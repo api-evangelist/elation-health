@@ -1,0 +1,42 @@
+generated: '2026-07-24'
+method: searched
+source: https://docs.elationhealth.com/reference/changelog
+scheme: dated
+current_version: '2.0'
+note: >-
+  Elation maintains a dated API 2.0 changelog. Recent window captured below;
+  the live changelog is the source of truth.
+entries:
+  - date: '2026-06-23'
+    type: addition
+    highlights: Added user_id field to the Office Staff object for use with ThreadMember creation.
+  - date: '2026-05-19'
+    type: change
+    highlights: Documented is_doc_med automatic order-signing behavior; discontinued-medication rules now require at least one signed order.
+  - date: '2026-05-06'
+    type: addition
+    highlights: Introduced event_uuid and resource_url fields on webhook payloads for a future id migration.
+  - date: '2026-04-22'
+    type: breaking
+    highlights: Default pagination switched from offset-based to cursor-based; clients needing offset must pass the offset parameter.
+  - date: '2026-03-26'
+    type: breaking
+    highlights: Removed two vaccine funding-source enum values from the Immunization object for POST requests.
+  - date: '2026-03-14'
+    type: breaking
+    highlights: Removed three Hawaii-specific vfc_eligibility enum values from the Immunization object.
+  - date: '2025-11-17'
+    type: addition
+    highlights: Added DELETE endpoints for cardiac, imaging, pulmonary, and sleep order tests.
+  - date: '2025-10-27'
+    type: addition
+    highlights: Added routed_document_delegates read-only field to the Report object.
+  - date: '2025-10-20'
+    type: addition
+    highlights: Introduced is_urgent field on the Report object.
+  - date: '2025-09-12'
+    type: addition
+    highlights: Implemented cursor-based pagination across Find endpoints (optional opt-in).
+  - date: '2025-08-29'
+    type: addition
+    highlights: Added signing capabilities to message threads and a verified boolean on Patient.

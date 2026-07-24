@@ -68,6 +68,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-api-authentication.json
+  - type: Overlay
+    url: overlays/elation-health-api-authentication-overlay.yaml
   - type: Documentation
     url: https://docs.elationhealth.com/docs/oauth
   - type: APIReference
@@ -88,6 +90,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-patient-profile-api.json
+  - type: Overlay
+    url: overlays/elation-health-patient-profile-api-overlay.yaml
   - type: Documentation
     url: https://docs.elationhealth.com/docs/api-overview
   - type: APIReference
@@ -106,6 +110,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-visit-notes-api.json
+  - type: Overlay
+    url: overlays/elation-health-visit-notes-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:patient-document-api
@@ -122,6 +128,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-patient-document-api.json
+  - type: Overlay
+    url: overlays/elation-health-patient-document-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:orders-api
@@ -138,6 +146,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-orders-api.json
+  - type: Overlay
+    url: overlays/elation-health-orders-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:scheduling-api
@@ -154,6 +164,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-scheduling-api.json
+  - type: Overlay
+    url: overlays/elation-health-scheduling-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:billing-api
@@ -170,6 +182,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-billing-api.json
+  - type: Overlay
+    url: overlays/elation-health-billing-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:insurance-api
@@ -186,6 +200,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-insurance-api.json
+  - type: Overlay
+    url: overlays/elation-health-insurance-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:patient-insurance-api
@@ -204,6 +220,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-premium-patient-insurance-api.json
+  - type: Overlay
+    url: overlays/elation-health-premium-patient-insurance-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference/insurance-eligibility
 - aid: elation-health:practice-api
@@ -220,6 +238,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-practice-api.json
+  - type: Overlay
+    url: overlays/elation-health-practice-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:user-management-api
@@ -235,6 +255,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-user-management-api.json
+  - type: Overlay
+    url: overlays/elation-health-user-management-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:messaging-api
@@ -251,6 +273,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-messaging-api.json
+  - type: Overlay
+    url: overlays/elation-health-messaging-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference/message-threads
 - aid: elation-health:event-subscription-api
@@ -268,6 +292,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-event-subscription-api.json
+  - type: Webhooks
+    url: asyncapi/elation-health-events-webhooks.yml
+  - type: Overlay
+    url: overlays/elation-health-event-subscription-api-overlay.yaml
   - type: Documentation
     url: https://docs.elationhealth.com/docs/webhooks
   - type: APIReference
@@ -285,6 +313,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-reference-data-api.json
+  - type: Overlay
+    url: overlays/elation-health-reference-data-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:care-gaps-api
@@ -302,6 +332,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-care-gaps-api-1.json
+  - type: Overlay
+    url: overlays/elation-health-care-gaps-api-1-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 - aid: elation-health:import-api
@@ -318,9 +350,47 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/elation-elation-import-api.json
+  - type: Overlay
+    url: overlays/elation-health-elation-import-api-overlay.yaml
   - type: APIReference
     url: https://docs.elationhealth.com/reference
 common:
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/elation-health-sandbox.yml
+- type: DataModel
+  url: data-model/elation-health-data-model.yml
+- type: ChangeLog
+  url: changelog/elation-health-changelog.yml
+- type: Conventions
+  url: conventions/elation-health-conventions.yml
+- type: Lifecycle
+  url: lifecycle/elation-health-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/elation-health-problem-types.yml
+- type: Compliance
+  url: https://www.elationhealth.com/solutions/ehr/
+- type: Conformance
+  url: conformance/elation-health-conformance.yml
+- type: ToolCrosswalk
+  url: mcp/elation-health-tool-crosswalk.yml
+- type: MCPServer
+  url: mcp/elation-health-mcp.yml
+- type: WellKnown
+  url: well-known/elation-health-well-known.yml
+- type: Packages
+  url: packages/elation-health-packages.yml
+- type: LLMsTxt
+  url: llms/elation-health-llms.txt
+- type: DomainSecurity
+  url: security/elation-health-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/elation-health-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/elation-health-scopes.yml
+- type: Authentication
+  url: authentication/elation-health-authentication.yml
 - type: Website
   url: https://www.elationhealth.com/
 - type: DeveloperPortal

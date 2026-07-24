@@ -1,0 +1,31 @@
+generated: '2026-07-24'
+method: searched
+source: https://www.npmjs.com/package/elationjs, https://github.com/elationemr
+note: >-
+  Elation Health does not publish a first-party, currently-maintained API client
+  SDK on any major registry. The elationemr GitHub org (19 public repos) ships
+  interoperability tooling (Blue Button / C-CDA parsers, a shared OpenAPI schema
+  repo, a Chrome-extension companion template) but no official REST client library.
+  The only client library found is a third-party Node SDK (elationjs), last
+  published ~2018, so no official:true SDK pointer is emitted (sdk_count stays 0).
+packages:
+  - language: javascript
+    registry: npm
+    name: elationjs
+    url: https://www.npmjs.com/package/elationjs
+    install: npm install elationjs
+    version: 1.0.10
+    official: false
+    maintainer: Pedro De Ona (community)
+    repository: https://github.com/pdeona/elation-health.js
+    description: A node SDK for interacting with the Elation Health API (community-maintained, stale)
+first_party_repos:
+  - name: shared-api-schema
+    url: https://github.com/elationemr/shared-api-schema
+    description: OpenAPI schema shared across Elation OpenAPI specs (spec source, not a client lib)
+  - name: FHIR
+    url: https://github.com/elationemr/FHIR
+    description: FHIR JavaScript tooling
+  - name: bluebutton.js
+    url: https://github.com/elationemr/bluebutton.js
+    description: Blue Button / C-CDA JavaScript parsing library

@@ -1,0 +1,39 @@
+generated: '2026-07-24'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on the production API host
+  (api.app.elationemr.com), the sandbox host (sandbox.elationemr.com), and the
+  marketing host (www.elationhealth.com). No usable discovery documents were
+  found: the production host returns 400 for all well-known paths, the sandbox
+  host 302-redirects to login, and the sandbox openid-configuration returns HTTP
+  200 with an empty body (0 bytes) rather than a real OIDC discovery document.
+  No security.txt is published. OAuth is documented in the developer docs, not
+  via RFC 8414 metadata.
+hosts:
+  - host: https://api.app.elationemr.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 400
+      - path: /.well-known/oauth-authorization-server
+        status: 400
+      - path: /.well-known/openid-configuration
+        status: 302
+      - path: /.well-known/oauth-protected-resource
+        status: 302
+  - host: https://sandbox.elationemr.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: empty body (0 bytes) — not a valid OIDC discovery document
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+      - path: /.well-known/security.txt
+        status: 302
+      - path: /.well-known/api-catalog
+        status: 302
+      - path: /.well-known/ai-plugin.json
+        status: 302
+  - host: https://www.elationhealth.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404

@@ -1,0 +1,59 @@
+generated: '2026-07-24'
+method: searched
+source: >-
+  https://docs.elationhealth.com/reference/oauth,
+  https://docs.elationhealth.com/reference/errors,
+  https://docs.elationhealth.com/reference/pagination,
+  https://www.elationhealth.com/solutions/ehr/ (ONC / HIPAA),
+  openapi/*.json
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      OpenAPI securitySchemes type oauth2 with clientCredentials flow
+      (tokenUrl /api/2.0/oauth2/token/); scopes apiv2, act_as_user,
+      system/{resource}.read|write. Legacy password grant also documented.
+  - id: oidc
+    conforms: false
+    evidence: >-
+      No working OpenID Connect discovery document
+      (/.well-known/openid-configuration returns empty/redirect); OAuth2 only.
+  - id: hl7-fhir-r4
+    conforms: true
+    evidence: >-
+      Elation operates HL7 FHIR R4 and SMART-on-FHIR interoperability endpoints
+      for ONC/CMS 21st Century Cures Act compliance (login-gated to registered
+      apps; not part of the anonymous REST v2.0 surface captured here).
+  - id: smart-on-fhir
+    conforms: true
+    evidence: SMART-on-FHIR endpoints exposed to registered applications for Cures Act compliance.
+  - id: onc-cehrt
+    conforms: true
+    evidence: Elation is ONC-Certified Electronic Health Record Technology (CEHRT).
+  - id: hipaa
+    conforms: true
+    evidence: >-
+      HIPAA-compliant EHR; signs a standard Business Associate Agreement (BAA)
+      with covered entities. 256-bit TLS + AES-256 encryption at rest.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Error responses use application/json, not application/problem+json; no
+      RFC 9457 problem-type envelope documented.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Cursor-based pagination by default (cursor param; next/previous/results),
+      plus optional offset-based (limit/offset; count/next/previous/results).
+      Max 100 results per page.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key header/parameter is documented or present in the OpenAPI.
+  - id: json-api
+    conforms: false
+    evidence: Standard JSON resource envelopes; not JSON:API.
+  - id: webhooks
+    conforms: true
+    evidence: >-
+      Event Subscription API with 43+ subscribable resource models; POST
+      callbacks signed with Ed25519 (El8-Ed25519-Signature header).

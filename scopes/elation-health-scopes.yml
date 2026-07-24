@@ -1,0 +1,165 @@
+generated: '2026-07-24'
+method: searched
+docs: https://docs.elationhealth.com/reference/scopes
+docs_note: >-
+  Confirmed against the published Token Scopes reference. Elation's OAuth2
+  client_credentials scopes are apiv2 (full access), act_as_user (provider
+  impersonation via X-On-Behalf-Of), and the granular system/{resource_name}.read
+  and system/{resource_name}.write pair. The legacy password-grant import scope
+  is used only by the Import API.
+source: openapi/elation-api-settings.json, openapi/elation-billing-api.json, openapi/elation-care-gaps-api-1.json,
+  openapi/elation-elation-import-api.json, openapi/elation-event-subscription-api.json, openapi/elation-insurance-api.json,
+  openapi/elation-messaging-api.json, openapi/elation-orders-api.json, openapi/elation-patient-document-api.json,
+  openapi/elation-patient-profile-api.json, openapi/elation-practice-api.json, openapi/elation-premium-patient-insurance-api.json,
+  openapi/elation-reference-data-api.json, openapi/elation-scheduling-api.json, openapi/elation-user-management-api.json
+schemes:
+- name: sec0
+  source: openapi/elation-api-settings.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://example.com/oauth2/token
+- name: oauth2
+  source: openapi/elation-billing-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: OAuth2PasswordBearer
+  source: openapi/elation-care-gaps-api-1.json
+  flows:
+  - flow: password
+    tokenUrl: token
+- name: elation_auth
+  source: openapi/elation-elation-import-api.json
+  flows:
+  - flow: password
+    tokenUrl: http://www.elationhealth.com/api/2.0/oauth
+- name: oauth2
+  source: openapi/elation-event-subscription-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-insurance-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-messaging-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-orders-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-patient-document-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-patient-profile-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-practice-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-premium-patient-insurance-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-reference-data-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-scheduling-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+- name: oauth2
+  source: openapi/elation-user-management-api.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /api/2.0/oauth2/token/
+scopes:
+- scope: act_as_user
+  description: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/elation-billing-api.json
+  - openapi/elation-event-subscription-api.json
+  - openapi/elation-insurance-api.json
+  - openapi/elation-messaging-api.json
+  - openapi/elation-orders-api.json
+  - openapi/elation-patient-document-api.json
+  - openapi/elation-patient-profile-api.json
+  - openapi/elation-practice-api.json
+  - openapi/elation-premium-patient-insurance-api.json
+  - openapi/elation-reference-data-api.json
+  - openapi/elation-scheduling-api.json
+  - openapi/elation-user-management-api.json
+- scope: apiv2
+  description: Full access to the API
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/elation-billing-api.json
+  - openapi/elation-event-subscription-api.json
+  - openapi/elation-insurance-api.json
+  - openapi/elation-messaging-api.json
+  - openapi/elation-orders-api.json
+  - openapi/elation-patient-document-api.json
+  - openapi/elation-patient-profile-api.json
+  - openapi/elation-practice-api.json
+  - openapi/elation-premium-patient-insurance-api.json
+  - openapi/elation-reference-data-api.json
+  - openapi/elation-scheduling-api.json
+  - openapi/elation-user-management-api.json
+- scope: import
+  description: interact with data imports in your practice
+  flows:
+  - password
+  sources:
+  - openapi/elation-elation-import-api.json
+- scope: system/{resource_name}.read
+  description: Read access to a specific resource
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/elation-billing-api.json
+  - openapi/elation-event-subscription-api.json
+  - openapi/elation-insurance-api.json
+  - openapi/elation-messaging-api.json
+  - openapi/elation-orders-api.json
+  - openapi/elation-patient-document-api.json
+  - openapi/elation-patient-profile-api.json
+  - openapi/elation-practice-api.json
+  - openapi/elation-premium-patient-insurance-api.json
+  - openapi/elation-reference-data-api.json
+  - openapi/elation-scheduling-api.json
+  - openapi/elation-user-management-api.json
+- scope: system/{resource_name}.write
+  description: Write access to a specific resource
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/elation-billing-api.json
+  - openapi/elation-event-subscription-api.json
+  - openapi/elation-insurance-api.json
+  - openapi/elation-messaging-api.json
+  - openapi/elation-orders-api.json
+  - openapi/elation-patient-document-api.json
+  - openapi/elation-patient-profile-api.json
+  - openapi/elation-practice-api.json
+  - openapi/elation-premium-patient-insurance-api.json
+  - openapi/elation-reference-data-api.json
+  - openapi/elation-scheduling-api.json
+  - openapi/elation-user-management-api.json

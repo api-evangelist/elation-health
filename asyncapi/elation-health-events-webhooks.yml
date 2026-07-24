@@ -1,0 +1,82 @@
+generated: '2026-07-24'
+method: searched
+source: >-
+  https://docs.elationhealth.com/reference/webhooks,
+  https://docs.elationhealth.com/docs/webhooks,
+  openapi/elation-event-subscription-api.json
+spec_type: Webhooks
+note: >-
+  Elation does not publish an AsyncAPI document. It exposes a webhook event
+  surface through the Event Subscription REST API: applications create
+  subscriptions to resource updates and receive HTTP POST callbacks. Captured
+  here as a webhook catalog (type Webhooks), not fabricated as AsyncAPI.
+subscription:
+  create_operation: subscriptions_create
+  list_operation: subscriptions_list
+  delete_operation: subscriptions_destroy
+  published_events_operation: published_events_list
+  path: /api/2.0/subscriptions/
+  delivery: HTTP POST to the subscriber-configured URL
+  self_events_suppressed: true
+signature:
+  algorithm: Ed25519
+  header: El8-Ed25519-Signature
+  encoding: base64
+  public_key_field: signing_pub_key
+payload:
+  content_type: application/json
+  fields:
+    - name: data
+      description: The resource object
+    - name: action
+      description: '"saved" or "deleted"'
+    - name: event_id
+      description: Integer identifier
+    - name: event_uuid
+      description: UUID7 identifier (will eventually replace event_id)
+    - name: application_id
+      description: OAuth2 client id
+    - name: resource
+      description: Resource type (e.g. "patients")
+    - name: resource_url
+      description: Optional URL to fetch large resource payloads
+subscribable_resources:
+  - Appointment
+  - Allergies
+  - Bill
+  - Cardiac Orders
+  - Clinical Documents
+  - Delegate Permissions
+  - Document Tags
+  - Drug Intolerances
+  - Imaging Orders
+  - Immunizations
+  - Incoming Files (fax)
+  - Insurance companies
+  - Insurance plans
+  - Lab Order Sets
+  - Lab Order Tests
+  - Lab Order
+  - Lab Vendor Patient Sites
+  - Lab Vendors
+  - Letters
+  - Medications
+  - Message Threads
+  - Non-visit Notes
+  - Office Staff
+  - Patient
+  - Patient Photo
+  - Physicians
+  - Problems
+  - Pulmonary Orders
+  - Referral Orders
+  - Reports
+  - Service Locations
+  - Sleep Orders
+  - Staff Groups
+  - Thread Member
+  - Thread Message
+  - Visit Notes
+  - Vitals
+  - History
+  - Family History

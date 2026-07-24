@@ -1,0 +1,65 @@
+generated: '2026-07-24'
+method: searched
+source: >-
+  https://docs.elationhealth.com/reference/oauth,
+  https://docs.elationhealth.com/reference/pagination,
+  https://docs.elationhealth.com/reference/dates,
+  https://docs.elationhealth.com/reference/metadata,
+  https://docs.elationhealth.com/reference/errors,
+  https://docs.elationhealth.com/reference/webhooks,
+  openapi/*.json
+authentication:
+  style: oauth2-bearer
+  token_endpoint: /api/2.0/oauth2/token/
+  grants: [client_credentials, password]
+  impersonation:
+    header: X-On-Behalf-Of
+    scope: act_as_user
+    note: Combine act_as_user with apiv2 or system scopes to act as a specific provider.
+  see: authentication/elation-health-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header or parameter is documented or present in the
+    OpenAPI. No Idempotency pointer is emitted (would be fabrication).
+pagination:
+  default_style: cursor
+  cursor:
+    param: cursor
+    response_fields: [next, previous, results]
+    note: Omitting/empty cursor starts at the beginning, ordered by ascending id.
+  offset:
+    param: [limit, offset]
+    response_fields: [count, next, previous, results]
+    note: Activated when an offset parameter is supplied.
+  max_page_size: 100
+  recommendation: Use cursor-based pagination for best performance and reliability.
+dates:
+  format: ISO 8601
+  docs: https://docs.elationhealth.com/reference/dates
+metadata:
+  supported: true
+  note: Free-form metadata can be attached to certain resources.
+  docs: https://docs.elationhealth.com/reference/metadata
+error_envelope:
+  content_type: application/json
+  rfc9457: false
+  see: errors/elation-health-problem-types.yml
+rate_limiting:
+  signaled: true
+  status_code: 429
+  note: >-
+    Documented ("Our API limits the rate at which you can perform certain
+    actions") but specific thresholds/headers are not published.
+versioning:
+  scheme: uri-path
+  current: '2.0'
+  see: lifecycle/elation-health-lifecycle.yml
+webhooks:
+  subscription_api: /api/2.0/subscriptions/
+  signature:
+    algorithm: Ed25519
+    header: El8-Ed25519-Signature
+    key_field: signing_pub_key
+  payload_fields: [data, action, event_id, event_uuid, application_id, resource, resource_url]
+  see: asyncapi/elation-health-events-webhooks.yml

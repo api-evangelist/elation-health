@@ -1,0 +1,24 @@
+generated: '2026-07-24'
+method: generated
+source: openapi/*.json (operationIds grounded), conventions/, errors/, asyncapi/
+skills:
+  - file: elation-health-register-and-read-patient.md
+    name: Register and read a patient
+    api: openapi/elation-patient-profile-api.json
+    operations: [patients_create, patients_retrieve, patients_list, patients_partial_update]
+  - file: elation-health-schedule-appointment.md
+    name: Schedule a patient appointment
+    api: openapi/elation-scheduling-api.json
+    operations: [appointment_types_list, appointments_create, appointments_retrieve, appointments_list, appointments_partial_update]
+  - file: elation-health-order-labs.md
+    name: Create and track a lab order
+    api: openapi/elation-orders-api.json
+    operations: [lab_orders_create, lab_orders_retrieve, lab_orders_list, lab_orders_printable_retrieve]
+  - file: elation-health-subscribe-to-events.md
+    name: Subscribe to webhook events
+    api: openapi/elation-event-subscription-api.json
+    operations: [subscriptions_create, subscriptions_list, subscriptions_retrieve, subscriptions_destroy, published_events_list]
+  - file: elation-health-check-insurance-eligibility.md
+    name: Check patient insurance eligibility
+    api: openapi/elation-premium-patient-insurance-api.json
+    operations: [patient_insurances_eligibility_create, patient_insurances_eligibility_retrieve, patient_insurances_eligibility_full_report_retrieve]

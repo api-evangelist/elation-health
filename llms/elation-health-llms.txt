@@ -1,0 +1,653 @@
+# Elation Health API Documentation
+
+> Documentation for Elation Health API
+
+## Guides
+- [MCP](https://docs.elationhealth.com/docs/mcp.md)
+
+## API Reference
+- [Introduction](https://docs.elationhealth.com/reference/introduction.md)
+- [API Overview](https://docs.elationhealth.com/reference/api-overview.md)
+- [Getting Started](https://docs.elationhealth.com/reference/getting-started-2.md)
+- [Authentication](https://docs.elationhealth.com/reference/oauth.md)
+- [Pagination](https://docs.elationhealth.com/reference/pagination.md)
+- [Dates](https://docs.elationhealth.com/reference/dates.md)
+- [Metadata](https://docs.elationhealth.com/reference/metadata.md)
+- [Errors](https://docs.elationhealth.com/reference/errors.md)
+- [Webhooks](https://docs.elationhealth.com/reference/webhooks.md)
+- [Getting Help](https://docs.elationhealth.com/reference/getting-help.md)
+- [Get Token](https://docs.elationhealth.com/reference/get-token.md): Exchange your **client id** and **client secret** for a bearer token.
+- [Token Scopes](https://docs.elationhealth.com/reference/scopes.md)
+- [Allergies](https://docs.elationhealth.com/reference/allergies.md)
+- [The Allergy Object](https://docs.elationhealth.com/reference/the-allergy-object.md)
+- [List Allergies](https://docs.elationhealth.com/reference/allergies_list.md): Returns a list of allergies
+- [Retrieve Allergy](https://docs.elationhealth.com/reference/allergies_retrieve.md): Retrieve a single allergy
+- [Create Allergy](https://docs.elationhealth.com/reference/allergies_create.md): Returns a list of allergies
+- [Partially Update Allergy](https://docs.elationhealth.com/reference/allergies_partial_update.md): Retrieve a single allergy
+- [Update Allergy](https://docs.elationhealth.com/reference/allergies_update.md): Retrieve a single allergy
+- [Delete Allergy](https://docs.elationhealth.com/reference/allergies_destroy.md): Retrieve a single allergy
+- [Allergy Documentation (NKDA)](https://docs.elationhealth.com/reference/allergy-documentation-nkda-1.md)
+- [The Allergy Documentation (NKDA) Object](https://docs.elationhealth.com/reference/the-allergy-documentation-nkda-object.md)
+- [List Allergy Documentations](https://docs.elationhealth.com/reference/allergy_documentation_list.md): Returns a list of allergy documentation
+- [Retrieve Allergy Documentation](https://docs.elationhealth.com/reference/allergy_documentation_retrieve.md): Retrieve a single allergy documentation
+- [Create Allergy Documentation](https://docs.elationhealth.com/reference/allergy_documentation_create.md): Returns a list of allergy documentation
+- [Delete Allergy Documentation](https://docs.elationhealth.com/reference/allergy_documentation_destroy.md): Retrieve a single allergy documentation
+- [Drug Intolerances](https://docs.elationhealth.com/reference/drug-intolerances-1.md)
+- [The Drug Intolerance Object](https://docs.elationhealth.com/reference/the-drug-intolerance-object-1.md)
+- [List Drug Intolerances](https://docs.elationhealth.com/reference/drug_intolerances_list.md): Returns a list of drug intolerances
+- [Retrieve Drug Intolerance](https://docs.elationhealth.com/reference/drug_intolerances_retrieve.md): Retrieve a single drug intolerance
+- [Create Drug Intolerance](https://docs.elationhealth.com/reference/drug_intolerances_create.md): Returns a list of drug intolerances
+- [Partially Update Drug Intolerance](https://docs.elationhealth.com/reference/drug_intolerances_partial_update.md): Retrieve a single drug intolerance
+- [Update Drug Intolerance](https://docs.elationhealth.com/reference/drug_intolerances_update.md): Retrieve a single drug intolerance
+- [Delete Drug Intolerance](https://docs.elationhealth.com/reference/drug_intolerances_destroy.md): Retrieve a single drug intolerance
+- [Family Histories](https://docs.elationhealth.com/reference/family-histories.md)
+- [The Family History Object](https://docs.elationhealth.com/reference/the-family-history-object.md)
+- [List Family Histories](https://docs.elationhealth.com/reference/family_histories_list.md): Returns a list of patient family histories
+- [Retrieve Family History](https://docs.elationhealth.com/reference/family_histories_retrieve.md): Retrieve a single patient family history
+- [Create Family History](https://docs.elationhealth.com/reference/family_histories_create.md): You have to specify either `text` or a valid `icd9_code` or a `snomed_code`. If you send `text` along with any of the two codes, the request will be rejected.
+- [Delete Family History](https://docs.elationhealth.com/reference/family_histories_destroy.md): Retrieve a single patient family history
+- [Histories](https://docs.elationhealth.com/reference/histories.md)
+- [The History Object](https://docs.elationhealth.com/reference/the-history-object.md)
+- [List Histories](https://docs.elationhealth.com/reference/histories_list.md): Returns a list of patient histories
+- [Retrieve History](https://docs.elationhealth.com/reference/histories_retrieve.md): Retrieve a single patient history
+- [Create History](https://docs.elationhealth.com/reference/histories_create.md): Returns a list of patient histories
+- [Delete History](https://docs.elationhealth.com/reference/histories_destroy.md): Retrieve a single patient history
+- [Immunizations](https://docs.elationhealth.com/reference/immunizations.md)
+- [The Immunization Object](https://docs.elationhealth.com/reference/the-immunization-object-wip.md)
+- [List Immunizations](https://docs.elationhealth.com/reference/immunizations_list.md): Returns a list of immunizations
+- [Retrieve Immunization](https://docs.elationhealth.com/reference/immunizations_retrieve.md): Retrieve a single immunization
+- [Create Immunization](https://docs.elationhealth.com/reference/immunizations_create.md): Returns a list of immunizations
+- [Delete Immunization](https://docs.elationhealth.com/reference/immunizations_destroy.md): Retrieve a single immunization
+- [Provider Team](https://docs.elationhealth.com/reference/provider-team.md)
+- [Patient Provider Team Object](https://docs.elationhealth.com/reference/patient-provider-team-object.md)
+- [List Patient Provider Teams](https://docs.elationhealth.com/reference/patient_provider_teams_list.md)
+- [Retrieve Patient Provider Team](https://docs.elationhealth.com/reference/patient_provider_teams_retrieve.md)
+- [Retrieve Patient Provider Teams Team Member](https://docs.elationhealth.com/reference/patient_provider_teams_team_members_retrieve.md)
+- [Retrieve Patients Patient Provider Team](https://docs.elationhealth.com/reference/patients_patient_provider_team_retrieve.md): Creates a PatientProviderTeam for a given patient_id if one does not already exist. Returns a 409 if a team already exists.
+- [Create Patient Provider Team Member](https://docs.elationhealth.com/reference/patient_provider_team_members_create.md)
+- [Create Patients Patient Provider Team](https://docs.elationhealth.com/reference/patients_patient_provider_team_create.md): Creates a PatientProviderTeam for a given patient_id if one does not already exist. Returns a 409 if a team already exists.
+- [Partially Update Patient Provider Team Member](https://docs.elationhealth.com/reference/patient_provider_team_members_partial_update.md)
+- [Update Patient Provider Team Member](https://docs.elationhealth.com/reference/patient_provider_team_members_update.md)
+- [Delete Patient Provider Team Member](https://docs.elationhealth.com/reference/patient_provider_team_members_destroy.md)
+- [Patients](https://docs.elationhealth.com/reference/patients.md)
+- [The Patient Object](https://docs.elationhealth.com/reference/the-patient-object.md)
+- [List Patients](https://docs.elationhealth.com/reference/patients_list.md): Returns a list of patient
+- [Retrieve Patient](https://docs.elationhealth.com/reference/patients_retrieve.md): Retrieve a single patient
+- [Create Patient](https://docs.elationhealth.com/reference/patients_create.md): Returns a list of patient
+- [Partially Update Patient](https://docs.elationhealth.com/reference/patients_partial_update.md): Retrieve a single patient
+- [Update Patient](https://docs.elationhealth.com/reference/patients_update.md): Retrieve a single patient
+- [Delete Patient](https://docs.elationhealth.com/reference/patients_destroy.md): DELETE handler
+- [Patient Profile Photo](https://docs.elationhealth.com/reference/patient-profile-photo-1.md)
+- [Patient Photo Object](https://docs.elationhealth.com/reference/patient-photo-object.md)
+- [Retrieve Patients Get Photo](https://docs.elationhealth.com/reference/patients_get_photo_retrieve.md): Get the patient's profile image
+- [Retrieve Patients Profile Image](https://docs.elationhealth.com/reference/patients_profile_image_retrieve.md): Get the patient's profile image
+- [Create Patients Profile Image](https://docs.elationhealth.com/reference/patients_profile_image_create.md): Create the patient's profile image
+- [Delete Patients Profile Image](https://docs.elationhealth.com/reference/patients_profile_image_destroy.md): Delete the patient's profile image
+- [Insurance Card](https://docs.elationhealth.com/reference/insurance-card-1.md)
+- [The Insurance Card Object](https://docs.elationhealth.com/reference/the-insurance-card-object.md)
+- [List Patients Insurance Cards](https://docs.elationhealth.com/reference/patients_insurance_cards_list.md): Get all insurance cards for a patient
+- [Create Patients Insurance Card](https://docs.elationhealth.com/reference/patients_insurance_cards_create.md): Create a new insurance card for a patient
+- [Delete Patients Insurance Card](https://docs.elationhealth.com/reference/patients_insurance_cards_destroy.md): Delete an insurance card for a patient
+- [Problems](https://docs.elationhealth.com/reference/problems.md)
+- [The Problem Object](https://docs.elationhealth.com/reference/the-problem-object.md)
+- [List Problems](https://docs.elationhealth.com/reference/problems_list.md): Returns a list of problems
+- [Retrieve Problem](https://docs.elationhealth.com/reference/problems_retrieve.md): Retrieve a single problem
+- [Create Problem](https://docs.elationhealth.com/reference/problems_create.md): Returns a list of problems
+- [Partially Update Problem](https://docs.elationhealth.com/reference/problems_partial_update.md): Retrieve a single problem
+- [Update Problem](https://docs.elationhealth.com/reference/problems_update.md): Retrieve a single problem
+- [Delete Problem](https://docs.elationhealth.com/reference/problems_destroy.md): Retrieve a single problem
+- [Vaccine](https://docs.elationhealth.com/reference/vaccine-1.md)
+- [The Vaccine Object](https://docs.elationhealth.com/reference/the-vaccine-object.md): This allows read-only access to both the publicly accessible Vaccines from Medispan and Elation, along with Vaccines entered into the system by the given Practice.
+- [List Vaccines](https://docs.elationhealth.com/reference/vaccine_list.md): Returns a list of vaccines
+- [Retrieve Vaccine](https://docs.elationhealth.com/reference/vaccine_retrieve.md): Retrieve a single vaccine
+- [Create Vaccine](https://docs.elationhealth.com/reference/vaccine_create.md): Returns a list of vaccines
+- [Delete Vaccine](https://docs.elationhealth.com/reference/vaccine_destroy.md): Retrieve a single vaccine
+- [CCDA](https://docs.elationhealth.com/reference/ccda-1.md)
+- [The CCDA Object](https://docs.elationhealth.com/reference/the-ccda-object.md)
+- [Retrieve Ccda](https://docs.elationhealth.com/reference/ccda_retrieve.md): Retrieve a single patient's ccda
+- [Clinical Documents](https://docs.elationhealth.com/reference/clinical-documents.md)
+- [The Clinical Document Object](https://docs.elationhealth.com/reference/the-clinical-document-object.md)
+- [List Clinical Documents](https://docs.elationhealth.com/reference/clinical_documents_list.md)
+- [Retrieve Clinical Document](https://docs.elationhealth.com/reference/clinical_documents_retrieve.md)
+- [Create Clinical Document](https://docs.elationhealth.com/reference/clinical_documents_create.md)
+- [Delete Clinical Document](https://docs.elationhealth.com/reference/clinical_documents_destroy.md)
+- [Discontinued Medications](https://docs.elationhealth.com/reference/discontinued-medications.md)
+- [The Discontinued Medication Object](https://docs.elationhealth.com/reference/the-discontinued-medication-object.md)
+- [List Discontinued Medications](https://docs.elationhealth.com/reference/discontinued_medications_list.md)
+- [Retrieve Discontinued Medication](https://docs.elationhealth.com/reference/discontinued_medications_retrieve.md)
+- [Create Discontinued Medication](https://docs.elationhealth.com/reference/discontinued_medications_create.md)
+- [Delete Discontinued Medication](https://docs.elationhealth.com/reference/discontinued_medications_destroy.md)
+- [Document Tags](https://docs.elationhealth.com/reference/document-tags.md)
+- [The Document Tag Object](https://docs.elationhealth.com/reference/the-document-tag-object.md)
+- [List Document Tags](https://docs.elationhealth.com/reference/document_tags_list.md)
+- [Retrieve Document Tag](https://docs.elationhealth.com/reference/document_tags_retrieve.md)
+- [Create Document Tag](https://docs.elationhealth.com/reference/document_tags_create.md)
+- [Partially Update Document Tag](https://docs.elationhealth.com/reference/document_tags_partial_update.md)
+- [Update Document Tag](https://docs.elationhealth.com/reference/document_tags_update.md)
+- [Incoming Files](https://docs.elationhealth.com/reference/incoming-files.md)
+- [The Incoming File Object](https://docs.elationhealth.com/reference/the-incoming-file-object.md)
+- [List Incoming Files](https://docs.elationhealth.com/reference/incoming_files_list.md)
+- [Retrieve Incoming Files File](https://docs.elationhealth.com/reference/incoming_files_files_retrieve.md)
+- [Retrieve Incoming Files Image](https://docs.elationhealth.com/reference/incoming_files_images_retrieve.md)
+- [Retrieve Incoming File](https://docs.elationhealth.com/reference/incoming_files_retrieve.md)
+- [Create Incoming File](https://docs.elationhealth.com/reference/incoming_files_create.md)
+- [Create a new incoming file](https://docs.elationhealth.com/reference/patients_incoming_files_create.md): Create a new incoming file for a patient
+- [Injections (BETA)](https://docs.elationhealth.com/reference/injections-beta.md)
+- [The Injection Object](https://docs.elationhealth.com/reference/the-injection-object.md): Documents an injection administered to a patient.
+- [List Injections](https://docs.elationhealth.com/reference/injections_list.md): Returns a list of injections
+- [Retrieve Injection](https://docs.elationhealth.com/reference/injections_retrieve.md): Retrieve a single injection
+- [Referrals](https://docs.elationhealth.com/reference/referrals.md)
+- [The Letter Object](https://docs.elationhealth.com/reference/the-letter-object.md)
+- [List Letters](https://docs.elationhealth.com/reference/letters_list.md): Find letters by patient, practice, and date range
+- [Retrieve Letter](https://docs.elationhealth.com/reference/letters_retrieve.md)
+- [Create Letter](https://docs.elationhealth.com/reference/letters_create.md)
+- [Partially Update Letter](https://docs.elationhealth.com/reference/letters_partial_update.md)
+- [Update Letter](https://docs.elationhealth.com/reference/letters_update.md)
+- [The Referral Order Object](https://docs.elationhealth.com/reference/the-referral-order-object.md)
+- [List Referral Orders](https://docs.elationhealth.com/reference/referral_orders_list.md)
+- [Retrieve Referral Order](https://docs.elationhealth.com/reference/referral_orders_retrieve.md)
+- [Create Referral Order](https://docs.elationhealth.com/reference/referral_orders_create.md)
+- [Partially Update Referral Order](https://docs.elationhealth.com/reference/referral_orders_partial_update.md)
+- [Update Referral Order](https://docs.elationhealth.com/reference/referral_orders_update.md)
+- [Fills](https://docs.elationhealth.com/reference/fills-1.md)
+- [The Prescription Fill object](https://docs.elationhealth.com/reference/the-prescription-fill-object.md)
+- [List Prescription Fills](https://docs.elationhealth.com/reference/prescription_fills_list.md): Returns a list of prescription fills
+- [Retrieve Prescription Fill](https://docs.elationhealth.com/reference/prescription_fills_retrieve.md): Retrieve a single prescription fill
+- [The History Download Fill object](https://docs.elationhealth.com/reference/the-history-download-fill-object.md)
+- [List Medication History Download Fills](https://docs.elationhealth.com/reference/medication_history_download_fills_list.md)
+- [Retrieve Medication History Download Fill](https://docs.elationhealth.com/reference/medication_history_download_fills_retrieve.md)
+- [Historical Medication Download Requests](https://docs.elationhealth.com/reference/historical-medication-download-requests.md)
+- [The  Historical Medication Download Request Object](https://docs.elationhealth.com/reference/history-object.md)
+- [List Medication History Downloads](https://docs.elationhealth.com/reference/medication_history_downloads_list.md)
+- [Retrieve Medication History Download](https://docs.elationhealth.com/reference/medication_history_downloads_retrieve.md): Retrieve a single med history object
+- [Create Medication History Download](https://docs.elationhealth.com/reference/medication_history_downloads_create.md)
+- [Refills](https://docs.elationhealth.com/reference/refills-1.md)
+- [The Refill object](https://docs.elationhealth.com/reference/the-refill-object.md)
+- [List Medication Refills](https://docs.elationhealth.com/reference/medication_refills_list.md)
+- [Retrieve Medication Refill](https://docs.elationhealth.com/reference/medication_refills_retrieve.md)
+- [Medications](https://docs.elationhealth.com/reference/medications.md)
+- [The Medication Object](https://docs.elationhealth.com/reference/the-medication-object-1.md)
+- [List Medications](https://docs.elationhealth.com/reference/medications_list.md)
+- [Retrieve Medication](https://docs.elationhealth.com/reference/medications_retrieve.md)
+- [Create Medication](https://docs.elationhealth.com/reference/medications_create.md)
+- [Delete Medication](https://docs.elationhealth.com/reference/medications_destroy.md)
+- [Non-Visit Notes](https://docs.elationhealth.com/reference/non-visit-notes.md)
+- [The Non-Visit Note Object](https://docs.elationhealth.com/reference/the-non-visit-note-object.md)
+- [List Non Visit Notes](https://docs.elationhealth.com/reference/non_visit_notes_list.md)
+- [Retrieve Non Visit Note](https://docs.elationhealth.com/reference/non_visit_notes_retrieve.md)
+- [Create Non Visit Note](https://docs.elationhealth.com/reference/non_visit_notes_create.md)
+- [Partially Update Non Visit Note](https://docs.elationhealth.com/reference/non_visit_notes_partial_update.md)
+- [Update Non Visit Note](https://docs.elationhealth.com/reference/non_visit_notes_update.md)
+- [Delete Non Visit Note](https://docs.elationhealth.com/reference/non_visit_notes_destroy.md)
+- [List Patient Letters Comments](https://docs.elationhealth.com/reference/patient_letters_comments_list.md)
+- [Create Patient Letters Comment](https://docs.elationhealth.com/reference/patient_letters_comments_create.md)
+- [Delete Patient Letters Comment](https://docs.elationhealth.com/reference/patient_letters_comments_destroy.md)
+- [Retrieve Patient Letters Comment](https://docs.elationhealth.com/reference/patient_letters_comments_retrieve.md)
+- [List Patient Letters](https://docs.elationhealth.com/reference/patient_letters_list.md): List patient-facing letters (both directions). Filter by patient, practice, or unread=true.
+- [Create Patient Letter](https://docs.elationhealth.com/reference/patient_letters_create.md): Create a patient letter. Set is_patient_initiated=true when patient is the author (requires active ChartAccessGrant). Sign separately, then PATCH send_out=true to send.
+- [Retrieve Patient Letter](https://docs.elationhealth.com/reference/patient_letters_retrieve.md): Retrieve a single patient letter.
+- [Partially Update Patient Letter](https://docs.elationhealth.com/reference/patient_letters_partial_update.md): Update a patient letter. PATCH {signLog:...} to sign. PATCH {send_out:true} to send after signing. PATCH {patient_read_time:<ts>} to acknowledge.
+- [Update Patient Letter](https://docs.elationhealth.com/reference/patient_letters_update.md)
+- [Patient Form Requests](https://docs.elationhealth.com/reference/patient-form-requests.md)
+- [The Patient Form Request Object](https://docs.elationhealth.com/reference/patient-form-request-object.md)
+- [List Patient Form Requests](https://docs.elationhealth.com/reference/patient_form_requests_list.md)
+- [Retrieve Patient Form Request](https://docs.elationhealth.com/reference/patient_form_requests_retrieve.md)
+- [Create Patient Form Request](https://docs.elationhealth.com/reference/patient_form_requests_create.md)
+- [Partially Update Patient Form Request](https://docs.elationhealth.com/reference/patient_form_requests_partial_update.md)
+- [Update Patient Form Request](https://docs.elationhealth.com/reference/patient_form_requests_update.md)
+- [Delete Patient Form Request](https://docs.elationhealth.com/reference/patient_form_requests_destroy.md)
+- [Patient Form Submissions](https://docs.elationhealth.com/reference/patient-form-submissions.md)
+- [The Patient Form Submission object](https://docs.elationhealth.com/reference/the-patient-form-submission-object.md)
+- [List Patient Form Submissions](https://docs.elationhealth.com/reference/patient_form_submissions_list.md): Returns a list of patient form submissions; supports direct creation.
+- [Retrieve Patient Form Submission](https://docs.elationhealth.com/reference/patient_form_submissions_retrieve.md): Retrieve a single patient form object
+- [Create Patient Form Submission](https://docs.elationhealth.com/reference/patient_form_submissions_create.md): Returns a list of patient form submissions; supports direct creation.
+- [Patient Forms](https://docs.elationhealth.com/reference/patient-forms.md)
+- [Patient Form Object](https://docs.elationhealth.com/reference/patient-form-object.md)
+- [List Patient Forms](https://docs.elationhealth.com/reference/patient_forms_list.md): Returns a list of patient form objects
+- [Retrieve Patient Form](https://docs.elationhealth.com/reference/patient_forms_retrieve.md): Retrieve a single patient form object
+- [List Patient Letter Categories](https://docs.elationhealth.com/reference/patient_letter_categories_list.md): Returns a list of patient letter categories
+- [Retrieve Patient Letter Category](https://docs.elationhealth.com/reference/patient_letter_categories_retrieve.md): Retrieve a single patient letter category
+- [Report Types](https://docs.elationhealth.com/reference/report-types.md)
+- [The Report Type Object](https://docs.elationhealth.com/reference/the-report-type-object.md)
+- [List Report Types](https://docs.elationhealth.com/reference/report_types_list.md)
+- [Retrieve Report Type](https://docs.elationhealth.com/reference/report_types_retrieve.md)
+- [Reports](https://docs.elationhealth.com/reference/reports.md)
+- [The Report Object](https://docs.elationhealth.com/reference/the-report-object.md)
+- [The Routed Document Delegate Object](https://docs.elationhealth.com/reference/the-routed-document-delegate-object.md)
+- [List Reports](https://docs.elationhealth.com/reference/reports_list.md)
+- [List Reports Files](https://docs.elationhealth.com/reference/reports_files_list.md)
+- [Retrieve Report](https://docs.elationhealth.com/reference/reports_retrieve.md)
+- [Retrieve Reports File](https://docs.elationhealth.com/reference/reports_files_retrieve.md)
+- [Retrieve a printable view of a report](https://docs.elationhealth.com/reference/reports_printable_retrieve.md)
+- [Create Report](https://docs.elationhealth.com/reference/reports_create.md)
+- [Partially Update Report](https://docs.elationhealth.com/reference/reports_partial_update.md)
+- [Update Report](https://docs.elationhealth.com/reference/reports_update.md)
+- [Delete Report](https://docs.elationhealth.com/reference/reports_destroy.md)
+- [Create a delegate for a report](https://docs.elationhealth.com/reference/reports_delegates_create.md): Assign a user or a staff group as a delegate for the report. Provide exactly one of `user` (user ID) or `group` (staff group ID). Report delegation must be enabled for the practice (FaxDelegateModal or ReportQueueDelegate). For group delegation, StaffGroupDelegates must be enabled.
+- [Remove delegate(s) from a report](https://docs.elationhealth.com/reference/reports_delegates_destroy.md): Soft-delete one or more delegates for the report. Send a JSON body with `ids`: a list of delegate IDs to remove (e.g. `{"ids": [1, 2]}`). Only non-deleted delegates for this report are removed.
+- [Report Internal Notes](https://docs.elationhealth.com/reference/report-internal-notes.md)
+- [The Report Internal Note Object](https://docs.elationhealth.com/reference/the-report-internal-note-object.md)
+- [Retrieve Reports Internal Note](https://docs.elationhealth.com/reference/reports_internal_notes_retrieve.md): Retrieve a specific internal note for a report
+- [Create Reports Internal Note](https://docs.elationhealth.com/reference/reports_internal_notes_create.md): Create an internal note
+- [Partially Update Reports Internal Note](https://docs.elationhealth.com/reference/reports_internal_notes_partial_update.md): Update a specific internal note
+- [Delete Reports Internal Note](https://docs.elationhealth.com/reference/reports_internal_notes_destroy.md): Delete a specific internal note
+- [List Reports Internal Notes](https://docs.elationhealth.com/reference/reports_internal_notes_list.md): List all internal notes for a report
+- [Visit Note Templates](https://docs.elationhealth.com/reference/visit-note-templates-1.md)
+- [The Visit Note Template Object](https://docs.elationhealth.com/reference/the-visit-note-template-object.md)
+- [List Visit Note Templates](https://docs.elationhealth.com/reference/visit_note_templates_list.md)
+- [Retrieve Visit Note Template](https://docs.elationhealth.com/reference/visit_note_templates_retrieve.md)
+- [Create Visit Note Template](https://docs.elationhealth.com/reference/visit_note_templates_create.md)
+- [Partially Update Visit Note Template](https://docs.elationhealth.com/reference/visit_note_templates_partial_update.md)
+- [Update Visit Note Template](https://docs.elationhealth.com/reference/visit_note_templates_update.md)
+- [Delete Visit Note Template](https://docs.elationhealth.com/reference/visit_note_templates_destroy.md)
+- [Visit Note Types](https://docs.elationhealth.com/reference/visit-note-types-1.md)
+- [The Visit Note Type Object](https://docs.elationhealth.com/reference/the-visit-notes-type-object.md)
+- [List Visit Note Types](https://docs.elationhealth.com/reference/visit_note_types_list.md)
+- [Retrieve Visit Note Type](https://docs.elationhealth.com/reference/visit_note_types_retrieve.md)
+- [Create Visit Note Type](https://docs.elationhealth.com/reference/visit_note_types_create.md)
+- [Partially Update Visit Note Type](https://docs.elationhealth.com/reference/visit_note_types_partial_update.md)
+- [Update Visit Note Type](https://docs.elationhealth.com/reference/visit_note_types_update.md)
+- [Delete Visit Note Type](https://docs.elationhealth.com/reference/visit_note_types_destroy.md)
+- [Visit Notes](https://docs.elationhealth.com/reference/visit-notes.md)
+- [The Visit Note Object](https://docs.elationhealth.com/reference/the-visit-note-object.md)
+- [List Visit Notes](https://docs.elationhealth.com/reference/visit_notes_list.md)
+- [Retrieve Visit Note](https://docs.elationhealth.com/reference/visit_notes_retrieve.md)
+- [Retrieve Visit Notes Clinical Summary](https://docs.elationhealth.com/reference/visit_notes_clinical_summary_retrieve.md)
+- [Retrieve Visit Notes Visit Summary](https://docs.elationhealth.com/reference/visit_notes_visit_summary_retrieve.md)
+- [Create Visit Note](https://docs.elationhealth.com/reference/visit_notes_create.md)
+- [Partially Update Visit Note](https://docs.elationhealth.com/reference/visit_notes_partial_update.md)
+- [Update Visit Note](https://docs.elationhealth.com/reference/visit_notes_update.md)
+- [Delete Visit Note](https://docs.elationhealth.com/reference/visit_notes_destroy.md)
+- [Vitals](https://docs.elationhealth.com/reference/vitals-1.md)
+- [The Vital Object](https://docs.elationhealth.com/reference/the-vital-object-new-version.md)
+- [List Vitals](https://docs.elationhealth.com/reference/vitals_list.md)
+- [Retrieve Vital](https://docs.elationhealth.com/reference/vitals_retrieve.md)
+- [Create Vital](https://docs.elationhealth.com/reference/vitals_create.md)
+- [Partially Update Vital](https://docs.elationhealth.com/reference/vitals_partial_update.md)
+- [Update Vital](https://docs.elationhealth.com/reference/vitals_update.md)
+- [Notes](https://docs.elationhealth.com/reference/notes.md)
+- [List Notes](https://docs.elationhealth.com/reference/list_notes.md): Returns a paginated list of note metadata
+- [Get Note By Id](https://docs.elationhealth.com/reference/get_note_by_id.md): Get a specific note. Returns a sections-based response for layout notes, or a legacy Note for notes created before the sections schema.  This endpoint fetches a note without creating a snapshot. The snapshot is used for conflict resolution when multiple sources are concurrently updating the note.  To fetch a note for editing that requires conflict resolution, use the `/notes/{note_id}/edit` endpoint instead.
+- [Create Note](https://docs.elationhealth.com/reference/create_note.md): Create a new `Note`.
+- [Update Note By Id](https://docs.elationhealth.com/reference/update_note_by_id.md): Update a specific note by id
+- [Delete Note By Id](https://docs.elationhealth.com/reference/delete_note_by_id.md): Delete a specific draft note
+- [Get Note Amendment By Id](https://docs.elationhealth.com/reference/get_note_amendment_by_id.md): Get a specific note amendment (legacy or EN2.1 sections-based).
+- [Custom Blocks](https://docs.elationhealth.com/reference/custom-blocks.md)
+- [List Custom Blocks](https://docs.elationhealth.com/reference/list_custom_blocks.md)
+- [List Notes V1](https://docs.elationhealth.com/reference/list_notes_v1.md): Returns a paginated list of note metadata.
+- [Create Note V1](https://docs.elationhealth.com/reference/create_note_v1.md): Create a legacy Note.
+- [Delete Note By Id V1](https://docs.elationhealth.com/reference/delete_note_by_id_v1.md): Delete a specific draft legacy Note.
+- [Get Note By Id V1](https://docs.elationhealth.com/reference/get_note_by_id_v1.md): Get a specific legacy Note. Returns HTTP 400 if the note uses the EN2.1 schema.
+- [Update Note By Id V1](https://docs.elationhealth.com/reference/update_note_by_id_v1.md): Update a legacy Note. Returns HTTP 400 if the note uses the EN2.1 schema (pass ``content_map`` and use the /v2/ endpoint instead).
+- [List Notes V2](https://docs.elationhealth.com/reference/list_notes_v2.md): Returns a paginated list of note metadata.
+- [Create Note V2](https://docs.elationhealth.com/reference/create_note_v2.md): Create an EN2.1 sections-based Note.
+- [Delete Note By Id V2](https://docs.elationhealth.com/reference/delete_note_by_id_v2.md): Delete a specific draft EN2.1 Note.
+- [Get Note By Id V2](https://docs.elationhealth.com/reference/get_note_by_id_v2.md): Get a specific EN2.1 sections-based Note. Returns HTTP 400 if the note uses the legacy schema.
+- [Update Note By Id V2](https://docs.elationhealth.com/reference/update_note_by_id_v2.md): Update an EN2.1 sections-based Note.
+- [Create Note Amendment V2](https://docs.elationhealth.com/reference/create_note_amendment_v2.md): Create an EN2.1 note amendment. If a draft amendment already exists, returns it (HTTP 200). The parent note must be a signed sections-based note.
+- [Delete Note Amendment By Id V2](https://docs.elationhealth.com/reference/delete_note_amendment_by_id_v2.md): Delete a specific draft EN2.1 note amendment.
+- [Get Note Amendment By Id V2](https://docs.elationhealth.com/reference/get_note_amendment_by_id_v2.md): Get a specific EN2.1 note amendment.
+- [Update Note Amendment By Id V2](https://docs.elationhealth.com/reference/update_note_amendment_by_id_v2.md): Update a draft EN2.1 note amendment.
+- [Get Note For Edit V2](https://docs.elationhealth.com/reference/get_note_for_edit_v2.md): Fetch an EN2.1 note for editing. Creates a snapshot and returns ``snapshot_id`` for collaborative PATCH updates.
+- [List Note Doctags V2](https://docs.elationhealth.com/reference/list_note_doctags_v2.md): List all doctags for an EN2.1 sections-based Note. Returns HTTP 400 if the note uses the legacy schema.
+- [Add Doctag To Note V2](https://docs.elationhealth.com/reference/add_doctag_to_note_v2.md): Add a doctag to an EN2.1 sections-based Note. The doctag will be upserted into the database and linked to the note. Returns HTTP 400 if the note uses the legacy schema.
+- [Delete Doctag V2](https://docs.elationhealth.com/reference/delete_doctag_v2.md): Remove a doctag from an EN2.1 sections-based Note. Returns HTTP 400 if the note uses the legacy schema.
+- [Retrieve a filtered page of definitions](https://docs.elationhealth.com/reference/definitions_get_page_caregaps_api__quality_program__definition__get-1.md): Retrieve a list of definitions.
+- [Ancillary Companies](https://docs.elationhealth.com/reference/ancillary-companies.md)
+- [The Ancillary Company Object](https://docs.elationhealth.com/reference/the-ancillary-company-object.md)
+- [List Ancillary Companies](https://docs.elationhealth.com/reference/ancillary_companies_list.md): Returns a list of ancillary companies by specific type of order
+- [Retrieve Ancillary Company](https://docs.elationhealth.com/reference/ancillary_companies_retrieve.md): Retrieve a single ancillary company
+- [Cardiac Centers](https://docs.elationhealth.com/reference/cardiac-centers.md)
+- [The Cardiac Center Object](https://docs.elationhealth.com/reference/the-cardiac-center-object.md)
+- [List Cardiac Centers](https://docs.elationhealth.com/reference/cardiac_centers_list.md): Returns a list of cardiac centers
+- [Retrieve Cardiac Center](https://docs.elationhealth.com/reference/cardiac_centers_retrieve.md): Retrieve a single cardiac center
+- [Cardiac Order Tests](https://docs.elationhealth.com/reference/cardiac-order-tests.md)
+- [The Cardiac Order Test Object](https://docs.elationhealth.com/reference/the-cardiac-order-test-object.md)
+- [List Cardiac Order Tests](https://docs.elationhealth.com/reference/cardiac_order_tests_list.md): Returns a list of cardiac order test
+- [Retrieve Cardiac Order Test](https://docs.elationhealth.com/reference/cardiac_order_tests_retrieve.md): Retrieve a single cardiac order test
+- [Create Cardiac Order Test](https://docs.elationhealth.com/reference/cardiac_order_tests_create.md): Returns a list of cardiac order test
+- [Delete Cardiac Order Test](https://docs.elationhealth.com/reference/cardiac_order_tests_destroy.md): Retrieve a single cardiac order test
+- [Cardiac Orders](https://docs.elationhealth.com/reference/cardiac-orders.md)
+- [The Cardiac Order Object](https://docs.elationhealth.com/reference/the-cardiac-order-object.md)
+- [List Cardiac Orders](https://docs.elationhealth.com/reference/cardiac_orders_list.md): Returns a list of cardiac orders
+- [Retrieve Cardiac Order](https://docs.elationhealth.com/reference/cardiac_orders_retrieve.md): Retrieve a single cardiac order
+- [Create Cardiac Order](https://docs.elationhealth.com/reference/cardiac_orders_create.md): Returns a list of cardiac orders
+- [Partially Update Cardiac Order](https://docs.elationhealth.com/reference/cardiac_orders_partial_update.md): Retrieve a single cardiac order
+- [Update Cardiac Order](https://docs.elationhealth.com/reference/cardiac_orders_update.md): Retrieve a single cardiac order
+- [Delete Cardiac Order](https://docs.elationhealth.com/reference/cardiac_orders_destroy.md): Retrieve a single cardiac order
+- [Imaging Centers](https://docs.elationhealth.com/reference/imaging-centers.md)
+- [The Imaging Center Object](https://docs.elationhealth.com/reference/the-imaging-center-object.md)
+- [List Imaging Centers](https://docs.elationhealth.com/reference/imaging_centers_list.md): Returns a list of imaging centers
+- [Retrieve Imaging Center](https://docs.elationhealth.com/reference/imaging_centers_retrieve.md): Retrieve a single imaging center
+- [Imaging Order Tests](https://docs.elationhealth.com/reference/imaging-order-tests.md)
+- [The Imaging Order Test Object](https://docs.elationhealth.com/reference/the-imaging-order-test-object.md)
+- [List Imaging Order Tests](https://docs.elationhealth.com/reference/imaging_order_tests_list.md): Returns a list of imaging order test
+- [Retrieve Imaging Order Test](https://docs.elationhealth.com/reference/imaging_order_tests_retrieve.md): Retrieve a single imaging order test
+- [Create Imaging Order Test](https://docs.elationhealth.com/reference/imaging_order_tests_create.md): Returns a list of imaging order test
+- [Delete Imaging Order Test](https://docs.elationhealth.com/reference/imaging_order_tests_destroy.md): Retrieve a single imaging order test
+- [Imaging Orders](https://docs.elationhealth.com/reference/imaging-orders.md)
+- [The Imaging Order Object](https://docs.elationhealth.com/reference/the-imaging-order-object.md)
+- [List Imaging Orders](https://docs.elationhealth.com/reference/imaging_orders_list.md): Returns a list of imaging orders
+- [Retrieve Imaging Order](https://docs.elationhealth.com/reference/imaging_orders_retrieve.md): Retrieve a single imaging order
+- [Create Imaging Order](https://docs.elationhealth.com/reference/imaging_orders_create.md): Returns a list of imaging orders
+- [Partially Update Imaging Order](https://docs.elationhealth.com/reference/imaging_orders_partial_update.md): Retrieve a single imaging order
+- [Update Imaging Order](https://docs.elationhealth.com/reference/imaging_orders_update.md): Retrieve a single imaging order
+- [Delete Imaging Order](https://docs.elationhealth.com/reference/imaging_orders_destroy.md): Retrieve a single imaging order
+- [Lab Facility Identifiers](https://docs.elationhealth.com/reference/lab-facility-identifiers.md)
+- [The Lab Facility Identifiers Object](https://docs.elationhealth.com/reference/lab-facility-identifiers-object.md)
+- [List Lab Facility Identifiers](https://docs.elationhealth.com/reference/lab_facility_identifiers_list.md): Returns a list of lab vendor integrations
+- [Retrieve Lab Facility Identifier](https://docs.elationhealth.com/reference/lab_facility_identifiers_retrieve.md): Retrieve a single lab vendor integration
+- [Create Lab Facility Identifier](https://docs.elationhealth.com/reference/lab_facility_identifiers_create.md): Returns a list of lab vendor integrations
+- [Partially Update Lab Facility Identifier](https://docs.elationhealth.com/reference/lab_facility_identifiers_partial_update.md): Retrieve a single lab vendor integration
+- [Update Lab Facility Identifier](https://docs.elationhealth.com/reference/lab_facility_identifiers_update.md): Retrieve a single lab vendor integration
+- [Delete Lab Facility Identifier](https://docs.elationhealth.com/reference/lab_facility_identifiers_destroy.md): Retrieve a single lab vendor integration
+- [Lab Order Compendiums](https://docs.elationhealth.com/reference/lab-order-compendiums.md)
+- [The Lab Order Compendium Object](https://docs.elationhealth.com/reference/the-lab-order-compendium-object.md)
+- [List Lab Order Compendiums](https://docs.elationhealth.com/reference/lab_order_compendiums_list.md): Returns a list of lab order compendiums
+- [Retrieve Lab Order Compendium](https://docs.elationhealth.com/reference/lab_order_compendiums_retrieve.md): Retrieve a single lab order compendium
+- [Create Lab Order Compendium](https://docs.elationhealth.com/reference/lab_order_compendiums_create.md): Returns a list of lab order compendiums
+- [Partially Update Lab Order Compendium](https://docs.elationhealth.com/reference/lab_order_compendiums_partial_update.md): Retrieve a single lab order compendium
+- [Update Lab Order Compendium](https://docs.elationhealth.com/reference/lab_order_compendiums_update.md): Retrieve a single lab order compendium
+- [Delete Lab Order Compendium](https://docs.elationhealth.com/reference/lab_order_compendiums_destroy.md): Retrieve a single lab order compendium
+- [Lab Order Sets](https://docs.elationhealth.com/reference/lab-order-sets.md)
+- [The Lab Order Set Object](https://docs.elationhealth.com/reference/the-lab-order-set-object.md)
+- [List Lab Order Sets](https://docs.elationhealth.com/reference/lab_order_sets_list.md): Returns a list of lab order sets
+- [Retrieve Lab Order Set](https://docs.elationhealth.com/reference/lab_order_sets_retrieve.md): Retrieve a single lab order set
+- [Create Lab Order Set](https://docs.elationhealth.com/reference/lab_order_sets_create.md): Returns a list of lab order sets
+- [Partially Update Lab Order Set](https://docs.elationhealth.com/reference/lab_order_sets_partial_update.md): Retrieve a single lab order set
+- [Update Lab Order Set](https://docs.elationhealth.com/reference/lab_order_sets_update.md): Retrieve a single lab order set
+- [Delete Lab Order Set](https://docs.elationhealth.com/reference/lab_order_sets_destroy.md): Retrieve a single lab order set
+- [Lab Order Tests](https://docs.elationhealth.com/reference/lab-order-tests.md)
+- [The Lab Orders Test Object](https://docs.elationhealth.com/reference/the-lab-orders-test-object.md)
+- [List Lab Order Tests](https://docs.elationhealth.com/reference/lab_order_tests_list.md): Returns a list of lab order tests
+- [Retrieve Lab Order Test](https://docs.elationhealth.com/reference/lab_order_tests_retrieve.md): Retrieve a single lab order test
+- [Create Lab Order Test](https://docs.elationhealth.com/reference/lab_order_tests_create.md): Returns a list of lab order tests
+- [Delete Lab Order Test](https://docs.elationhealth.com/reference/lab_order_tests_destroy.md): Retrieve a single lab order test
+- [Lab Orders](https://docs.elationhealth.com/reference/lab-orders.md)
+- [The Lab Order Object](https://docs.elationhealth.com/reference/the-lab-order-object.md)
+- [List Lab Orders](https://docs.elationhealth.com/reference/lab_orders_list.md): Returns a list of lab orders
+- [Retrieve Lab Order](https://docs.elationhealth.com/reference/lab_orders_retrieve.md): Retrieve a single lab order
+- [Retrieve the Printable Lab Order View](https://docs.elationhealth.com/reference/lab_orders_printable_retrieve.md): Providers are able to print a view of the lab order including the data provided behind this endpoint. Each lab order response includes a link to obtain this view; a PDF file. When you GET the link you'll receive a response with application/pdf and the bytes of the PDF.
+- [Create Lab Order](https://docs.elationhealth.com/reference/lab_orders_create.md): Returns a list of lab orders
+- [Partially Update Lab Order](https://docs.elationhealth.com/reference/lab_orders_partial_update.md): Retrieve a single lab order
+- [Update Lab Order](https://docs.elationhealth.com/reference/lab_orders_update.md): Retrieve a single lab order
+- [Delete Lab Order](https://docs.elationhealth.com/reference/lab_orders_destroy.md): Retrieve a single lab order
+- [The Lab Order Content Object](https://docs.elationhealth.com/reference/the-lab-order-content-object.md)
+- [Lab Vendor Integrations](https://docs.elationhealth.com/reference/lab-vendor-integrations.md)
+- [Lab Vendor Integration Object](https://docs.elationhealth.com/reference/lab-vendor-integration-object.md)
+- [List Lab Vendor Integrations](https://docs.elationhealth.com/reference/lab_vendor_integrations_list.md): Returns a list of lab vendor integrations
+- [Retrieve Lab Vendor Integration](https://docs.elationhealth.com/reference/lab_vendor_integrations_retrieve.md): Retrieve a single lab vendor integration
+- [Create Lab Vendor Integration](https://docs.elationhealth.com/reference/lab_vendor_integrations_create.md): Returns a list of lab vendor integrations
+- [Partially Update Lab Vendor Integration](https://docs.elationhealth.com/reference/lab_vendor_integrations_partial_update.md): Retrieve a single lab vendor integration
+- [Update Lab Vendor Integration](https://docs.elationhealth.com/reference/lab_vendor_integrations_update.md): Retrieve a single lab vendor integration
+- [Delete Lab Vendor Integration](https://docs.elationhealth.com/reference/lab_vendor_integrations_destroy.md): Retrieve a single lab vendor integration
+- [Lab Vendor Patient Sites](https://docs.elationhealth.com/reference/lab-vendor-patient-sites.md)
+- [The Lab Vendor Patient Site Object](https://docs.elationhealth.com/reference/the-lab-vendor-patient-site-object.md)
+- [List Lab Vendor Patient Sites](https://docs.elationhealth.com/reference/lab_vendor_patient_sites_list.md): Returns a list of lab vendor patient sites
+- [Retrieve Lab Vendor Patient Site](https://docs.elationhealth.com/reference/lab_vendor_patient_sites_retrieve.md): Retrieve a single lab vendor patient site
+- [Create Lab Vendor Patient Site](https://docs.elationhealth.com/reference/lab_vendor_patient_sites_create.md): Returns a list of lab vendor patient sites
+- [Partially Update Lab Vendor Patient Site](https://docs.elationhealth.com/reference/lab_vendor_patient_sites_partial_update.md): Retrieve a single lab vendor patient site
+- [Update Lab Vendor Patient Site](https://docs.elationhealth.com/reference/lab_vendor_patient_sites_update.md): Retrieve a single lab vendor patient site
+- [Delete Lab Vendor Patient Site](https://docs.elationhealth.com/reference/lab_vendor_patient_sites_destroy.md): Retrieve a single lab vendor patient site
+- [Lab Vendors](https://docs.elationhealth.com/reference/lab-vendors.md)
+- [The Lab Vendor Object](https://docs.elationhealth.com/reference/the-lab-vendor-object.md)
+- [List Lab Vendors](https://docs.elationhealth.com/reference/lab_vendors_list.md): Returns a list of lab vendors
+- [Retrieve Lab Vendor](https://docs.elationhealth.com/reference/lab_vendors_retrieve.md): Retrieve a single lab vendor
+- [Create Lab Vendor](https://docs.elationhealth.com/reference/lab_vendors_create.md): Returns a list of lab vendors
+- [Partially Update Lab Vendor](https://docs.elationhealth.com/reference/lab_vendors_partial_update.md): Retrieve a single lab vendor
+- [Update Lab Vendor](https://docs.elationhealth.com/reference/lab_vendors_update.md): Retrieve a single lab vendor
+- [Delete Lab Vendor](https://docs.elationhealth.com/reference/lab_vendors_destroy.md): Retrieve a single lab vendor
+- [Pulmonary Centers](https://docs.elationhealth.com/reference/pulmonary-centers.md)
+- [The Pulmonary Center Object](https://docs.elationhealth.com/reference/the-pulmonary-center-object.md)
+- [List Pulmonary Centers](https://docs.elationhealth.com/reference/pulmonary_centers_list.md): Returns a list of pulmonary centers
+- [Retrieve Pulmonary Center](https://docs.elationhealth.com/reference/pulmonary_centers_retrieve.md): Retrieve a single pulmonary center
+- [Pulmonary Order Tests](https://docs.elationhealth.com/reference/pulmonary-order-tests.md)
+- [The Pulmonary Order Test Object](https://docs.elationhealth.com/reference/the-pulmonary-order-test-object.md)
+- [List Pulmonary Order Tests](https://docs.elationhealth.com/reference/pulmonary_order_tests_list.md): Returns a list of pulmonary order test
+- [Retrieve Pulmonary Order Test](https://docs.elationhealth.com/reference/pulmonary_order_tests_retrieve.md): Retrieve a single pulmonary order test
+- [Create Pulmonary Order Test](https://docs.elationhealth.com/reference/pulmonary_order_tests_create.md): Returns a list of pulmonary order test
+- [Delete Pulmonary Order Test](https://docs.elationhealth.com/reference/pulmonary_order_tests_destroy.md): Retrieve a single pulmonary order test
+- [Pulmonary Orders](https://docs.elationhealth.com/reference/pulmonary-orders.md)
+- [The Pulmonary Order Object](https://docs.elationhealth.com/reference/the-pulmonary-order-object.md)
+- [List Pulmonary Orders](https://docs.elationhealth.com/reference/pulmonary_orders_list.md): Returns a list of pulmonary orders
+- [Retrieve Pulmonary Order](https://docs.elationhealth.com/reference/pulmonary_orders_retrieve.md): Retrieve a single pulmonary order
+- [Create Pulmonary Order](https://docs.elationhealth.com/reference/pulmonary_orders_create.md): Returns a list of pulmonary orders
+- [Partially Update Pulmonary Order](https://docs.elationhealth.com/reference/pulmonary_orders_partial_update.md): Retrieve a single pulmonary order
+- [Update Pulmonary Order](https://docs.elationhealth.com/reference/pulmonary_orders_update.md): Retrieve a single pulmonary order
+- [Delete Pulmonary Order](https://docs.elationhealth.com/reference/pulmonary_orders_destroy.md): Retrieve a single pulmonary order
+- [Sleep Centers](https://docs.elationhealth.com/reference/sleep-centers.md)
+- [The Sleep Center Object](https://docs.elationhealth.com/reference/the-sleep-center-object.md)
+- [List Sleep Centers](https://docs.elationhealth.com/reference/sleep_centers_list.md): Returns a list of sleep centers
+- [Retrieve Sleep Center](https://docs.elationhealth.com/reference/sleep_centers_retrieve.md): Retrieve a single sleep center
+- [Sleep Order Tests](https://docs.elationhealth.com/reference/sleep-order-tests.md)
+- [The Sleep Order Test Object](https://docs.elationhealth.com/reference/the-sleep-order-test-object.md)
+- [List Sleep Order Tests](https://docs.elationhealth.com/reference/sleep_order_tests_list.md): Returns a list of sleep order test
+- [Retrieve Sleep Order Test](https://docs.elationhealth.com/reference/sleep_order_tests_retrieve.md): Retrieve a single sleep order test
+- [Create Sleep Order Test](https://docs.elationhealth.com/reference/sleep_order_tests_create.md): Returns a list of sleep order test
+- [Delete Sleep Order Test](https://docs.elationhealth.com/reference/sleep_order_tests_destroy.md): Retrieve a single sleep order test
+- [Sleep Orders](https://docs.elationhealth.com/reference/sleep-orders.md)
+- [The Sleep Order Object](https://docs.elationhealth.com/reference/the-sleep-order-object.md)
+- [List Sleep Orders](https://docs.elationhealth.com/reference/sleep_orders_list.md): Returns a list of sleep orders
+- [Retrieve Sleep Order](https://docs.elationhealth.com/reference/sleep_orders_retrieve.md): Retrieve a single sleep order
+- [Create Sleep Order](https://docs.elationhealth.com/reference/sleep_orders_create.md): Returns a list of sleep orders
+- [Partially Update Sleep Order](https://docs.elationhealth.com/reference/sleep_orders_partial_update.md): Retrieve a single sleep order
+- [Update Sleep Order](https://docs.elationhealth.com/reference/sleep_orders_update.md): Retrieve a single sleep order
+- [Delete Sleep Order](https://docs.elationhealth.com/reference/sleep_orders_destroy.md): Retrieve a single sleep order
+- [Message Threads](https://docs.elationhealth.com/reference/message-threads.md)
+- [The Message Thread Object](https://docs.elationhealth.com/reference/the-message-thread-object.md)
+- [List Message Threads](https://docs.elationhealth.com/reference/message_threads_list.md)
+- [Retrieve Message Thread](https://docs.elationhealth.com/reference/message_threads_retrieve.md)
+- [Create Message Thread](https://docs.elationhealth.com/reference/message_threads_create.md)
+- [Partially Update Message Thread](https://docs.elationhealth.com/reference/message_threads_partial_update.md)
+- [Update Message Thread](https://docs.elationhealth.com/reference/message_threads_update.md)
+- [Delete Message Thread](https://docs.elationhealth.com/reference/message_threads_destroy.md)
+- [Thread Members](https://docs.elationhealth.com/reference/thread-members.md)
+- [The Thread Member Object](https://docs.elationhealth.com/reference/the-thread-member-object.md)
+- [List Thread Members](https://docs.elationhealth.com/reference/thread_members_list.md)
+- [Retrieve Thread Member](https://docs.elationhealth.com/reference/thread_members_retrieve.md)
+- [Create Thread Member](https://docs.elationhealth.com/reference/thread_members_create.md)
+- [Partially Update Thread Member](https://docs.elationhealth.com/reference/thread_members_partial_update.md)
+- [Update Thread Member](https://docs.elationhealth.com/reference/thread_members_update.md)
+- [Delete Thread Member](https://docs.elationhealth.com/reference/thread_members_destroy.md)
+- [Thread Messages](https://docs.elationhealth.com/reference/thread-messages.md)
+- [The Thread Message Object](https://docs.elationhealth.com/reference/the-thread-message-object.md)
+- [List Thread Messages](https://docs.elationhealth.com/reference/thread_messages_list.md)
+- [Retrieve Thread Message](https://docs.elationhealth.com/reference/thread_messages_retrieve.md)
+- [Create Thread Message](https://docs.elationhealth.com/reference/thread_messages_create.md)
+- [Delete Thread Message](https://docs.elationhealth.com/reference/thread_messages_destroy.md)
+- [Appointment Types](https://docs.elationhealth.com/reference/appointment-types-1.md)
+- [The Appointment Type Object](https://docs.elationhealth.com/reference/the-appointment-type-object.md)
+- [List Appointment Types](https://docs.elationhealth.com/reference/appointment_types_list.md)
+- [Retrieve Appointment Type](https://docs.elationhealth.com/reference/appointment_types_retrieve.md)
+- [Create Appointment Type](https://docs.elationhealth.com/reference/appointment_types_create.md)
+- [Partially Update Appointment Type](https://docs.elationhealth.com/reference/appointment_types_partial_update.md)
+- [Update Appointment Type](https://docs.elationhealth.com/reference/appointment_types_update.md)
+- [Delete Appointment Type](https://docs.elationhealth.com/reference/appointment_types_destroy.md)
+- [Appointments](https://docs.elationhealth.com/reference/appointments.md)
+- [The Appointment Object](https://docs.elationhealth.com/reference/the-appointment-object.md)
+- [List Appointments](https://docs.elationhealth.com/reference/appointments_list.md)
+- [Retrieve Appointment](https://docs.elationhealth.com/reference/appointments_retrieve.md)
+- [Create Appointment](https://docs.elationhealth.com/reference/appointments_create.md)
+- [Partially Update Appointment](https://docs.elationhealth.com/reference/appointments_partial_update.md)
+- [Update Appointment](https://docs.elationhealth.com/reference/appointments_update.md)
+- [Delete Appointment](https://docs.elationhealth.com/reference/appointments_destroy.md)
+- [The Event Object](https://docs.elationhealth.com/reference/the-event-object-1.md)
+- [Appointment Rooms](https://docs.elationhealth.com/reference/appointment-rooms.md)
+- [The Appointment Room Object](https://docs.elationhealth.com/reference/the-appointment-room-object.md)
+- [List Appointment Rooms](https://docs.elationhealth.com/reference/appointments_rooms_retrieve.md): List the rooms available per practices
+- [Recurring Event Groups](https://docs.elationhealth.com/reference/recurring-event-groups.md)
+- [The Recurring Event Group Object](https://docs.elationhealth.com/reference/alpha-the-recurring-event-group-object.md)
+- [List Recurring Event Groups](https://docs.elationhealth.com/reference/recurring_event_groups_list.md)
+- [Retrieve Recurring Event Group](https://docs.elationhealth.com/reference/recurring_event_groups_retrieve.md)
+- [Create Recurring Event Group](https://docs.elationhealth.com/reference/recurring_event_groups_create.md)
+- [Delete Recurring Event Group](https://docs.elationhealth.com/reference/recurring_event_groups_destroy.md)
+- [Insurance Cards](https://docs.elationhealth.com/reference/insurance-cards.md)
+- [Get Card Images By Policy](https://docs.elationhealth.com/reference/get_card_images_by_policy_patients__patient_id__policies__policy_id__card_images_get.md)
+- [Upsert Insurance Card](https://docs.elationhealth.com/reference/upsert_insurance_card_patients__patient_id__policies__policy_id__card_images_post.md)
+- [Delete Insurance Card Image](https://docs.elationhealth.com/reference/delete_insurance_card_image_patients__patient_id__policies__policy_id__card_images__image_rank__delete.md): Calling this endpoint twice, once with each image rank, will result in deleting the card entirely.
+- [Insurance Companies](https://docs.elationhealth.com/reference/insurance-companies.md)
+- [The Insurance Company Object](https://docs.elationhealth.com/reference/the-insurance-company-object.md)
+- [List Insurance Companies](https://docs.elationhealth.com/reference/insurance_companies_list.md)
+- [Retrieve Insurance Company](https://docs.elationhealth.com/reference/insurance_companies_retrieve.md)
+- [Create Insurance Company](https://docs.elationhealth.com/reference/insurance_companies_create.md)
+- [Partially Update Insurance Company](https://docs.elationhealth.com/reference/insurance_companies_partial_update.md)
+- [Update Insurance Company](https://docs.elationhealth.com/reference/insurance_companies_update.md)
+- [Delete Insurance Company](https://docs.elationhealth.com/reference/insurance_companies_destroy.md)
+- [Insurance Plans](https://docs.elationhealth.com/reference/insurance-plans.md)
+- [The Insurance Plan Object](https://docs.elationhealth.com/reference/the-insurance-plan-object.md)
+- [List Insurance Plans](https://docs.elationhealth.com/reference/insurance_plans_list.md)
+- [Retrieve Insurance Plan](https://docs.elationhealth.com/reference/insurance_plans_retrieve.md)
+- [Create Insurance Plan](https://docs.elationhealth.com/reference/insurance_plans_create.md)
+- [Partially Update Insurance Plan](https://docs.elationhealth.com/reference/insurance_plans_partial_update.md)
+- [Update Insurance Plan](https://docs.elationhealth.com/reference/insurance_plans_update.md)
+- [Delete Insurance Plan](https://docs.elationhealth.com/reference/insurance_plans_destroy.md)
+- [Insurance Policies](https://docs.elationhealth.com/reference/policies.md)
+- [The Policy Object](https://docs.elationhealth.com/reference/the-policy-object.md)
+- [Get Policy](https://docs.elationhealth.com/reference/get_policy_patients__patient_id__policies__policy_id__get.md)
+- [Get Policies](https://docs.elationhealth.com/reference/get_policies_patients__patient_id__policies_get.md)
+- [Create Policies](https://docs.elationhealth.com/reference/create_policies_patients__patient_id__policies_post.md)
+- [Put Policy](https://docs.elationhealth.com/reference/put_policy_patients__patient_id__policies__policy_id__put.md)
+- [Put Policies](https://docs.elationhealth.com/reference/put_policies_patients__patient_id__policies_put.md)
+- [Delete Policy](https://docs.elationhealth.com/reference/delete_policy_patients__patient_id__policies__policy_id__delete.md)
+- [Insurance Eligibility](https://docs.elationhealth.com/reference/insurance-eligibility.md)
+- [The Insurance Eligibility Object](https://docs.elationhealth.com/reference/the-insurance-eligibility-object.md)
+- [Get Eligibility](https://docs.elationhealth.com/reference/patient_insurances_eligibility_retrieve.md): Get eligibility information for a patient insurance
+- [Create Eligibility](https://docs.elationhealth.com/reference/patient_insurances_eligibility_create.md): Create eligibility information for a patient insurance
+- [The Insurance Eligibility Full Report Object](https://docs.elationhealth.com/reference/the-insurance-eligibility-full-report-object.md)
+- [Get Eligibility Full Report](https://docs.elationhealth.com/reference/patient_insurances_eligibility_full_report_retrieve.md): Get eligibility full report for a patient insurance
+- [Billing Codes](https://docs.elationhealth.com/reference/billing-codes-1.md)
+- [The Billing Code Object](https://docs.elationhealth.com/reference/the-billing-code-object.md): A code that users can add to bills within a patient chart. Used often as CPT codes.
+- [List Billing Codes](https://docs.elationhealth.com/reference/billing_codes_list.md): Get the CPT codes that the practice has set up. To view them in the app, go to Practice Settings - Billing.
+- [Retrieve Billing Code](https://docs.elationhealth.com/reference/billing_codes_retrieve.md): Get a CPT code that the practice has set up. To view all codes in the app, go to Practice Settings - Billing.
+- [Create Billing Code](https://docs.elationhealth.com/reference/billing_codes_create.md): Create a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.
+- [Partially Update Billing Code](https://docs.elationhealth.com/reference/billing_codes_partial_update.md)
+- [Update Billing Code](https://docs.elationhealth.com/reference/billing_codes_update.md): Update a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.
+- [Delete Billing Code](https://docs.elationhealth.com/reference/billing_codes_destroy.md): Delete a CPT code that the practice has set up. To view them in the app, go to Practice Settings - Billing.
+- [Bills](https://docs.elationhealth.com/reference/bills.md)
+- [The Bill Object](https://docs.elationhealth.com/reference/the-bill-object.md)
+- [List Bills](https://docs.elationhealth.com/reference/bills_list.md)
+- [Retrieve Bill](https://docs.elationhealth.com/reference/bills_retrieve.md)
+- [Create Bill](https://docs.elationhealth.com/reference/bills_create.md)
+- [Partially Update Bill](https://docs.elationhealth.com/reference/bills_partial_update.md)
+- [Release a Bill to PMS](https://docs.elationhealth.com/reference/bills_actions_release_to_pms_partial_update.md): This is a simple PATCH endpoint that allows you to release a bill to your connected PMS. It accomplishes the same goal as pressing the "Send to PMS" button on the Elation Billing Report for a bill.
+- [Outstanding Balance](https://docs.elationhealth.com/reference/outstanding-balance-1.md)
+- [Update Outstanding Balance](https://docs.elationhealth.com/reference/patients_outstanding_balance_create.md): The outstanding balance is a write-only resource that can be used to update the balance of a specific patient. It requires that the OutstandingBalance feature must be enabled for the practice.
+- [Users](https://docs.elationhealth.com/reference/users.md)
+- [The User Object](https://docs.elationhealth.com/reference/the-user-object.md)
+- [List Users](https://docs.elationhealth.com/reference/users_list.md): Returns a list of users
+- [Retrieve User](https://docs.elationhealth.com/reference/users_retrieve.md): Retrieve a single user
+- [Create User](https://docs.elationhealth.com/reference/users_create.md): Create a new user
+- [Partially Update User](https://docs.elationhealth.com/reference/users_partial_update.md): Update an existing user
+- [Contacts](https://docs.elationhealth.com/reference/contacts.md)
+- [The Contact Object](https://docs.elationhealth.com/reference/the-contact-object.md)
+- [List Contacts](https://docs.elationhealth.com/reference/contacts_list.md)
+- [Search Contacts](https://docs.elationhealth.com/reference/contacts_search_list.md)
+- [Retrieve Contact](https://docs.elationhealth.com/reference/contacts_retrieve.md)
+- [Create Contact](https://docs.elationhealth.com/reference/contacts_create.md)
+- [Partially Update Contact](https://docs.elationhealth.com/reference/contacts_partial_update.md)
+- [Update Contact](https://docs.elationhealth.com/reference/contacts_update.md)
+- [Delete Contact](https://docs.elationhealth.com/reference/contacts_destroy.md)
+- [Delegate Permissions](https://docs.elationhealth.com/reference/delegate-permissions-1.md)
+- [The Delegate Permission Object](https://docs.elationhealth.com/reference/the-delegate-permission-object.md)
+- [List Delegate Permissions](https://docs.elationhealth.com/reference/delegate_permissions_list.md)
+- [Retrieve Delegate Permission](https://docs.elationhealth.com/reference/delegate_permissions_retrieve.md)
+- [Create Delegate Permission](https://docs.elationhealth.com/reference/delegate_permissions_create.md)
+- [Delete Delegate Permission](https://docs.elationhealth.com/reference/delegate_permissions_destroy.md)
+- [Handouts](https://docs.elationhealth.com/reference/handouts-1.md)
+- [The Handout object](https://docs.elationhealth.com/reference/the-handout-object.md)
+- [List Handouts](https://docs.elationhealth.com/reference/handouts_list.md)
+- [Retrieve Handout](https://docs.elationhealth.com/reference/handouts_retrieve.md)
+- [Create Handout](https://docs.elationhealth.com/reference/handouts_create.md)
+- [Partially Update Handout](https://docs.elationhealth.com/reference/handouts_partial_update.md)
+- [Update Handout](https://docs.elationhealth.com/reference/handouts_update.md)
+- [Delete Handout](https://docs.elationhealth.com/reference/handouts_destroy.md)
+- [Medication Order Templates](https://docs.elationhealth.com/reference/medication-order-templates-1.md)
+- [The Medication Order Template object](https://docs.elationhealth.com/reference/the-medication-order-template-object.md)
+- [List Medication Order Templates](https://docs.elationhealth.com/reference/medication_order_templates_list.md)
+- [Retrieve Medication Order Template](https://docs.elationhealth.com/reference/medication_order_templates_retrieve.md)
+- [Create Medication Order Template](https://docs.elationhealth.com/reference/medication_order_templates_create.md)
+- [Partially Update Medication Order Template](https://docs.elationhealth.com/reference/medication_order_templates_partial_update.md)
+- [Update Medication Order Template](https://docs.elationhealth.com/reference/medication_order_templates_update.md)
+- [Delete Medication Order Template](https://docs.elationhealth.com/reference/medication_order_templates_destroy.md)
+- [Office Staff](https://docs.elationhealth.com/reference/office-staff-1.md)
+- [The Office Staff Object](https://docs.elationhealth.com/reference/office-staff.md)
+- [List Office Staffs](https://docs.elationhealth.com/reference/office_staff_list.md): Returns a list of office staff
+- [Retrieve Office Staff](https://docs.elationhealth.com/reference/office_staff_retrieve.md): Retrieve an office staff
+- [Physicians](https://docs.elationhealth.com/reference/physicians.md)
+- [The Physician Object](https://docs.elationhealth.com/reference/the-physician-object-1.md)
+- [List Physicians](https://docs.elationhealth.com/reference/physicians_list.md)
+- [Retrieve Physician](https://docs.elationhealth.com/reference/physicians_retrieve.md)
+- [Partially Update Physician](https://docs.elationhealth.com/reference/physicians_partial_update.md)
+- [Update Physician](https://docs.elationhealth.com/reference/physicians_update.md)
+- [The Physician Availabilities Object](https://docs.elationhealth.com/reference/the-physician-availabilities-object-1.md)
+- [Get Physician Availabilities](https://docs.elationhealth.com/reference/physicians_availabilities_list.md): Get the availabilities for a physician
+- [Update Physician Availabilities](https://docs.elationhealth.com/reference/physicians_availabilities_update.md): Update the availabilities for a physician
+- [Practice Medications](https://docs.elationhealth.com/reference/practice-medications-1.md)
+- [The Practice Medication Object](https://docs.elationhealth.com/reference/the-practice-medication-object.md)
+- [List Practice Medications](https://docs.elationhealth.com/reference/practice_medications_list.md)
+- [Retrieve Practice Medication](https://docs.elationhealth.com/reference/practice_medications_retrieve.md)
+- [Create Practice Medication](https://docs.elationhealth.com/reference/practice_medications_create.md)
+- [Partially Update Practice Medication](https://docs.elationhealth.com/reference/practice_medications_partial_update.md)
+- [Update Practice Medication](https://docs.elationhealth.com/reference/practice_medications_update.md)
+- [Delete Practice Medication](https://docs.elationhealth.com/reference/practice_medications_destroy.md)
+- [Practices](https://docs.elationhealth.com/reference/practices.md)
+- [The Practice Object](https://docs.elationhealth.com/reference/the-practice-object-wip.md)
+- [List Practices](https://docs.elationhealth.com/reference/practices_list.md)
+- [Retrieve Practice](https://docs.elationhealth.com/reference/practices_retrieve.md)
+- [Partially Update Practice](https://docs.elationhealth.com/reference/practices_partial_update.md)
+- [Update Practice](https://docs.elationhealth.com/reference/practices_update.md)
+- [Insurance Eligibility Usage](https://docs.elationhealth.com/reference/insurance-eligibility-usage.md)
+- [The Insurance Eligibility Usage Object](https://docs.elationhealth.com/reference/the-insurance-eligibility-usage-object-1.md)
+- [Get Practice Eligibility Usage](https://docs.elationhealth.com/reference/practices_eligibility_usage_retrieve.md): Get the real time eligibility usage for a practice
+- [Print Headers](https://docs.elationhealth.com/reference/print-headers-1.md)
+- [The Print Header Object](https://docs.elationhealth.com/reference/the-print-header-object.md)
+- [List Print Headers](https://docs.elationhealth.com/reference/print_headers_list.md): Returns a list of print headers
+- [Retrieve Print Header](https://docs.elationhealth.com/reference/print_headers_retrieve.md)
+- [Delete Print Header](https://docs.elationhealth.com/reference/print_headers_destroy.md)
+- [Service Locations](https://docs.elationhealth.com/reference/service-locations.md)
+- [The Service Location Object](https://docs.elationhealth.com/reference/service-location-object.md)
+- [List Service Locations](https://docs.elationhealth.com/reference/service_locations_list.md)
+- [Retrieve Service Location](https://docs.elationhealth.com/reference/service_locations_retrieve.md)
+- [Create Service Location](https://docs.elationhealth.com/reference/service_locations_create.md)
+- [Partially Update Service Location](https://docs.elationhealth.com/reference/service_locations_partial_update.md)
+- [Update Service Location](https://docs.elationhealth.com/reference/service_locations_update.md)
+- [Delete Service Location](https://docs.elationhealth.com/reference/service_locations_destroy.md)
+- [Staff Groups](https://docs.elationhealth.com/reference/staff-groups-1.md)
+- [The Staff Group Object](https://docs.elationhealth.com/reference/the-staff-group-object.md)
+- [List Staff Groups](https://docs.elationhealth.com/reference/staff_groups_list.md)
+- [Retrieve Staff Group](https://docs.elationhealth.com/reference/staff_groups_retrieve.md)
+- [Create Staff Group](https://docs.elationhealth.com/reference/staff_groups_create.md)
+- [Partially Update Staff Group](https://docs.elationhealth.com/reference/staff_groups_partial_update.md)
+- [Update Staff Group](https://docs.elationhealth.com/reference/staff_groups_update.md)
+- [Delete Staff Group](https://docs.elationhealth.com/reference/staff_groups_destroy.md)
+- [Languages](https://docs.elationhealth.com/reference/languages.md)
+- [The Language Object](https://docs.elationhealth.com/reference/the-language-object.md)
+- [List Languages](https://docs.elationhealth.com/reference/languages_list.md): Retrieve the available preferred languages
+- [Packaged Medication Labeler (Beta)](https://docs.elationhealth.com/reference/packaged-medication-labeler-beta.md)
+- [The Packaged Medication Labeler Object](https://docs.elationhealth.com/reference/the-packaged-medication-labeler-object.md): The manufacturer or distributor of a packaged medication.
+- [List Packaged Medication Labelers](https://docs.elationhealth.com/reference/packaged_medication_labelers_list.md): Requests to this endpoint must specify at least one query parameter.
+- [Retrieve Packaged Medication Labeler](https://docs.elationhealth.com/reference/packaged_medication_labelers_retrieve.md): Retrieve a single packaged medication labeler
+- [Packaged Medication (Beta)](https://docs.elationhealth.com/reference/packaged-medication-beta.md)
+- [The Packaged Medication Object](https://docs.elationhealth.com/reference/the-packaged-medication-object.md): A specific packaging of a reference medication.
+- [List Packaged Medications](https://docs.elationhealth.com/reference/packaged_medications_list.md): Requests to this endpoint must specify at least one query parameter.
+- [Retrieve Packaged Medication](https://docs.elationhealth.com/reference/packaged_medications_retrieve.md): Retrieve a single packaged medication
+- [Pharmacies](https://docs.elationhealth.com/reference/pharmacies.md)
+- [The Pharmacy Object](https://docs.elationhealth.com/reference/the-pharmacy-object.md)
+- [List Pharmacies](https://docs.elationhealth.com/reference/pharmacies_list.md): Returns a list of physicians
+- [Retrieve Pharmacy](https://docs.elationhealth.com/reference/pharmacies_retrieve.md): Retrieve a single pharmacy
+- [Reference Medication (Beta)](https://docs.elationhealth.com/reference/reference-medication-beta.md)
+- [The Reference Medication Object](https://docs.elationhealth.com/reference/the-reference-medication-object.md)
+- [List Reference Medications](https://docs.elationhealth.com/reference/reference_medications_list.md): Requests to this endpoint must specify at least one query parameter.
+- [Retrieve Reference Medication](https://docs.elationhealth.com/reference/reference_medications_retrieve.md): Retrieve a single reference medication
+- [Event Subscriptions](https://docs.elationhealth.com/reference/event-subscriptions.md)
+- [The Subscription object](https://docs.elationhealth.com/reference/the-subscription-object.md)
+- [List Subscriptions](https://docs.elationhealth.com/reference/app_subscriptions_list.md)
+- [Get a Subscription](https://docs.elationhealth.com/reference/app_subscriptions_retrieve.md)
+- [Subscribe to a resource updates](https://docs.elationhealth.com/reference/app_subscriptions_create.md): You can only subscribe to the same resource and the same target once. A status 409 will be returned if you attempt to send duplicate subscription.
+- [Delete a Subscription](https://docs.elationhealth.com/reference/app_subscriptions_destroy.md)
+- [The Event object](https://docs.elationhealth.com/reference/the-event-object.md)
+- [List Published Events](https://docs.elationhealth.com/reference/app_published_events_list.md): Returns a list of published events
+- [Get a Published Event](https://docs.elationhealth.com/reference/app_published_events_retrieve.md)
+- [Partially Update App Published Event](https://docs.elationhealth.com/reference/app_published_events_partial_update.md)
+- [Update a Published Event](https://docs.elationhealth.com/reference/app_published_events_update.md)
+- [Changelog](https://docs.elationhealth.com/reference/changelog.md): Notable changes to Elation API 2.0, organized by release date. Covering both changes to individual resources and changes impacting the behavior of the API in general.

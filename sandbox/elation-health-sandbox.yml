@@ -1,0 +1,26 @@
+generated: '2026-07-24'
+method: searched
+source: >-
+  https://www.elationhealth.com/contact-us/sandbox/,
+  https://docs.elationhealth.com/reference/getting-started-2,
+  openapi/*.json (servers)
+note: >-
+  Elation provides a partner Developer Sandbox on a separate host, provisioned on
+  request (no self-serve signup). The sandbox and production APIs are separated by
+  host, not by test-vs-live key prefixes. No published magic/test identifiers
+  (test cards, test patient ids) were found — sandbox practices are seeded per
+  partner. Nothing invented.
+environments:
+  - name: sandbox
+    api_host: https://sandbox.elationemr.com
+    base_path: /api/2.0
+    care_gaps_host: https://caregaps.sandbox.elationemr.com
+    access: Requested via the sandbox contact form; provisioned per partner.
+    request_url: https://www.elationhealth.com/contact-us/sandbox/
+  - name: production
+    api_host: https://api.app.elationemr.com
+    base_path: /api/2.0
+token_endpoint: /api/2.0/oauth2/token/
+test_values:
+  published: false
+  note: Sandbox practices/patients are provisioned per partner; no shared magic test values are published.

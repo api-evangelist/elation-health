@@ -1,0 +1,66 @@
+generated: '2026-07-24'
+method: derived
+source: >-
+  openapi/*.json (4xx/5xx responses),
+  https://docs.elationhealth.com/reference/errors
+format: json
+note: >-
+  Elation returns errors as standard application/json (not RFC 9457
+  application/problem+json); no problem-type URIs are published. Status codes
+  below are the union observed across the 17 OpenAPI specs, enriched with the
+  documented error reference. Documented rate limiting surfaces as HTTP 429.
+envelope:
+  content_type: application/json
+  note: Error body shape is not formally documented; a detail/message field is typical.
+problems:
+  - status: 400
+    title: Bad Request
+    remediation: Validation error in the request body or query parameters; correct the payload.
+    observed_in_specs: 352
+  - status: 401
+    title: Unauthorized
+    remediation: Missing or invalid OAuth2 bearer token; obtain a token from /api/2.0/oauth2/token/.
+    observed_in_specs: 12
+  - status: 403
+    title: Forbidden
+    remediation: Token lacks the required scope/practice authorization for this resource.
+    observed_in_specs: 13
+  - status: 404
+    title: Not Found
+    remediation: Resource id does not exist or is not visible to this application.
+    observed_in_specs: 18
+  - status: 405
+    title: Method Not Allowed
+    observed_in_specs: 1
+  - status: 409
+    title: Conflict
+    remediation: State conflict (e.g. duplicate or concurrent modification).
+    observed_in_specs: 3
+  - status: 410
+    title: Resource Deleted
+    remediation: The resource has been deleted (documented in the error reference).
+    source: docs
+  - status: 413
+    title: Payload Too Large
+    remediation: Reduce upload/document size.
+    observed_in_specs: 3
+  - status: 415
+    title: Unsupported Media Type
+    source: docs
+  - status: 422
+    title: Unprocessable Entity
+    remediation: Semantically invalid request (business-rule validation failure).
+    observed_in_specs: 39
+  - status: 429
+    title: Too Many Requests
+    remediation: Rate limit exceeded; back off and retry. (Documented; not enumerated in specs.)
+    source: docs
+  - status: 500
+    title: Internal Server Error
+    source: docs
+  - status: 503
+    title: Service Unavailable
+    source: docs
+  - status: 504
+    title: Gateway Timeout
+    source: docs
