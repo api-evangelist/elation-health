@@ -1,0 +1,360 @@
+aid: elation-health
+url: https://raw.githubusercontent.com/api-evangelist/elation-health/refs/heads/main/apis.yml
+name: Elation Health
+kind: company
+description: >-
+  Elation Health is a United States clinical-first electronic health record (EHR/EMR)
+  and healthcare technology company, founded in 2010 and headquartered in San Francisco,
+  California, serving independent primary care practices, value-based care organizations,
+  digital health startups, and health-tech partners. Beyond its provider-facing EHR,
+  Elation ships a broad, well-documented public REST API (v2.0) that lets partners read
+  and write clinical and administrative data - patient profiles and demographics,
+  allergies and problems, visit notes, clinical and lab/imaging orders, patient documents,
+  scheduling, billing, insurance and eligibility, messaging, practice and user management,
+  care gaps, and data import - authenticated with OAuth2. The API is documented on a
+  ReadMe developer portal backed by machine-readable OpenAPI definitions, augmented with
+  event subscription webhooks and a Model Context Protocol (MCP) server for agentic access.
+  Elation also operates login-gated HL7 FHIR R4 and SMART-on-FHIR interoperability
+  endpoints for ONC/CMS 21st Century Cures Act information-blocking compliance, exposed to
+  registered applications rather than anonymously. Positioned as an independent challenger
+  to the US EHR duopoly, Elation targets the primary-care and value-based-care segment of
+  the largest, most commercial healthcare-API market.
+accessModel:
+  pricing: paid
+  onboarding: partner
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Partner / sandbox onboarding
+  confidence: medium
+  source:
+  - authentication
+  - documentation
+  generated: '2026-07-24'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Healthcare
+- United States
+- EHR
+- EMR
+- FHIR
+- HL7
+- Interoperability
+- SMART on FHIR
+- Primary Care
+- Value-Based Care
+- Eligibility
+- Clinical Data
+- Scheduling
+- e-Prescribing
+- Digital Health
+created: '2026-07-24'
+modified: '2026-07-24'
+specificationVersion: '0.19'
+apis:
+- aid: elation-health:oauth-api
+  name: Elation OAuth API
+  description: >-
+    OAuth2 token endpoint for the Elation API v2.0. Partners exchange client credentials
+    (and legacy password grant) for a bearer access token, optionally scoped with
+    apiv2, act_as_user, or system/{resource}.read|write scopes, at
+    /api/2.0/oauth2/token/.
+  humanURL: https://docs.elationhealth.com/reference/get-token
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Authentication
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-api-authentication.json
+  - type: Documentation
+    url: https://docs.elationhealth.com/docs/oauth
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference/get-token
+  - type: Documentation
+    url: https://docs.elationhealth.com/reference/scopes
+- aid: elation-health:patient-profile-api
+  name: Elation Patient Profile API
+  description: >-
+    Read and write patient demographic and clinical profile data - patients, allergies,
+    problems, medications, vitals, and related clinical records - via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Patients
+  - Clinical Data
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-patient-profile-api.json
+  - type: Documentation
+    url: https://docs.elationhealth.com/docs/api-overview
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:visit-notes-api
+  name: Elation Visit Notes API
+  description: >-
+    Create, retrieve, and manage clinical visit notes and their documentation, including
+    note signing, via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Clinical Documentation
+  - Visit Notes
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-visit-notes-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:patient-document-api
+  name: Elation Patient Document API
+  description: >-
+    Manage patient documents and document-based clinical data - the largest surface of the
+    Elation API v2.0 - including uploads, retrieval, tagging, and document workflows.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Documents
+  - Clinical Data
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-patient-document-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:orders-api
+  name: Elation Orders API
+  description: >-
+    Create and manage clinical orders - laboratory, imaging, and other diagnostic orders,
+    plus related order workflows - via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Orders
+  - Lab Orders
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-orders-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:scheduling-api
+  name: Elation Scheduling API
+  description: >-
+    Manage appointments, appointment types, and provider schedules for a practice via the
+    Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Scheduling
+  - Appointments
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-scheduling-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:billing-api
+  name: Elation Billing API
+  description: >-
+    Manage billing data - bills, billing codes, and outstanding balances - for a practice
+    via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Billing
+  - Revenue Cycle
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-billing-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:insurance-api
+  name: Elation Insurance API
+  description: >-
+    Manage insurance companies and insurance plans, and related payer reference data,
+    via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Insurance
+  - Payer
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-insurance-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:patient-insurance-api
+  name: Elation Patient Insurance API (Premium) & Eligibility
+  description: >-
+    Premium patient insurance API for managing patient policies, insurance card images,
+    and running insurance eligibility checks and full eligibility reports via the Elation
+    API v2.0.
+  humanURL: https://docs.elationhealth.com/reference/insurance-eligibility
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Insurance
+  - Eligibility
+  - Payer
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-premium-patient-insurance-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference/insurance-eligibility
+- aid: elation-health:practice-api
+  name: Elation Practice API
+  description: >-
+    Manage practice-level entities - practices, physicians/providers, service locations,
+    and related organizational data - via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Practice
+  - Providers
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-practice-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:user-management-api
+  name: Elation User Management API
+  description: >-
+    Manage application users and their access within a practice via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - User Management
+  - Administration
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-user-management-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:messaging-api
+  name: Elation Messaging API
+  description: >-
+    Manage message threads and thread members for provider and patient messaging
+    workflows via the Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference/message-threads
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Messaging
+  - Communication
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-messaging-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference/message-threads
+- aid: elation-health:event-subscription-api
+  name: Elation Event Subscription API
+  description: >-
+    Subscribe to and manage webhook event subscriptions and published events, enabling
+    near-real-time notifications on clinical and administrative changes via the Elation
+    API v2.0.
+  humanURL: https://docs.elationhealth.com/docs/webhooks
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Webhooks
+  - Events
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-event-subscription-api.json
+  - type: Documentation
+    url: https://docs.elationhealth.com/docs/webhooks
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference/event-subscriptions
+- aid: elation-health:reference-data-api
+  name: Elation Reference Data API
+  description: >-
+    Retrieve shared reference and lookup data used across the Elation platform via the
+    Elation API v2.0.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Reference Data
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-reference-data-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:care-gaps-api
+  name: Elation Care Gaps API
+  description: >-
+    Retrieve care gap definitions and quality-program care-gap data for value-based care
+    workflows. Served from a dedicated care-gaps service host.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://caregaps.sandbox.elationemr.com
+  tags:
+  - Care Gaps
+  - Value-Based Care
+  - Quality
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-care-gaps-api-1.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+- aid: elation-health:import-api
+  name: Elation Import API
+  description: >-
+    Interact with data imports into a practice - submitting and managing bulk clinical and
+    administrative data imports - via the Elation Import API.
+  humanURL: https://docs.elationhealth.com/reference
+  baseURL: https://api.app.elationemr.com/api/2.0
+  tags:
+  - Data Import
+  - Migration
+  - Healthcare
+  properties:
+  - type: OpenAPI
+    url: openapi/elation-elation-import-api.json
+  - type: APIReference
+    url: https://docs.elationhealth.com/reference
+common:
+- type: Website
+  url: https://www.elationhealth.com/
+- type: DeveloperPortal
+  url: https://docs.elationhealth.com/
+- type: Documentation
+  url: https://docs.elationhealth.com/docs/api-overview
+- type: APIReference
+  url: https://docs.elationhealth.com/reference
+- type: GettingStarted
+  url: https://docs.elationhealth.com/docs/getting-started-2
+- type: Authentication
+  url: https://docs.elationhealth.com/docs/oauth
+- type: Webhooks
+  url: https://docs.elationhealth.com/docs/webhooks
+- type: ModelContextProtocol
+  url: https://docs.elationhealth.com/docs/mcp
+- type: GitHubOrganization
+  url: https://github.com/elationemr
+- type: LinkedIn
+  url: https://www.linkedin.com/company/elationhealth/
+- type: Blog
+  url: https://www.elationhealth.com/blog/
+- type: Pricing
+  url: https://www.elationhealth.com/pricing/
+- type: SignUp
+  url: https://www.elationhealth.com/contact-us/sandbox/
+- type: Support
+  url: https://www.elationhealth.com/contact-us/
+- type: StatusPage
+  url: https://elationhealth.statuspage.io/
+- type: TermsOfService
+  url: https://www.elationhealth.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.elationhealth.com/privacy-policy/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

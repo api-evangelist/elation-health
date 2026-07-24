@@ -1,0 +1,217 @@
+aid: elation-health
+name: Elation Health
+review:
+  question: >-
+    Does Elation Health expose a real, documented public developer API, and is a
+    machine-readable contract (OpenAPI and/or FHIR CapabilityStatement) harvestable?
+  answer: true
+  date: '2026-07-24'
+  reviewer: API Evangelist
+  homeMarket: United States
+findings:
+  summary: |
+    Elation Health publishes a confirmed, live developer portal at
+    https://docs.elationhealth.com/ (HTTP 200), a ReadMe-hosted site documenting the
+    Elation API v2.0 - a broad REST API for clinical-first EHR data. The public REST
+    surface is segmented by product (Patient Profile, Visit Notes, Patient Document,
+    Orders, Scheduling, Billing, Insurance, [Premium] Patient Insurance & Eligibility,
+    Practice, User Management, Messaging, Event Subscription/Webhooks, Reference Data,
+    Care Gaps, Import, and OAuth). Eighteen machine-readable OpenAPI 3.x definitions
+    back the ReadMe reference and were harvested verbatim from ReadMe's public
+    api-registry endpoint (https://dash.readme.com/api/v1/api-registry/<uuid>); all 18
+    parse as valid OpenAPI with schemas/paths. Production base URL (from the specs'
+    servers) is https://api.app.elationemr.com/api/2.0 with a sandbox at
+    https://sandbox.elationemr.com/api/2.0 (Care Gaps runs on a dedicated
+    caregaps.sandbox.elationemr.com host). Authentication is OAuth2: the documented flow
+    is client-credentials (with a legacy password grant) against
+    /api/2.0/oauth2/token/, issuing bearer tokens. Token scopes (closed beta) follow
+    apiv2 (full access, the default), act_as_user (provider impersonation via
+    X-On-Behalf-Of), and system/{resource}.read | system/{resource}.write. Elation also
+    documents an MCP server (https://docs.elationhealth.com/docs/mcp) for agentic access.
+    Elation operates HL7 FHIR R4 / SMART-on-FHIR interoperability endpoints
+    (e.g. /fhir/R4/metadata, /.well-known/smart-configuration) for ONC/CMS 21st Century
+    Cures Act information-blocking compliance, but these are LOGIN-GATED: anonymous
+    probes at sandbox.elationemr.com return the Okta login/SPA shell (HTTP 200 body =
+    "Elation EMR (sandbox)" login page), not a public FHIR CapabilityStatement or
+    SMART configuration JSON. No FHIR CapabilityStatement or smart-configuration was
+    anonymously retrievable, so none was saved. Overall: self-documented REST API
+    (partner/sandbox onboarding, not fully self-serve) with rich harvestable OpenAPI,
+    plus a gated FHIR interoperability layer.
+  developerPortal:
+    url: https://docs.elationhealth.com/
+    httpStatus: 200
+    confirmed: true
+    platform: ReadMe
+  fhirCapabilityStatement:
+    captured: false
+    reason: >-
+      FHIR R4 / SMART-on-FHIR endpoints exist for Cures Act compliance but are behind
+      Okta login; /fhir/R4/metadata and /.well-known/smart-configuration on
+      sandbox.elationemr.com return the authenticated app login shell, not a public
+      CapabilityStatement or SMART configuration document.
+    probes:
+    - url: https://sandbox.elationemr.com/fhir/R4/metadata
+      httpStatus: 200
+      note: Returns Okta/SPA login HTML ("Elation EMR (sandbox)"), not a FHIR CapabilityStatement.
+    - url: https://sandbox.elationemr.com/.well-known/smart-configuration
+      httpStatus: 200
+      note: Returns login shell HTML, not SMART configuration JSON.
+    - url: https://sandbox.elationemr.com/api/2.0/.well-known/openid-configuration
+      httpStatus: 200
+      note: Returns login shell HTML, not an OpenID configuration document.
+  openapiHarvested: true
+  specsCount: 18
+  specs:
+  - file: openapi/elation-api-authentication.json
+    title: API Authentication
+    paths: 0
+    provenance: https://dash.readme.com/api/v1/api-registry/hjgm2allh71bf9v
+  - file: openapi/elation-api-settings.json
+    title: API Settings (aggregate reference)
+    paths: 218
+    provenance: https://dash.readme.com/api/v1/api-registry/342dy2gm7jidx73
+  - file: openapi/elation-patient-profile-api.json
+    title: Patient Profile API
+    paths: 27
+    provenance: https://dash.readme.com/api/v1/api-registry/2s22q2tmrv90kxq
+  - file: openapi/elation-visit-notes-api.json
+    title: Visit Notes API
+    paths: 13
+    provenance: https://dash.readme.com/api/v1/api-registry/103mt3qmr2qqoct
+  - file: openapi/elation-patient-document-api.json
+    title: Patient Document API
+    paths: 62
+    provenance: https://dash.readme.com/api/v1/api-registry/gn5941ymrv90kzb
+  - file: openapi/elation-orders-api.json
+    title: Orders API
+    paths: 43
+    provenance: https://dash.readme.com/api/v1/api-registry/b6yblj1ymrv8zxso
+  - file: openapi/elation-scheduling-api.json
+    title: Scheduling API
+    paths: 7
+    provenance: https://dash.readme.com/api/v1/api-registry/2kzeq1ymrv9091l
+  - file: openapi/elation-billing-api.json
+    title: Billing API
+    paths: 6
+    provenance: https://dash.readme.com/api/v1/api-registry/2s22q1ymrv8zdw9
+  - file: openapi/elation-insurance-api.json
+    title: Insurance API
+    paths: 4
+    provenance: https://dash.readme.com/api/v1/api-registry/b6yblj13mrv8zxre
+  - file: openapi/elation-premium-patient-insurance-api.json
+    title: '[Premium] Patient Insurance API'
+    paths: 2
+    provenance: https://dash.readme.com/api/v1/api-registry/b6yblj3wmrv9181n
+  - file: openapi/elation-practice-api.json
+    title: Practice API
+    paths: 25
+    provenance: https://dash.readme.com/api/v1/api-registry/gn59413mrv90kxu
+  - file: openapi/elation-user-management-api.json
+    title: User Management API
+    paths: 2
+    provenance: https://dash.readme.com/api/v1/api-registry/2s22q13mrv91835
+  - file: openapi/elation-messaging-api.json
+    title: Messaging API
+    paths: 6
+    provenance: https://dash.readme.com/api/v1/api-registry/b6yblj3wmrv90110
+  - file: openapi/elation-event-subscription-api.json
+    title: Event Subscription API
+    paths: 8
+    provenance: https://dash.readme.com/api/v1/api-registry/b6yblj13mrv8zaom
+  - file: openapi/elation-reference-data-api.json
+    title: Reference Data API
+    paths: 9
+    provenance: https://dash.readme.com/api/v1/api-registry/b6yblj13mrv9181l
+  - file: openapi/elation-care-gaps-api-1.json
+    title: Care Gaps API
+    paths: 4
+    provenance: https://dash.readme.com/api/v1/api-registry/3qz4syldkmcnxh
+  - file: openapi/elation-elation-import-api.json
+    title: Elation Import API
+    paths: 6
+    provenance: https://dash.readme.com/api/v1/api-registry/1mld74kq6vxtn0
+  note: >-
+    insurance-api was published to ReadMe as both a .json and a .yaml source with the same
+    "Insurance API" title and identical paths; both were harvested to the single
+    openapi/elation-insurance-api.json (18 registry entries, 17 distinct output files).
+  authModel:
+    scheme: OAuth2
+    flows:
+    - clientCredentials
+    - password (legacy)
+    tokenUrl: https://api.app.elationemr.com/api/2.0/oauth2/token/
+    tokenType: bearer
+    scopes:
+    - apiv2 (full access to the API; default when no scope is requested)
+    - act_as_user (impersonate a provider via X-On-Behalf-Of; combinable with apiv2 or system scopes)
+    - system/{resource}.read
+    - system/{resource}.write
+    scopesStatus: closed beta
+    smartOnFhir: >-
+      SMART-on-FHIR / FHIR R4 endpoints exist for Cures Act interoperability but require
+      registered-app + user authentication (Okta); not part of the anonymous public REST auth.
+  standardsConformance:
+    usCore: gated (FHIR R4 endpoints login-gated; ONC/CMS 21st Century Cures Act information-blocking compliance)
+    ukCore: n/a
+    auCore: n/a
+    daVinci: not documented publicly
+    carinBlueButton: not documented publicly
+  accessPosture:
+    gatedVsSelfServe: partner / sandbox onboarding (not fully self-serve)
+    pricing: paid (contact/sales; sandbox available via request)
+    sandbox: https://sandbox.elationemr.com/api/2.0
+  transports:
+  - protocol: REST
+    scheme: https
+    baseURL: https://api.app.elationemr.com/api/2.0
+    documented: true
+  - protocol: REST
+    scheme: https
+    baseURL: https://sandbox.elationemr.com/api/2.0
+    documented: true
+    note: Sandbox environment.
+  - protocol: Webhooks
+    scheme: https
+    documented: true
+    note: Event Subscription API delivers near-real-time event notifications to subscriber callback URLs.
+  - protocol: FHIR
+    scheme: https
+    documented: true
+    note: HL7 FHIR R4 / SMART-on-FHIR interoperability endpoints exist for Cures Act compliance but are login-gated (not anonymously reachable).
+  - protocol: WebSocket
+    scheme: wss
+    documented: false
+    note: No WebSocket endpoint is documented in the Elation developer reference as of the review date.
+sources:
+- url: https://docs.elationhealth.com/
+  type: DeveloperPortal
+  note: Confirmed live (HTTP 200); ReadMe-hosted portal for the Elation API v2.0.
+- url: https://docs.elationhealth.com/reference
+  type: APIReference
+  note: Product-segmented REST reference backed by 18 OpenAPI definitions.
+- url: https://docs.elationhealth.com/docs/oauth
+  type: Documentation
+  note: OAuth2 authentication and token model.
+- url: https://docs.elationhealth.com/reference/scopes
+  type: Documentation
+  note: Token scopes (apiv2, act_as_user, system/{resource}.read|write); closed beta.
+- url: https://docs.elationhealth.com/docs/webhooks
+  type: Documentation
+  note: Event subscription webhooks.
+- url: https://docs.elationhealth.com/docs/mcp
+  type: Documentation
+  note: Elation MCP server for agentic access.
+- url: https://dash.readme.com/api/v1/api-registry/
+  type: OpenAPI
+  note: Public ReadMe api-registry endpoint used to harvest all 18 OpenAPI definitions verbatim.
+actions:
+  apisYmlUpdated: true
+  openapiHarvested: 18
+  fhirSaved: false
+  reason: >-
+    Captured a real, live developer portal and 18 verbatim OpenAPI definitions covering the
+    documented Elation API v2.0 product family. FHIR/SMART surfaces are login-gated, so no
+    CapabilityStatement or smart-configuration could be saved without fabrication.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
