@@ -1,0 +1,2133 @@
+{
+  "info": {
+    "_postman_id": "82e1fb83-9dec-448f-bda3-48b53c285325",
+    "name": "Event Subscription API",
+    "description": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:35:27.000Z",
+    "updatedAt": "2026-07-28T01:35:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-82e1fb83-9dec-448f-bda3-48b53c285325"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2.0",
+          "item": [
+            {
+              "name": "app",
+              "item": [
+                {
+                  "name": "published_events",
+                  "item": [
+                    {
+                      "name": "{event_id}",
+                      "item": [
+                        {
+                          "name": "Get a Published Event",
+                          "id": "34b0afdd-b43b-40d0-bd45-42614bd534bb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/published_events/:event_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "published_events",
+                                ":event_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "39fa58c0-193f-4776-900e-4d7d39ce8fa3",
+                                  "key": "event_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the event to retrieve"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "bd978d67-3ab9-4121-be98-8b8446692866",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/app/published_events/:event_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "app",
+                                    "published_events",
+                                    ":event_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "event_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:35:27.000Z",
+                              "updatedAt": "2026-07-28T01:35:27.000Z",
+                              "uid": "35240-bd978d67-3ab9-4121-be98-8b8446692866"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-34b0afdd-b43b-40d0-bd45-42614bd534bb"
+                        },
+                        {
+                          "name": "Partially Update App Published Event",
+                          "id": "d3eeb45b-76e4-478e-90d7-77e6ce626b89",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"processed_date\": \"<dateTime>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/published_events/:event_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "published_events",
+                                ":event_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "55615565-a1b5-4829-bce9-4f4fe44d4659",
+                                  "key": "event_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the event to retrieve"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "8f31df03-dcb8-4827-85e2-3bbc67c322a8",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"processed_date\": \"<dateTime>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/app/published_events/:event_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "app",
+                                    "published_events",
+                                    ":event_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "event_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:35:27.000Z",
+                              "updatedAt": "2026-07-28T01:35:27.000Z",
+                              "uid": "35240-8f31df03-dcb8-4827-85e2-3bbc67c322a8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-d3eeb45b-76e4-478e-90d7-77e6ce626b89"
+                        },
+                        {
+                          "name": "Update a Published Event",
+                          "id": "37d924e5-a2a7-4b0b-8020-ca0396cb21d7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/published_events/:event_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "published_events",
+                                ":event_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2a2c512e-2305-40fd-b87f-e8e7be763849",
+                                  "key": "event_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The ID of the event to retrieve"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "c80ad870-8b4c-4c3b-9c1d-8b324a316af0",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/app/published_events/:event_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "app",
+                                    "published_events",
+                                    ":event_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "event_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:35:27.000Z",
+                              "updatedAt": "2026-07-28T01:35:27.000Z",
+                              "uid": "35240-c80ad870-8b4c-4c3b-9c1d-8b324a316af0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-37d924e5-a2a7-4b0b-8020-ca0396cb21d7"
+                        }
+                      ],
+                      "id": "c2367fa7-447d-457f-800c-59eb8572823d",
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-c2367fa7-447d-457f-800c-59eb8572823d"
+                    },
+                    {
+                      "name": "List Published Events",
+                      "id": "16419a69-85bc-4c33-945d-75b0bb6ad65a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/app/published_events/?limit=<integer>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "app",
+                            "published_events",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of published events"
+                      },
+                      "response": [
+                        {
+                          "id": "1d3e6063-c5d7-47f7-8e70-050e9e01a0ca",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/published_events/?limit=<integer>&offset=<integer>&order_by=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "published_events",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Number of results to return per page.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The initial index from which to return the results.",
+                                  "key": "offset",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Which field to use when ordering the results.",
+                                  "key": "order_by",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"processed_date\": \"<dateTime>\",\n      \"error_content\": \"<string,null>\",\n      \"event_id\": \"<integer>\",\n      \"event_type\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"resource\": \"<string>\",\n      \"resource_id\": \"<integer>\",\n      \"status_code\": \"<integer,null>\",\n      \"target\": \"<string>\"\n    },\n    {\n      \"processed_date\": \"<dateTime>\",\n      \"error_content\": \"<string,null>\",\n      \"event_id\": \"<integer>\",\n      \"event_type\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"resource\": \"<string>\",\n      \"resource_id\": \"<integer>\",\n      \"status_code\": \"<integer,null>\",\n      \"target\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-1d3e6063-c5d7-47f7-8e70-050e9e01a0ca"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-16419a69-85bc-4c33-945d-75b0bb6ad65a"
+                    }
+                  ],
+                  "id": "965425c3-ceee-4bfc-b53a-35b2e063f7aa",
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-965425c3-ceee-4bfc-b53a-35b2e063f7aa"
+                },
+                {
+                  "name": "subscriptions",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Delete a Subscription",
+                          "id": "ace90c86-fff1-440f-8d4a-2b43b8a4fb2a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/subscriptions/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "subscriptions",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "33684cce-2371-4a99-8489-8dd5817a4bee",
+                                  "key": "id",
+                                  "value": "<long>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d8ca19c1-8a99-4e00-955b-775bba9b1ec8",
+                              "name": "No response body",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/app/subscriptions/:id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "app",
+                                    "subscriptions",
+                                    ":id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:35:27.000Z",
+                              "updatedAt": "2026-07-28T01:35:27.000Z",
+                              "uid": "35240-d8ca19c1-8a99-4e00-955b-775bba9b1ec8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-ace90c86-fff1-440f-8d4a-2b43b8a4fb2a"
+                        },
+                        {
+                          "name": "Get a Subscription",
+                          "id": "2434fcc4-a7a4-448b-8472-1f6ce66e18a6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/subscriptions/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "subscriptions",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "56357b88-b592-4b52-99ce-7ea4b83fdfff",
+                                  "key": "id",
+                                  "value": "<long>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "26798ec9-71a8-439d-8ea0-00f697fe2fa8",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/app/subscriptions/:id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "app",
+                                    "subscriptions",
+                                    ":id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:35:27.000Z",
+                              "updatedAt": "2026-07-28T01:35:27.000Z",
+                              "uid": "35240-26798ec9-71a8-439d-8ea0-00f697fe2fa8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-2434fcc4-a7a4-448b-8472-1f6ce66e18a6"
+                        }
+                      ],
+                      "id": "7355b685-ac72-4089-b7ee-c20ca5c8603d",
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-7355b685-ac72-4089-b7ee-c20ca5c8603d"
+                    },
+                    {
+                      "name": "List Subscriptions",
+                      "id": "ca778e42-fb85-4568-b59f-8909614cc2ca",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/app/subscriptions/?limit=<integer>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "app",
+                            "subscriptions",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "122481d5-0a15-4f08-89cb-686f85e66538",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/subscriptions/?limit=<integer>&offset=<integer>&order_by=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "subscriptions",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "Number of results to return per page.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The initial index from which to return the results.",
+                                  "key": "offset",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Which field to use when ordering the results.",
+                                  "key": "order_by",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"resource\": \"<string>\",\n      \"target\": \"<uri>\",\n      \"created_date\": \"<dateTime>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"properties\": {},\n      \"signing_pub_key\": \"<string>\"\n    },\n    {\n      \"resource\": \"<string>\",\n      \"target\": \"<uri>\",\n      \"created_date\": \"<dateTime>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"properties\": {},\n      \"signing_pub_key\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-122481d5-0a15-4f08-89cb-686f85e66538"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-ca778e42-fb85-4568-b59f-8909614cc2ca"
+                    },
+                    {
+                      "name": "Subscribe to a resource updates",
+                      "id": "858f93d7-51db-4a05-abf2-c9984fcfcb72",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/app/subscriptions/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "app",
+                            "subscriptions",
+                            ""
+                          ]
+                        },
+                        "description": "You can only subscribe to the same resource and the same target once. A status 409 will be returned if you attempt to send duplicate subscription."
+                      },
+                      "response": [
+                        {
+                          "id": "a1b237e3-e50b-4b30-8999-dab48b6e5ddf",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/app/subscriptions/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "app",
+                                "subscriptions",
+                                ""
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-a1b237e3-e50b-4b30-8999-dab48b6e5ddf"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-858f93d7-51db-4a05-abf2-c9984fcfcb72"
+                    }
+                  ],
+                  "id": "f8288a80-6d89-4b27-ba41-e6287da3c7da",
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-f8288a80-6d89-4b27-ba41-e6287da3c7da"
+                }
+              ],
+              "id": "ed4dafc0-c067-4cbf-a5a5-1c862c4b843e",
+              "createdAt": "2026-07-28T01:35:27.000Z",
+              "updatedAt": "2026-07-28T01:35:27.000Z",
+              "uid": "35240-ed4dafc0-c067-4cbf-a5a5-1c862c4b843e"
+            },
+            {
+              "name": "published_events",
+              "item": [
+                {
+                  "name": "{event_id}",
+                  "item": [
+                    {
+                      "name": "Get a Published Event",
+                      "id": "0610e94d-78b2-47a0-bcfc-f3652177528a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/published_events/:event_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "published_events",
+                            ":event_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "eade9628-1720-4c3f-93ee-bb67da3c85eb",
+                              "key": "event_id",
+                              "value": "<integer>",
+                              "description": "(Required) The ID of the event to retrieve"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c0387bb0-4a7e-4b08-ad14-5acc01aa055f",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/published_events/:event_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "published_events",
+                                ":event_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "event_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-c0387bb0-4a7e-4b08-ad14-5acc01aa055f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-0610e94d-78b2-47a0-bcfc-f3652177528a"
+                    },
+                    {
+                      "name": "Partially Update Published Event",
+                      "id": "04fb9865-ac9e-4923-8ba2-8cb90e0e64c9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"processed_date\": \"<dateTime>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/published_events/:event_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "published_events",
+                            ":event_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "997e1860-306e-4a79-888a-5b21e6dc0029",
+                              "key": "event_id",
+                              "value": "<integer>",
+                              "description": "(Required) The ID of the event to retrieve"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e0494b9c-4411-437a-8c26-6c48a80e15e9",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"processed_date\": \"<dateTime>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/published_events/:event_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "published_events",
+                                ":event_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "event_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-e0494b9c-4411-437a-8c26-6c48a80e15e9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-04fb9865-ac9e-4923-8ba2-8cb90e0e64c9"
+                    },
+                    {
+                      "name": "Update a Published Event",
+                      "id": "282a7472-2f85-4d85-b565-e95753b04622",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/published_events/:event_id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "published_events",
+                            ":event_id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "c67bd626-245c-41ca-9ff6-f997f5282b38",
+                              "key": "event_id",
+                              "value": "<integer>",
+                              "description": "(Required) The ID of the event to retrieve"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d6239604-ddd0-4294-9b25-a4fd82e4d9df",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/published_events/:event_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "published_events",
+                                ":event_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "event_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"processed_date\": \"<dateTime>\",\n  \"error_content\": \"<string,null>\",\n  \"event_id\": \"<integer>\",\n  \"event_type\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"resource\": \"<string>\",\n  \"resource_id\": \"<integer>\",\n  \"status_code\": \"<integer,null>\",\n  \"target\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-d6239604-ddd0-4294-9b25-a4fd82e4d9df"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-282a7472-2f85-4d85-b565-e95753b04622"
+                    }
+                  ],
+                  "id": "8fbdfead-fc3b-453a-bddd-da03bf67c0bd",
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-8fbdfead-fc3b-453a-bddd-da03bf67c0bd"
+                },
+                {
+                  "name": "List Published Events",
+                  "id": "44007f34-fb40-471f-9287-562151578ef9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/published_events/?limit=<integer>&offset=<integer>&order_by=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "published_events",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of published events"
+                  },
+                  "response": [
+                    {
+                      "id": "a3ed4547-30ab-4325-8785-c308509ca29e",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/published_events/?limit=<integer>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "published_events",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"processed_date\": \"<dateTime>\",\n      \"error_content\": \"<string,null>\",\n      \"event_id\": \"<integer>\",\n      \"event_type\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"resource\": \"<string>\",\n      \"resource_id\": \"<integer>\",\n      \"status_code\": \"<integer,null>\",\n      \"target\": \"<string>\"\n    },\n    {\n      \"processed_date\": \"<dateTime>\",\n      \"error_content\": \"<string,null>\",\n      \"event_id\": \"<integer>\",\n      \"event_type\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"resource\": \"<string>\",\n      \"resource_id\": \"<integer>\",\n      \"status_code\": \"<integer,null>\",\n      \"target\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-a3ed4547-30ab-4325-8785-c308509ca29e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-44007f34-fb40-471f-9287-562151578ef9"
+                }
+              ],
+              "id": "6391b6ef-6593-4976-983b-3a51f9ebc685",
+              "createdAt": "2026-07-28T01:35:27.000Z",
+              "updatedAt": "2026-07-28T01:35:27.000Z",
+              "uid": "35240-6391b6ef-6593-4976-983b-3a51f9ebc685"
+            },
+            {
+              "name": "subscriptions",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete a Subscription",
+                      "id": "9a1f6a0b-e210-430c-9e49-777757a1b2c2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/subscriptions/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "subscriptions",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "d1413a8e-0b65-4500-9625-023adc39a1e1",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "87dffb2c-c713-4c16-b722-107d00c6dd2b",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/subscriptions/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "subscriptions",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-87dffb2c-c713-4c16-b722-107d00c6dd2b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-9a1f6a0b-e210-430c-9e49-777757a1b2c2"
+                    },
+                    {
+                      "name": "Get a Subscription",
+                      "id": "ea772048-6118-4f03-916a-497ee9417860",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/subscriptions/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "subscriptions",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "ece099e9-a7ab-46d3-8732-5ab977e5205a",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "4d96430c-25f8-4dfe-b7b9-cca5be23ac05",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/subscriptions/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "subscriptions",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:27.000Z",
+                          "updatedAt": "2026-07-28T01:35:27.000Z",
+                          "uid": "35240-4d96430c-25f8-4dfe-b7b9-cca5be23ac05"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-ea772048-6118-4f03-916a-497ee9417860"
+                    }
+                  ],
+                  "id": "ab691af5-746d-4f88-9663-1bbfc05815d7",
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-ab691af5-746d-4f88-9663-1bbfc05815d7"
+                },
+                {
+                  "name": "List Subscriptions",
+                  "id": "7e456ef7-06e2-4ab5-8914-a1954a6deb2e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/subscriptions/?limit=<integer>&offset=<integer>&order_by=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "subscriptions",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "1dabefbc-f650-4592-9b44-432f86cfd6be",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/subscriptions/?limit=<integer>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "subscriptions",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"resource\": \"<string>\",\n      \"target\": \"<uri>\",\n      \"created_date\": \"<dateTime>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"properties\": {},\n      \"signing_pub_key\": \"<string>\"\n    },\n    {\n      \"resource\": \"<string>\",\n      \"target\": \"<uri>\",\n      \"created_date\": \"<dateTime>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"properties\": {},\n      \"signing_pub_key\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-1dabefbc-f650-4592-9b44-432f86cfd6be"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-7e456ef7-06e2-4ab5-8914-a1954a6deb2e"
+                },
+                {
+                  "name": "Subscribe to a resource updates",
+                  "id": "9d07ff1c-e57e-4e76-a6ef-98e797174930",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/subscriptions/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "subscriptions",
+                        ""
+                      ]
+                    },
+                    "description": "You can only subscribe to the same resource and the same target once. A status 409 will be returned if you attempt to send duplicate subscription."
+                  },
+                  "response": [
+                    {
+                      "id": "aaf0ff61-cf6c-4ce5-a24c-d1093fb9d76b",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/subscriptions/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "subscriptions",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"resource\": \"<string>\",\n  \"target\": \"<uri>\",\n  \"created_date\": \"<dateTime>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"properties\": {},\n  \"signing_pub_key\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:35:27.000Z",
+                      "updatedAt": "2026-07-28T01:35:27.000Z",
+                      "uid": "35240-aaf0ff61-cf6c-4ce5-a24c-d1093fb9d76b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:27.000Z",
+                  "updatedAt": "2026-07-28T01:35:27.000Z",
+                  "uid": "35240-9d07ff1c-e57e-4e76-a6ef-98e797174930"
+                }
+              ],
+              "id": "f961f690-5929-4a8e-8497-4de460467e35",
+              "createdAt": "2026-07-28T01:35:27.000Z",
+              "updatedAt": "2026-07-28T01:35:27.000Z",
+              "uid": "35240-f961f690-5929-4a8e-8497-4de460467e35"
+            }
+          ],
+          "id": "562ab6b6-20b6-4e67-a992-6f76ac26f1b5",
+          "createdAt": "2026-07-28T01:35:27.000Z",
+          "updatedAt": "2026-07-28T01:35:27.000Z",
+          "uid": "35240-562ab6b6-20b6-4e67-a992-6f76ac26f1b5"
+        }
+      ],
+      "id": "b8f5da70-8d19-4237-960c-291caf313a35",
+      "createdAt": "2026-07-28T01:35:27.000Z",
+      "updatedAt": "2026-07-28T01:35:27.000Z",
+      "uid": "35240-b8f5da70-8d19-4237-960c-291caf313a35"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.elationemr.com"
+    }
+  ]
+}

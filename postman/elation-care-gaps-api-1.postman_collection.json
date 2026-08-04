@@ -1,0 +1,2091 @@
+{
+  "info": {
+    "_postman_id": "e50709e5-bbcd-475c-86e3-2cea2202e4d9",
+    "name": "Care Gaps API",
+    "description": "This API supports the management of definitions, gaps, and webhook notifications.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:35:31.000Z",
+    "updatedAt": "2026-07-28T01:35:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e50709e5-bbcd-475c-86e3-2cea2202e4d9"
+  },
+  "item": [
+    {
+      "name": "caregaps",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "{quality_program}",
+              "item": [
+                {
+                  "name": "definition",
+                  "item": [
+                    {
+                      "name": "{definition_id}",
+                      "item": [
+                        {
+                          "name": "Retrieve an existing definition.",
+                          "id": "201e0943-da15-4038-9b10-f9c91b4c4c39",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "password_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/:definition_id/?practice_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "definition",
+                                ":definition_id",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "practice_id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f488c3ac-b5e4-413f-8ffc-7b1521d7e0e8",
+                                  "key": "quality_program",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "1e519134-e175-4536-8dc2-045f99b13a6a",
+                                  "key": "definition_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve a specific definition."
+                          },
+                          "response": [
+                            {
+                              "id": "ab9a604a-313b-4ec1-9d3e-5b1dd4cf5a35",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/:definition_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "definition",
+                                    ":definition_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "definition_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"indicator\": \"info\",\n  \"source\": {\n    \"label\": \"<string>\",\n    \"url\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"topic\": {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  },\n  \"selection_behavior\": \"at-most-one\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"suggestions\": [\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"uuid\": \"<string>\",\n      \"actions\": [\n        {\n          \"type\": \"update\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"AVxUyqn\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"Zx)1\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"P\u2000R}dEjv\\tPN9\\\\@5&4$\\r~D\u20071\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\t\ufeff\u180e\\u000b\\t\u3000\\fr\\r\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \" \u200a\\f\ufeff\\t\u2002'\\n%+\u3000\u2002\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"TP_s(^*P9E\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"NS,u~Yh\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u200a\u2029\u200a\ufeff\u202f\u200a\\f\u3000\u2000\u200a\\f\ufeff2jOuj\",\n            \"_purpose\": \"<string>\",\n            \"status\": \":zK+\\f2Ie^<nIsJb\u2029Pu\u3000?3MG<^[R.r\u20069XAlM\\u000b*0//jW>9\u2004>tQrR)\u2008C*K=e;]\u2003LWgHvw;S%bW\u2004B4M>M3cKbM$\u2009VGh\",\n            \"_status\": \"<string>\",\n            \"title\": \">E~\\\\{;*\\\\QCa\",\n            \"_title\": \"<string>\",\n            \"url\": \"P\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"@vR/ rgBoZb\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"fdiJu7AWhf\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"~=vNP@`MD*\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"PMK\u200a3${\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u180e\u2002 \u3000\u3000\u2005\\f\u00a0\u1680\u205fl\\t<\\n\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u205f\u00a0\u2004\u2002 \u2005\u2008\u2028\u2001\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"^NQ\",\n            \"_name\": \"<string>\",\n            \"publisher\": \")>1xnH\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2003\u2008\u2028\u2004\\n\u2000\u2006\u2000 \u2000\u2028\u1680(\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"[5k,q#q[di\u2006B\u30006in*!1#c9hG\u2008+Iuz\u2002[mTmq@\\\\g $(#ixFqh$A\ufeffPu\\u000b:\u1680K5`\u2001^buX\",\n            \"_status\": \"<string>\",\n            \"title\": \"8D 7<S9.\",\n            \"_title\": \"<string>\",\n            \"url\": \"`QDa\\\"\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"GKT*r\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"uuid\": \"<string>\",\n      \"actions\": [\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Xs18aBbjH\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"GY\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"0*6AI2k#`St\\u000bU^3\\\"x;\\\"<B\u2004;JT5idsK <U7\u20289\ufefffcO5s?v\u202fZY2I(E\u2003OM\\\"W\u3000KW`@@$bd\u2008>^a\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"+\u2003l\u20282\\t1\u200a\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\\u000b\\r \u2008\\r\u202f\u20042 \u2009\\n\u1680\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"&g&TQQj\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"TyN\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u00a0\\t\u2004\u2006S\u2028\u3000\u00a0\u2006\\r\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"S!-)\\\\gi\u1680Tv1^'\\\\\\t_l'\ufeffGGT{.U\u180eW&^6VL~XD2H\u2004p\",\n            \"_status\": \"<string>\",\n            \"title\": \";V$\",\n            \"_title\": \"<string>\",\n            \"url\": \"zG^]T\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"KU\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"update\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"olSx7Y-Fb\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"7\u2009,7+UF;z2\u30007Oxm<ijTM\u1680J[Q6\u3000FPfyn\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u2008\u2004\u180e\u2003\u2006\\t\\t\\t\u202f\u2008\u3000t\u2002i\u2003\\n\\nH\u180e\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\ufeff \u2009\u3000\u2002\u200a6Ze\\rl*;D\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"\\\\s9EA_\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"m*\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2002\u2000\u202f\u2009\u2005\u2028\u2004\u2029\u2008t#\u202f_\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"$uWKL\u2006)fT25w\\u000b8|\u2000]\u2029>Y\",\n            \"_status\": \"<string>\",\n            \"title\": \"TxE|'\",\n            \"_title\": \"<string>\",\n            \"url\": \"A]`:]g:'Q\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"J(\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"quality_program\": \"<string>\",\n  \"closing_codes\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"override_reasons\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  ],\n  \"links\": [\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    }\n  ],\n  \"additional_documentation\": [\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"footer\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"external_id\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-ab9a604a-313b-4ec1-9d3e-5b1dd4cf5a35"
+                            },
+                            {
+                              "id": "dcdd43e1-4b7d-4067-bd87-dd9bddfe9df3",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/:definition_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "definition",
+                                    ":definition_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "definition_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-dcdd43e1-4b7d-4067-bd87-dd9bddfe9df3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-201e0943-da15-4038-9b10-f9c91b4c4c39"
+                        },
+                        {
+                          "name": "Delete an existing definition.",
+                          "id": "a02e4189-135a-49e5-bc20-884ee98f6647",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "password_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/:definition_id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "definition",
+                                ":definition_id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d24ddefa-370b-4764-8286-6d0a3aacb564",
+                                  "key": "quality_program",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "54fa4276-5852-4545-9658-1c579ee66455",
+                                  "key": "definition_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Delete a specific definition."
+                          },
+                          "response": [
+                            {
+                              "id": "9df47ed4-2f51-4680-a28d-cbb75550d4d5",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/:definition_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "definition",
+                                    ":definition_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "definition_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-9df47ed4-2f51-4680-a28d-cbb75550d4d5"
+                            },
+                            {
+                              "id": "ac4467b6-6a72-4fce-954f-0e57312c4bab",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/:definition_id/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "definition",
+                                    ":definition_id",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "definition_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-ac4467b6-6a72-4fce-954f-0e57312c4bab"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-a02e4189-135a-49e5-bc20-884ee98f6647"
+                        }
+                      ],
+                      "id": "279f6072-5d9d-417b-a10e-056c755a7810",
+                      "createdAt": "2026-07-28T01:35:31.000Z",
+                      "updatedAt": "2026-07-28T01:35:31.000Z",
+                      "uid": "35240-279f6072-5d9d-417b-a10e-056c755a7810"
+                    },
+                    {
+                      "name": "Retrieve a filtered page of definitions",
+                      "id": "ad27d799-2308-4fa7-a014-8da97c25483c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "password_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"definition_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"closing_code\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/?page_size=5&page_num=1&closing_code=<string>&closing_code=<string>&definition_id=<string>&definition_id=<string>&external_id=<string>&cursor=<string>&name=<string>&indicator=warning",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "caregaps",
+                            "api",
+                            ":quality_program",
+                            "definition",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "page_size",
+                              "value": "5"
+                            },
+                            {
+                              "key": "page_num",
+                              "value": "1"
+                            },
+                            {
+                              "key": "closing_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "closing_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "definition_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "definition_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "external_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "indicator",
+                              "value": "warning"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "59865c0c-6575-4803-9d4d-d5073c8c2d1a",
+                              "key": "quality_program",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a list of definitions."
+                      },
+                      "response": [
+                        {
+                          "id": "be3f4f94-20a2-4538-963b-9a13c50db8c7",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"definition_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"closing_code\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/?page_size=5&page_num=1&closing_code=<string>&definition_id=<string>&external_id=<string>&cursor=<string>&name=<string>&indicator=warning",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "definition",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "page_size",
+                                  "value": "5"
+                                },
+                                {
+                                  "key": "page_num",
+                                  "value": "1"
+                                },
+                                {
+                                  "key": "closing_code",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "definition_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "external_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "indicator",
+                                  "value": "warning"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"name\": \"<string>\",\n      \"indicator\": \"info\",\n      \"source\": {\n        \"label\": \"<string>\",\n        \"url\": \"<string>\",\n        \"icon\": \"<string>\",\n        \"topic\": {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"encounter-diagnosis\"\n          }\n        }\n      },\n      \"selection_behavior\": \"any\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"suggestions\": [\n        {\n          \"label\": \"<string>\",\n          \"is_recommended\": \"<boolean>\",\n          \"uuid\": \"<string>\",\n          \"actions\": [\n            {\n              \"type\": \"update\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"cTXhJH0.KNr\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \",W@CH\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"q=r5\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\\t\u2005c\u2028\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\u2004\\nS\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"8tTboqixPr_\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"68&TA\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u2008\u3000\u2006\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"aXEJ\\\\Wx:= wEq5c>\u00a0F`O4|\\\\=W(\u2007W/jIm]\u2009Urm#r2\u2004jdt+B&{\u2003f\u2005St!2-\",\n                \"_status\": \"<string>\",\n                \"title\": \"9\\tu.YZJ\",\n                \"_title\": \"<string>\",\n                \"url\": \"\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"\\t#GAiAf)8\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            },\n            {\n              \"type\": \"delete\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"3w75y\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"K>!^~jO\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"0qX\\\\LgSl\u202fy>t^_\\r\\\":I@g\u2002RI)7?\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\ufeffl\u1680R\u180e'd8_\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\u180e\\t\\t\u3000\u2006\\f\\f\u2008;\u200aL\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"6X<qnzm|f\",\n                \"_name\": \"<string>\",\n                \"publisher\": \",xz]\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u1680\u2000\ufeff\u2001\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"Hv3ZBH\ufeff,uTV>|]fvs_\u2004}\\\\0FK)8T\",\n                \"_status\": \"<string>\",\n                \"title\": \"8UorBH62\",\n                \"_title\": \"<string>\",\n                \"url\": \"{-tf!)]{_\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"JnJ;\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"label\": \"<string>\",\n          \"is_recommended\": \"<boolean>\",\n          \"uuid\": \"<string>\",\n          \"actions\": [\n            {\n              \"type\": \"update\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"d5C\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"\\\";\\\\XAT~\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"B0\u2001\\\"!upZnYC48C\u2005@[o\\fx1Zx\ufeffo\\\"5vlO\u2028Y+,\\fK58Bv@[\\t`l)2O3$\\f(H2(\\u000bL_'%P11\u202f'hB-`i($gW\\\\\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\u180e\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\u2000\\u000b\u2001\u2007\u3000\\f\u2001*\\u000b\\n\\n\u2005\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"@A2s\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"=[s#1\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u00a0\u3000\u2007\\n\\f\\n\u205f\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"|W\\f'U\",\n                \"_status\": \"<string>\",\n                \"title\": \"1v:#i'\",\n                \"_title\": \"<string>\",\n                \"url\": \"gw1)pkb\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"Iz<2;;+\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            },\n            {\n              \"type\": \"update\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"Kk\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"\\\\-3I\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"WQ8tm)]J\u2029Yp4wTFg{!A\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\u2001\u3000\\f\u200a\u200an \\nh(1,J\u1680\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\u2007\u2008\u2001\u2002\u180e\\f\u2028\\nie\u1680\u2006r\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"~lDF,\\\"\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"mO}a\\t;;\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u2007\\n\u2005 \u2004\u180e\u180e\u2000\u3000\\f\ufeff\\f\u2006\u180e\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"v/3mCf)b\",\n                \"_status\": \"<string>\",\n                \"title\": \"aW d\",\n                \"_title\": \"<string>\",\n                \"url\": \"$S\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"+|0_<H!\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"id\": \"<string>\",\n      \"quality_program\": \"<string>\",\n      \"closing_codes\": [\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"problem-list-item\"\n          }\n        },\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"encounter-diagnosis\"\n          }\n        }\n      ],\n      \"description\": \"<string>\",\n      \"practice_id\": \"<string>\",\n      \"override_reasons\": [\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"encounter-diagnosis\"\n          }\n        },\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"encounter-diagnosis\"\n          }\n        }\n      ],\n      \"links\": [\n        {\n          \"label\": \"<string>\",\n          \"url\": \"<string>\",\n          \"type\": \"<string>\",\n          \"app_context\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"url\": \"<string>\",\n          \"type\": \"<string>\",\n          \"app_context\": \"<string>\"\n        }\n      ],\n      \"additional_documentation\": [\n        {\n          \"type\": \"footer\",\n          \"subtitle\": \"<string>\",\n          \"paragraphs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"subsections\": [\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            },\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"type\": \"footer\",\n          \"subtitle\": \"<string>\",\n          \"paragraphs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"subsections\": [\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            },\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"indicator\": \"info\",\n      \"source\": {\n        \"label\": \"<string>\",\n        \"url\": \"<string>\",\n        \"icon\": \"<string>\",\n        \"topic\": {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"encounter-diagnosis\"\n          }\n        }\n      },\n      \"selection_behavior\": \"any\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"suggestions\": [\n        {\n          \"label\": \"<string>\",\n          \"is_recommended\": \"<boolean>\",\n          \"uuid\": \"<string>\",\n          \"actions\": [\n            {\n              \"type\": \"update\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"99HAtJcT\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"I[]&$\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"=YM=eM[)Z\u2005UA3XY\u1680Bx?o\u2029R@B7n{N\u205fjx\\\"\\\"pN Q}p6?CnvLb\u2028L#\ufeff:w\\\\\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\u2000&g\u2006 \",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\u180e%e\u2004\u2008d\\n \\n\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"7CsRY\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"zuo\\\\cL/\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u202f\u2006\\n\u2006\u1680\u2005\u2001\u2004>\u202f\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"&\u2009gWM7g\u2009L1{Rx|0EU_\u200a[&*|\u00a0QL!M\\\\h4%\\fa~HW%F\\\"EP{\\\"\u2002z3{@\u2001XUMM\u2003Q_u<>\\\".\u00a09BE.5v'~k\u3000'5n.AN8*b%\",\n                \"_status\": \"<string>\",\n                \"title\": \",#@5kMUvgsO\",\n                \"_title\": \"<string>\",\n                \"url\": \"uM_^;H68p[\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"L2!`?ag%\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            },\n            {\n              \"type\": \"update\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"eoc0UKZbhA\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"Ji\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"on\u2001]olKb%q\u180e<^z/)@(\u2000|~\u2006$:t'\u2008f[yN\u20296T1.W+W)[\u2009J\\\\]\u1680D8O9!Ozt\u2004\\\\%\u3000?g\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\u2007\u2002\ufeff\u1680\u2001\u1680Q\u2001\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\\r\u205f\\f \u2007=9\u3000\u2003\u2009\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"LO7X+[#J]bR\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"KqO4[\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u1680\u200a\u2008\u2004\u2005\u00a0\u2004\u2028\u2007\u2004GV\u2009\ufeff\u2005U\u2005Z\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"E{r|hL#8-g0\\t7a@mbd_\u2005PHY5\u205fBx{#F#F)\u30000^-U,2FGD@v\u2000fw\\\\Bk`j\u205fy!ruv;,4H]_\u2002@^o^6hG4\u2007|&['0\\\"A}+2Z\",\n                \"_status\": \"<string>\",\n                \"title\": \"vz3vnDAD# \",\n                \"_title\": \"<string>\",\n                \"url\": \"#HS\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"#x) L\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"label\": \"<string>\",\n          \"is_recommended\": \"<boolean>\",\n          \"uuid\": \"<string>\",\n          \"actions\": [\n            {\n              \"type\": \"create\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"yyGkD7N\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"dP(\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \">\u30006CMQ{E0tqw\\r/tmZ6Hji~\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\u3000\\u000b\u30002A/\u2029\\\"O\u2003W\u202f\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \" \u3000\u2006\u2004\u2008\\f\u2000\u2004\ufeff\ufeff\u2001\ufeff\u2008\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \";r.\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"W\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\u205f\\n\u2001\u1680\u2000\u00a0J+Ok\u2003\",\n                \"_purpose\": \"<string>\",\n                \"status\": \".wS#\",\n                \"_status\": \"<string>\",\n                \"title\": \"DF03)\\\\(-x\",\n                \"_title\": \"<string>\",\n                \"url\": \"[Lec\\\\\\\\l\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"\\tB*SG\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            },\n            {\n              \"type\": \"create\",\n              \"description\": \"<string>\",\n              \"resource\": {\n                \"resource_type\": \"<string>\",\n                \"fhir_comments\": \"<string>\",\n                \"id\": \"fNhq.HHG-6K\",\n                \"_id\": \"<string>\",\n                \"implicitRules\": \"1Cm|,6\",\n                \"_implicitRules\": \"<string>\",\n                \"language\": \"\\\\<]*V\u2000G>WMy4[P+,~\\u000bpCWi9s:?)\u200aSeq\\\\~~d:\u2007`3IQlLG\",\n                \"_language\": \"<string>\",\n                \"meta\": \"<string>\",\n                \"contained\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"extension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"modifierExtension\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"text\": \"<string>\",\n                \"compose\": \"<string>\",\n                \"contact\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"copyright\": \"\\t\u00a0\",\n                \"_copyright\": \"<string>\",\n                \"date\": \"<dateTime>\",\n                \"_date\": \"<string>\",\n                \"description\": \"\\f\ufeff \u2004\u2006\\n\u2000\u3000\u2002aD^(\",\n                \"_description\": \"<string>\",\n                \"expansion\": \"<string>\",\n                \"experimental\": \"<boolean>\",\n                \"_experimental\": \"<string>\",\n                \"identifier\": [\n                  \"<integer>\",\n                  \"<integer>\"\n                ],\n                \"immutable\": \"<boolean>\",\n                \"_immutable\": \"<string>\",\n                \"jurisdiction\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"name\": \"Wl\\t(S{sK\",\n                \"_name\": \"<string>\",\n                \"publisher\": \"9`dq{{\",\n                \"_publisher\": \"<string>\",\n                \"purpose\": \"\\f\u2029\u2008\u2006\u2005\u2008\u2002\u2003\u2006\",\n                \"_purpose\": \"<string>\",\n                \"status\": \"b\u2009Q;`\\\\08$\u2004C;\u3000Spr.r$k\\u000bw\\fL(k@2#\u180ex|v1)2B$H1%\u00a0wn@%|\u202fVj6Y\u20037A_gX#(\u1680tlu6hW2<\",\n                \"_status\": \"<string>\",\n                \"title\": \"V/BofS}Q\",\n                \"_title\": \"<string>\",\n                \"url\": \"t%/rXTk\",\n                \"_url\": \"<string>\",\n                \"useContext\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"version\": \"<8-)h2\",\n                \"_version\": \"<string>\"\n              },\n              \"resourceId\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"id\": \"<string>\",\n      \"quality_program\": \"<string>\",\n      \"closing_codes\": [\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"problem-list-item\"\n          }\n        },\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"encounter-diagnosis\"\n          }\n        }\n      ],\n      \"description\": \"<string>\",\n      \"practice_id\": \"<string>\",\n      \"override_reasons\": [\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"problem-list-item\"\n          }\n        },\n        {\n          \"code\": \"<string>\",\n          \"display\": \"<string>\",\n          \"system\": \"<string>\",\n          \"context\": {\n            \"target\": \"problem-list-item\"\n          }\n        }\n      ],\n      \"links\": [\n        {\n          \"label\": \"<string>\",\n          \"url\": \"<string>\",\n          \"type\": \"<string>\",\n          \"app_context\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"url\": \"<string>\",\n          \"type\": \"<string>\",\n          \"app_context\": \"<string>\"\n        }\n      ],\n      \"additional_documentation\": [\n        {\n          \"type\": \"subsection\",\n          \"subtitle\": \"<string>\",\n          \"paragraphs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"subsections\": [\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            },\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            }\n          ]\n        },\n        {\n          \"type\": \"text\",\n          \"subtitle\": \"<string>\",\n          \"paragraphs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"subsections\": [\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            },\n            {\n              \"label\": \"<string>\",\n              \"text\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"external_id\": \"<string>\"\n    }\n  ],\n  \"cursor\": \"<string>\",\n  \"next_page_url\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-be3f4f94-20a2-4538-963b-9a13c50db8c7"
+                        },
+                        {
+                          "id": "8484fa8f-eb40-4987-810a-96c42e36fcc8",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"definition_id\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"closing_code\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/?page_size=5&page_num=1&closing_code=<string>&definition_id=<string>&external_id=<string>&cursor=<string>&name=<string>&indicator=warning",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "definition",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "page_size",
+                                  "value": "5"
+                                },
+                                {
+                                  "key": "page_num",
+                                  "value": "1"
+                                },
+                                {
+                                  "key": "closing_code",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "definition_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "external_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "indicator",
+                                  "value": "warning"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-8484fa8f-eb40-4987-810a-96c42e36fcc8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:31.000Z",
+                      "updatedAt": "2026-07-28T01:35:31.000Z",
+                      "uid": "35240-ad27d799-2308-4fa7-a014-8da97c25483c"
+                    },
+                    {
+                      "name": "Create a new definition.",
+                      "id": "be9757ab-2d3f-49fa-b854-cdaa13ccafb5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "password_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"indicator\": \"warning\",\n  \"source\": {\n    \"label\": \"<string>\",\n    \"url\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"topic\": {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  },\n  \"selection_behavior\": \"any\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"suggestions\": [\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"actions\": [\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"TQwju5wMt2B\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"^n1~^x#8G^\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"/#<v_>HYL\u3000\\\\\\\"a$=\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\n\u200a\u2003\\u000b\u2009\u2008\u2005\u2007\u20070\u3000}rL~\u205f \",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"s\u200a\u2000\u205f\u200a<\u2009C\u2009\u2001\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \" rf4h\\\" I\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"AnMC}p:lv\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2005\u2003\u2003\u205f\u2001\u205f\\t\u00a0\\\\V\u2028v\u2005\u180e2\u2002~\u1680\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"fk]\",\n            \"_status\": \"<string>\",\n            \"title\": \"2$8Z>\",\n            \"_title\": \"<string>\",\n            \"url\": \"AtCj<zKy\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"U=Bd\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"vc4pl8El6\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"PZj$\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"e4\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\u000b\ufeff\u180e\u180e\u2000 r\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2006\ufeff\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"\\tfGWHCDVpb\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"#WD\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2003\\f\u2002\u2004\u00a0 \u2029\\u000b\u3000]\\nS\u2029\\n\u2029\u2008\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"h0v\\t?oea0\u2028n\u2003bn8XvcTVni\",\n            \"_status\": \"<string>\",\n            \"title\": \"Kk|B\\\")wJ\",\n            \"_title\": \"<string>\",\n            \"url\": \"0EE`T\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"__7/u[Mt\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"actions\": [\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Rp\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"t\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"x;t5[RMrRb\u202f0#J{Hr ?\u3000V<:2fD*4~\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \" \u2001\u3000\u2006\u2000\u2007stX\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2029\u2009\u2009\u2000\u2029X\u2029h=\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \".g&#\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"g\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\ufeff\\n\u180e\\n\u2028\\r\u1680\u2005\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"k1'\",\n            \"_status\": \"<string>\",\n            \"title\": \"4OkX/rslk\",\n            \"_title\": \"<string>\",\n            \"url\": \"\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"fc.|1>)]s8\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Nib3vRxV\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \".6P\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"zxYK9\\\\vl=oT\u2006U.'r&\\tEU`#ZYg=PA&\\u000b2m\\\"y.[ZCu+R\u205f;N\u3000Cdz\u200auKQ=%/B_\u202f{\u2007x\\\"^<Da)Mi3M\\u000bQ!jm0-W\u2003v:\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u202f\u2003\u3000\\t\\tfT)\\f\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2003\u2004\u180e\u2028\u2005\u00a0]\u20084\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"%lzA/Uz%F6w\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"rjE:f\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"P\u2008\u00a0}\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"t1(O@c m7R^!<UPk>0\\f`*lV;OzYI\u2009iZGN;[jDF_\u20294h`K\",\n            \"_status\": \"<string>\",\n            \"title\": \"f~pIVDwVN%g\",\n            \"_title\": \"<string>\",\n            \"url\": \"m:I~AAy\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"|%}\\\"WNV7` q\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"quality_program\": \"<string>\",\n  \"closing_codes\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"override_reasons\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  ],\n  \"links\": [\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    }\n  ],\n  \"additional_documentation\": [\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"external_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "caregaps",
+                            "api",
+                            ":quality_program",
+                            "definition",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "dd88dfb9-6565-435b-b8d9-00fbfc2af600",
+                              "key": "quality_program",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Create a new definition."
+                      },
+                      "response": [
+                        {
+                          "id": "cdcb7147-c65c-47fe-bf49-fd9cb45c137e",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"indicator\": \"warning\",\n  \"source\": {\n    \"label\": \"<string>\",\n    \"url\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"topic\": {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  },\n  \"selection_behavior\": \"any\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"suggestions\": [\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"actions\": [\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"TQwju5wMt2B\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"^n1~^x#8G^\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"/#<v_>HYL\u3000\\\\\\\"a$=\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\n\u200a\u2003\\u000b\u2009\u2008\u2005\u2007\u20070\u3000}rL~\u205f \",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"s\u200a\u2000\u205f\u200a<\u2009C\u2009\u2001\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \" rf4h\\\" I\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"AnMC}p:lv\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2005\u2003\u2003\u205f\u2001\u205f\\t\u00a0\\\\V\u2028v\u2005\u180e2\u2002~\u1680\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"fk]\",\n            \"_status\": \"<string>\",\n            \"title\": \"2$8Z>\",\n            \"_title\": \"<string>\",\n            \"url\": \"AtCj<zKy\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"U=Bd\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"vc4pl8El6\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"PZj$\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"e4\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\u000b\ufeff\u180e\u180e\u2000 r\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2006\ufeff\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"\\tfGWHCDVpb\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"#WD\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2003\\f\u2002\u2004\u00a0 \u2029\\u000b\u3000]\\nS\u2029\\n\u2029\u2008\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"h0v\\t?oea0\u2028n\u2003bn8XvcTVni\",\n            \"_status\": \"<string>\",\n            \"title\": \"Kk|B\\\")wJ\",\n            \"_title\": \"<string>\",\n            \"url\": \"0EE`T\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"__7/u[Mt\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"actions\": [\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Rp\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"t\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"x;t5[RMrRb\u202f0#J{Hr ?\u3000V<:2fD*4~\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \" \u2001\u3000\u2006\u2000\u2007stX\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2029\u2009\u2009\u2000\u2029X\u2029h=\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \".g&#\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"g\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\ufeff\\n\u180e\\n\u2028\\r\u1680\u2005\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"k1'\",\n            \"_status\": \"<string>\",\n            \"title\": \"4OkX/rslk\",\n            \"_title\": \"<string>\",\n            \"url\": \"\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"fc.|1>)]s8\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Nib3vRxV\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \".6P\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"zxYK9\\\\vl=oT\u2006U.'r&\\tEU`#ZYg=PA&\\u000b2m\\\"y.[ZCu+R\u205f;N\u3000Cdz\u200auKQ=%/B_\u202f{\u2007x\\\"^<Da)Mi3M\\u000bQ!jm0-W\u2003v:\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u202f\u2003\u3000\\t\\tfT)\\f\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2003\u2004\u180e\u2028\u2005\u00a0]\u20084\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"%lzA/Uz%F6w\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"rjE:f\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"P\u2008\u00a0}\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"t1(O@c m7R^!<UPk>0\\f`*lV;OzYI\u2009iZGN;[jDF_\u20294h`K\",\n            \"_status\": \"<string>\",\n            \"title\": \"f~pIVDwVN%g\",\n            \"_title\": \"<string>\",\n            \"url\": \"m:I~AAy\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"|%}\\\"WNV7` q\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"quality_program\": \"<string>\",\n  \"closing_codes\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"override_reasons\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  ],\n  \"links\": [\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    }\n  ],\n  \"additional_documentation\": [\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"external_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "definition",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"indicator\": \"info\",\n  \"source\": {\n    \"label\": \"<string>\",\n    \"url\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"topic\": {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  },\n  \"selection_behavior\": \"at-most-one\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"suggestions\": [\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"uuid\": \"<string>\",\n      \"actions\": [\n        {\n          \"type\": \"update\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"AVxUyqn\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"Zx)1\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"P\u2000R}dEjv\\tPN9\\\\@5&4$\\r~D\u20071\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\t\ufeff\u180e\\u000b\\t\u3000\\fr\\r\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \" \u200a\\f\ufeff\\t\u2002'\\n%+\u3000\u2002\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"TP_s(^*P9E\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"NS,u~Yh\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u200a\u2029\u200a\ufeff\u202f\u200a\\f\u3000\u2000\u200a\\f\ufeff2jOuj\",\n            \"_purpose\": \"<string>\",\n            \"status\": \":zK+\\f2Ie^<nIsJb\u2029Pu\u3000?3MG<^[R.r\u20069XAlM\\u000b*0//jW>9\u2004>tQrR)\u2008C*K=e;]\u2003LWgHvw;S%bW\u2004B4M>M3cKbM$\u2009VGh\",\n            \"_status\": \"<string>\",\n            \"title\": \">E~\\\\{;*\\\\QCa\",\n            \"_title\": \"<string>\",\n            \"url\": \"P\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"@vR/ rgBoZb\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"fdiJu7AWhf\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"~=vNP@`MD*\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"PMK\u200a3${\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u180e\u2002 \u3000\u3000\u2005\\f\u00a0\u1680\u205fl\\t<\\n\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u205f\u00a0\u2004\u2002 \u2005\u2008\u2028\u2001\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"^NQ\",\n            \"_name\": \"<string>\",\n            \"publisher\": \")>1xnH\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2003\u2008\u2028\u2004\\n\u2000\u2006\u2000 \u2000\u2028\u1680(\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"[5k,q#q[di\u2006B\u30006in*!1#c9hG\u2008+Iuz\u2002[mTmq@\\\\g $(#ixFqh$A\ufeffPu\\u000b:\u1680K5`\u2001^buX\",\n            \"_status\": \"<string>\",\n            \"title\": \"8D 7<S9.\",\n            \"_title\": \"<string>\",\n            \"url\": \"`QDa\\\"\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"GKT*r\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"uuid\": \"<string>\",\n      \"actions\": [\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Xs18aBbjH\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"GY\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"0*6AI2k#`St\\u000bU^3\\\"x;\\\"<B\u2004;JT5idsK <U7\u20289\ufefffcO5s?v\u202fZY2I(E\u2003OM\\\"W\u3000KW`@@$bd\u2008>^a\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"+\u2003l\u20282\\t1\u200a\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\\u000b\\r \u2008\\r\u202f\u20042 \u2009\\n\u1680\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"&g&TQQj\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"TyN\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u00a0\\t\u2004\u2006S\u2028\u3000\u00a0\u2006\\r\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"S!-)\\\\gi\u1680Tv1^'\\\\\\t_l'\ufeffGGT{.U\u180eW&^6VL~XD2H\u2004p\",\n            \"_status\": \"<string>\",\n            \"title\": \";V$\",\n            \"_title\": \"<string>\",\n            \"url\": \"zG^]T\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"KU\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"update\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"olSx7Y-Fb\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"7\u2009,7+UF;z2\u30007Oxm<ijTM\u1680J[Q6\u3000FPfyn\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u2008\u2004\u180e\u2003\u2006\\t\\t\\t\u202f\u2008\u3000t\u2002i\u2003\\n\\nH\u180e\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\ufeff \u2009\u3000\u2002\u200a6Ze\\rl*;D\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"\\\\s9EA_\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"m*\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2002\u2000\u202f\u2009\u2005\u2028\u2004\u2029\u2008t#\u202f_\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"$uWKL\u2006)fT25w\\u000b8|\u2000]\u2029>Y\",\n            \"_status\": \"<string>\",\n            \"title\": \"TxE|'\",\n            \"_title\": \"<string>\",\n            \"url\": \"A]`:]g:'Q\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"J(\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"id\": \"<string>\",\n  \"quality_program\": \"<string>\",\n  \"closing_codes\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"override_reasons\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  ],\n  \"links\": [\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    }\n  ],\n  \"additional_documentation\": [\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"footer\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"external_id\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-cdcb7147-c65c-47fe-bf49-fd9cb45c137e"
+                        },
+                        {
+                          "id": "3554f71c-36b2-4d12-9537-cb850fc29813",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"indicator\": \"warning\",\n  \"source\": {\n    \"label\": \"<string>\",\n    \"url\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"topic\": {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  },\n  \"selection_behavior\": \"any\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"suggestions\": [\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"actions\": [\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"TQwju5wMt2B\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"^n1~^x#8G^\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"/#<v_>HYL\u3000\\\\\\\"a$=\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\n\u200a\u2003\\u000b\u2009\u2008\u2005\u2007\u20070\u3000}rL~\u205f \",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"s\u200a\u2000\u205f\u200a<\u2009C\u2009\u2001\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \" rf4h\\\" I\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"AnMC}p:lv\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2005\u2003\u2003\u205f\u2001\u205f\\t\u00a0\\\\V\u2028v\u2005\u180e2\u2002~\u1680\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"fk]\",\n            \"_status\": \"<string>\",\n            \"title\": \"2$8Z>\",\n            \"_title\": \"<string>\",\n            \"url\": \"AtCj<zKy\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"U=Bd\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"vc4pl8El6\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"PZj$\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"e4\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\\u000b\ufeff\u180e\u180e\u2000 r\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2006\ufeff\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"\\tfGWHCDVpb\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"#WD\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\u2003\\f\u2002\u2004\u00a0 \u2029\\u000b\u3000]\\nS\u2029\\n\u2029\u2008\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"h0v\\t?oea0\u2028n\u2003bn8XvcTVni\",\n            \"_status\": \"<string>\",\n            \"title\": \"Kk|B\\\")wJ\",\n            \"_title\": \"<string>\",\n            \"url\": \"0EE`T\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"__7/u[Mt\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"label\": \"<string>\",\n      \"is_recommended\": \"<boolean>\",\n      \"actions\": [\n        {\n          \"type\": \"create\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Rp\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \"t\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"x;t5[RMrRb\u202f0#J{Hr ?\u3000V<:2fD*4~\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \" \u2001\u3000\u2006\u2000\u2007stX\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2029\u2009\u2009\u2000\u2029X\u2029h=\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \".g&#\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"g\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"\ufeff\\n\u180e\\n\u2028\\r\u1680\u2005\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"k1'\",\n            \"_status\": \"<string>\",\n            \"title\": \"4OkX/rslk\",\n            \"_title\": \"<string>\",\n            \"url\": \"\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"fc.|1>)]s8\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        },\n        {\n          \"type\": \"delete\",\n          \"description\": \"<string>\",\n          \"resource\": {\n            \"resource_type\": \"<string>\",\n            \"fhir_comments\": \"<string>\",\n            \"id\": \"Nib3vRxV\",\n            \"_id\": \"<string>\",\n            \"implicitRules\": \".6P\",\n            \"_implicitRules\": \"<string>\",\n            \"language\": \"zxYK9\\\\vl=oT\u2006U.'r&\\tEU`#ZYg=PA&\\u000b2m\\\"y.[ZCu+R\u205f;N\u3000Cdz\u200auKQ=%/B_\u202f{\u2007x\\\"^<Da)Mi3M\\u000bQ!jm0-W\u2003v:\",\n            \"_language\": \"<string>\",\n            \"meta\": \"<string>\",\n            \"contained\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"extension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"modifierExtension\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"text\": \"<string>\",\n            \"compose\": \"<string>\",\n            \"contact\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"copyright\": \"\u202f\u2003\u3000\\t\\tfT)\\f\",\n            \"_copyright\": \"<string>\",\n            \"date\": \"<dateTime>\",\n            \"_date\": \"<string>\",\n            \"description\": \"\u2003\u2004\u180e\u2028\u2005\u00a0]\u20084\",\n            \"_description\": \"<string>\",\n            \"expansion\": \"<string>\",\n            \"experimental\": \"<boolean>\",\n            \"_experimental\": \"<string>\",\n            \"identifier\": [\n              \"<integer>\",\n              \"<integer>\"\n            ],\n            \"immutable\": \"<boolean>\",\n            \"_immutable\": \"<string>\",\n            \"jurisdiction\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"name\": \"%lzA/Uz%F6w\",\n            \"_name\": \"<string>\",\n            \"publisher\": \"rjE:f\",\n            \"_publisher\": \"<string>\",\n            \"purpose\": \"P\u2008\u00a0}\",\n            \"_purpose\": \"<string>\",\n            \"status\": \"t1(O@c m7R^!<UPk>0\\f`*lV;OzYI\u2009iZGN;[jDF_\u20294h`K\",\n            \"_status\": \"<string>\",\n            \"title\": \"f~pIVDwVN%g\",\n            \"_title\": \"<string>\",\n            \"url\": \"m:I~AAy\",\n            \"_url\": \"<string>\",\n            \"useContext\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"version\": \"|%}\\\"WNV7` q\",\n            \"_version\": \"<string>\"\n          },\n          \"resourceId\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"quality_program\": \"<string>\",\n  \"closing_codes\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"problem-list-item\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"override_reasons\": [\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"display\": \"<string>\",\n      \"system\": \"<string>\",\n      \"context\": {\n        \"target\": \"encounter-diagnosis\"\n      }\n    }\n  ],\n  \"links\": [\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"app_context\": \"<string>\"\n    }\n  ],\n  \"additional_documentation\": [\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"subsection\",\n      \"subtitle\": \"<string>\",\n      \"paragraphs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subsections\": [\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        },\n        {\n          \"label\": \"<string>\",\n          \"text\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"external_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/definition/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "definition",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-3554f71c-36b2-4d12-9537-cb850fc29813"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:31.000Z",
+                      "updatedAt": "2026-07-28T01:35:31.000Z",
+                      "uid": "35240-be9757ab-2d3f-49fa-b854-cdaa13ccafb5"
+                    }
+                  ],
+                  "id": "0f8bedc9-1e7c-4fc8-aa54-6d1c3d7634e9",
+                  "createdAt": "2026-07-28T01:35:31.000Z",
+                  "updatedAt": "2026-07-28T01:35:31.000Z",
+                  "uid": "35240-0f8bedc9-1e7c-4fc8-aa54-6d1c3d7634e9"
+                },
+                {
+                  "name": "caregap",
+                  "item": [
+                    {
+                      "name": "{caregap_id}",
+                      "item": [
+                        {
+                          "name": "Retrieve an existing caregap.",
+                          "id": "65899671-641d-457a-a880-34323a7ca039",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "password_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ":caregap_id",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "practice_id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "caec5c7b-c837-4c4b-974b-7b5d61bcedc6",
+                                  "key": "quality_program",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "51342dae-00e2-4b84-b33d-702de6e48214",
+                                  "key": "caregap_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve a specific Care Gap."
+                          },
+                          "response": [
+                            {
+                              "id": "7ec1da5d-002e-46ee-a07e-671cc5711f49",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "caregap",
+                                    ":caregap_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "caregap_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"definition_id\": \"<string>\",\n  \"patient_id\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"created_date\": \"<date>\",\n  \"status\": \"closed\",\n  \"id\": \"<string>\",\n  \"quality_program\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"closed_date\": \"<date>\",\n  \"closed_by\": \"feedback\"\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-7ec1da5d-002e-46ee-a07e-671cc5711f49"
+                            },
+                            {
+                              "id": "79ca67f2-51bf-4f9b-a26d-271a4890db26",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "caregap",
+                                    ":caregap_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "caregap_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-79ca67f2-51bf-4f9b-a26d-271a4890db26"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-65899671-641d-457a-a880-34323a7ca039"
+                        },
+                        {
+                          "name": "Delete an existing caregap.",
+                          "id": "c543acab-9447-45b3-8d2e-d04a007c5ed7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "password_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ":caregap_id",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "practice_id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2c05014e-231a-4fec-8015-8c7b8ca69d42",
+                                  "key": "quality_program",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "b6fb91e9-35d4-4579-9fde-581881b51594",
+                                  "key": "caregap_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Delete a specific Care Gap."
+                          },
+                          "response": [
+                            {
+                              "id": "a0c82cd6-f1b3-4491-acc2-816f32539ce9",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "caregap",
+                                    ":caregap_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "caregap_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-a0c82cd6-f1b3-4491-acc2-816f32539ce9"
+                            },
+                            {
+                              "id": "cc465279-0264-4b98-8790-968601ba9c1c",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "caregap",
+                                    ":caregap_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "caregap_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-cc465279-0264-4b98-8790-968601ba9c1c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-c543acab-9447-45b3-8d2e-d04a007c5ed7"
+                        },
+                        {
+                          "name": "Modifies an existing caregap's closed status.",
+                          "id": "e1eb1082-b216-48ee-95a7-5fdf4a3dbb3c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "password_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"open\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ":caregap_id",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "practice_id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7d8330ac-e4c7-4f39-a980-94f63d605c61",
+                                  "key": "quality_program",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "b0fd66a8-60d7-4ba6-9355-c8e93ac4ac25",
+                                  "key": "caregap_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "579b1db2-c753-4789-9211-0c0e56aaea0f",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"status\": \"open\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "caregap",
+                                    ":caregap_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "caregap_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"definition_id\": \"<string>\",\n  \"patient_id\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"created_date\": \"<date>\",\n  \"status\": \"closed\",\n  \"id\": \"<string>\",\n  \"quality_program\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"closed_date\": \"<date>\",\n  \"closed_by\": \"feedback\"\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-579b1db2-c753-4789-9211-0c0e56aaea0f"
+                            },
+                            {
+                              "id": "0a77452f-35fb-4c5e-a965-606b5404361d",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"status\": \"open\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/:caregap_id/?practice_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "caregaps",
+                                    "api",
+                                    ":quality_program",
+                                    "caregap",
+                                    ":caregap_id",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "practice_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "quality_program"
+                                    },
+                                    {
+                                      "key": "caregap_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:35:31.000Z",
+                              "updatedAt": "2026-07-28T01:35:31.000Z",
+                              "uid": "35240-0a77452f-35fb-4c5e-a965-606b5404361d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-e1eb1082-b216-48ee-95a7-5fdf4a3dbb3c"
+                        }
+                      ],
+                      "id": "02b4cc7c-fa08-40ac-bc9d-03ce3a92b2de",
+                      "createdAt": "2026-07-28T01:35:31.000Z",
+                      "updatedAt": "2026-07-28T01:35:31.000Z",
+                      "uid": "35240-02b4cc7c-fa08-40ac-bc9d-03ce3a92b2de"
+                    },
+                    {
+                      "name": "Retrieve a list of existing caregap.",
+                      "id": "33efceab-4f31-4236-9a45-e973fc5d59af",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "password_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/?practice_id=<string>&page_size=5&cursor=<string>&patient_id=<string>&definition_id=<string>&status=open&closed_date_begin=<date>&closed_date_end=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "caregaps",
+                            "api",
+                            ":quality_program",
+                            "caregap",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "practice_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "page_size",
+                              "value": "5"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "patient_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "definition_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "open"
+                            },
+                            {
+                              "key": "closed_date_begin",
+                              "value": "<date>"
+                            },
+                            {
+                              "key": "closed_date_end",
+                              "value": "<date>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "02bab165-8daa-42cf-aaa7-d3fca44df04b",
+                              "key": "quality_program",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a list of Care Gaps with filters specified by query parameters."
+                      },
+                      "response": [
+                        {
+                          "id": "f1e7b2bd-288a-43c1-a03e-bba6a3af9afd",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/?practice_id=<string>&page_size=5&cursor=<string>&patient_id=<string>&definition_id=<string>&status=open&closed_date_begin=<date>&closed_date_end=<date>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "practice_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "page_size",
+                                  "value": "5"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "patient_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "definition_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "status",
+                                  "value": "open"
+                                },
+                                {
+                                  "key": "closed_date_begin",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "closed_date_end",
+                                  "value": "<date>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"definition_id\": \"<string>\",\n      \"patient_id\": \"<string>\",\n      \"practice_id\": \"<string>\",\n      \"created_date\": \"<date>\",\n      \"status\": \"closed\",\n      \"id\": \"<string>\",\n      \"quality_program\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"closed_date\": \"<date>\",\n      \"closed_by\": \"API\"\n    },\n    {\n      \"definition_id\": \"<string>\",\n      \"patient_id\": \"<string>\",\n      \"practice_id\": \"<string>\",\n      \"created_date\": \"<date>\",\n      \"status\": \"closed\",\n      \"id\": \"<string>\",\n      \"quality_program\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"closed_date\": \"<date>\",\n      \"closed_by\": \"condition-saved\"\n    }\n  ],\n  \"cursor\": \"<string>\",\n  \"next_page_url\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-f1e7b2bd-288a-43c1-a03e-bba6a3af9afd"
+                        },
+                        {
+                          "id": "7add76be-5a22-4ab6-a541-d349650a5a24",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/?practice_id=<string>&page_size=5&cursor=<string>&patient_id=<string>&definition_id=<string>&status=open&closed_date_begin=<date>&closed_date_end=<date>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "practice_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "page_size",
+                                  "value": "5"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "patient_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "definition_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "status",
+                                  "value": "open"
+                                },
+                                {
+                                  "key": "closed_date_begin",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "closed_date_end",
+                                  "value": "<date>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-7add76be-5a22-4ab6-a541-d349650a5a24"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:31.000Z",
+                      "updatedAt": "2026-07-28T01:35:31.000Z",
+                      "uid": "35240-33efceab-4f31-4236-9a45-e973fc5d59af"
+                    },
+                    {
+                      "name": "Create a new caregap.",
+                      "id": "583bfe47-d43f-47d3-be0c-78e3cfd83c29",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "password_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"definition_id\": \"<string>\",\n  \"patient_id\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"created_date\": \"<date>\",\n  \"status\": \"closed\",\n  \"detail\": \"<string>\",\n  \"closed_date\": \"<date>\",\n  \"closed_by\": \"feedback\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "caregaps",
+                            "api",
+                            ":quality_program",
+                            "caregap",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "611db538-890b-41d7-9b2e-4525fc6f766b",
+                              "key": "quality_program",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Create a new caregap."
+                      },
+                      "response": [
+                        {
+                          "id": "1828de91-7431-4dff-b17a-0daec37e03b8",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"definition_id\": \"<string>\",\n  \"patient_id\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"created_date\": \"<date>\",\n  \"status\": \"closed\",\n  \"detail\": \"<string>\",\n  \"closed_date\": \"<date>\",\n  \"closed_by\": \"feedback\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"definition_id\": \"<string>\",\n  \"patient_id\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"created_date\": \"<date>\",\n  \"status\": \"closed\",\n  \"id\": \"<string>\",\n  \"quality_program\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"closed_date\": \"<date>\",\n  \"closed_by\": \"feedback\"\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-1828de91-7431-4dff-b17a-0daec37e03b8"
+                        },
+                        {
+                          "id": "8598cfeb-dc1d-406a-89ba-e970e1486a82",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"definition_id\": \"<string>\",\n  \"patient_id\": \"<string>\",\n  \"practice_id\": \"<string>\",\n  \"created_date\": \"<date>\",\n  \"status\": \"closed\",\n  \"detail\": \"<string>\",\n  \"closed_date\": \"<date>\",\n  \"closed_by\": \"feedback\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/caregaps/api/:quality_program/caregap/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "caregaps",
+                                "api",
+                                ":quality_program",
+                                "caregap",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "quality_program"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:35:31.000Z",
+                          "updatedAt": "2026-07-28T01:35:31.000Z",
+                          "uid": "35240-8598cfeb-dc1d-406a-89ba-e970e1486a82"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:31.000Z",
+                      "updatedAt": "2026-07-28T01:35:31.000Z",
+                      "uid": "35240-583bfe47-d43f-47d3-be0c-78e3cfd83c29"
+                    }
+                  ],
+                  "id": "808d306e-191a-48d7-8ef1-4b24bf7e2eac",
+                  "createdAt": "2026-07-28T01:35:31.000Z",
+                  "updatedAt": "2026-07-28T01:35:31.000Z",
+                  "uid": "35240-808d306e-191a-48d7-8ef1-4b24bf7e2eac"
+                }
+              ],
+              "id": "79dbb426-4b0b-4bef-9638-8136b5043529",
+              "createdAt": "2026-07-28T01:35:31.000Z",
+              "updatedAt": "2026-07-28T01:35:31.000Z",
+              "uid": "35240-79dbb426-4b0b-4bef-9638-8136b5043529"
+            }
+          ],
+          "id": "8ac538bd-bb00-4d4d-8611-d487571c2d2e",
+          "createdAt": "2026-07-28T01:35:31.000Z",
+          "updatedAt": "2026-07-28T01:35:31.000Z",
+          "uid": "35240-8ac538bd-bb00-4d4d-8611-d487571c2d2e"
+        }
+      ],
+      "id": "bb199ede-fe8d-4c0e-9479-cd55faa318d4",
+      "createdAt": "2026-07-28T01:35:31.000Z",
+      "updatedAt": "2026-07-28T01:35:31.000Z",
+      "uid": "35240-bb199ede-fe8d-4c0e-9479-cd55faa318d4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://caregaps.sandbox.elationemr.com/"
+    }
+  ]
+}

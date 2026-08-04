@@ -1,0 +1,2330 @@
+{
+  "info": {
+    "_postman_id": "d8fbbf49-83d7-46fe-8340-3779cf3e2884",
+    "name": "Scheduling API",
+    "description": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:34:42.000Z",
+    "updatedAt": "2026-07-28T01:34:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d8fbbf49-83d7-46fe-8340-3779cf3e2884"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2.0",
+          "item": [
+            {
+              "name": "appointment_types",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Appointment Type",
+                      "id": "eec749d2-b40c-41dd-83d7-27270fbe9bdb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointment_types",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "5c261b20-835a-4795-accf-f598acef3de9",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "80e6d820-6c88-4822-a538-5aa8a867ad47",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointment_types",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-80e6d820-6c88-4822-a538-5aa8a867ad47"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-eec749d2-b40c-41dd-83d7-27270fbe9bdb"
+                    },
+                    {
+                      "name": "Retrieve Appointment Type",
+                      "id": "4102ee3d-a74f-4f8f-85b7-69324380676c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointment_types",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "7f56f701-3b52-4696-aa70-4869b27852e4",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "3e1abbac-635c-4645-9497-85d6e21713ae",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointment_types",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-3e1abbac-635c-4645-9497-85d6e21713ae"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-4102ee3d-a74f-4f8f-85b7-69324380676c"
+                    },
+                    {
+                      "name": "Partially Update Appointment Type",
+                      "id": "8e5287f0-0410-4374-ad9a-ecb6437a53bf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"default_duration\": \"<integer>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"practice\": \"<long>\",\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.oneField\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointment_types",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "0d9a8971-1580-4cf7-a24d-0b098e2268d8",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "5f7c8f84-6e41-43af-9640-095d28d12368",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"default_duration\": \"<integer>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"practice\": \"<long>\",\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.oneField\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointment_types",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-5f7c8f84-6e41-43af-9640-095d28d12368"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-8e5287f0-0410-4374-ad9a-ecb6437a53bf"
+                    },
+                    {
+                      "name": "Update Appointment Type",
+                      "id": "6c0ed26c-f9b3-4745-968e-4f97d33d5d27",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointment_types",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "0fa4e0ae-c290-41dc-b081-7563c4e9549e",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "41d046f7-daf2-4c35-b42b-9ae65576c967",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointment_types/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointment_types",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-41d046f7-daf2-4c35-b42b-9ae65576c967"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-6c0ed26c-f9b3-4745-968e-4f97d33d5d27"
+                    }
+                  ],
+                  "id": "7d5f727e-ea3d-4c46-8457-988423cee59e",
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-7d5f727e-ea3d-4c46-8457-988423cee59e"
+                },
+                {
+                  "name": "List Appointment Types",
+                  "id": "d42d3edb-b1bf-48d8-9fe9-64f0c114a9c3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/appointment_types/?limit=<integer>&name=<string>,<string>&offset=<integer>&order_by=<string>&practice=<long>,<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "appointment_types",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "name",
+                          "value": "<string>,<string>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "728da166-9169-439c-995f-e6b91a4444f2",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointment_types/?limit=<integer>&name=<string>,<string>&offset=<integer>&order_by=<string>&practice=<long>,<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointment_types",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "name",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"default_duration\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"practice\": \"<long>\",\n      \"abbreviation\": \"<string>\",\n      \"color\": \"<string>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"elation_note_template_ids\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"id\": \"<integer>\",\n      \"is_telehealth\": \"<boolean>\",\n      \"patient_bookable\": \"<boolean>\",\n      \"patient_form_hours_prior\": \"<integer>\",\n      \"patient_forms\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"sequence\": \"<integer>\",\n      \"visit_note_format\": \"note2\",\n      \"visit_note_templates\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"visit_note_type\": \"<integer,null-int64>\"\n    },\n    {\n      \"default_duration\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"practice\": \"<long>\",\n      \"abbreviation\": \"<string>\",\n      \"color\": \"<string>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"elation_note_template_ids\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"id\": \"<integer>\",\n      \"is_telehealth\": \"<boolean>\",\n      \"patient_bookable\": \"<boolean>\",\n      \"patient_form_hours_prior\": \"<integer>\",\n      \"patient_forms\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"sequence\": \"<integer>\",\n      \"visit_note_format\": \"twoCol.complex2\",\n      \"visit_note_templates\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"visit_note_type\": \"<integer,null-int64>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-728da166-9169-439c-995f-e6b91a4444f2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-d42d3edb-b1bf-48d8-9fe9-64f0c114a9c3"
+                },
+                {
+                  "name": "Create Appointment Type",
+                  "id": "c86b0f14-fc8b-46fd-8570-7904683247cb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/appointment_types/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "appointment_types",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0a2bd8a8-9287-4085-96b7-c9c7f215be32",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointment_types/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointment_types",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"default_duration\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"abbreviation\": \"<string>\",\n  \"color\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string>\",\n  \"elation_note_template_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<integer>\",\n  \"is_telehealth\": \"<boolean>\",\n  \"patient_bookable\": \"<boolean>\",\n  \"patient_form_hours_prior\": \"<integer>\",\n  \"patient_forms\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"sequence\": \"<integer>\",\n  \"visit_note_format\": \"oneCol.preOp\",\n  \"visit_note_templates\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"visit_note_type\": \"<integer,null-int64>\"\n}",
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-0a2bd8a8-9287-4085-96b7-c9c7f215be32"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-c86b0f14-fc8b-46fd-8570-7904683247cb"
+                }
+              ],
+              "id": "83601237-793e-49c0-ae1d-eafb7ed47f20",
+              "createdAt": "2026-07-28T01:34:43.000Z",
+              "updatedAt": "2026-07-28T01:34:43.000Z",
+              "uid": "35240-83601237-793e-49c0-ae1d-eafb7ed47f20"
+            },
+            {
+              "name": "appointments",
+              "item": [
+                {
+                  "name": "rooms",
+                  "item": [
+                    {
+                      "name": "List Appointment Rooms",
+                      "id": "fc3c31dc-4051-4896-b8d9-3ac6b1f9fcbc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/rooms/?practice=<long>&practice=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            "rooms",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "The practice ID to filter by.",
+                              "key": "practice",
+                              "value": "<long>"
+                            },
+                            {
+                              "description": "The practice ID to filter by.",
+                              "key": "practice",
+                              "value": "<long>"
+                            }
+                          ]
+                        },
+                        "description": "List the rooms available per practices"
+                      },
+                      "response": [
+                        {
+                          "id": "a28bb3b6-8197-4cde-b878-55a24b91c5e8",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointments/rooms/?practice=<long>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointments",
+                                "rooms",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "description": "The practice ID to filter by.",
+                                  "key": "practice",
+                                  "value": "<long>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"name\": \"<string>\",\n      \"practice\": \"<long>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"practice\": \"<long>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-a28bb3b6-8197-4cde-b878-55a24b91c5e8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-fc3c31dc-4051-4896-b8d9-3ac6b1f9fcbc"
+                    }
+                  ],
+                  "id": "a16abf82-015a-491e-b22e-3c71b4210d90",
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-a16abf82-015a-491e-b22e-3c71b4210d90"
+                },
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Appointment",
+                      "id": "9491dfb5-a5a1-420c-8e10-9687ae5e3687",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "8055cfd0-e6cb-4e45-a832-f3b238efbb95",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "00b9d2f9-dfb4-4054-abe3-56dee984502f",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointments",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-00b9d2f9-dfb4-4054-abe3-56dee984502f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-9491dfb5-a5a1-420c-8e10-9687ae5e3687"
+                    },
+                    {
+                      "name": "Retrieve Appointment",
+                      "id": "d7f9c945-a03e-4b1c-b562-be5814e97bd9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d8ad9ad-274c-43f0-bce3-35247a0d9f46",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "533454c5-2098-4ae9-bd14-908224c46293",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointments",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-533454c5-2098-4ae9-bd14-908224c46293"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-d7f9c945-a03e-4b1c-b562-be5814e97bd9"
+                    },
+                    {
+                      "name": "Partially Update Appointment",
+                      "id": "896f3443-6944-4732-9afb-7773b809bd0b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"patient\": \"<integer,null-int64>\",\n  \"payment\": {\n    \"amount\": \"-8.\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "2cae885e-6b79-4e40-973a-137847c04382",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6276dcb7-b1fd-4e71-bed8-72e76f275e87",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"patient\": \"<integer,null-int64>\",\n  \"payment\": {\n    \"amount\": \"-8.\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointments",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-6276dcb7-b1fd-4e71-bed8-72e76f275e87"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-896f3443-6944-4732-9afb-7773b809bd0b"
+                    },
+                    {
+                      "name": "Update Appointment",
+                      "id": "f18239fb-d2fb-4e7d-a646-6b944d5b6fd3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "43a1bcc3-9639-4fc1-86cd-6eca4b21e18c",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "aba4d838-7fab-4e19-881b-ed4e93fc5a2c",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/appointments/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "appointments",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-aba4d838-7fab-4e19-881b-ed4e93fc5a2c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-f18239fb-d2fb-4e7d-a646-6b944d5b6fd3"
+                    }
+                  ],
+                  "id": "5f38cbf9-cb1d-4de8-95df-d40647c35d76",
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-5f38cbf9-cb1d-4de8-95df-d40647c35d76"
+                },
+                {
+                  "name": "List Appointments",
+                  "id": "51addac1-694e-40c1-a8ea-2742d34e8c92",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/appointments/?from_date=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&physician=<string>&practice=<integer>,<integer>&time_slot_type=event&to_date=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "appointments",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "from_date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "patient",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "key": "physician",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "practice",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "key": "time_slot_type",
+                          "value": "event"
+                        },
+                        {
+                          "key": "to_date",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "94f3bb56-7ecb-4b41-ae73-cbd5a998ccf6",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/?from_date=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&physician=<string>&practice=<integer>,<integer>&time_slot_type=event&to_date=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "from_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "patient",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "key": "physician",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "practice",
+                              "value": "<integer>,<integer>"
+                            },
+                            {
+                              "key": "time_slot_type",
+                              "value": "event"
+                            },
+                            {
+                              "key": "to_date",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"patient\": \"<integer,null-int64>\",\n      \"physician\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"scheduled_date\": \"<dateTime>\",\n      \"appointment_type_id\": \"<integer,null-int64>\",\n      \"billing_details\": {\n        \"billing_note\": \"<string,null>\",\n        \"prior_authorization\": \"<string,null>\",\n        \"referring_provider\": \"<string,null>\",\n        \"referring_provider_state\": \"<string,null>\"\n      },\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"description\": \"<string,null>\",\n      \"duration\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"instructions\": \"<string,null>\",\n      \"is_blocking\": \"<boolean>\",\n      \"last_modified_date\": \"<dateTime>\",\n      \"metadata\": null,\n      \"mode\": \"IN_PERSON\",\n      \"payment\": {\n        \"amount\": \"630\",\n        \"when_collected\": \"<dateTime>\",\n        \"appointment\": \"<integer,null-int64>\",\n        \"bill\": \"<integer,null-int64>\",\n        \"create_date\": \"<string,null-date-time>\",\n        \"delete_date\": \"<string,null-date-time>\",\n        \"id\": \"<integer>\"\n      },\n      \"reason\": \"<string,null>\",\n      \"recurring_event_schedule\": \"<integer,null-int64>\",\n      \"service_location\": -56561727,\n      \"status\": {\n        \"status\": \"Checked Out\",\n        \"room\": \"<string,null>\",\n        \"status_date\": \"<string,null-date-time>\",\n        \"status_detail\": \"<string,null>\"\n      },\n      \"telehealth_details\": \"<string,null>\",\n      \"time_slot_status\": \"not_avail_for_self_schedule\",\n      \"time_slot_type\": \"appointment_slot\",\n      \"transportation_details\": {\n        \"is_required\": \"<boolean>\",\n        \"notes\": \"<string,null>\"\n      }\n    },\n    {\n      \"patient\": \"<integer,null-int64>\",\n      \"physician\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"scheduled_date\": \"<dateTime>\",\n      \"appointment_type_id\": \"<integer,null-int64>\",\n      \"billing_details\": {\n        \"billing_note\": \"<string,null>\",\n        \"prior_authorization\": \"<string,null>\",\n        \"referring_provider\": \"<string,null>\",\n        \"referring_provider_state\": \"<string,null>\"\n      },\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"description\": \"<string,null>\",\n      \"duration\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"instructions\": \"<string,null>\",\n      \"is_blocking\": \"<boolean>\",\n      \"last_modified_date\": \"<dateTime>\",\n      \"metadata\": {\n        \"data\": {},\n        \"object_id\": \"<string>\",\n        \"object_web_link\": \"<string>\"\n      },\n      \"mode\": \"IN_PERSON\",\n      \"payment\": {\n        \"amount\": \"8585.1\",\n        \"when_collected\": \"<dateTime>\",\n        \"appointment\": \"<integer,null-int64>\",\n        \"bill\": \"<integer,null-int64>\",\n        \"create_date\": \"<string,null-date-time>\",\n        \"delete_date\": \"<string,null-date-time>\",\n        \"id\": \"<integer>\"\n      },\n      \"reason\": \"<string,null>\",\n      \"recurring_event_schedule\": \"<integer,null-int64>\",\n      \"service_location\": {\n        \"address_line1\": \"<string>\",\n        \"address_line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"created_date\": \"<dateTime>\",\n        \"deleted_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"is_primary\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"place_of_service\": 33,\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      \"status\": {\n        \"status\": \"Checked Out\",\n        \"room\": \"<string,null>\",\n        \"status_date\": \"<string,null-date-time>\",\n        \"status_detail\": \"<string,null>\"\n      },\n      \"telehealth_details\": \"<string,null>\",\n      \"time_slot_status\": \"not_avail_for_self_schedule\",\n      \"time_slot_type\": \"appointment\",\n      \"transportation_details\": {\n        \"is_required\": \"<boolean>\",\n        \"notes\": \"<string,null>\"\n      }\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-94f3bb56-7ecb-4b41-ae73-cbd5a998ccf6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-51addac1-694e-40c1-a8ea-2742d34e8c92"
+                },
+                {
+                  "name": "Create Appointment",
+                  "id": "6d62d521-ce48-4bb5-91f7-3d71c6f8ae21",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/appointments/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "appointments",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b3d02e94-d3c3-4931-b656-e65f878925fe",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/appointments/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "appointments",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"patient\": \"<integer,null-int64>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"appointment_type_id\": \"<integer,null-int64>\",\n  \"billing_details\": {\n    \"billing_note\": \"<string,null>\",\n    \"prior_authorization\": \"<string,null>\",\n    \"referring_provider\": \"<string,null>\",\n    \"referring_provider_state\": \"<string,null>\"\n  },\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"description\": \"<string,null>\",\n  \"duration\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"instructions\": \"<string,null>\",\n  \"is_blocking\": \"<boolean>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": null,\n  \"mode\": \"VIDEO\",\n  \"payment\": {\n    \"amount\": \"-288\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"reason\": \"<string,null>\",\n  \"recurring_event_schedule\": \"<integer,null-int64>\",\n  \"service_location\": null,\n  \"status\": {\n    \"status\": \"In Room - Vitals Taken\",\n    \"room\": \"<string,null>\",\n    \"status_date\": \"<string,null-date-time>\",\n    \"status_detail\": \"<string,null>\"\n  },\n  \"telehealth_details\": \"<string,null>\",\n  \"time_slot_status\": \"not_avail_for_self_schedule\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"transportation_details\": {\n    \"is_required\": \"<boolean>\",\n    \"notes\": \"<string,null>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-b3d02e94-d3c3-4931-b656-e65f878925fe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-6d62d521-ce48-4bb5-91f7-3d71c6f8ae21"
+                }
+              ],
+              "id": "fc931799-5ff2-48f9-8223-e7e1408faa64",
+              "createdAt": "2026-07-28T01:34:43.000Z",
+              "updatedAt": "2026-07-28T01:34:43.000Z",
+              "uid": "35240-fc931799-5ff2-48f9-8223-e7e1408faa64"
+            },
+            {
+              "name": "recurring_event_groups",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Recurring Event Group",
+                      "id": "77a869cd-e99b-400e-8b61-0c2184319edd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "recurring_event_groups",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "cd7ac186-cb48-4d1a-ba39-72234d1d5ba0",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d22fe444-554c-4db4-8888-2ca8f3e262e2",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "recurring_event_groups",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-d22fe444-554c-4db4-8888-2ca8f3e262e2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-77a869cd-e99b-400e-8b61-0c2184319edd"
+                    },
+                    {
+                      "name": "Retrieve Recurring Event Group",
+                      "id": "2e73b0cb-1f77-4f53-aa58-18e1cb04d1af",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "recurring_event_groups",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "f4f162fd-1009-4bb0-8a13-93a5d7a0720a",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "47dbb004-4b5b-4706-9764-f8dd5c82563c",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "recurring_event_groups",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"practice\": \"<long>\",\n  \"schedules\": [\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Weekly\",\n      \"series_stop\": \"<string,null-date>\"\n    },\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Monthly\",\n      \"series_stop\": \"<string,null-date>\"\n    }\n  ],\n  \"time_slot_type\": \"event\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_blocking\": \"<boolean>\",\n  \"reason\": \"<string,null>\"\n}",
+                          "createdAt": "2026-07-28T01:34:43.000Z",
+                          "updatedAt": "2026-07-28T01:34:43.000Z",
+                          "uid": "35240-47dbb004-4b5b-4706-9764-f8dd5c82563c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-2e73b0cb-1f77-4f53-aa58-18e1cb04d1af"
+                    }
+                  ],
+                  "id": "d651c67a-bdc0-4add-8428-5b3b8fe5430e",
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-d651c67a-bdc0-4add-8428-5b3b8fe5430e"
+                },
+                {
+                  "name": "List Recurring Event Groups",
+                  "id": "db7b0811-9f16-4c78-9a08-6870778053d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/?end_date=<string>&limit=<integer>&offset=<integer>&order_by=<string>&physician=<string>&physician=<string>&practice=<long>,<long>&reason=<string>,<string>&start_date=<string>&time_slot_type=event",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "recurring_event_groups",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "End of range to filter event groups by schedule date. Returns any group with schedules that don't start after this date.",
+                          "key": "end_date",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ids of providers associated with these recurring event groups.",
+                          "key": "physician",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ids of providers associated with these recurring event groups.",
+                          "key": "physician",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The practice for these recurring event groups.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "The name of the recurring event group.",
+                          "key": "reason",
+                          "value": "<string>,<string>"
+                        },
+                        {
+                          "description": "Start of range to filter event groups by schedule date. Returns any group with schedules that don't end before this date.",
+                          "key": "start_date",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "time_slot_type",
+                          "value": "event"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c594b556-c823-4e48-a536-ce173ad04b7b",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/?end_date=<string>&limit=<integer>&offset=<integer>&order_by=<string>&physician=<string>&practice=<long>,<long>&reason=<string>,<string>&start_date=<string>&time_slot_type=event",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "recurring_event_groups",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "End of range to filter event groups by schedule date. Returns any group with schedules that don't start after this date.",
+                              "key": "end_date",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The ids of providers associated with these recurring event groups.",
+                              "key": "physician",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The practice for these recurring event groups.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "The name of the recurring event group.",
+                              "key": "reason",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "Start of range to filter event groups by schedule date. Returns any group with schedules that don't end before this date.",
+                              "key": "start_date",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "time_slot_type",
+                              "value": "event"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"practice\": \"<long>\",\n      \"schedules\": [\n        {\n          \"duration\": \"<integer>\",\n          \"event_time\": \"<time>\",\n          \"physician\": \"<long>\",\n          \"series_start\": \"<date>\",\n          \"created_date\": \"<string,null-date-time>\",\n          \"description\": \"<string>\",\n          \"dow_friday\": \"<boolean>\",\n          \"dow_monday\": \"<boolean>\",\n          \"dow_saturday\": \"<boolean>\",\n          \"dow_sunday\": \"<boolean>\",\n          \"dow_thursday\": \"<boolean>\",\n          \"dow_tuesday\": \"<boolean>\",\n          \"dow_wednesday\": \"<boolean>\",\n          \"id\": \"<integer>\",\n          \"repeats\": \"Weekly\",\n          \"series_stop\": \"<string,null-date>\"\n        },\n        {\n          \"duration\": \"<integer>\",\n          \"event_time\": \"<time>\",\n          \"physician\": \"<long>\",\n          \"series_start\": \"<date>\",\n          \"created_date\": \"<string,null-date-time>\",\n          \"description\": \"<string>\",\n          \"dow_friday\": \"<boolean>\",\n          \"dow_monday\": \"<boolean>\",\n          \"dow_saturday\": \"<boolean>\",\n          \"dow_sunday\": \"<boolean>\",\n          \"dow_thursday\": \"<boolean>\",\n          \"dow_tuesday\": \"<boolean>\",\n          \"dow_wednesday\": \"<boolean>\",\n          \"id\": \"<integer>\",\n          \"repeats\": \"Weekly\",\n          \"series_stop\": \"<string,null-date>\"\n        }\n      ],\n      \"time_slot_type\": \"event\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"is_blocking\": \"<boolean>\",\n      \"reason\": \"<string,null>\"\n    },\n    {\n      \"practice\": \"<long>\",\n      \"schedules\": [\n        {\n          \"duration\": \"<integer>\",\n          \"event_time\": \"<time>\",\n          \"physician\": \"<long>\",\n          \"series_start\": \"<date>\",\n          \"created_date\": \"<string,null-date-time>\",\n          \"description\": \"<string>\",\n          \"dow_friday\": \"<boolean>\",\n          \"dow_monday\": \"<boolean>\",\n          \"dow_saturday\": \"<boolean>\",\n          \"dow_sunday\": \"<boolean>\",\n          \"dow_thursday\": \"<boolean>\",\n          \"dow_tuesday\": \"<boolean>\",\n          \"dow_wednesday\": \"<boolean>\",\n          \"id\": \"<integer>\",\n          \"repeats\": \"Monthly\",\n          \"series_stop\": \"<string,null-date>\"\n        },\n        {\n          \"duration\": \"<integer>\",\n          \"event_time\": \"<time>\",\n          \"physician\": \"<long>\",\n          \"series_start\": \"<date>\",\n          \"created_date\": \"<string,null-date-time>\",\n          \"description\": \"<string>\",\n          \"dow_friday\": \"<boolean>\",\n          \"dow_monday\": \"<boolean>\",\n          \"dow_saturday\": \"<boolean>\",\n          \"dow_sunday\": \"<boolean>\",\n          \"dow_thursday\": \"<boolean>\",\n          \"dow_tuesday\": \"<boolean>\",\n          \"dow_wednesday\": \"<boolean>\",\n          \"id\": \"<integer>\",\n          \"repeats\": \"Weekly\",\n          \"series_stop\": \"<string,null-date>\"\n        }\n      ],\n      \"time_slot_type\": \"appointment_slot\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"is_blocking\": \"<boolean>\",\n      \"reason\": \"<string,null>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-c594b556-c823-4e48-a536-ce173ad04b7b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-db7b0811-9f16-4c78-9a08-6870778053d5"
+                },
+                {
+                  "name": "Create Recurring Event Group",
+                  "id": "90eca4e6-4277-475f-9f08-fa1f65c556a4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"practice\": \"<long>\",\n  \"schedules\": [\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Weekly\",\n      \"series_stop\": \"<string,null-date>\"\n    },\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Monthly\",\n      \"series_stop\": \"<string,null-date>\"\n    }\n  ],\n  \"time_slot_type\": \"event\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_blocking\": \"<boolean>\",\n  \"reason\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "recurring_event_groups",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "312044da-6b6b-4c19-94eb-67fe2d9b432c",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"practice\": \"<long>\",\n  \"schedules\": [\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Weekly\",\n      \"series_stop\": \"<string,null-date>\"\n    },\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Monthly\",\n      \"series_stop\": \"<string,null-date>\"\n    }\n  ],\n  \"time_slot_type\": \"event\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_blocking\": \"<boolean>\",\n  \"reason\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/recurring_event_groups/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "recurring_event_groups",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"practice\": \"<long>\",\n  \"schedules\": [\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Weekly\",\n      \"series_stop\": \"<string,null-date>\"\n    },\n    {\n      \"duration\": \"<integer>\",\n      \"event_time\": \"<time>\",\n      \"physician\": \"<long>\",\n      \"series_start\": \"<date>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"description\": \"<string>\",\n      \"dow_friday\": \"<boolean>\",\n      \"dow_monday\": \"<boolean>\",\n      \"dow_saturday\": \"<boolean>\",\n      \"dow_sunday\": \"<boolean>\",\n      \"dow_thursday\": \"<boolean>\",\n      \"dow_tuesday\": \"<boolean>\",\n      \"dow_wednesday\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"repeats\": \"Monthly\",\n      \"series_stop\": \"<string,null-date>\"\n    }\n  ],\n  \"time_slot_type\": \"event\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_blocking\": \"<boolean>\",\n  \"reason\": \"<string,null>\"\n}",
+                      "createdAt": "2026-07-28T01:34:43.000Z",
+                      "updatedAt": "2026-07-28T01:34:43.000Z",
+                      "uid": "35240-312044da-6b6b-4c19-94eb-67fe2d9b432c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:43.000Z",
+                  "updatedAt": "2026-07-28T01:34:43.000Z",
+                  "uid": "35240-90eca4e6-4277-475f-9f08-fa1f65c556a4"
+                }
+              ],
+              "id": "fd7d1586-f00a-46b7-8599-5602ab5c7480",
+              "createdAt": "2026-07-28T01:34:43.000Z",
+              "updatedAt": "2026-07-28T01:34:43.000Z",
+              "uid": "35240-fd7d1586-f00a-46b7-8599-5602ab5c7480"
+            }
+          ],
+          "id": "2e8c8416-b6d3-4bb3-9854-87e9c26b5404",
+          "createdAt": "2026-07-28T01:34:43.000Z",
+          "updatedAt": "2026-07-28T01:34:43.000Z",
+          "uid": "35240-2e8c8416-b6d3-4bb3-9854-87e9c26b5404"
+        }
+      ],
+      "id": "3abcb276-d802-4850-a65a-e6c464657e07",
+      "createdAt": "2026-07-28T01:34:43.000Z",
+      "updatedAt": "2026-07-28T01:34:43.000Z",
+      "uid": "35240-3abcb276-d802-4850-a65a-e6c464657e07"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.elationemr.com"
+    }
+  ]
+}

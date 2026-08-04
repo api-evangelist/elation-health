@@ -1,0 +1,450 @@
+{
+  "info": {
+    "_postman_id": "c20eb591-76da-469b-a5b3-baa11f33f2fc",
+    "name": "[Premium] Patient Insurance API",
+    "description": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:34:55.000Z",
+    "updatedAt": "2026-07-28T01:34:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c20eb591-76da-469b-a5b3-baa11f33f2fc"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2.0",
+          "item": [
+            {
+              "name": "patient_insurances",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "eligibility",
+                      "item": [
+                        {
+                          "name": "Get Eligibility",
+                          "id": "2d189d59-254f-4b3f-8913-33b522f517b2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/patient_insurances/:id/eligibility/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "patient_insurances",
+                                ":id",
+                                "eligibility",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3ffb50dd-17a7-4dd8-8851-f931cac52be7",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The id of the patient insurance"
+                                }
+                              ]
+                            },
+                            "description": "Get eligibility information for a patient insurance"
+                          },
+                          "response": [
+                            {
+                              "id": "d7cc6a29-b5fb-4fa1-8f0b-c7d6c568e475",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/patient_insurances/:id/eligibility/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "patient_insurances",
+                                    ":id",
+                                    "eligibility",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"eligibility_check_timestamp\": \"<dateTime>\",\n  \"eligibility_details\": {\n    \"coinsurance\": \".\",\n    \"coinsurance_ambiguous\": \"<boolean>\",\n    \"copay\": \"<number,null-double>\",\n    \"copay_ambiguous\": \"<boolean>\",\n    \"deductible\": \"91.00\",\n    \"deductible_ambiguous\": \"<boolean>\",\n    \"deductible_remaining\": \"-7.68\",\n    \"deductible_remaining_ambiguous\": \"<boolean>\",\n    \"errors\": [\n      {\n        \"commodo305\": {},\n        \"proident_6\": {}\n      },\n      {\n        \"adipisicingc\": {},\n        \"enimef3\": {}\n      }\n    ]\n  },\n  \"eligibility_status\": \"active\",\n  \"patient_id\": \"<integer>\",\n  \"patient_insurance_id\": \"<integer>\",\n  \"practice_id\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T01:34:56.000Z",
+                              "updatedAt": "2026-07-28T01:34:56.000Z",
+                              "uid": "35240-d7cc6a29-b5fb-4fa1-8f0b-c7d6c568e475"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:34:56.000Z",
+                          "updatedAt": "2026-07-28T01:34:56.000Z",
+                          "uid": "35240-2d189d59-254f-4b3f-8913-33b522f517b2"
+                        },
+                        {
+                          "name": "Create Eligibility",
+                          "id": "48a5e6b8-949d-4efd-8d75-39a25d2a1480",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"group_id\": \"<integer>\",\n  \"group_name\": \"<string>\",\n  \"group_npi\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/patient_insurances/:id/eligibility/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "patient_insurances",
+                                ":id",
+                                "eligibility",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a15c76a6-78cd-44f3-ac48-5478fb9eee00",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The id of the patient insurance"
+                                }
+                              ]
+                            },
+                            "description": "Create eligibility information for a patient insurance"
+                          },
+                          "response": [
+                            {
+                              "id": "a52d72e5-4f52-4019-b347-4e068eae7c33",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"group_id\": \"<integer>\",\n  \"group_name\": \"<string>\",\n  \"group_npi\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/patient_insurances/:id/eligibility/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "patient_insurances",
+                                    ":id",
+                                    "eligibility",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"eligibility_check_timestamp\": \"<dateTime>\",\n  \"eligibility_details\": {\n    \"coinsurance\": \".\",\n    \"coinsurance_ambiguous\": \"<boolean>\",\n    \"copay\": \"<number,null-double>\",\n    \"copay_ambiguous\": \"<boolean>\",\n    \"deductible\": \"91.00\",\n    \"deductible_ambiguous\": \"<boolean>\",\n    \"deductible_remaining\": \"-7.68\",\n    \"deductible_remaining_ambiguous\": \"<boolean>\",\n    \"errors\": [\n      {\n        \"commodo305\": {},\n        \"proident_6\": {}\n      },\n      {\n        \"adipisicingc\": {},\n        \"enimef3\": {}\n      }\n    ]\n  },\n  \"eligibility_status\": \"active\",\n  \"patient_id\": \"<integer>\",\n  \"patient_insurance_id\": \"<integer>\",\n  \"practice_id\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T01:34:56.000Z",
+                              "updatedAt": "2026-07-28T01:34:56.000Z",
+                              "uid": "35240-a52d72e5-4f52-4019-b347-4e068eae7c33"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:34:56.000Z",
+                          "updatedAt": "2026-07-28T01:34:56.000Z",
+                          "uid": "35240-48a5e6b8-949d-4efd-8d75-39a25d2a1480"
+                        }
+                      ],
+                      "id": "22f1896d-30d1-4fcc-bb1f-71e386c6bf7e",
+                      "createdAt": "2026-07-28T01:34:56.000Z",
+                      "updatedAt": "2026-07-28T01:34:56.000Z",
+                      "uid": "35240-22f1896d-30d1-4fcc-bb1f-71e386c6bf7e"
+                    },
+                    {
+                      "name": "eligibility_full_report",
+                      "item": [
+                        {
+                          "name": "Get Eligibility Full Report",
+                          "id": "d66e7358-f43d-42b7-94f2-ae45d1ac4423",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/patient_insurances/:id/eligibility_full_report/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "patient_insurances",
+                                ":id",
+                                "eligibility_full_report",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d5e85874-f682-414c-9c1a-9c14dec24d17",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The id of the patient insurance"
+                                }
+                              ]
+                            },
+                            "description": "Get eligibility full report for a patient insurance"
+                          },
+                          "response": [
+                            {
+                              "id": "40145cee-f661-43e0-a609-9e633e335c07",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/patient_insurances/:id/eligibility_full_report/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "patient_insurances",
+                                    ":id",
+                                    "eligibility_full_report",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"benefits\": {\n    \"coinsurance\": [\n      {\n        \"veniamb\": {}\n      },\n      {\n        \"dolor2\": {},\n        \"ut_5\": {}\n      }\n    ],\n    \"copay\": [\n      {\n        \"culpa2\": {}\n      },\n      {\n        \"minim_91\": {},\n        \"cupidatat_b\": {}\n      }\n    ],\n    \"deductible\": [\n      {\n        \"ut_4c4\": {},\n        \"labore098\": {},\n        \"fugiat_6a\": {}\n      },\n      {\n        \"exercitation_549\": {}\n      }\n    ],\n    \"limitations\": [\n      {\n        \"autea0c\": {},\n        \"esse_2\": {},\n        \"tempor_c\": {},\n        \"ut_c94\": {}\n      },\n      {\n        \"dolor_5\": {},\n        \"cupidatat5\": {},\n        \"incididunt_8f2\": {},\n        \"in_6\": {}\n      }\n    ],\n    \"out_of_pocket\": [\n      {\n        \"sedd\": {},\n        \"cillum_0d\": {}\n      },\n      {\n        \"laborisa\": {},\n        \"aliqua_ba\": {}\n      }\n    ]\n  },\n  \"eligibility_check_timestamp\": \"<dateTime>\",\n  \"eligibility_provider\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"npi\": \"<string>\",\n    \"organization_name\": \"<string>\"\n  },\n  \"patient_id\": \"<integer>\",\n  \"patient_insurance_id\": \"<integer>\",\n  \"plan_details\": {\n    \"carrier\": \"<string>\",\n    \"end_date\": \"<string,null-date>\",\n    \"group_name\": \"<string>\",\n    \"group_number\": \"<string>\",\n    \"insurance_type\": \"<string,null>\",\n    \"member_id\": \"<string>\",\n    \"plan_name\": \"<string>\",\n    \"plan_number\": \"<string>\",\n    \"policy_name\": \"<string,null>\",\n    \"policy_number\": \"<string,null>\",\n    \"provider\": {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"npi\": \"<string>\",\n      \"organization_name\": \"<string>\"\n    },\n    \"start_date\": \"<date>\"\n  },\n  \"practice_id\": \"<integer>\",\n  \"service_type_code\": \"<string>\",\n  \"subscriber\": {\n    \"address\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"member_id\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"name\": \"<string>\",\n    \"sex_at_birth\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:34:56.000Z",
+                              "updatedAt": "2026-07-28T01:34:56.000Z",
+                              "uid": "35240-40145cee-f661-43e0-a609-9e633e335c07"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:34:56.000Z",
+                          "updatedAt": "2026-07-28T01:34:56.000Z",
+                          "uid": "35240-d66e7358-f43d-42b7-94f2-ae45d1ac4423"
+                        }
+                      ],
+                      "id": "c8970027-e382-46e5-a115-d0f56ecaf712",
+                      "createdAt": "2026-07-28T01:34:56.000Z",
+                      "updatedAt": "2026-07-28T01:34:56.000Z",
+                      "uid": "35240-c8970027-e382-46e5-a115-d0f56ecaf712"
+                    }
+                  ],
+                  "id": "30044144-a558-4c04-8ae8-89e14177748b",
+                  "createdAt": "2026-07-28T01:34:56.000Z",
+                  "updatedAt": "2026-07-28T01:34:56.000Z",
+                  "uid": "35240-30044144-a558-4c04-8ae8-89e14177748b"
+                }
+              ],
+              "id": "404cfb29-464d-4b07-b194-aad48a2200a6",
+              "createdAt": "2026-07-28T01:34:56.000Z",
+              "updatedAt": "2026-07-28T01:34:56.000Z",
+              "uid": "35240-404cfb29-464d-4b07-b194-aad48a2200a6"
+            }
+          ],
+          "id": "dba685e3-bb4a-4c91-9640-f93fff648cf3",
+          "createdAt": "2026-07-28T01:34:56.000Z",
+          "updatedAt": "2026-07-28T01:34:56.000Z",
+          "uid": "35240-dba685e3-bb4a-4c91-9640-f93fff648cf3"
+        }
+      ],
+      "id": "8821891b-018b-4516-8580-c47ef465cff0",
+      "createdAt": "2026-07-28T01:34:56.000Z",
+      "updatedAt": "2026-07-28T01:34:56.000Z",
+      "uid": "35240-8821891b-018b-4516-8580-c47ef465cff0"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.elationemr.com"
+    }
+  ]
+}

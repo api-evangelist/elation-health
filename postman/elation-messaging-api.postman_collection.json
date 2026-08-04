@@ -1,0 +1,2224 @@
+{
+  "info": {
+    "_postman_id": "baa41955-665e-4d2c-8c0b-22cdcad996d4",
+    "name": "Messaging API",
+    "description": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:35:23.000Z",
+    "updatedAt": "2026-07-28T01:35:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-baa41955-665e-4d2c-8c0b-22cdcad996d4"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2.0",
+          "item": [
+            {
+              "name": "message_threads",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Message Thread",
+                      "id": "b00c96f0-b768-4364-8653-d475e31c0ea7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "message_threads",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "be91ff2f-e373-441f-8b24-c159774a2edf",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d9a9956c-8e9a-40d7-a411-0c8d9b4e01d9",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "message_threads",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-d9a9956c-8e9a-40d7-a411-0c8d9b4e01d9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-b00c96f0-b768-4364-8653-d475e31c0ea7"
+                    },
+                    {
+                      "name": "Retrieve Message Thread",
+                      "id": "01e57cac-1d66-448c-a0fd-6f2863751680",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "message_threads",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "ff537d32-63d5-49b9-b574-42ce5214e9cd",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "7c58aa28-c95b-4e82-b6f3-51fcfc4fe1f7",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "message_threads",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-7c58aa28-c95b-4e82-b6f3-51fcfc4fe1f7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-01e57cac-1d66-448c-a0fd-6f2863751680"
+                    },
+                    {
+                      "name": "Partially Update Message Thread",
+                      "id": "0d4271f3-015b-4ca2-ba4c-9cf219889851",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"document_date\": \"<dateTime>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Addressed\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "message_threads",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "85fb6401-e93f-4023-a03b-05873938f5df",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6b17bc0c-01fc-4f7f-9c41-348136714c81",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"document_date\": \"<dateTime>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Addressed\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "message_threads",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-6b17bc0c-01fc-4f7f-9c41-348136714c81"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-0d4271f3-015b-4ca2-ba4c-9cf219889851"
+                    },
+                    {
+                      "name": "Update Message Thread",
+                      "id": "d9068eca-285b-4cd7-9210-2da9974bc828",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "message_threads",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "9fe50561-2fdd-4637-8a04-39fe3d064726",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1c46215b-af4f-405e-b69d-2fcc1dadd172",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/message_threads/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "message_threads",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-1c46215b-af4f-405e-b69d-2fcc1dadd172"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-d9068eca-285b-4cd7-9210-2da9974bc828"
+                    }
+                  ],
+                  "id": "fa59a03f-f919-498c-b32e-e7fa555b229a",
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-fa59a03f-f919-498c-b32e-e7fa555b229a"
+                },
+                {
+                  "name": "List Message Threads",
+                  "id": "52a7c2eb-295c-430f-b38a-db22f7ab70bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/message_threads/?document_date__gt=<dateTime>&document_date__gte=<dateTime>&document_date__lt=<dateTime>&document_date__lte=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "message_threads",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "document_date__gt",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "document_date__gte",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "document_date__lt",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "document_date__lte",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "patient",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "52063e83-361a-4f74-8fe5-14886bf9e0ef",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/message_threads/?document_date__gt=<dateTime>&document_date__gte=<dateTime>&document_date__lt=<dateTime>&document_date__lte=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "message_threads",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "document_date__gt",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "document_date__gte",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "document_date__lt",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "document_date__lte",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "patient",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"chart_date\": \"<dateTime>\",\n      \"document_date\": \"<dateTime>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"delivery_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"is_urgent\": false,\n      \"members\": [\n        {\n          \"status\": \"Addressed\",\n          \"ack_time\": \"<dateTime>\",\n          \"group\": \"<integer,null-int64>\",\n          \"id\": \"<integer>\",\n          \"thread\": \"<long>\",\n          \"user\": \"<integer,null>\"\n        },\n        {\n          \"status\": \"Requiring Action\",\n          \"ack_time\": \"<dateTime>\",\n          \"group\": \"<integer,null-int64>\",\n          \"id\": \"<integer>\",\n          \"thread\": \"<long>\",\n          \"user\": \"<integer,null>\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"body\": \"<string>\",\n          \"send_date\": \"<dateTime>\",\n          \"sender\": \"<integer>\",\n          \"id\": \"<integer>\",\n          \"patient\": \"<long>\",\n          \"practice\": \"<long>\",\n          \"thread\": \"<long>\",\n          \"to_document\": {\n            \"authoring_practice\": \"<long>\",\n            \"chart_date\": \"<dateTime>\",\n            \"document_date\": \"<dateTime>\",\n            \"id\": \"<long>\",\n            \"patient\": \"<long>\",\n            \"created_date\": \"<string,null-date-time>\",\n            \"deleted_date\": \"<string,null-date-time>\",\n            \"document_type\": \"<integer,null>\",\n            \"last_modified\": \"<dateTime>\",\n            \"sign_date\": \"<string,null-date-time>\",\n            \"signed_by\": \"<integer>\"\n          }\n        },\n        {\n          \"body\": \"<string>\",\n          \"send_date\": \"<dateTime>\",\n          \"sender\": \"<integer>\",\n          \"id\": \"<integer>\",\n          \"patient\": \"<long>\",\n          \"practice\": \"<long>\",\n          \"thread\": \"<long>\",\n          \"to_document\": {\n            \"authoring_practice\": \"<long>\",\n            \"chart_date\": \"<dateTime>\",\n            \"document_date\": \"<dateTime>\",\n            \"id\": \"<long>\",\n            \"patient\": \"<long>\",\n            \"created_date\": \"<string,null-date-time>\",\n            \"deleted_date\": \"<string,null-date-time>\",\n            \"document_type\": \"<integer,null>\",\n            \"last_modified\": \"<dateTime>\",\n            \"sign_date\": \"<string,null-date-time>\",\n            \"signed_by\": \"<integer>\"\n          }\n        }\n      ],\n      \"signed_by\": \"<integer,null-int64>\",\n      \"signed_date\": \"<string,null-date-time>\"\n    },\n    {\n      \"chart_date\": \"<dateTime>\",\n      \"document_date\": \"<dateTime>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"delivery_date\": \"<string,null-date-time>\",\n      \"id\": \"<integer>\",\n      \"is_urgent\": false,\n      \"members\": [\n        {\n          \"status\": \"Requiring Action\",\n          \"ack_time\": \"<dateTime>\",\n          \"group\": \"<integer,null-int64>\",\n          \"id\": \"<integer>\",\n          \"thread\": \"<long>\",\n          \"user\": \"<integer,null>\"\n        },\n        {\n          \"status\": \"Addressed\",\n          \"ack_time\": \"<dateTime>\",\n          \"group\": \"<integer,null-int64>\",\n          \"id\": \"<integer>\",\n          \"thread\": \"<long>\",\n          \"user\": \"<integer,null>\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"body\": \"<string>\",\n          \"send_date\": \"<dateTime>\",\n          \"sender\": \"<integer>\",\n          \"id\": \"<integer>\",\n          \"patient\": \"<long>\",\n          \"practice\": \"<long>\",\n          \"thread\": \"<long>\",\n          \"to_document\": {\n            \"authoring_practice\": \"<long>\",\n            \"chart_date\": \"<dateTime>\",\n            \"document_date\": \"<dateTime>\",\n            \"id\": \"<long>\",\n            \"patient\": \"<long>\",\n            \"created_date\": \"<string,null-date-time>\",\n            \"deleted_date\": \"<string,null-date-time>\",\n            \"document_type\": \"<integer,null>\",\n            \"last_modified\": \"<dateTime>\",\n            \"sign_date\": \"<string,null-date-time>\",\n            \"signed_by\": \"<integer>\"\n          }\n        },\n        {\n          \"body\": \"<string>\",\n          \"send_date\": \"<dateTime>\",\n          \"sender\": \"<integer>\",\n          \"id\": \"<integer>\",\n          \"patient\": \"<long>\",\n          \"practice\": \"<long>\",\n          \"thread\": \"<long>\",\n          \"to_document\": {\n            \"authoring_practice\": \"<long>\",\n            \"chart_date\": \"<dateTime>\",\n            \"document_date\": \"<dateTime>\",\n            \"id\": \"<long>\",\n            \"patient\": \"<long>\",\n            \"created_date\": \"<string,null-date-time>\",\n            \"deleted_date\": \"<string,null-date-time>\",\n            \"document_type\": \"<integer,null>\",\n            \"last_modified\": \"<dateTime>\",\n            \"sign_date\": \"<string,null-date-time>\",\n            \"signed_by\": \"<integer>\"\n          }\n        }\n      ],\n      \"signed_by\": \"<integer,null-int64>\",\n      \"signed_date\": \"<string,null-date-time>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-52063e83-361a-4f74-8fe5-14886bf9e0ef"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-52a7c2eb-295c-430f-b38a-db22f7ab70bc"
+                },
+                {
+                  "name": "Create Message Thread",
+                  "id": "0b8223ac-3674-40e8-b8cc-bd63108e536b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/message_threads/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "message_threads",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "439c3d03-e449-4a7a-af38-0be0164a60ed",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/message_threads/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "message_threads",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"id\": \"<integer>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-439c3d03-e449-4a7a-af38-0be0164a60ed"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-0b8223ac-3674-40e8-b8cc-bd63108e536b"
+                }
+              ],
+              "id": "3f85e898-f7ab-4761-80b4-5a44b736ece7",
+              "createdAt": "2026-07-28T01:35:23.000Z",
+              "updatedAt": "2026-07-28T01:35:23.000Z",
+              "uid": "35240-3f85e898-f7ab-4761-80b4-5a44b736ece7"
+            },
+            {
+              "name": "thread_members",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Thread Member",
+                      "id": "fc1359bb-49fd-4a6f-94ac-3e0997c3a7f1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_members",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "0c2b05bf-557c-4be2-abe8-855a87fb6acc",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ee7e33b6-15d2-4f60-a550-c7faf97e50ad",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "thread_members",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-ee7e33b6-15d2-4f60-a550-c7faf97e50ad"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-fc1359bb-49fd-4a6f-94ac-3e0997c3a7f1"
+                    },
+                    {
+                      "name": "Retrieve Thread Member",
+                      "id": "10695ed4-b967-4e82-9754-ea6ef0a921ff",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_members",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "041d4845-c4d0-4a47-801d-92ef1690e6dc",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "f25fb889-8e4a-4161-827a-e74e3fbe83a7",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "thread_members",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-f25fb889-8e4a-4161-827a-e74e3fbe83a7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-10695ed4-b967-4e82-9754-ea6ef0a921ff"
+                    },
+                    {
+                      "name": "Partially Update Thread Member",
+                      "id": "82503c0a-e899-4b7e-8253-a72e23546fad",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"status\": \"Requiring Action\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_members",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "e5c66a3f-6d6d-4372-8fa1-50879ec40a1d",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "bf3ec4bc-65ed-4ea3-99a3-c49061a5fb8f",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"status\": \"Requiring Action\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "thread_members",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-bf3ec4bc-65ed-4ea3-99a3-c49061a5fb8f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-82503c0a-e899-4b7e-8253-a72e23546fad"
+                    },
+                    {
+                      "name": "Update Thread Member",
+                      "id": "d419e0f6-3ef4-4942-a597-199ef5b8753a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_members",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "8315a0ac-6883-4c14-96f2-5a0d8c67bac8",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "180fd15f-55dc-4b2b-a3ab-1b8201697afb",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/thread_members/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "thread_members",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-180fd15f-55dc-4b2b-a3ab-1b8201697afb"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-d419e0f6-3ef4-4942-a597-199ef5b8753a"
+                    }
+                  ],
+                  "id": "de4d9f27-4eb6-4aa9-ab82-56f7047c30b4",
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-de4d9f27-4eb6-4aa9-ab82-56f7047c30b4"
+                },
+                {
+                  "name": "List Thread Members",
+                  "id": "1d5a4c6f-b052-484b-a997-3279cc4cdba4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/thread_members/?ack_time=<dateTime>&group=<long>,<long>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>&status=<string>&thread=<long>,<long>&user=<integer>,<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "thread_members",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "ack_time",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "group",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "patient",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "key": "status",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "thread",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "user",
+                          "value": "<integer>,<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "88392a8f-55ae-44ba-ab03-d374dbe1131c",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_members/?ack_time=<dateTime>&group=<long>,<long>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>&status=<string>&thread=<long>,<long>&user=<integer>,<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_members",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "ack_time",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "group",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "patient",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "thread",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "user",
+                              "value": "<integer>,<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": \"Requiring Action\",\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"id\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-88392a8f-55ae-44ba-ab03-d374dbe1131c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-1d5a4c6f-b052-484b-a997-3279cc4cdba4"
+                },
+                {
+                  "name": "Create Thread Member",
+                  "id": "cf6fa660-afdd-4544-8ceb-4026a4ac1eb8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/thread_members/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "thread_members",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0a91e57b-05c8-4779-87e4-b863e1a62b74",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_members/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_members",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"Requiring Action\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-0a91e57b-05c8-4779-87e4-b863e1a62b74"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-cf6fa660-afdd-4544-8ceb-4026a4ac1eb8"
+                }
+              ],
+              "id": "33b6eb33-364b-47e8-b41e-690da0f60fe1",
+              "createdAt": "2026-07-28T01:35:23.000Z",
+              "updatedAt": "2026-07-28T01:35:23.000Z",
+              "uid": "35240-33b6eb33-364b-47e8-b41e-690da0f60fe1"
+            },
+            {
+              "name": "thread_messages",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Thread Message",
+                      "id": "fee9dfa1-c16b-4239-b2ef-c9b8ca84b48e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_messages/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_messages",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "82531c98-12f1-493d-901f-74b601d78b15",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "81f2bf10-ccbd-4153-8ab5-12a6637281cc",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/thread_messages/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "thread_messages",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-81f2bf10-ccbd-4153-8ab5-12a6637281cc"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-fee9dfa1-c16b-4239-b2ef-c9b8ca84b48e"
+                    },
+                    {
+                      "name": "Retrieve Thread Message",
+                      "id": "94642d29-464a-4321-9139-e7d666fb2d9c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_messages/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_messages",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "b3f58030-0435-487c-9021-6cafe679a67c",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "bef20b1e-6574-4cf9-846b-4e347c0a8d10",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/thread_messages/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "thread_messages",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"body\": \"<string>\",\n  \"send_date\": \"<dateTime>\",\n  \"sender\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"thread\": \"<long>\",\n  \"to_document\": {\n    \"authoring_practice\": \"<long>\",\n    \"chart_date\": \"<dateTime>\",\n    \"document_date\": \"<dateTime>\",\n    \"id\": \"<long>\",\n    \"patient\": \"<long>\",\n    \"created_date\": \"<string,null-date-time>\",\n    \"deleted_date\": \"<string,null-date-time>\",\n    \"document_type\": \"<integer,null>\",\n    \"last_modified\": \"<dateTime>\",\n    \"sign_date\": \"<string,null-date-time>\",\n    \"signed_by\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:35:23.000Z",
+                          "updatedAt": "2026-07-28T01:35:23.000Z",
+                          "uid": "35240-bef20b1e-6574-4cf9-846b-4e347c0a8d10"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-94642d29-464a-4321-9139-e7d666fb2d9c"
+                    }
+                  ],
+                  "id": "b4ebbeec-f5c3-4fd6-8124-980dd15e66a9",
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-b4ebbeec-f5c3-4fd6-8124-980dd15e66a9"
+                },
+                {
+                  "name": "List Thread Messages",
+                  "id": "fe4ece75-ff9c-48fa-8f17-bf5928abfec4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/thread_messages/?limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>&sender=<integer>,<integer>&thread=<long>,<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "thread_messages",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "patient",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "sender",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "thread",
+                          "value": "<long>,<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "415a5b5e-4e08-4bfd-97ea-ed17f07698b8",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_messages/?limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>&sender=<integer>,<integer>&thread=<long>,<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_messages",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "patient",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "sender",
+                              "value": "<integer>,<integer>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "thread",
+                              "value": "<long>,<long>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"id\": \"<integer>\",\n      \"patient\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": \"<long>\",\n        \"chart_date\": \"<dateTime>\",\n        \"document_date\": \"<dateTime>\",\n        \"id\": \"<long>\",\n        \"patient\": \"<long>\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"document_type\": \"<integer,null>\",\n        \"last_modified\": \"<dateTime>\",\n        \"sign_date\": \"<string,null-date-time>\",\n        \"signed_by\": \"<integer>\"\n      }\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-415a5b5e-4e08-4bfd-97ea-ed17f07698b8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-fe4ece75-ff9c-48fa-8f17-bf5928abfec4"
+                },
+                {
+                  "name": "Create Thread Message",
+                  "id": "1c24be98-ea0f-4cec-881a-79a86b82a357",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"body\": \"<string>\",\n  \"send_date\": \"<dateTime>\",\n  \"sender\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"thread\": \"<long>\",\n  \"to_document\": {\n    \"authoring_practice\": \"<long>\",\n    \"chart_date\": \"<dateTime>\",\n    \"document_date\": \"<dateTime>\",\n    \"id\": \"<long>\",\n    \"patient\": \"<long>\",\n    \"created_date\": \"<string,null-date-time>\",\n    \"deleted_date\": \"<string,null-date-time>\",\n    \"document_type\": \"<integer,null>\",\n    \"last_modified\": \"<dateTime>\",\n    \"sign_date\": \"<string,null-date-time>\",\n    \"signed_by\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/thread_messages/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "thread_messages",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c184065d-d052-47cc-a128-42a9fd6b563c",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"body\": \"<string>\",\n  \"send_date\": \"<dateTime>\",\n  \"sender\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"thread\": \"<long>\",\n  \"to_document\": {\n    \"authoring_practice\": \"<long>\",\n    \"chart_date\": \"<dateTime>\",\n    \"document_date\": \"<dateTime>\",\n    \"id\": \"<long>\",\n    \"patient\": \"<long>\",\n    \"created_date\": \"<string,null-date-time>\",\n    \"deleted_date\": \"<string,null-date-time>\",\n    \"document_type\": \"<integer,null>\",\n    \"last_modified\": \"<dateTime>\",\n    \"sign_date\": \"<string,null-date-time>\",\n    \"signed_by\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/thread_messages/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "thread_messages",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"body\": \"<string>\",\n  \"send_date\": \"<dateTime>\",\n  \"sender\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"thread\": \"<long>\",\n  \"to_document\": {\n    \"authoring_practice\": \"<long>\",\n    \"chart_date\": \"<dateTime>\",\n    \"document_date\": \"<dateTime>\",\n    \"id\": \"<long>\",\n    \"patient\": \"<long>\",\n    \"created_date\": \"<string,null-date-time>\",\n    \"deleted_date\": \"<string,null-date-time>\",\n    \"document_type\": \"<integer,null>\",\n    \"last_modified\": \"<dateTime>\",\n    \"sign_date\": \"<string,null-date-time>\",\n    \"signed_by\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:35:23.000Z",
+                      "updatedAt": "2026-07-28T01:35:23.000Z",
+                      "uid": "35240-c184065d-d052-47cc-a128-42a9fd6b563c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:23.000Z",
+                  "updatedAt": "2026-07-28T01:35:23.000Z",
+                  "uid": "35240-1c24be98-ea0f-4cec-881a-79a86b82a357"
+                }
+              ],
+              "id": "11b1d523-8207-4bd6-ae17-899816bcbc08",
+              "createdAt": "2026-07-28T01:35:23.000Z",
+              "updatedAt": "2026-07-28T01:35:23.000Z",
+              "uid": "35240-11b1d523-8207-4bd6-ae17-899816bcbc08"
+            }
+          ],
+          "id": "8c099fb3-8379-44ba-aa49-b6002de0232d",
+          "createdAt": "2026-07-28T01:35:23.000Z",
+          "updatedAt": "2026-07-28T01:35:23.000Z",
+          "uid": "35240-8c099fb3-8379-44ba-aa49-b6002de0232d"
+        }
+      ],
+      "id": "97599a2f-27be-4a2d-a629-c291dfe56b48",
+      "createdAt": "2026-07-28T01:35:23.000Z",
+      "updatedAt": "2026-07-28T01:35:23.000Z",
+      "uid": "35240-97599a2f-27be-4a2d-a629-c291dfe56b48"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.elationemr.com"
+    }
+  ]
+}

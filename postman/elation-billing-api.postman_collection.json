@@ -1,0 +1,1756 @@
+{
+  "info": {
+    "_postman_id": "c1fbc81d-998c-4d3a-98ec-aa158dde9f56",
+    "name": "Billing API",
+    "description": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:34:47.000Z",
+    "updatedAt": "2026-07-28T01:34:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c1fbc81d-998c-4d3a-98ec-aa158dde9f56"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2.0",
+          "item": [
+            {
+              "name": "billing_codes",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete Billing Code",
+                      "id": "de5953ea-9b20-400c-96bf-c664e06e84e0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "billing_codes",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "a5d21f98-621f-4400-8725-002908adfd2d",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Delete a CPT code that the practice has set up. To view them in the app, go to Practice Settings - Billing."
+                      },
+                      "response": [
+                        {
+                          "id": "8399936e-b794-4b24-ab99-7ead433fe63e",
+                          "name": "No response body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "billing_codes",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-8399936e-b794-4b24-ab99-7ead433fe63e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-de5953ea-9b20-400c-96bf-c664e06e84e0"
+                    },
+                    {
+                      "name": "Retrieve Billing Code",
+                      "id": "d9024e2a-99c4-4ddf-9809-d75bbbb93f8a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "billing_codes",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "31df0abf-edbd-416f-8a28-3f08f44d96da",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get a CPT code that the practice has set up. To view all codes in the app, go to Practice Settings - Billing."
+                      },
+                      "response": [
+                        {
+                          "id": "76edf6b7-608b-4f56-8654-1138a38c0e1e",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "billing_codes",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-76edf6b7-608b-4f56-8654-1138a38c0e1e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-d9024e2a-99c4-4ddf-9809-d75bbbb93f8a"
+                    },
+                    {
+                      "name": "Partially Update Billing Code",
+                      "id": "083bca82-7d05-4d88-b2c6-6ee6e27ead97",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"charge\": \"2\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"practice\": \"<long>\",\n  \"sequence\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "billing_codes",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "c952de34-7b07-42d6-ab2f-631f5d6dbc6a",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d34d5472-ab5b-4fe6-8c1e-319fb473071b",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"charge\": \"2\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"practice\": \"<long>\",\n  \"sequence\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "billing_codes",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-d34d5472-ab5b-4fe6-8c1e-319fb473071b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-083bca82-7d05-4d88-b2c6-6ee6e27ead97"
+                    },
+                    {
+                      "name": "Update Billing Code",
+                      "id": "c1de6889-04f3-47d9-b855-346365373f15",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "billing_codes",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "d2eeacb5-7f77-482d-882e-a1b47787391f",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Update a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing."
+                      },
+                      "response": [
+                        {
+                          "id": "039abec0-9e9f-4aaf-b9f4-bf483c91a695",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/billing_codes/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "billing_codes",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-039abec0-9e9f-4aaf-b9f4-bf483c91a695"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-c1de6889-04f3-47d9-b855-346365373f15"
+                    }
+                  ],
+                  "id": "bc3312cb-9797-4183-ba78-f6e65654e397",
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-bc3312cb-9797-4183-ba78-f6e65654e397"
+                },
+                {
+                  "name": "List Billing Codes",
+                  "id": "8e8efa3e-63e9-4754-8abd-f85c8756f53c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/billing_codes/?code=<string>,<string>&description=<string>,<string>&limit=<integer>&offset=<integer>&order_by=<string>&practice=<long>,<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "billing_codes",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "code",
+                          "value": "<string>,<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "description",
+                          "value": "<string>,<string>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        }
+                      ]
+                    },
+                    "description": "Get the CPT codes that the practice has set up. To view them in the app, go to Practice Settings - Billing."
+                  },
+                  "response": [
+                    {
+                      "id": "850de3f9-dd2a-484e-bb3f-29128c646fef",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/billing_codes/?code=<string>,<string>&description=<string>,<string>&limit=<integer>&offset=<integer>&order_by=<string>&practice=<long>,<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "billing_codes",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "code",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "description",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"code\": \"<string>\",\n      \"description\": \"<string>\",\n      \"practice\": \"<long>\",\n      \"charge\": \"2633208.9\",\n      \"id\": \"<integer>\",\n      \"sequence\": \"<integer>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"description\": \"<string>\",\n      \"practice\": \"<long>\",\n      \"charge\": \"-\",\n      \"id\": \"<integer>\",\n      \"sequence\": \"<integer>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-850de3f9-dd2a-484e-bb3f-29128c646fef"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-8e8efa3e-63e9-4754-8abd-f85c8756f53c"
+                },
+                {
+                  "name": "Create Billing Code",
+                  "id": "5552f3cb-5ed5-4032-80fa-01d53bb33d3c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/billing_codes/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "billing_codes",
+                        ""
+                      ]
+                    },
+                    "description": "Create a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing."
+                  },
+                  "response": [
+                    {
+                      "id": "b3f540c5-3d7f-45ca-a31c-c38cc852dedc",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/billing_codes/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "billing_codes",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"-70535933\",\n  \"id\": \"<integer>\",\n  \"sequence\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-b3f540c5-3d7f-45ca-a31c-c38cc852dedc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-5552f3cb-5ed5-4032-80fa-01d53bb33d3c"
+                }
+              ],
+              "id": "6db76ece-6f23-4628-9e34-748632a10413",
+              "createdAt": "2026-07-28T01:34:48.000Z",
+              "updatedAt": "2026-07-28T01:34:48.000Z",
+              "uid": "35240-6db76ece-6f23-4628-9e34-748632a10413"
+            },
+            {
+              "name": "bills",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "actions",
+                      "item": [
+                        {
+                          "name": "release-to-pms",
+                          "item": [
+                            {
+                              "name": "Release a Bill to PMS",
+                              "id": "deae03de-1ddb-440c-a057-b6d2b186e057",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "oauth2",
+                                  "oauth2": [
+                                    {
+                                      "key": "scope",
+                                      "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "accessTokenUrl",
+                                      "value": "/api/2.0/oauth2/token/",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "grant_type",
+                                      "value": "client_credentials",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/bills/:id/actions/release-to-pms/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "bills",
+                                    ":id",
+                                    "actions",
+                                    "release-to-pms",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "59a77444-cfa1-4332-8fdc-34d936771bc5",
+                                      "key": "id",
+                                      "value": "<long>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "This is a simple PATCH endpoint that allows you to release a bill to your connected PMS. It accomplishes the same goal as pressing the \"Send to PMS\" button on the Elation Billing Report for a bill."
+                              },
+                              "response": [
+                                {
+                                  "id": "1b27ee36-eedf-42ed-8527-ea47196fd101",
+                                  "name": "New Response",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/2.0/bills/:id/actions/release-to-pms/",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "2.0",
+                                        "bills",
+                                        ":id",
+                                        "actions",
+                                        "release-to-pms",
+                                        ""
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"billing_date\": \"<string,null-date-time>\",\n  \"billing_error\": \"<string,null>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"billing_raw_error\": \"<string,null>\",\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"92\",\n      \"ndc_measure\": \"UN\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-0321\",\n      \"ndc_measure\": \"F2\"\n    }\n  ],\n  \"metadata\": {\n    \"consecteturc28\": {}\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment_amount\": \"940\",\n  \"place_of_service\": \"21\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"service_location\": \"<long>\",\n  \"supervising_provider\": \"<integer,null-int64>\",\n  \"visit_note\": \"<long>\"\n}",
+                                  "createdAt": "2026-07-28T01:34:48.000Z",
+                                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                                  "uid": "35240-1b27ee36-eedf-42ed-8527-ea47196fd101"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:34:48.000Z",
+                              "updatedAt": "2026-07-28T01:34:48.000Z",
+                              "uid": "35240-deae03de-1ddb-440c-a057-b6d2b186e057"
+                            }
+                          ],
+                          "id": "8127f6f3-7531-44fc-accc-64f471fde8c0",
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-8127f6f3-7531-44fc-accc-64f471fde8c0"
+                        }
+                      ],
+                      "id": "a3e30bfc-79e2-4110-b5d1-50846991a2fd",
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-a3e30bfc-79e2-4110-b5d1-50846991a2fd"
+                    },
+                    {
+                      "name": "Retrieve Bill",
+                      "id": "de1191b1-0732-4af7-9229-c337ed5c5c76",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/bills/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "bills",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "7451ff34-cf58-4c43-b3df-042d2ed0c9f2",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "14817f3b-8a63-4a7e-8af4-371fe05f8ef3",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/bills/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "bills",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"billing_date\": \"<dateTime>\",\n  \"billing_error\": \"<string>\",\n  \"billing_raw_error\": \"<string>\",\n  \"billing_provider\": \"<long>\",\n  \"billing_status\": \"Unbilled\",\n  \"cpts\": [\n    {\n      \"alt_dxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"cpt\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"dxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"modifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ndc\": \"<string>\",\n      \"ndc_dose\": \"-77434\",\n      \"ndc_measure\": \"<string>\",\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\"\n    },\n    {\n      \"alt_dxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"cpt\": \"<string>\",\n      \"description\": \"<string,null>\",\n      \"dxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"modifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ndc\": \"<string>\",\n      \"ndc_dose\": \"458\",\n      \"ndc_measure\": \"<string>\",\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\"\n    }\n  ],\n  \"created_date\": \"<string,null-date-time>\",\n  \"deferred_bill\": \"<boolean>\",\n  \"id\": \"<integer>\",\n  \"last_modified_date\": \"<dateTime>\",\n  \"metadata\": {\n    \"data\": {},\n    \"object_id\": \"<string>\",\n    \"object_web_link\": \"<string>\"\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"patient\": \"<long>\",\n  \"payment\": {\n    \"amount\": \"-309023.61\",\n    \"when_collected\": \"<dateTime>\",\n    \"appointment\": \"<integer,null-int64>\",\n    \"bill\": \"<integer,null-int64>\",\n    \"create_date\": \"<string,null-date-time>\",\n    \"delete_date\": \"<string,null-date-time>\",\n    \"id\": \"<integer>\"\n  },\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string,null>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<long>\",\n  \"service_date\": \"<dateTime>\",\n  \"service_date_timezone\": \"<string>\",\n  \"service_location\": {\n    \"address_line1\": \"<string>\",\n    \"name\": \"<string>\",\n    \"practice\": \"<long>\",\n    \"state\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"\",\n    \"created_date\": \"<string,null-date-time>\",\n    \"deleted_date\": \"<string,null-date-time>\",\n    \"email\": \"<string,null-email>\",\n    \"fax\": \"<string,null>\",\n    \"id\": \"<integer>\",\n    \"is_primary\": false,\n    \"phone\": \"<string,null>\",\n    \"place_of_service\": \"Programs of All-Inclusive Care for the Elderly (PACE) Center\",\n    \"place_of_service_code\": \"<integer>\",\n    \"status\": \"active\",\n    \"timezone\": \"America/Kentucky/Louisville\",\n    \"zip\": \"\"\n  },\n  \"supervising_provider\": \"<long>\",\n  \"visit_note_deleted_date\": \"<string,null-date-time>\",\n  \"visit_note_id\": \"<integer>\",\n  \"visit_note_signed_date\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-14817f3b-8a63-4a7e-8af4-371fe05f8ef3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-de1191b1-0732-4af7-9229-c337ed5c5c76"
+                    },
+                    {
+                      "name": "Partially Update Bill",
+                      "id": "cc145127-9a4a-416b-9b89-6cb40d5b11bb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"billing_date\": \"<string,null-date-time>\",\n  \"billing_error\": \"<string,null>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"billing_raw_error\": \"<string,null>\",\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"92\",\n      \"ndc_measure\": \"UN\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-0321\",\n      \"ndc_measure\": \"F2\"\n    }\n  ],\n  \"metadata\": {\n    \"consecteturc28\": {}\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment_amount\": \"940\",\n  \"place_of_service\": \"21\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"service_location\": \"<long>\",\n  \"supervising_provider\": \"<integer,null-int64>\",\n  \"visit_note\": \"<long>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/bills/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "bills",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "56497499-0fd6-422c-8c6e-668f0acc3120",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "68ca1b66-ffb1-4c11-bdcd-840e0a045bf4",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_date\": \"<string,null-date-time>\",\n  \"billing_error\": \"<string,null>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"billing_raw_error\": \"<string,null>\",\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"92\",\n      \"ndc_measure\": \"UN\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-0321\",\n      \"ndc_measure\": \"F2\"\n    }\n  ],\n  \"metadata\": {\n    \"consecteturc28\": {}\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment_amount\": \"940\",\n  \"place_of_service\": \"21\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"service_location\": \"<long>\",\n  \"supervising_provider\": \"<integer,null-int64>\",\n  \"visit_note\": \"<long>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/bills/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "bills",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"billing_date\": \"<string,null-date-time>\",\n  \"billing_error\": \"<string,null>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"billing_raw_error\": \"<string,null>\",\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"92\",\n      \"ndc_measure\": \"UN\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-0321\",\n      \"ndc_measure\": \"F2\"\n    }\n  ],\n  \"metadata\": {\n    \"consecteturc28\": {}\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment_amount\": \"940\",\n  \"place_of_service\": \"21\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"service_location\": \"<long>\",\n  \"supervising_provider\": \"<integer,null-int64>\",\n  \"visit_note\": \"<long>\"\n}",
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-68ca1b66-ffb1-4c11-bdcd-840e0a045bf4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-cc145127-9a4a-416b-9b89-6cb40d5b11bb"
+                    }
+                  ],
+                  "id": "10754da0-60b0-40db-8030-0f147e8de47b",
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-10754da0-60b0-40db-8030-0f147e8de47b"
+                },
+                {
+                  "name": "List Bills",
+                  "id": "394380aa-9ea9-4b16-9b35-8e0d0d9bbcb4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/bills/?assigned_physician=<long>,<long>&bill_id=<long>,<long>&from_service_date=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>&signing_physician=<string>&to_service_date=<dateTime>&visit_note_id=<long>,<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "bills",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "The id of the physician who is assigned to this bill, could be different from the signer.",
+                          "key": "assigned_physician",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "bill_id",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "key": "from_service_date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Multiple values may be separated by commas.",
+                          "key": "patient",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "The id of the practice that is responsible for the bill.",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "The id of the physician who signed off on the visit note that is associated with this bill.",
+                          "key": "signing_physician",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "to_service_date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "The id of the visit note this bill is attached to.",
+                          "key": "visit_note_id",
+                          "value": "<long>,<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2ddd770e-1696-4b07-a9fe-e675f2eebdf7",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/bills/?assigned_physician=<long>,<long>&bill_id=<long>,<long>&from_service_date=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>&patient=<long>,<long>&practice=<long>,<long>&signing_physician=<string>&to_service_date=<dateTime>&visit_note_id=<long>,<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "bills",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "The id of the physician who is assigned to this bill, could be different from the signer.",
+                              "key": "assigned_physician",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "bill_id",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "key": "from_service_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Multiple values may be separated by commas.",
+                              "key": "patient",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "The id of the practice that is responsible for the bill.",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "The id of the physician who signed off on the visit note that is associated with this bill.",
+                              "key": "signing_physician",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "to_service_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "The id of the visit note this bill is attached to.",
+                              "key": "visit_note_id",
+                              "value": "<long>,<long>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"billing_date\": \"<dateTime>\",\n      \"billing_error\": \"<string>\",\n      \"billing_raw_error\": \"<string>\",\n      \"billing_provider\": \"<long>\",\n      \"billing_status\": \"UnresolvedError\",\n      \"cpts\": [\n        {\n          \"alt_dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpt\": \"<string>\",\n          \"description\": \"<string,null>\",\n          \"dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"modifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ndc\": \"<string>\",\n          \"ndc_dose\": \"35281\",\n          \"ndc_measure\": \"<string>\",\n          \"unit_charge\": \"<string>\",\n          \"units\": \"<string>\"\n        },\n        {\n          \"alt_dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpt\": \"<string>\",\n          \"description\": \"<string,null>\",\n          \"dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"modifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ndc\": \"<string>\",\n          \"ndc_dose\": \"6\",\n          \"ndc_measure\": \"<string>\",\n          \"unit_charge\": \"<string>\",\n          \"units\": \"<string>\"\n        }\n      ],\n      \"created_date\": \"<string,null-date-time>\",\n      \"deferred_bill\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"last_modified_date\": \"<dateTime>\",\n      \"metadata\": {\n        \"data\": {},\n        \"object_id\": \"<string>\",\n        \"object_web_link\": \"<string>\"\n      },\n      \"notes\": \"<string,null>\",\n      \"ordering_provider\": {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\",\n        \"npi\": \"<string,null>\"\n      },\n      \"patient\": \"<long>\",\n      \"payment\": {\n        \"amount\": \"50963759.23\",\n        \"when_collected\": \"<dateTime>\",\n        \"appointment\": \"<integer,null-int64>\",\n        \"bill\": \"<integer,null-int64>\",\n        \"create_date\": \"<string,null-date-time>\",\n        \"delete_date\": \"<string,null-date-time>\",\n        \"id\": \"<integer>\"\n      },\n      \"physician\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"prior_authorization\": \"<string,null>\",\n      \"ref_number\": \"<string,null>\",\n      \"referring_provider\": {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\",\n        \"npi\": \"<string,null>\"\n      },\n      \"rendering_provider\": \"<long>\",\n      \"service_date\": \"<dateTime>\",\n      \"service_date_timezone\": \"<string>\",\n      \"service_location\": {\n        \"address_line1\": \"<string>\",\n        \"name\": \"<string>\",\n        \"practice\": \"<long>\",\n        \"state\": \"<string>\",\n        \"address_line2\": \"<string>\",\n        \"city\": \"\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"email\": \"<string,null-email>\",\n        \"fax\": \"<string,null>\",\n        \"id\": \"<integer>\",\n        \"is_primary\": false,\n        \"phone\": \"<string,null>\",\n        \"place_of_service\": \"Tribal 638Free-standingFacility\",\n        \"place_of_service_code\": \"<integer>\",\n        \"status\": \"active\",\n        \"timezone\": \"Asia/Jayapura\",\n        \"zip\": \"\"\n      },\n      \"supervising_provider\": \"<long>\",\n      \"visit_note_deleted_date\": \"<string,null-date-time>\",\n      \"visit_note_id\": \"<integer>\",\n      \"visit_note_signed_date\": \"<dateTime>\"\n    },\n    {\n      \"billing_date\": \"<dateTime>\",\n      \"billing_error\": \"<string>\",\n      \"billing_raw_error\": \"<string>\",\n      \"billing_provider\": \"<long>\",\n      \"billing_status\": \"UnresolvedError\",\n      \"cpts\": [\n        {\n          \"alt_dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpt\": \"<string>\",\n          \"description\": \"<string,null>\",\n          \"dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"modifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ndc\": \"<string>\",\n          \"ndc_dose\": \"1.14\",\n          \"ndc_measure\": \"<string>\",\n          \"unit_charge\": \"<string>\",\n          \"units\": \"<string>\"\n        },\n        {\n          \"alt_dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"cpt\": \"<string>\",\n          \"description\": \"<string,null>\",\n          \"dxs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"modifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"ndc\": \"<string>\",\n          \"ndc_dose\": \"-40.946\",\n          \"ndc_measure\": \"<string>\",\n          \"unit_charge\": \"<string>\",\n          \"units\": \"<string>\"\n        }\n      ],\n      \"created_date\": \"<string,null-date-time>\",\n      \"deferred_bill\": \"<boolean>\",\n      \"id\": \"<integer>\",\n      \"last_modified_date\": \"<dateTime>\",\n      \"metadata\": null,\n      \"notes\": \"<string,null>\",\n      \"ordering_provider\": {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\",\n        \"npi\": \"<string,null>\"\n      },\n      \"patient\": \"<long>\",\n      \"payment\": {\n        \"amount\": \"-675241\",\n        \"when_collected\": \"<dateTime>\",\n        \"appointment\": \"<integer,null-int64>\",\n        \"bill\": \"<integer,null-int64>\",\n        \"create_date\": \"<string,null-date-time>\",\n        \"delete_date\": \"<string,null-date-time>\",\n        \"id\": \"<integer>\"\n      },\n      \"physician\": \"<long>\",\n      \"practice\": \"<long>\",\n      \"prior_authorization\": \"<string,null>\",\n      \"ref_number\": \"<string,null>\",\n      \"referring_provider\": {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\",\n        \"npi\": \"<string,null>\"\n      },\n      \"rendering_provider\": \"<long>\",\n      \"service_date\": \"<dateTime>\",\n      \"service_date_timezone\": \"<string>\",\n      \"service_location\": {\n        \"address_line1\": \"<string>\",\n        \"name\": \"<string>\",\n        \"practice\": \"<long>\",\n        \"state\": \"<string>\",\n        \"address_line2\": \"<string>\",\n        \"city\": \"\",\n        \"created_date\": \"<string,null-date-time>\",\n        \"deleted_date\": \"<string,null-date-time>\",\n        \"email\": \"<string,null-email>\",\n        \"fax\": \"<string,null>\",\n        \"id\": \"<integer>\",\n        \"is_primary\": false,\n        \"phone\": \"<string,null>\",\n        \"place_of_service\": \"Temporary Lodging\",\n        \"place_of_service_code\": \"<integer>\",\n        \"status\": \"active\",\n        \"timezone\": \"Asia/Yakutsk\",\n        \"zip\": \"\"\n      },\n      \"supervising_provider\": \"<long>\",\n      \"visit_note_deleted_date\": \"<string,null-date-time>\",\n      \"visit_note_id\": \"<integer>\",\n      \"visit_note_signed_date\": \"<dateTime>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-2ddd770e-1696-4b07-a9fe-e675f2eebdf7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-394380aa-9ea9-4b16-9b35-8e0d0d9bbcb4"
+                },
+                {
+                  "name": "Create Bill",
+                  "id": "ee650a12-9873-4017-ae9a-192e0db759f2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-033\",\n      \"ndc_measure\": \"ML\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-364\",\n      \"ndc_measure\": \"UN\"\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<long>\",\n  \"visit_note\": \"<long>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"notes\": \"\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment\": \"<long>\",\n  \"payment_amount\": \"0.00\",\n  \"prior_authorization\": \"<string,null>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"show_dual_coding\": false,\n  \"supervising_provider\": \"<integer,null-int64>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/bills/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "bills",
+                        ""
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "dbe16c1c-7ee8-43f3-98e7-5fd95ae607ff",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-033\",\n      \"ndc_measure\": \"ML\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-364\",\n      \"ndc_measure\": \"UN\"\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<long>\",\n  \"visit_note\": \"<long>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"notes\": \"\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment\": \"<long>\",\n  \"payment_amount\": \"0.00\",\n  \"prior_authorization\": \"<string,null>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"show_dual_coding\": false,\n  \"supervising_provider\": \"<integer,null-int64>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/bills/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "bills",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-033\",\n      \"ndc_measure\": \"ML\"\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"icd10_code\": \"<string>\",\n          \"icd9_codes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"-364\",\n      \"ndc_measure\": \"UN\"\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<long>\",\n  \"visit_note\": \"<long>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"id\": \"<integer>\",\n  \"notes\": \"\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment\": \"<long>\",\n  \"payment_amount\": \"0.00\",\n  \"prior_authorization\": \"<string,null>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"show_dual_coding\": false,\n  \"supervising_provider\": \"<integer,null-int64>\"\n}",
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-dbe16c1c-7ee8-43f3-98e7-5fd95ae607ff"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-ee650a12-9873-4017-ae9a-192e0db759f2"
+                }
+              ],
+              "id": "73916abc-485a-4e19-94d4-c420360ceb19",
+              "createdAt": "2026-07-28T01:34:48.000Z",
+              "updatedAt": "2026-07-28T01:34:48.000Z",
+              "uid": "35240-73916abc-485a-4e19-94d4-c420360ceb19"
+            },
+            {
+              "name": "patients",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "outstanding_balance",
+                      "item": [
+                        {
+                          "name": "Update Outstanding Balance",
+                          "id": "77f3c1b6-bf5d-4af8-b88a-d39d5fe832e4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/api/2.0/oauth2/token/",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"balance\": \"-103.94\",\n  \"patient_id\": \"<long>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/patients/:id/outstanding_balance/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "patients",
+                                ":id",
+                                "outstanding_balance",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "id": "35af4dcc-0c63-4c2c-9086-da251e923164",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) The id of the patient"
+                                }
+                              ]
+                            },
+                            "description": "The outstanding balance is a write-only resource that can be used to update the balance of a specific patient. It requires that the OutstandingBalance feature must be enabled for the practice."
+                          },
+                          "response": [
+                            {
+                              "id": "56a34881-052b-4dac-a4b2-c13050887799",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"balance\": \"-103.94\",\n  \"patient_id\": \"<long>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2.0/patients/:id/outstanding_balance/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2.0",
+                                    "patients",
+                                    ":id",
+                                    "outstanding_balance",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"balance\": \"-103.94\",\n  \"patient_id\": \"<long>\"\n}",
+                              "createdAt": "2026-07-28T01:34:48.000Z",
+                              "updatedAt": "2026-07-28T01:34:48.000Z",
+                              "uid": "35240-56a34881-052b-4dac-a4b2-c13050887799"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:34:48.000Z",
+                          "updatedAt": "2026-07-28T01:34:48.000Z",
+                          "uid": "35240-77f3c1b6-bf5d-4af8-b88a-d39d5fe832e4"
+                        }
+                      ],
+                      "id": "d4d6eb0e-bda2-47df-b800-f29e97bbb834",
+                      "createdAt": "2026-07-28T01:34:48.000Z",
+                      "updatedAt": "2026-07-28T01:34:48.000Z",
+                      "uid": "35240-d4d6eb0e-bda2-47df-b800-f29e97bbb834"
+                    }
+                  ],
+                  "id": "8995e20c-9d92-4a2c-891f-87f6ac195ab9",
+                  "createdAt": "2026-07-28T01:34:48.000Z",
+                  "updatedAt": "2026-07-28T01:34:48.000Z",
+                  "uid": "35240-8995e20c-9d92-4a2c-891f-87f6ac195ab9"
+                }
+              ],
+              "id": "2014ce93-c9ca-4f2e-b06c-68bc221f6ed3",
+              "createdAt": "2026-07-28T01:34:48.000Z",
+              "updatedAt": "2026-07-28T01:34:48.000Z",
+              "uid": "35240-2014ce93-c9ca-4f2e-b06c-68bc221f6ed3"
+            }
+          ],
+          "id": "bb85e223-e7a9-4dc6-81c2-301b532fcadb",
+          "createdAt": "2026-07-28T01:34:48.000Z",
+          "updatedAt": "2026-07-28T01:34:48.000Z",
+          "uid": "35240-bb85e223-e7a9-4dc6-81c2-301b532fcadb"
+        }
+      ],
+      "id": "4a186884-10c2-4b8b-97e2-91303dceed79",
+      "createdAt": "2026-07-28T01:34:48.000Z",
+      "updatedAt": "2026-07-28T01:34:48.000Z",
+      "uid": "35240-4a186884-10c2-4b8b-97e2-91303dceed79"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.elationemr.com"
+    }
+  ]
+}

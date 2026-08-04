@@ -1,0 +1,1354 @@
+{
+  "info": {
+    "_postman_id": "23cba8b1-2608-4f9c-b77f-92520274688d",
+    "name": "Reference Data API",
+    "description": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:35:29.000Z",
+    "updatedAt": "2026-07-28T01:35:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-23cba8b1-2608-4f9c-b77f-92520274688d"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2.0",
+          "item": [
+            {
+              "name": "languages",
+              "item": [
+                {
+                  "name": "List Languages",
+                  "id": "5f74b19a-53ea-497d-8b78-228e23957901",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/languages/?limit=<integer>&offset=<integer>&order_by=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "languages",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the available preferred languages"
+                  },
+                  "response": [
+                    {
+                      "id": "567930e8-b5b8-4f5a-a601-97de554236ae",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/languages/?limit=<integer>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "languages",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-567930e8-b5b8-4f5a-a601-97de554236ae"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-5f74b19a-53ea-497d-8b78-228e23957901"
+                }
+              ],
+              "id": "7c8df4ed-c6ef-41e0-9b48-eedeabd9ca0b",
+              "createdAt": "2026-07-28T01:35:30.000Z",
+              "updatedAt": "2026-07-28T01:35:30.000Z",
+              "uid": "35240-7c8df4ed-c6ef-41e0-9b48-eedeabd9ca0b"
+            },
+            {
+              "name": "packaged_medication_labelers",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve Packaged Medication Labeler",
+                      "id": "1b61de1e-d75c-41ec-8aa3-346001b6bdab",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/packaged_medication_labelers/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "packaged_medication_labelers",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "58a8edc7-75d3-4e87-b262-168931d595b4",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single packaged medication labeler"
+                      },
+                      "response": [
+                        {
+                          "id": "32fa1bf6-2475-4a9d-85bc-2183f43ee667",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/packaged_medication_labelers/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "packaged_medication_labelers",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<long>\",\n  \"medispanid\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:35:30.000Z",
+                          "updatedAt": "2026-07-28T01:35:30.000Z",
+                          "uid": "35240-32fa1bf6-2475-4a9d-85bc-2183f43ee667"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-1b61de1e-d75c-41ec-8aa3-346001b6bdab"
+                    }
+                  ],
+                  "id": "e2ad115e-4c8c-43da-8600-265dd2cb32ab",
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-e2ad115e-4c8c-43da-8600-265dd2cb32ab"
+                },
+                {
+                  "name": "List Packaged Medication Labelers",
+                  "id": "81633b44-3aac-4bf2-b9eb-016ea2840d60",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/packaged_medication_labelers/?limit=<integer>&name=<string>,<string>&offset=<integer>&order_by=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "packaged_medication_labelers",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The name of the packaged medication labeler.",
+                          "key": "name",
+                          "value": "<string>,<string>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Requests to this endpoint must specify at least one query parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "58e06e90-713c-4cfa-8d82-eb0e9c4cd117",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/packaged_medication_labelers/?limit=<integer>&name=<string>,<string>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "packaged_medication_labelers",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The name of the packaged medication labeler.",
+                              "key": "name",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"id\": \"<long>\",\n      \"medispanid\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"medispanid\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-58e06e90-713c-4cfa-8d82-eb0e9c4cd117"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-81633b44-3aac-4bf2-b9eb-016ea2840d60"
+                }
+              ],
+              "id": "1d0eed51-8ef9-4e69-8813-85f47832511e",
+              "createdAt": "2026-07-28T01:35:30.000Z",
+              "updatedAt": "2026-07-28T01:35:30.000Z",
+              "uid": "35240-1d0eed51-8ef9-4e69-8813-85f47832511e"
+            },
+            {
+              "name": "packaged_medications",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve Packaged Medication",
+                      "id": "e55acc98-eabb-4988-a136-4aec78ef5954",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/packaged_medications/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "packaged_medications",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "8dec851a-4d97-476e-9273-f91f65c995d1",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single packaged medication"
+                      },
+                      "response": [
+                        {
+                          "id": "3d93cd73-76d1-42ab-888c-1c8e9601b47a",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/packaged_medications/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "packaged_medications",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"created_date\": \"<string,null-date-time>\",\n  \"deleted_date\": \"<string,null-date-time>\",\n  \"din\": \"<string,null>\",\n  \"gpi\": \"<string,null>\",\n  \"has_outer_packaged_drug\": \"<boolean,null>\",\n  \"hri\": \"<string,null>\",\n  \"id\": \"<integer>\",\n  \"is_active\": \"<boolean>\",\n  \"is_clinic_pack\": \"<boolean,null>\",\n  \"is_repackaged\": \"<boolean,null>\",\n  \"labeler_id\": \"<long>\",\n  \"market_end_date\": \"<string,null-date-time>\",\n  \"medispanppid\": \"<string,null>\",\n  \"multi_source\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"ndc\": \"<string,null>\",\n  \"obsolete_date\": \"<string,null-date-time>\",\n  \"packaging_name\": \"<string,null>\",\n  \"reference_medication_id\": \"<long>\",\n  \"size_description\": \"<string,null>\",\n  \"upc\": \"<string,null>\"\n}",
+                          "createdAt": "2026-07-28T01:35:30.000Z",
+                          "updatedAt": "2026-07-28T01:35:30.000Z",
+                          "uid": "35240-3d93cd73-76d1-42ab-888c-1c8e9601b47a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-e55acc98-eabb-4988-a136-4aec78ef5954"
+                    }
+                  ],
+                  "id": "a7442964-c9ba-48ce-96ce-38a51f13f0cc",
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-a7442964-c9ba-48ce-96ce-38a51f13f0cc"
+                },
+                {
+                  "name": "List Packaged Medications",
+                  "id": "6fe787c3-96e3-4154-9000-cba107db5343",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/packaged_medications/?is_active=<boolean>&is_deleted=<boolean>&limit=<integer>&name=<string>,<string>&ndc=<string,null>,<string,null>&offset=<integer>&order_by=<string>&reference_medication_id=<long>,<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "packaged_medications",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "is_active",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If `true`, return only soft-deleted packaged medications. If `false`, exclude soft-deleted packaged medications. If omitted, both are returned.",
+                          "key": "is_deleted",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The name of the packaged medication.",
+                          "key": "name",
+                          "value": "<string>,<string>"
+                        },
+                        {
+                          "description": "The National Drug Code associated with the packaged medication.",
+                          "key": "ndc",
+                          "value": "<string,null>,<string,null>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The id of the reference medication associated with the packaged medication.",
+                          "key": "reference_medication_id",
+                          "value": "<long>,<long>"
+                        }
+                      ]
+                    },
+                    "description": "Requests to this endpoint must specify at least one query parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "72a510f0-76e8-4fc2-96ea-a3cd3af01c61",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/packaged_medications/?is_active=<boolean>&is_deleted=<boolean>&limit=<integer>&name=<string>,<string>&ndc=<string,null>,<string,null>&offset=<integer>&order_by=<string>&reference_medication_id=<long>,<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "packaged_medications",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "is_active",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "If `true`, return only soft-deleted packaged medications. If `false`, exclude soft-deleted packaged medications. If omitted, both are returned.",
+                              "key": "is_deleted",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The name of the packaged medication.",
+                              "key": "name",
+                              "value": "<string>,<string>"
+                            },
+                            {
+                              "description": "The National Drug Code associated with the packaged medication.",
+                              "key": "ndc",
+                              "value": "<string,null>,<string,null>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The id of the reference medication associated with the packaged medication.",
+                              "key": "reference_medication_id",
+                              "value": "<long>,<long>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"din\": \"<string,null>\",\n      \"gpi\": \"<string,null>\",\n      \"has_outer_packaged_drug\": \"<boolean,null>\",\n      \"hri\": \"<string,null>\",\n      \"id\": \"<integer>\",\n      \"is_active\": \"<boolean>\",\n      \"is_clinic_pack\": \"<boolean,null>\",\n      \"is_repackaged\": \"<boolean,null>\",\n      \"labeler_id\": \"<long>\",\n      \"market_end_date\": \"<string,null-date-time>\",\n      \"medispanppid\": \"<string,null>\",\n      \"multi_source\": \"<string,null>\",\n      \"name\": \"<string>\",\n      \"ndc\": \"<string,null>\",\n      \"obsolete_date\": \"<string,null-date-time>\",\n      \"packaging_name\": \"<string,null>\",\n      \"reference_medication_id\": \"<long>\",\n      \"size_description\": \"<string,null>\",\n      \"upc\": \"<string,null>\"\n    },\n    {\n      \"created_date\": \"<string,null-date-time>\",\n      \"deleted_date\": \"<string,null-date-time>\",\n      \"din\": \"<string,null>\",\n      \"gpi\": \"<string,null>\",\n      \"has_outer_packaged_drug\": \"<boolean,null>\",\n      \"hri\": \"<string,null>\",\n      \"id\": \"<integer>\",\n      \"is_active\": \"<boolean>\",\n      \"is_clinic_pack\": \"<boolean,null>\",\n      \"is_repackaged\": \"<boolean,null>\",\n      \"labeler_id\": \"<long>\",\n      \"market_end_date\": \"<string,null-date-time>\",\n      \"medispanppid\": \"<string,null>\",\n      \"multi_source\": \"<string,null>\",\n      \"name\": \"<string>\",\n      \"ndc\": \"<string,null>\",\n      \"obsolete_date\": \"<string,null-date-time>\",\n      \"packaging_name\": \"<string,null>\",\n      \"reference_medication_id\": \"<long>\",\n      \"size_description\": \"<string,null>\",\n      \"upc\": \"<string,null>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-72a510f0-76e8-4fc2-96ea-a3cd3af01c61"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-6fe787c3-96e3-4154-9000-cba107db5343"
+                }
+              ],
+              "id": "042a7274-9846-4c57-8b35-5cd4f033a445",
+              "createdAt": "2026-07-28T01:35:30.000Z",
+              "updatedAt": "2026-07-28T01:35:30.000Z",
+              "uid": "35240-042a7274-9846-4c57-8b35-5cd4f033a445"
+            },
+            {
+              "name": "pharmacies",
+              "item": [
+                {
+                  "name": "{ncpdpid}",
+                  "item": [
+                    {
+                      "name": "Retrieve Pharmacy",
+                      "id": "d2df6a51-2542-49cc-9c2a-7cf7b911143d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/pharmacies/:ncpdpid/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "pharmacies",
+                            ":ncpdpid",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "635c0628-13dd-4d8f-89ba-15805f93793b",
+                              "key": "ncpdpid",
+                              "value": "<integer>",
+                              "description": "(Required) The NCPDP ID of the pharmacy to retrieve"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single pharmacy"
+                      },
+                      "response": [
+                        {
+                          "id": "b2238a1d-cde9-443c-bf29-4b148c5e0abf",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/pharmacies/:ncpdpid/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "pharmacies",
+                                ":ncpdpid",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ncpdpid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"active_end_time\": \"<dateTime>\",\n  \"active_start_time\": \"<dateTime>\",\n  \"id\": \"<long>\",\n  \"ncpdpid\": \"<string>\",\n  \"address_line1\": \"<string,null>\",\n  \"address_line2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"fax\": \"<string,null>\",\n  \"npi\": \"<string,null>\",\n  \"phone_primary\": \"<string,null>\",\n  \"specialty_types\": \"<string,null>\",\n  \"state\": \"<string,null>\",\n  \"store_name\": \"<string,null>\",\n  \"zip\": \"<string,null>\"\n}",
+                          "createdAt": "2026-07-28T01:35:30.000Z",
+                          "updatedAt": "2026-07-28T01:35:30.000Z",
+                          "uid": "35240-b2238a1d-cde9-443c-bf29-4b148c5e0abf"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-d2df6a51-2542-49cc-9c2a-7cf7b911143d"
+                    }
+                  ],
+                  "id": "3bfb3d42-edc7-47c4-b50e-78b4034be485",
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-3bfb3d42-edc7-47c4-b50e-78b4034be485"
+                },
+                {
+                  "name": "List Pharmacies",
+                  "id": "e2f61c21-11f2-4c91-98f4-338585141801",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/pharmacies/?active_end_time=<dateTime>&active_start_time=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "pharmacies",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "active_end_time",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "active_start_time",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of physicians"
+                  },
+                  "response": [
+                    {
+                      "id": "0a9446ee-de8b-474d-9970-2a3f6b885083",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/pharmacies/?active_end_time=<dateTime>&active_start_time=<dateTime>&limit=<integer>&offset=<integer>&order_by=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "pharmacies",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "key": "active_end_time",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "active_start_time",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"active_end_time\": \"<dateTime>\",\n      \"active_start_time\": \"<dateTime>\",\n      \"id\": \"<long>\",\n      \"ncpdpid\": \"<string>\",\n      \"address_line1\": \"<string,null>\",\n      \"address_line2\": \"<string,null>\",\n      \"city\": \"<string,null>\",\n      \"fax\": \"<string,null>\",\n      \"npi\": \"<string,null>\",\n      \"phone_primary\": \"<string,null>\",\n      \"specialty_types\": \"<string,null>\",\n      \"state\": \"<string,null>\",\n      \"store_name\": \"<string,null>\",\n      \"zip\": \"<string,null>\"\n    },\n    {\n      \"active_end_time\": \"<dateTime>\",\n      \"active_start_time\": \"<dateTime>\",\n      \"id\": \"<long>\",\n      \"ncpdpid\": \"<string>\",\n      \"address_line1\": \"<string,null>\",\n      \"address_line2\": \"<string,null>\",\n      \"city\": \"<string,null>\",\n      \"fax\": \"<string,null>\",\n      \"npi\": \"<string,null>\",\n      \"phone_primary\": \"<string,null>\",\n      \"specialty_types\": \"<string,null>\",\n      \"state\": \"<string,null>\",\n      \"store_name\": \"<string,null>\",\n      \"zip\": \"<string,null>\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-0a9446ee-de8b-474d-9970-2a3f6b885083"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-e2f61c21-11f2-4c91-98f4-338585141801"
+                }
+              ],
+              "id": "d7c27e7c-8e0e-48b0-9290-bd81b50a2e42",
+              "createdAt": "2026-07-28T01:35:30.000Z",
+              "updatedAt": "2026-07-28T01:35:30.000Z",
+              "uid": "35240-d7c27e7c-8e0e-48b0-9290-bd81b50a2e42"
+            },
+            {
+              "name": "reference_medications",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve Reference Medication",
+                      "id": "18478c5a-524f-4f17-b270-11b7db0cabbb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/api/2.0/oauth2/token/",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/reference_medications/:id/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "reference_medications",
+                            ":id",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "id": "aae62c98-5a32-4011-a7d0-a2833fe49dba",
+                              "key": "id",
+                              "value": "<long>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single reference medication"
+                      },
+                      "response": [
+                        {
+                          "id": "2e0fcf19-e5ce-4af3-ae4a-3b40693e34bc",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2.0/reference_medications/:id/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2.0",
+                                "reference_medications",
+                                ":id",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"active_ndcs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"brand_name\": \"<string>\",\n  \"created_date\": \"<string,null-date-time>\",\n  \"creation_type\": \"user\",\n  \"form\": \"<string>\",\n  \"generic_name\": \"<string>\",\n  \"id\": \"<long>\",\n  \"is_controlled\": false,\n  \"market_end_date\": \"<string,null-date-time>\",\n  \"name\": \"<string>\",\n  \"ndcs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"obsolete_date\": \"<string,null-date-time>\",\n  \"practice\": \"<long>\",\n  \"route\": \"<string>\",\n  \"rxnorm_cuis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"strength\": \"<string,null>\",\n  \"type\": \"prescription\"\n}",
+                          "createdAt": "2026-07-28T01:35:30.000Z",
+                          "updatedAt": "2026-07-28T01:35:30.000Z",
+                          "uid": "35240-2e0fcf19-e5ce-4af3-ae4a-3b40693e34bc"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-18478c5a-524f-4f17-b270-11b7db0cabbb"
+                    }
+                  ],
+                  "id": "4aeaa991-8e13-4eb9-ac6a-15516b7062c3",
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-4aeaa991-8e13-4eb9-ac6a-15516b7062c3"
+                },
+                {
+                  "name": "List Reference Medications",
+                  "id": "a0d2de16-67a1-44e4-a7ee-ad834d0ead2f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/api/2.0/oauth2/token/",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2.0/reference_medications/?limit=<integer>&name=<string,null>,<string,null>&ndc=<string,null>,<string,null>&offset=<integer>&order_by=<string>&practice=<long>,<long>&rxnorm_cui=<string>,<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2.0",
+                        "reference_medications",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of results to return per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The name of the reference medication.",
+                          "key": "name",
+                          "value": "<string,null>,<string,null>"
+                        },
+                        {
+                          "description": "Any of the National Drug Codes of packaged medications associated with the reference medication.",
+                          "key": "ndc",
+                          "value": "<string,null>,<string,null>"
+                        },
+                        {
+                          "description": "The initial index from which to return the results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Which field to use when ordering the results.",
+                          "key": "order_by",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The id of the practice that created the reference medication (if applicable).",
+                          "key": "practice",
+                          "value": "<long>,<long>"
+                        },
+                        {
+                          "description": "Any of the RxNorm Concept Identifiers associated with the reference medication.",
+                          "key": "rxnorm_cui",
+                          "value": "<string>,<string>"
+                        }
+                      ]
+                    },
+                    "description": "Requests to this endpoint must specify at least one query parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "8dc3d521-ef1d-4d8c-9633-346eaeb42b06",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2.0/reference_medications/?limit=<integer>&name=<string,null>,<string,null>&ndc=<string,null>,<string,null>&offset=<integer>&order_by=<string>&practice=<long>,<long>&rxnorm_cui=<string>,<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2.0",
+                            "reference_medications",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of results to return per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The name of the reference medication.",
+                              "key": "name",
+                              "value": "<string,null>,<string,null>"
+                            },
+                            {
+                              "description": "Any of the National Drug Codes of packaged medications associated with the reference medication.",
+                              "key": "ndc",
+                              "value": "<string,null>,<string,null>"
+                            },
+                            {
+                              "description": "The initial index from which to return the results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Which field to use when ordering the results.",
+                              "key": "order_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The id of the practice that created the reference medication (if applicable).",
+                              "key": "practice",
+                              "value": "<long>,<long>"
+                            },
+                            {
+                              "description": "Any of the RxNorm Concept Identifiers associated with the reference medication.",
+                              "key": "rxnorm_cui",
+                              "value": "<string>,<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"active_ndcs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"brand_name\": \"<string>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"creation_type\": \"user\",\n      \"form\": \"<string>\",\n      \"generic_name\": \"<string>\",\n      \"id\": \"<long>\",\n      \"is_controlled\": false,\n      \"market_end_date\": \"<string,null-date-time>\",\n      \"name\": \"<string>\",\n      \"ndcs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"obsolete_date\": \"<string,null-date-time>\",\n      \"practice\": \"<long>\",\n      \"route\": \"<string>\",\n      \"rxnorm_cuis\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"strength\": \"<string,null>\",\n      \"type\": \"prescription\"\n    },\n    {\n      \"active_ndcs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"brand_name\": \"<string>\",\n      \"created_date\": \"<string,null-date-time>\",\n      \"creation_type\": \"user\",\n      \"form\": \"<string>\",\n      \"generic_name\": \"<string>\",\n      \"id\": \"<long>\",\n      \"is_controlled\": false,\n      \"market_end_date\": \"<string,null-date-time>\",\n      \"name\": \"<string>\",\n      \"ndcs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"obsolete_date\": \"<string,null-date-time>\",\n      \"practice\": \"<long>\",\n      \"route\": \"<string>\",\n      \"rxnorm_cuis\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"strength\": \"<string,null>\",\n      \"type\": \"prescription\"\n    }\n  ],\n  \"count\": \"<integer>\",\n  \"next\": \"<uri>\",\n  \"previous\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:35:30.000Z",
+                      "updatedAt": "2026-07-28T01:35:30.000Z",
+                      "uid": "35240-8dc3d521-ef1d-4d8c-9633-346eaeb42b06"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:35:30.000Z",
+                  "updatedAt": "2026-07-28T01:35:30.000Z",
+                  "uid": "35240-a0d2de16-67a1-44e4-a7ee-ad834d0ead2f"
+                }
+              ],
+              "id": "c13630c2-a75f-405c-a917-e0ab2306c16c",
+              "createdAt": "2026-07-28T01:35:30.000Z",
+              "updatedAt": "2026-07-28T01:35:30.000Z",
+              "uid": "35240-c13630c2-a75f-405c-a917-e0ab2306c16c"
+            }
+          ],
+          "id": "7bb2ca57-f452-4eb2-89ef-20734b431a9a",
+          "createdAt": "2026-07-28T01:35:30.000Z",
+          "updatedAt": "2026-07-28T01:35:30.000Z",
+          "uid": "35240-7bb2ca57-f452-4eb2-89ef-20734b431a9a"
+        }
+      ],
+      "id": "9e3a5aa3-4d2b-4ee0-ae05-2002b64f91dc",
+      "createdAt": "2026-07-28T01:35:30.000Z",
+      "updatedAt": "2026-07-28T01:35:30.000Z",
+      "uid": "35240-9e3a5aa3-4d2b-4ee0-ae05-2002b64f91dc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.elationemr.com"
+    }
+  ]
+}
