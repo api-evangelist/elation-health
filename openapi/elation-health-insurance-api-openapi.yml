@@ -1,0 +1,226 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Insurance API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Insurance
+  description: Insurance company, plan, and policy management
+paths:
+  /insurance_companies/:
+    get:
+      operationId: insurance_companies_list
+      summary: List insurance companies
+      description: Retrieve a paginated list of insurance companies.
+      tags:
+      - Insurance
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of insurance companies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInsuranceCompanyList'
+    post:
+      operationId: insurance_companies_create
+      summary: Create an insurance company
+      tags:
+      - Insurance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCompanyCreate'
+      responses:
+        '201':
+          description: Insurance company created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+  /insurance_companies/{id}/:
+    get:
+      operationId: insurance_companies_retrieve
+      summary: Retrieve an insurance company
+      tags:
+      - Insurance
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Insurance company details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+    put:
+      operationId: insurance_companies_update
+      summary: Update an insurance company
+      tags:
+      - Insurance
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCompanyCreate'
+      responses:
+        '200':
+          description: Insurance company updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+    patch:
+      operationId: insurance_companies_partial_update
+      summary: Partially update an insurance company
+      tags:
+      - Insurance
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCompanyCreate'
+      responses:
+        '200':
+          description: Insurance company updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+    delete:
+      operationId: insurance_companies_destroy
+      summary: Delete an insurance company
+      tags:
+      - Insurance
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Insurance company deleted
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  schemas:
+    InsuranceCompanyCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Insurance company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        fax:
+          type: string
+        payer_id:
+          type: string
+          description: Electronic payer identifier
+    Address:
+      type: object
+      properties:
+        address_line1:
+          type: string
+          description: Primary street address
+        address_line2:
+          type: string
+          description: Secondary address line
+        city:
+          type: string
+        state:
+          type: string
+          description: Two-letter state code
+        zip:
+          type: string
+          description: ZIP or postal code
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    InsuranceCompany:
+      allOf:
+      - $ref: '#/components/schemas/InsuranceCompanyCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    PaginatedInsuranceCompanyList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/InsuranceCompany'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

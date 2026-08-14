@@ -1,0 +1,674 @@
+{
+  "item": [
+    {
+      "id": "4aa1cbaa-18da-4443-8691-9f29d82caad1",
+      "name": "Allergies",
+      "description": {
+        "content": "Allergy and drug intolerance tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3bf96d64-39aa-43c3-b065-650e7bd1542e",
+          "name": "List allergies",
+          "request": {
+            "name": "List allergies",
+            "description": {
+              "content": "Retrieve a paginated list of patient allergies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "allergies",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<integer>",
+                  "description": "Filter by patient ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3ecca13-a850-4241-9ccc-a0b7ec31966f",
+              "name": "Paginated list of allergies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "allergies",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6984,\n  \"next\": \"string\",\n  \"previous\": \"string\",\n  \"results\": [\n    {\n      \"patient\": 2941,\n      \"allergen\": \"string\",\n      \"status\": \"Active\",\n      \"reaction\": \"string\",\n      \"severity\": \"Severe\",\n      \"start_date\": \"1959-02-02\",\n      \"notes\": \"string\",\n      \"id\": 1052,\n      \"created_date\": \"1987-07-07T15:04:13.826Z\",\n      \"deleted_date\": \"2005-04-23T18:29:14.760Z\"\n    },\n    {\n      \"patient\": 2184,\n      \"allergen\": \"string\",\n      \"status\": \"Inactive\",\n      \"reaction\": \"string\",\n      \"severity\": \"Moderate\",\n      \"start_date\": \"2010-02-02\",\n      \"notes\": \"string\",\n      \"id\": 2135,\n      \"created_date\": \"2026-01-19T15:05:46.442Z\",\n      \"deleted_date\": \"2006-12-07T00:19:28.639Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "579a8433-d4a8-44aa-9383-c499be4f5652",
+          "name": "Create an allergy",
+          "request": {
+            "name": "Create an allergy",
+            "description": {
+              "content": "Record a new allergy for a patient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "allergies",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a0a143f-ab90-4122-83c4-3c308ac95ebb",
+              "name": "Allergy created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "allergies",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\",\n  \"id\": 5833,\n  \"created_date\": \"2010-02-16T07:41:11.611Z\",\n  \"deleted_date\": \"1969-12-21T22:13:54.432Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5e86ed3-e66b-4be3-b446-a9debf066e4f",
+          "name": "Retrieve an allergy",
+          "request": {
+            "name": "Retrieve an allergy",
+            "description": {},
+            "url": {
+              "path": [
+                "allergies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b960cdf0-540f-491d-bf31-c5fc1558a1cf",
+              "name": "Allergy details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "allergies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\",\n  \"id\": 5833,\n  \"created_date\": \"2010-02-16T07:41:11.611Z\",\n  \"deleted_date\": \"1969-12-21T22:13:54.432Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4865b595-b35f-46b9-9c3b-4bcc9572f56d",
+          "name": "Update an allergy",
+          "request": {
+            "name": "Update an allergy",
+            "description": {},
+            "url": {
+              "path": [
+                "allergies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "684a13e4-0df3-4419-8b8a-67465a44ec92",
+              "name": "Allergy updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "allergies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\",\n  \"id\": 5833,\n  \"created_date\": \"2010-02-16T07:41:11.611Z\",\n  \"deleted_date\": \"1969-12-21T22:13:54.432Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00ebad89-917c-42e6-beb1-9dd084be0b59",
+          "name": "Partially update an allergy",
+          "request": {
+            "name": "Partially update an allergy",
+            "description": {},
+            "url": {
+              "path": [
+                "allergies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cfbb5ad4-3400-481e-a488-0d3c9414c78a",
+              "name": "Allergy updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "allergies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patient\": \"<integer>\",\n  \"allergen\": \"<string>\",\n  \"status\": \"<string>\",\n  \"reaction\": \"<string>\",\n  \"severity\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"notes\": \"<string>\",\n  \"id\": 5833,\n  \"created_date\": \"2010-02-16T07:41:11.611Z\",\n  \"deleted_date\": \"1969-12-21T22:13:54.432Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "068ec59e-d5d8-4d48-a437-06c04445a1fd",
+          "name": "Delete an allergy",
+          "request": {
+            "name": "Delete an allergy",
+            "description": {},
+            "url": {
+              "path": [
+                "allergies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81ac4b82-37de-4ed3-8174-85f8fe82a4a3",
+              "name": "Allergy deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "allergies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "apiv2"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://sandbox.elationemr.com/api/2.0/oauth2/token/"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d386cc9e-fc8f-459a-b555-ee8c982438ff",
+    "name": "Elation Health REST Allergies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.\n\nContact Support:\n Name: Elation Health Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

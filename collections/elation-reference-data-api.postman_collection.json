@@ -1,0 +1,1316 @@
+{
+  "item": [
+    {
+      "id": "f09dde4b-ce43-48e0-be21-ef929f1437b8",
+      "name": "Languages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b46a85e-dfcc-488d-8eed-42be0d2203b7",
+          "name": "List Languages",
+          "request": {
+            "name": "List Languages",
+            "description": {
+              "content": "Retrieve the available preferred languages",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "languages",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "16b07215-ce9f-4c49-a6fa-46ba0c76ad78",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "languages",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fbe27620-54ca-4659-9e18-c108702cba90",
+      "name": "Packaged Medication Labeler (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d71727c-90ac-4793-9023-a14765832665",
+          "name": "List Packaged Medication Labelers",
+          "request": {
+            "name": "List Packaged Medication Labelers",
+            "description": {
+              "content": "Requests to this endpoint must specify at least one query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "packaged_medication_labelers",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>,<string>",
+                  "description": "The name of the packaged medication labeler."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b45de4d0-3236-4654-9ba2-985b0c4aa9a7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "packaged_medication_labelers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": 4531,\n      \"medispanid\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": 3863,\n      \"medispanid\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5ff58f6-8d53-4c43-8c49-a37def639a87",
+          "name": "Retrieve Packaged Medication Labeler",
+          "request": {
+            "name": "Retrieve Packaged Medication Labeler",
+            "description": {
+              "content": "Retrieve a single packaged medication labeler",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "packaged_medication_labelers",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ab6d14d0-4b4d-4387-9f50-e695087d19ce",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "packaged_medication_labelers",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2953,\n  \"medispanid\": \"string\",\n  \"name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "69e0d42d-7972-48f3-a2d6-60e35e21a880",
+      "name": "Packaged Medication (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f146e25-b163-47da-9a08-1439c1ffa466",
+          "name": "List Packaged Medications",
+          "request": {
+            "name": "List Packaged Medications",
+            "description": {
+              "content": "Requests to this endpoint must specify at least one query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "packaged_medications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "is_active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_deleted",
+                  "value": "<boolean>",
+                  "description": "If `true`, return only soft-deleted packaged medications. If `false`, exclude soft-deleted packaged medications. If omitted, both are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>,<string>",
+                  "description": "The name of the packaged medication."
+                },
+                {
+                  "disabled": false,
+                  "key": "ndc",
+                  "value": "<string,null>,<string,null>",
+                  "description": "The National Drug Code associated with the packaged medication."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "reference_medication_id",
+                  "value": "<long>,<long>",
+                  "description": "The id of the reference medication associated with the packaged medication."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b3b4ba8a-ee4f-453c-8314-41e59a287194",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "packaged_medications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "is_active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "ndc",
+                      "value": "<string,null>,<string,null>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reference_medication_id",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"created_date\": \"2022-12-12T15:03:00.496Z\",\n      \"deleted_date\": \"1970-01-06T16:18:46.816Z\",\n      \"din\": \"string\",\n      \"gpi\": \"string\",\n      \"has_outer_packaged_drug\": true,\n      \"hri\": \"string\",\n      \"id\": 5818,\n      \"is_active\": true,\n      \"is_clinic_pack\": true,\n      \"is_repackaged\": true,\n      \"labeler_id\": 5278,\n      \"market_end_date\": \"1965-09-28T20:26:34.487Z\",\n      \"medispanppid\": \"string\",\n      \"multi_source\": \"string\",\n      \"name\": \"string\",\n      \"ndc\": \"string\",\n      \"obsolete_date\": \"1966-08-18T07:31:23.588Z\",\n      \"packaging_name\": \"string\",\n      \"reference_medication_id\": 4875,\n      \"size_description\": \"string\",\n      \"upc\": \"string\"\n    },\n    {\n      \"created_date\": \"2024-01-28T07:08:12.903Z\",\n      \"deleted_date\": \"1990-05-28T04:12:32.001Z\",\n      \"din\": \"string\",\n      \"gpi\": \"string\",\n      \"has_outer_packaged_drug\": true,\n      \"hri\": \"string\",\n      \"id\": 7626,\n      \"is_active\": true,\n      \"is_clinic_pack\": true,\n      \"is_repackaged\": true,\n      \"labeler_id\": 9218,\n      \"market_end_date\": \"2000-09-12T00:36:20.425Z\",\n      \"medispanppid\": \"string\",\n      \"multi_source\": \"string\",\n      \"name\": \"string\",\n      \"ndc\": \"string\",\n      \"obsolete_date\": \"1966-09-18T21:04:39.545Z\",\n      \"packaging_name\": \"string\",\n      \"reference_medication_id\": 3745,\n      \"size_description\": \"string\",\n      \"upc\": \"string\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abee792c-2bfc-4ce8-b03c-65b7f3eb5d41",
+          "name": "Retrieve Packaged Medication",
+          "request": {
+            "name": "Retrieve Packaged Medication",
+            "description": {
+              "content": "Retrieve a single packaged medication",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "packaged_medications",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c3dd926c-08d1-4789-b31e-ac7545580316",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "packaged_medications",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_date\": \"2024-08-05T11:57:47.538Z\",\n  \"deleted_date\": \"1956-06-15T01:37:12.102Z\",\n  \"din\": \"string\",\n  \"gpi\": \"string\",\n  \"has_outer_packaged_drug\": true,\n  \"hri\": \"string\",\n  \"id\": 1254,\n  \"is_active\": true,\n  \"is_clinic_pack\": false,\n  \"is_repackaged\": false,\n  \"labeler_id\": 964,\n  \"market_end_date\": \"2013-01-10T11:31:37.936Z\",\n  \"medispanppid\": \"string\",\n  \"multi_source\": \"string\",\n  \"name\": \"string\",\n  \"ndc\": \"string\",\n  \"obsolete_date\": \"2005-01-18T03:58:56.061Z\",\n  \"packaging_name\": \"string\",\n  \"reference_medication_id\": 7034,\n  \"size_description\": \"string\",\n  \"upc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2c92ac9a-b6f8-4156-b1f1-dd258ad4099c",
+      "name": "Pharmacies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "301f9e8e-90d5-4cc6-9c67-29cff1a2a332",
+          "name": "List Pharmacies",
+          "request": {
+            "name": "List Pharmacies",
+            "description": {
+              "content": "Returns a list of physicians",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "pharmacies",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active_end_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_start_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5ed7983c-5100-4005-bcee-8b90c06254cc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "pharmacies",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active_end_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "active_start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"active_end_time\": \"1998-08-04T15:06:42.184Z\",\n      \"active_start_time\": \"2003-11-08T18:18:50.871Z\",\n      \"id\": 2591,\n      \"ncpdpid\": \"string\",\n      \"address_line1\": \"string\",\n      \"address_line2\": \"string\",\n      \"city\": \"string\",\n      \"fax\": \"string\",\n      \"npi\": \"string\",\n      \"phone_primary\": \"string\",\n      \"specialty_types\": \"string\",\n      \"state\": \"string\",\n      \"store_name\": \"string\",\n      \"zip\": \"string\"\n    },\n    {\n      \"active_end_time\": \"1969-10-05T10:58:59.514Z\",\n      \"active_start_time\": \"1999-04-10T22:57:11.506Z\",\n      \"id\": 7195,\n      \"ncpdpid\": \"string\",\n      \"address_line1\": \"string\",\n      \"address_line2\": \"string\",\n      \"city\": \"string\",\n      \"fax\": \"string\",\n      \"npi\": \"string\",\n      \"phone_primary\": \"string\",\n      \"specialty_types\": \"string\",\n      \"state\": \"string\",\n      \"store_name\": \"string\",\n      \"zip\": \"string\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc50c48f-7397-4cd6-acf9-cfd8fbf94feb",
+          "name": "Retrieve Pharmacy",
+          "request": {
+            "name": "Retrieve Pharmacy",
+            "description": {
+              "content": "Retrieve a single pharmacy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "pharmacies",
+                ":ncpdpid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ncpdpid",
+                  "description": "(Required) The NCPDP ID of the pharmacy to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d7ad11f-301f-4438-b65a-6121537888fd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "pharmacies",
+                    ":ncpdpid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ncpdpid",
+                      "description": "(Required) The NCPDP ID of the pharmacy to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active_end_time\": \"2013-08-02T05:05:25.373Z\",\n  \"active_start_time\": \"2011-11-19T23:29:41.746Z\",\n  \"id\": 1738,\n  \"ncpdpid\": \"string\",\n  \"address_line1\": \"string\",\n  \"address_line2\": \"string\",\n  \"city\": \"string\",\n  \"fax\": \"string\",\n  \"npi\": \"string\",\n  \"phone_primary\": \"string\",\n  \"specialty_types\": \"string\",\n  \"state\": \"string\",\n  \"store_name\": \"string\",\n  \"zip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5d72f18a-bed4-46b5-820a-44a242ad44b7",
+      "name": "Reference Medication (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24a63a3d-71cd-445e-ac8c-edf384a678d7",
+          "name": "List Reference Medications",
+          "request": {
+            "name": "List Reference Medications",
+            "description": {
+              "content": "Requests to this endpoint must specify at least one query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "reference_medications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string,null>,<string,null>",
+                  "description": "The name of the reference medication."
+                },
+                {
+                  "disabled": false,
+                  "key": "ndc",
+                  "value": "<string,null>,<string,null>",
+                  "description": "Any of the National Drug Codes of packaged medications associated with the reference medication."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "The id of the practice that created the reference medication (if applicable)."
+                },
+                {
+                  "disabled": false,
+                  "key": "rxnorm_cui",
+                  "value": "<string>,<string>",
+                  "description": "Any of the RxNorm Concept Identifiers associated with the reference medication."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6e11ac5b-ab3c-4410-9d7f-cde5079a9e4e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "reference_medications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string,null>,<string,null>"
+                    },
+                    {
+                      "key": "ndc",
+                      "value": "<string,null>,<string,null>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "rxnorm_cui",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"active_ndcs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"brand_name\": \"string\",\n      \"created_date\": \"2020-03-13T15:03:23.437Z\",\n      \"creation_type\": \"user\",\n      \"form\": \"string\",\n      \"generic_name\": \"string\",\n      \"id\": 2801,\n      \"is_controlled\": false,\n      \"market_end_date\": \"1967-03-07T04:01:08.117Z\",\n      \"name\": \"string\",\n      \"ndcs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"obsolete_date\": \"1984-07-04T10:16:13.750Z\",\n      \"practice\": 3078,\n      \"route\": \"string\",\n      \"rxnorm_cuis\": [\n        \"string\",\n        \"string\"\n      ],\n      \"strength\": \"string\",\n      \"type\": \"prescription\"\n    },\n    {\n      \"active_ndcs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"brand_name\": \"string\",\n      \"created_date\": \"1968-08-03T16:34:41.571Z\",\n      \"creation_type\": \"user\",\n      \"form\": \"string\",\n      \"generic_name\": \"string\",\n      \"id\": 9996,\n      \"is_controlled\": false,\n      \"market_end_date\": \"1967-12-25T04:01:32.688Z\",\n      \"name\": \"string\",\n      \"ndcs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"obsolete_date\": \"1947-07-18T16:28:40.073Z\",\n      \"practice\": 3545,\n      \"route\": \"string\",\n      \"rxnorm_cuis\": [\n        \"string\",\n        \"string\"\n      ],\n      \"strength\": \"string\",\n      \"type\": \"prescription\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c7928dd-61f9-426d-8a4c-76f5c06777f5",
+          "name": "Retrieve Reference Medication",
+          "request": {
+            "name": "Retrieve Reference Medication",
+            "description": {
+              "content": "Retrieve a single reference medication",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "reference_medications",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e02795af-12d8-4465-aad6-2391bf04bd58",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "reference_medications",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active_ndcs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"brand_name\": \"string\",\n  \"created_date\": \"2012-04-22T16:05:27.983Z\",\n  \"creation_type\": \"user\",\n  \"form\": \"string\",\n  \"generic_name\": \"string\",\n  \"id\": 3881,\n  \"is_controlled\": false,\n  \"market_end_date\": \"1992-12-28T09:48:29.430Z\",\n  \"name\": \"string\",\n  \"ndcs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"obsolete_date\": \"1985-12-04T20:30:53.777Z\",\n  \"practice\": 4810,\n  \"route\": \"string\",\n  \"rxnorm_cuis\": [\n    \"string\",\n    \"string\"\n  ],\n  \"strength\": \"string\",\n  \"type\": \"prescription\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.elationemr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "96a0ec9c-4017-481c-901b-c59b27317d3a",
+    "name": "Reference Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+      "type": "text/plain"
+    }
+  }
+}

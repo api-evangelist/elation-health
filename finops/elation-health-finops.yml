@@ -1,0 +1,99 @@
+name: Elation Health API FinOps
+description: >-
+  Financial operations guidance for managing costs associated with Elation
+  Health EHR platform and API integrations. Elation uses a quote-based pricing
+  model with no publicly disclosed API call-level metering. Cost management
+  focuses on practice plan subscription optimization, API usage efficiency, and
+  enterprise negotiation strategies.
+url: https://www.elationhealth.com/contact-us/pricing/
+created: '2026-06-13'
+modified: '2026-06-13'
+pricingModel:
+  type: subscription-plus-custom
+  description: >-
+    Elation Health charges a monthly subscription per practice with pricing
+    customized by specialty, payment model, and clinician count. API access is
+    bundled with enterprise plans or available through the Developer Platform.
+    There is no publicly documented per-call or consumption-based API pricing.
+  transparency: low
+  note: >-
+    All pricing requires direct engagement with Elation's sales team. No
+    self-serve pricing tiers are available on the public website.
+costDrivers:
+  - name: Practice Subscription
+    description: >-
+      Monthly per-practice subscription is the primary cost driver. Starting
+      price is approximately $349/month, scaling with number of clinicians and
+      practice complexity.
+    impact: high
+  - name: Additional Services
+    description: >-
+      Technical advising, performance consulting, and implementation support are
+      available as add-ons for larger practices and value-based payment
+      organizations.
+    impact: medium
+  - name: Enterprise API Integration
+    description: >-
+      Enterprise developer platform access may carry additional licensing costs
+      for third-party application vendors building integrations. Pricing is
+      negotiated directly with Elation.
+    impact: medium
+  - name: DBaaS Services
+    description: >-
+      Cloud-based Database-as-a-Service offerings for data management may carry
+      separate pricing for enterprise customers.
+    impact: low
+costOptimization:
+  - strategy: Sandbox First
+    description: >-
+      Use the free Developer Sandbox environment for all development and testing
+      to avoid incurring any production costs during integration development.
+    url: https://www.elationhealth.com/contact-us/sandbox/
+  - strategy: Efficient API Design
+    description: >-
+      Implement pagination properly using the results/next pattern to retrieve
+      only needed data. Cache responses where clinically appropriate to reduce
+      redundant API calls and stay within rate limits.
+  - strategy: Webhook Usage
+    description: >-
+      Subscribe to Elation's event subscriptions and webhooks for data change
+      notifications rather than polling endpoints repeatedly. This reduces API
+      call volume and associated overhead.
+  - strategy: Clinician Count Optimization
+    description: >-
+      Since subscription pricing is tied to number of clinicians, periodically
+      review active clinician accounts and remove inactive users to optimize the
+      subscription cost.
+  - strategy: Negotiate Volume Discounts
+    description: >-
+      Enterprise practices and large vendor integrations should negotiate
+      volume-based discounts directly with Elation's sales team, particularly
+      for multi-practice or multi-tenant deployments.
+budgeting:
+  approach: >-
+    As Elation does not publish consumption-based API pricing, budgeting centers
+    on subscription costs and one-time integration development costs. Establish
+    a fixed monthly line item for the practice subscription and budget separately
+    for any additional professional services.
+  recommendations:
+    - Obtain detailed quotes during pre-sales engagement covering all expected services
+    - Negotiate multi-year contract terms for price stability
+    - Include API access rights explicitly in contract terms
+    - Budget for initial integration development effort (developer sandbox access required)
+    - Plan for ongoing subscription costs that scale with practice growth
+monitoring:
+  description: >-
+    Monitor API usage through application-level logging since Elation does not
+    provide a publicly documented usage dashboard. Track API call volumes, error
+    rates, and response times to identify optimization opportunities and detect
+    anomalies before they impact practice operations.
+  tools:
+    - Application performance monitoring (APM) tools
+    - Custom logging for API call volumes and error rates
+    - Elation status page for incident awareness: https://elationhealth.statuspage.io
+notes: >-
+  Elation Health is positioned as an enterprise EHR platform for independent
+  primary care practices. Their pricing model reflects a B2B SaaS approach
+  focused on practice-level relationships rather than consumption-based
+  developer pricing. Cost optimization opportunities are primarily structural
+  (contract negotiation, efficient integration design) rather than usage-based.

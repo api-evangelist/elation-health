@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Elation Health REST Allergies Problems API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://sandbox.elationemr.com/api/2.0/oauth2/token/",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Problems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List problems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/problems/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of patient problems."
+        },
+        {
+          "info": {
+            "name": "Create a problem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.elationemr.com/api/2.0/problems/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new problem to a patient's problem list."
+        },
+        {
+          "info": {
+            "name": "Retrieve a problem",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/problems/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Get details for a specific patient problem."
+        },
+        {
+          "info": {
+            "name": "Update a problem",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.elationemr.com/api/2.0/problems/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all problem fields with the provided values."
+        },
+        {
+          "info": {
+            "name": "Partially update a problem",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.elationemr.com/api/2.0/problems/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update one or more problem fields."
+        },
+        {
+          "info": {
+            "name": "Delete a problem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.elationemr.com/api/2.0/problems/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Remove a problem from the patient's problem list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

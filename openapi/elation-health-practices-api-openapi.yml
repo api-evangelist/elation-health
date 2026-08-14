@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Practices API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Practices
+  description: Practice administration
+paths:
+  /practices/:
+    get:
+      operationId: practices_list
+      summary: List practices
+      description: Retrieve a list of practices accessible to the authenticated application.
+      tags:
+      - Practices
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of practices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPracticeList'
+  /practices/{id}/:
+    get:
+      operationId: practices_retrieve
+      summary: Retrieve a practice
+      tags:
+      - Practices
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Practice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practice'
+    put:
+      operationId: practices_update
+      summary: Update a practice
+      tags:
+      - Practices
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Practice'
+      responses:
+        '200':
+          description: Practice updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practice'
+    patch:
+      operationId: practices_partial_update
+      summary: Partially update a practice
+      tags:
+      - Practices
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Practice'
+      responses:
+        '200':
+          description: Practice updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practice'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  schemas:
+    PaginatedPracticeList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Practice'
+    Practice:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Practice name
+        phone:
+          type: string
+        fax:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        tax_id:
+          type: string
+        npi:
+          type: string
+          maxLength: 10
+    Address:
+      type: object
+      properties:
+        address_line1:
+          type: string
+          description: Primary street address
+        address_line2:
+          type: string
+          description: Secondary address line
+        city:
+          type: string
+        state:
+          type: string
+          description: Two-letter state code
+        zip:
+          type: string
+          description: ZIP or postal code
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

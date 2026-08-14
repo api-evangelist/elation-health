@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Allergies
+  description: Allergy and drug intolerance tracking
+paths:
+  /allergies/:
+    get:
+      operationId: allergies_list
+      summary: List allergies
+      description: Retrieve a paginated list of patient allergies.
+      tags:
+      - Allergies
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: patient
+        in: query
+        schema:
+          type: integer
+        description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of allergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAllergyList'
+    post:
+      operationId: allergies_create
+      summary: Create an allergy
+      description: Record a new allergy for a patient.
+      tags:
+      - Allergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllergyCreate'
+      responses:
+        '201':
+          description: Allergy created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+  /allergies/{id}/:
+    get:
+      operationId: allergies_retrieve
+      summary: Retrieve an allergy
+      tags:
+      - Allergies
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Allergy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+    put:
+      operationId: allergies_update
+      summary: Update an allergy
+      tags:
+      - Allergies
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllergyCreate'
+      responses:
+        '200':
+          description: Allergy updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+    patch:
+      operationId: allergies_partial_update
+      summary: Partially update an allergy
+      tags:
+      - Allergies
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllergyCreate'
+      responses:
+        '200':
+          description: Allergy updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+    delete:
+      operationId: allergies_destroy
+      summary: Delete an allergy
+      tags:
+      - Allergies
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Allergy deleted
+components:
+  schemas:
+    AllergyCreate:
+      type: object
+      required:
+      - patient
+      - allergen
+      - status
+      properties:
+        patient:
+          type: integer
+          description: Patient ID
+        allergen:
+          type: string
+          description: Substance causing the allergy
+        reaction:
+          type: string
+          description: Allergic reaction description
+        severity:
+          type: string
+          enum:
+          - Mild
+          - Moderate
+          - Severe
+          - Unknown
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+        start_date:
+          type: string
+          format: date
+        notes:
+          type: string
+    Allergy:
+      allOf:
+      - $ref: '#/components/schemas/AllergyCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    PaginatedAllergyList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Allergy'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

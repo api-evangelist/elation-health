@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Elation Health REST Allergies Medications API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://sandbox.elationemr.com/api/2.0/oauth2/token/",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Medications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List medications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/medications/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of patient medications."
+        },
+        {
+          "info": {
+            "name": "Create a medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.elationemr.com/api/2.0/medications/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a medication to a patient's medication list."
+        },
+        {
+          "info": {
+            "name": "Retrieve a medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/medications/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a medication"
+        },
+        {
+          "info": {
+            "name": "Delete a medication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.elationemr.com/api/2.0/medications/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Delete a medication"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

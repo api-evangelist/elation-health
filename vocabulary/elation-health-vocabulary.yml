@@ -1,0 +1,278 @@
+vocab:
+  - term: patient
+    label: Patient
+    definition: >-
+      An individual who receives care within an Elation Health practice. Patients
+      have a primary physician and caregiver practice, and may have demographics,
+      insurance, contact information, and clinical records associated with them.
+    related:
+      - appointment
+      - visit_note
+      - problem
+      - medication
+      - allergy
+
+  - term: physician
+    label: Physician
+    definition: >-
+      A licensed healthcare provider within an Elation Health practice who can
+      author visit notes, place orders, prescribe medications, and manage patients.
+      Identified by NPI (National Provider Identifier).
+    related:
+      - practice
+      - appointment
+      - visit_note
+
+  - term: practice
+    label: Practice
+    definition: >-
+      A medical practice or clinic using the Elation Health EHR platform. Each
+      practice has physicians, staff, service locations, and patients associated
+      with it.
+    related:
+      - physician
+      - patient
+      - service_location
+
+  - term: appointment
+    label: Appointment
+    definition: >-
+      A scheduled encounter between a patient and a physician at a practice.
+      Appointments have a scheduled date, duration, reason, and status that
+      progresses through a defined workflow (Scheduled → Checked In → Checked Out).
+    related:
+      - patient
+      - physician
+      - practice
+      - visit_note
+
+  - term: visit_note
+    label: Visit Note
+    definition: >-
+      A clinical document recording the details of a patient encounter with a
+      physician. Visit notes follow structured templates (SOAP, Simple, Complete H&P)
+      and contain bullets organized by clinical categories. Notes must be signed
+      by the physician.
+    related:
+      - patient
+      - physician
+      - appointment
+
+  - term: problem
+    label: Problem
+    definition: >-
+      A medical condition or diagnosis on a patient's problem list. Problems have
+      a description, ICD-9/ICD-10/SNOMED coding, status (Active/Controlled/Resolved),
+      and start/resolved dates.
+    related:
+      - patient
+      - diagnosis
+
+  - term: allergy
+    label: Allergy
+    definition: >-
+      An adverse immune reaction a patient has to a substance (allergen). Recorded
+      with allergen, reaction, severity, and status. Separate from drug intolerances
+      which are non-immune adverse reactions.
+    related:
+      - patient
+      - drug_intolerance
+
+  - term: medication
+    label: Medication
+    definition: >-
+      A drug prescribed to or taken by a patient. Includes drug name, sig (dosage
+      instructions), dose, route, and frequency. Active medications appear on the
+      patient's medication list.
+    related:
+      - patient
+      - prescription
+      - pharmacy
+
+  - term: lab_order
+    label: Lab Order
+    definition: >-
+      An order for laboratory tests placed by a physician for a patient. Lab orders
+      are routed to lab vendors and can include multiple individual tests. Results
+      are returned as reports.
+    related:
+      - patient
+      - physician
+      - lab_vendor
+      - report
+
+  - term: imaging_order
+    label: Imaging Order
+    definition: >-
+      An order for radiological or imaging studies (X-ray, MRI, CT, ultrasound, etc.)
+      placed by a physician for a patient. Routed to imaging centers.
+    related:
+      - patient
+      - physician
+      - imaging_center
+
+  - term: referral_order
+    label: Referral Order
+    definition: >-
+      A physician's referral of a patient to a specialist or other healthcare provider
+      for evaluation or treatment of a specific condition.
+    related:
+      - patient
+      - physician
+
+  - term: message_thread
+    label: Message Thread
+    definition: >-
+      A secure direct message conversation between practice staff members. Threads
+      can be associated with a patient and contain one or more messages and members.
+    related:
+      - patient
+      - thread_message
+      - thread_member
+
+  - term: billing_code
+    label: Billing Code
+    definition: >-
+      A CPT, ICD-10, or other code used to document services rendered for insurance
+      billing and reimbursement purposes.
+    related:
+      - bill
+      - appointment
+
+  - term: bill
+    label: Bill
+    definition: >-
+      A billing record representing charges for services rendered to a patient.
+      Bills reference billing codes and can be submitted to insurance for reimbursement.
+    related:
+      - billing_code
+      - patient
+      - insurance
+
+  - term: insurance_company
+    label: Insurance Company
+    definition: >-
+      A health insurance payer organization. Insurance companies have plans that
+      patients enroll in, and are identified by electronic payer IDs for claims submission.
+    related:
+      - insurance_plan
+      - insurance_policy
+
+  - term: insurance_plan
+    label: Insurance Plan
+    definition: >-
+      A specific insurance product offered by an insurance company, defining coverage
+      terms, network, and benefits for enrolled patients.
+    related:
+      - insurance_company
+      - insurance_policy
+
+  - term: insurance_policy
+    label: Insurance Policy
+    definition: >-
+      A patient's active enrollment in an insurance plan, including member ID,
+      group number, relationship to subscriber, and effective dates.
+    related:
+      - patient
+      - insurance_plan
+      - insurance_company
+
+  - term: vitals
+    label: Vitals
+    definition: >-
+      Physiological measurements recorded during a patient visit, including blood
+      pressure, heart rate, temperature, respiratory rate, height, weight, BMI,
+      and oxygen saturation.
+    related:
+      - patient
+      - visit_note
+      - appointment
+
+  - term: immunization
+    label: Immunization
+    definition: >-
+      A vaccine administered to a patient for disease prevention. Immunizations
+      are recorded with vaccine type, lot number, administration date, and site.
+    related:
+      - patient
+      - vaccine
+
+  - term: ccda
+    label: C-CDA
+    definition: >-
+      Consolidated Clinical Document Architecture — a structured clinical document
+      standard for sharing patient health information between healthcare systems,
+      supporting care coordination and interoperability.
+    related:
+      - patient
+      - clinical_document
+
+  - term: oauth2
+    label: OAuth 2.0
+    definition: >-
+      The authorization framework used by the Elation API. Applications use the
+      client_credentials grant type to obtain access tokens. Tokens expire after
+      36000 seconds (10 hours) and must be refreshed.
+    related:
+      - scope
+      - access_token
+
+  - term: sandbox
+    label: Sandbox Environment
+    definition: >-
+      A non-production testing environment at sandbox.elationemr.com used by
+      developers to test API integrations without affecting real patient data.
+      Separate client credentials are required for sandbox access.
+    related:
+      - oauth2
+
+  - term: npi
+    label: National Provider Identifier
+    definition: >-
+      A 10-digit unique identifier assigned to healthcare providers in the United
+      States by the Centers for Medicare & Medicaid Services (CMS). Used to identify
+      physicians and practices in claims and clinical data exchange.
+    related:
+      - physician
+      - practice
+
+  - term: ehr
+    label: Electronic Health Record
+    definition: >-
+      A digital version of a patient's medical chart. Elation Health's EHR platform
+      provides a primary care-focused system for managing clinical encounters,
+      patient records, orders, prescriptions, and practice administration.
+    related:
+      - patient
+      - visit_note
+      - physician
+
+  - term: fhir
+    label: FHIR
+    definition: >-
+      Fast Healthcare Interoperability Resources — an HL7 standard for healthcare
+      data exchange. Elation Health supports FHIR-based interoperability for
+      patient data exchange with third-party systems.
+    related:
+      - ccda
+      - patient
+
+  - term: service_location
+    label: Service Location
+    definition: >-
+      A physical or virtual location where healthcare services are rendered. Each
+      appointment is associated with a service location, which includes address,
+      phone, and CMS place of service code.
+    related:
+      - practice
+      - appointment
+
+  - term: webhook
+    label: Webhook
+    definition: >-
+      An event notification mechanism where Elation pushes HTTP callbacks to a
+      registered URL when specific events occur (e.g., appointment created, patient
+      updated). Configured via event subscriptions.
+    related:
+      - event_subscription
+      - app_published_event

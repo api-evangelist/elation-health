@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Physicians API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Physicians
+  description: Provider and staff management
+paths:
+  /physicians/:
+    get:
+      operationId: physicians_list
+      summary: List physicians
+      description: Retrieve a list of physicians in the practice.
+      tags:
+      - Physicians
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of physicians
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPhysicianList'
+  /physicians/{id}/:
+    get:
+      operationId: physicians_retrieve
+      summary: Retrieve a physician
+      tags:
+      - Physicians
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Physician details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+    put:
+      operationId: physicians_update
+      summary: Update a physician
+      tags:
+      - Physicians
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Physician'
+      responses:
+        '200':
+          description: Physician updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+    patch:
+      operationId: physicians_partial_update
+      summary: Partially update a physician
+      tags:
+      - Physicians
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Physician'
+      responses:
+        '200':
+          description: Physician updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+components:
+  schemas:
+    PaginatedPhysicianList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Physician'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    Physician:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        npi:
+          type: string
+          maxLength: 10
+          description: National Provider Identifier
+        practice:
+          type: integer
+          description: Practice ID
+        specialty:
+          type: string
+        credentials:
+          type: string
+        email:
+          type: string
+          format: email
+        is_active:
+          type: boolean
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

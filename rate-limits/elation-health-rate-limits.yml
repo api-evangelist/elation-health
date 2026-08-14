@@ -1,0 +1,67 @@
+name: Elation Health API Rate Limits
+description: >-
+  Elation Health's API platform includes rate limiting to ensure fair usage and
+  platform stability. Specific rate limit values are not publicly documented;
+  developers are encouraged to consult the official API documentation or contact
+  Elation directly for current rate limit specifications applicable to their
+  integration tier.
+url: https://docs.elationhealth.com/reference/api-overview
+created: '2026-06-13'
+modified: '2026-06-13'
+authentication:
+  type: OAuth2
+  grantType: client_credentials
+  sandboxTokenURL: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+  productionTokenURL: https://app.elationemr.com/api/2.0/oauth2/token/
+  note: >-
+    OAuth2 Bearer tokens are required for all API calls. Separate credentials
+    are required for sandbox and production environments. Tokens are obtained by
+    exchanging a client ID and client secret at the token endpoint. Include the
+    token as an Authorization: Bearer <token> header on all requests.
+environments:
+  - name: Sandbox
+    baseURL: https://sandbox.elationemr.com/api/2.0/
+    description: Development and testing environment. Requires sandbox-specific credentials.
+    tokenURL: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+  - name: Production
+    baseURL: https://app.elationemr.com/api/2.0/
+    description: Live production environment. Requires production credentials obtained after approval.
+    tokenURL: https://app.elationemr.com/api/2.0/oauth2/token/
+rateLimits:
+  - name: General API Rate Limit
+    description: >-
+      Elation's API platform features transparent rate limits. Specific
+      request-per-minute or request-per-day values are not publicly documented.
+      Developers should implement exponential backoff and respect 429
+      Too Many Requests responses.
+    documented: false
+    guidance: >-
+      Contact Elation Health developer support or consult the API documentation
+      at docs.elationhealth.com for current rate limit specifications.
+pagination:
+  type: cursor
+  description: >-
+    API responses for list endpoints are paginated. Results are returned in a
+    results array. Use the next URL from the response to retrieve subsequent
+    pages.
+  resultsField: results
+  nextField: next
+  previousField: previous
+errorHandling:
+  - code: 400
+    description: Bad Request - Invalid parameters or request body
+  - code: 401
+    description: Unauthorized - Invalid or missing OAuth2 Bearer token
+  - code: 403
+    description: Forbidden - Insufficient permissions for the requested resource
+  - code: 404
+    description: Not Found - Resource does not exist
+  - code: 429
+    description: Too Many Requests - Rate limit exceeded; implement backoff and retry
+  - code: 500
+    description: Internal Server Error - Contact Elation support if persistent
+notes: >-
+  Elation Health does not publicly publish specific numeric rate limit values.
+  The platform is designed for enterprise integration and rate limits may vary
+  by plan and usage agreement. Monitor the X-RateLimit headers if present in
+  API responses for current limit status.

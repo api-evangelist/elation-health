@@ -1,0 +1,811 @@
+{
+  "item": [
+    {
+      "id": "f252af0b-1d88-4e0e-807d-68947a27d14d",
+      "name": "Appointments",
+      "description": {
+        "content": "Scheduling and appointment management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0bd2428-8327-4281-8f5b-bd4418cdfc27",
+          "name": "List appointments",
+          "request": {
+            "name": "List appointments",
+            "description": {
+              "content": "Retrieve a paginated list of appointments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "appointments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "physician",
+                  "value": "<integer>",
+                  "description": "Filter by physician ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<integer>",
+                  "description": "Filter by patient ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduled_date",
+                  "value": "<dateTime>",
+                  "description": "Filter by scheduled date (ISO 8601)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "096e83b6-e649-4727-b48c-f614406dbf16",
+              "name": "Paginated list of appointments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "physician",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scheduled_date",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 2170,\n  \"next\": \"string\",\n  \"previous\": \"string\",\n  \"results\": [\n    {\n      \"scheduled_date\": \"2017-05-22T10:27:20.947Z\",\n      \"duration\": 43,\n      \"reason\": \"string\",\n      \"patient\": 8300,\n      \"physician\": 5700,\n      \"practice\": 2134,\n      \"service_location\": {},\n      \"description\": \"string\",\n      \"mode\": \"VIDEO\",\n      \"instructions\": \"string\",\n      \"metadata\": {},\n      \"id\": 3989,\n      \"time_slot_type\": \"appointment\",\n      \"time_slot_status\": {},\n      \"status\": {\n        \"status\": \"Cancelled\",\n        \"room\": \"string\",\n        \"status_date\": \"1989-08-05T22:55:43.069Z\",\n        \"status_detail\": \"Other\"\n      },\n      \"payment\": {\n        \"amount\": 3699.123189835868,\n        \"collection_date\": \"2020-05-21\"\n      },\n      \"billing_details\": {},\n      \"is_blocking\": false,\n      \"created_date\": \"2001-03-28T01:19:28.773Z\",\n      \"last_modified_date\": \"1956-02-24T03:11:34.625Z\",\n      \"deleted_date\": \"2008-12-19T10:22:41.753Z\"\n    },\n    {\n      \"scheduled_date\": \"1982-02-17T12:19:05.459Z\",\n      \"duration\": 119,\n      \"reason\": \"string\",\n      \"patient\": 1539,\n      \"physician\": 3590,\n      \"practice\": 2950,\n      \"service_location\": {},\n      \"description\": \"string\",\n      \"mode\": \"IN_PERSON\",\n      \"instructions\": \"string\",\n      \"metadata\": {},\n      \"id\": 7274,\n      \"time_slot_type\": \"appointment\",\n      \"time_slot_status\": {},\n      \"status\": {\n        \"status\": \"Checked In\",\n        \"room\": \"string\",\n        \"status_date\": \"2010-04-26T06:41:56.978Z\",\n        \"status_detail\": \"Left Without Seeing\"\n      },\n      \"payment\": {\n        \"amount\": 9722.824615376143,\n        \"collection_date\": \"2002-07-12\"\n      },\n      \"billing_details\": {},\n      \"is_blocking\": false,\n      \"created_date\": \"1974-09-10T01:20:51.497Z\",\n      \"last_modified_date\": \"1996-05-08T04:18:08.883Z\",\n      \"deleted_date\": \"2006-06-08T05:49:06.727Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54b45e56-cbe9-4a89-ab1c-48af1912d736",
+          "name": "Create an appointment",
+          "request": {
+            "name": "Create an appointment",
+            "description": {
+              "content": "Schedule a new appointment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "appointments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0488e8c-57a6-452b-bcee-3d5edee420ac",
+              "name": "Appointment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"id\": 3224,\n  \"time_slot_type\": \"appointment\",\n  \"time_slot_status\": {},\n  \"status\": {\n    \"status\": \"Not Seen\",\n    \"room\": \"string\",\n    \"status_date\": \"1983-08-03T20:55:27.003Z\",\n    \"status_detail\": \"No Show\"\n  },\n  \"payment\": {\n    \"amount\": 8441.781993230934,\n    \"collection_date\": \"1970-06-28\"\n  },\n  \"billing_details\": {},\n  \"is_blocking\": false,\n  \"created_date\": \"1964-02-24T05:34:16.070Z\",\n  \"last_modified_date\": \"1964-05-18T01:47:17.900Z\",\n  \"deleted_date\": \"2003-10-01T07:22:35.646Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaca71f6-81d6-4fb5-9fc0-d9fed5676954",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aa2f439-afb0-46a4-ab2f-d168f9f85c1d",
+          "name": "Retrieve an appointment",
+          "request": {
+            "name": "Retrieve an appointment",
+            "description": {
+              "content": "Get details for a specific appointment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "appointments",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f80d424-7b06-4b23-870e-eab3e76b7f46",
+              "name": "Appointment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"id\": 3224,\n  \"time_slot_type\": \"appointment\",\n  \"time_slot_status\": {},\n  \"status\": {\n    \"status\": \"Not Seen\",\n    \"room\": \"string\",\n    \"status_date\": \"1983-08-03T20:55:27.003Z\",\n    \"status_detail\": \"No Show\"\n  },\n  \"payment\": {\n    \"amount\": 8441.781993230934,\n    \"collection_date\": \"1970-06-28\"\n  },\n  \"billing_details\": {},\n  \"is_blocking\": false,\n  \"created_date\": \"1964-02-24T05:34:16.070Z\",\n  \"last_modified_date\": \"1964-05-18T01:47:17.900Z\",\n  \"deleted_date\": \"2003-10-01T07:22:35.646Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7791e3e-2c14-4c46-a382-810db186c9ac",
+              "name": "Appointment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f377b25c-c173-47a1-a72f-1daa7132a064",
+          "name": "Update an appointment",
+          "request": {
+            "name": "Update an appointment",
+            "description": {
+              "content": "Replace all appointment fields with the provided values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "appointments",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "afb0d664-d15f-46ea-9c8e-ae0f274d7a0b",
+              "name": "Appointment updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"id\": 3224,\n  \"time_slot_type\": \"appointment\",\n  \"time_slot_status\": {},\n  \"status\": {\n    \"status\": \"Not Seen\",\n    \"room\": \"string\",\n    \"status_date\": \"1983-08-03T20:55:27.003Z\",\n    \"status_detail\": \"No Show\"\n  },\n  \"payment\": {\n    \"amount\": 8441.781993230934,\n    \"collection_date\": \"1970-06-28\"\n  },\n  \"billing_details\": {},\n  \"is_blocking\": false,\n  \"created_date\": \"1964-02-24T05:34:16.070Z\",\n  \"last_modified_date\": \"1964-05-18T01:47:17.900Z\",\n  \"deleted_date\": \"2003-10-01T07:22:35.646Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b5f2ddd-8659-40fd-a4ca-7c2a6f427dd1",
+          "name": "Partially update an appointment",
+          "request": {
+            "name": "Partially update an appointment",
+            "description": {
+              "content": "Update one or more appointment fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "appointments",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": {\n    \"status\": \"<string>\",\n    \"room\": \"<string>\",\n    \"status_detail\": \"<string>\"\n  },\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "467c1c4a-9859-485e-a98f-154f12ed4e4a",
+              "name": "Appointment updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": {\n    \"status\": \"<string>\",\n    \"room\": \"<string>\",\n    \"status_detail\": \"<string>\"\n  },\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scheduled_date\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"reason\": \"<string>\",\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<object>\",\n  \"description\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"metadata\": \"<object>\",\n  \"id\": 6017,\n  \"time_slot_type\": \"appointment\",\n  \"time_slot_status\": {},\n  \"status\": {\n    \"status\": \"<string>\",\n    \"room\": \"<string>\",\n    \"status_date\": \"1966-06-17T11:05:03.724Z\",\n    \"status_detail\": \"<string>\"\n  },\n  \"payment\": {\n    \"amount\": 740.4949863976407,\n    \"collection_date\": \"1996-04-09\"\n  },\n  \"billing_details\": {},\n  \"is_blocking\": false,\n  \"created_date\": \"1970-09-06T06:09:58.086Z\",\n  \"last_modified_date\": \"2016-06-28T17:23:59.386Z\",\n  \"deleted_date\": \"2018-05-10T16:15:22.064Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e65ef79a-8890-405a-9687-dbd9520107b6",
+          "name": "Delete an appointment",
+          "request": {
+            "name": "Delete an appointment",
+            "description": {
+              "content": "Cancel and delete an appointment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "appointments",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12e3674f-7077-4c8e-8418-a8209d6b31df",
+              "name": "Appointment deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "appointments",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "apiv2"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://sandbox.elationemr.com/api/2.0/oauth2/token/"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e11e3cae-d358-4541-a962-36187b446889",
+    "name": "Elation Health REST Allergies Appointments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.\n\nContact Support:\n Name: Elation Health Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

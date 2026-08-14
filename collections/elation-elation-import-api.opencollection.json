@@ -1,0 +1,477 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Elation Import API",
+    "version": "1.0.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Import Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of existing data import requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a list of existing data import requests."
+        },
+        {
+          "info": {
+            "name": "Create a new data import request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new data import request."
+        },
+        {
+          "info": {
+            "name": "Retrieve an existing data import request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the existing Data Import Request"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "This can be used to check on the status of all child Patient Chart Import Requests."
+        },
+        {
+          "info": {
+            "name": "Update an existing data import request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the existing Data Import Request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "All editable fields must be included even if the value is unchanged."
+        },
+        {
+          "info": {
+            "name": "Update an existing data import request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the existing Data Import Request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Only include fields where the value is changing."
+        },
+        {
+          "info": {
+            "name": "Delete an existing data import request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the existing Data Import Request"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Only possible if no Patient Chart Import Requests have ever been created for this Data Import Request."
+        },
+        {
+          "info": {
+            "name": "Convenience call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/run",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the existing Data Import Request"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Convenience call to transition all child Patient Chart Import Requests in `open` to `pending`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "patient chart import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Finds patient_chart_import records by status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the data-import-request"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status values that need to be considered for filter"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Multiple status values can be provided with comma separated strings"
+        },
+        {
+          "info": {
+            "name": "Add a new patient-chart-import to the associated data import request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the data-import-request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add a new patient-chart-import to the associated data import request"
+        },
+        {
+          "info": {
+            "name": "Find patient-chart-import by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports/:pci-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the data-import-request"
+              },
+              {
+                "name": "pci-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient-chart-import to return"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a single patient-chart-import"
+        },
+        {
+          "info": {
+            "name": "Update an existing patient-chart-import",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports/:pci-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the data-import-request"
+              },
+              {
+                "name": "pci-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient-chart-import to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an existing patient-chart-import"
+        },
+        {
+          "info": {
+            "name": "Updates a patient-chart-import in the store with form data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports/:pci-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the data-import-request"
+              },
+              {
+                "name": "pci-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient-chart-import to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates a patient-chart-import in the store with form data"
+        },
+        {
+          "info": {
+            "name": "Deletes a patient-chart-import",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports/:pci-id",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the data-import-request"
+              },
+              {
+                "name": "pci-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient-chart-import to return"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deletes a patient-chart-import"
+        },
+        {
+          "info": {
+            "name": "uploads an document for rendering",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.elationemr.com/api/2.0/data-import-requests/:dir-id/patient-chart-imports/:pci-id/render-requests",
+            "params": [
+              {
+                "name": "dir-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of data-import-request to update"
+              },
+              {
+                "name": "pci-id",
+                "value": "",
+                "type": "path",
+                "description": "ID of patient-chart-import to update"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "additionalMetadata",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "http://www.elationhealth.com/api/2.0/oauth",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "uploads an document for rendering"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

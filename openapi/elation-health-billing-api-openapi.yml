@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Billing API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Billing
+  description: Billing codes and bill management
+paths:
+  /billing_codes/:
+    get:
+      operationId: billing_codes_list
+      summary: List billing codes
+      description: Retrieve a paginated list of billing codes.
+      tags:
+      - Billing
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of billing codes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBillingCodeList'
+    post:
+      operationId: billing_codes_create
+      summary: Create a billing code
+      tags:
+      - Billing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCodeCreate'
+      responses:
+        '201':
+          description: Billing code created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+  /billing_codes/{id}/:
+    get:
+      operationId: billing_codes_retrieve
+      summary: Retrieve a billing code
+      tags:
+      - Billing
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Billing code details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+    put:
+      operationId: billing_codes_update
+      summary: Update a billing code
+      tags:
+      - Billing
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCodeCreate'
+      responses:
+        '200':
+          description: Billing code updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+    patch:
+      operationId: billing_codes_partial_update
+      summary: Partially update a billing code
+      tags:
+      - Billing
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCodeCreate'
+      responses:
+        '200':
+          description: Billing code updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+    delete:
+      operationId: billing_codes_destroy
+      summary: Delete a billing code
+      tags:
+      - Billing
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Billing code deleted
+components:
+  schemas:
+    PaginatedBillingCodeList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BillingCode'
+    BillingCode:
+      allOf:
+      - $ref: '#/components/schemas/BillingCodeCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    BillingCodeCreate:
+      type: object
+      required:
+      - code
+      - description
+      properties:
+        code:
+          type: string
+          description: Billing/CPT code
+        description:
+          type: string
+          description: Description of the billing code
+        fee:
+          type: number
+          format: float
+          description: Standard fee amount
+        code_type:
+          type: string
+          description: Type of billing code (CPT, ICD10, etc.)
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

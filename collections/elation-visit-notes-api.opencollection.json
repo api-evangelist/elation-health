@@ -1,0 +1,728 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Visit Notes API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for pagination"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by practice ID"
+              },
+              {
+                "name": "is_draft",
+                "value": "",
+                "type": "query",
+                "description": "True to filter to draft notes only. False to include only signed notes. Omit to include both."
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              },
+              {
+                "name": "providers",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of provider IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of note metadata"
+        },
+        {
+          "info": {
+            "name": "Create Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new `Note`."
+        },
+        {
+          "info": {
+            "name": "Get Note By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific note. Returns a sections-based response for layout notes,\nor a legacy Note for notes created before the sections schema.\n\nThis endpoint fetches a note without creating a snapshot. The snapshot is used for conflict\nresolution when multiple sources are concurrently updating the note.\n\nTo fetch a note for editing that requires conflict resolution, use the `/notes/{note_id}/edit`\nendpoint instead."
+        },
+        {
+          "info": {
+            "name": "Update Note By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a specific note by id"
+        },
+        {
+          "info": {
+            "name": "Delete Note By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific draft note"
+        },
+        {
+          "info": {
+            "name": "Get Note Amendment By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes/:note_id/amendments/:amendment_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "amendment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific note amendment (legacy or EN2.1 sections-based)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Custom Blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/notes/custom-blocks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for pagination"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Custom Blocks"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notes v1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notes V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v1/notes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for pagination"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by practice ID"
+              },
+              {
+                "name": "is_draft",
+                "value": "",
+                "type": "query",
+                "description": "True to filter to draft notes only. False to include only signed notes. Omit to include both."
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              },
+              {
+                "name": "providers",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of provider IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of note metadata."
+        },
+        {
+          "info": {
+            "name": "Create Note V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.elationemr.com/api/2.0/v1/notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a legacy Note."
+        },
+        {
+          "info": {
+            "name": "Get Note By Id V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v1/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific legacy Note. Returns HTTP 400 if the note uses the EN2.1 schema."
+        },
+        {
+          "info": {
+            "name": "Update Note By Id V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.elationemr.com/api/2.0/v1/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a legacy Note. Returns HTTP 400 if the note uses the EN2.1 schema\n(pass ``content_map`` and use the /v2/ endpoint instead)."
+        },
+        {
+          "info": {
+            "name": "Delete Note By Id V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sandbox.elationemr.com/api/2.0/v1/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific draft legacy Note."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notes v2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notes V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit for pagination"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by practice ID"
+              },
+              {
+                "name": "is_draft",
+                "value": "",
+                "type": "query",
+                "description": "True to filter to draft notes only. False to include only signed notes. Omit to include both."
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              },
+              {
+                "name": "providers",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of provider IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a paginated list of note metadata."
+        },
+        {
+          "info": {
+            "name": "Create Note V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an EN2.1 sections-based Note."
+        },
+        {
+          "info": {
+            "name": "Get Note By Id V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific EN2.1 sections-based Note. Returns HTTP 400 if the note\nuses the legacy schema."
+        },
+        {
+          "info": {
+            "name": "Update Note By Id V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an EN2.1 sections-based Note."
+        },
+        {
+          "info": {
+            "name": "Delete Note By Id V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific draft EN2.1 Note."
+        },
+        {
+          "info": {
+            "name": "Create Note Amendment V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/amendments",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an EN2.1 note amendment. If a draft amendment already exists, returns it\n(HTTP 200). The parent note must be a signed sections-based note."
+        },
+        {
+          "info": {
+            "name": "Get Note Amendment By Id V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/amendments/:amendment_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "amendment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific EN2.1 note amendment."
+        },
+        {
+          "info": {
+            "name": "Update Note Amendment By Id V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/amendments/:amendment_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "amendment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a draft EN2.1 note amendment."
+        },
+        {
+          "info": {
+            "name": "Delete Note Amendment By Id V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/amendments/:amendment_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "amendment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific draft EN2.1 note amendment."
+        },
+        {
+          "info": {
+            "name": "List Note Doctags V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/doctags",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all doctags for an EN2.1 sections-based Note. Returns HTTP 400 if\nthe note uses the legacy schema."
+        },
+        {
+          "info": {
+            "name": "Add Doctag To Note V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/doctags",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add a doctag to an EN2.1 sections-based Note. The doctag will be upserted\ninto the database and linked to the note. Returns HTTP 400 if the note\nuses the legacy schema."
+        },
+        {
+          "info": {
+            "name": "Delete Doctag V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/doctags/:doctag_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "doctag_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove a doctag from an EN2.1 sections-based Note. Returns HTTP 400 if\nthe note uses the legacy schema."
+        },
+        {
+          "info": {
+            "name": "Get Note For Edit V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.elationemr.com/api/2.0/v2/notes/:note_id/edit",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch an EN2.1 note for editing. Creates a snapshot and returns ``snapshot_id``\nfor collaborative PATCH updates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

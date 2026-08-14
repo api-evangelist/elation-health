@@ -1,0 +1,1666 @@
+{
+  "item": [
+    {
+      "id": "d9bcb941-8701-4b1a-8256-2fd15b9834cb",
+      "name": "Billing Codes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "809bb218-5a2f-4c86-8f24-0426b2c81675",
+          "name": "List Billing Codes",
+          "request": {
+            "name": "List Billing Codes",
+            "description": {
+              "content": "Get the CPT codes that the practice has set up. To view them in the app, go to Practice Settings - Billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "billing_codes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>,<string>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>,<string>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b233ac19-114e-41d2-b774-84b6f1cbceed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "billing_codes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "description",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"practice\": 9582,\n      \"charge\": \"-96888\",\n      \"id\": 903,\n      \"sequence\": -1833432511\n    },\n    {\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"practice\": 5295,\n      \"charge\": \"-7\",\n      \"id\": 6364,\n      \"sequence\": -692225455\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59af7fa3-f0d2-4104-8f33-2114a265b3be",
+          "name": "Create Billing Code",
+          "request": {
+            "name": "Create Billing Code",
+            "description": {
+              "content": "Create a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "billing_codes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"<string,null-decimal>\",\n  \"sequence\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ccbd051-1e65-4059-9da6-23c81cb95a25",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "billing_codes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"<string,null-decimal>\",\n  \"sequence\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"practice\": 5841,\n  \"charge\": \"237459.5\",\n  \"id\": 4798,\n  \"sequence\": -2097381505\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40a4897a-64f4-42ce-8044-331355933e10",
+          "name": "Delete Billing Code",
+          "request": {
+            "name": "Delete Billing Code",
+            "description": {
+              "content": "Delete a CPT code that the practice has set up. To view them in the app, go to Practice Settings - Billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "billing_codes",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f6c1e68f-6705-46d2-807f-36bf5ea50308",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "billing_codes",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65ae06f5-05e3-4c7d-a602-d6204f840f99",
+          "name": "Retrieve Billing Code",
+          "request": {
+            "name": "Retrieve Billing Code",
+            "description": {
+              "content": "Get a CPT code that the practice has set up. To view all codes in the app, go to Practice Settings - Billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "billing_codes",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2a81169a-07f2-44c3-97cd-96903a260c10",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "billing_codes",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"practice\": 5841,\n  \"charge\": \"237459.5\",\n  \"id\": 4798,\n  \"sequence\": -2097381505\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "673dea68-d0c8-4015-8f85-5d3d28409f5d",
+          "name": "Partially Update Billing Code",
+          "request": {
+            "name": "Partially Update Billing Code",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "billing_codes",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"charge\": \"<string,null-decimal>\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"sequence\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee01fe91-245b-42d6-9031-4b1e3cd3deea",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "billing_codes",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"charge\": \"<string,null-decimal>\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"sequence\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"practice\": 5841,\n  \"charge\": \"237459.5\",\n  \"id\": 4798,\n  \"sequence\": -2097381505\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70b5ae29-a240-49a5-88f5-358412f5d2b4",
+          "name": "Update Billing Code",
+          "request": {
+            "name": "Update Billing Code",
+            "description": {
+              "content": "Update a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "billing_codes",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"<string,null-decimal>\",\n  \"sequence\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09265393-977e-4c33-a172-ff58685515d2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "billing_codes",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"charge\": \"<string,null-decimal>\",\n  \"sequence\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"practice\": 5841,\n  \"charge\": \"237459.5\",\n  \"id\": 4798,\n  \"sequence\": -2097381505\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "208ba490-0833-4adc-acfc-afb357ad663a",
+      "name": "Bills",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a70af46-a8c4-482c-b223-183d854fd890",
+          "name": "List Bills",
+          "request": {
+            "name": "List Bills",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "bills",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assigned_physician",
+                  "value": "<long>,<long>",
+                  "description": "The id of the physician who is assigned to this bill, could be different from the signer."
+                },
+                {
+                  "disabled": false,
+                  "key": "bill_id",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_service_date",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "The id of the practice that is responsible for the bill."
+                },
+                {
+                  "disabled": false,
+                  "key": "signing_physician",
+                  "value": "<string>",
+                  "description": "The id of the physician who signed off on the visit note that is associated with this bill."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_service_date",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "visit_note_id",
+                  "value": "<long>,<long>",
+                  "description": "The id of the visit note this bill is attached to."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fabc3de7-60e3-4f2f-b967-bc8442ab0715",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "bills",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigned_physician",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "bill_id",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "from_service_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "signing_physician",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to_service_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "visit_note_id",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"billing_date\": \"2023-07-09T03:51:11.290Z\",\n      \"billing_error\": \"string\",\n      \"billing_raw_error\": \"string\",\n      \"billing_provider\": 2093,\n      \"billing_status\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"cpts\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"created_date\": \"1966-09-28T14:19:09.085Z\",\n      \"deferred_bill\": true,\n      \"id\": 6433,\n      \"last_modified_date\": \"1971-08-31T06:01:19.090Z\",\n      \"metadata\": {\n        \"data\": {},\n        \"object_id\": \"string\",\n        \"object_web_link\": \"string\"\n      },\n      \"notes\": \"string\",\n      \"ordering_provider\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"patient\": 9310,\n      \"payment\": {\n        \"description\": \"Patient payment for the bill.\",\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"physician\": 8606,\n      \"practice\": 6839,\n      \"prior_authorization\": \"string\",\n      \"ref_number\": \"string\",\n      \"referring_provider\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"rendering_provider\": 5684,\n      \"service_date\": \"1988-09-23T19:19:54.873Z\",\n      \"service_date_timezone\": \"string\",\n      \"service_location\": {\n        \"address_line1\": \"string\",\n        \"name\": \"string\",\n        \"practice\": 5448,\n        \"state\": \"string\",\n        \"address_line2\": \"string\",\n        \"city\": \"\",\n        \"created_date\": \"2023-10-20T04:52:27.359Z\",\n        \"deleted_date\": \"2002-04-27T14:52:42.603Z\",\n        \"email\": \"NGEnn2AQkgIk@CByFLVSonDFNilbZUNXMxWawoozoySZ.phz\",\n        \"fax\": \"string\",\n        \"id\": 8830,\n        \"is_primary\": false,\n        \"phone\": \"string\",\n        \"place_of_service\": \"Psychiatric Facility-Partial Hospitalization\",\n        \"place_of_service_code\": 9175,\n        \"status\": \"active\",\n        \"timezone\": \"Asia/Choibalsan\",\n        \"zip\": \"\"\n      },\n      \"supervising_provider\": 9498,\n      \"visit_note_deleted_date\": \"2008-06-09T22:03:43.290Z\",\n      \"visit_note_id\": 7740,\n      \"visit_note_signed_date\": \"1999-11-09T19:39:30.895Z\"\n    },\n    {\n      \"billing_date\": \"1962-01-04T22:07:34.594Z\",\n      \"billing_error\": \"string\",\n      \"billing_raw_error\": \"string\",\n      \"billing_provider\": 7945,\n      \"billing_status\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"cpts\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"created_date\": \"1985-03-30T09:26:00.707Z\",\n      \"deferred_bill\": true,\n      \"id\": 6383,\n      \"last_modified_date\": \"1981-08-21T07:22:24.618Z\",\n      \"metadata\": {\n        \"data\": {},\n        \"object_id\": \"string\",\n        \"object_web_link\": \"string\"\n      },\n      \"notes\": \"string\",\n      \"ordering_provider\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"patient\": 4516,\n      \"payment\": {\n        \"description\": \"Patient payment for the bill.\",\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"physician\": 5161,\n      \"practice\": 8368,\n      \"prior_authorization\": \"string\",\n      \"ref_number\": \"string\",\n      \"referring_provider\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"rendering_provider\": 4079,\n      \"service_date\": \"1963-05-11T09:49:41.940Z\",\n      \"service_date_timezone\": \"string\",\n      \"service_location\": {\n        \"address_line1\": \"string\",\n        \"name\": \"string\",\n        \"practice\": 5495,\n        \"state\": \"string\",\n        \"address_line2\": \"string\",\n        \"city\": \"\",\n        \"created_date\": \"2014-08-13T15:36:01.810Z\",\n        \"deleted_date\": \"1980-08-09T08:25:43.660Z\",\n        \"email\": \"3Yb8UWx3fUoZ@hIqNpIeVHPWdiSqLVQcMBllJbEPweq.qr\",\n        \"fax\": \"string\",\n        \"id\": 8460,\n        \"is_primary\": false,\n        \"phone\": \"string\",\n        \"place_of_service\": \"Telehealth Provided in Patient’s Home\",\n        \"place_of_service_code\": 2318,\n        \"status\": \"active\",\n        \"timezone\": \"Europe/Ulyanovsk\",\n        \"zip\": \"\"\n      },\n      \"supervising_provider\": 8849,\n      \"visit_note_deleted_date\": \"1995-01-22T18:23:16.472Z\",\n      \"visit_note_id\": 6395,\n      \"visit_note_signed_date\": \"1979-04-03T13:10:20.753Z\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61560986-1f9b-430f-b638-5c94187bb514",
+          "name": "Create Bill",
+          "request": {
+            "name": "Create Bill",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "bills",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"<string,null-decimal>\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"<string,null-decimal>\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<long>\",\n  \"visit_note\": \"<long>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"notes\": \"\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment\": \"<long>\",\n  \"payment_amount\": \"0.00\",\n  \"prior_authorization\": \"<string,null>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"show_dual_coding\": false,\n  \"supervising_provider\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c5f773e-c5c7-4298-a7a5-f0f6f56670ff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "bills",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cpts\": [\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-.69\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"physician\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"service_location\": \"<long>\",\n  \"visit_note\": \"<long>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"notes\": \"\",\n  \"ordering_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"payment\": \"<long>\",\n  \"payment_amount\": \"0.00\",\n  \"prior_authorization\": \"<string,null>\",\n  \"referring_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"show_dual_coding\": false,\n  \"supervising_provider\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cpts\": [\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-.61\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-037.82\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"patient\": 6376,\n  \"physician\": 1481,\n  \"practice\": 3562,\n  \"service_location\": 7507,\n  \"visit_note\": 8936,\n  \"billing_provider\": 8534,\n  \"id\": 812,\n  \"notes\": \"\",\n  \"ordering_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"payment\": 623,\n  \"payment_amount\": \"0.00\",\n  \"prior_authorization\": \"string\",\n  \"referring_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"rendering_provider\": 3782,\n  \"show_dual_coding\": false,\n  \"supervising_provider\": 5612\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e05dc7e4-b437-4142-9e60-2eb70702b135",
+          "name": "Retrieve Bill",
+          "request": {
+            "name": "Retrieve Bill",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "bills",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6d29e3bb-5dae-4554-ac81-c07800eca6c5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "bills",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billing_date\": \"1962-01-22T18:18:48.061Z\",\n  \"billing_error\": \"string\",\n  \"billing_raw_error\": \"string\",\n  \"billing_provider\": 7387,\n  \"billing_status\": \"Unbilled\",\n  \"cpts\": [\n    {\n      \"alt_dxs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cpt\": \"string\",\n      \"description\": \"string\",\n      \"dxs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"modifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-1423\",\n      \"ndc_measure\": \"string\",\n      \"unit_charge\": \"string\",\n      \"units\": \"string\"\n    },\n    {\n      \"alt_dxs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cpt\": \"string\",\n      \"description\": \"string\",\n      \"dxs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"modifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-\",\n      \"ndc_measure\": \"string\",\n      \"unit_charge\": \"string\",\n      \"units\": \"string\"\n    }\n  ],\n  \"created_date\": \"1958-05-30T17:20:03.582Z\",\n  \"deferred_bill\": false,\n  \"id\": 8370,\n  \"last_modified_date\": \"2013-03-30T07:15:48.922Z\",\n  \"metadata\": {\n    \"data\": {},\n    \"object_id\": \"string\",\n    \"object_web_link\": \"string\"\n  },\n  \"notes\": \"string\",\n  \"ordering_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"patient\": 4522,\n  \"payment\": {\n    \"amount\": \"-359309.\",\n    \"when_collected\": \"1998-10-12T20:34:05.282Z\",\n    \"appointment\": 1827,\n    \"bill\": 6234,\n    \"create_date\": \"1976-06-16T04:53:15.748Z\",\n    \"delete_date\": \"2024-06-03T21:40:40.665Z\",\n    \"id\": 4035\n  },\n  \"physician\": 8406,\n  \"practice\": 8427,\n  \"prior_authorization\": \"string\",\n  \"ref_number\": \"string\",\n  \"referring_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"rendering_provider\": 9807,\n  \"service_date\": \"1953-02-08T08:28:45.805Z\",\n  \"service_date_timezone\": \"string\",\n  \"service_location\": {\n    \"address_line1\": \"string\",\n    \"name\": \"string\",\n    \"practice\": 6158,\n    \"state\": \"string\",\n    \"address_line2\": \"string\",\n    \"city\": \"\",\n    \"created_date\": \"2015-08-28T22:52:42.529Z\",\n    \"deleted_date\": \"1958-04-18T06:42:16.614Z\",\n    \"email\": \"ZKK@hMZx.mw\",\n    \"fax\": \"string\",\n    \"id\": 858,\n    \"is_primary\": false,\n    \"phone\": \"string\",\n    \"place_of_service\": \"Residential Substance Abuse Treatment Facility\",\n    \"place_of_service_code\": 7178,\n    \"status\": \"active\",\n    \"timezone\": \"Europe/Vatican\",\n    \"zip\": \"\"\n  },\n  \"supervising_provider\": 7335,\n  \"visit_note_deleted_date\": \"1960-08-14T18:55:09.117Z\",\n  \"visit_note_id\": 4862,\n  \"visit_note_signed_date\": \"1982-03-08T14:41:12.406Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2066325d-a847-4d63-b922-805de0364f7f",
+          "name": "Partially Update Bill",
+          "request": {
+            "name": "Partially Update Bill",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "bills",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billing_date\": \"<string,null-date-time>\",\n  \"billing_error\": \"<string,null>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"billing_raw_error\": \"<string,null>\",\n  \"cpts\": [\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"<string,null-decimal>\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"<string>\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"<string>\",\n      \"units\": \"<string>\",\n      \"modifier_1\": \"<string,null>\",\n      \"modifier_2\": \"<string,null>\",\n      \"modifier_3\": \"<string,null>\",\n      \"modifier_4\": \"<string,null>\",\n      \"ndc\": \"<string,null>\",\n      \"ndc_dose\": \"<string,null-decimal>\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"payment_amount\": \"<string,null-decimal>\",\n  \"place_of_service\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string>\",\n  \"referring_provider\": {\n    \"name\": \"<string>\",\n    \"state\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"service_location\": \"<long>\",\n  \"supervising_provider\": \"<integer,null-int64>\",\n  \"visit_note\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0649665-c8bf-4d8d-93e1-d462d9837763",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "bills",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing_date\": \"<string,null-date-time>\",\n  \"billing_error\": \"<string,null>\",\n  \"billing_provider\": \"<integer,null-int64>\",\n  \"billing_raw_error\": \"<string,null>\",\n  \"cpts\": [\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-3.2\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-.114\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"notes\": \"<string,null>\",\n  \"ordering_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"payment_amount\": \"<string,null-decimal>\",\n  \"place_of_service\": \"55\",\n  \"practice\": \"<long>\",\n  \"prior_authorization\": \"<string,null>\",\n  \"ref_number\": \"<string>\",\n  \"referring_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"rendering_provider\": \"<integer,null-int64>\",\n  \"service_location\": \"<long>\",\n  \"supervising_provider\": \"<integer,null-int64>\",\n  \"visit_note\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billing_date\": \"1947-04-29T11:05:28.884Z\",\n  \"billing_error\": \"string\",\n  \"billing_provider\": 1404,\n  \"billing_raw_error\": \"string\",\n  \"cpts\": [\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-9\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-850793\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"notes\": \"string\",\n  \"ordering_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"payment_amount\": \"-\",\n  \"place_of_service\": \"16\",\n  \"practice\": 6260,\n  \"prior_authorization\": \"string\",\n  \"ref_number\": \"string\",\n  \"referring_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"rendering_provider\": 6167,\n  \"service_location\": 9218,\n  \"supervising_provider\": 7296,\n  \"visit_note\": 3390\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccd7a678-c7aa-44e7-b87e-5705453d3c97",
+          "name": "Release a Bill to PMS",
+          "request": {
+            "name": "Release a Bill to PMS",
+            "description": {
+              "content": "This is a simple PATCH endpoint that allows you to release a bill to your connected PMS. It accomplishes the same goal as pressing the \"Send to PMS\" button on the Elation Billing Report for a bill.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "bills",
+                ":id",
+                "actions",
+                "release-to-pms",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3ecafb91-40ab-4de9-a6a7-7353c1512ad0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "bills",
+                    ":id",
+                    "actions",
+                    "release-to-pms",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billing_date\": \"1947-04-29T11:05:28.884Z\",\n  \"billing_error\": \"string\",\n  \"billing_provider\": 1404,\n  \"billing_raw_error\": \"string\",\n  \"cpts\": [\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-9\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"cpt\": \"string\",\n      \"dxs\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"unit_charge\": \"string\",\n      \"units\": \"string\",\n      \"modifier_1\": \"st\",\n      \"modifier_2\": \"st\",\n      \"modifier_3\": \"st\",\n      \"modifier_4\": \"st\",\n      \"ndc\": \"string\",\n      \"ndc_dose\": \"-850793\",\n      \"ndc_measure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"notes\": \"string\",\n  \"ordering_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"payment_amount\": \"-\",\n  \"place_of_service\": \"16\",\n  \"practice\": 6260,\n  \"prior_authorization\": \"string\",\n  \"ref_number\": \"string\",\n  \"referring_provider\": {\n    \"name\": \"string\",\n    \"state\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"rendering_provider\": 6167,\n  \"service_location\": 9218,\n  \"supervising_provider\": 7296,\n  \"visit_note\": 3390\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9f19699c-bf48-4ac6-8a55-679774af13d8",
+      "name": "Outstanding Balance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0f671dc-de7a-4421-803f-2f4cce5ae376",
+          "name": "Update Outstanding Balance",
+          "request": {
+            "name": "Update Outstanding Balance",
+            "description": {
+              "content": "The outstanding balance is a write-only resource that can be used to update the balance of a specific patient. It requires that the OutstandingBalance feature must be enabled for the practice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "patients",
+                ":id",
+                "outstanding_balance",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the patient"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"balance\": \"<decimal>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60dce8dd-be1c-4ac8-a250-5008c6d71743",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "patients",
+                    ":id",
+                    "outstanding_balance",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the patient"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"balance\": \"<decimal>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": \"-\",\n  \"patient_id\": 7883\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.elationemr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0409a72c-f9ae-4ff3-9d78-fa2b11bb184a",
+    "name": "Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+      "type": "text/plain"
+    }
+  }
+}

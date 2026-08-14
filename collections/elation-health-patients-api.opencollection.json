@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Elation Health REST Allergies Patients API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://sandbox.elationemr.com/api/2.0/oauth2/token/",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/patients/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by first name"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last name"
+              },
+              {
+                "name": "dob",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date of birth (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of patients in the practice."
+        },
+        {
+          "info": {
+            "name": "Create a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.elationemr.com/api/2.0/patients/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new patient record in the practice."
+        },
+        {
+          "info": {
+            "name": "Retrieve a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/patients/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Get details for a specific patient by ID."
+        },
+        {
+          "info": {
+            "name": "Update a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.elationemr.com/api/2.0/patients/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all patient fields with the provided values."
+        },
+        {
+          "info": {
+            "name": "Partially update a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.elationemr.com/api/2.0/patients/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update one or more patient fields."
+        },
+        {
+          "info": {
+            "name": "Delete a patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.elationemr.com/api/2.0/patients/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Soft-delete a patient record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

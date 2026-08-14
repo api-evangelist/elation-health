@@ -1,0 +1,811 @@
+{
+  "item": [
+    {
+      "id": "1653ee86-522b-4b42-9747-ca8e48477b34",
+      "name": "Patients",
+      "description": {
+        "content": "Patient profile management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "930e1f8f-d917-4cc3-a74a-f66662ff7a50",
+          "name": "List patients",
+          "request": {
+            "name": "List patients",
+            "description": {
+              "content": "Retrieve a paginated list of patients in the practice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "Filter by first name"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "Filter by last name"
+                },
+                {
+                  "disabled": false,
+                  "key": "dob",
+                  "value": "<date>",
+                  "description": "Filter by date of birth (YYYY-MM-DD)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c903450f-13cd-4ed2-9081-05a48546cd6f",
+              "name": "Paginated list of patients",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dob",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 390,\n  \"next\": \"string\",\n  \"previous\": \"string\",\n  \"results\": [\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"dob\": \"1995-10-29\",\n      \"primary_physician\": 4886,\n      \"caregiver_practice\": 6916,\n      \"sex\": \"Male\",\n      \"middle_name\": \"string\",\n      \"suffix\": \"string\",\n      \"actual_name\": \"string\",\n      \"gender_identity\": \"transgender_woman\",\n      \"legal_gender_marker\": \"F\",\n      \"pronouns\": \"not_listed\",\n      \"sexual_orientation\": \"asexual\",\n      \"race\": \"string\",\n      \"ethnicity\": \"string\",\n      \"preferred_language\": \"string\",\n      \"preferred_contact\": \"email\",\n      \"ssn\": \"string\",\n      \"address\": {\n        \"address_line1\": \"string\",\n        \"address_line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phones\": [\n        {\n          \"phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phone_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phone_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"emails\": [\n        {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"notes\": \"string\",\n      \"vip\": true,\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"patient_status\": {\n        \"status\": \"Active\",\n        \"reason\": \"string\",\n        \"deleted_date\": \"1981-11-04T14:42:39.167Z\"\n      },\n      \"metadata\": {},\n      \"id\": 1317,\n      \"created_date\": \"1951-01-21T10:15:22.574Z\",\n      \"deleted_date\": \"1956-08-31T05:42:32.842Z\",\n      \"merged_into_chart\": 1148,\n      \"sms_opt_in_status\": true,\n      \"verified\": true,\n      \"primary_care_provider\": 1452,\n      \"primary_care_provider_npi\": \"string\"\n    },\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"dob\": \"1996-11-13\",\n      \"primary_physician\": 1006,\n      \"caregiver_practice\": 8019,\n      \"sex\": \"Female\",\n      \"middle_name\": \"string\",\n      \"suffix\": \"string\",\n      \"actual_name\": \"string\",\n      \"gender_identity\": \"nonbinary\",\n      \"legal_gender_marker\": \"M\",\n      \"pronouns\": \"she_her_hers\",\n      \"sexual_orientation\": \"bisexual\",\n      \"race\": \"string\",\n      \"ethnicity\": \"string\",\n      \"preferred_language\": \"string\",\n      \"preferred_contact\": \"passport\",\n      \"ssn\": \"string\",\n      \"address\": {\n        \"address_line1\": \"string\",\n        \"address_line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phones\": [\n        {\n          \"phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phone_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phone_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"emails\": [\n        {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"notes\": \"string\",\n      \"vip\": true,\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"patient_status\": {\n        \"status\": \"Inactive\",\n        \"reason\": \"string\",\n        \"deleted_date\": \"2001-07-09T00:13:35.470Z\"\n      },\n      \"metadata\": {},\n      \"id\": 848,\n      \"created_date\": \"2014-06-11T08:20:56.256Z\",\n      \"deleted_date\": \"1999-12-12T18:04:57.156Z\",\n      \"merged_into_chart\": 5906,\n      \"sms_opt_in_status\": false,\n      \"verified\": false,\n      \"primary_care_provider\": 1263,\n      \"primary_care_provider_npi\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19105f8d-e8fc-47b0-8cf9-13b6ad98afab",
+          "name": "Create a patient",
+          "request": {
+            "name": "Create a patient",
+            "description": {
+              "content": "Create a new patient record in the practice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f602d37-7648-44a8-ad3d-90d6ef0d6a1b",
+              "name": "Patient created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\",\n    \"deleted_date\": \"2000-09-01T02:22:35.035Z\"\n  },\n  \"metadata\": \"<object>\",\n  \"id\": 1993,\n  \"created_date\": \"1958-09-07T13:56:39.152Z\",\n  \"deleted_date\": \"1999-01-16T16:22:48.317Z\",\n  \"merged_into_chart\": 3588,\n  \"sms_opt_in_status\": false,\n  \"verified\": true,\n  \"primary_care_provider\": 2314,\n  \"primary_care_provider_npi\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20025c55-0ef0-44a2-bc9a-f89f49f9fe8b",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "171a5e7c-d26e-49da-bd12-61a3404c94c6",
+          "name": "Retrieve a patient",
+          "request": {
+            "name": "Retrieve a patient",
+            "description": {
+              "content": "Get details for a specific patient by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f7116ae-f97a-4812-bede-a7b1d32150e6",
+              "name": "Patient details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\",\n    \"deleted_date\": \"2000-09-01T02:22:35.035Z\"\n  },\n  \"metadata\": \"<object>\",\n  \"id\": 1993,\n  \"created_date\": \"1958-09-07T13:56:39.152Z\",\n  \"deleted_date\": \"1999-01-16T16:22:48.317Z\",\n  \"merged_into_chart\": 3588,\n  \"sms_opt_in_status\": false,\n  \"verified\": true,\n  \"primary_care_provider\": 2314,\n  \"primary_care_provider_npi\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fde4be9-03ab-49e0-ad43-badb9e848995",
+              "name": "Patient not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1db153d7-4d56-4af5-8a22-cfce9b25075b",
+          "name": "Update a patient",
+          "request": {
+            "name": "Update a patient",
+            "description": {
+              "content": "Replace all patient fields with the provided values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "437d0589-d0bb-4712-beca-8b64e6b23df9",
+              "name": "Patient updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\",\n    \"deleted_date\": \"2000-09-01T02:22:35.035Z\"\n  },\n  \"metadata\": \"<object>\",\n  \"id\": 1993,\n  \"created_date\": \"1958-09-07T13:56:39.152Z\",\n  \"deleted_date\": \"1999-01-16T16:22:48.317Z\",\n  \"merged_into_chart\": 3588,\n  \"sms_opt_in_status\": false,\n  \"verified\": true,\n  \"primary_care_provider\": 2314,\n  \"primary_care_provider_npi\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b423246-8a29-4d4a-ac7b-86bc573b9ed2",
+          "name": "Partially update a patient",
+          "request": {
+            "name": "Partially update a patient",
+            "description": {
+              "content": "Update one or more patient fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"sex\": \"<string>\",\n  \"primary_physician\": \"<integer>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6ae6eeb-bdf4-441c-9933-ca465e599c53",
+              "name": "Patient updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"sex\": \"<string>\",\n  \"primary_physician\": \"<integer>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"primary_physician\": \"<integer>\",\n  \"caregiver_practice\": \"<integer>\",\n  \"sex\": \"<string>\",\n  \"middle_name\": \"<string>\",\n  \"suffix\": \"<string>\",\n  \"actual_name\": \"<string>\",\n  \"gender_identity\": \"<string>\",\n  \"legal_gender_marker\": \"<string>\",\n  \"pronouns\": \"<string>\",\n  \"sexual_orientation\": \"<string>\",\n  \"race\": \"<string>\",\n  \"ethnicity\": \"<string>\",\n  \"preferred_language\": \"<string>\",\n  \"preferred_contact\": \"<string>\",\n  \"ssn\": \"<string>\",\n  \"address\": {\n    \"address_line1\": \"<string>\",\n    \"address_line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phones\": [\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    },\n    {\n      \"phone\": \"<string>\",\n      \"phone_type\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"email\": \"<email>\"\n    },\n    {\n      \"email\": \"<email>\"\n    }\n  ],\n  \"notes\": \"<string>\",\n  \"vip\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"patient_status\": {\n    \"status\": \"<string>\",\n    \"reason\": \"<string>\",\n    \"deleted_date\": \"2000-09-01T02:22:35.035Z\"\n  },\n  \"metadata\": \"<object>\",\n  \"id\": 1993,\n  \"created_date\": \"1958-09-07T13:56:39.152Z\",\n  \"deleted_date\": \"1999-01-16T16:22:48.317Z\",\n  \"merged_into_chart\": 3588,\n  \"sms_opt_in_status\": false,\n  \"verified\": true,\n  \"primary_care_provider\": 2314,\n  \"primary_care_provider_npi\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "636a1c4c-57f1-4141-8bc7-a6fff7f86cd3",
+          "name": "Delete a patient",
+          "request": {
+            "name": "Delete a patient",
+            "description": {
+              "content": "Soft-delete a patient record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8fef8965-2edb-43ea-957f-9a549269cab2",
+              "name": "Patient deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "apiv2"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://sandbox.elationemr.com/api/2.0/oauth2/token/"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "580890c4-dbe8-43d9-a1d1-9261097f4c53",
+    "name": "Elation Health REST Allergies Patients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.\n\nContact Support:\n Name: Elation Health Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

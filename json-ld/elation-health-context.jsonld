@@ -1,0 +1,321 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "fhir": "http://hl7.org/fhir/",
+    "elation": "https://docs.elationhealth.com/reference/",
+
+    "Patient": {
+      "@id": "schema:Patient",
+      "@type": "@id"
+    },
+    "id": "@id",
+    "first_name": "schema:givenName",
+    "middle_name": "schema:additionalName",
+    "last_name": "schema:familyName",
+    "actual_name": "schema:alternateName",
+    "dob": {
+      "@id": "schema:birthDate",
+      "@type": "xsd:date"
+    },
+    "sex": {
+      "@id": "schema:gender",
+      "@type": "@vocab"
+    },
+    "gender_identity": {
+      "@id": "elation:gender_identity",
+      "@type": "@vocab"
+    },
+    "legal_gender_marker": {
+      "@id": "elation:legal_gender_marker",
+      "@type": "@vocab"
+    },
+    "pronouns": {
+      "@id": "elation:pronouns",
+      "@type": "@vocab"
+    },
+    "sexual_orientation": {
+      "@id": "elation:sexual_orientation",
+      "@type": "@vocab"
+    },
+    "race": "schema:race",
+    "ethnicity": "schema:ethnicity",
+    "preferred_language": {
+      "@id": "schema:knowsLanguage",
+      "@type": "@vocab"
+    },
+    "ssn": {
+      "@id": "elation:ssn",
+      "@type": "xsd:string"
+    },
+    "primary_physician": {
+      "@id": "schema:physician",
+      "@type": "@id"
+    },
+    "caregiver_practice": {
+      "@id": "schema:provider",
+      "@type": "@id"
+    },
+    "address": "schema:address",
+    "address_line1": "schema:streetAddress",
+    "city": "schema:addressLocality",
+    "state": "schema:addressRegion",
+    "zip": "schema:postalCode",
+    "phones": "schema:telephone",
+    "phone": "schema:telephone",
+    "phone_type": "elation:phone_type",
+    "emails": "schema:email",
+    "email": "schema:email",
+    "notes": "schema:description",
+    "vip": {
+      "@id": "elation:vip",
+      "@type": "xsd:boolean"
+    },
+    "verified": {
+      "@id": "elation:verified",
+      "@type": "xsd:boolean"
+    },
+    "patient_status": {
+      "@id": "elation:patient_status"
+    },
+    "metadata": {
+      "@id": "elation:metadata"
+    },
+    "created_date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "deleted_date": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    },
+    "tags": "schema:keywords",
+
+    "Appointment": {
+      "@id": "schema:MedicalAppointment",
+      "@type": "@id"
+    },
+    "scheduled_date": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "duration": {
+      "@id": "schema:duration",
+      "@type": "xsd:integer"
+    },
+    "reason": "schema:name",
+    "description": "schema:description",
+    "patient": {
+      "@id": "schema:patient",
+      "@type": "@id"
+    },
+    "physician": {
+      "@id": "schema:physician",
+      "@type": "@id"
+    },
+    "practice": {
+      "@id": "schema:provider",
+      "@type": "@id"
+    },
+    "mode": {
+      "@id": "elation:appointment_mode",
+      "@type": "@vocab"
+    },
+    "instructions": "schema:description",
+    "service_location": {
+      "@id": "schema:location"
+    },
+
+    "VisitNote": {
+      "@id": "schema:MedicalCondition",
+      "@type": "@id"
+    },
+    "document_date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "chart_date": {
+      "@id": "elation:chart_date",
+      "@type": "xsd:dateTime"
+    },
+    "template": {
+      "@id": "elation:note_template",
+      "@type": "@vocab"
+    },
+    "bullets": {
+      "@id": "elation:note_bullets",
+      "@container": "@list"
+    },
+    "confidential": {
+      "@id": "elation:confidential",
+      "@type": "xsd:boolean"
+    },
+    "signed_date": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:dateTime"
+    },
+
+    "Problem": {
+      "@id": "schema:MedicalCondition",
+      "@type": "@id"
+    },
+    "status": {
+      "@id": "schema:status",
+      "@type": "@vocab"
+    },
+    "synopsis": "schema:abstract",
+    "start_date": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "resolved_date": {
+      "@id": "schema:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "dx": {
+      "@id": "elation:diagnosis"
+    },
+    "icd9": {
+      "@id": "elation:icd9_codes",
+      "@container": "@list"
+    },
+    "icd10": {
+      "@id": "elation:icd10_codes",
+      "@container": "@list"
+    },
+    "snomed": {
+      "@id": "elation:snomed_code",
+      "@type": "xsd:string"
+    },
+
+    "Medication": {
+      "@id": "schema:Drug",
+      "@type": "@id"
+    },
+    "medication_name": "schema:name",
+    "sig": {
+      "@id": "elation:sig",
+      "@type": "xsd:string"
+    },
+    "dose": {
+      "@id": "schema:dosageForm",
+      "@type": "xsd:string"
+    },
+    "dose_unit": {
+      "@id": "elation:dose_unit",
+      "@type": "xsd:string"
+    },
+    "route": {
+      "@id": "elation:route_of_administration",
+      "@type": "xsd:string"
+    },
+    "frequency": {
+      "@id": "elation:dosing_frequency",
+      "@type": "xsd:string"
+    },
+
+    "Allergy": {
+      "@id": "schema:MedicalCondition",
+      "@type": "@id"
+    },
+    "allergen": {
+      "@id": "elation:allergen",
+      "@type": "xsd:string"
+    },
+    "reaction": {
+      "@id": "schema:sideEffect",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "elation:severity",
+      "@type": "@vocab"
+    },
+
+    "Physician": {
+      "@id": "schema:Physician",
+      "@type": "@id"
+    },
+    "npi": {
+      "@id": "elation:npi",
+      "@type": "xsd:string"
+    },
+    "specialty": {
+      "@id": "schema:medicalSpecialty",
+      "@type": "xsd:string"
+    },
+    "credentials": {
+      "@id": "elation:credentials",
+      "@type": "xsd:string"
+    },
+
+    "Practice": {
+      "@id": "schema:MedicalOrganization",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "phone": "schema:telephone",
+    "fax": "schema:faxNumber",
+    "tax_id": {
+      "@id": "elation:tax_id",
+      "@type": "xsd:string"
+    },
+
+    "MessageThread": {
+      "@id": "schema:Message",
+      "@type": "@id"
+    },
+    "subject": "schema:headline",
+    "members": {
+      "@id": "schema:participant",
+      "@container": "@list"
+    },
+
+    "BillingCode": {
+      "@id": "schema:MedicalCode",
+      "@type": "@id"
+    },
+    "code": "schema:codeValue",
+    "fee": {
+      "@id": "schema:price",
+      "@type": "xsd:float"
+    },
+    "code_type": {
+      "@id": "elation:code_type",
+      "@type": "xsd:string"
+    },
+
+    "InsuranceCompany": {
+      "@id": "schema:Organization",
+      "@type": "@id"
+    },
+    "payer_id": {
+      "@id": "elation:payer_id",
+      "@type": "xsd:string"
+    },
+
+    "TokenResponse": {
+      "@id": "elation:TokenResponse"
+    },
+    "access_token": {
+      "@id": "elation:access_token",
+      "@type": "xsd:string"
+    },
+    "token_type": {
+      "@id": "elation:token_type",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "elation:expires_in",
+      "@type": "xsd:integer"
+    },
+    "refresh_token": {
+      "@id": "elation:refresh_token",
+      "@type": "xsd:string"
+    },
+    "scope": {
+      "@id": "elation:scope",
+      "@type": "xsd:string"
+    }
+  }
+}

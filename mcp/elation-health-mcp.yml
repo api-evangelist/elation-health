@@ -9,29 +9,34 @@ server:
   transport: http
   url: https://docs.elationhealth.com/mcp
   protocol_version: '2024-11-05'
-  auth: >-
-    Hosted alongside the ReadMe developer documentation. The server exposes the
-    Elation API v2.0 spec for navigation/search anonymously; the execute-request
-    tool proxies live API calls, which require the caller to supply their own
-    Elation OAuth2 bearer token via request headers.
-description: >-
-  ReadMe-hosted Model Context Protocol server that exposes the Elation Health
-  API v2.0 OpenAPI documentation and endpoints to MCP clients. Rather than one
-  tool per resource, it offers five generic OpenAPI-navigation/execution tools;
-  the underlying capability surface is the full REST API described in openapi/.
+  auth: Hosted alongside the ReadMe developer documentation. The server exposes the Elation API v2.0 spec
+    for navigation/search anonymously; the execute-request tool proxies live API calls, which require
+    the caller to supply their own Elation OAuth2 bearer token via request headers.
+description: ReadMe-hosted Model Context Protocol server that exposes the Elation Health API v2.0 OpenAPI
+  documentation and endpoints to MCP clients. Rather than one tool per resource, it offers five generic
+  OpenAPI-navigation/execution tools; the underlying capability surface is the full REST API described
+  in openapi/.
 tools:
-  - name: list-endpoints
-    description: Lists all API paths and their HTTP methods with summaries, organized by path.
-    read_only: true
-  - name: get-endpoint
-    description: Gets detailed information about a specific API endpoint, including security schemes and servers.
-    read_only: true
-  - name: search-endpoints
-    description: Deep search through paths, operations, and parameters to discover relevant API endpoints.
-    read_only: true
-  - name: list-specs
-    description: Lists all available OpenAPI specs.
-    read_only: true
-  - name: execute-request
-    description: Executes an API request with a given HAR request object (proxies a live call; caller supplies auth).
-    read_only: false
+- name: list-endpoints
+  description: Lists all API paths and their HTTP methods with summaries, organized by path.
+  read_only: true
+- name: get-endpoint
+  description: Gets detailed information about a specific API endpoint, including security schemes and
+    servers.
+  read_only: true
+- name: search-endpoints
+  description: Deep search through paths, operations, and parameters to discover relevant API endpoints.
+  read_only: true
+- name: list-specs
+  description: Lists all available OpenAPI specs.
+  read_only: true
+- name: execute-request
+  description: Executes an API request with a given HAR request object (proxies a live call; caller supplies
+    auth).
+  read_only: false
+deployment:
+  mode: remote
+  verified: searched
+  tools: 5
+  checked: '2026-08-12'
+  source: catalog MCP census

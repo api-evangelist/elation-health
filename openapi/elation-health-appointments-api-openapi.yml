@@ -1,0 +1,372 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Appointments API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Appointments
+  description: Scheduling and appointment management
+paths:
+  /appointments/:
+    get:
+      operationId: appointments_list
+      summary: List appointments
+      description: Retrieve a paginated list of appointments.
+      tags:
+      - Appointments
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: physician
+        in: query
+        schema:
+          type: integer
+        description: Filter by physician ID
+      - name: patient
+        in: query
+        schema:
+          type: integer
+        description: Filter by patient ID
+      - name: scheduled_date
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filter by scheduled date (ISO 8601)
+      responses:
+        '200':
+          description: Paginated list of appointments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAppointmentList'
+    post:
+      operationId: appointments_create
+      summary: Create an appointment
+      description: Schedule a new appointment.
+      tags:
+      - Appointments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentCreate'
+      responses:
+        '201':
+          description: Appointment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /appointments/{id}/:
+    get:
+      operationId: appointments_retrieve
+      summary: Retrieve an appointment
+      description: Get details for a specific appointment.
+      tags:
+      - Appointments
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Appointment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        '404':
+          description: Appointment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: appointments_update
+      summary: Update an appointment
+      description: Replace all appointment fields with the provided values.
+      tags:
+      - Appointments
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentCreate'
+      responses:
+        '200':
+          description: Appointment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+    patch:
+      operationId: appointments_partial_update
+      summary: Partially update an appointment
+      description: Update one or more appointment fields.
+      tags:
+      - Appointments
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentPatch'
+      responses:
+        '200':
+          description: Appointment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+    delete:
+      operationId: appointments_destroy
+      summary: Delete an appointment
+      description: Cancel and delete an appointment.
+      tags:
+      - Appointments
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Appointment deleted
+components:
+  schemas:
+    Appointment:
+      allOf:
+      - $ref: '#/components/schemas/AppointmentCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            readOnly: true
+          time_slot_type:
+            type: string
+            default: appointment
+          time_slot_status:
+            type: object
+            nullable: true
+          status:
+            $ref: '#/components/schemas/AppointmentStatus'
+          payment:
+            type: object
+            nullable: true
+            properties:
+              amount:
+                type: number
+              collection_date:
+                type: string
+                format: date
+          billing_details:
+            type: object
+            nullable: true
+          is_blocking:
+            type: boolean
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          last_modified_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    AppointmentStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Scheduled
+          - Confirmed
+          - Checked Out
+          - Cancelled
+          - With Doctor
+          - In Room
+          - Checked In
+          - In Room - Vitals Taken
+          - Not Seen
+          - Billed
+        room:
+          type: string
+          description: Physical room assignment
+        status_date:
+          type: string
+          format: date-time
+          readOnly: true
+        status_detail:
+          type: string
+          enum:
+          - No Show
+          - Left Without Seeing
+          - Other
+          description: Additional detail when status is Not Seen
+    AppointmentPatch:
+      type: object
+      properties:
+        scheduled_date:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+        reason:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 500
+        status:
+          $ref: '#/components/schemas/AppointmentStatus'
+        mode:
+          type: string
+          enum:
+          - IN_PERSON
+          - VIDEO
+        instructions:
+          type: string
+          maxLength: 500
+    AppointmentCreate:
+      type: object
+      required:
+      - scheduled_date
+      - duration
+      - reason
+      - patient
+      - physician
+      - practice
+      - service_location
+      properties:
+        scheduled_date:
+          type: string
+          format: date-time
+          description: Appointment date and time (ISO 8601)
+        duration:
+          type: integer
+          minimum: 1
+          maximum: 1440
+          description: Duration in minutes (5-minute increments)
+        reason:
+          type: string
+          maxLength: 50
+          description: Appointment reason/type
+        description:
+          type: string
+          maxLength: 500
+          description: Additional context
+        patient:
+          type: integer
+          format: int64
+          description: Patient ID
+        physician:
+          type: integer
+          format: int64
+          description: Physician ID
+        practice:
+          type: integer
+          format: int64
+          description: Practice ID
+        service_location:
+          type: object
+          description: Facility where appointment occurs
+        mode:
+          type: string
+          enum:
+          - IN_PERSON
+          - VIDEO
+          description: Visit format
+        instructions:
+          type: string
+          maxLength: 500
+          description: Appointment instructions
+        metadata:
+          type: object
+          nullable: true
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable error description
+        error:
+          type: string
+          description: Machine-readable error code
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    PaginatedAppointmentList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Appointment'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

@@ -1,0 +1,442 @@
+{
+  "item": [
+    {
+      "id": "4026323f-d436-4a90-aa4e-c8559d4f638c",
+      "name": "Medications",
+      "description": {
+        "content": "Medication and prescription management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d292a1c-9bf5-4e41-8cb9-2c8cdaa509bb",
+          "name": "List medications",
+          "request": {
+            "name": "List medications",
+            "description": {
+              "content": "Retrieve a paginated list of patient medications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "medications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<integer>",
+                  "description": "Filter by patient ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68e3af23-4b6a-4b46-9258-2ae2d57541ab",
+              "name": "Paginated list of medications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "medications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 537,\n  \"next\": \"string\",\n  \"previous\": \"string\",\n  \"results\": [\n    {\n      \"patient\": 5552,\n      \"medication_name\": \"string\",\n      \"sig\": \"string\",\n      \"dose\": \"string\",\n      \"dose_unit\": \"string\",\n      \"route\": \"string\",\n      \"frequency\": \"string\",\n      \"start_date\": \"1967-12-07\",\n      \"end_date\": \"1981-07-11\",\n      \"status\": \"Inactive\",\n      \"notes\": \"string\",\n      \"id\": 9212,\n      \"created_date\": \"2015-10-26T01:05:04.527Z\",\n      \"deleted_date\": \"1968-11-15T23:34:47.197Z\"\n    },\n    {\n      \"patient\": 3180,\n      \"medication_name\": \"string\",\n      \"sig\": \"string\",\n      \"dose\": \"string\",\n      \"dose_unit\": \"string\",\n      \"route\": \"string\",\n      \"frequency\": \"string\",\n      \"start_date\": \"1985-07-16\",\n      \"end_date\": \"1960-07-21\",\n      \"status\": \"Active\",\n      \"notes\": \"string\",\n      \"id\": 7069,\n      \"created_date\": \"1981-10-10T08:09:36.379Z\",\n      \"deleted_date\": \"1960-05-03T13:06:14.997Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acf8db4b-ada8-434e-be70-265f69a4c6b6",
+          "name": "Create a medication",
+          "request": {
+            "name": "Create a medication",
+            "description": {
+              "content": "Add a medication to a patient's medication list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "medications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient\": \"<integer>\",\n  \"medication_name\": \"<string>\",\n  \"sig\": \"<string>\",\n  \"dose\": \"<string>\",\n  \"dose_unit\": \"<string>\",\n  \"route\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "666ca2fe-55a6-4f1f-9116-e16c7e87bbcb",
+              "name": "Medication created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "medications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient\": \"<integer>\",\n  \"medication_name\": \"<string>\",\n  \"sig\": \"<string>\",\n  \"dose\": \"<string>\",\n  \"dose_unit\": \"<string>\",\n  \"route\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patient\": \"<integer>\",\n  \"medication_name\": \"<string>\",\n  \"sig\": \"<string>\",\n  \"dose\": \"<string>\",\n  \"dose_unit\": \"<string>\",\n  \"route\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"id\": 652,\n  \"created_date\": \"1956-12-04T08:48:04.837Z\",\n  \"deleted_date\": \"1995-04-04T03:52:17.012Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2575b64-5b0b-4880-9a01-b2e0abf00326",
+          "name": "Retrieve a medication",
+          "request": {
+            "name": "Retrieve a medication",
+            "description": {},
+            "url": {
+              "path": [
+                "medications",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee9aca5b-f713-467f-a346-1e68c8c00f51",
+              "name": "Medication details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "medications",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patient\": \"<integer>\",\n  \"medication_name\": \"<string>\",\n  \"sig\": \"<string>\",\n  \"dose\": \"<string>\",\n  \"dose_unit\": \"<string>\",\n  \"route\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"id\": 652,\n  \"created_date\": \"1956-12-04T08:48:04.837Z\",\n  \"deleted_date\": \"1995-04-04T03:52:17.012Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eda16e12-dc4d-4a09-b313-3316cf0c6b97",
+          "name": "Delete a medication",
+          "request": {
+            "name": "Delete a medication",
+            "description": {},
+            "url": {
+              "path": [
+                "medications",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81d4909b-0c8d-41ea-b014-62d0c4d380ca",
+              "name": "Medication deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "medications",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "apiv2"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://sandbox.elationemr.com/api/2.0/oauth2/token/"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3866b598-e92b-4c97-a129-b31b582b05fd",
+    "name": "Elation Health REST Allergies Medications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.\n\nContact Support:\n Name: Elation Health Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

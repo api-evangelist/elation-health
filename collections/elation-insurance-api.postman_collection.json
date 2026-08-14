@@ -1,0 +1,1551 @@
+{
+  "item": [
+    {
+      "id": "9f713109-8506-4f8a-a48b-1cac4c8fad45",
+      "name": "Insurance Companies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6262be1d-b511-4d9a-ade9-5376d18502e4",
+          "name": "List Insurance Companies",
+          "request": {
+            "name": "List Insurance Companies",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_companies",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>,<string>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "40225fac-157d-4dd6-b51a-bff09be521d1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_companies",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"carrier\": \"string\",\n      \"practice\": 7241,\n      \"address\": \"string\",\n      \"aliases\": \"string\",\n      \"city\": \"string\",\n      \"created_date\": \"1974-02-02T13:22:29.008Z\",\n      \"deleted_date\": \"1982-12-25T16:06:00.209Z\",\n      \"eligibility_payer_id\": \"string\",\n      \"extension\": \"string\",\n      \"external_vendor_id\": \"string\",\n      \"id\": 4156,\n      \"insurance_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"is_credentialed\": false,\n      \"is_enrolled\": true,\n      \"payer_id\": \"string\",\n      \"phone\": \"string\",\n      \"state\": \"st\",\n      \"suite\": \"string\",\n      \"zip\": \"string\"\n    },\n    {\n      \"carrier\": \"string\",\n      \"practice\": 3339,\n      \"address\": \"string\",\n      \"aliases\": \"string\",\n      \"city\": \"string\",\n      \"created_date\": \"2018-08-28T08:48:36.347Z\",\n      \"deleted_date\": \"1980-01-12T09:22:05.154Z\",\n      \"eligibility_payer_id\": \"string\",\n      \"extension\": \"string\",\n      \"external_vendor_id\": \"string\",\n      \"id\": 5782,\n      \"insurance_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"is_credentialed\": false,\n      \"is_enrolled\": true,\n      \"payer_id\": \"string\",\n      \"phone\": \"string\",\n      \"state\": \"st\",\n      \"suite\": \"string\",\n      \"zip\": \"string\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3691ce0b-685b-4d69-aa79-ba2c77e9c902",
+          "name": "Create Insurance Company",
+          "request": {
+            "name": "Create Insurance Company",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_companies",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"address\": \"<string>\",\n  \"aliases\": \"<string,null>\",\n  \"city\": \"<string>\",\n  \"eligibility_payer_id\": \"<string,null>\",\n  \"extension\": \"<string,null>\",\n  \"external_vendor_id\": \"<string,null>\",\n  \"insurance_type\": \"<string>\",\n  \"is_credentialed\": \"<boolean,null>\",\n  \"is_enrolled\": \"<boolean,null>\",\n  \"payer_id\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"state\": \"<string>\",\n  \"suite\": \"<string,null>\",\n  \"zip\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0588fb9-a4f8-48c7-9309-139835583b52",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_companies",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"address\": \"<string>\",\n  \"aliases\": \"<string,null>\",\n  \"city\": \"<string>\",\n  \"eligibility_payer_id\": \"<string,null>\",\n  \"extension\": \"<string,null>\",\n  \"external_vendor_id\": \"<string,null>\",\n  \"insurance_type\": \"Medicare\",\n  \"is_credentialed\": \"<boolean,null>\",\n  \"is_enrolled\": \"<boolean,null>\",\n  \"payer_id\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"state\": \"<string>\",\n  \"suite\": \"<string,null>\",\n  \"zip\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier\": \"string\",\n  \"practice\": 6376,\n  \"address\": \"string\",\n  \"aliases\": \"string\",\n  \"city\": \"string\",\n  \"created_date\": \"2009-02-04T02:53:53.620Z\",\n  \"deleted_date\": \"1996-04-22T04:53:21.646Z\",\n  \"eligibility_payer_id\": \"string\",\n  \"extension\": \"string\",\n  \"external_vendor_id\": \"string\",\n  \"id\": 3122,\n  \"insurance_type\": \"Workers Compensation/Third Party Liability\",\n  \"is_credentialed\": false,\n  \"is_enrolled\": false,\n  \"payer_id\": \"string\",\n  \"phone\": \"string\",\n  \"state\": \"st\",\n  \"suite\": \"string\",\n  \"zip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f3308f4-1d55-49e6-89e4-06d455851322",
+          "name": "Delete Insurance Company",
+          "request": {
+            "name": "Delete Insurance Company",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_companies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ec59a669-f80c-4258-b92e-8b7370ed0f9d",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_companies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9e7a516-f1d8-4058-ba7b-0550568de5d5",
+          "name": "Retrieve Insurance Company",
+          "request": {
+            "name": "Retrieve Insurance Company",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_companies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54ba3de8-8af5-4ac7-91e1-134a5d439608",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_companies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier\": \"string\",\n  \"practice\": 7345,\n  \"address\": \"string\",\n  \"aliases\": \"string\",\n  \"city\": \"string\",\n  \"created_date\": \"1950-05-28T13:57:35.565Z\",\n  \"deleted_date\": \"1965-01-19T11:14:40.755Z\",\n  \"eligibility_payer_id\": \"string\",\n  \"extension\": \"string\",\n  \"external_vendor_id\": \"string\",\n  \"id\": 469,\n  \"insurance_type\": \"Medicaid\",\n  \"is_credentialed\": false,\n  \"is_enrolled\": true,\n  \"patients\": [\n    5171,\n    6730\n  ],\n  \"payer_id\": \"string\",\n  \"phone\": \"string\",\n  \"plans\": [\n    2208,\n    1931\n  ],\n  \"state\": \"st\",\n  \"suite\": \"string\",\n  \"zip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c21ec2dc-dd93-4484-b9f6-e1490b5dacb2",
+          "name": "Partially Update Insurance Company",
+          "request": {
+            "name": "Partially Update Insurance Company",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_companies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\",\n  \"aliases\": \"<string,null>\",\n  \"carrier\": \"<string>\",\n  \"city\": \"<string>\",\n  \"eligibility_payer_id\": \"<string,null>\",\n  \"extension\": \"<string,null>\",\n  \"external_vendor_id\": \"<string,null>\",\n  \"insurance_type\": \"<string>\",\n  \"is_credentialed\": \"<boolean,null>\",\n  \"is_enrolled\": \"<boolean,null>\",\n  \"payer_id\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"practice\": \"<long>\",\n  \"state\": \"<string>\",\n  \"suite\": \"<string,null>\",\n  \"zip\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ce0ef94-064f-4201-afe2-c391aa9887b1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_companies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\",\n  \"aliases\": \"<string,null>\",\n  \"carrier\": \"<string>\",\n  \"city\": \"<string>\",\n  \"eligibility_payer_id\": \"<string,null>\",\n  \"extension\": \"<string,null>\",\n  \"external_vendor_id\": \"<string,null>\",\n  \"insurance_type\": \"Commercial\",\n  \"is_credentialed\": \"<boolean,null>\",\n  \"is_enrolled\": \"<boolean,null>\",\n  \"payer_id\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"practice\": \"<long>\",\n  \"state\": \"<string>\",\n  \"suite\": \"<string,null>\",\n  \"zip\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier\": \"string\",\n  \"practice\": 7345,\n  \"address\": \"string\",\n  \"aliases\": \"string\",\n  \"city\": \"string\",\n  \"created_date\": \"1950-05-28T13:57:35.565Z\",\n  \"deleted_date\": \"1965-01-19T11:14:40.755Z\",\n  \"eligibility_payer_id\": \"string\",\n  \"extension\": \"string\",\n  \"external_vendor_id\": \"string\",\n  \"id\": 469,\n  \"insurance_type\": \"Medicaid\",\n  \"is_credentialed\": false,\n  \"is_enrolled\": true,\n  \"patients\": [\n    5171,\n    6730\n  ],\n  \"payer_id\": \"string\",\n  \"phone\": \"string\",\n  \"plans\": [\n    2208,\n    1931\n  ],\n  \"state\": \"st\",\n  \"suite\": \"string\",\n  \"zip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef247079-a867-485a-82cd-e61fb7e26b08",
+          "name": "Update Insurance Company",
+          "request": {
+            "name": "Update Insurance Company",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_companies",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"address\": \"<string>\",\n  \"aliases\": \"<string,null>\",\n  \"city\": \"<string>\",\n  \"eligibility_payer_id\": \"<string,null>\",\n  \"extension\": \"<string,null>\",\n  \"external_vendor_id\": \"<string,null>\",\n  \"insurance_type\": \"<string>\",\n  \"is_credentialed\": \"<boolean,null>\",\n  \"is_enrolled\": \"<boolean,null>\",\n  \"payer_id\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"state\": \"<string>\",\n  \"suite\": \"<string,null>\",\n  \"zip\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06ef1f19-7b99-423d-a9ed-fac4f533c635",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_companies",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"address\": \"<string>\",\n  \"aliases\": \"<string,null>\",\n  \"city\": \"<string>\",\n  \"eligibility_payer_id\": \"<string,null>\",\n  \"extension\": \"<string,null>\",\n  \"external_vendor_id\": \"<string,null>\",\n  \"insurance_type\": \"Medicare\",\n  \"is_credentialed\": \"<boolean,null>\",\n  \"is_enrolled\": \"<boolean,null>\",\n  \"payer_id\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"state\": \"<string>\",\n  \"suite\": \"<string,null>\",\n  \"zip\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier\": \"string\",\n  \"practice\": 7345,\n  \"address\": \"string\",\n  \"aliases\": \"string\",\n  \"city\": \"string\",\n  \"created_date\": \"1950-05-28T13:57:35.565Z\",\n  \"deleted_date\": \"1965-01-19T11:14:40.755Z\",\n  \"eligibility_payer_id\": \"string\",\n  \"extension\": \"string\",\n  \"external_vendor_id\": \"string\",\n  \"id\": 469,\n  \"insurance_type\": \"Medicaid\",\n  \"is_credentialed\": false,\n  \"is_enrolled\": true,\n  \"patients\": [\n    5171,\n    6730\n  ],\n  \"payer_id\": \"string\",\n  \"phone\": \"string\",\n  \"plans\": [\n    2208,\n    1931\n  ],\n  \"state\": \"st\",\n  \"suite\": \"string\",\n  \"zip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5bbb1615-d2b2-477d-a50f-990e2afe2ca3",
+      "name": "Insurance Plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cba00de2-d0b7-4220-8a44-80d6810e15e0",
+          "name": "List Insurance Plans",
+          "request": {
+            "name": "List Insurance Plans",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_plans",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "insurance_company",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "67b048fe-0ce1-495c-82e6-47f52cf4a0ee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_plans",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insurance_company",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"insurance_company\": 7683,\n      \"name\": \"string\",\n      \"practice\": 466,\n      \"created_date\": \"1964-07-26T13:51:20.989Z\",\n      \"deleted_date\": \"2017-01-21T14:59:06.749Z\",\n      \"id\": 1091\n    },\n    {\n      \"insurance_company\": 8434,\n      \"name\": \"string\",\n      \"practice\": 5198,\n      \"created_date\": \"2018-04-01T05:15:01.600Z\",\n      \"deleted_date\": \"1979-11-05T13:56:44.762Z\",\n      \"id\": 8669\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca9c46cb-7976-4263-9ff9-86b4a8631267",
+          "name": "Create Insurance Plan",
+          "request": {
+            "name": "Create Insurance Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_plans",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_company\": \"<long>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3b8047d-b895-4c98-87f8-57b450091db4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_plans",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_company\": \"<long>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insurance_company\": 6800,\n  \"name\": \"string\",\n  \"practice\": 1896,\n  \"created_date\": \"1984-08-28T18:21:03.171Z\",\n  \"deleted_date\": \"2020-04-03T22:18:06.214Z\",\n  \"id\": 3646\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1b43e2d-0394-4d2e-9bcd-0840cb4d7468",
+          "name": "Delete Insurance Plan",
+          "request": {
+            "name": "Delete Insurance Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_plans",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "51510ec1-ae21-4e99-be4b-8145a9600f65",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_plans",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff320ccd-b6bc-4a05-b55f-808fb7e45f79",
+          "name": "Retrieve Insurance Plan",
+          "request": {
+            "name": "Retrieve Insurance Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_plans",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9c4a10de-4d28-4fe1-becc-c2f32f09b20c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_plans",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insurance_company\": 2191,\n  \"name\": \"string\",\n  \"practice\": 6763,\n  \"created_date\": \"1988-08-13T01:12:00.683Z\",\n  \"deleted_date\": \"1992-12-09T18:06:49.023Z\",\n  \"id\": 6519,\n  \"patients\": [\n    1702,\n    2936\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f4e0a66-3cf3-44f5-95d8-aacc8d65dc69",
+          "name": "Partially Update Insurance Plan",
+          "request": {
+            "name": "Partially Update Insurance Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_plans",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_company\": \"<long>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8cb2e18a-d540-4433-9bcd-7d97c90ee47b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_plans",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_company\": \"<long>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insurance_company\": 2191,\n  \"name\": \"string\",\n  \"practice\": 6763,\n  \"created_date\": \"1988-08-13T01:12:00.683Z\",\n  \"deleted_date\": \"1992-12-09T18:06:49.023Z\",\n  \"id\": 6519,\n  \"patients\": [\n    1702,\n    2936\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af58e43-1ac0-4fd5-9a7a-85f206452eb2",
+          "name": "Update Insurance Plan",
+          "request": {
+            "name": "Update Insurance Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "insurance_plans",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"insurance_company\": \"<long>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7635d17d-cccf-48d0-a59b-42854ae8426f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "insurance_plans",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"insurance_company\": \"<long>\",\n  \"name\": \"<string>\",\n  \"practice\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"insurance_company\": 2191,\n  \"name\": \"string\",\n  \"practice\": 6763,\n  \"created_date\": \"1988-08-13T01:12:00.683Z\",\n  \"deleted_date\": \"1992-12-09T18:06:49.023Z\",\n  \"id\": 6519,\n  \"patients\": [\n    1702,\n    2936\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.elationemr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5088e968-d4ab-4a86-a409-ced72a1e3406",
+    "name": "Insurance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+      "type": "text/plain"
+    }
+  }
+}

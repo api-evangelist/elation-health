@@ -1,0 +1,2411 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST API
+  description: >-
+    RESTful API for Elation's primary care EHR platform enabling management of
+    patient profiles, visit notes, clinical documents, problems, allergies,
+    immunizations, vitals, medications, lab orders, imaging orders, referrals,
+    appointments, insurance, billing, pharmacy, messaging, and practice
+    administration. Supports OAuth2 client credentials authentication with
+    both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+  - url: https://app.elationemr.com/api/2.0
+    description: Production
+  - url: https://sandbox.elationemr.com/api/2.0
+    description: Sandbox
+security:
+  - oauth2: []
+tags:
+  - name: Patients
+    description: Patient profile management
+  - name: Appointments
+    description: Scheduling and appointment management
+  - name: Visit Notes
+    description: Clinical encounter documentation
+  - name: Problems
+    description: Patient problem list management
+  - name: Allergies
+    description: Allergy and drug intolerance tracking
+  - name: Medications
+    description: Medication and prescription management
+  - name: Lab Orders
+    description: Laboratory order management
+  - name: Imaging Orders
+    description: Radiology and imaging order management
+  - name: Referrals
+    description: Referral order management
+  - name: Messaging
+    description: Secure direct messaging
+  - name: Billing
+    description: Billing codes and bill management
+  - name: Insurance
+    description: Insurance company, plan, and policy management
+  - name: Physicians
+    description: Provider and staff management
+  - name: Practices
+    description: Practice administration
+  - name: Authentication
+    description: OAuth2 token management
+paths:
+  /oauth2/token/:
+    post:
+      operationId: getToken
+      summary: Obtain OAuth2 access token
+      description: >-
+        Exchange client credentials for an OAuth2 access token using the
+        client_credentials grant type.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                  description: OAuth2 grant type
+                client_id:
+                  type: string
+                  description: Your client identifier
+                client_secret:
+                  type: string
+                  description: Your client secret
+                scope:
+                  type: string
+                  description: Space-separated list of requested scopes; defaults to apiv2
+      responses:
+        '200':
+          description: Token issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /patients/:
+    get:
+      operationId: patients_list
+      summary: List patients
+      description: Retrieve a paginated list of patients in the practice.
+      tags:
+        - Patients
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: first_name
+          in: query
+          schema:
+            type: string
+          description: Filter by first name
+        - name: last_name
+          in: query
+          schema:
+            type: string
+          description: Filter by last name
+        - name: dob
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filter by date of birth (YYYY-MM-DD)
+      responses:
+        '200':
+          description: Paginated list of patients
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientList'
+    post:
+      operationId: patients_create
+      summary: Create a patient
+      description: Create a new patient record in the practice.
+      tags:
+        - Patients
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCreate'
+      responses:
+        '201':
+          description: Patient created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /patients/{id}/:
+    get:
+      operationId: patients_retrieve
+      summary: Retrieve a patient
+      description: Get details for a specific patient by ID.
+      tags:
+        - Patients
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Patient details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: patients_update
+      summary: Update a patient
+      description: Replace all patient fields with the provided values.
+      tags:
+        - Patients
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCreate'
+      responses:
+        '200':
+          description: Patient updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+    patch:
+      operationId: patients_partial_update
+      summary: Partially update a patient
+      description: Update one or more patient fields.
+      tags:
+        - Patients
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientPatch'
+      responses:
+        '200':
+          description: Patient updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+    delete:
+      operationId: patients_destroy
+      summary: Delete a patient
+      description: Soft-delete a patient record.
+      tags:
+        - Patients
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Patient deleted
+  /appointments/:
+    get:
+      operationId: appointments_list
+      summary: List appointments
+      description: Retrieve a paginated list of appointments.
+      tags:
+        - Appointments
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: physician
+          in: query
+          schema:
+            type: integer
+          description: Filter by physician ID
+        - name: patient
+          in: query
+          schema:
+            type: integer
+          description: Filter by patient ID
+        - name: scheduled_date
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Filter by scheduled date (ISO 8601)
+      responses:
+        '200':
+          description: Paginated list of appointments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAppointmentList'
+    post:
+      operationId: appointments_create
+      summary: Create an appointment
+      description: Schedule a new appointment.
+      tags:
+        - Appointments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentCreate'
+      responses:
+        '201':
+          description: Appointment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /appointments/{id}/:
+    get:
+      operationId: appointments_retrieve
+      summary: Retrieve an appointment
+      description: Get details for a specific appointment.
+      tags:
+        - Appointments
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Appointment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        '404':
+          description: Appointment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: appointments_update
+      summary: Update an appointment
+      description: Replace all appointment fields with the provided values.
+      tags:
+        - Appointments
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentCreate'
+      responses:
+        '200':
+          description: Appointment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+    patch:
+      operationId: appointments_partial_update
+      summary: Partially update an appointment
+      description: Update one or more appointment fields.
+      tags:
+        - Appointments
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentPatch'
+      responses:
+        '200':
+          description: Appointment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+    delete:
+      operationId: appointments_destroy
+      summary: Delete an appointment
+      description: Cancel and delete an appointment.
+      tags:
+        - Appointments
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Appointment deleted
+  /visit_notes/:
+    get:
+      operationId: visit_notes_list
+      summary: List visit notes
+      description: Retrieve a paginated list of visit notes.
+      tags:
+        - Visit Notes
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: patient
+          in: query
+          schema:
+            type: integer
+          description: Filter by patient ID
+        - name: physician
+          in: query
+          schema:
+            type: integer
+          description: Filter by physician ID
+      responses:
+        '200':
+          description: Paginated list of visit notes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVisitNoteList'
+    post:
+      operationId: visit_notes_create
+      summary: Create a visit note
+      description: Create a new clinical visit note.
+      tags:
+        - Visit Notes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitNoteCreate'
+      responses:
+        '201':
+          description: Visit note created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+  /visit_notes/{id}/:
+    get:
+      operationId: visit_notes_retrieve
+      summary: Retrieve a visit note
+      description: Get details for a specific visit note.
+      tags:
+        - Visit Notes
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Visit note details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+    put:
+      operationId: visit_notes_update
+      summary: Update a visit note
+      description: Replace all visit note fields with the provided values.
+      tags:
+        - Visit Notes
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitNoteCreate'
+      responses:
+        '200':
+          description: Visit note updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+    patch:
+      operationId: visit_notes_partial_update
+      summary: Partially update a visit note
+      description: Update one or more visit note fields.
+      tags:
+        - Visit Notes
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitNoteCreate'
+      responses:
+        '200':
+          description: Visit note updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+    delete:
+      operationId: visit_notes_destroy
+      summary: Delete a visit note
+      description: Soft-delete a visit note.
+      tags:
+        - Visit Notes
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Visit note deleted
+  /problems/:
+    get:
+      operationId: problems_list
+      summary: List problems
+      description: Retrieve a paginated list of patient problems.
+      tags:
+        - Problems
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: patient
+          in: query
+          schema:
+            type: integer
+          description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of problems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProblemList'
+    post:
+      operationId: problems_create
+      summary: Create a problem
+      description: Add a new problem to a patient's problem list.
+      tags:
+        - Problems
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemCreate'
+      responses:
+        '201':
+          description: Problem created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /problems/{id}/:
+    get:
+      operationId: problems_retrieve
+      summary: Retrieve a problem
+      description: Get details for a specific patient problem.
+      tags:
+        - Problems
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Problem details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    put:
+      operationId: problems_update
+      summary: Update a problem
+      description: Replace all problem fields with the provided values.
+      tags:
+        - Problems
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemCreate'
+      responses:
+        '200':
+          description: Problem updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      operationId: problems_partial_update
+      summary: Partially update a problem
+      description: Update one or more problem fields.
+      tags:
+        - Problems
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemCreate'
+      responses:
+        '200':
+          description: Problem updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      operationId: problems_destroy
+      summary: Delete a problem
+      description: Remove a problem from the patient's problem list.
+      tags:
+        - Problems
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Problem deleted
+  /allergies/:
+    get:
+      operationId: allergies_list
+      summary: List allergies
+      description: Retrieve a paginated list of patient allergies.
+      tags:
+        - Allergies
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: patient
+          in: query
+          schema:
+            type: integer
+          description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of allergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAllergyList'
+    post:
+      operationId: allergies_create
+      summary: Create an allergy
+      description: Record a new allergy for a patient.
+      tags:
+        - Allergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllergyCreate'
+      responses:
+        '201':
+          description: Allergy created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+  /allergies/{id}/:
+    get:
+      operationId: allergies_retrieve
+      summary: Retrieve an allergy
+      tags:
+        - Allergies
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Allergy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+    put:
+      operationId: allergies_update
+      summary: Update an allergy
+      tags:
+        - Allergies
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllergyCreate'
+      responses:
+        '200':
+          description: Allergy updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+    patch:
+      operationId: allergies_partial_update
+      summary: Partially update an allergy
+      tags:
+        - Allergies
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllergyCreate'
+      responses:
+        '200':
+          description: Allergy updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allergy'
+    delete:
+      operationId: allergies_destroy
+      summary: Delete an allergy
+      tags:
+        - Allergies
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Allergy deleted
+  /medications/:
+    get:
+      operationId: medications_list
+      summary: List medications
+      description: Retrieve a paginated list of patient medications.
+      tags:
+        - Medications
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: patient
+          in: query
+          schema:
+            type: integer
+          description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of medications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicationList'
+    post:
+      operationId: medications_create
+      summary: Create a medication
+      description: Add a medication to a patient's medication list.
+      tags:
+        - Medications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicationCreate'
+      responses:
+        '201':
+          description: Medication created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+  /medications/{id}/:
+    get:
+      operationId: medications_retrieve
+      summary: Retrieve a medication
+      tags:
+        - Medications
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Medication details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+    delete:
+      operationId: medications_destroy
+      summary: Delete a medication
+      tags:
+        - Medications
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Medication deleted
+  /lab_orders/:
+    get:
+      operationId: lab_orders_list
+      summary: List lab orders
+      description: Retrieve a paginated list of laboratory orders.
+      tags:
+        - Lab Orders
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: patient
+          in: query
+          schema:
+            type: integer
+          description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of lab orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabOrderList'
+    post:
+      operationId: lab_orders_create
+      summary: Create a lab order
+      description: Place a new laboratory order for a patient.
+      tags:
+        - Lab Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderCreate'
+      responses:
+        '201':
+          description: Lab order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+  /lab_orders/{id}/:
+    get:
+      operationId: lab_orders_retrieve
+      summary: Retrieve a lab order
+      tags:
+        - Lab Orders
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Lab order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+    put:
+      operationId: lab_orders_update
+      summary: Update a lab order
+      tags:
+        - Lab Orders
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderCreate'
+      responses:
+        '200':
+          description: Lab order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+    patch:
+      operationId: lab_orders_partial_update
+      summary: Partially update a lab order
+      tags:
+        - Lab Orders
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderCreate'
+      responses:
+        '200':
+          description: Lab order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+    delete:
+      operationId: lab_orders_destroy
+      summary: Delete a lab order
+      tags:
+        - Lab Orders
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Lab order deleted
+  /message_threads/:
+    get:
+      operationId: message_threads_list
+      summary: List message threads
+      description: Retrieve a paginated list of secure message threads.
+      tags:
+        - Messaging
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of message threads
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMessageThreadList'
+    post:
+      operationId: message_threads_create
+      summary: Create a message thread
+      description: Start a new secure message thread.
+      tags:
+        - Messaging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThreadCreate'
+      responses:
+        '201':
+          description: Message thread created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+  /message_threads/{id}/:
+    get:
+      operationId: message_threads_retrieve
+      summary: Retrieve a message thread
+      tags:
+        - Messaging
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Message thread details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+    put:
+      operationId: message_threads_update
+      summary: Update a message thread
+      tags:
+        - Messaging
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThreadCreate'
+      responses:
+        '200':
+          description: Message thread updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+    patch:
+      operationId: message_threads_partial_update
+      summary: Partially update a message thread
+      tags:
+        - Messaging
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThreadCreate'
+      responses:
+        '200':
+          description: Message thread updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+    delete:
+      operationId: message_threads_destroy
+      summary: Delete a message thread
+      tags:
+        - Messaging
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Message thread deleted
+  /physicians/:
+    get:
+      operationId: physicians_list
+      summary: List physicians
+      description: Retrieve a list of physicians in the practice.
+      tags:
+        - Physicians
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of physicians
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPhysicianList'
+  /physicians/{id}/:
+    get:
+      operationId: physicians_retrieve
+      summary: Retrieve a physician
+      tags:
+        - Physicians
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Physician details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+    put:
+      operationId: physicians_update
+      summary: Update a physician
+      tags:
+        - Physicians
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Physician'
+      responses:
+        '200':
+          description: Physician updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+    patch:
+      operationId: physicians_partial_update
+      summary: Partially update a physician
+      tags:
+        - Physicians
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Physician'
+      responses:
+        '200':
+          description: Physician updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+  /practices/:
+    get:
+      operationId: practices_list
+      summary: List practices
+      description: Retrieve a list of practices accessible to the authenticated application.
+      tags:
+        - Practices
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of practices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPracticeList'
+  /practices/{id}/:
+    get:
+      operationId: practices_retrieve
+      summary: Retrieve a practice
+      tags:
+        - Practices
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Practice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practice'
+    put:
+      operationId: practices_update
+      summary: Update a practice
+      tags:
+        - Practices
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Practice'
+      responses:
+        '200':
+          description: Practice updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practice'
+    patch:
+      operationId: practices_partial_update
+      summary: Partially update a practice
+      tags:
+        - Practices
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Practice'
+      responses:
+        '200':
+          description: Practice updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practice'
+  /billing_codes/:
+    get:
+      operationId: billing_codes_list
+      summary: List billing codes
+      description: Retrieve a paginated list of billing codes.
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of billing codes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBillingCodeList'
+    post:
+      operationId: billing_codes_create
+      summary: Create a billing code
+      tags:
+        - Billing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCodeCreate'
+      responses:
+        '201':
+          description: Billing code created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+  /billing_codes/{id}/:
+    get:
+      operationId: billing_codes_retrieve
+      summary: Retrieve a billing code
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Billing code details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+    put:
+      operationId: billing_codes_update
+      summary: Update a billing code
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCodeCreate'
+      responses:
+        '200':
+          description: Billing code updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+    patch:
+      operationId: billing_codes_partial_update
+      summary: Partially update a billing code
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingCodeCreate'
+      responses:
+        '200':
+          description: Billing code updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingCode'
+    delete:
+      operationId: billing_codes_destroy
+      summary: Delete a billing code
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Billing code deleted
+  /insurance_companies/:
+    get:
+      operationId: insurance_companies_list
+      summary: List insurance companies
+      description: Retrieve a paginated list of insurance companies.
+      tags:
+        - Insurance
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of insurance companies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInsuranceCompanyList'
+    post:
+      operationId: insurance_companies_create
+      summary: Create an insurance company
+      tags:
+        - Insurance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCompanyCreate'
+      responses:
+        '201':
+          description: Insurance company created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+  /insurance_companies/{id}/:
+    get:
+      operationId: insurance_companies_retrieve
+      summary: Retrieve an insurance company
+      tags:
+        - Insurance
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Insurance company details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+    put:
+      operationId: insurance_companies_update
+      summary: Update an insurance company
+      tags:
+        - Insurance
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCompanyCreate'
+      responses:
+        '200':
+          description: Insurance company updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+    patch:
+      operationId: insurance_companies_partial_update
+      summary: Partially update an insurance company
+      tags:
+        - Insurance
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InsuranceCompanyCreate'
+      responses:
+        '200':
+          description: Insurance company updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceCompany'
+    delete:
+      operationId: insurance_companies_destroy
+      summary: Delete an insurance company
+      tags:
+        - Insurance
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Insurance company deleted
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Bearer token for API requests
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Token validity in seconds
+          example: 36000
+        refresh_token:
+          type: string
+          description: Token for obtaining new access tokens
+        scope:
+          type: string
+          description: Granted permission scopes
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable error description
+        error:
+          type: string
+          description: Machine-readable error code
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    Address:
+      type: object
+      properties:
+        address_line1:
+          type: string
+          description: Primary street address
+        address_line2:
+          type: string
+          description: Secondary address line
+        city:
+          type: string
+        state:
+          type: string
+          description: Two-letter state code
+        zip:
+          type: string
+          description: ZIP or postal code
+    Phone:
+      type: object
+      properties:
+        phone:
+          type: string
+          description: Phone number
+        phone_type:
+          type: string
+          enum:
+            - Home
+            - Work
+            - Cell
+            - Fax
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+    PatientStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - Prospect
+            - Deceased
+        reason:
+          type: string
+          description: Reason for status
+        deleted_date:
+          type: string
+          format: date-time
+          readOnly: true
+    PatientCreate:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - dob
+        - primary_physician
+        - caregiver_practice
+        - sex
+      properties:
+        first_name:
+          type: string
+          maxLength: 70
+          description: Patient's first name
+        middle_name:
+          type: string
+          maxLength: 50
+          description: Patient's middle name
+        last_name:
+          type: string
+          maxLength: 70
+          description: Patient's last name
+        suffix:
+          type: string
+          maxLength: 20
+          description: Name suffix
+        actual_name:
+          type: string
+          maxLength: 150
+          description: Preferred name variation
+        dob:
+          type: string
+          format: date
+          description: Date of birth (YYYY-MM-DD)
+        sex:
+          type: string
+          enum:
+            - Female
+            - Male
+            - Other
+            - Unknown
+          description: Biological sex
+        gender_identity:
+          type: string
+          enum:
+            - man
+            - woman
+            - nonbinary
+            - transgender_man
+            - transgender_woman
+            - prefer_not_to_say
+          description: Personal gender identity
+        legal_gender_marker:
+          type: string
+          enum:
+            - M
+            - F
+            - X
+            - U
+          description: Document gender marker
+        pronouns:
+          type: string
+          enum:
+            - he_him_his
+            - she_her_hers
+            - they_them_theirs
+            - not_listed
+          description: Preferred pronouns
+        sexual_orientation:
+          type: string
+          enum:
+            - straight
+            - gay
+            - lesbian
+            - bisexual
+            - queer
+            - asexual
+            - unknown
+        race:
+          type: string
+          description: Racial category
+        ethnicity:
+          type: string
+          description: Hispanic/Latino status
+        preferred_language:
+          type: string
+          description: Patient's preferred communication language
+        preferred_contact:
+          type: string
+          enum:
+            - sms
+            - email
+            - phone
+            - passport
+        ssn:
+          type: string
+          maxLength: 37
+          description: Social Security Number
+        primary_physician:
+          type: integer
+          description: ID of physician providing care within practice
+        caregiver_practice:
+          type: integer
+          description: Practice ID
+        address:
+          $ref: '#/components/schemas/Address'
+        phones:
+          type: array
+          maxItems: 2
+          items:
+            $ref: '#/components/schemas/Phone'
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        notes:
+          type: string
+          maxLength: 500
+          description: Additional notes about patient
+        vip:
+          type: boolean
+          description: VIP status flag
+        tags:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+        patient_status:
+          $ref: '#/components/schemas/PatientStatus'
+        metadata:
+          type: object
+          description: Custom metadata
+    PatientPatch:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 70
+        middle_name:
+          type: string
+          maxLength: 50
+        last_name:
+          type: string
+          maxLength: 70
+        dob:
+          type: string
+          format: date
+        sex:
+          type: string
+          enum:
+            - Female
+            - Male
+            - Other
+            - Unknown
+        primary_physician:
+          type: integer
+        address:
+          $ref: '#/components/schemas/Address'
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        patient_status:
+          $ref: '#/components/schemas/PatientStatus'
+        metadata:
+          type: object
+    Patient:
+      allOf:
+        - $ref: '#/components/schemas/PatientCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              readOnly: true
+              description: Unique patient identifier
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+            merged_into_chart:
+              type: integer
+              format: int64
+              nullable: true
+              readOnly: true
+            sms_opt_in_status:
+              type: boolean
+              readOnly: true
+            verified:
+              type: boolean
+            primary_care_provider:
+              type: integer
+              readOnly: true
+            primary_care_provider_npi:
+              type: string
+              maxLength: 10
+            consents:
+              type: array
+              readOnly: true
+              items:
+                type: object
+    PaginatedPatientList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Patient'
+    AppointmentStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - Scheduled
+            - Confirmed
+            - Checked Out
+            - Cancelled
+            - With Doctor
+            - In Room
+            - Checked In
+            - In Room - Vitals Taken
+            - Not Seen
+            - Billed
+        room:
+          type: string
+          description: Physical room assignment
+        status_date:
+          type: string
+          format: date-time
+          readOnly: true
+        status_detail:
+          type: string
+          enum:
+            - No Show
+            - Left Without Seeing
+            - Other
+          description: Additional detail when status is Not Seen
+    AppointmentCreate:
+      type: object
+      required:
+        - scheduled_date
+        - duration
+        - reason
+        - patient
+        - physician
+        - practice
+        - service_location
+      properties:
+        scheduled_date:
+          type: string
+          format: date-time
+          description: Appointment date and time (ISO 8601)
+        duration:
+          type: integer
+          minimum: 1
+          maximum: 1440
+          description: Duration in minutes (5-minute increments)
+        reason:
+          type: string
+          maxLength: 50
+          description: Appointment reason/type
+        description:
+          type: string
+          maxLength: 500
+          description: Additional context
+        patient:
+          type: integer
+          format: int64
+          description: Patient ID
+        physician:
+          type: integer
+          format: int64
+          description: Physician ID
+        practice:
+          type: integer
+          format: int64
+          description: Practice ID
+        service_location:
+          type: object
+          description: Facility where appointment occurs
+        mode:
+          type: string
+          enum:
+            - IN_PERSON
+            - VIDEO
+          description: Visit format
+        instructions:
+          type: string
+          maxLength: 500
+          description: Appointment instructions
+        metadata:
+          type: object
+          nullable: true
+    AppointmentPatch:
+      type: object
+      properties:
+        scheduled_date:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+        reason:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 500
+        status:
+          $ref: '#/components/schemas/AppointmentStatus'
+        mode:
+          type: string
+          enum:
+            - IN_PERSON
+            - VIDEO
+        instructions:
+          type: string
+          maxLength: 500
+    Appointment:
+      allOf:
+        - $ref: '#/components/schemas/AppointmentCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              readOnly: true
+            time_slot_type:
+              type: string
+              default: appointment
+            time_slot_status:
+              type: object
+              nullable: true
+            status:
+              $ref: '#/components/schemas/AppointmentStatus'
+            payment:
+              type: object
+              nullable: true
+              properties:
+                amount:
+                  type: number
+                collection_date:
+                  type: string
+                  format: date
+            billing_details:
+              type: object
+              nullable: true
+            is_blocking:
+              type: boolean
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            last_modified_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedAppointmentList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Appointment'
+    VisitNoteCreate:
+      type: object
+      required:
+        - patient
+        - physician
+        - practice
+        - document_date
+        - chart_date
+        - template
+      properties:
+        patient:
+          type: integer
+          format: int64
+          description: Patient ID
+        physician:
+          type: integer
+          format: int64
+          description: Clinician ID
+        practice:
+          type: integer
+          format: int64
+          description: Practice ID
+        document_date:
+          type: string
+          format: date-time
+          description: Clinical service date
+        chart_date:
+          type: string
+          format: date-time
+          description: Date entry was recorded in chart
+        template:
+          type: string
+          enum:
+            - Simple
+            - SOAP
+            - Complete H&P
+            - Pre-Op
+          description: Document structure format
+        type:
+          type: string
+          maxLength: 50
+          description: Visit note classification
+        bullets:
+          type: array
+          description: Clinical bullet points organized by category
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              text:
+                type: string
+                maxLength: 500
+        confidential:
+          type: boolean
+          description: Privacy flag for sensitive content
+        tags:
+          type: array
+          items:
+            type: string
+    VisitNote:
+      allOf:
+        - $ref: '#/components/schemas/VisitNoteCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              readOnly: true
+            checklists:
+              type: object
+              description: PE and ROS checklist items
+            edits:
+              type: array
+              readOnly: true
+              items:
+                type: object
+            signatures:
+              type: array
+              readOnly: true
+              items:
+                type: object
+            signed_date:
+              type: string
+              format: date-time
+              nullable: true
+            signed_by:
+              type: integer
+              nullable: true
+            amendment_request:
+              type: object
+              nullable: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            last_modified:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+            clinical_summary_link:
+              type: string
+              format: uri
+              readOnly: true
+            visit_summary_link:
+              type: string
+              format: uri
+              readOnly: true
+    PaginatedVisitNoteList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/VisitNote'
+    Diagnosis:
+      type: object
+      properties:
+        icd9:
+          type: array
+          items:
+            type: string
+        icd10:
+          type: array
+          items:
+            type: string
+        snomed:
+          type: string
+    ProblemCreate:
+      type: object
+      required:
+        - description
+        - status
+        - start_date
+        - patient
+      properties:
+        description:
+          type: string
+          description: Description of the problem
+        status:
+          type: string
+          enum:
+            - Active
+            - Controlled
+            - Resolved
+        synopsis:
+          type: string
+          description: Brief synopsis of the problem
+        start_date:
+          type: string
+          format: date-time
+          description: Date the problem started
+        resolved_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date the problem was resolved (required when status is Resolved)
+        patient:
+          type: integer
+          description: Patient ID
+        dx:
+          $ref: '#/components/schemas/Diagnosis'
+    Problem:
+      allOf:
+        - $ref: '#/components/schemas/ProblemCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedProblemList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Problem'
+    AllergyCreate:
+      type: object
+      required:
+        - patient
+        - allergen
+        - status
+      properties:
+        patient:
+          type: integer
+          description: Patient ID
+        allergen:
+          type: string
+          description: Substance causing the allergy
+        reaction:
+          type: string
+          description: Allergic reaction description
+        severity:
+          type: string
+          enum:
+            - Mild
+            - Moderate
+            - Severe
+            - Unknown
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+        start_date:
+          type: string
+          format: date
+        notes:
+          type: string
+    Allergy:
+      allOf:
+        - $ref: '#/components/schemas/AllergyCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedAllergyList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Allergy'
+    MedicationCreate:
+      type: object
+      required:
+        - patient
+        - medication_name
+      properties:
+        patient:
+          type: integer
+          description: Patient ID
+        medication_name:
+          type: string
+          description: Medication name
+        sig:
+          type: string
+          description: Dosage instructions
+        dose:
+          type: string
+          description: Dose amount
+        dose_unit:
+          type: string
+          description: Dose unit (mg, mL, etc.)
+        route:
+          type: string
+          description: Route of administration
+        frequency:
+          type: string
+          description: Dosing frequency
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+        notes:
+          type: string
+    Medication:
+      allOf:
+        - $ref: '#/components/schemas/MedicationCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedMedicationList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Medication'
+    LabOrderCreate:
+      type: object
+      required:
+        - patient
+        - physician
+        - practice
+      properties:
+        patient:
+          type: integer
+          description: Patient ID
+        physician:
+          type: integer
+          description: Ordering physician ID
+        practice:
+          type: integer
+          description: Practice ID
+        lab_vendor:
+          type: integer
+          description: Lab vendor ID
+        tests:
+          type: array
+          items:
+            type: object
+            properties:
+              test_id:
+                type: integer
+              test_name:
+                type: string
+        clinical_notes:
+          type: string
+          description: Clinical notes for the lab
+        document_date:
+          type: string
+          format: date
+          description: Order date
+        status:
+          type: string
+          enum:
+            - Ordered
+            - Collected
+            - Sent
+            - Resulted
+    LabOrder:
+      allOf:
+        - $ref: '#/components/schemas/LabOrderCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedLabOrderList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/LabOrder'
+    MessageThreadCreate:
+      type: object
+      required:
+        - subject
+      properties:
+        subject:
+          type: string
+          description: Thread subject
+        members:
+          type: array
+          items:
+            type: integer
+          description: User IDs of thread members
+        patient:
+          type: integer
+          nullable: true
+          description: Associated patient ID
+        note:
+          type: string
+          description: Initial message content
+    MessageThread:
+      allOf:
+        - $ref: '#/components/schemas/MessageThreadCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            last_modified:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedMessageThreadList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/MessageThread'
+    Physician:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        npi:
+          type: string
+          maxLength: 10
+          description: National Provider Identifier
+        practice:
+          type: integer
+          description: Practice ID
+        specialty:
+          type: string
+        credentials:
+          type: string
+        email:
+          type: string
+          format: email
+        is_active:
+          type: boolean
+    PaginatedPhysicianList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Physician'
+    Practice:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          description: Practice name
+        phone:
+          type: string
+        fax:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        tax_id:
+          type: string
+        npi:
+          type: string
+          maxLength: 10
+    PaginatedPracticeList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Practice'
+    BillingCodeCreate:
+      type: object
+      required:
+        - code
+        - description
+      properties:
+        code:
+          type: string
+          description: Billing/CPT code
+        description:
+          type: string
+          description: Description of the billing code
+        fee:
+          type: number
+          format: float
+          description: Standard fee amount
+        code_type:
+          type: string
+          description: Type of billing code (CPT, ICD10, etc.)
+    BillingCode:
+      allOf:
+        - $ref: '#/components/schemas/BillingCodeCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+    PaginatedBillingCodeList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BillingCode'
+    InsuranceCompanyCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Insurance company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        fax:
+          type: string
+        payer_id:
+          type: string
+          description: Electronic payer identifier
+    InsuranceCompany:
+      allOf:
+        - $ref: '#/components/schemas/InsuranceCompanyCreate'
+        - type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            created_date:
+              type: string
+              format: date-time
+              readOnly: true
+            deleted_date:
+              type: string
+              format: date-time
+              nullable: true
+              readOnly: true
+    PaginatedInsuranceCompanyList:
+      allOf:
+        - $ref: '#/components/schemas/PaginationMeta'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/InsuranceCompany'

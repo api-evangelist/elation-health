@@ -1,0 +1,240 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Lab Orders API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Lab Orders
+  description: Laboratory order management
+paths:
+  /lab_orders/:
+    get:
+      operationId: lab_orders_list
+      summary: List lab orders
+      description: Retrieve a paginated list of laboratory orders.
+      tags:
+      - Lab Orders
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: patient
+        in: query
+        schema:
+          type: integer
+        description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of lab orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabOrderList'
+    post:
+      operationId: lab_orders_create
+      summary: Create a lab order
+      description: Place a new laboratory order for a patient.
+      tags:
+      - Lab Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderCreate'
+      responses:
+        '201':
+          description: Lab order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+  /lab_orders/{id}/:
+    get:
+      operationId: lab_orders_retrieve
+      summary: Retrieve a lab order
+      tags:
+      - Lab Orders
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Lab order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+    put:
+      operationId: lab_orders_update
+      summary: Update a lab order
+      tags:
+      - Lab Orders
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderCreate'
+      responses:
+        '200':
+          description: Lab order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+    patch:
+      operationId: lab_orders_partial_update
+      summary: Partially update a lab order
+      tags:
+      - Lab Orders
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderCreate'
+      responses:
+        '200':
+          description: Lab order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+    delete:
+      operationId: lab_orders_destroy
+      summary: Delete a lab order
+      tags:
+      - Lab Orders
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Lab order deleted
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  schemas:
+    LabOrder:
+      allOf:
+      - $ref: '#/components/schemas/LabOrderCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    PaginatedLabOrderList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/LabOrder'
+    LabOrderCreate:
+      type: object
+      required:
+      - patient
+      - physician
+      - practice
+      properties:
+        patient:
+          type: integer
+          description: Patient ID
+        physician:
+          type: integer
+          description: Ordering physician ID
+        practice:
+          type: integer
+          description: Practice ID
+        lab_vendor:
+          type: integer
+          description: Lab vendor ID
+        tests:
+          type: array
+          items:
+            type: object
+            properties:
+              test_id:
+                type: integer
+              test_name:
+                type: string
+        clinical_notes:
+          type: string
+          description: Clinical notes for the lab
+        document_date:
+          type: string
+          format: date
+          description: Order date
+        status:
+          type: string
+          enum:
+          - Ordered
+          - Collected
+          - Sent
+          - Resulted
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

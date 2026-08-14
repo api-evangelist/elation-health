@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Elation Health REST Allergies API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://sandbox.elationemr.com/api/2.0/oauth2/token/",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Allergies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List allergies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/allergies/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of patient allergies."
+        },
+        {
+          "info": {
+            "name": "Create an allergy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.elationemr.com/api/2.0/allergies/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a new allergy for a patient."
+        },
+        {
+          "info": {
+            "name": "Retrieve an allergy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/allergies/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve an allergy"
+        },
+        {
+          "info": {
+            "name": "Update an allergy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.elationemr.com/api/2.0/allergies/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an allergy"
+        },
+        {
+          "info": {
+            "name": "Partially update an allergy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.elationemr.com/api/2.0/allergies/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update an allergy"
+        },
+        {
+          "info": {
+            "name": "Delete an allergy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.elationemr.com/api/2.0/allergies/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Delete an allergy"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

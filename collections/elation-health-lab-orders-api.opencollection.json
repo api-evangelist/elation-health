@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Elation Health REST Allergies Lab Orders API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://sandbox.elationemr.com/api/2.0/oauth2/token/",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lab Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List lab orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/lab_orders/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of laboratory orders."
+        },
+        {
+          "info": {
+            "name": "Create a lab order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.elationemr.com/api/2.0/lab_orders/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Place a new laboratory order for a patient."
+        },
+        {
+          "info": {
+            "name": "Retrieve a lab order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.elationemr.com/api/2.0/lab_orders/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a lab order"
+        },
+        {
+          "info": {
+            "name": "Update a lab order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.elationemr.com/api/2.0/lab_orders/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a lab order"
+        },
+        {
+          "info": {
+            "name": "Partially update a lab order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.elationemr.com/api/2.0/lab_orders/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a lab order"
+        },
+        {
+          "info": {
+            "name": "Delete a lab order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.elationemr.com/api/2.0/lab_orders/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique resource identifier"
+              }
+            ]
+          },
+          "docs": "Delete a lab order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

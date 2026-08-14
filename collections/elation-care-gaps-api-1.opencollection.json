@@ -1,0 +1,414 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Care Gaps API",
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a filtered page of definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/definition/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_num",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "closing_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "definition_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "indicator",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a list of definitions."
+        },
+        {
+          "info": {
+            "name": "Create a new definition.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/definition/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new definition."
+        },
+        {
+          "info": {
+            "name": "Retrieve an existing definition.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/definition/:definition_id/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "definition_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a specific definition."
+        },
+        {
+          "info": {
+            "name": "Delete an existing definition.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/definition/:definition_id/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "definition_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a specific definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Caregaps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of existing caregap.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/caregap/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "definition_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "closed_date_begin",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "closed_date_end",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a list of Care Gaps with filters specified by query parameters."
+        },
+        {
+          "info": {
+            "name": "Create a new caregap.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/caregap/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new caregap."
+        },
+        {
+          "info": {
+            "name": "Retrieve an existing caregap.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/caregap/:caregap_id/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "caregap_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a specific Care Gap."
+        },
+        {
+          "info": {
+            "name": "Modifies an existing caregap's closed status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/caregap/:caregap_id/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "caregap_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Modifies an existing caregap's closed status."
+        },
+        {
+          "info": {
+            "name": "Delete an existing caregap.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://caregaps.sandbox.elationemr.com/caregaps/api/:quality_program/caregap/:caregap_id/",
+            "params": [
+              {
+                "name": "quality_program",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "caregap_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "practice_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a specific Care Gap."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,217 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Messaging API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Messaging
+  description: Secure direct messaging
+paths:
+  /message_threads/:
+    get:
+      operationId: message_threads_list
+      summary: List message threads
+      description: Retrieve a paginated list of secure message threads.
+      tags:
+      - Messaging
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of message threads
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMessageThreadList'
+    post:
+      operationId: message_threads_create
+      summary: Create a message thread
+      description: Start a new secure message thread.
+      tags:
+      - Messaging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThreadCreate'
+      responses:
+        '201':
+          description: Message thread created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+  /message_threads/{id}/:
+    get:
+      operationId: message_threads_retrieve
+      summary: Retrieve a message thread
+      tags:
+      - Messaging
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Message thread details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+    put:
+      operationId: message_threads_update
+      summary: Update a message thread
+      tags:
+      - Messaging
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThreadCreate'
+      responses:
+        '200':
+          description: Message thread updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+    patch:
+      operationId: message_threads_partial_update
+      summary: Partially update a message thread
+      tags:
+      - Messaging
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThreadCreate'
+      responses:
+        '200':
+          description: Message thread updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+    delete:
+      operationId: message_threads_destroy
+      summary: Delete a message thread
+      tags:
+      - Messaging
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Message thread deleted
+components:
+  schemas:
+    PaginatedMessageThreadList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/MessageThread'
+    MessageThread:
+      allOf:
+      - $ref: '#/components/schemas/MessageThreadCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          last_modified:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    MessageThreadCreate:
+      type: object
+      required:
+      - subject
+      properties:
+        subject:
+          type: string
+          description: Thread subject
+        members:
+          type: array
+          items:
+            type: integer
+          description: User IDs of thread members
+        patient:
+          type: integer
+          nullable: true
+          description: Associated patient ID
+        note:
+          type: string
+          description: Initial message content
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

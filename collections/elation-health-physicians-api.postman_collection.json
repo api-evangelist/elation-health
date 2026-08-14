@@ -1,0 +1,478 @@
+{
+  "item": [
+    {
+      "id": "45c3eeb7-110a-47eb-a3cc-6031ac099162",
+      "name": "Physicians",
+      "description": {
+        "content": "Provider and staff management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68b7c59e-8caa-4f8b-9a25-03af637acece",
+          "name": "List physicians",
+          "request": {
+            "name": "List physicians",
+            "description": {
+              "content": "Retrieve a list of physicians in the practice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "physicians",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d817f09-e079-4c32-889b-4826c62fb523",
+              "name": "Paginated list of physicians",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physicians",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7747,\n  \"next\": \"string\",\n  \"previous\": \"string\",\n  \"results\": [\n    {\n      \"id\": 2704,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"npi\": \"string\",\n      \"practice\": 9393,\n      \"specialty\": \"string\",\n      \"credentials\": \"string\",\n      \"email\": \"CLfZMic@iQ.uq\",\n      \"is_active\": true\n    },\n    {\n      \"id\": 2388,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"npi\": \"string\",\n      \"practice\": 1150,\n      \"specialty\": \"string\",\n      \"credentials\": \"string\",\n      \"email\": \"pjnbfdNNj@LjZGnmIKemd.dk\",\n      \"is_active\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08a2a485-7391-4663-b04e-b75736d04918",
+          "name": "Retrieve a physician",
+          "request": {
+            "name": "Retrieve a physician",
+            "description": {},
+            "url": {
+              "path": [
+                "physicians",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba8fbe41-c545-4c48-8422-1450cfa15c8b",
+              "name": "Physician details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physicians",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1858,\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"npi\": \"string\",\n  \"practice\": 3315,\n  \"specialty\": \"string\",\n  \"credentials\": \"string\",\n  \"email\": \"Xbqqka@CAQQqZmGuDtNHQ.btst\",\n  \"is_active\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "266307c0-546b-4c28-98fd-9bff7776b42a",
+          "name": "Update a physician",
+          "request": {
+            "name": "Update a physician",
+            "description": {},
+            "url": {
+              "path": [
+                "physicians",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"practice\": \"<integer>\",\n  \"specialty\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fa48332-b94f-40b7-aa4b-234f4277fcc3",
+              "name": "Physician updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physicians",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"practice\": \"<integer>\",\n  \"specialty\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8585,\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"practice\": \"<integer>\",\n  \"specialty\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "790c6e37-314e-4560-9974-b1ff3cdb22c8",
+          "name": "Partially update a physician",
+          "request": {
+            "name": "Partially update a physician",
+            "description": {},
+            "url": {
+              "path": [
+                "physicians",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"practice\": \"<integer>\",\n  \"specialty\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5c25e77-a976-4139-8b10-96a3ef6b9295",
+              "name": "Physician updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physicians",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"practice\": \"<integer>\",\n  \"specialty\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8585,\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"practice\": \"<integer>\",\n  \"specialty\": \"<string>\",\n  \"credentials\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "apiv2"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://sandbox.elationemr.com/api/2.0/oauth2/token/"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3f52985d-8d9e-4b2f-a399-585d9801d145",
+    "name": "Elation Health REST Allergies Physicians API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.\n\nContact Support:\n Name: Elation Health Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

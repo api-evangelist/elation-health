@@ -1,0 +1,2150 @@
+{
+  "item": [
+    {
+      "id": "20a46680-5062-4871-a643-67a9b891bc1a",
+      "name": "Message Threads",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3afc21f1-c1a1-44fe-8be8-a9590676abc4",
+          "name": "List Message Threads",
+          "request": {
+            "name": "List Message Threads",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "message_threads",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "document_date__gt",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "document_date__gte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "document_date__lt",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "document_date__lte",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "872db75e-78fb-4754-9238-a00c7b3e0f13",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "message_threads",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "document_date__gt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_date__gte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_date__lt",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_date__lte",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"chart_date\": \"2004-06-25T11:15:12.445Z\",\n      \"document_date\": \"1984-03-11T10:37:00.513Z\",\n      \"patient\": 4346,\n      \"practice\": 2127,\n      \"created_date\": \"1978-12-18T03:32:43.004Z\",\n      \"deleted_date\": \"1975-12-21T07:01:24.011Z\",\n      \"delivery_date\": \"1975-12-08T02:26:00.205Z\",\n      \"id\": 1250,\n      \"is_urgent\": false,\n      \"members\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"signed_by\": 7830,\n      \"signed_date\": \"1998-09-10T09:47:30.836Z\"\n    },\n    {\n      \"chart_date\": \"2026-02-25T20:53:57.566Z\",\n      \"document_date\": \"2015-05-30T02:01:44.207Z\",\n      \"patient\": 9296,\n      \"practice\": 3024,\n      \"created_date\": \"1993-11-09T16:25:51.758Z\",\n      \"deleted_date\": \"2004-02-07T04:54:56.763Z\",\n      \"delivery_date\": \"1951-12-22T22:44:44.030Z\",\n      \"id\": 3903,\n      \"is_urgent\": false,\n      \"members\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"messages\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"signed_by\": 6410,\n      \"signed_date\": \"1983-02-15T23:47:07.638Z\"\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20571d71-c8a7-4cca-98cc-9b09dad45f96",
+          "name": "Create Message Thread",
+          "request": {
+            "name": "Create Message Thread",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "message_threads",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f9f9aa9-b525-406d-b8b0-3cc221d4e99c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "message_threads",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"1958-04-19T18:52:39.063Z\",\n      \"group\": 8432,\n      \"thread\": 9289,\n      \"user\": 1340\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2006-01-26T14:54:08.747Z\",\n      \"group\": 2814,\n      \"thread\": 1291,\n      \"user\": 2944\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1993-07-22T20:22:38.687Z\",\n      \"sender\": 2793,\n      \"thread\": 3434,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1977-12-01T11:26:51.305Z\",\n      \"sender\": 857,\n      \"thread\": 8523,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chart_date\": \"1991-12-13T08:26:02.876Z\",\n  \"document_date\": \"1996-12-11T12:03:28.005Z\",\n  \"patient\": 8447,\n  \"practice\": 8965,\n  \"created_date\": \"2009-11-06T20:17:19.696Z\",\n  \"deleted_date\": \"2009-01-16T09:48:47.562Z\",\n  \"delivery_date\": \"1973-10-27T18:32:16.096Z\",\n  \"id\": 2749,\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2019-07-30T21:50:20.699Z\",\n      \"group\": 1824,\n      \"id\": 523,\n      \"thread\": 454,\n      \"user\": 7699\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2026-05-19T14:28:55.043Z\",\n      \"group\": 2668,\n      \"id\": 1265,\n      \"thread\": 3691,\n      \"user\": 2093\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1990-06-23T06:34:20.192Z\",\n      \"sender\": 5045,\n      \"id\": 2607,\n      \"patient\": 5337,\n      \"practice\": 5699,\n      \"thread\": 3034,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1984-09-07T08:03:46.086Z\",\n      \"sender\": 8807,\n      \"id\": 2216,\n      \"patient\": 5666,\n      \"practice\": 9035,\n      \"thread\": 934,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": 4388,\n  \"signed_date\": \"1983-07-28T03:57:03.480Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9738d07-f198-42e3-b8e3-1a2642e87f53",
+          "name": "Delete Message Thread",
+          "request": {
+            "name": "Delete Message Thread",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "message_threads",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7c69b3f6-4203-4187-95e8-d2d1b6ba36bd",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "message_threads",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80864790-28bb-4d17-9966-abb2449fd4c0",
+          "name": "Retrieve Message Thread",
+          "request": {
+            "name": "Retrieve Message Thread",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "message_threads",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a89f637e-5ca0-4dff-a7db-0df62fc69843",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "message_threads",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chart_date\": \"1991-12-13T08:26:02.876Z\",\n  \"document_date\": \"1996-12-11T12:03:28.005Z\",\n  \"patient\": 8447,\n  \"practice\": 8965,\n  \"created_date\": \"2009-11-06T20:17:19.696Z\",\n  \"deleted_date\": \"2009-01-16T09:48:47.562Z\",\n  \"delivery_date\": \"1973-10-27T18:32:16.096Z\",\n  \"id\": 2749,\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2019-07-30T21:50:20.699Z\",\n      \"group\": 1824,\n      \"id\": 523,\n      \"thread\": 454,\n      \"user\": 7699\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2026-05-19T14:28:55.043Z\",\n      \"group\": 2668,\n      \"id\": 1265,\n      \"thread\": 3691,\n      \"user\": 2093\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1990-06-23T06:34:20.192Z\",\n      \"sender\": 5045,\n      \"id\": 2607,\n      \"patient\": 5337,\n      \"practice\": 5699,\n      \"thread\": 3034,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1984-09-07T08:03:46.086Z\",\n      \"sender\": 8807,\n      \"id\": 2216,\n      \"patient\": 5666,\n      \"practice\": 9035,\n      \"thread\": 934,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": 4388,\n  \"signed_date\": \"1983-07-28T03:57:03.480Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bcdf2f05-c5ee-4efa-bfce-027aa2018ca2",
+          "name": "Partially Update Message Thread",
+          "request": {
+            "name": "Partially Update Message Thread",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "message_threads",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"document_date\": \"<dateTime>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07a4f661-31e1-4fd8-9b29-3846f91da1ae",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "message_threads",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"document_date\": \"<dateTime>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2014-02-09T05:12:47.744Z\",\n      \"group\": 3410,\n      \"thread\": 7688,\n      \"user\": 1355\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2023-02-09T08:43:03.242Z\",\n      \"group\": 2417,\n      \"thread\": 2142,\n      \"user\": 735\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1987-10-16T17:56:10.525Z\",\n      \"sender\": 217,\n      \"thread\": 7149,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"2013-04-30T18:49:26.805Z\",\n      \"sender\": 7648,\n      \"thread\": 5791,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chart_date\": \"1991-12-13T08:26:02.876Z\",\n  \"document_date\": \"1996-12-11T12:03:28.005Z\",\n  \"patient\": 8447,\n  \"practice\": 8965,\n  \"created_date\": \"2009-11-06T20:17:19.696Z\",\n  \"deleted_date\": \"2009-01-16T09:48:47.562Z\",\n  \"delivery_date\": \"1973-10-27T18:32:16.096Z\",\n  \"id\": 2749,\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2019-07-30T21:50:20.699Z\",\n      \"group\": 1824,\n      \"id\": 523,\n      \"thread\": 454,\n      \"user\": 7699\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2026-05-19T14:28:55.043Z\",\n      \"group\": 2668,\n      \"id\": 1265,\n      \"thread\": 3691,\n      \"user\": 2093\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1990-06-23T06:34:20.192Z\",\n      \"sender\": 5045,\n      \"id\": 2607,\n      \"patient\": 5337,\n      \"practice\": 5699,\n      \"thread\": 3034,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1984-09-07T08:03:46.086Z\",\n      \"sender\": 8807,\n      \"id\": 2216,\n      \"patient\": 5666,\n      \"practice\": 9035,\n      \"thread\": 934,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": 4388,\n  \"signed_date\": \"1983-07-28T03:57:03.480Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe728837-be47-453c-9df9-b9c36340722f",
+          "name": "Update Message Thread",
+          "request": {
+            "name": "Update Message Thread",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "message_threads",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"<dateTime>\",\n      \"group\": \"<integer,null-int64>\",\n      \"thread\": \"<long>\",\n      \"user\": \"<integer,null>\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"<string>\",\n      \"send_date\": \"<dateTime>\",\n      \"sender\": \"<integer>\",\n      \"thread\": \"<long>\",\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e56477c3-61af-4faf-9135-7424a9e869ca",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "message_threads",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_date\": \"<dateTime>\",\n  \"document_date\": \"<dateTime>\",\n  \"patient\": \"<long>\",\n  \"practice\": \"<long>\",\n  \"delivery_date\": \"<string,null-date-time>\",\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"1958-04-19T18:52:39.063Z\",\n      \"group\": 8432,\n      \"thread\": 9289,\n      \"user\": 1340\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2006-01-26T14:54:08.747Z\",\n      \"group\": 2814,\n      \"thread\": 1291,\n      \"user\": 2944\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1993-07-22T20:22:38.687Z\",\n      \"sender\": 2793,\n      \"thread\": 3434,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1977-12-01T11:26:51.305Z\",\n      \"sender\": 857,\n      \"thread\": 8523,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": \"<integer,null-int64>\",\n  \"signed_date\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chart_date\": \"1991-12-13T08:26:02.876Z\",\n  \"document_date\": \"1996-12-11T12:03:28.005Z\",\n  \"patient\": 8447,\n  \"practice\": 8965,\n  \"created_date\": \"2009-11-06T20:17:19.696Z\",\n  \"deleted_date\": \"2009-01-16T09:48:47.562Z\",\n  \"delivery_date\": \"1973-10-27T18:32:16.096Z\",\n  \"id\": 2749,\n  \"is_urgent\": false,\n  \"members\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2019-07-30T21:50:20.699Z\",\n      \"group\": 1824,\n      \"id\": 523,\n      \"thread\": 454,\n      \"user\": 7699\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"2026-05-19T14:28:55.043Z\",\n      \"group\": 2668,\n      \"id\": 1265,\n      \"thread\": 3691,\n      \"user\": 2093\n    }\n  ],\n  \"messages\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1990-06-23T06:34:20.192Z\",\n      \"sender\": 5045,\n      \"id\": 2607,\n      \"patient\": 5337,\n      \"practice\": 5699,\n      \"thread\": 3034,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1984-09-07T08:03:46.086Z\",\n      \"sender\": 8807,\n      \"id\": 2216,\n      \"patient\": 5666,\n      \"practice\": 9035,\n      \"thread\": 934,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"signed_by\": 4388,\n  \"signed_date\": \"1983-07-28T03:57:03.480Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c54e0f5a-0fa4-42bf-9337-cde0bff41d8f",
+      "name": "Thread Members",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2592fe5-e4e0-4eb9-953d-23f4da2ad7ee",
+          "name": "List Thread Members",
+          "request": {
+            "name": "List Thread Members",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_members",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ack_time",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "thread",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>,<integer>",
+                  "description": "Multiple values may be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "13c7ab32-7884-444a-bdc3-e5bc2ffc0b73",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_members",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ack_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "thread",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>,<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"1957-12-22T20:25:05.278Z\",\n      \"group\": 9922,\n      \"id\": 9516,\n      \"thread\": 9814,\n      \"user\": 9497\n    },\n    {\n      \"status\": {\n        \"description\": \"Whether this member has acknowledged the message thread.\",\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ack_time\": \"1987-10-01T21:37:14.173Z\",\n      \"group\": 8625,\n      \"id\": 9815,\n      \"thread\": 3111,\n      \"user\": 5208\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b292a90e-8b41-4226-81f9-e14556a4c239",
+          "name": "Create Thread Member",
+          "request": {
+            "name": "Create Thread Member",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_members",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45c52e34-0586-4d3b-9940-74bc3a0e045a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_members",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"Addressed\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Addressed\",\n  \"ack_time\": \"1979-08-09T15:00:51.574Z\",\n  \"group\": 5353,\n  \"id\": 4000,\n  \"thread\": 3811,\n  \"user\": 6180\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30415f38-be22-4646-bf58-b4085d3fda99",
+          "name": "Delete Thread Member",
+          "request": {
+            "name": "Delete Thread Member",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_members",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f4f9acad-d0f2-47af-ab5f-014c90ea46bb",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_members",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d0863cf-21bf-485e-8a33-5b74def9575c",
+          "name": "Retrieve Thread Member",
+          "request": {
+            "name": "Retrieve Thread Member",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_members",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5fb2902d-f35b-41d8-8159-ad6b93914ab5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_members",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Addressed\",\n  \"ack_time\": \"1979-08-09T15:00:51.574Z\",\n  \"group\": 5353,\n  \"id\": 4000,\n  \"thread\": 3811,\n  \"user\": 6180\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f20e9649-4275-4ae2-ba96-1568c6325a81",
+          "name": "Partially Update Thread Member",
+          "request": {
+            "name": "Partially Update Thread Member",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_members",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"status\": \"<string>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dde74dbd-1df4-48a6-acb9-20aee2d41996",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_members",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"status\": \"Addressed\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Addressed\",\n  \"ack_time\": \"1979-08-09T15:00:51.574Z\",\n  \"group\": 5353,\n  \"id\": 4000,\n  \"thread\": 3811,\n  \"user\": 6180\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c0e6ca3-a4e7-410c-ad0d-5dacbdc606a9",
+          "name": "Update Thread Member",
+          "request": {
+            "name": "Update Thread Member",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_members",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "900788e0-4a8d-413b-a839-519e938d27a0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_members",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"Addressed\",\n  \"ack_time\": \"<dateTime>\",\n  \"group\": \"<integer,null-int64>\",\n  \"thread\": \"<long>\",\n  \"user\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Addressed\",\n  \"ack_time\": \"1979-08-09T15:00:51.574Z\",\n  \"group\": 5353,\n  \"id\": 4000,\n  \"thread\": 3811,\n  \"user\": 6180\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "17a7ef64-33f1-4d4e-a1d9-4a32fbc5bb19",
+      "name": "Thread Messages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6b818a0a-aea6-4b05-b009-1eb11370e051",
+          "name": "List Thread Messages",
+          "request": {
+            "name": "List Thread Messages",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_messages",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "practice",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "sender",
+                  "value": "<integer>,<integer>",
+                  "description": "Multiple values may be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "thread",
+                  "value": "<long>,<long>",
+                  "description": "Multiple values may be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "111bd163-22e9-41dd-b806-2ec889f511c2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_messages",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "practice",
+                      "value": "<long>,<long>"
+                    },
+                    {
+                      "key": "sender",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "key": "thread",
+                      "value": "<long>,<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"body\": \"string\",\n      \"send_date\": \"2008-02-01T06:41:14.477Z\",\n      \"sender\": 5779,\n      \"id\": 189,\n      \"patient\": 1504,\n      \"practice\": 2931,\n      \"thread\": 4214,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"body\": \"string\",\n      \"send_date\": \"1996-07-20T16:34:41.256Z\",\n      \"sender\": 1116,\n      \"id\": 7719,\n      \"patient\": 8285,\n      \"practice\": 1901,\n      \"thread\": 2577,\n      \"to_document\": {\n        \"authoring_practice\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"chart_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"patient\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"created_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deleted_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_modified\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sign_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"signed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94ddaac1-84da-4280-94e8-a3bbef06c06f",
+          "name": "Create Thread Message",
+          "request": {
+            "name": "Create Thread Message",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_messages",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"<string>\",\n  \"send_date\": \"<dateTime>\",\n  \"sender\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"to_document\": {\n    \"authoring_practice\": \"<long>\",\n    \"chart_date\": \"<dateTime>\",\n    \"document_date\": \"<dateTime>\",\n    \"id\": \"<long>\",\n    \"patient\": \"<long>\",\n    \"last_modified\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ffa79bd-4e07-4815-9b5a-0015962cac5d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_messages",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\",\n  \"send_date\": \"<dateTime>\",\n  \"sender\": \"<integer>\",\n  \"thread\": \"<long>\",\n  \"to_document\": {\n    \"authoring_practice\": 5795,\n    \"chart_date\": \"1980-12-01T11:47:29.223Z\",\n    \"document_date\": \"1958-09-29T17:11:44.997Z\",\n    \"id\": 9381,\n    \"patient\": 3219,\n    \"last_modified\": \"2011-10-28T17:42:10.894Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"send_date\": \"1965-09-14T09:07:14.298Z\",\n  \"sender\": 3529,\n  \"id\": 431,\n  \"patient\": 1279,\n  \"practice\": 6871,\n  \"thread\": 3272,\n  \"to_document\": {\n    \"authoring_practice\": 6041,\n    \"chart_date\": \"1953-06-26T22:25:21.852Z\",\n    \"document_date\": \"1949-07-23T11:37:12.191Z\",\n    \"id\": 6456,\n    \"patient\": 1485,\n    \"created_date\": \"2023-11-16T10:17:24.707Z\",\n    \"deleted_date\": \"1983-10-26T12:11:33.731Z\",\n    \"document_type\": 6715,\n    \"last_modified\": \"1985-03-13T05:01:23.526Z\",\n    \"sign_date\": \"2015-10-29T05:53:17.981Z\",\n    \"signed_by\": 2595\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90e21955-8858-482a-a17a-f76234fa6a53",
+          "name": "Delete Thread Message",
+          "request": {
+            "name": "Delete Thread Message",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_messages",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a2514746-5568-49f7-a8ec-94f25dd58adb",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_messages",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0cd78b5-4cfa-4b7e-93e5-10f1e157801b",
+          "name": "Retrieve Thread Message",
+          "request": {
+            "name": "Retrieve Thread Message",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "thread_messages",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e0ed8ef6-88a8-4c94-9a37-2fbca7a54d10",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "thread_messages",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": \"string\",\n  \"send_date\": \"1965-09-14T09:07:14.298Z\",\n  \"sender\": 3529,\n  \"id\": 431,\n  \"patient\": 1279,\n  \"practice\": 6871,\n  \"thread\": 3272,\n  \"to_document\": {\n    \"authoring_practice\": 6041,\n    \"chart_date\": \"1953-06-26T22:25:21.852Z\",\n    \"document_date\": \"1949-07-23T11:37:12.191Z\",\n    \"id\": 6456,\n    \"patient\": 1485,\n    \"created_date\": \"2023-11-16T10:17:24.707Z\",\n    \"deleted_date\": \"1983-10-26T12:11:33.731Z\",\n    \"document_type\": 6715,\n    \"last_modified\": \"1985-03-13T05:01:23.526Z\",\n    \"sign_date\": \"2015-10-29T05:53:17.981Z\",\n    \"signed_by\": 2595\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.elationemr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8e2a8884-084a-4378-b2f1-7cf99860b711",
+    "name": "Messaging API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+      "type": "text/plain"
+    }
+  }
+}

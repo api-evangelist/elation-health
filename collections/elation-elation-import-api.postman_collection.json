@@ -1,0 +1,4135 @@
+{
+  "item": [
+    {
+      "id": "2ce931ec-f8b0-4d92-bd3d-bd1fe373c9fc",
+      "name": "Data Import Request",
+      "description": {
+        "content": "The parent resource for tracking batches of individual patient chart imports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04fd55e9-6e23-474f-a5fe-97efe323ef09",
+          "name": "Retrieve a list of existing data import requests.",
+          "request": {
+            "name": "Retrieve a list of existing data import requests.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "38bac0e6-3f42-478c-aae5-be4e7ac65b16",
+              "name": "An array of Data Import Request details without statuses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 8365,\n    \"created_at\": \"1985-09-20T03:52:33.983Z\",\n    \"physician_id\": 1288,\n    \"practice_id\": 4850,\n    \"notes\": \"string\"\n  },\n  {\n    \"id\": 1811,\n    \"created_at\": \"1995-07-28T14:04:40.679Z\",\n    \"physician_id\": 1924,\n    \"practice_id\": 890,\n    \"notes\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ff97316-938e-4b0d-b7c8-1384c2c46905",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2104dbe4-b682-403e-b995-217b244b0c50",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f10c00f-2a73-4486-b0fa-294ca04b8b50",
+          "name": "Create a new data import request.",
+          "request": {
+            "name": "Create a new data import request.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f38df630-7316-4050-b5b0-1fde5dcef921",
+              "name": "Details of the created Data Import Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"1953-08-12T06:58:28.906Z\",\n  \"id\": 492,\n  \"physician_id\": 3824,\n  \"practice_id\": 5342,\n  \"status\": [\n    {\n      \"importStatus\": \"open\",\n      \"numPatientImports\": 3793\n    },\n    {\n      \"importStatus\": \"open\",\n      \"numPatientImports\": 9387\n    }\n  ],\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96796c70-f1c8-4f3c-83b4-b4c75501b679",
+              "name": "New Data Import Request successfully created; check Location reponse header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "405cc7ab-9f45-4b29-94c1-8b5868547928",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37f6a03b-21c5-43ae-9b37-33d896259ad4",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b43647c-7713-4cd1-aab4-7753089213e5",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a24242c7-e2d4-4665-a504-2b4df5a28767",
+              "name": "The request body could not be parsed as JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87cb33ad-4b63-4091-9965-db5f38a1ba5d",
+          "name": "Retrieve an existing data import request.",
+          "request": {
+            "name": "Retrieve an existing data import request.",
+            "description": {
+              "content": "This can be used to check on the status of all child Patient Chart Import Requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) The id of the existing Data Import Request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b40da477-f13f-40d0-a767-5d825b4d209b",
+              "name": "Details of the Data Import Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"1963-12-16T03:12:23.311Z\",\n  \"id\": 8954,\n  \"physician_id\": 5822,\n  \"practice_id\": 1597,\n  \"status\": [\n    {\n      \"importStatus\": \"open\",\n      \"numPatientImports\": 4694\n    },\n    {\n      \"importStatus\": \"open\",\n      \"numPatientImports\": 5860\n    }\n  ],\n  \"notes\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6bedaca-4287-4cf5-a731-9e612d370fb2",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b9fe2b6-82bf-41a7-b9a1-9c74df7432e9",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c2ce6c3-ffed-477c-a17b-2740f9c695dd",
+              "name": "Existing Data Import Request not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b718c073-f9d2-4108-9eb3-e9c5bde84e43",
+          "name": "Update an existing data import request.",
+          "request": {
+            "name": "Update an existing data import request.",
+            "description": {
+              "content": "All editable fields must be included even if the value is unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) The id of the existing Data Import Request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4fae1baa-b236-4cf5-8738-98da6915ba9e",
+              "name": "Details of the updated Data Import Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"<object>\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f26c5af-71b9-4680-81c3-8600a9faa273",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d623b44-7c37-4772-bc2f-4b67ba17f695",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c25b307-8b8f-4c53-bf32-42673185f6fb",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6bad0f9-e1fe-4081-a20e-0c532f337a5a",
+              "name": "Existing Data Import Request not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7be58d7-74f2-4be3-98ee-fd017cb83b22",
+              "name": "The request body could not be parsed as JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b587353-477d-42d1-9843-cb326ab96a5d",
+          "name": "Update an existing data import request.",
+          "request": {
+            "name": "Update an existing data import request.",
+            "description": {
+              "content": "Only include fields where the value is changing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) The id of the existing Data Import Request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aaa4627c-16d0-4164-bad7-a654a91c2de1",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "806e56e2-acd5-4415-9f83-fd064bf20ec2",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2bf627d9-a94f-4e98-a389-afb3408ada65",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "714b2643-c406-486c-b194-c8853ba73b08",
+              "name": "Existing Data Import Request not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ed2dd10-bb22-4755-b654-fd1134437019",
+              "name": "The request body could not be parsed as JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5de1f560-694a-4f87-9aa7-1b21231b8cef",
+          "name": "Delete an existing data import request.",
+          "request": {
+            "name": "Delete an existing data import request.",
+            "description": {
+              "content": "Only possible if no Patient Chart Import Requests have ever been created for this Data Import Request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) The id of the existing Data Import Request"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1f3a07ff-4475-49c3-afd2-4aed0fbf18d8",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1923a33-b3ee-4e6a-8a98-8bddf7f17c97",
+              "name": "The Data Import Request cannot be deleted because child records already exist; or your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02b3f1d6-2be6-4e6a-9434-dd54521aeb18",
+              "name": "Existing Data Import Request not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bbfa0ff-74ad-4eaf-90c2-4984421dd02c",
+          "name": "Convenience call",
+          "request": {
+            "name": "Convenience call",
+            "description": {
+              "content": "Convenience call to transition all child Patient Chart Import Requests in `open` to `pending`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) The id of the existing Data Import Request"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bb4518cf-2544-4686-993b-33f41353d0fa",
+              "name": "Request accepted; Patient Chart Import Requests will be updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c8fb154-63c7-43f5-953d-f5b28d6ea359",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e2af1b6-90f4-4213-8b87-66279ef41f34",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) The id of the existing Data Import Request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e70b3959-ec71-4e48-9358-172bdb5864cf",
+      "name": "patient chart import",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8187b7b0-c287-4aaf-af57-97c8a607168c",
+          "name": "Finds patient_chart_import records by status",
+          "request": {
+            "name": "Finds patient_chart_import records by status",
+            "description": {
+              "content": "Multiple status values can be provided with comma separated strings",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "open",
+                  "description": "Status values that need to be considered for filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "open",
+                  "description": "Status values that need to be considered for filter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of the data-import-request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ea0818b2-f9a6-4d47-8850-7961b7361dd3",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 10,\n    \"patientId\": 11,\n    \"dataImportRequestId\": 12,\n    \"completedAt\": 12341234123,\n    \"errors\": null,\n    \"sectionStatus\": [],\n    \"status\": \"open\",\n    \"startedProcessingAt\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "442a393d-6928-4c1b-9f24-c239af723477",
+              "name": "Invalid status value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edfb8194-8619-44dd-b265-ed1fc77fccca",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "811683db-e36e-4b1d-bd5b-05143f87d3ad",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1057510e-9855-4106-a2ea-f786f0306941",
+              "name": "Data Import Request not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67e18af2-1c19-4007-bca5-234ef4fb4b77",
+          "name": "Add a new patient-chart-import to the associated data import request",
+          "request": {
+            "name": "Add a new patient-chart-import to the associated data import request",
+            "description": {},
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of the data-import-request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"source_patient_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f019c4bf-b40a-4ea9-80a4-bdfcadbd5b18",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"source_patient_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c92de0d-418e-4d8f-821e-cbf1c20ac4cc",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"source_patient_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a876760-4073-4ed4-bc3e-b56b6a155d16",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"source_patient_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "208ee0ae-9228-45e5-8485-cb5a63993eaf",
+              "name": "Existing Data Import Request not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"source_patient_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb386d21-77dd-4878-9d84-e98c78cb8b62",
+              "name": "The request body could not be parsed as JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"source_patient_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57bf0ba8-892d-4980-b418-7aaf7e1fc4a2",
+          "name": "Find patient-chart-import by ID",
+          "request": {
+            "name": "Find patient-chart-import by ID",
+            "description": {
+              "content": "Returns a single patient-chart-import",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports",
+                ":pci-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of the data-import-request"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pci-id",
+                  "description": "(Required) ID of patient-chart-import to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5a1d742f-5778-4b1e-9030-ac013ee049f2",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"id\": 5958,\n  \"patient_id\": 5513,\n  \"data_import_request_id\": 9871,\n  \"completed_at\": 7279,\n  \"section_status\": {},\n  \"started_processing_at\": \"2001-09-26T17:37:21.482Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "702d76c9-020a-4642-b3d0-4b7538dbb47e",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ae35577-976c-4ad1-8dac-2a7ec2b0e9f0",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3ee9a30-2e05-4af0-8c6a-29902f605e2a",
+              "name": "Data Import Request or Patient Chart Import not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f5b2747-a572-4c05-9559-5495187cba3d",
+          "name": "Update an existing patient-chart-import",
+          "request": {
+            "name": "Update an existing patient-chart-import",
+            "description": {},
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports",
+                ":pci-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of the data-import-request"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pci-id",
+                  "description": "(Required) ID of patient-chart-import to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"patient_id\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98c4d6d9-c8d4-4e91-b16f-338c2e6d50c4",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"patient_id\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37d10615-be7a-41a3-87ab-3b5b94051aae",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"patient_id\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb43b77d-bb27-4efb-b99e-7408af19d8fc",
+              "name": "Your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"patient_id\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bc6ac0b-1096-46d0-b673-f8e385a1d23d",
+              "name": "Data Import Request or Patient Chart Import not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"patient_id\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6112f32d-fffc-43a9-a377-3c1c5605e46f",
+              "name": "The request body could not be parsed as JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chart_json\": \"<object>\",\n  \"status\": \"open\",\n  \"patient_id\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "760796b4-a694-4d0c-86d8-0a3425fb9569",
+          "name": "Updates a patient-chart-import in the store with form data",
+          "request": {
+            "name": "Updates a patient-chart-import in the store with form data",
+            "description": {},
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports",
+                ":pci-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of the data-import-request"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pci-id",
+                  "description": "(Required) ID of patient-chart-import to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"status\": \"open\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f497bf70-98fc-4e1c-b2dc-f40641754a80",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"status\": \"open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b32385c9-3379-479c-9815-0c2aebf691b0",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"status\": \"open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9de7e3ba-ae3d-4e35-bf82-b3c2e0d9aa88",
+          "name": "Deletes a patient-chart-import",
+          "request": {
+            "name": "Deletes a patient-chart-import",
+            "description": {},
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports",
+                ":pci-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of the data-import-request"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pci-id",
+                  "description": "(Required) ID of patient-chart-import to return"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c2fdc714-cca0-4312-ae7c-9f58e26e0dbc",
+              "name": "No valid credentials provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3145ca98-e99d-41dd-b807-c2a390ba83ac",
+              "name": "Patient Chart Import is in a state where it cannot be deleted; or your credentials are not authorized to use the import API resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9aef2c47-0da6-4dfb-b480-b29a79e0ef67",
+              "name": "Data Import Request or Patient Chart Import not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of the data-import-request"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54a94603-7af7-4241-9b28-332b7f0e179f",
+          "name": "uploads an document for rendering",
+          "request": {
+            "name": "uploads an document for rendering",
+            "description": {},
+            "url": {
+              "path": [
+                "data-import-requests",
+                ":dir-id",
+                "patient-chart-imports",
+                ":pci-id",
+                "render-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "dir-id",
+                  "description": "(Required) ID of data-import-request to update"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pci-id",
+                  "description": "(Required) ID of patient-chart-import to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "import"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://www.elationhealth.com/api/2.0/oauth"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "additionalMetadata",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Additional data to pass to server"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "file to upload"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bef5a2bc-fc43-441e-a3af-50eed8c25c73",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id",
+                    "render-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of data-import-request to update"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Additional data to pass to server",
+                        "type": "text/plain"
+                      },
+                      "key": "additionalMetadata",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8265,\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e447fd27-471a-49c6-b0c0-d74f09a6ed9d",
+              "name": "Validation error(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id",
+                    "render-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of data-import-request to update"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Additional data to pass to server",
+                        "type": "text/plain"
+                      },
+                      "key": "additionalMetadata",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd7705cd-7dd1-4b44-9764-02c14b8280fe",
+              "name": "Data Import Request or Patient Chart Import not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-import-requests",
+                    ":dir-id",
+                    "patient-chart-imports",
+                    ":pci-id",
+                    "render-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "dir-id",
+                      "description": "(Required) ID of data-import-request to update"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pci-id",
+                      "description": "(Required) ID of patient-chart-import to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Additional data to pass to server",
+                        "type": "text/plain"
+                      },
+                      "key": "additionalMetadata",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "file to upload",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76ecc2d0-2282-4fc0-8992-12cc6b414ae5",
+    "name": "Elation Import API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This set of API resources allows you to import patient data into the Elation\nEMR.  For more information on Elation APIs, view [our\ndocumentation](https://docs.elationhealth.com/reference).\n\nThe expected flow for an import is:\n1. Create a Data Import Request for each batch of imports. There is no size limit on an import batch, though larger batches will take longer to process. You may separate your imports into batches using whatever logic you like. Each batch must be for a single practice and a single provider within that practice.\n\n2. Create Patient Chart Import Requests for each chart you want to import. Some validation will occur at create time, but final validation only occurs when the import is attempted. Patient Chart Import Requests are initially created in the `open` status.\n\n3. When you are ready to begin importing data, update the Patient Chart Import Request status to `pending`. It will not be imported immediately, but it will be added to the queue.  \n\n4. Alternatively, a convenience is provided at the Data Import Request level. POSTing to `/data-import-request/{dir-id}/run` will transition all child Patient Chart Import Requests in `open` to `pending`.\n\n5. Check the status of the import by polling the Data Import Request item. If import failures occur, you can review the Patient Chart Import Requests that failed and then update and rerun them individually.\n\n6. Once all Patient Chart Import Requests have succeeded, you should consider the Data Import Request to be successful. Please review your data within the web application to ensure that charts imported as you expected.\n\nIf you encounter any problems, please contact Elation at api-support@elationhealth.com.\n\nContact Support:\n Email: api-support@elationhealth.com",
+      "type": "text/plain"
+    }
+  }
+}

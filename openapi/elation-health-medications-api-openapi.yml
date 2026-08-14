@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Medications API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Medications
+  description: Medication and prescription management
+paths:
+  /medications/:
+    get:
+      operationId: medications_list
+      summary: List medications
+      description: Retrieve a paginated list of patient medications.
+      tags:
+      - Medications
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: patient
+        in: query
+        schema:
+          type: integer
+        description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of medications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicationList'
+    post:
+      operationId: medications_create
+      summary: Create a medication
+      description: Add a medication to a patient's medication list.
+      tags:
+      - Medications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicationCreate'
+      responses:
+        '201':
+          description: Medication created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+  /medications/{id}/:
+    get:
+      operationId: medications_retrieve
+      summary: Retrieve a medication
+      tags:
+      - Medications
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Medication details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+    delete:
+      operationId: medications_destroy
+      summary: Delete a medication
+      tags:
+      - Medications
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Medication deleted
+components:
+  schemas:
+    MedicationCreate:
+      type: object
+      required:
+      - patient
+      - medication_name
+      properties:
+        patient:
+          type: integer
+          description: Patient ID
+        medication_name:
+          type: string
+          description: Medication name
+        sig:
+          type: string
+          description: Dosage instructions
+        dose:
+          type: string
+          description: Dose amount
+        dose_unit:
+          type: string
+          description: Dose unit (mg, mL, etc.)
+        route:
+          type: string
+          description: Route of administration
+        frequency:
+          type: string
+          description: Dosing frequency
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+        notes:
+          type: string
+    Medication:
+      allOf:
+      - $ref: '#/components/schemas/MedicationCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    PaginatedMedicationList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Medication'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

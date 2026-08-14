@@ -1,0 +1,480 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Patients API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Patients
+  description: Patient profile management
+paths:
+  /patients/:
+    get:
+      operationId: patients_list
+      summary: List patients
+      description: Retrieve a paginated list of patients in the practice.
+      tags:
+      - Patients
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: first_name
+        in: query
+        schema:
+          type: string
+        description: Filter by first name
+      - name: last_name
+        in: query
+        schema:
+          type: string
+        description: Filter by last name
+      - name: dob
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Filter by date of birth (YYYY-MM-DD)
+      responses:
+        '200':
+          description: Paginated list of patients
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientList'
+    post:
+      operationId: patients_create
+      summary: Create a patient
+      description: Create a new patient record in the practice.
+      tags:
+      - Patients
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCreate'
+      responses:
+        '201':
+          description: Patient created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /patients/{id}/:
+    get:
+      operationId: patients_retrieve
+      summary: Retrieve a patient
+      description: Get details for a specific patient by ID.
+      tags:
+      - Patients
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Patient details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          description: Patient not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: patients_update
+      summary: Update a patient
+      description: Replace all patient fields with the provided values.
+      tags:
+      - Patients
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCreate'
+      responses:
+        '200':
+          description: Patient updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+    patch:
+      operationId: patients_partial_update
+      summary: Partially update a patient
+      description: Update one or more patient fields.
+      tags:
+      - Patients
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientPatch'
+      responses:
+        '200':
+          description: Patient updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+    delete:
+      operationId: patients_destroy
+      summary: Delete a patient
+      description: Soft-delete a patient record.
+      tags:
+      - Patients
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Patient deleted
+components:
+  schemas:
+    PatientStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Prospect
+          - Deceased
+        reason:
+          type: string
+          description: Reason for status
+        deleted_date:
+          type: string
+          format: date-time
+          readOnly: true
+    Patient:
+      allOf:
+      - $ref: '#/components/schemas/PatientCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            readOnly: true
+            description: Unique patient identifier
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+          merged_into_chart:
+            type: integer
+            format: int64
+            nullable: true
+            readOnly: true
+          sms_opt_in_status:
+            type: boolean
+            readOnly: true
+          verified:
+            type: boolean
+          primary_care_provider:
+            type: integer
+            readOnly: true
+          primary_care_provider_npi:
+            type: string
+            maxLength: 10
+          consents:
+            type: array
+            readOnly: true
+            items:
+              type: object
+    PaginatedPatientList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Patient'
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+    Address:
+      type: object
+      properties:
+        address_line1:
+          type: string
+          description: Primary street address
+        address_line2:
+          type: string
+          description: Secondary address line
+        city:
+          type: string
+        state:
+          type: string
+          description: Two-letter state code
+        zip:
+          type: string
+          description: ZIP or postal code
+    PatientPatch:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 70
+        middle_name:
+          type: string
+          maxLength: 50
+        last_name:
+          type: string
+          maxLength: 70
+        dob:
+          type: string
+          format: date
+        sex:
+          type: string
+          enum:
+          - Female
+          - Male
+          - Other
+          - Unknown
+        primary_physician:
+          type: integer
+        address:
+          $ref: '#/components/schemas/Address'
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        patient_status:
+          $ref: '#/components/schemas/PatientStatus'
+        metadata:
+          type: object
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable error description
+        error:
+          type: string
+          description: Machine-readable error code
+    Phone:
+      type: object
+      properties:
+        phone:
+          type: string
+          description: Phone number
+        phone_type:
+          type: string
+          enum:
+          - Home
+          - Work
+          - Cell
+          - Fax
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+    PatientCreate:
+      type: object
+      required:
+      - first_name
+      - last_name
+      - dob
+      - primary_physician
+      - caregiver_practice
+      - sex
+      properties:
+        first_name:
+          type: string
+          maxLength: 70
+          description: Patient's first name
+        middle_name:
+          type: string
+          maxLength: 50
+          description: Patient's middle name
+        last_name:
+          type: string
+          maxLength: 70
+          description: Patient's last name
+        suffix:
+          type: string
+          maxLength: 20
+          description: Name suffix
+        actual_name:
+          type: string
+          maxLength: 150
+          description: Preferred name variation
+        dob:
+          type: string
+          format: date
+          description: Date of birth (YYYY-MM-DD)
+        sex:
+          type: string
+          enum:
+          - Female
+          - Male
+          - Other
+          - Unknown
+          description: Biological sex
+        gender_identity:
+          type: string
+          enum:
+          - man
+          - woman
+          - nonbinary
+          - transgender_man
+          - transgender_woman
+          - prefer_not_to_say
+          description: Personal gender identity
+        legal_gender_marker:
+          type: string
+          enum:
+          - M
+          - F
+          - X
+          - U
+          description: Document gender marker
+        pronouns:
+          type: string
+          enum:
+          - he_him_his
+          - she_her_hers
+          - they_them_theirs
+          - not_listed
+          description: Preferred pronouns
+        sexual_orientation:
+          type: string
+          enum:
+          - straight
+          - gay
+          - lesbian
+          - bisexual
+          - queer
+          - asexual
+          - unknown
+        race:
+          type: string
+          description: Racial category
+        ethnicity:
+          type: string
+          description: Hispanic/Latino status
+        preferred_language:
+          type: string
+          description: Patient's preferred communication language
+        preferred_contact:
+          type: string
+          enum:
+          - sms
+          - email
+          - phone
+          - passport
+        ssn:
+          type: string
+          maxLength: 37
+          description: Social Security Number
+        primary_physician:
+          type: integer
+          description: ID of physician providing care within practice
+        caregiver_practice:
+          type: integer
+          description: Practice ID
+        address:
+          $ref: '#/components/schemas/Address'
+        phones:
+          type: array
+          maxItems: 2
+          items:
+            $ref: '#/components/schemas/Phone'
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        notes:
+          type: string
+          maxLength: 500
+          description: Additional notes about patient
+        vip:
+          type: boolean
+          description: VIP status flag
+        tags:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+        patient_status:
+          $ref: '#/components/schemas/PatientStatus'
+        metadata:
+          type: object
+          description: Custom metadata
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

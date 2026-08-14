@@ -1,0 +1,538 @@
+{
+  "item": [
+    {
+      "id": "edc87b78-5428-428f-b5f2-f448dfa99a8a",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b5ebd4d5-88ba-434e-a80e-5ce0c308927a",
+          "name": "List Users",
+          "request": {
+            "name": "List Users",
+            "description": {
+              "content": "Returns a list of users",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "users",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04fe2987-184e-4c5f-bbf0-7f7a78d50bd0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "users",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"is_active\": true,\n      \"last_name\": \"string\",\n      \"practice\": 8180,\n      \"user_type\": \"staff\",\n      \"account_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credentialed\": false,\n      \"has_chart_access\": true,\n      \"id\": 4390,\n      \"is_practice_admin\": false,\n      \"is_read_only\": false,\n      \"physician_qualifications\": {\n        \"credentials\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"license\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"license_state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dea\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"npi\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"is_active\": false,\n      \"last_name\": \"string\",\n      \"practice\": 8787,\n      \"user_type\": \"physician\",\n      \"account_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credentialed\": false,\n      \"has_chart_access\": true,\n      \"id\": 7605,\n      \"is_practice_admin\": false,\n      \"is_read_only\": false,\n      \"physician_qualifications\": {\n        \"credentials\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"license\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"license_state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dea\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"npi\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"count\": 123,\n  \"next\": \"http://api.example.org/accounts/?offset=400&limit=100\",\n  \"previous\": \"http://api.example.org/accounts/?offset=200&limit=100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ff7cefd-ec98-4368-8b6d-a206339b57ca",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Create a new user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "users",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"last_name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"user_type\": \"<string>\",\n  \"account_type\": \"<string>\",\n  \"credentialed\": false,\n  \"has_chart_access\": true,\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"physician_qualifications\": {\n    \"credentials\": \"<string>\",\n    \"license\": \"<string>\",\n    \"license_state\": \"<string>\",\n    \"dea\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5538d56-eddb-41a9-9850-9a627de6c56a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "users",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"is_active\": \"<boolean>\",\n  \"last_name\": \"<string>\",\n  \"practice\": \"<long>\",\n  \"user_type\": \"staff\",\n  \"account_type\": \"oncall\",\n  \"credentialed\": false,\n  \"has_chart_access\": true,\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"physician_qualifications\": {\n    \"credentials\": \"string\",\n    \"license\": \"string\",\n    \"license_state\": \"st\",\n    \"dea\": \"string\",\n    \"npi\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"is_active\": true,\n  \"last_name\": \"string\",\n  \"practice\": 7247,\n  \"user_type\": \"physician\",\n  \"account_type\": \"oncall\",\n  \"credentialed\": false,\n  \"has_chart_access\": true,\n  \"id\": 8225,\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"physician_qualifications\": {\n    \"credentials\": \"string\",\n    \"license\": \"string\",\n    \"license_state\": \"st\",\n    \"dea\": \"string\",\n    \"npi\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "028808dc-5726-4668-bd9e-0d6c511d1c5c",
+          "name": "Retrieve User",
+          "request": {
+            "name": "Retrieve User",
+            "description": {
+              "content": "Retrieve a single user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "users",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "99adbbd1-7d7b-46dd-8097-06dcaa951b57",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "users",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"is_active\": true,\n  \"last_name\": \"string\",\n  \"practice\": 7247,\n  \"user_type\": \"physician\",\n  \"account_type\": \"oncall\",\n  \"credentialed\": false,\n  \"has_chart_access\": true,\n  \"id\": 8225,\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"physician_qualifications\": {\n    \"credentials\": \"string\",\n    \"license\": \"string\",\n    \"license_state\": \"st\",\n    \"dea\": \"string\",\n    \"npi\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b07c86da-608a-404a-99eb-0136d4964acb",
+          "name": "Partially Update User",
+          "request": {
+            "name": "Partially Update User",
+            "description": {
+              "content": "Update an existing user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2.0",
+                "users",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "act_as_user apiv2 system/{resource_name}.read system/{resource_name}.write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/2.0/oauth2/token/"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_type\": \"<string>\",\n  \"credentialed\": false,\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"has_chart_access\": true,\n  \"is_active\": \"<boolean>\",\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"last_name\": \"<string>\",\n  \"physician_qualifications\": {\n    \"credentials\": \"<string>\",\n    \"license\": \"<string>\",\n    \"license_state\": \"<string>\",\n    \"dea\": \"<string>\",\n    \"npi\": \"<string,null>\"\n  },\n  \"practice\": \"<long>\",\n  \"user_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a8a0c9c-2f4a-4f39-8a2b-9236947cf1c6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2.0",
+                    "users",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"pt_prescribing\",\n  \"credentialed\": false,\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"has_chart_access\": true,\n  \"is_active\": \"<boolean>\",\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"last_name\": \"<string>\",\n  \"physician_qualifications\": {\n    \"credentials\": \"string\",\n    \"license\": \"string\",\n    \"license_state\": \"st\",\n    \"dea\": \"string\",\n    \"npi\": \"string\"\n  },\n  \"practice\": \"<long>\",\n  \"user_type\": \"physician\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"is_active\": true,\n  \"last_name\": \"string\",\n  \"practice\": 7247,\n  \"user_type\": \"physician\",\n  \"account_type\": \"oncall\",\n  \"credentialed\": false,\n  \"has_chart_access\": true,\n  \"id\": 8225,\n  \"is_practice_admin\": false,\n  \"is_read_only\": false,\n  \"physician_qualifications\": {\n    \"credentials\": \"string\",\n    \"license\": \"string\",\n    \"license_state\": \"st\",\n    \"dea\": \"string\",\n    \"npi\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.elationemr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a4d2e08b-f3a2-41e9-b101-1ea5fd5484ad",
+    "name": "User Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Elation Health API v2.0\n\nContact Support:\n Name: Elation Health",
+      "type": "text/plain"
+    }
+  }
+}

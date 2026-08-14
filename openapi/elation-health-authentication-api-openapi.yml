@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Authentication API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Authentication
+  description: OAuth2 token management
+paths:
+  /oauth2/token/:
+    post:
+      operationId: getToken
+      summary: Obtain OAuth2 access token
+      description: Exchange client credentials for an OAuth2 access token using the client_credentials grant type.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                  description: OAuth2 grant type
+                client_id:
+                  type: string
+                  description: Your client identifier
+                client_secret:
+                  type: string
+                  description: Your client secret
+                scope:
+                  type: string
+                  description: Space-separated list of requested scopes; defaults to apiv2
+      responses:
+        '200':
+          description: Token issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Bearer token for API requests
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Token validity in seconds
+          example: 36000
+        refresh_token:
+          type: string
+          description: Token for obtaining new access tokens
+        scope:
+          type: string
+          description: Granted permission scopes
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable error description
+        error:
+          type: string
+          description: Machine-readable error code
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

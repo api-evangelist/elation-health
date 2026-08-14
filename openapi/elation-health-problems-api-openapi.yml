@@ -1,0 +1,249 @@
+openapi: 3.0.3
+info:
+  title: Elation Health REST Allergies Problems API
+  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
+  version: '2.0'
+  contact:
+    name: Elation Health Developer Support
+    url: https://docs.elationhealth.com/reference/api-overview
+  termsOfService: https://www.elationhealth.com/
+servers:
+- url: https://app.elationemr.com/api/2.0
+  description: Production
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox
+security:
+- oauth2: []
+tags:
+- name: Problems
+  description: Patient problem list management
+paths:
+  /problems/:
+    get:
+      operationId: problems_list
+      summary: List problems
+      description: Retrieve a paginated list of patient problems.
+      tags:
+      - Problems
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: patient
+        in: query
+        schema:
+          type: integer
+        description: Filter by patient ID
+      responses:
+        '200':
+          description: Paginated list of problems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProblemList'
+    post:
+      operationId: problems_create
+      summary: Create a problem
+      description: Add a new problem to a patient's problem list.
+      tags:
+      - Problems
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemCreate'
+      responses:
+        '201':
+          description: Problem created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /problems/{id}/:
+    get:
+      operationId: problems_retrieve
+      summary: Retrieve a problem
+      description: Get details for a specific patient problem.
+      tags:
+      - Problems
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Problem details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    put:
+      operationId: problems_update
+      summary: Update a problem
+      description: Replace all problem fields with the provided values.
+      tags:
+      - Problems
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemCreate'
+      responses:
+        '200':
+          description: Problem updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      operationId: problems_partial_update
+      summary: Partially update a problem
+      description: Update one or more problem fields.
+      tags:
+      - Problems
+      parameters:
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemCreate'
+      responses:
+        '200':
+          description: Problem updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      operationId: problems_destroy
+      summary: Delete a problem
+      description: Remove a problem from the patient's problem list.
+      tags:
+      - Problems
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Problem deleted
+components:
+  schemas:
+    ProblemCreate:
+      type: object
+      required:
+      - description
+      - status
+      - start_date
+      - patient
+      properties:
+        description:
+          type: string
+          description: Description of the problem
+        status:
+          type: string
+          enum:
+          - Active
+          - Controlled
+          - Resolved
+        synopsis:
+          type: string
+          description: Brief synopsis of the problem
+        start_date:
+          type: string
+          format: date-time
+          description: Date the problem started
+        resolved_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date the problem was resolved (required when status is Resolved)
+        patient:
+          type: integer
+          description: Patient ID
+        dx:
+          $ref: '#/components/schemas/Diagnosis'
+    Diagnosis:
+      type: object
+      properties:
+        icd9:
+          type: array
+          items:
+            type: string
+        icd10:
+          type: array
+          items:
+            type: string
+        snomed:
+          type: string
+    Problem:
+      allOf:
+      - $ref: '#/components/schemas/ProblemCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type: string
+            format: date-time
+            nullable: true
+            readOnly: true
+    PaginatedProblemList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Problem'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type: string
+          nullable: true
+          description: URL for next page
+        previous:
+          type: string
+          nullable: true
+          description: URL for previous page
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          scopes:
+            apiv2: Full API access

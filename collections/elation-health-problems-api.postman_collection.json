@@ -1,0 +1,686 @@
+{
+  "item": [
+    {
+      "id": "362ee9b2-2f7a-425d-a7a9-adeb2c8c8a58",
+      "name": "Problems",
+      "description": {
+        "content": "Patient problem list management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f16a23d0-d9a2-48d3-8bad-53524d4df50f",
+          "name": "List problems",
+          "request": {
+            "name": "List problems",
+            "description": {
+              "content": "Retrieve a paginated list of patient problems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "problems",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<integer>",
+                  "description": "Filter by patient ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7b76907-4d9f-4c20-91c0-e23fb9e758f4",
+              "name": "Paginated list of problems",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "problems",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "patient",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6240,\n  \"next\": \"string\",\n  \"previous\": \"string\",\n  \"results\": [\n    {\n      \"description\": \"string\",\n      \"status\": \"Active\",\n      \"start_date\": \"1991-11-26T07:27:07.925Z\",\n      \"patient\": 5131,\n      \"synopsis\": \"string\",\n      \"resolved_date\": \"1962-03-15T10:21:39.855Z\",\n      \"dx\": {\n        \"icd9\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"icd10\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"snomed\": \"string\"\n      },\n      \"id\": 6596,\n      \"created_date\": \"2003-02-23T04:07:33.651Z\",\n      \"deleted_date\": \"1999-06-09T21:04:49.080Z\"\n    },\n    {\n      \"description\": \"string\",\n      \"status\": \"Resolved\",\n      \"start_date\": \"1947-11-07T02:25:23.964Z\",\n      \"patient\": 5684,\n      \"synopsis\": \"string\",\n      \"resolved_date\": \"1950-03-11T11:55:29.942Z\",\n      \"dx\": {\n        \"icd9\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"icd10\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"snomed\": \"string\"\n      },\n      \"id\": 1808,\n      \"created_date\": \"2024-05-05T00:06:36.743Z\",\n      \"deleted_date\": \"2024-04-05T07:03:05.281Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b119c3e0-a890-4a98-aa02-c6ff409f7615",
+          "name": "Create a problem",
+          "request": {
+            "name": "Create a problem",
+            "description": {
+              "content": "Add a new problem to a patient's problem list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "problems",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f5d5d2b-8649-4321-b367-b3305293ca3e",
+              "name": "Problem created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "problems",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  },\n  \"id\": 3123,\n  \"created_date\": \"1996-07-02T16:44:52.482Z\",\n  \"deleted_date\": \"1987-10-24T16:45:34.445Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bd18ec3-6ef7-4914-a27e-d4f0d17f103e",
+          "name": "Retrieve a problem",
+          "request": {
+            "name": "Retrieve a problem",
+            "description": {
+              "content": "Get details for a specific patient problem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "problems",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "396a0117-208f-4d35-a517-e769c7a50dfb",
+              "name": "Problem details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "problems",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  },\n  \"id\": 3123,\n  \"created_date\": \"1996-07-02T16:44:52.482Z\",\n  \"deleted_date\": \"1987-10-24T16:45:34.445Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a92d9c01-0501-4b31-8953-b2aa2e9abdd4",
+          "name": "Update a problem",
+          "request": {
+            "name": "Update a problem",
+            "description": {
+              "content": "Replace all problem fields with the provided values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "problems",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a14c264-1be9-49ff-88c3-21ee63432398",
+              "name": "Problem updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "problems",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  },\n  \"id\": 3123,\n  \"created_date\": \"1996-07-02T16:44:52.482Z\",\n  \"deleted_date\": \"1987-10-24T16:45:34.445Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2bfb3a0-1806-469e-b846-fd98e47921a9",
+          "name": "Partially update a problem",
+          "request": {
+            "name": "Partially update a problem",
+            "description": {
+              "content": "Update one or more problem fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "problems",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d4ad683-6e1d-4d0a-9346-66957b6d313a",
+              "name": "Problem updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "problems",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"<string>\",\n  \"status\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"patient\": \"<integer>\",\n  \"synopsis\": \"<string>\",\n  \"resolved_date\": \"<dateTime>\",\n  \"dx\": {\n    \"icd9\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"icd10\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"snomed\": \"<string>\"\n  },\n  \"id\": 3123,\n  \"created_date\": \"1996-07-02T16:44:52.482Z\",\n  \"deleted_date\": \"1987-10-24T16:45:34.445Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4159ef48-b0e0-4bdd-8af9-df6c24845a9a",
+          "name": "Delete a problem",
+          "request": {
+            "name": "Delete a problem",
+            "description": {
+              "content": "Remove a problem from the patient's problem list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "problems",
+                ":id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique resource identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a628996-e3a4-4c4d-a0c8-3b1f9fa19e79",
+              "name": "Problem deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "problems",
+                    ":id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Unique resource identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.elationemr.com/api/2.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "apiv2"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://sandbox.elationemr.com/api/2.0/oauth2/token/"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "51e9f629-b846-4080-8d0b-e1c00dc6800c",
+    "name": "Elation Health REST Allergies Problems API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.\n\nContact Support:\n Name: Elation Health Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
