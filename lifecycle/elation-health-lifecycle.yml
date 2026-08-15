@@ -1,23 +1,48 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
 source: >-
-  https://docs.elationhealth.com/reference/changelog,
-  https://docs.elationhealth.com/reference/api-overview,
+  https://help.elationhealth.com/articles/rest/changelog/changelog,
+  https://help.elationhealth.com/articles/rest/overview/api-overview,
+  https://docs.elationhealth.com/reference/introduction,
   https://elationhealth.statuspage.io/
 versioning:
   scheme: uri-path
   current: '2.0'
   base_path: /api/2.0
-  docs: https://docs.elationhealth.com/reference/api-overview
+  docs: https://help.elationhealth.com/articles/rest/overview/api-overview
+documentation_migration:
+  date: '2026-08-07'
+  from: https://docs.elationhealth.com/
+  to: https://help.elationhealth.com/api-reference
+  announcement: https://docs.elationhealth.com/reference/introduction
+  quote: >-
+    "These docs have moved. The Elation Health API documentation now lives at
+    help.elationhealth.com... The old pages are still reachable if you have a
+    direct link to one, but they are no longer listed here and are no longer
+    being updated."
+  note: >-
+    The legacy ReadMe developer portal (docs.elationhealth.com) still returns 200
+    for direct links and its MCP server still answers, but it is explicitly
+    frozen. REST, FHIR and HL7 documentation are now consolidated on
+    help.elationhealth.com, which additionally serves an A2A agent card, an MCP
+    server card, an Agent Skills index and llms.txt.
 deprecation:
-  policy_url: https://docs.elationhealth.com/reference/changelog
+  policy_url: https://help.elationhealth.com/articles/rest/changelog/changelog
   sunset_header: false
   note: >-
     Elation communicates removals and behavior changes through a dated changelog
-    (e.g. enum values removed from the Immunization object in Mar 2026; default
-    pagination switched from offset to cursor in Apr 2026). No formal
-    Deprecation/Sunset (RFC 8594) response-header policy is documented, so no
-    Deprecation pointer is emitted.
+    with explicit "Breaking change" labels (e.g. 2026-07-20 lab_vendors now
+    rejects a null practice_created; 2026-04-22 default pagination switched from
+    offset to cursor; enum values removed from the Immunization object in Mar
+    2026). There is still no formal Deprecation/Sunset (RFC 8594) response-header
+    policy and no dated sunset window published, so no Deprecation pointer is
+    emitted.
+notification:
+  changelog_rss: https://help.elationhealth.com/articles/rest/changelog/changelog/rss.xml
+  docs: https://help.elationhealth.com/articles/subscribe-to-release-feeds
+  note: >-
+    New in this round — Elation now publishes an RSS feed for API changes
+    (new endpoints, field changes, deprecations, breaking changes).
 status_page: https://elationhealth.statuspage.io/
-changelog: https://docs.elationhealth.com/reference/changelog
+changelog: https://help.elationhealth.com/articles/rest/changelog/changelog
 deprecated_operations: []

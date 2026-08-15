@@ -1,0 +1,56 @@
+generated: '2026-08-14'
+method: probed
+source: https://help.elationhealth.com/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: help.elationhealth.com
+  note: >-
+    Advertised by the host itself: the HTML response from help.elationhealth.com
+    carries a Link header with rel="agent-card" pointing at this path (alongside
+    llms-txt, mcp-server-card and agent-skills). help.elationhealth.com is
+    Elation Health's own documentation host — as of 2026-08-07 the Elation
+    Health API documentation moved here from the legacy ReadMe portal at
+    docs.elationhealth.com. The card is served by the Mintlify docs platform on
+    Elation's domain; the same probe returned 302/404 on every other Elation
+    host (app.elationemr.com, api.app.elationemr.com, sandbox.elationemr.com,
+    docs.elationhealth.com, www.elationhealth.com).
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+    default_input_modes: true
+    default_output_modes: true
+  deviations:
+    - supportedInterfaces-instead-of-additionalInterfaces
+card:
+  name: Elation Help Center
+  url: https://help.elationhealth.com/
+  version: 1.0.0
+  documentation_url: https://help.elationhealth.com/
+  provider_organization: Elation Help Center
+  skills: 1
+  skill_ids:
+    - elationhealth
+  streaming: false
+  push_notifications: false
+  file: elation-health-agent-card.json
+related:
+  agent_skill: https://help.elationhealth.com/.well-known/agent-skills/elationhealth/skill.md
+  agent_skills_index: https://help.elationhealth.com/.well-known/agent-skills/index.json
+  mcp_server_card: https://help.elationhealth.com/.well-known/mcp/server-card.json
+  mcp_endpoint: https://help.elationhealth.com/mcp
+scope_note: >-
+  The card describes the documentation agent surface (search and retrieval over
+  the Elation Help Center and the API reference), not the Elation EHR REST API
+  itself. Recorded as published; not upgraded or embellished.
+x-evidence:
+  fetched: '2026-08-14'
+  url: https://help.elationhealth.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json

@@ -1,3 +1,19 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://help.elationhealth.com/articles/rest/overview/errors,
+  https://help.elationhealth.com/articles/rest/overview/api-overview
+limit_count: 0
+published_headers: []
+exhaustion_status: 429
+method_note: >-
+  Re-checked against the new documentation host on 2026-08-14. Elation documents
+  the 429 response ("Our API limits the rate at which you can perform certain
+  actions") in its error-code table but publishes NO numeric limit, NO window,
+  NO burst allowance and NO rate-limit response headers — neither X-RateLimit-*
+  nor RateLimit-* nor Retry-After appears anywhere in the REST overview,
+  errors or api-overview pages. limit_count is an honest zero: the runtime
+  signal an agent would need does not exist in the public documentation.
 name: Elation Health API Rate Limits
 description: >-
   Elation Health's API platform includes rate limiting to ensure fair usage and
@@ -63,5 +79,5 @@ errorHandling:
 notes: >-
   Elation Health does not publicly publish specific numeric rate limit values.
   The platform is designed for enterprise integration and rate limits may vary
-  by plan and usage agreement. Monitor the X-RateLimit headers if present in
-  API responses for current limit status.
+  by plan and usage agreement. No rate-limit response headers are documented;
+  clients must treat a 429 as the only signal and back off exponentially.

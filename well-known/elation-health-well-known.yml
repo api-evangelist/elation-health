@@ -1,15 +1,52 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
 note: >-
   Probed the /.well-known/ discovery surface on the production API host
-  (api.app.elationemr.com), the sandbox host (sandbox.elationemr.com), and the
-  marketing host (www.elationhealth.com). No usable discovery documents were
-  found: the production host returns 400 for all well-known paths, the sandbox
-  host 302-redirects to login, and the sandbox openid-configuration returns HTTP
-  200 with an empty body (0 bytes) rather than a real OIDC discovery document.
-  No security.txt is published. OAuth is documented in the developer docs, not
-  via RFC 8414 metadata.
+  (api.app.elationemr.com), the production app host (app.elationemr.com), the
+  sandbox host (sandbox.elationemr.com), the care-gaps service host, the legacy
+  ReadMe developer portal (docs.elationhealth.com), the marketing host
+  (www.elationhealth.com), and — new in this round — the current developer
+  documentation host help.elationhealth.com, which the Elation API docs moved to
+  on 2026-08-07. The API hosts serve no discovery documents (400/302/401). The
+  new documentation host DOES: its HTML response advertises a Link header with
+  rel="agent-card", rel="mcp-server-card", rel="agent-skills", rel="llms-txt"
+  and rel="api-catalog", and three of those return real JSON documents. No
+  security.txt is published on any host, so no SecurityTxt pointer is emitted.
+  No RFC 8414 / OIDC discovery metadata is published; OAuth is documented in
+  prose in the developer docs.
 hosts:
+  - host: https://help.elationhealth.com
+    note: current developer documentation host (Mintlify); advertises its own well-known surface via Link header
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: application/json
+        file: elation-health-agent-card.json
+        note: A2A agent card — see a2a/elation-health-a2a.yml (graded conformant)
+      - path: /.well-known/mcp/server-card.json
+        status: 200
+        content_type: application/json
+        file: elation-health-mcp-server-card.json
+        note: MCP server card for the docs MCP server — see mcp/elation-health-mcp.yml
+      - path: /.well-known/agent-skills/index.json
+        status: 200
+        content_type: application/json
+        file: elation-health-agent-skills-index.json
+        note: >-
+          Agent Skills discovery index (schemas.agentskills.io 0.2.0); the single
+          published skill is saved verbatim at
+          skills/elation-health-provider-published-skill.md
+      - path: /.well-known/api-catalog
+        status: 404
+        note: advertised in the Link header but not served
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
   - host: https://api.app.elationemr.com
     documents:
       - path: /.well-known/security.txt
@@ -19,6 +56,16 @@ hosts:
       - path: /.well-known/openid-configuration
         status: 302
       - path: /.well-known/oauth-protected-resource
+        status: 302
+      - path: /.well-known/agent-card.json
+        status: 302
+      - path: /.well-known/agent.json
+        status: 302
+  - host: https://app.elationemr.com
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 302
+      - path: /.well-known/agent.json
         status: 302
   - host: https://sandbox.elationemr.com
     documents:
@@ -33,7 +80,29 @@ hosts:
         status: 302
       - path: /.well-known/ai-plugin.json
         status: 302
+      - path: /.well-known/agent-card.json
+        status: 302
+  - host: https://caregaps.sandbox.elationemr.com
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 401
+        note: '{"detail":"Invalid authentication token"} — service is auth-gated, not an agent surface'
+      - path: /.well-known/agent.json
+        status: 401
+  - host: https://docs.elationhealth.com
+    note: legacy ReadMe developer portal, superseded 2026-08-07
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
   - host: https://www.elationhealth.com
     documents:
       - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
         status: 404

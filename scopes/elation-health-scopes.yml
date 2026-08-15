@@ -1,12 +1,14 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
-docs: https://docs.elationhealth.com/reference/scopes
-docs_note: >-
-  Confirmed against the published Token Scopes reference. Elation's OAuth2
-  client_credentials scopes are apiv2 (full access), act_as_user (provider
-  impersonation via X-On-Behalf-Of), and the granular system/{resource_name}.read
-  and system/{resource_name}.write pair. The legacy password-grant import scope
-  is used only by the Import API.
+docs: https://help.elationhealth.com/articles/rest/overview/scopes
+docs_note: Re-harvested 2026-08-14 from the new documentation host. The scope reference now enumerates
+  151 concrete system/<resource>.<permission> scopes across the Patient Profile, Patient Document, Orders,
+  Messaging, Scheduling, Insurance, Billing, Practice, User Management and Reference Data APIs, replacing
+  the system/{resource_name}.read|write placeholders recorded in the previous round. Format is system/<resource>.<permission>
+  where permission is read (GET) or write (POST/PUT/PATCH/DELETE); nested endpoints inherit the parent
+  resource scope; scopes are space-separated in the form-encoded scope parameter and CANNOT be combined
+  with apiv2. Reference Data scopes are read-only by design. Practice admins can also assign scopes to
+  credentials from the Elation UI (self-service API credential management).
 source: openapi/elation-api-settings.json, openapi/elation-billing-api.json, openapi/elation-care-gaps-api-1.json,
   openapi/elation-elation-import-api.json, openapi/elation-event-subscription-api.json, openapi/elation-insurance-api.json,
   openapi/elation-messaging-api.json, openapi/elation-orders-api.json, openapi/elation-patient-document-api.json,
@@ -129,37 +131,1067 @@ scopes:
   - password
   sources:
   - openapi/elation-elation-import-api.json
-- scope: system/{resource_name}.read
-  description: Read access to a specific resource
+- scope: system/allergies.read
+  description: Read access to allergies
+  group: Patient Profile API
   flows:
   - clientCredentials
   sources:
-  - openapi/elation-billing-api.json
-  - openapi/elation-event-subscription-api.json
-  - openapi/elation-insurance-api.json
-  - openapi/elation-messaging-api.json
-  - openapi/elation-orders-api.json
-  - openapi/elation-patient-document-api.json
-  - openapi/elation-patient-profile-api.json
-  - openapi/elation-practice-api.json
-  - openapi/elation-premium-patient-insurance-api.json
-  - openapi/elation-reference-data-api.json
-  - openapi/elation-scheduling-api.json
-  - openapi/elation-user-management-api.json
-- scope: system/{resource_name}.write
-  description: Write access to a specific resource
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/allergies.write
+  description: Write access to allergies
+  group: Patient Profile API
   flows:
   - clientCredentials
   sources:
-  - openapi/elation-billing-api.json
-  - openapi/elation-event-subscription-api.json
-  - openapi/elation-insurance-api.json
-  - openapi/elation-messaging-api.json
-  - openapi/elation-orders-api.json
-  - openapi/elation-patient-document-api.json
-  - openapi/elation-patient-profile-api.json
-  - openapi/elation-practice-api.json
-  - openapi/elation-premium-patient-insurance-api.json
-  - openapi/elation-reference-data-api.json
-  - openapi/elation-scheduling-api.json
-  - openapi/elation-user-management-api.json
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/allergy_documentation.read
+  description: Read access to allergy documentation (NKDA)
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/allergy_documentation.write
+  description: Write access to allergy documentation (NKDA)
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/ancillary_companies.read
+  description: Read access to ancillary companies
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/ancillary_companies.write
+  description: Write access to ancillary companies
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/appointment_types.read
+  description: Read access to appointment types
+  group: Scheduling API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/appointment_types.write
+  description: Write access to appointment types
+  group: Scheduling API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/appointments.read
+  description: Read access to appointments
+  group: Scheduling API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/appointments.write
+  description: Write access to appointments
+  group: Scheduling API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/billing_codes.read
+  description: Read access to billing codes
+  group: Billing API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/billing_codes.write
+  description: Write access to billing codes
+  group: Billing API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/bills.read
+  description: Read access to bills
+  group: Billing API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/bills.write
+  description: Write access to bills
+  group: Billing API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/cardiac_centers.read
+  description: Read access to cardiac centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/cardiac_centers.write
+  description: Write access to cardiac centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/cardiac_order_tests.read
+  description: Read access to cardiac order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/cardiac_order_tests.write
+  description: Write access to cardiac order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/cardiac_orders.read
+  description: Read access to cardiac orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/cardiac_orders.write
+  description: Write access to cardiac orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/ccda.read
+  description: Read access to C-CDA documents
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/ccda.write
+  description: Write access to C-CDA documents
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/clinical_documents.read
+  description: Read access to clinical documents
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/clinical_documents.write
+  description: Write access to clinical documents
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/contacts.read
+  description: Read access to contacts
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/contacts.write
+  description: Write access to contacts
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/delegate_permissions.read
+  description: Read access to delegate permissions
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/delegate_permissions.write
+  description: Write access to delegate permissions
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/discontinued_medications.read
+  description: Read access to discontinued medications
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/discontinued_medications.write
+  description: Write access to discontinued medications
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/document_tags.read
+  description: Read access to document tags
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/document_tags.write
+  description: Write access to document tags
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/drug_intolerances.read
+  description: Read access to drug intolerances
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/drug_intolerances.write
+  description: Write access to drug intolerances
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/family_histories.read
+  description: Read access to family histories
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/family_histories.write
+  description: Write access to family histories
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/handouts.read
+  description: Read access to handouts
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/handouts.write
+  description: Write access to handouts
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/histories.read
+  description: Read access to histories
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/histories.write
+  description: Write access to histories
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/imaging_centers.read
+  description: Read access to imaging centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/imaging_centers.write
+  description: Write access to imaging centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/imaging_order_tests.read
+  description: Read access to imaging order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/imaging_order_tests.write
+  description: Write access to imaging order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/imaging_orders.read
+  description: Read access to imaging orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/imaging_orders.write
+  description: Write access to imaging orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/immunizations.read
+  description: Read access to immunizations
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/immunizations.write
+  description: Write access to immunizations
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/incoming_files.read
+  description: Read access to incoming files
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/incoming_files.write
+  description: Write access to incoming files
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/injections.read
+  description: Read access to injections
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/injections.write
+  description: Write access to injections
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/insurance_companies.read
+  description: Read access to insurance companies
+  group: Insurance API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/insurance_companies.write
+  description: Write access to insurance companies
+  group: Insurance API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/insurance_plans.read
+  description: Read access to insurance plans
+  group: Insurance API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/insurance_plans.write
+  description: Write access to insurance plans
+  group: Insurance API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_facility_identifiers.read
+  description: Read access to lab facility identifiers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_facility_identifiers.write
+  description: Write access to lab facility identifiers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_order_compendiums.read
+  description: Read access to lab order compendiums
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_order_compendiums.write
+  description: Write access to lab order compendiums
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_order_sets.read
+  description: Read access to lab order sets
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_order_sets.write
+  description: Write access to lab order sets
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_order_tests.read
+  description: Read access to lab order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_order_tests.write
+  description: Write access to lab order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_orders.read
+  description: Read access to lab orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_orders.write
+  description: Write access to lab orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_vendor_integrations.read
+  description: Read access to lab vendor integrations
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_vendor_integrations.write
+  description: Write access to lab vendor integrations
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_vendor_patient_sites.read
+  description: Read access to lab vendor patient sites
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_vendor_patient_sites.write
+  description: Write access to lab vendor patient sites
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_vendors.read
+  description: Read access to lab vendors
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/lab_vendors.write
+  description: Write access to lab vendors
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/languages.read
+  description: Read access to languages
+  group: Reference Data API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/letters.read
+  description: Read access to letters
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/letters.write
+  description: Write access to letters
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_history_download_fills.read
+  description: Read access to medication history download fills
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_history_download_fills.write
+  description: Write access to medication history download fills
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_history_downloads.read
+  description: Read access to medication history downloads
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_history_downloads.write
+  description: Write access to medication history downloads
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_order_templates.read
+  description: Read access to medication order templates
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_order_templates.write
+  description: Write access to medication order templates
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_refills.read
+  description: Read access to medication refills
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medication_refills.write
+  description: Write access to medication refills
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medications.read
+  description: Read access to medications
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/medications.write
+  description: Write access to medications
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/message_threads.read
+  description: Read access to message threads
+  group: Messaging API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/message_threads.write
+  description: Write access to message threads
+  group: Messaging API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/non_visit_notes.read
+  description: Read access to non-visit notes
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/non_visit_notes.write
+  description: Write access to non-visit notes
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/office_staff.read
+  description: Read access to office staff
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/office_staff.write
+  description: Write access to office staff
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/packaged_medication_labelers.read
+  description: Read access to packaged medication labelers
+  group: Reference Data API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/packaged_medications.read
+  description: Read access to packaged medications
+  group: Reference Data API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient-provider-team-members.read
+  description: Read access to provider team members
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient-provider-team-members.write
+  description: Write access to provider team members
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient_form_requests.read
+  description: Read access to patient form requests
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient_form_requests.write
+  description: Write access to patient form requests
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient_form_submissions.read
+  description: Read access to patient form submissions
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient_form_submissions.write
+  description: Write access to patient form submissions
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient_forms.read
+  description: Read access to patient forms
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patient_forms.write
+  description: Write access to patient forms
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patients.read
+  description: Read access to patients
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/patients.write
+  description: Write access to patients
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pharmacies.read
+  description: Read access to pharmacies
+  group: Reference Data API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/physicians.read
+  description: Read access to physicians
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/physicians.write
+  description: Write access to physicians
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/practice_medications.read
+  description: Read access to practice medications
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/practice_medications.write
+  description: Write access to practice medications
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/practices.read
+  description: Read access to practices
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/practices.write
+  description: Write access to practices
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/print_headers.read
+  description: Read access to print headers
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/print_headers.write
+  description: Write access to print headers
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/problems.read
+  description: Read access to problems
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/problems.write
+  description: Write access to problems
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pulmonary_centers.read
+  description: Read access to pulmonary centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pulmonary_centers.write
+  description: Write access to pulmonary centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pulmonary_order_tests.read
+  description: Read access to pulmonary order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pulmonary_order_tests.write
+  description: Write access to pulmonary order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pulmonary_orders.read
+  description: Read access to pulmonary orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/pulmonary_orders.write
+  description: Write access to pulmonary orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/recurring_event_groups.read
+  description: Read access to recurring event groups
+  group: Scheduling API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/recurring_event_groups.write
+  description: Write access to recurring event groups
+  group: Scheduling API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/reference_medications.read
+  description: Read access to reference medications
+  group: Reference Data API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/report_types.read
+  description: Read access to report types
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/report_types.write
+  description: Write access to report types
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/reports.read
+  description: Read access to reports
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/reports.write
+  description: Write access to reports
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/service_locations.read
+  description: Read access to service locations
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/service_locations.write
+  description: Write access to service locations
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/sleep_centers.read
+  description: Read access to sleep centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/sleep_centers.write
+  description: Write access to sleep centers
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/sleep_order_tests.read
+  description: Read access to sleep order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/sleep_order_tests.write
+  description: Write access to sleep order tests
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/sleep_orders.read
+  description: Read access to sleep orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/sleep_orders.write
+  description: Write access to sleep orders
+  group: Orders API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/staff_groups.read
+  description: Read access to staff groups
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/staff_groups.write
+  description: Write access to staff groups
+  group: Practice API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/thread_members.read
+  description: Read access to thread members
+  group: Messaging API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/thread_members.write
+  description: Write access to thread members
+  group: Messaging API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/thread_messages.read
+  description: Read access to thread messages
+  group: Messaging API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/thread_messages.write
+  description: Write access to thread messages
+  group: Messaging API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/vaccine.read
+  description: Read access to vaccines
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/vaccine.write
+  description: Write access to vaccines
+  group: Patient Profile API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/visit_note_templates.read
+  description: Read access to visit note templates
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/visit_note_templates.write
+  description: Write access to visit note templates
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/visit_note_types.read
+  description: Read access to visit note types
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/visit_note_types.write
+  description: Write access to visit note types
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/visit_notes.read
+  description: Read access to visit notes
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/visit_notes.write
+  description: Write access to visit notes
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/vitals.read
+  description: Read access to vitals
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+- scope: system/vitals.write
+  description: Write access to vitals
+  group: Patient Document API
+  flows:
+  - clientCredentials
+  sources:
+  - https://help.elationhealth.com/articles/rest/overview/scopes
+legacy_docs: https://docs.elationhealth.com/reference/scopes
+scope_count: 154
+availability:
+  status: closed-beta
+  note: 'The Token Scopes doc states: "Token scopes are currently in closed beta and available to select
+    customers only." Without scopes a token defaults to the apiv2 global scope, which grants access to
+    all API resources.'

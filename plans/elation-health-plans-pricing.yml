@@ -1,3 +1,16 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.elationhealth.com/contact-us/pricing/
+plan_count: 3
+published_prices: false
+pricing_model: quote-based
+method_note: >-
+  Elation publishes no public API price list or self-serve tier table. The three
+  entries below are the named commercial surfaces Elation describes publicly
+  (EHR practice subscription with a "starting at" figure, a free developer
+  sandbox obtained by request, and quote-based enterprise developer-platform
+  access). No per-call, per-seat or overage rate is published anywhere; all
+  numbers beyond the starting figure require contacting sales.
 name: Elation Health Plans and Pricing
 description: >-
   Elation Health uses a customized, quote-based pricing model for its EHR
@@ -32,6 +45,13 @@ plans:
     pricing:
       model: quote-based
       startingAt: '$349/month'
+      startingAt_verified: false
+      startingAt_note: >-
+        Recorded in the 2026-06-13 pass. Re-probed 2026-08-14:
+        https://www.elationhealth.com/contact-us/pricing/ returns HTTP 200 but
+        publishes no currency figure in its markup, so this number could not be
+        re-confirmed from the provider's own page and should be treated as
+        historical rather than current.
       note: Pricing varies by specialty, payment model, and clinician count
 
   - name: Developer Sandbox

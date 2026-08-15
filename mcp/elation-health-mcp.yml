@@ -1,42 +1,92 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
 status: published
-source: https://docs.elationhealth.com/docs/mcp
-probe: tools/list returned 200 (anonymous) on 2026-07-24
-server:
-  name: Elation Health API
-  version: '2.0'
-  transport: http
-  url: https://docs.elationhealth.com/mcp
-  protocol_version: '2024-11-05'
-  auth: Hosted alongside the ReadMe developer documentation. The server exposes the Elation API v2.0 spec
-    for navigation/search anonymously; the execute-request tool proxies live API calls, which require
-    the caller to supply their own Elation OAuth2 bearer token via request headers.
-description: ReadMe-hosted Model Context Protocol server that exposes the Elation Health API v2.0 OpenAPI
-  documentation and endpoints to MCP clients. Rather than one tool per resource, it offers five generic
-  OpenAPI-navigation/execution tools; the underlying capability surface is the full REST API described
-  in openapi/.
-tools:
-- name: list-endpoints
-  description: Lists all API paths and their HTTP methods with summaries, organized by path.
-  read_only: true
-- name: get-endpoint
-  description: Gets detailed information about a specific API endpoint, including security schemes and
-    servers.
-  read_only: true
-- name: search-endpoints
-  description: Deep search through paths, operations, and parameters to discover relevant API endpoints.
-  read_only: true
-- name: list-specs
-  description: Lists all available OpenAPI specs.
-  read_only: true
-- name: execute-request
-  description: Executes an API request with a given HAR request object (proxies a live call; caller supplies
-    auth).
-  read_only: false
+source: >-
+  https://help.elationhealth.com/.well-known/mcp/server-card.json,
+  https://help.elationhealth.com/articles/rest/overview/mcp-server,
+  https://docs.elationhealth.com/docs/mcp
+probe: >-
+  POST tools/list returned HTTP 200 anonymously on 2026-08-14 against
+  https://help.elationhealth.com/mcp (3 tools) and against the legacy
+  https://docs.elationhealth.com/mcp (5 tools). Both are documentation MCP
+  servers; neither is a resource server over the Elation EHR data API.
+note: >-
+  Elation ships TWO hosted MCP servers, both bound to its documentation rather
+  than to the clinical API itself. The current one runs on the new developer
+  documentation host help.elationhealth.com (Mintlify), which the Elation API
+  documentation moved to on 2026-08-07; its server card is advertised from the
+  host's Link header at /.well-known/mcp/server-card.json and saved at
+  well-known/elation-health-mcp-server-card.json. The legacy one runs on the
+  superseded ReadMe portal docs.elationhealth.com and exposes generic
+  OpenAPI-navigation tools plus an execute-request proxy. Live tool schemas for
+  the current server are captured verbatim in
+  mcp/elation-health-help-mcp-tools.json.
 deployment:
   mode: remote
-  verified: searched
-  tools: 5
-  checked: '2026-08-12'
-  source: catalog MCP census
+  endpoint: https://help.elationhealth.com/mcp
+  auth: none
+  verified: probed
+  checked: '2026-08-14'
+  note: >-
+    Anonymous HTTP MCP endpoint, streamable (text/event-stream). The server card
+    also names an equivalent platform-origin URL,
+    https://elationhealth.main-kill-isr.mintlify.me/mcp, which returns the same
+    tool set; the elationhealth.com endpoint is the one to use.
+servers:
+  - name: Elation Help Center Docs MCP
+    status: current
+    transport: http
+    url: https://help.elationhealth.com/mcp
+    platform_url: https://elationhealth.main-kill-isr.mintlify.me/mcp
+    server_card: https://help.elationhealth.com/.well-known/mcp/server-card.json
+    version: '1.0.0'
+    auth: none
+    capabilities:
+      tools: true
+      resources: true
+    tools_file: elation-health-help-mcp-tools.json
+    tools:
+      - name: search_elation_help_center
+        title: Search documentation
+        description: Semantic search across the Elation Help Center knowledge base, API reference and guides.
+        read_only: true
+        inputs: [query]
+      - name: query_docs_filesystem_elation_help_center
+        description: >-
+          Read-only shell-like query (rg/grep/find/tree/ls/cat/head/tail/jq) against a
+          virtualized in-memory filesystem containing only the Elation documentation
+          pages and its OpenAPI specs. This is the tool that exposed the 16 published
+          OpenAPI documents, including /openapi/files/elation-api-full.yaml.
+        read_only: true
+        inputs: [command]
+      - name: submit_feedback
+        title: Submit documentation feedback
+        description: Submit feedback on a documentation page.
+        read_only: false
+        inputs: [path, feedback]
+  - name: Elation Health API (ReadMe docs MCP)
+    status: legacy
+    transport: http
+    url: https://docs.elationhealth.com/mcp
+    protocol_version: '2024-11-05'
+    auth: >-
+      Anonymous for spec navigation/search. The execute-request tool proxies live
+      Elation API calls, for which the caller supplies their own Elation OAuth2
+      bearer token via request headers.
+    note: Hosted alongside the superseded ReadMe developer portal; still answering as of 2026-08-14.
+    tools:
+      - name: list-endpoints
+        description: Lists all API paths and their HTTP methods with summaries, organized by path.
+        read_only: true
+      - name: get-endpoint
+        description: Gets detailed information about a specific API endpoint, including security schemes and servers.
+        read_only: true
+      - name: search-endpoints
+        description: Deep search through paths, operations, and parameters to discover relevant API endpoints.
+        read_only: true
+      - name: list-specs
+        description: Lists all available OpenAPI specs.
+        read_only: true
+      - name: execute-request
+        description: Executes an API request with a given HAR request object (proxies a live call; caller supplies auth).
+        read_only: false

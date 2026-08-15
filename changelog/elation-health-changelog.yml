@@ -1,12 +1,24 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
-source: https://docs.elationhealth.com/reference/changelog
+source: https://help.elationhealth.com/articles/rest/changelog/changelog
+legacy_source: https://docs.elationhealth.com/reference/changelog
+rss: https://help.elationhealth.com/articles/rest/changelog/changelog/rss.xml
 scheme: dated
 current_version: '2.0'
 note: >-
-  Elation maintains a dated API 2.0 changelog. Recent window captured below;
-  the live changelog is the source of truth.
+  Elation maintains a dated API 2.0 changelog, now published on the new
+  documentation host help.elationhealth.com (the ReadMe portal was superseded
+  2026-08-07) and accompanied by an RSS feed. Recent window captured below; the
+  live changelog is the source of truth.
 entries:
+  - date: '2026-07-20'
+    type: breaking
+    tags: [Orders API]
+    highlights: >-
+      POST /api/2.0/lab_vendors/ now rejects requests where practice_created is
+      null or omitted (previously created a global vendor visible to all
+      practices); returns 400 with {"practice_created": "This field is required
+      and cannot be null."}.
   - date: '2026-06-23'
     type: addition
     highlights: Added user_id field to the Office Staff object for use with ThreadMember creation.

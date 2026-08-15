@@ -1,0 +1,60 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Elation Health API (Full v2.0)
+  version: 1.0.0
+extends: openapi/elation-health-api-full-openapi.yaml
+x-generated: '2026-08-14'
+x-method: generated
+x-source: >-
+  Derived from the verbatim spec harvested at
+  https://help.elationhealth.com/files/elation-api-full.yaml plus the artifacts in
+  this repo (conventions/, scopes/, rate-limits/, lifecycle/, asyncapi/, mcp/).
+  The harvested spec is never mutated; these are our additive annotations.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: elation-health
+      x-apievangelist-harvested: '2026-08-14'
+      x-apievangelist-source: https://help.elationhealth.com/files/elation-api-full.yaml
+      x-apievangelist-docs: https://help.elationhealth.com/api-reference
+      x-apievangelist-note: >-
+        Provider-published combined description of the Elation Health API v2.0:
+        201 paths, 419 operations, one oauth2 securityScheme. Documentation moved
+        from the ReadMe portal docs.elationhealth.com to help.elationhealth.com on
+        2026-08-07.
+  - target: $.info
+    update:
+      x-agent-readiness:
+        idempotency: false
+        idempotency_note: No idempotency-key header or parameter is documented or present in the spec.
+        pagination: cursor
+        pagination_note: >-
+          Cursor-based by default since 2026-04-22 (cursor param; next/previous/results),
+          with optional offset-based paging (limit/offset; count/next/previous/results).
+          Maximum 100 results per page.
+        rate_limit_headers: []
+        rate_limit_note: 429 is the only documented runtime signal; no X-RateLimit-*/RateLimit-*/Retry-After.
+        error_envelope: application/json
+        rfc9457: false
+        mcp_endpoint: https://help.elationhealth.com/mcp
+        mcp_note: Documentation MCP server only; no MCP tool binds to a single REST operation.
+        agent_card: https://help.elationhealth.com/.well-known/agent-card.json
+  - target: $.components.securitySchemes.oauth2
+    update:
+      x-apievangelist-scopes: scopes/elation-health-scopes.yml
+      x-apievangelist-scope-count: 151
+      x-apievangelist-scope-model: system/<resource>.<permission>
+      x-apievangelist-default-scope: apiv2
+      x-apievangelist-scope-availability: >-
+        Granular token scopes are in closed beta for select customers; a request with
+        no scope parameter receives the apiv2 global scope (full access to all
+        resources). Scopes cannot be combined with apiv2.
+      x-apievangelist-impersonation:
+        scope: act_as_user
+        header: X-On-Behalf-Of
+  - target: $.servers
+    update:
+      x-apievangelist-note: >-
+        Sandbox access is provisioned per partner via
+        https://www.elationhealth.com/contact-us/sandbox/ - separate credentials from
+        production; separation is by host, not by test-vs-live key prefix.

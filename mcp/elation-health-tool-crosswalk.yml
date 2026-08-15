@@ -1,49 +1,77 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: derived
-source: mcp/elation-health-mcp.yml, openapi/*.json
+source: mcp/elation-health-mcp.yml, mcp/elation-health-help-mcp-tools.json, openapi/*.json, openapi/elation-health-api-full-openapi.yaml
 note: >-
-  Elation's published MCP server (docs.elationhealth.com/mcp) is a ReadMe
-  generic OpenAPI-navigation server: its five tools are meta-tools over the spec,
-  not one tool per Elation resource/operation. There is therefore no 1:1 binding
-  between an MCP tool and a single OpenAPI operationId. The three read tools
-  navigate the whole spec; execute-request can invoke ANY operation via a HAR
-  request object. All REST operations remain reachable through execute-request,
-  but none has a dedicated named tool. GraphQL is not offered.
+  Neither of Elation's two hosted MCP servers exposes one tool per Elation
+  resource, so there is no 1:1 binding between any MCP tool and a single
+  OpenAPI operationId — the crosswalk is intentionally empty and every tool is
+  recorded under mcp_only. The CURRENT server (help.elationhealth.com/mcp,
+  Mintlify) is a documentation server: it searches and reads the docs and their
+  bundled OpenAPI specs, and cannot call the Elation API at all. The LEGACY
+  server (docs.elationhealth.com/mcp, ReadMe) is a generic OpenAPI-navigation
+  server whose execute-request tool can invoke ANY operation via a HAR request
+  object, fanning out across the whole spec rather than binding to one
+  operationId. GraphQL is not offered.
 surfaces:
   openapi:
-    files: 17
-    operations: 846
+    files: 31
+    full_spec: openapi/elation-health-api-full-openapi.yaml
+    full_spec_operations: 419
+    full_spec_paths: 201
     gated: false
   graphql:
     present: false
   mcp:
-    url: https://docs.elationhealth.com/mcp
-    tools_list_gated: false
-    style: generic-openapi-navigation
+    current:
+      url: https://help.elationhealth.com/mcp
+      tools_list_gated: false
+      style: documentation-search
+    legacy:
+      url: https://docs.elationhealth.com/mcp
+      tools_list_gated: false
+      style: generic-openapi-navigation
 crosswalk: []
 mcp_only:
+  - tool: search_elation_help_center
+    server: help.elationhealth.com/mcp
+    reason: Semantic search over documentation content. No backing REST operation.
+  - tool: query_docs_filesystem_elation_help_center
+    server: help.elationhealth.com/mcp
+    reason: >-
+      Read-only virtual-filesystem query over documentation pages and the bundled
+      OpenAPI specs. Reads the contract; never calls it.
+  - tool: submit_feedback
+    server: help.elationhealth.com/mcp
+    reason: Writes documentation feedback to the docs platform, not to any Elation API resource.
   - tool: list-endpoints
+    server: docs.elationhealth.com/mcp
     reason: Meta-tool; enumerates all spec paths/methods. No single backing operationId.
   - tool: get-endpoint
+    server: docs.elationhealth.com/mcp
     reason: Meta-tool; returns spec detail for a chosen path+method. No single backing operationId.
   - tool: search-endpoints
+    server: docs.elationhealth.com/mcp
     reason: Meta-tool; keyword search across the spec. No single backing operationId.
   - tool: list-specs
+    server: docs.elationhealth.com/mcp
     reason: Meta-tool; lists available OpenAPI specs. No backing operationId.
   - tool: execute-request
+    server: docs.elationhealth.com/mcp
     reason: >-
-      Generic executor. Can invoke ANY of the 846 REST operations via a HAR
-      request object, so it fans out to the entire spec rather than binding to
-      one operationId. Caller supplies method+url+auth.
+      Generic executor. Can invoke ANY REST operation via a HAR request object, so
+      it fans out to the entire spec rather than binding to one operationId.
+      Caller supplies method+url+auth.
 rest_only:
   note: >-
-    All 846 REST operations are executable only through the generic
-    execute-request tool; none is exposed as a dedicated named MCP tool.
+    Every REST operation is reachable only through the legacy server's generic
+    execute-request tool; none is exposed as a dedicated named MCP tool on either
+    server. An agent pointed at the current (documentation) server can read the
+    Elation contract but cannot execute against it.
   capabilities:
     - patient-profile (allergies, problems, medications, immunizations, vitals, histories)
     - scheduling (appointments, appointment types)
     - orders (lab, imaging, cardiac, pulmonary, sleep, referral)
-    - patient-document
+    - patient-document (visit notes, clinical documents, reports, CCDA)
     - billing
     - insurance and eligibility
     - practice and user management
@@ -53,9 +81,9 @@ rest_only:
     - care gaps
     - data import
 coverage:
-  tools_named: 5
+  tools_named: 8
   tools_bound_to_single_operation: 0
-  mcp_only: 5
-  rest_operations_total: 846
+  mcp_only: 8
+  rest_operations_total: 419
   rest_operations_with_dedicated_tool: 0
-  rest_operations_reachable_via_execute_request: 846
+  rest_operations_reachable_via_execute_request: 419

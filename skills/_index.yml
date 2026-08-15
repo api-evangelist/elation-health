@@ -1,7 +1,24 @@
-generated: '2026-07-24'
-method: generated
-source: openapi/*.json (operationIds grounded), conventions/, errors/, asyncapi/
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://help.elationhealth.com/.well-known/agent-skills/index.json (provider-published, verbatim),
+  openapi/*.json (operationIds grounded), conventions/, errors/, asyncapi/
+note: >-
+  Elation Health publishes its own Agent Skill. The docs host
+  help.elationhealth.com advertises rel="agent-skills" in its Link header and
+  serves an Agent Skills discovery index
+  (schemas.agentskills.io/discovery/0.2.0) listing one skill, saved verbatim as
+  elation-health-provider-published-skill.md. The five API-Evangelist-generated
+  flow skills below remain, grounded in real operationIds from openapi/.
 skills:
+  - file: elation-health-provider-published-skill.md
+    name: Elationhealth
+    method: searched
+    source: https://help.elationhealth.com/.well-known/agent-skills/elationhealth/skill.md
+    digest: sha256:c295705797d2d822d247c0aa7cdadade2e0838941c6fc0a9e4f1a061d4c5a0f3
+    description: >-
+      Provider-published skill covering Elation REST and FHIR API integration,
+      clinical workflows, practice operations and troubleshooting. Saved verbatim.
   - file: elation-health-register-and-read-patient.md
     name: Register and read a patient
     api: openapi/elation-patient-profile-api.json

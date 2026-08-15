@@ -1,5 +1,28 @@
-generated: '2026-07-24'
-method: derived
+generated: '2026-08-14'
+method: searched
+docs: https://help.elationhealth.com/articles/rest/overview/oauth
+docs_pages:
+  get_token: https://help.elationhealth.com/articles/rest/overview/get-token
+  token_scopes: https://help.elationhealth.com/articles/rest/overview/scopes
+  user_impersonation: https://help.elationhealth.com/articles/rest/overview/user-impersonation
+  self_service_credentials: https://help.elationhealth.com/articles/self-service-api-credential-management
+legacy_docs: https://docs.elationhealth.com/docs/oauth
+docs_note: >-
+  Upgraded to searched on 2026-08-14 against the new documentation host. OAuth2
+  bearer over POST /api/2.0/oauth2/token/ (application/x-www-form-urlencoded),
+  grant types client_credentials (system-to-system) and authorization_code
+  (user-facing apps), with the legacy password grant still documented for the
+  Import API. A token with no scope parameter defaults to the apiv2 global scope
+  (full access to all API resources); granular system/<resource>.<permission>
+  scopes exist but are in closed beta for select customers — see
+  scopes/elation-health-scopes.yml for all 151 enumerated scopes. Provider
+  impersonation uses the act_as_user scope plus the X-On-Behalf-Of header.
+  Practice admins can generate and scope credentials themselves from the Elation
+  UI. FHIR uses separate SMART-on-FHIR endpoints
+  (https://fhir.elationemr.com/fhir/r4/, sandbox
+  https://sandbox-fhir.elationemr.com/fhir/r4/); both /metadata and
+  /.well-known/smart-configuration returned HTTP 401 to an anonymous probe on
+  2026-08-14, so the FHIR conformance statement is registered-app-gated.
 source: openapi/elation-api-authentication.json, openapi/elation-api-settings.json, openapi/elation-billing-api.json,
   openapi/elation-care-gaps-api-1.json, openapi/elation-elation-import-api.json, openapi/elation-event-subscription-api.json,
   openapi/elation-insurance-api.json, openapi/elation-messaging-api.json, openapi/elation-orders-api.json,

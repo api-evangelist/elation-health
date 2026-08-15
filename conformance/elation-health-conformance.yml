@@ -1,11 +1,14 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
 source: >-
-  https://docs.elationhealth.com/reference/oauth,
-  https://docs.elationhealth.com/reference/errors,
-  https://docs.elationhealth.com/reference/pagination,
+  https://help.elationhealth.com/articles/rest/overview/oauth,
+  https://help.elationhealth.com/articles/rest/overview/scopes,
+  https://help.elationhealth.com/articles/rest/overview/errors,
+  https://help.elationhealth.com/articles/rest/overview/pagination,
+  https://help.elationhealth.com/api-reference,
+  https://help.elationhealth.com/.well-known/agent-card.json,
   https://www.elationhealth.com/solutions/ehr/ (ONC / HIPAA),
-  openapi/*.json
+  openapi/elation-health-api-full-openapi.yaml, openapi/*.json
 standards:
   - id: oauth2
     conforms: true
@@ -26,7 +29,44 @@ standards:
       apps; not part of the anonymous REST v2.0 surface captured here).
   - id: smart-on-fhir
     conforms: true
-    evidence: SMART-on-FHIR endpoints exposed to registered applications for Cures Act compliance.
+    evidence: >-
+      SMART on FHIR 1.0.0 with US Core v5.0.1 over FHIR R4 v4.0.1, per Elation's
+      own published Agent Skill. Base URLs https://fhir.elationemr.com/fhir/r4/
+      (production) and https://sandbox-fhir.elationemr.com/fhir/r4/ (sandbox).
+      Gated: anonymous GET of /fhir/r4/metadata and
+      /fhir/r4/.well-known/smart-configuration returned HTTP 401 on 2026-08-14,
+      so the CapabilityStatement could not be harvested.
+  - id: a2a-agent-card
+    conforms: true
+    evidence: >-
+      A2A agent card served at
+      https://help.elationhealth.com/.well-known/agent-card.json (HTTP 200,
+      application/json, protocolVersion 0.3). Graded conformant - capabilities is
+      an object, protocolVersion present, skills is an array; sole deviation is
+      supportedInterfaces in place of additionalInterfaces. See
+      a2a/elation-health-a2a.yml.
+  - id: agent-skills-discovery
+    conforms: true
+    evidence: >-
+      Agent Skills discovery index at
+      https://help.elationhealth.com/.well-known/agent-skills/index.json
+      (schemas.agentskills.io/discovery/0.2.0, HTTP 200), advertised by a
+      rel="agent-skills" Link header; one published skill saved verbatim at
+      skills/elation-health-provider-published-skill.md.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      Two hosted MCP servers answering tools/list anonymously over HTTP
+      (help.elationhealth.com/mcp, 3 tools; legacy docs.elationhealth.com/mcp,
+      5 tools), plus an MCP server card at
+      /.well-known/mcp/server-card.json. Both are documentation servers, not
+      resource servers over the clinical API.
+  - id: rfc8414-oauth-metadata
+    conforms: false
+    evidence: >-
+      No OAuth 2.0 authorization-server metadata is published;
+      /.well-known/oauth-authorization-server returned 400/302/404 on every
+      Elation host probed 2026-08-14.
   - id: onc-cehrt
     conforms: true
     evidence: Elation is ONC-Certified Electronic Health Record Technology (CEHRT).

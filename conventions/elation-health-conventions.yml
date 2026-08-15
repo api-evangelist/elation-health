@@ -1,13 +1,18 @@
-generated: '2026-07-24'
+generated: '2026-08-14'
 method: searched
 source: >-
-  https://docs.elationhealth.com/reference/oauth,
-  https://docs.elationhealth.com/reference/pagination,
-  https://docs.elationhealth.com/reference/dates,
-  https://docs.elationhealth.com/reference/metadata,
-  https://docs.elationhealth.com/reference/errors,
-  https://docs.elationhealth.com/reference/webhooks,
-  openapi/*.json
+  https://help.elationhealth.com/articles/rest/overview/oauth,
+  https://help.elationhealth.com/articles/rest/overview/scopes,
+  https://help.elationhealth.com/articles/rest/overview/pagination,
+  https://help.elationhealth.com/articles/rest/overview/dates,
+  https://help.elationhealth.com/articles/rest/overview/metadata,
+  https://help.elationhealth.com/articles/rest/overview/errors,
+  https://help.elationhealth.com/articles/rest/overview/webhooks,
+  openapi/elation-health-api-full-openapi.yaml, openapi/*.json
+source_note: >-
+  Re-verified 2026-08-14 against the new documentation host. The legacy ReadMe
+  URLs (docs.elationhealth.com/reference/*) still resolve but are frozen as of
+  2026-08-07 — see lifecycle/elation-health-lifecycle.yml.
 authentication:
   style: oauth2-bearer
   token_endpoint: /api/2.0/oauth2/token/
@@ -48,9 +53,23 @@ error_envelope:
 rate_limiting:
   signaled: true
   status_code: 429
+  headers: []
   note: >-
     Documented ("Our API limits the rate at which you can perform certain
-    actions") but specific thresholds/headers are not published.
+    actions") but specific thresholds are not published and NO rate-limit
+    response headers exist — re-checked 2026-08-14 across the REST overview,
+    errors and api-overview pages: no X-RateLimit-*, no RateLimit-*, no
+    Retry-After. A 429 status is the only runtime signal available to an agent.
+  see: rate-limits/elation-health-rate-limits.yml
+authorization:
+  scope_model: system/<resource>.<permission>
+  default_scope: apiv2
+  availability: closed-beta
+  note: >-
+    Granular token scopes are in closed beta for select customers; a token with
+    no scope parameter receives the apiv2 global scope, i.e. full access to
+    every API resource. Scopes cannot be combined with apiv2.
+  see: scopes/elation-health-scopes.yml
 versioning:
   scheme: uri-path
   current: '2.0'
