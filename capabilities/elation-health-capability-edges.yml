@@ -1,0 +1,36 @@
+slug: elation-health
+provider: Elation Health
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Event Subscriptions
+  spec_file: elation-health-event-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: '''Subscribe to a resource updates'', ''List Published Events'', ''Delete a Subscription'',
+    schemas ''PublishedEvent'', ''Subscription'''
+  reason: The operations manage outbound event publication and third-party app subscriptions to resource
+    updates — the webhook/event subscription lifecycle of a developer platform.
+- tag: App
+  spec_file: elation-health-app-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.78
+  evidence: POST /app/subscriptions/ "Subscribe to a resource updates"; GET /app/published_events/ "Find
+    published events"; DELETE /app/subscriptions/{id}/ "Delete a Subscription"
+  reason: Despite the 'App' tag and 'subscriptions' wording, the operations create and delete event subscriptions
+    for resource updates and read/update published events — outbound webhook and event subscription lifecycle
+    for API consumers, not commercial subscriptions.
