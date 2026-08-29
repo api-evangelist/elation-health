@@ -11,483 +11,404 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 49
+edge_count: 40
 edges:
-- tag: Insurance Eligibility
-  spec_file: elation-health-insurance-eligibility-api-openapi.yml
-  capability_id: BC-2800.30
-  capability_id_l1: BC-2800
-  capability_name: Eligibility & Benefits Verification
+- tag: Visit Notes
+  spec_file: elation-health-visit-notes-api-openapi.yml
+  capability_id: BC-2830.10
+  capability_id_l1: BC-2830
+  capability_name: Clinical Note Documentation
   confidence: 0.95
-  evidence: 'GET /api/2.0/patient_insurances/{id}/eligibility/ Get Eligibility; schemas: EligibilityBenefits,
-    EligibilityPlanDetails, InsuranceEligibilityFullReport'
-  reason: Operations run and retrieve payer eligibility and benefits checks for a patient's insurance
-    — squarely Eligibility & Benefits Verification.
+  evidence: PATCH /visit_notes/{id}/ sign-visit-note 'Sign Visit Note'; schemas VisitNote, AddSignaturesToNote,
+    AmendmentRequest
+  reason: Creation, amendment and signing of clinician visit notes is unambiguously clinical note documentation
+    in the active patient record.
 - tag: Appointments
   spec_file: elation-health-appointments-api-openapi.yml
   capability_id: BC-2800.10
   capability_id_l1: BC-2800
   capability_name: Scheduling & Appointment Management
   confidence: 0.92
-  evidence: POST /appointments/ "Create Event"; "Update Appointment Slot"; schemas "AppointmentStatus",
-    "TimeSlotStatusEnum"
-  reason: Full CRUD over patient appointments and time slots in a clinical EHR — plainly appointment booking
-    and slot management (patient access scheduling).
+  evidence: POST /appointments/ 'Create Event'; 'Update Appointment Slot'; schemas 'Appointment', 'AppointmentStatus',
+    'PaginatedAppointmentList'
+  reason: Full lifecycle of patient appointments and slots in an EHR scheduling API — create, find, update,
+    delete events and slots. This plainly performs appointment booking and slot management for a healthcare
+    provider.
+- tag: Insurance Eligibility
+  spec_file: elation-health-insurance-eligibility-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.92
+  evidence: GET /api/2.0/patient_insurances/{id}/eligibility/ 'Get Eligibility'; schemas EligibilityBenefits,
+    EligibilityPlanDetails, InsuranceEligibilityFullReport
+  reason: Operations run and retrieve payer eligibility checks with benefits and plan detail for a patient's
+    insurance — textbook eligibility and benefits verification.
 - tag: Patient Insurances
   spec_file: elation-health-patient-insurances-api-openapi.yml
   capability_id: BC-2800.30
   capability_id_l1: BC-2800
   capability_name: Eligibility & Benefits Verification
   confidence: 0.92
-  evidence: GET /patient_insurances/{id}/eligibility/  get-eligibility  Get Eligibility ... GET /patient_insurances/{id}/eligibility_full_report/
-  reason: Operations run and retrieve insurance eligibility checks against a patient's coverage — precisely
-    eligibility and benefits verification in patient access.
+  evidence: GET /patient_insurances/{id}/eligibility/ 'Get Eligibility'; POST 'Create Eligibility'; GET
+    '/eligibility_full_report/'
+  reason: Operations run and retrieve insurance eligibility checks against a patient's coverage, which
+    is precisely eligibility and benefits verification within patient access.
 - tag: Notes
   spec_file: elation-health-notes-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
   confidence: 0.9
-  evidence: 'openapi description: "This API supports the management of visit notes."; GET /notes/{note_id}/amendments/{amendment_id}
-    "Get Note Amendment By Id"'
-  reason: CRUD plus amendment of visit notes with clinical content schemas (VitalBP, ImmunizationVaccine,
-    DocumentSignature) is clinician documentation of the patient record.
-- tag: Notes v1
-  spec_file: elation-health-notes-v1-api-openapi.yml
-  capability_id: BC-2830.10
-  capability_id_l1: BC-2830
-  capability_name: Clinical Note Documentation
-  confidence: 0.9
-  evidence: '"This API supports the management of visit notes."; POST /v1/notes create_note_v1; schemas
-    NoteCreate, NoteUpdate, DocumentSignature'
-  reason: Versioned surface for creating and updating clinical visit notes — clinical note documentation.
+  evidence: '''This API supports the management of visit notes.''; schemas VitalBP, Procedure-Output,
+    DocumentSignature, ImmunizationVaccine'
+  reason: Create/update/sign structured visit notes containing vitals, procedures and narrative sections
+    — clinical note documentation.
 - tag: Notes v2
   spec_file: elation-health-notes-v2-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
   confidence: 0.9
-  evidence: POST /v2/notes/{note_id}/amendments create_note_amendment_v2 "Create Note Amendment V2"; "This
-    API supports the management of visit notes."
-  reason: Same visit-note authoring and amendment surface at v2, including doctag tagging of notes — clinical
-    note documentation.
+  evidence: POST /v2/notes/{note_id}/amendments create_note_amendment_v2; schemas ElationNoteAmendmentUpdate,
+    VitalBP, ReferralBlock-Output
+  reason: Visit note authoring plus amendment and doctag management — clinical note documentation in the
+    EHR.
+- tag: Notes v1
+  spec_file: elation-health-notes-v1-api-openapi.yml
+  capability_id: BC-2830.10
+  capability_id_l1: BC-2830
+  capability_name: Clinical Note Documentation
+  confidence: 0.88
+  evidence: POST /v1/notes create_note_v1 Create Note V1; schemas NoteCreate, NoteUpdate, DocumentSignature
+  reason: Versioned endpoint set for authoring visit notes with signatures — clinical note documentation.
 - tag: Referral Orders
   spec_file: elation-health-referral-orders-api-openapi.yml
   capability_id: BC-2820.10
   capability_id_l1: BC-2820
   capability_name: Referral Management
-  confidence: 0.9
-  evidence: POST /referral_orders/ "Post Referral Order"; GET /referral_orders/{id} "Get Referral Order"
-  reason: Operations create, retrieve and update referral orders in a provider EHR — end-to-end management
-    of patient referrals, matching Referral Management.
+  confidence: 0.88
+  evidence: '"Post Referral Order", "Update Referral Order", "Get Referral Order"'
+  reason: CRUD over referral orders is the capture and management of patient referrals to other providers
+    — referral management within care coordination.
 - tag: Referrals
   spec_file: elation-health-referrals-api-openapi.yml
   capability_id: BC-2820.10
   capability_id_l1: BC-2820
   capability_name: Referral Management
-  confidence: 0.9
-  evidence: '"List Referral Orders", "Create Referral Order"; schemas ReferralOrder, ReferralLetter, MedicalSpecialty,
-    SendToContact'
-  reason: Referral order and referral letter lifecycle with specialty and send-to-contact data is referral
-    capture, specialist match and tracking.
-- tag: Visit Notes
-  spec_file: elation-health-visit-notes-api-openapi.yml
-  capability_id: BC-2830.10
-  capability_id_l1: BC-2830
-  capability_name: Clinical Note Documentation
-  confidence: 0.9
-  evidence: '"Sign Visit Note", schemas VisitNote, VisitNoteSignatureList, AmendmentRequest'
-  reason: Authoring, amending and signing of clinician visit notes is plainly clinical note documentation
-    in the EHR.
+  confidence: 0.88
+  evidence: '"List Referral Orders", "Create Referral Order"; schemas "ReferralOrder", "ReferralLetter",
+    "MedicalSpecialty", "SendToContact"'
+  reason: Operations create/track referral orders and referral letters with specialty and send-to-contact
+    data — end-to-end referral management from order capture to specialist routing.
 - tag: Bills
   spec_file: elation-health-bills-api-openapi.yml
   capability_id: BC-2870
   capability_id_l1: BC-2870
   capability_name: Healthcare Revenue Cycle Management
   confidence: 0.85
-  evidence: POST /bills/ "Create Bill"; "Release a Bill To PMS"; schemas "CPT", "DX", "BillingStatusEnum",
-    "ReferringProvider"
-  reason: Encounter-level bills carrying CPT and diagnosis codes, with release to the practice management
-    system — provider-side charge capture and billing, i.e. healthcare revenue cycle. L2 ambiguous between
-    charge capture and claim production.
+  evidence: POST /bills/ 'Create Bill'; PATCH /bills/{id}/actions/release-to-pms/ 'Release a Bill To PMS';
+    schemas 'CPT', 'DX', 'BillingStatusEnum', 'Payment'
+  reason: Bills carrying CPT and diagnosis codes are created from encounters and released to the practice
+    management system — provider-side charge capture feeding claim production. L1 healthcare revenue cycle
+    is clear; the surface spans charge capture and downstream claim handoff, so no single L2 is asserted.
 - tag: Non Visit Notes
   spec_file: elation-health-non-visit-notes-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
   confidence: 0.85
-  evidence: POST /non_visit_notes/ create-non-visit-note "Create Non-Visit Note"; schemas NonVisitNote,
+  evidence: POST /non_visit_notes/ create-non-visit-note Create Non-Visit Note; schemas NonVisitNote,
     NonVisitNoteBullet, NonVisitNoteDocument
-  reason: Operations author, retrieve and amend clinician notes recorded outside a visit encounter in
-    the EHR — clinical note documentation.
+  reason: Authoring and lifecycle of clinician non-visit notes in the patient record — clinical note documentation.
+- tag: App
+  spec_file: elation-health-app-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.82
+  evidence: POST /app/subscriptions/ 'Subscribe to a resource updates'; GET /app/published_events/ 'Find
+    published events'
+  reason: 'This tag is pure platform plumbing for API consumers: managing event subscriptions and published
+    events for the vendor''s public API. That maps to outbound webhook/event subscription lifecycle in
+    the developer-platform capability, not to any healthcare delivery capability.'
+- tag: Lab Order Sets
+  spec_file: elation-health-lab-order-sets-api-openapi.yml
+  capability_id: BC-2830.20
+  capability_id_l1: BC-2830
+  capability_name: Computerised Provider Order Entry
+  confidence: 0.82
+  evidence: '''Create Lab Order Set'' / schemas LabOrderSet, LabOrderContent, LabOrderTestWithDiagnoses,
+    ICD10Code'
+  reason: Order sets for laboratory ordering are explicitly named in Computerised Provider Order Entry
+    ('order sets and clinical protocols'); operations manage the lifecycle of these diagnostic order sets.
 - tag: Appointment Types
   spec_file: elation-health-appointment-types-api-openapi.yml
   capability_id: BC-2800.10
   capability_id_l1: BC-2800
   capability_name: Scheduling & Appointment Management
   confidence: 0.8
-  evidence: '"Create Appointment Type", schema "AppointmentType", "VisitNoteFormatEnum"; published in
-    elation-scheduling-api.json'
-  reason: Configuration of appointment types within the vendor's scheduling API — supporting reference
-    data for appointment booking, i.e. scheduling and appointment management.
+  evidence: POST /api/2.0/appointment_types/ 'Create Appointment Type'; schema 'AppointmentType', 'VisitNoteFormatEnum'
+  reason: CRUD over appointment types published in the vendor's scheduling API definition; these configure
+    the bookable visit types used for appointment booking, so it realises scheduling & appointment management.
+    It is configuration rather than booking itself, hence 0.8.
+- tag: Billing Codes
+  spec_file: elation-health-billing-codes-api-openapi.yml
+  capability_id: BC-2870
+  capability_id_l1: BC-2870
+  capability_name: Healthcare Revenue Cycle Management
+  confidence: 0.8
+  evidence: POST /api/2.0/billing_codes/ 'Create Billing Code'; schemas 'CPTCode', 'PaginatedCPTCodeList'
+  reason: Maintenance of CPT billing codes for a provider practice, published in the vendor's billing
+    API. This is provider revenue-cycle code/charge master data; the split between chargemaster management
+    and coding management is not resolvable from the evidence, so L2 is null.
+- tag: Event Subscriptions
+  spec_file: elation-health-event-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: POST /api/2.0/app/subscriptions/ "Subscribe to a resource updates"; schemas PublishedEvent,
+    Subscription
+  reason: Purely platform plumbing for outbound event/webhook subscriptions exposed to API consumers —
+    developer platform event subscription management, not a clinical capability.
 - tag: Outstanding Balance
   spec_file: elation-health-outstanding-balance-api-openapi.yml
   capability_id: BC-2870.60
   capability_id_l1: BC-2870
   capability_name: Patient Financial Services
   confidence: 0.8
-  evidence: POST /api/2.0/patients/{id}/outstanding_balance/ patients_outstanding_balance_create "Update
-    Outstanding Balance"; schema PatientOutstandingBalance
-  reason: Maintains the patient's outstanding balance from the billing API — patient billing/financial
-    services within provider revenue cycle.
-- tag: Patients
-  spec_file: elation-health-patients-api-openapi.yml
-  capability_id: BC-2800.20
-  capability_id_l1: BC-2800
-  capability_name: Patient Registration Management
-  confidence: 0.8
-  evidence: POST /patients/  create-patient  Create Patient ... POST /patients/{id}/insurance_cards/  create-insurance-card;
-    schemas Patient, EmergencyContact, Consent, Address
-  reason: Full CRUD over patient demographic, contact, consent and insurance-card data is capture and
-    stewardship of registration data; some overlap with master patient index stewardship keeps it below
-    0.9.
+  evidence: POST /api/2.0/patients/{id}/outstanding_balance/ Update Outstanding Balance; schema PatientOutstandingBalance
+  reason: Maintains a patient's outstanding balance in the billing API — patient financial services within
+    provider revenue cycle.
 - tag: Sleep Orders
   spec_file: elation-health-sleep-orders-api-openapi.yml
   capability_id: BC-2830.20
   capability_id_l1: BC-2830
   capability_name: Computerised Provider Order Entry
   confidence: 0.8
-  evidence: POST /sleep_orders/ "Create Sleep Order"; schemas SleepOrder, ICD10Code, SleepOrderTest
-  reason: Full lifecycle of clinician-placed sleep study diagnostic orders with diagnosis codes — computerised
-    provider order entry for diagnostics.
-- tag: Visit Note Templates
-  spec_file: elation-health-visit-note-templates-api-openapi.yml
-  capability_id: BC-2830.10
-  capability_id_l1: BC-2830
-  capability_name: Clinical Note Documentation
-  confidence: 0.8
-  evidence: '"Create Visit Note Template", schemas VisitNoteTemplate, PatchedVisitNoteTemplate'
-  reason: Templates that structure clinician authoring of visit notes — directly supports clinical note
-    documentation.
+  evidence: POST /sleep_orders/ 'Create Sleep Order'; schemas SleepOrder, ICD10Code, DocumentResolutionState
+  reason: CRUD over clinician-authored sleep study orders with diagnosis codes and document resolution
+    state is computerised provider order entry for a diagnostic study.
 - tag: Billing
   spec_file: elation-health-billing-api-openapi.yml
   capability_id: BC-2870
   capability_id_l1: BC-2870
   capability_name: Healthcare Revenue Cycle Management
   confidence: 0.78
-  evidence: GET /billing_codes/ "List billing codes"; schema "BillingCode", "BillingCodeCreate"
-  reason: Despite the generic tag, operations only manage a catalogue of billing codes used for provider
-    charge/claim production — provider revenue cycle. Mapped at L1 because the evidence does not clearly
-    distinguish chargemaster stewardship from coding operations.
-- tag: Billing Codes
-  spec_file: elation-health-billing-codes-api-openapi.yml
-  capability_id: BC-2870
-  capability_id_l1: BC-2870
-  capability_name: Healthcare Revenue Cycle Management
-  confidence: 0.78
-  evidence: POST /billing_codes/ "Create a Billing Code"; schemas "PaginatedCPTCodeList", "CPTCode"
-  reason: CRUD over CPT billing codes for a provider EHR — reference data underpinning charge capture
-    and claim production in healthcare revenue cycle. L2 left open between chargemaster and coding management.
-- tag: Caregaps
-  spec_file: elation-health-caregaps-api-openapi.yml
-  capability_id: BC-2880
-  capability_id_l1: BC-2880
-  capability_name: Population Health Management
-  confidence: 0.78
-  evidence: POST /caregaps/api/{quality_program}/caregap/ "Create a new caregap"; "Modifies an existing
-    caregap's closed status"; schemas "CaregapAPI", "ClosedByEnum"
-  reason: Management of care gaps per quality program with open/closed status — population health / value-based
-    care gap closure. L2 left open between risk-and-gap identification and population analytics.
+  evidence: POST /billing_codes/ 'Create a billing code'; schemas 'BillingCode', 'BillingCodeCreate'
+  reason: Despite the generic 'Billing' tag, the operations are CRUD on billing codes in a provider EHR
+    — the code/charge master used for provider revenue cycle. L1 revenue cycle is safe; whether this is
+    chargemaster stewardship or medical coding is ambiguous, so no L2.
 - tag: Ccda
   spec_file: elation-health-ccda-api-openapi.yml
   capability_id: BC-2900.60
   capability_id_l1: BC-2900
   capability_name: Healthcare Interoperability Operations
   confidence: 0.78
-  evidence: GET /ccda/{patient-id}  get-ccda-cehrt-2022  Get CCDA (CEHRT 2022); POST /ccda/  create-ccda  Create
-    CCDA
-  reason: C-CDA generation and retrieval for a patient is the certified-EHR document exchange surface,
-    i.e. healthcare interoperability operations within Health Information Management, not clinical note
-    authoring.
-- tag: Imaging Orders
-  spec_file: elation-health-imaging-orders-api-openapi.yml
-  capability_id: BC-2830.20
-  capability_id_l1: BC-2830
-  capability_name: Computerised Provider Order Entry
-  confidence: 0.78
-  evidence: '''Create Imaging Order'', ''Update Imaging Order'', schemas ''ImagingOrder'', ''ICD10Code'',
-    ''ImagingOrderTest'''
-  reason: Full lifecycle of clinician-placed imaging orders with diagnosis codes is provider order entry
-    for diagnostics in the EHR.
-- tag: App
-  spec_file: elation-health-app-api-openapi.yml
-  capability_id: BC-4270.80
-  capability_id_l1: BC-4270
-  capability_name: Webhook & Event Subscription Management
-  confidence: 0.75
-  evidence: POST /app/subscriptions/  subscribe-to-a-resource-updates  Subscribe to a resource updates;
-    GET /app/published_events/  find-published-events
-  reason: Operations manage event subscriptions and published events for integrating applications — outbound
-    webhook/event subscription lifecycle on the vendor's developer platform, not any clinical or revenue-cycle
-    capability.
-- tag: Injections (BETA)
-  spec_file: elation-health-injections-beta-api-openapi.yml
-  capability_id: BC-2850.40
-  capability_id_l1: BC-2850
-  capability_name: Medication Administration & Reconciliation
-  confidence: 0.75
-  evidence: 'schemas: Injection, SiteEnum, MethodEnum, DoseUnitEnum, ProcedureCodes, DiagnosisCode, Actor'
-  reason: Schemas capture administration site, method, dose unit and administering actor — the hallmark
-    of a medication administration record for injectables.
-- tag: Lab Order Compendiums
-  spec_file: elation-health-lab-order-compendiums-api-openapi.yml
-  capability_id: BC-2860.10
-  capability_id_l1: BC-2860
-  capability_name: Laboratory Services Management
-  confidence: 0.75
-  evidence: 'POST /api/2.0/lab_order_compendiums/ Create Lab Order Compendium; schemas: LabOrderTestCompendium'
-  reason: Maintenance of the orderable lab test compendium for a lab, a core laboratory services/orderables
-    catalogue function.
-- tag: Lab Order Sets
-  spec_file: elation-health-lab-order-sets-api-openapi.yml
-  capability_id: BC-2830.20
-  capability_id_l1: BC-2830
-  capability_name: Computerised Provider Order Entry
-  confidence: 0.75
-  evidence: 'POST /api/2.0/lab_order_sets/ Create Lab Order Set; schemas: LabOrderSet, LabOrderTestWithDiagnoses,
-    LabOrderAOEQuestion, ICD10Code'
-  reason: Lab order sets with ask-at-order-entry questions and associated diagnoses are the building blocks
-    of provider order entry (order sets), per CPOE sub-capability.
+  evidence: '"Create CCDA", "Get CCDA", "Get CCDA (CEHRT 2022)" keyed by {patient_id}'
+  reason: Generation and retrieval of C-CDA continuity-of-care documents per patient, explicitly tied
+    to CEHRT certification — provider-side health information exchange / interoperability operations.
 - tag: Lab Orders
   spec_file: elation-health-lab-orders-api-openapi.yml
   capability_id: BC-2830.20
   capability_id_l1: BC-2830
   capability_name: Computerised Provider Order Entry
+  confidence: 0.78
+  evidence: '''Create Lab Order'', ''Retrieve the Printable Lab Order View'', schemas LabOrder, LabOrderSubmission,
+    LabOrderSpecimen'
+  reason: Creation, update and submission of laboratory orders for patients is provider order entry for
+    diagnostics; specimen and submission schemas confirm real clinical ordering rather than a technical
+    object.
+- tag: Cardiac Orders
+  spec_file: elation-health-cardiac-orders-api-openapi.yml
+  capability_id: BC-2830.20
+  capability_id_l1: BC-2830
+  capability_name: Computerised Provider Order Entry
   confidence: 0.75
-  evidence: POST /lab_orders/ 'Create Lab Order'; schemas LabOrder, LabOrderSpecimen, LabOrderSubmission,
-    ICD10Code
-  reason: Provider-side creation and lifecycle of laboratory orders from the EHR, i.e. computerised provider
-    order entry for diagnostics; specimen and submission schemas confirm ordering rather than result reporting.
+  evidence: '"Create Cardiac Order", "Update Cardiac Order"; schemas "CardiacOrder", "ICD10Code", "CardiacOrderTest"'
+  reason: Full CRUD over clinician-created cardiac diagnostic orders with ICD-10 indication codes — computerised
+    provider order entry for diagnostics within the EHR.
+- tag: Imaging Orders
+  spec_file: elation-health-imaging-orders-api-openapi.yml
+  capability_id: BC-2830.20
+  capability_id_l1: BC-2830
+  capability_name: Computerised Provider Order Entry
+  confidence: 0.75
+  evidence: POST /imaging_orders/ create-imaging-order 'Create Imaging Order'; schemas ImagingOrderTest,
+    ICD10Code, ImagingOrder
+  reason: CRUD over provider-entered imaging orders with diagnosis codes and ordered tests inside an EHR
+    — this is provider order entry for diagnostics, not the operation of imaging modalities themselves.
 - tag: Medication Order Templates
   spec_file: elation-health-medication-order-templates-api-openapi.yml
   capability_id: BC-2830.20
   capability_id_l1: BC-2830
   capability_name: Computerised Provider Order Entry
   confidence: 0.75
-  evidence: '''Create Medication Order Template''; schemas MedOrderTemplate, Medication, QtyUnitsEnum'
-  reason: Reusable medication order templates are order-set style constructs used in provider order entry
-    for medications.
-- tag: Pulmonary Orders
-  spec_file: elation-health-pulmonary-orders-api-openapi.yml
-  capability_id: BC-2830.20
-  capability_id_l1: BC-2830
-  capability_name: Computerised Provider Order Entry
+  evidence: '''Create Medication Order Template'' / schemas MedOrderTemplate, Medication, MedicationDrugType,
+    QtyUnitsEnum'
+  reason: Manages reusable medication order templates (sig, drug, quantity units) used by clinicians when
+    entering medication orders — the order-set/protocol content of provider order entry for medications.
+- tag: Patients
+  spec_file: elation-health-patients-api-openapi.yml
+  capability_id: BC-2800.20
+  capability_id_l1: BC-2800
+  capability_name: Patient Registration Management
   confidence: 0.75
-  evidence: POST /pulmonary_orders/ 'Create Pulmonary Order'; schemas PulmonaryOrder, PulmonaryOrderTest,
-    ICD10Code
-  reason: Full lifecycle of provider-placed pulmonary diagnostic orders with associated tests and ICD-10
-    diagnosis codes — computerised provider order entry for diagnostics.
+  evidence: POST /patients/ 'Create Patient'; schemas Patient, EmergencyContact, Address, Consent, PatientPreviousName,
+    'Get Insurance Cards'
+  reason: Operations create, retrieve and update patient demographic/identity records including consent,
+    emergency contacts and insurance cards — the stewardship of registration data for a patient in the
+    EHR. Patient Registration Management is the closest fit; some overlap with master patient index stewardship
+    keeps confidence below 0.8.
 - tag: Recurring Event Groups
   spec_file: elation-health-recurring-event-groups-api-openapi.yml
   capability_id: BC-2800.10
   capability_id_l1: BC-2800
   capability_name: Scheduling & Appointment Management
   confidence: 0.75
-  evidence: POST /recurring_event_groups/ 'Create Recurring Event Group'; schemas RecurringEventSchedule,
-    TimeSlotTypeEnum, RepeatsEnum
-  reason: Manages recurring calendar/schedule blocks with time-slot types and repeat rules within Elation's
-    scheduling API — provider and resource scheduling for appointments.
-- tag: Appointment Rooms
-  spec_file: elation-health-appointment-rooms-api-openapi.yml
-  capability_id: BC-2800.10
-  capability_id_l1: BC-2800
-  capability_name: Scheduling & Appointment Management
-  confidence: 0.72
-  evidence: GET /api/2.0/appointments/rooms/ — "List Appointment Rooms"
-  reason: A reference list of rooms used for appointments in an EHR scheduling API; supports provider/resource
-    scheduling. Thin (single read-only operation), so confidence is moderate.
-- tag: Custom Blocks
-  spec_file: elation-health-custom-blocks-api-openapi.yml
+  evidence: '"Create Recurring Event Group"; schemas "RecurringEventSchedule", "TimeSlotTypeEnum", "RepeatsEnum";
+    published in elation-scheduling-api.json'
+  reason: Operations manage repeating calendar/time-slot definitions within the vendor's scheduling API,
+    i.e. provider/resource appointment scheduling configuration.
+- tag: Sleep Order Tests
+  spec_file: elation-health-sleep-order-tests-api-openapi.yml
+  capability_id: BC-2830.20
+  capability_id_l1: BC-2830
+  capability_name: Computerised Provider Order Entry
+  confidence: 0.75
+  evidence: POST /sleep_order_tests/ create-sleep-order-test 'Create Sleep Order Test'; schema SleepOrderTest
+    tied to SleepOrder
+  reason: Sleep order tests are the diagnostic test line items of a clinician-placed sleep study order
+    in the EHR, i.e. provider order entry for diagnostics rather than any billing or scheduling function.
+- tag: Visit Note Templates
+  spec_file: elation-health-visit-note-templates-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
+  confidence: 0.75
+  evidence: GET /visit_note_templates/ find-visit-note-templates; schemas VisitNoteTemplate, PatchedVisitNoteTemplate
+  reason: Templates that structure clinician-authored visit notes are part of the clinical note documentation
+    capability of the EHR.
+- tag: Allergy Documentation (NKDA)
+  spec_file: elation-health-allergy-documentation-nkda-api-openapi.yml
+  capability_id: BC-2830
+  capability_id_l1: BC-2830
+  capability_name: Clinical Documentation Management
   confidence: 0.72
-  evidence: 'openapi title: Visit Notes Custom Blocks API; description: ''This API supports the management
-    of visit notes.''; GET /notes/custom-blocks  list_custom_blocks'
-  reason: Custom blocks are structured components of visit notes (DynamicFormNode, AiGenerationInfo),
-    i.e. the templating of clinician note authoring; single read operation keeps confidence moderate.
-- tag: Fills
-  spec_file: elation-health-fills-api-openapi.yml
-  capability_id: BC-2850
-  capability_id_l1: BC-2850
-  capability_name: Pharmacy & Medication Management
-  confidence: 0.72
-  evidence: '''List Prescription Fills'' / ''Retrieve Prescription Fill''; schemas ''PrescriptionFill'',
-    ''FillStatusEnum'', ''MedicationHistoryDownloadFill'''
-  reason: Prescription fill records and medication-history fill data are provider-side medication management;
-    the split between dispensing operations and reconciliation is ambiguous so only L1 is asserted.
+  evidence: POST /api/2.0/allergy_documentation/ 'Create Allergy Documentation'; schema 'PatientAllergyDocumentation'
+  reason: 'Operations create, retrieve and delete structured allergy entries in the patient''s chart within
+    a clinical EHR — this is documentation of the active clinical record (BC-2830). No sub-capability
+    is clearly named: allergy lists are structured chart data rather than specifically notes, order entry
+    or results review, so L2 is left null.'
 - tag: Imaging Order Tests
   spec_file: elation-health-imaging-order-tests-api-openapi.yml
   capability_id: BC-2830.20
   capability_id_l1: BC-2830
   capability_name: Computerised Provider Order Entry
   confidence: 0.72
-  evidence: '''Create Imaging Order Test'', schema ''ImagingOrderTest'''
-  reason: Test line items on provider-entered imaging orders are part of computerised provider order entry
-    for diagnostics.
+  evidence: POST /imaging_order_tests/ "Create Imaging Order Test"; schema ImagingOrderTest
+  reason: Creation and management of imaging order test entries, i.e. provider order entry for diagnostics,
+    matching CPOE ("order entry for medications, diagnostics, and procedures").
+- tag: Injections (BETA)
+  spec_file: elation-health-injections-beta-api-openapi.yml
+  capability_id: BC-2850.40
+  capability_id_l1: BC-2850
+  capability_name: Medication Administration & Reconciliation
+  confidence: 0.72
+  evidence: 'schemas: Injection, SiteEnum, MethodEnum, DoseUnitEnum, ProcedureCodes, DiagnosisCode, Actor'
+  reason: Injection records carrying administration site, method and dose unit plus procedure/diagnosis
+    codes represent documented medication administration in the clinical record.
+- tag: Medications
+  spec_file: elation-health-medications-api-openapi.yml
+  capability_id: BC-2850
+  capability_id_l1: BC-2850
+  capability_name: Pharmacy & Medication Management
+  confidence: 0.72
+  evidence: POST /medications/ create-medication Create Medication; schemas MedOrder, Fulfillment, MedicationDrugType,
+    QtyUnitsEnum
+  reason: CRUD over patient medications with medication orders and fulfillment schemas — provider-side
+    medication management. Sub-capability ambiguous between prescribing/order entry and reconciliation,
+    so L1 only.
 - tag: Allergies
   spec_file: elation-health-allergies-api-openapi.yml
   capability_id: BC-2830
   capability_id_l1: BC-2830
   capability_name: Clinical Documentation Management
   confidence: 0.7
-  evidence: 'POST /allergies/  create-allergy  Create Allergy; schemas: PatientAllergy, PatientAllergySeverityEnum,
+  evidence: 'POST /allergies/ create-allergy Create Allergy; schemas: PatientAllergy, PatientAllergySeverityEnum,
     AllergyStatus'
-  reason: CRUD over patient allergy records in an EHR is maintenance of the active clinical record. Mapped
-    at L1 (Clinical Documentation Management) only, since an allergy list is neither specifically a clinical
-    note nor order entry.
+  reason: Elation is a clinical EHR and these operations maintain the structured patient allergy list
+    within the active clinical record. That places it under Clinical Documentation Management; no single
+    L2 (note authoring, order entry, results review) cleanly names structured allergy-list maintenance,
+    so only the L1 is asserted.
 - tag: Allergy Documentation
   spec_file: elation-health-allergy-documentation-api-openapi.yml
   capability_id: BC-2830
   capability_id_l1: BC-2830
   capability_name: Clinical Documentation Management
   confidence: 0.7
-  evidence: POST /allergy_documentation/  create-allergy-documentation-nkda  Create Allergy Documentation
+  evidence: POST /allergy_documentation/ create-allergy-documentation-nkda Create Allergy Documentation
     (NKDA)
-  reason: Recording allergy documentation status (including 'no known drug allergies') is clinical charting
-    within the EHR. L1 only because no single L2 (note authoring vs. record content) is clearly named.
-- tag: Allergy Documentation (NKDA)
-  spec_file: elation-health-allergy-documentation-nkda-api-openapi.yml
-  capability_id: BC-2830
+  reason: Records clinician documentation of allergy status including 'No Known Drug Allergies' in the
+    EHR chart, i.e. authoring of structured clinical documentation. L1 only, since the specific L2 sub-capabilities
+    do not squarely cover structured allergy attestation.
+- tag: Caregaps
+  spec_file: elation-health-caregaps-api-openapi.yml
+  capability_id: BC-2880.10
+  capability_id_l1: BC-2880
+  capability_name: Risk Stratification & Identification
+  confidence: 0.7
+  evidence: '"Create a new caregap." / "Modifies an existing caregap''s closed status." under /caregaps/api/{quality_program}/'
+  reason: Operations create, list and close patient care gaps under a quality programme — identification
+    and closure of care-gap populations, a population health capability rather than plumbing.
+- tag: Custom Blocks
+  spec_file: elation-health-custom-blocks-api-openapi.yml
+  capability_id: BC-2830.10
   capability_id_l1: BC-2830
-  capability_name: Clinical Documentation Management
+  capability_name: Clinical Note Documentation
   confidence: 0.7
-  evidence: POST /api/2.0/allergy_documentation/  allergy_documentation_create  Create Allergy Documentation;
-    schema PatientAllergyDocumentation
-  reason: 'Same surface as the sibling tag: documentation of a patient''s allergy status in the clinical
-    record. Mapped at L1 Clinical Documentation Management.'
-- tag: Cardiac Orders
-  spec_file: elation-health-cardiac-orders-api-openapi.yml
-  capability_id: BC-2830.20
-  capability_id_l1: BC-2830
-  capability_name: Computerised Provider Order Entry
+  evidence: openapi description "This API supports the management of visit notes."; "List Custom Blocks";
+    schemas "DynamicFormAttrs", "AiGenerationInfo"
+  reason: Custom blocks are structured/dynamic form components of visit notes, so the surface supports
+    authoring of clinical notes. Only one read operation, hence moderate confidence.
+- tag: Delegate Permissions
+  spec_file: elation-health-delegate-permissions-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
   confidence: 0.7
-  evidence: POST /cardiac_orders/ "Create Cardiac Order"; schemas "CardiacOrder", "ICD10Code", "CardiacOrderTest"
-  reason: Full lifecycle of clinician-placed cardiac diagnostic orders with ICD-10 indications in an EHR
-    — computerised provider order entry for diagnostics; some overlap with cardiology diagnostic services.
-- tag: Historical Medication Download Requests
-  spec_file: elation-health-historical-medication-download-requests-api-openapi.yml
-  capability_id: BC-2850
-  capability_id_l1: BC-2850
-  capability_name: Pharmacy & Medication Management
-  confidence: 0.7
-  evidence: '''Create Medication History Download'', schema ''RxHistoryDownload'''
-  reason: Requesting external medication history downloads is a pharmacy/medication management function
-    (typically feeding medication reconciliation); L1 only given thin evidence on the exact sub-process.
-- tag: Injections
-  spec_file: elation-health-injections-api-openapi.yml
-  capability_id: BC-2850.40
-  capability_id_l1: BC-2850
-  capability_name: Medication Administration & Reconciliation
-  confidence: 0.7
-  evidence: GET /injections/{id}/ Get Injection; GET /injections/ Find Injections
-  reason: Injections in an EHR represent administered injectable medications/immunizations recorded at
-    the point of care, which maps to medication administration records. Read-only surface, so some ambiguity
-    remains vs. clinical documentation.
-- tag: Insurance Card
-  spec_file: elation-health-insurance-card-api-openapi.yml
-  capability_id: BC-2800.30
-  capability_id_l1: BC-2800
-  capability_name: Eligibility & Benefits Verification
-  confidence: 0.7
-  evidence: 'POST /api/2.0/patients/{id}/insurance_cards/ Create Patients Insurance Card; schemas: InsuranceCard,
-    InsuranceCardImage'
-  reason: Capture and storage of patient insurance card images/data per patient, part of registration
-    and coverage verification workflow at patient access.
-- tag: Lab Facility Identifiers
-  spec_file: elation-health-lab-facility-identifiers-api-openapi.yml
-  capability_id: BC-2860.10
-  capability_id_l1: BC-2860
-  capability_name: Laboratory Services Management
-  confidence: 0.7
-  evidence: 'GET /api/2.0/lab_facility_identifiers/ List Lab Facility Identifiers; schemas: FacilityIdentifier,
-    BiDiLabConnection'
-  reason: Configuration of laboratory facility identifiers and bidirectional lab connections used for
-    lab ordering/result interfacing — laboratory services/LIS integration setup.
-- tag: Lab Order Tests
-  spec_file: elation-health-lab-order-tests-api-openapi.yml
-  capability_id: BC-2860.10
-  capability_id_l1: BC-2860
-  capability_name: Laboratory Services Management
-  confidence: 0.7
-  evidence: 'POST /api/2.0/lab_order_tests/ Create Lab Order Test; schemas: LabOrderTest, LabOrderAOEQuestion'
-  reason: Definition of individual orderable lab tests with AOE questions — laboratory test catalogue
-    management; could also be read as CPOE configuration, hence moderate confidence.
-- tag: Medications
-  spec_file: elation-health-medications-api-openapi.yml
-  capability_id: BC-2830.20
-  capability_id_l1: BC-2830
-  capability_name: Computerised Provider Order Entry
-  confidence: 0.7
-  evidence: POST /medications/ 'Create Medication'; schemas MedOrder, PaginatedMedOrderList, OrderTypeEnum,
-    Fulfillment
-  reason: Creation and retrieval of patient medications alongside MedOrder/order-type/fulfilment schemas
-    indicates prescription order capture in the EHR, i.e. provider medication order entry.
+  evidence: '"Create Delegate Permission", "Delete Delegate Permission"; schemas "DelegatePermission",
+    "PermissionTypeEnum"'
+  reason: Manages delegation of access rights between users in the practice — access management plumbing
+    rather than a clinical capability.
 - tag: Problems
   spec_file: elation-health-problems-api-openapi.yml
   capability_id: BC-2830
   capability_id_l1: BC-2830
   capability_name: Clinical Documentation Management
   confidence: 0.7
-  evidence: POST /problems/ 'Create Problem'; schemas PatientProblem, PatientProblemStatusEnum, Diagnosis,
-    ImoCodeRelation
-  reason: Maintains the patient problem list with coded diagnoses and status — structured clinician documentation
-    in the active patient record. Kept at L1 because a problem list is not specifically a clinical note,
-    order, or decision-support artefact.
-- tag: Reports
-  spec_file: elation-health-reports-api-openapi.yml
-  capability_id: BC-2830.30
-  capability_id_l1: BC-2830
-  capability_name: Results Review & Endorsement
-  confidence: 0.7
-  evidence: PATCH /reports/{id}/ "Sign Report"; schemas LabResult, LabTest, LabResultsGrid, AbnormalFlagEnum
-  reason: Reports here carry lab test/result payloads and are signed by clinicians, i.e. routing, review
-    and endorsement of diagnostic results; could alternatively read as diagnostic results management.
-- tag: Sleep Order Tests
-  spec_file: elation-health-sleep-order-tests-api-openapi.yml
+  evidence: POST /problems/ 'Create Problem'; schemas PatientProblem, Diagnosis, ImoCodeRelation, PatientProblemStatusEnum
+  reason: Maintenance of the patient problem list with coded diagnoses in the active clinical record —
+    clinical documentation of the patient's conditions. L1 Clinical Documentation Management; no single
+    L2 (problem list spans note documentation and record content), so L2 left null.
+- tag: Pulmonary Orders
+  spec_file: elation-health-pulmonary-orders-api-openapi.yml
   capability_id: BC-2830.20
   capability_id_l1: BC-2830
   capability_name: Computerised Provider Order Entry
   confidence: 0.7
-  evidence: POST /sleep_order_tests/ "Create Sleep Order Test"; schema SleepOrderTest
-  reason: Creating the diagnostic tests that constitute a sleep study order is provider order entry for
-    diagnostics.
+  evidence: POST /pulmonary_orders/ 'Create Pulmonary Order'; schemas PulmonaryOrder, PulmonaryOrderTest,
+    ICD10Code, DocumentResolutionState
+  reason: Full lifecycle of pulmonary diagnostic orders with associated diagnosis codes and tests — provider
+    order entry for diagnostics (CPOE). Alternative reading as cardiopulmonary diagnostic service management
+    keeps this at 0.7.
 - tag: Visit Note Types
   spec_file: elation-health-visit-note-types-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
   confidence: 0.7
-  evidence: '"Create Visit Note Type", schemas VisitNoteType, SnomedCode'
-  reason: Classification/reference data for clinical visit notes, coded with SNOMED; it configures the
-    clinical note documentation surface rather than any other capability.
-- tag: Vitals
-  spec_file: elation-health-vitals-api-openapi.yml
-  capability_id: BC-2830
-  capability_id_l1: BC-2830
-  capability_name: Clinical Documentation Management
-  confidence: 0.7
-  evidence: '"Create Vitals", schemas VitalBP, VitalHR, VitalTemperature, VitalOxygen, VitalsCollection'
-  reason: Capture of structured vital-sign observations into the patient record — documentation of clinical
-    data. Left at L1 because it straddles note documentation and bedside care delivery.
-- tag: patient chart import
-  spec_file: elation-health-patient-chart-import-api-openapi.yml
-  capability_id: BC-2900
-  capability_id_l1: BC-2900
-  capability_name: Health Information Management
-  confidence: 0.7
-  evidence: '"This set of API resources allows you to import patient data into the Elation EMR"; "Add
-    a new patient-chart-import to the associated data import request"'
-  reason: Bulk ingestion of patient charts into the health record is health information management (record
-    creation/migration). L2 left null because it sits between health record lifecycle and interoperability
-    operations.
+  evidence: POST /api/2.0/visit_note_types/ visit_note_types_create; schemas VisitNoteType, SnomedCode
+  reason: Configuration of visit note categories coded to SNOMED supports authoring of clinical notes
+    across encounter types; it is documentation configuration rather than a distinct capability.
