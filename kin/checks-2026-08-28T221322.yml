@@ -2,25 +2,27 @@
 kin_checks:
   slug: elation-health
   schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T140727
+  scored_at: '2026-08-28'
+  run_ts: 2026-08-28T221322
   note: Actionable checks only (missed + partial). earned/na are every other check
     in rubric/scoring-0.15.1.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 65
-    partial: 20
-    missed: 26
+    earned: 67
+    partial: 17
+    missed: 27
     na: 19
   checks:
+  - id: maintainer_present
+    status: missed
   - id: apis_json_self_hosted
     status: missed
   - id: openapi_3_2
     status: missed
-    detail: 0 of 14 openapi documents pass
+    detail: 0 of 125 openapi documents pass
   - id: webhooks_or_callbacks
     status: missed
-    detail: 0 of 14 openapi documents pass
+    detail: 0 of 125 openapi documents pass
   - id: json_schema_present
     status: missed
   - id: json_schema_per_resource
@@ -67,49 +69,41 @@ kin_checks:
     status: missed
   - id: agentic_commerce
     status: missed
-  - id: openapi_3_0
-    status: partial
-    earned: 2.79
-    detail: 13 of 14 openapi documents pass
   - id: info_complete
     status: partial
-    earned: 1.14
-    detail: 4 of 14 openapi documents pass
-  - id: operations_summary_coverage
-    status: partial
-    earned: 5.57
-    detail: 13 of 14 openapi documents pass
+    earned: 0.9
+    detail: 28 of 125 openapi documents pass
   - id: operations_description_coverage
     status: partial
-    earned: 0.43
-    detail: 1 of 14 openapi documents pass
-  - id: operations_tagged
-    status: partial
-    earned: 3.71
-    detail: 13 of 14 openapi documents pass
+    earned: 1.15
+    detail: 24 of 125 openapi documents pass
   - id: operations_operation_ids
     status: partial
-    earned: 2.0
-    detail: 7 of 14 openapi documents pass
+    earned: 3.81
+    detail: 119 of 125 openapi documents pass
   - id: response_coverage
     status: partial
-    earned: 4.29
-    detail: 12 of 14 openapi documents pass
+    earned: 4.8
+    detail: 120 of 125 openapi documents pass
   - id: error_responses_documented
     status: partial
-    earned: 1.43
-    detail: 5 of 14 openapi documents pass
+    earned: 2.18
+    detail: 68 of 125 openapi documents pass
   - id: examples_present
     status: partial
-    earned: 1.25
+    earned: 1.82
   - id: components_reuse
     status: partial
-    earned: 2.14
-    detail: 10 of 14 openapi documents pass
+    earned: 1.25
+    detail: 52 of 125 openapi documents pass
+  - id: oauth_flows_current
+    status: partial
+    earned: 3.87
+    detail: 121 of 125 openapi documents pass
   - id: oauth_scopes_enumerated
     status: partial
-    earned: 1.43
-    detail: 5 of 14 openapi documents pass
+    earned: 1.02
+    detail: 32 of 125 openapi documents pass
   - id: rules_present
     status: partial
     earned: 2.5
@@ -132,10 +126,6 @@ kin_checks:
     status: partial
     earned: 7.5
     detail: 'grade: negotiable'
-  - id: error_semantics
-    status: partial
-    earned: 4.0
-    detail: 'grade: documented'
   - id: openapi_examples
     status: partial
     earned: 3.5
