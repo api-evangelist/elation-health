@@ -1,0 +1,584 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Billing Codes API
+  version: '1.0'
+  description: 'Operations tagged Billing Codes across 3 of this provider''s published API definitions: elation-api-settings.json, elation-billing-api.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Billing Codes
+paths:
+  /billing_codes/:
+    post:
+      summary: Create a Billing Code
+      description: Create a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.
+      operationId: create-a-billing-code
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - practice
+              - code
+              properties:
+                practice:
+                  type: integer
+                  description: The practice id
+                  format: int32
+                code:
+                  type: string
+                  description: The code
+                description:
+                  type: string
+                  description: The user visible description of the code
+                charge:
+                  type: string
+                  description: The amount of money to be charged for the code
+                sequence:
+                  type: integer
+                  description: The position in the list of codes when viewing them as a list
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 4,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 7890102,\n            \"practice\": 123456,\n            \"code\": \"90471\",\n            \"description\": \"vaccine injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 10  // sequence in the list of CPTs on the settings page\n        },\n        {\n            \"id\": 7890103,\n            \"practice\": 123456,\n            \"code\": \"96372\",\n            \"description\": \"injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 9\n        },\n        {\n            \"id\": 7890104,\n            \"practice\": 123456,\n            \"code\": \"99203\",\n            \"description\": \"new patient, low-moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 11\n        },\n        {\n            \"id\": 7890105,\n            \"practice\": 123456,\n            \"code\": \"99204\",\n            \"description\": \"new patient, moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 12\n        },\n        ...\n\t\t]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/billing_codes/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Billing Codes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /billing_codes/{billing_code_id}/:
+    get:
+      summary: Get a Billing Code
+      description: Get a CPT code that the practice has set up. To view all codes in the app, go to Practice Settings - Billing.
+      operationId: get-billing-code
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: billing_code_id
+        in: path
+        description: The internal elation id of the billing code
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 4,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 7890102,\n            \"practice\": 123456,\n            \"code\": \"90471\",\n            \"description\": \"vaccine injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 10  // sequence in the list of CPTs on the settings page\n        },\n        {\n            \"id\": 7890103,\n            \"practice\": 123456,\n            \"code\": \"96372\",\n            \"description\": \"injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 9\n        },\n        {\n            \"id\": 7890104,\n            \"practice\": 123456,\n            \"code\": \"99203\",\n            \"description\": \"new patient, low-moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 11\n        },\n        {\n            \"id\": 7890105,\n            \"practice\": 123456,\n            \"code\": \"99204\",\n            \"description\": \"new patient, moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 12\n        },\n        ...\n\t\t]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/billing_codes/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Billing Codes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /billing_codes/ (COPY):
+    get:
+      summary: Get Billing Codes
+      description: Get the CPT codes that the practice has set up. To view them in the app, go to Practice Settings - Billing.
+      operationId: get-billing-codes
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: practice
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: code
+        in: query
+        schema:
+          type: string
+      - name: description
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 4,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 7890102,\n            \"practice\": 123456,\n            \"code\": \"90471\",\n            \"description\": \"vaccine injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 10  // sequence in the list of CPTs on the settings page\n        },\n        {\n            \"id\": 7890103,\n            \"practice\": 123456,\n            \"code\": \"96372\",\n            \"description\": \"injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 9\n        },\n        {\n            \"id\": 7890104,\n            \"practice\": 123456,\n            \"code\": \"99203\",\n            \"description\": \"new patient, low-moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 11\n        },\n        {\n            \"id\": 7890105,\n            \"practice\": 123456,\n            \"code\": \"99204\",\n            \"description\": \"new patient, moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 12\n        },\n        ...\n\t\t]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/billing_codes/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Billing Codes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /billing_codes/{billing_code_id}:
+    patch:
+      summary: Update a Billing Code
+      description: Update a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.
+      operationId: update-a-billing-code
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: billing_code_id
+        in: path
+        description: The id of the billing code
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                practice:
+                  type: integer
+                  description: The practice id
+                  format: int32
+                code:
+                  type: string
+                  description: The code
+                description:
+                  type: string
+                  description: The user visible description of the code
+                charge:
+                  type: string
+                  description: The amount of money to be charged for the code
+                sequence:
+                  type: integer
+                  description: The position in the list of codes when viewing them as a list
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 4,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 7890102,\n            \"practice\": 123456,\n            \"code\": \"90471\",\n            \"description\": \"vaccine injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 10  // sequence in the list of CPTs on the settings page\n        },\n        {\n            \"id\": 7890103,\n            \"practice\": 123456,\n            \"code\": \"96372\",\n            \"description\": \"injection, procedure only\",\n            \"charge\": null,\n            \"sequence\": 9\n        },\n        {\n            \"id\": 7890104,\n            \"practice\": 123456,\n            \"code\": \"99203\",\n            \"description\": \"new patient, low-moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 11\n        },\n        {\n            \"id\": 7890105,\n            \"practice\": 123456,\n            \"code\": \"99204\",\n            \"description\": \"new patient, moderate complexity office visit\",\n            \"charge\": null,\n            \"sequence\": 12\n        },\n        ...\n\t\t]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/billing_codes/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Billing Codes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/billing_codes/:
+    get:
+      description: Get the CPT codes that the practice has set up. To view them in the app, go to Practice Settings - Billing.
+      operationId: billing_codes_list
+      parameters:
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: code
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: description
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCPTCodeList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Billing Codes
+      tags:
+      - Billing Codes
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.
+      operationId: billing_codes_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CPTCode'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPTCode'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Billing Code
+      tags:
+      - Billing Codes
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/billing_codes/{id}/:
+    delete:
+      description: Delete a CPT code that the practice has set up. To view them in the app, go to Practice Settings - Billing.
+      operationId: billing_codes_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Billing Code
+      tags:
+      - Billing Codes
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Get a CPT code that the practice has set up. To view all codes in the app, go to Practice Settings - Billing.
+      operationId: billing_codes_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPTCode'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Billing Code
+      tags:
+      - Billing Codes
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      operationId: billing_codes_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCPTCode'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPTCode'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Billing Code
+      tags:
+      - Billing Codes
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Update a CPT code that users can add to bills. To view them in the app, go to Practice Settings - Billing.
+      operationId: billing_codes_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CPTCode'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPTCode'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Billing Code
+      tags:
+      - Billing Codes
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedCPTCodeList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/CPTCode'
+          type: array
+      required:
+      - results
+      type: object
+    CPTCode:
+      properties:
+        charge:
+          description: The amount of money that will be charged for the code.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type:
+          - string
+          - 'null'
+        code:
+          description: The code that a user and integrators will see.
+          maxLength: 10
+          type: string
+        description:
+          description: The description of the code that users will see.
+          maxLength: 200
+          type: string
+        id:
+          description: The internal elation id of the billing code.
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice who created the billing code.
+          format: int64
+          type: integer
+        sequence:
+          description: The position in the list of billing codes.
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+      required:
+      - code
+      - description
+      - practice
+      type: object
+    PatchedCPTCode:
+      properties:
+        charge:
+          description: The amount of money that will be charged for the code.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type:
+          - string
+          - 'null'
+        code:
+          description: The code that a user and integrators will see.
+          maxLength: 10
+          type: string
+        description:
+          description: The description of the code that users will see.
+          maxLength: 200
+          type: string
+        id:
+          description: The internal elation id of the billing code.
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice who created the billing code.
+          format: int64
+          type: integer
+        sequence:
+          description: The position in the list of billing codes.
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-billing-api.json
+- elation-health-api-full-openapi.yaml
+x-readme:
+  headers: []
+x-readme-fauxas: true

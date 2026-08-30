@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Settings Medication History Download Fills API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Medication History Download Fills
+paths:
+  /medication_history_download_fills/{id}/:
+    get:
+      summary: Get History Download Fill
+      description: ''
+      operationId: get-history-download-fill
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: text
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/medication_history_download_fills/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - text
+      tags:
+      - Medication History Download Fills
+  /medication_history_download_fills/:
+    get:
+      summary: Find History Download Fills
+      description: ''
+      operationId: find-history-download-fills
+      parameters:
+      - name: patient
+        in: query
+        description: Prescribed patient
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        description: The doctor's practice
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: history_download
+        in: query
+        description: Download summary
+        schema:
+          type: string
+      - name: last_fill_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: last_fill_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: written_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: written_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: last_fill_date__isnull
+        in: query
+        schema:
+          type: boolean
+      - name: written_date__isnull
+        in: query
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/medication_history_download_fills/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/medication_history_download_fills/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: text
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/medication_history_download_fills/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - text
+      tags:
+      - Medication History Download Fills
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

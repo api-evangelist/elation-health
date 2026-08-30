@@ -1,0 +1,191 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Insurance Card API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Insurance Card across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Insurance Card
+paths:
+  /api/2.0/patients/{id}/insurance_cards/:
+    delete:
+      description: Delete an insurance card for a patient
+      operationId: patients_insurance_cards_destroy
+      parameters:
+      - description: Optional flag to archive the insurance card as a report before deleting
+        in: query
+        name: archive
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Primary or secondary insurances (1 or 2)
+        in: query
+        name: rank
+        required: true
+        schema:
+          type: string
+      - description: Insurance card side. Usually front (1) or back (2)
+        in: query
+        name: side
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Patients Insurance Card
+      tags:
+      - Insurance Card
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Get all insurance cards for a patient
+      operationId: patients_insurance_cards_list
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InsuranceCard'
+                type: array
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Patients Insurance Cards
+      tags:
+      - Insurance Card
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new insurance card for a patient
+      operationId: patients_insurance_cards_create
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInsuranceCard'
+        required: true
+      responses:
+        '201':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Create Patients Insurance Card
+      tags:
+      - Insurance Card
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    ImageContent:
+      properties:
+        base64_content:
+          type: string
+        original_filename:
+          type: string
+      required:
+      - base64_content
+      - original_filename
+      type: object
+    CreateInsuranceCard:
+      properties:
+        image:
+          allOf:
+          - $ref: '#/components/schemas/ImageContent'
+          description: Base64 encoded image of the insurance card. Only JPG and PNG files are supported.
+        rank:
+          description: Primary or secondary insurances (1 or 2).
+          type: integer
+        side:
+          description: Insurance card side. Usually front (1) or back (2).
+          type: integer
+      required:
+      - image
+      - rank
+      - side
+      type: object
+    InsuranceCard:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/InsuranceCardImage'
+          type: array
+        rank:
+          description: Primary or secondary insurances (1 or 2).
+          type: integer
+      required:
+      - images
+      - rank
+      type: object
+    InsuranceCardImage:
+      properties:
+        side:
+          description: Insurance card side. Usually front (1) or back (2).
+          type: integer
+        ttl:
+          type: integer
+        url:
+          format: uri
+          type: string
+      required:
+      - side
+      - ttl
+      - url
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-profile-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,353 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Insurance Eligibility API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Insurance Eligibility across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-premium-patient-insurance-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Insurance Eligibility
+paths:
+  /api/2.0/patient_insurances/{id}/eligibility/:
+    get:
+      description: Get eligibility information for a patient insurance
+      operationId: patient_insurances_eligibility_retrieve
+      parameters:
+      - description: The id of the patient insurance
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceEligibility'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get Eligibility
+      tags:
+      - Insurance Eligibility
+      x-el8-docs-category: '[Premium] Patient Insurance API'
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create eligibility information for a patient insurance
+      operationId: patient_insurances_eligibility_create
+      parameters:
+      - description: The id of the patient insurance
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInsuranceEligibility'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceEligibility'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Eligibility
+      tags:
+      - Insurance Eligibility
+      x-el8-docs-category: '[Premium] Patient Insurance API'
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient_insurances/{id}/eligibility_full_report/:
+    get:
+      description: Get eligibility full report for a patient insurance
+      operationId: patient_insurances_eligibility_full_report_retrieve
+      parameters:
+      - description: The id of the patient insurance
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceEligibilityFullReport'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get Eligibility Full Report
+      tags:
+      - Insurance Eligibility
+      x-el8-docs-category: '[Premium] Patient Insurance API'
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    CreateInsuranceEligibility:
+      properties:
+        group_id:
+          description: ID that matches the group record in Elation system
+          type: integer
+        group_name:
+          description: Name of the group / organization. group_npi field is required if this is populated.
+          type: string
+        group_npi:
+          description: NPI of the group / organization. group_name field is required if this is populated.
+          type: string
+      type: object
+    EligibilityDetails:
+      properties:
+        coinsurance:
+          description: Coinsurance percentage value as a decimal (e.g. 0.25).
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type: string
+        coinsurance_ambiguous:
+          type: boolean
+        copay:
+          description: copayment amount in dollars.
+          format: double
+          type:
+          - number
+          - 'null'
+        copay_ambiguous:
+          description: If true, the given copay value may not be accurate and the full eligibility report will need to be referenced for better details.
+          type: boolean
+        deductible:
+          description: Deductible amount in dollars.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type: string
+        deductible_ambiguous:
+          type: boolean
+        deductible_remaining:
+          description: Remaining deductible amount in dollars.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type: string
+        deductible_remaining_ambiguous:
+          type: boolean
+        errors:
+          description: Error messages showing reason for failed eligibility check.
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+      type: object
+    EligibilityAddress:
+      properties:
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+      type: object
+    InsuranceEligibility:
+      properties:
+        eligibility_check_timestamp:
+          description: Eligibility check timestamp in ISO format.
+          format: date-time
+          type: string
+        eligibility_details:
+          $ref: '#/components/schemas/EligibilityDetails'
+        eligibility_status:
+          allOf:
+          - $ref: '#/components/schemas/EligibilityStatusEnum'
+          description: 'Status of eligibility check.
+
+
+            * `active` - active
+
+            * `inactive` - inactive
+
+            * `error` - error'
+        patient_id:
+          description: Patient's id in Elation system.
+          type: integer
+        patient_insurance_id:
+          description: Patient's insurance id in Elation system.
+          type: integer
+        practice_id:
+          description: Practice's id in Elation system.
+          type: integer
+      type: object
+    EligibilityPlanDetails:
+      properties:
+        carrier:
+          type: string
+        end_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        group_name:
+          type: string
+        group_number:
+          type: string
+        insurance_type:
+          type:
+          - string
+          - 'null'
+        member_id:
+          type: string
+        plan_name:
+          type: string
+        plan_number:
+          type: string
+        policy_name:
+          type:
+          - string
+          - 'null'
+        policy_number:
+          type:
+          - string
+          - 'null'
+        provider:
+          $ref: '#/components/schemas/EligibilityProvider'
+        start_date:
+          format: date
+          type: string
+      type: object
+    InsuranceEligibilityFullReport:
+      properties:
+        benefits:
+          $ref: '#/components/schemas/EligibilityBenefits'
+        eligibility_check_timestamp:
+          description: Eligibility check timestamp in ISO format.
+          format: date-time
+          type: string
+        eligibility_provider:
+          $ref: '#/components/schemas/EligibilityProvider'
+        patient_id:
+          description: Patient's id in Elation system.
+          type: integer
+        patient_insurance_id:
+          description: Patient's insurance id in Elation system.
+          type: integer
+        plan_details:
+          $ref: '#/components/schemas/EligibilityPlanDetails'
+        practice_id:
+          description: Practice's id in Elation system.
+          type: integer
+        service_type_code:
+          type: string
+        subscriber:
+          $ref: '#/components/schemas/EligibilitySubscriber'
+      type: object
+    EligibilityBenefits:
+      properties:
+        coinsurance:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        copay:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        deductible:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        limitations:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        out_of_pocket:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+      type: object
+    EligibilityStatusEnum:
+      description: '* `active` - active
+
+        * `inactive` - inactive
+
+        * `error` - error'
+      enum:
+      - active
+      - inactive
+      - error
+      type: string
+    EligibilityProvider:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        npi:
+          type: string
+        organization_name:
+          type: string
+      type: object
+    EligibilitySubscriber:
+      properties:
+        address:
+          $ref: '#/components/schemas/EligibilityAddress'
+        first_name:
+          type: string
+        last_name:
+          type: string
+        member_id:
+          type: string
+        middle_name:
+          type: string
+        name:
+          type: string
+        sex_at_birth:
+          type: string
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-premium-patient-insurance-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

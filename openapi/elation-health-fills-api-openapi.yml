@@ -1,0 +1,581 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Fills API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Fills across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Fills
+paths:
+  /api/2.0/medication_history_download_fills/:
+    get:
+      operationId: medication_history_download_fills_list
+      parameters:
+      - description: Download summary.
+        explode: false
+        in: query
+        name: history_download
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - in: query
+        name: last_fill_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: last_fill_date__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: last_fill_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Prescribed patient.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: The doctor's practice.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - in: query
+        name: written_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: written_date__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: written_date__lte
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicationHistoryDownloadFillList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Medication History Download Fills
+      tags:
+      - Fills
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/medication_history_download_fills/{id}/:
+    get:
+      operationId: medication_history_download_fills_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicationHistoryDownloadFill'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Medication History Download Fill
+      tags:
+      - Fills
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/prescription_fills/:
+    get:
+      description: Returns a list of prescription fills
+      operationId: prescription_fills_list
+      parameters:
+      - in: query
+        name: fill_date__gte
+        schema:
+          format: date
+          type: string
+      - in: query
+        name: fill_date__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: fill_date__lte
+        schema:
+          format: date
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: fill_status
+        schema:
+          items:
+            enum:
+            - AH
+            - AJ
+            - AK
+            - AL
+            type: string
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Prescribed patient.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: The doctor's practice.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPrescriptionFillList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Prescription Fills
+      tags:
+      - Fills
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/prescription_fills/{id}/:
+    get:
+      description: Retrieve a single prescription fill
+      operationId: prescription_fills_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrescriptionFill'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Prescription Fill
+      tags:
+      - Fills
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    MedicationHistoryDownloadFill:
+      properties:
+        create_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        days_supply:
+          type: string
+        diagnoses:
+          items:
+            format: int64
+            type: integer
+          type: array
+        directions:
+          type: string
+        history_download:
+          format: int64
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          type: boolean
+        last_fill_date:
+          format: date-time
+          type: string
+        medication:
+          format: int64
+          type: integer
+        medication_description:
+          type: string
+        medication_order:
+          format: int64
+          type: integer
+        note:
+          type: string
+        patient:
+          format: int64
+          type: integer
+        pharmacy_ncpdpid:
+          type: string
+        practice:
+          format: int64
+          type: integer
+        prescriber:
+          format: int64
+          type: integer
+        prescribing_physician:
+          format: int64
+          type: integer
+        prior_auth:
+          type: string
+        prior_auth_qualifier:
+          $ref: '#/components/schemas/PriorAuthQualifierEnum'
+        quantity:
+          type: string
+        quantity_note:
+          type: string
+        quantity_unit:
+          type: string
+        refills:
+          items:
+            format: int64
+            type: integer
+          type: array
+        requesting_physician:
+          format: int64
+          type: integer
+        requesting_physician_action:
+          $ref: '#/components/schemas/RequestingPhysicianActionEnum'
+        substitutions:
+          type: string
+        written_date:
+          format: date-time
+          type: string
+      required:
+      - days_supply
+      - diagnoses
+      - directions
+      - history_download
+      - is_active
+      - last_fill_date
+      - medication
+      - medication_description
+      - medication_order
+      - note
+      - patient
+      - pharmacy_ncpdpid
+      - practice
+      - prescriber
+      - prescribing_physician
+      - prior_auth
+      - prior_auth_qualifier
+      - quantity
+      - quantity_note
+      - quantity_unit
+      - refills
+      - requesting_physician
+      - requesting_physician_action
+      - substitutions
+      - written_date
+      type: object
+    PaginatedMedicationHistoryDownloadFillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedicationHistoryDownloadFill'
+          type: array
+      required:
+      - results
+      type: object
+    PrescriptionFill:
+      properties:
+        fill_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        fill_status:
+          $ref: '#/components/schemas/FillStatusEnum'
+        id:
+          readOnly: true
+          type: integer
+        medication_order:
+          format: int64
+          type: integer
+        note_from_pharmacy:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        patient:
+          format: int64
+          type: integer
+        pharmacy_ncpdpid:
+          maxLength: 21
+          title: Pharmacy this fill occurred at
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - fill_status
+      - medication_order
+      - patient
+      - pharmacy_ncpdpid
+      - practice
+      type: object
+    PaginatedPrescriptionFillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PrescriptionFill'
+          type: array
+      required:
+      - results
+      type: object
+    PriorAuthQualifierEnum:
+      description: '* `94` - Pharmacy or Prescriber File ID
+
+        * `0B` - State License Number
+
+        * `1C` - Medicare Number
+
+        * `1D` - Medicaid Number
+
+        * `1E` - Dentist License Number
+
+        * `1G` - UPIN
+
+        * `1J` - Facility ID Number
+
+        * `1M` - PPO Number
+
+        * `2U` - Payer Identification Number
+
+        * `ADI` - Processor Identification Number
+
+        * `BO` - BIN Location Number
+
+        * `C1` - Commercial
+
+        * `EA` - Medical Record Identification Number
+
+        * `EJ` - Patient Account Number
+
+        * `D3` - NCPDP Provider ID Number
+
+        * `DH` - DEA Number
+
+        * `G1` - Prior Authorization
+
+        * `GI` - Secondary Provider Number
+
+        * `HI` - HIN
+
+        * `HPI` - National Provider ID
+
+        * `IP` - Individual Policy Number
+
+        * `NC` - Secondary Coverage Company Number
+
+        * `NF` - National Association of Insurance Commissioner Code
+
+        * `PD` - Promotion Number
+
+        * `SY` - Social Security Number
+
+        * `WI` - Waiver
+
+        * `ZZ` - Mutually Defined'
+      enum:
+      - '94'
+      - 0B
+      - 1C
+      - 1D
+      - 1E
+      - 1G
+      - 1J
+      - 1M
+      - 2U
+      - ADI
+      - BO
+      - C1
+      - EA
+      - EJ
+      - D3
+      - DH
+      - G1
+      - GI
+      - HI
+      - HPI
+      - IP
+      - NC
+      - NF
+      - PD
+      - SY
+      - WI
+      - ZZ
+      type: string
+    RequestingPhysicianActionEnum:
+      description: '* `ReqAct` - Requiring Action
+
+        * `Addressed` - Addressed'
+      enum:
+      - ReqAct
+      - Addressed
+      type: string
+    FillStatusEnum:
+      description: '* `AH` - Dispensed
+
+        * `AJ` - PartiallyDispensed
+
+        * `AK` - NotDispensed
+
+        * `AL` - Transferred'
+      enum:
+      - AH
+      - AJ
+      - AK
+      - AL
+      type: string
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

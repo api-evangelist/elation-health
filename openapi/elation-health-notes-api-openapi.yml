@@ -1,0 +1,3388 @@
+openapi: 3.2.0
+info:
+  title: Visit Notes API
+  description: This API supports the management of visit notes.
+  version: 0.1.0
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox Environment
+tags:
+- name: Notes
+paths:
+  /notes:
+    get:
+      description: Returns a paginated list of note metadata
+      operationId: list_notes
+      parameters:
+      - description: Limit for pagination
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          description: Limit for pagination
+          maximum: 100
+          minimum: 1
+          title: Limit
+          type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          description: Offset for pagination
+          title: Offset
+          type: integer
+      - description: Filter by practice ID
+        in: query
+        name: practice_id
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filter by practice ID
+          title: Practice Id
+      - description: True to filter to draft notes only. False to include only signed notes. Omit to include both.
+        in: query
+        name: is_draft
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: True to filter to draft notes only. False to include only signed notes. Omit to include both.
+          title: Is Draft
+      - description: Filter by patient ID
+        in: query
+        name: patient
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filter by patient ID
+          title: Patient
+      - description: Comma separated list of provider IDs
+        in: query
+        name: providers
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Comma separated list of provider IDs
+          title: Providers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_NoteMetadata_'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: List Notes
+      tags:
+      - Notes
+    post:
+      description: Create a new `Note`.
+      operationId: create_note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteCreate'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Create Note
+      tags:
+      - Notes
+  /notes/{note_id}:
+    delete:
+      description: Delete a specific draft note
+      operationId: delete_note_by_id
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Delete Note By Id
+      tags:
+      - Notes
+    get:
+      description: 'Get a specific note. Returns a sections-based response for layout notes,
+
+        or a legacy Note for notes created before the sections schema.
+
+
+        This endpoint fetches a note without creating a snapshot. The snapshot is used for conflict
+
+        resolution when multiple sources are concurrently updating the note.
+
+
+        To fetch a note for editing that requires conflict resolution, use the `/notes/{note_id}/edit`
+
+        endpoint instead.'
+      operationId: get_note_by_id
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ElationNote'
+                - $ref: '#/components/schemas/Note'
+                title: Response Get Note By Id Notes  Note Id  Get
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Get Note By Id
+      tags:
+      - Notes
+    patch:
+      description: Update a specific note by id
+      operationId: update_note_by_id
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Update Note By Id
+      tags:
+      - Notes
+  /notes/{note_id}/amendments/{amendment_id}:
+    get:
+      description: Get a specific note amendment (legacy or EN2.1 sections-based).
+      operationId: get_note_amendment_by_id
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      - in: path
+        name: amendment_id
+        required: true
+        schema:
+          title: Amendment Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ElationNoteAmendment'
+                - $ref: '#/components/schemas/NoteAmendment'
+                title: Response Get Note Amendment By Id Notes  Note Id  Amendments  Amendment Id  Get
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Get Note Amendment By Id
+      tags:
+      - Notes
+components:
+  schemas:
+    DocumentSignature:
+      description: A signature on a document.
+      properties:
+        amendment_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: ID of the note amendment this signature applies to, if any; null for signatures on the base note or legacy records.
+          title: Amendment Id
+        on_behalf_of_user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: On Behalf Of User Id
+        on_behalf_of_user_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: On Behalf Of User Name
+        signature_comments:
+          title: Signature Comments
+          type: string
+        signature_role:
+          $ref: '#/components/schemas/DocumentSignatureRole'
+        signed_at:
+          description: When the associated document was signed with this signature.
+          format: date-time
+          title: Signed At
+          type: string
+        user_id:
+          description: The ID of the user who authored the signature.
+          title: User Id
+          type: integer
+        user_name:
+          description: The name of the user who authored the signature.
+          title: User Name
+          type: string
+      required:
+      - user_id
+      - user_name
+      - signed_at
+      - signature_role
+      - signature_comments
+      title: DocumentSignature
+      type: object
+    ReferralBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/ReferralBlockAttrs'
+        type:
+          const: referral
+          default: referral
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: ReferralBlock
+      type: object
+    NarrativeParagraphAttrs:
+      properties:
+        ref_id:
+          title: Ref Id
+          type: string
+      title: NarrativeParagraphAttrs
+      type: object
+    VitalTemperature:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        temperature:
+          default: ''
+          title: Temperature
+          type: string
+      title: VitalTemperature
+      type: object
+    FollowupParagraphAttrs:
+      properties:
+        ref_id:
+          title: Ref Id
+          type: string
+      title: FollowupParagraphAttrs
+      type: object
+    SleepOrderSummary:
+      properties:
+        clinical_reason:
+          title: Clinical Reason
+          type: string
+        confidential:
+          title: Confidential
+          type: boolean
+        created_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created Date
+        date_for_test:
+          anyOf:
+          - format: date
+            type: string
+          - type: 'null'
+          title: Date For Test
+        deleted_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Deleted Date
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        tests:
+          default: []
+          items:
+            $ref: '#/components/schemas/SleepOrderTest'
+          title: Tests
+          type: array
+      required:
+      - id
+      - clinical_reason
+      - confidential
+      title: SleepOrderSummary
+      type: object
+    FollowupUnorderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/FollowupListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: followUpUnorderedList
+          default: followUpUnorderedList
+          title: Type
+          type: string
+      title: FollowupUnorderedList
+      type: object
+    el8_note_models__note__content__base_node__Node__NodeAttrs:
+      properties:
+        ai_generation_info:
+          anyOf:
+          - $ref: '#/components/schemas/AiGenerationInfo'
+          - type: 'null'
+        creation_type:
+          anyOf:
+          - enum:
+            - ai
+            - template
+            type: string
+          - type: 'null'
+          title: Creation Type
+        is_new:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is New
+        ref_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ref Id
+      title: NodeAttrs
+      type: object
+    PulmonaryOrderBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/PulmonaryOrderBlockAttrs-Output'
+        type:
+          const: pulmonaryOrder
+          default: pulmonaryOrder
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: PulmonaryOrderBlock
+      type: object
+    Procedure-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/ProcedureAttrs'
+        type:
+          const: procedure
+          default: procedure
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: Procedure
+      type: object
+    VitalBP:
+      properties:
+        bp_d:
+          default: ''
+          title: Bp D
+          type: string
+        bp_s:
+          default: ''
+          title: Bp S
+          type: string
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+      title: VitalBP
+      type: object
+    AttrsWithRefId:
+      description: Base attrs for any node that carries a stable change-tracking ref_id.
+      properties:
+        ref_id:
+          title: Ref Id
+          type: string
+      title: AttrsWithRefId
+      type: object
+    NarrativeOrderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/NarrativeListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: narrativeOrderedList
+          default: narrativeOrderedList
+          title: Type
+          type: string
+      title: NarrativeOrderedList
+      type: object
+    NoteLayoutColumn:
+      properties:
+        content:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/NoteLayoutHeader'
+            - $ref: '#/components/schemas/NoteLayoutBlock'
+          title: Content
+          type: array
+        type:
+          const: column
+          default: column
+          title: Type
+          type: string
+      title: NoteLayoutColumn
+      type: object
+    ReferencedDocumentAttrs:
+      properties:
+        document:
+          $ref: '#/components/schemas/ReferencedDocumentData'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - document
+      title: ReferencedDocumentAttrs
+      type: object
+    TwoColumnLayoutNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/ColumnLayoutNode-Output'
+          title: Content
+          type: array
+        type:
+          const: twoColumnLayout
+          default: twoColumnLayout
+          title: Type
+          type: string
+      title: TwoColumnLayoutNode
+      type: object
+    VitalsSectionAttrs-Output:
+      properties:
+        ref_id:
+          title: Ref Id
+          type: string
+        vitals:
+          $ref: '#/components/schemas/el8_note_models__note__sections__vitals_section__Vitals'
+        vitals_collection_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Vitals Collection Id
+      title: VitalsSectionAttrs
+      type: object
+    ImmunizationVaccine:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+      title: ImmunizationVaccine
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    AiGenerationInfo:
+      properties:
+        is_finalized:
+          default: true
+          title: Is Finalized
+          type: boolean
+        transcript_source_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: ''
+          title: Transcript Source Text
+      title: AiGenerationInfo
+      type: object
+    PrescriptionSummary:
+      properties:
+        created_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created Date
+        days_supply:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Days Supply
+        directions:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Directions
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        instructions_to_pharmacy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Instructions To Pharmacy
+        is_document_med:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Is Document Med
+        medication_display_name:
+          title: Medication Display Name
+          type: string
+        medication_id:
+          title: Medication Id
+          type: integer
+        medication_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medication Type
+        num_samples:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Num Samples
+        quantity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Quantity
+        quantity_units:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Quantity Units
+        refills:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Refills
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+      required:
+      - id
+      - medication_display_name
+      - medication_id
+      title: PrescriptionSummary
+      type: object
+    NoteUpdate:
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bill
+        category:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Category
+        close_snapshot:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Close Snapshot
+        confidential:
+          default: false
+          title: Confidential
+          type: boolean
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Input'
+          - type: 'null'
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+        provider:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provider
+        serviced_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Serviced At
+        snapshot_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Snapshot Id
+      title: NoteUpdate
+      type: object
+    LabOrderBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/LabOrderBlockAttrs-Output'
+        type:
+          const: labOrder
+          default: labOrder
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: LabOrderBlock
+      type: object
+    HandoutBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        handout:
+          $ref: '#/components/schemas/Handout'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - handout
+      title: HandoutBlockAttrs
+      type: object
+    InstructionsListItem-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          description: 'List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].'
+          items:
+            discriminator:
+              mapping:
+                instructionsOrderedList: '#/components/schemas/InstructionsOrderedList-Output'
+                instructionsParagraph: '#/components/schemas/InstructionsParagraph-Output'
+                instructionsUnorderedList: '#/components/schemas/InstructionsUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/InstructionsParagraph-Output'
+            - $ref: '#/components/schemas/InstructionsUnorderedList-Output'
+            - $ref: '#/components/schemas/InstructionsOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: instructionsListItem
+          default: instructionsListItem
+          title: Type
+          type: string
+      title: InstructionsListItem
+      type: object
+    VitalHR:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        hr:
+          default: ''
+          title: Hr
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+      title: VitalHR
+      type: object
+    ColumnLayoutNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          default: []
+          items:
+            $ref: '#/components/schemas/AnyNodeContent'
+          title: Content
+          type: array
+        type:
+          const: columnLayout
+          default: columnLayout
+          title: Type
+          type: string
+      title: ColumnLayoutNode
+      type: object
+    ProcedureSection-Output:
+      properties:
+        content:
+          items:
+            discriminator:
+              mapping:
+                procedure: '#/components/schemas/Procedure-Output'
+                proceduresOrderedList: '#/components/schemas/ProcedureOrderedList-Output'
+                proceduresParagraph: '#/components/schemas/ProcedureParagraph-Output'
+                proceduresUnorderedList: '#/components/schemas/ProcedureUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/Procedure-Output'
+            - $ref: '#/components/schemas/ProcedureParagraph-Output'
+            - $ref: '#/components/schemas/ProcedureUnorderedList-Output'
+            - $ref: '#/components/schemas/ProcedureOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: procedures
+          default: procedures
+          title: Type
+          type: string
+      title: ProcedureSection
+      type: object
+    InstructionsOrderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/InstructionsListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: instructionsOrderedList
+          default: instructionsOrderedList
+          title: Type
+          type: string
+      title: InstructionsOrderedList
+      type: object
+    DocumentNodeChild-Input:
+      discriminator:
+        mapping:
+          columnLayout: '#/components/schemas/ColumnLayoutNode-Input'
+          twoColumnLayout: '#/components/schemas/TwoColumnLayoutNode-Input'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/TwoColumnLayoutNode-Input'
+      - $ref: '#/components/schemas/ColumnLayoutNode-Input'
+    Note:
+      description: 'A full representation of a note.
+
+
+        Do not use this for endpoints that return notes in bulk. Use `NoteMetadata`
+
+        for that instead.'
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the bill associated with the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          description: Whether the note is marked as confidential.
+          title: Confidential
+          type: boolean
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Output'
+          - type: 'null'
+          description: An object representing the body of the note.
+        doctags:
+          default: []
+          items:
+            $ref: '#/components/schemas/Doctag'
+          title: Doctags
+          type: array
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        is_outdated:
+          default: false
+          title: Is Outdated
+          type: boolean
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          default: {}
+          description: Unstructured data for storing related metadata.
+          title: Metadata
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Serviced At
+        signatures:
+          default: []
+          items:
+            $ref: '#/components/schemas/DocumentSignature'
+          title: Signatures
+          type: array
+        snapshot_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Snapshot Id
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+      required:
+      - provider
+      - practice
+      - patient
+      - category
+      - serviced_at
+      - id
+      - is_draft
+      title: Note
+      type: object
+    LineBreakInline:
+      description: Hard line break. No attrs, no content.
+      properties:
+        type:
+          const: lineBreak
+          default: lineBreak
+          title: Type
+          type: string
+      title: LineBreakInline
+      type: object
+    VitalFiO2:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        percent:
+          default: ''
+          title: Percent
+          type: string
+      title: VitalFiO2
+      type: object
+    ProcedureParagraphAttrs:
+      properties:
+        ref_id:
+          title: Ref Id
+          type: string
+      title: ProcedureParagraphAttrs
+      type: object
+    ColumnLayoutNode-Input:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          default: []
+          items:
+            $ref: '#/components/schemas/AnyNodeContent'
+          title: Content
+          type: array
+        type:
+          const: columnLayout
+          default: columnLayout
+          title: Type
+          type: string
+      title: ColumnLayoutNode
+      type: object
+    ElationNoteAmendment:
+      description: 'Full representation of an EN2.1 sections-based note amendment.
+
+
+        Analogous to NoteAmendment for legacy DocumentNode notes. `previous_content`
+
+        is populated after the amendment is signed and captures the parent note
+
+        state at signing time.'
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bill
+        category:
+          title: Category
+          type: integer
+        content:
+          $ref: '#/components/schemas/SectionsContent'
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        is_outdated:
+          default: false
+          title: Is Outdated
+          type: boolean
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Metadata
+        note_id:
+          title: Note Id
+          type: integer
+        patient:
+          title: Patient
+          type: integer
+        practice:
+          title: Practice
+          type: integer
+        previous_content:
+          anyOf:
+          - $ref: '#/components/schemas/SectionsContent'
+          - type: 'null'
+        provider:
+          title: Provider
+          type: integer
+        serviced_at:
+          format: date-time
+          title: Serviced At
+          type: string
+        signatures:
+          default: []
+          items:
+            $ref: '#/components/schemas/DocumentSignature'
+          title: Signatures
+          type: array
+      required:
+      - id
+      - note_id
+      - provider
+      - practice
+      - patient
+      - category
+      - content
+      - serviced_at
+      - is_draft
+      title: ElationNoteAmendment
+      type: object
+    InjectionBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/InjectionBlockAttrs-Output'
+        type:
+          const: injection
+          default: injection
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: InjectionBlock
+      type: object
+    NarrativeSection-Output:
+      properties:
+        content:
+          items:
+            discriminator:
+              mapping:
+                narrativeOrderedList: '#/components/schemas/NarrativeOrderedList-Output'
+                narrativeParagraph: '#/components/schemas/NarrativeParagraph-Output'
+                narrativeUnorderedList: '#/components/schemas/NarrativeUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/NarrativeParagraph-Output'
+            - $ref: '#/components/schemas/NarrativeUnorderedList-Output'
+            - $ref: '#/components/schemas/NarrativeOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: narrative
+          default: narrative
+          title: Type
+          type: string
+      title: NarrativeSection
+      type: object
+    PulmonaryOrderTest:
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: PulmonaryOrderTest
+      type: object
+    FollowupParagraph-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/FollowupParagraphAttrs'
+        content:
+          items:
+            discriminator:
+              mapping:
+                lineBreak: '#/components/schemas/LineBreakInline'
+                text: '#/components/schemas/TextInline-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/TextInline-Output'
+            - $ref: '#/components/schemas/LineBreakInline'
+          title: Content
+          type: array
+        type:
+          const: followUpParagraph
+          default: followUpParagraph
+          title: Type
+          type: string
+      title: FollowupParagraph
+      type: object
+    ReferencedDocumentData:
+      description: 'Structured reference to a hippo document (e.g. a lab/imaging report).
+
+
+        Mirrors the VN1 reference-bullet payload: ``id`` is the report/document id,
+
+        ``lab_result_id`` identifies an individual lab result within a lab report,
+
+        ``summary`` is the link text shown in the UI, and ``summary_formatting``
+
+        carries optional VN1-style decoration offsets (kept for backport parity).'
+      properties:
+        id:
+          title: Id
+          type: integer
+        lab_result_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Result Id
+        summary:
+          default: ''
+          title: Summary
+          type: string
+        summary_formatting:
+          items: {}
+          title: Summary Formatting
+          type: array
+      required:
+      - id
+      title: ReferencedDocumentData
+      type: object
+    FollowupListItem-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          description: 'List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].'
+          items:
+            discriminator:
+              mapping:
+                followUpOrderedList: '#/components/schemas/FollowupOrderedList-Output'
+                followUpParagraph: '#/components/schemas/FollowupParagraph-Output'
+                followUpUnorderedList: '#/components/schemas/FollowupUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/FollowupParagraph-Output'
+            - $ref: '#/components/schemas/FollowupUnorderedList-Output'
+            - $ref: '#/components/schemas/FollowupOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: followUpListItem
+          default: followUpListItem
+          title: Type
+          type: string
+      title: FollowupListItem
+      type: object
+    VitalBMI:
+      properties:
+        bmi:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bmi
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+      title: VitalBMI
+      type: object
+    NarrativeParagraph-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/NarrativeParagraphAttrs'
+        content:
+          items:
+            discriminator:
+              mapping:
+                lineBreak: '#/components/schemas/LineBreakInline'
+                text: '#/components/schemas/TextInline-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/TextInline-Output'
+            - $ref: '#/components/schemas/LineBreakInline'
+          title: Content
+          type: array
+        type:
+          const: narrativeParagraph
+          default: narrativeParagraph
+          title: Type
+          type: string
+      title: NarrativeParagraph
+      type: object
+    InstructionsSection-Output:
+      properties:
+        content:
+          items:
+            discriminator:
+              mapping:
+                instructionsOrderedList: '#/components/schemas/InstructionsOrderedList-Output'
+                instructionsParagraph: '#/components/schemas/InstructionsParagraph-Output'
+                instructionsUnorderedList: '#/components/schemas/InstructionsUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/InstructionsParagraph-Output'
+            - $ref: '#/components/schemas/InstructionsUnorderedList-Output'
+            - $ref: '#/components/schemas/InstructionsOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: instructions
+          default: instructions
+          title: Type
+          type: string
+      title: InstructionsSection
+      type: object
+    CptCode:
+      properties:
+        code:
+          title: Code
+          type: string
+        description:
+          title: Description
+          type: string
+        id:
+          title: Id
+          type: integer
+      required:
+      - id
+      - code
+      - description
+      title: CptCode
+      type: object
+    PatientImmunizationAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        immunization:
+          $ref: '#/components/schemas/Immunization'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - immunization
+      title: PatientImmunizationAttrs
+      type: object
+    DocumentNodeChild-Output:
+      discriminator:
+        mapping:
+          columnLayout: '#/components/schemas/ColumnLayoutNode-Output'
+          twoColumnLayout: '#/components/schemas/TwoColumnLayoutNode-Output'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/TwoColumnLayoutNode-Output'
+      - $ref: '#/components/schemas/ColumnLayoutNode-Output'
+    LabOrderTest:
+      properties:
+        code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: LabOrderTest
+      type: object
+    DocumentSignatureRole:
+      description: The role the user is performing when adding a signature to a visit note
+      enum:
+      - amender
+      - cosigner
+      - rendering_provider
+      - staff_autofiler
+      title: DocumentSignatureRole
+      type: string
+    Attachment:
+      description: 'A file attached to a note.
+
+
+        Attachments are modeled as a top-level field on the note (not as note
+
+        content) per the Simple Note 2.1 spec: they carry no positioning or other
+
+        content-node properties.'
+      properties:
+        attached_at:
+          title: Attached At
+          type: string
+        content_type:
+          title: Content Type
+          type: string
+        display_name:
+          title: Display Name
+          type: string
+        download_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Download Url
+        id:
+          title: Id
+          type: integer
+        preview_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Preview Url
+      required:
+      - id
+      - attached_at
+      - content_type
+      - display_name
+      title: Attachment
+      type: object
+    CODE_TYPE:
+      enum:
+      - CPT
+      - SNOMED
+      - HL7
+      - ICD9
+      - LOINC
+      - CVX
+      - RXNORM
+      - ICD10
+      - CPTII
+      - HCPCS
+      - EL8
+      title: CODE_TYPE
+      type: string
+    DocumentNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/DocumentNodeChild-Output'
+          title: Content
+          type: array
+        type:
+          const: document
+          default: document
+          title: Type
+          type: string
+      title: DocumentNode
+      type: object
+    HandoutBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/HandoutBlockAttrs-Output'
+        type:
+          const: handout
+          default: handout
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: HandoutBlock
+      type: object
+    CardiacOrderBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        order:
+          $ref: '#/components/schemas/CardiacOrderSummary'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - order
+      title: CardiacOrderBlockAttrs
+      type: object
+    TextInline-Output:
+      description: 'Plain text run.
+
+
+        This node has NO ``attrs``: both ``text`` and ``marks`` are top-level keys.
+
+        This is the one deliberate exception to the type/attrs/content rule
+
+        documented at the top of this module — it mirrors the VN2 TextNode wire
+
+        shape verbatim (and ProseMirror''s text node, where ``text`` and ``marks``
+
+        sit beside ``type`` with no ``attrs``), keeping the two schema-compatible.'
+      properties:
+        marks:
+          default: []
+          items:
+            $ref: '#/components/schemas/TextInlineMark'
+          title: Marks
+          type: array
+        text:
+          default: ''
+          title: Text
+          type: string
+        type:
+          const: text
+          default: text
+          title: Type
+          type: string
+      title: TextInline
+      type: object
+    HandoutTypeName:
+      description: Handout kind. Hippo reconciles this into its integer ``type`` if needed.
+      enum:
+      - Patient Resource
+      - VIS
+      title: HandoutTypeName
+      type: string
+    ContentMap-Output:
+      description: 'Typed map from section type to its content. All sections are optional.
+
+
+        Keys match section ``type`` wire values (``NodeType``): lowercase single words
+
+        (e.g. ``narrative``, ``vitals``) or camelCase for multi-word nodes (e.g. ``followUp``).'
+      properties:
+        followUp:
+          anyOf:
+          - $ref: '#/components/schemas/FollowupSection-Output'
+          - type: 'null'
+        instructions:
+          anyOf:
+          - $ref: '#/components/schemas/InstructionsSection-Output'
+          - type: 'null'
+        narrative:
+          anyOf:
+          - $ref: '#/components/schemas/NarrativeSection-Output'
+          - type: 'null'
+        orders:
+          anyOf:
+          - $ref: '#/components/schemas/OrdersSection-Output'
+          - type: 'null'
+        procedures:
+          anyOf:
+          - $ref: '#/components/schemas/ProcedureSection-Output'
+          - type: 'null'
+        referencedDocuments:
+          anyOf:
+          - $ref: '#/components/schemas/ReferencedDocumentsSection-Output'
+          - type: 'null'
+        vitals:
+          anyOf:
+          - $ref: '#/components/schemas/VitalsSection-Output'
+          - type: 'null'
+      title: ContentMap
+      type: object
+    Injection:
+      properties:
+        deleted_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Deleted Date
+        dose:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dose
+        dose_unit:
+          anyOf:
+          - $ref: '#/components/schemas/InjectionDoseUnit'
+          - type: 'null'
+        given_by_user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Given By User Id
+        given_date:
+          title: Given Date
+          type: string
+        id:
+          title: Id
+          type: integer
+        is_confidential:
+          default: false
+          title: Is Confidential
+          type: boolean
+        is_new:
+          default: false
+          title: Is New
+          type: boolean
+        method:
+          anyOf:
+          - $ref: '#/components/schemas/InjectionMethod'
+          - type: 'null'
+        patient_id:
+          title: Patient Id
+          type: integer
+        practice_id:
+          title: Practice Id
+          type: integer
+        reference_medication_id:
+          title: Reference Medication Id
+          type: integer
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signed Date
+      required:
+      - given_date
+      - id
+      - patient_id
+      - practice_id
+      - reference_medication_id
+      title: Injection
+      type: object
+    ImagingOrderTest:
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: ImagingOrderTest
+      type: object
+    TextInlineMark:
+      description: A single formatting mark applied to a TextInline run.
+      properties:
+        type:
+          $ref: '#/components/schemas/el8_note_models__note__sections__shared__TextBlockMarkTypes'
+      required:
+      - type
+      title: TextInlineMark
+      type: object
+    ProcedureParagraph-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/ProcedureParagraphAttrs'
+        content:
+          items:
+            discriminator:
+              mapping:
+                lineBreak: '#/components/schemas/LineBreakInline'
+                text: '#/components/schemas/TextInline-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/TextInline-Output'
+            - $ref: '#/components/schemas/LineBreakInline'
+          title: Content
+          type: array
+        type:
+          const: proceduresParagraph
+          default: proceduresParagraph
+          title: Type
+          type: string
+      title: ProcedureParagraph
+      type: object
+    el8_note_models__note__sections__shared__ReferralSummary:
+      properties:
+        authorization_for:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization For
+        clinical_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Reason
+        confidential:
+          default: false
+          title: Confidential
+          type: boolean
+        consultant_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Consultant Name
+        created_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created Date
+        deleted_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Deleted Date
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        signed_by_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By Id
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        specialty_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Specialty Name
+      required:
+      - id
+      title: ReferralSummary
+      type: object
+    ImagingOrderBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/ImagingOrderBlockAttrs-Output'
+        type:
+          const: imagingOrder
+          default: imagingOrder
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: ImagingOrderBlock
+      type: object
+    ReferralBlockAttrs:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        ref_id:
+          title: Ref Id
+          type: string
+        referral:
+          $ref: '#/components/schemas/el8_note_models__note__sections__shared__ReferralSummary'
+      required:
+      - entity_id
+      - referral
+      title: ReferralBlockAttrs
+      type: object
+    Immunization:
+      properties:
+        administered_date:
+          title: Administered Date
+          type: string
+        administering_physician:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Administering Physician
+        created_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created Date
+        deleted_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Deleted Date
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        dose_in_series:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Dose In Series
+        id:
+          title: Id
+          type: integer
+        lot_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lot Number
+        method:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Method
+        ordering_physician:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ordering Physician
+        patient_id:
+          title: Patient Id
+          type: integer
+        qty:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Qty
+        qty_units:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Qty Units
+        site:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Site
+        vaccine:
+          $ref: '#/components/schemas/ImmunizationVaccine'
+      required:
+      - administered_date
+      - id
+      - patient_id
+      title: Immunization
+      type: object
+    ImagingOrderBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        order:
+          $ref: '#/components/schemas/ImagingOrderSummary'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - order
+      title: ImagingOrderBlockAttrs
+      type: object
+    InstructionsParagraph-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/InstructionParagraphAttrs'
+        content:
+          items:
+            discriminator:
+              mapping:
+                lineBreak: '#/components/schemas/LineBreakInline'
+                text: '#/components/schemas/TextInline-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/TextInline-Output'
+            - $ref: '#/components/schemas/LineBreakInline'
+          title: Content
+          type: array
+        type:
+          const: instructionsParagraph
+          default: instructionsParagraph
+          title: Type
+          type: string
+      title: InstructionsParagraph
+      type: object
+    ImagingOrderSummary:
+      properties:
+        clinical_reason:
+          title: Clinical Reason
+          type: string
+        confidential:
+          title: Confidential
+          type: boolean
+        created_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created Date
+        date_for_test:
+          anyOf:
+          - format: date
+            type: string
+          - type: 'null'
+          title: Date For Test
+        deleted_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Deleted Date
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        tests:
+          default: []
+          items:
+            $ref: '#/components/schemas/ImagingOrderTest'
+          title: Tests
+          type: array
+      required:
+      - id
+      - clinical_reason
+      - confidential
+      title: ImagingOrderSummary
+      type: object
+    InjectionMethod:
+      enum:
+      - Intravenous
+      - Intramuscular
+      - Subcutaneous
+      - Intradermal
+      - Other
+      title: InjectionMethod
+      type: string
+    PaginatedResponse_NoteMetadata_:
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+        offset:
+          title: Offset
+          type: integer
+        previous:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Previous
+        results:
+          items:
+            $ref: '#/components/schemas/NoteMetadata'
+          title: Results
+          type: array
+      required:
+      - results
+      - count
+      - offset
+      - limit
+      title: PaginatedResponse[NoteMetadata]
+      type: object
+    NoteLayoutBlock:
+      description: A section slot in the layout. `type` is the section identifier.
+      properties:
+        type:
+          title: Type
+          type: string
+      required:
+      - type
+      title: NoteLayoutBlock
+      type: object
+    VitalOxygen:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        percent:
+          default: ''
+          title: Percent
+          type: string
+      title: VitalOxygen
+      type: object
+    el8_note_models__note__sections__shared__TextBlockMarkTypes:
+      description: 'Formatting marks a text run can carry.
+
+
+        Supports ``bold``, ``italic``, ``strike`` (strikethrough), and ``underline``.'
+      enum:
+      - bold
+      - italic
+      - strike
+      - underline
+      title: TextBlockMarkTypes
+      type: string
+    OrdersSection-Output:
+      properties:
+        content:
+          items:
+            discriminator:
+              mapping:
+                cardiacOrder: '#/components/schemas/CardiacOrderBlock-Output'
+                handout: '#/components/schemas/HandoutBlock-Output'
+                imagingOrder: '#/components/schemas/ImagingOrderBlock-Output'
+                injection: '#/components/schemas/InjectionBlock-Output'
+                labOrder: '#/components/schemas/LabOrderBlock-Output'
+                patientImmunization: '#/components/schemas/PatientImmunizationBlock-Output'
+                prescription: '#/components/schemas/PrescriptionBlock-Output'
+                pulmonaryOrder: '#/components/schemas/PulmonaryOrderBlock-Output'
+                referral: '#/components/schemas/ReferralBlock-Output'
+                sleepOrder: '#/components/schemas/SleepOrderBlock-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/PrescriptionBlock-Output'
+            - $ref: '#/components/schemas/LabOrderBlock-Output'
+            - $ref: '#/components/schemas/ImagingOrderBlock-Output'
+            - $ref: '#/components/schemas/ReferralBlock-Output'
+            - $ref: '#/components/schemas/CardiacOrderBlock-Output'
+            - $ref: '#/components/schemas/PulmonaryOrderBlock-Output'
+            - $ref: '#/components/schemas/SleepOrderBlock-Output'
+            - $ref: '#/components/schemas/PatientImmunizationBlock-Output'
+            - $ref: '#/components/schemas/InjectionBlock-Output'
+            - $ref: '#/components/schemas/HandoutBlock-Output'
+          title: Content
+          type: array
+        type:
+          const: orders
+          default: orders
+          title: Type
+          type: string
+      title: OrdersSection
+      type: object
+    ProcedureOrderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/ProcedureListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: proceduresOrderedList
+          default: proceduresOrderedList
+          title: Type
+          type: string
+      title: ProcedureOrderedList
+      type: object
+    VitalPain:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        pain:
+          default: ''
+          title: Pain
+          type: string
+      title: VitalPain
+      type: object
+    ReferencedDocumentsSection-Output:
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/ReferencedDocument-Output'
+          title: Content
+          type: array
+        type:
+          const: referencedDocuments
+          default: referencedDocuments
+          title: Type
+          type: string
+      title: ReferencedDocumentsSection
+      type: object
+    NarrativeListItem-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          description: 'List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].'
+          items:
+            discriminator:
+              mapping:
+                narrativeOrderedList: '#/components/schemas/NarrativeOrderedList-Output'
+                narrativeParagraph: '#/components/schemas/NarrativeParagraph-Output'
+                narrativeUnorderedList: '#/components/schemas/NarrativeUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/NarrativeParagraph-Output'
+            - $ref: '#/components/schemas/NarrativeUnorderedList-Output'
+            - $ref: '#/components/schemas/NarrativeOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: narrativeListItem
+          default: narrativeListItem
+          title: Type
+          type: string
+      title: NarrativeListItem
+      type: object
+    ProcedureAttrs:
+      properties:
+        cpt_code:
+          $ref: '#/components/schemas/CptCode'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - cpt_code
+      title: ProcedureAttrs
+      type: object
+    SleepOrderTest:
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: SleepOrderTest
+      type: object
+    FollowupOrderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/FollowupListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: followUpOrderedList
+          default: followUpOrderedList
+          title: Type
+          type: string
+      title: FollowupOrderedList
+      type: object
+    ValidationError:
+      properties:
+        ctx:
+          title: Context
+          type: object
+        input:
+          title: Input
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+    LabOrderSummary:
+      properties:
+        confidential:
+          title: Confidential
+          type: boolean
+        created_date:
+          format: date-time
+          title: Created Date
+          type: string
+        deleted_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Deleted Date
+        fasting_method:
+          $ref: '#/components/schemas/LabOrderFastingMethod'
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        tests:
+          default: []
+          items:
+            $ref: '#/components/schemas/LabOrderTest'
+          title: Tests
+          type: array
+        vendor_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Vendor Id
+      required:
+      - id
+      - confidential
+      - fasting_method
+      - created_date
+      title: LabOrderSummary
+      type: object
+    Doctag:
+      description: 'A doctag is an identifier that can be applied to a document.
+
+        This implementation of doctag mirrors VN1''s coded document tag'
+      properties:
+        code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code
+        code_type:
+          anyOf:
+          - $ref: '#/components/schemas/CODE_TYPE'
+          - type: 'null'
+        concept_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Concept Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        id:
+          title: Id
+          type: integer
+        is_cpc_plus:
+          title: Is Cpc Plus
+          type: boolean
+        is_mips:
+          title: Is Mips
+          type: boolean
+        practice:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Practice
+        shared:
+          title: Shared
+          type: boolean
+        snomed_result_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Snomed Result Code
+        value:
+          title: Value
+          type: string
+      required:
+      - value
+      - id
+      - shared
+      - is_mips
+      - is_cpc_plus
+      title: Doctag
+      type: object
+    CardiacOrderBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/CardiacOrderBlockAttrs-Output'
+        type:
+          const: cardiacOrder
+          default: cardiacOrder
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: CardiacOrderBlock
+      type: object
+    el8_note_models__note__sections__vitals_section__Vitals:
+      properties:
+        bmi:
+          items:
+            $ref: '#/components/schemas/VitalBMI'
+          title: Bmi
+          type: array
+        bp:
+          items:
+            $ref: '#/components/schemas/VitalBP'
+          title: Bp
+          type: array
+        fio2:
+          items:
+            $ref: '#/components/schemas/VitalFiO2'
+          title: Fio2
+          type: array
+        hc:
+          items:
+            $ref: '#/components/schemas/VitalHC'
+          title: Hc
+          type: array
+        height:
+          items:
+            $ref: '#/components/schemas/VitalHeight'
+          title: Height
+          type: array
+        hr:
+          items:
+            $ref: '#/components/schemas/VitalHR'
+          title: Hr
+          type: array
+        oxygen:
+          items:
+            $ref: '#/components/schemas/VitalOxygen'
+          title: Oxygen
+          type: array
+        pain:
+          items:
+            $ref: '#/components/schemas/VitalPain'
+          title: Pain
+          type: array
+        rr:
+          items:
+            $ref: '#/components/schemas/VitalRR'
+          title: Rr
+          type: array
+        temperature:
+          items:
+            $ref: '#/components/schemas/VitalTemperature'
+          title: Temperature
+          type: array
+        weight:
+          items:
+            $ref: '#/components/schemas/VitalWeight'
+          title: Weight
+          type: array
+      title: Vitals
+      type: object
+    NoteLayoutHeader:
+      description: Decorative section divider — display text only, no clinical meaning.
+      properties:
+        text:
+          default: ''
+          title: Text
+          type: string
+        type:
+          const: header
+          default: header
+          title: Type
+          type: string
+      title: NoteLayoutHeader
+      type: object
+    SectionsContent:
+      description: 'The sections-based note content: layout description + typed section content.'
+      properties:
+        content_map:
+          $ref: '#/components/schemas/ContentMap-Output'
+        layout:
+          $ref: '#/components/schemas/Layout'
+      required:
+      - layout
+      - content_map
+      title: SectionsContent
+      type: object
+    InstructionsUnorderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/InstructionsListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: instructionsUnorderedList
+          default: instructionsUnorderedList
+          title: Type
+          type: string
+      title: InstructionsUnorderedList
+      type: object
+    VitalRR:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        rr:
+          default: ''
+          title: Rr
+          type: string
+      title: VitalRR
+      type: object
+    SleepOrderBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        order:
+          $ref: '#/components/schemas/SleepOrderSummary'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - order
+      title: SleepOrderBlockAttrs
+      type: object
+    Layout:
+      description: 'Structural description of a note.
+
+
+        `name` identifies the template (e.g. "simple_note", "soap").
+
+        `content` lists columns (1 for single-column, 2 for two-column).
+
+        Each column''s `content` list defines both which section blocks are
+
+        permitted and their display order. Headers are decorative dividers.'
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/NoteLayoutColumn'
+          title: Content
+          type: array
+        name:
+          title: Name
+          type: string
+      required:
+      - name
+      title: Layout
+      type: object
+    NoteAmendment:
+      description: 'Full representation of a note amendment fetched from the DB
+
+        Note Amendment is a clone of Note and is analogous to a VisitNoteEdit for a Visit Note 1'
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the bill associated with the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Output'
+          - type: 'null'
+          description: An object representing the body of the note.
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        is_outdated:
+          default: false
+          title: Is Outdated
+          type: boolean
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          default: {}
+          description: Unstructured data for storing related metadata.
+          title: Metadata
+        note_id:
+          title: Note Id
+          type: integer
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        previous_content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Output'
+          - type: 'null'
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Serviced At
+        signatures:
+          default: []
+          items:
+            $ref: '#/components/schemas/DocumentSignature'
+          title: Signatures
+          type: array
+      required:
+      - provider
+      - practice
+      - patient
+      - category
+      - serviced_at
+      - id
+      - note_id
+      - is_draft
+      title: NoteAmendment
+      type: object
+    InstructionParagraphAttrs:
+      properties:
+        ref_id:
+          title: Ref Id
+          type: string
+      title: InstructionParagraphAttrs
+      type: object
+    VitalHC:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        hc:
+          default: ''
+          title: Hc
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+      title: VitalHC
+      type: object
+    VitalWeight:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        weight:
+          default: ''
+          title: Weight
+          type: string
+      title: VitalWeight
+      type: object
+    ElationNote:
+      description: 'Full representation of a sections-based note returned by the API.
+
+
+        `content` holds the sections-based structure: layout (structural description)
+
+        and content_map (typed section content). This replaces the DocumentNode
+
+        tree used by the legacy Note model.
+
+
+        `layout_name` is inherited from ElationNoteCreate. It is not populated on
+
+        reads — the canonical layout is embedded in `content.layout`.'
+      properties:
+        attachments:
+          default: []
+          items:
+            $ref: '#/components/schemas/Attachment'
+          title: Attachments
+          type: array
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the bill associated with the note.
+          title: Bill
+        category:
+          description: Practice-created identifier for note category (Visit Note Type).
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          title: Confidential
+          type: boolean
+        content:
+          $ref: '#/components/schemas/SectionsContent'
+        doctags:
+          default: []
+          items:
+            $ref: '#/components/schemas/Doctag'
+          title: Doctags
+          type: array
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        is_outdated:
+          default: false
+          title: Is Outdated
+          type: boolean
+        layout_name:
+          description: Name of the pre-defined layout, e.g. 'simple_note'.
+          title: Layout Name
+          type: string
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Metadata
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          format: date-time
+          title: Serviced At
+          type: string
+        signatures:
+          default: []
+          items:
+            $ref: '#/components/schemas/DocumentSignature'
+          title: Signatures
+          type: array
+        snapshot_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Snapshot Id
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+      required:
+      - provider
+      - category
+      - serviced_at
+      - layout_name
+      - practice
+      - patient
+      - id
+      - content
+      - is_draft
+      title: ElationNote
+      type: object
+    DocumentNode-Input:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/DocumentNodeChild-Input'
+          title: Content
+          type: array
+        type:
+          const: document
+          default: document
+          title: Type
+          type: string
+      title: DocumentNode
+      type: object
+    PulmonaryOrderBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        order:
+          $ref: '#/components/schemas/PulmonaryOrderSummary'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - order
+      title: PulmonaryOrderBlockAttrs
+      type: object
+    LabOrderFastingMethod:
+      enum:
+      - fasting_12_hour
+      - fasting_8_hours
+      - fasting_2_hours
+      - fasting_none
+      - fasting_random
+      title: LabOrderFastingMethod
+      type: string
+    ProcedureUnorderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/ProcedureListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: proceduresUnorderedList
+          default: proceduresUnorderedList
+          title: Type
+          type: string
+      title: ProcedureUnorderedList
+      type: object
+    InjectionBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        injection:
+          $ref: '#/components/schemas/Injection'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - injection
+      title: InjectionBlockAttrs
+      type: object
+    VitalsSection-Output:
+      description: Tier-1 vitals section; attrs mirror VN2 ``VitalsNode``.
+      properties:
+        attrs:
+          $ref: '#/components/schemas/VitalsSectionAttrs-Output'
+        type:
+          const: vitals
+          default: vitals
+          title: Type
+          type: string
+      title: VitalsSection
+      type: object
+    PrescriptionBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/PrescriptionBlockAttrs'
+        type:
+          const: prescription
+          default: prescription
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: PrescriptionBlock
+      type: object
+    PrescriptionBlockAttrs:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        prescription:
+          $ref: '#/components/schemas/PrescriptionSummary'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - prescription
+      title: PrescriptionBlockAttrs
+      type: object
+    PulmonaryOrderSummary:
+      properties:
+        allergies:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Allergies
+        clinical_reason:
+          title: Clinical Reason
+          type: string
+        confidential:
+          title: Confidential
+          type: boolean
+        created_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created Date
+        date_for_test:
+          anyOf:
+          - format: date
+            type: string
+          - type: 'null'
+          title: Date For Test
+        deleted_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Deleted Date
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        tests:
+          default: []
+          items:
+            $ref: '#/components/schemas/PulmonaryOrderTest'
+          title: Tests
+          type: array
+      required:
+      - id
+      - clinical_reason
+      - confidential
+      title: PulmonaryOrderSummary
+      type: object
+    NarrativeUnorderedList-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          items:
+            $ref: '#/components/schemas/NarrativeListItem-Output'
+          title: Content
+          type: array
+        type:
+          const: narrativeUnorderedList
+          default: narrativeUnorderedList
+          title: Type
+          type: string
+      title: NarrativeUnorderedList
+      type: object
+    NoteCreate:
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the bill associated with the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          description: Whether the note is marked as confidential.
+          title: Confidential
+          type: boolean
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Input'
+          - type: 'null'
+          description: An object representing the body of the note.
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          default: {}
+          description: Unstructured data for storing related metadata.
+          title: Metadata
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Serviced At
+      required:
+      - provider
+      - practice
+      - patient
+      - category
+      title: NoteCreate
+      type: object
+    ProcedureListItem-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/AttrsWithRefId'
+        content:
+          description: 'List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].'
+          items:
+            discriminator:
+              mapping:
+                proceduresOrderedList: '#/components/schemas/ProcedureOrderedList-Output'
+                proceduresParagraph: '#/components/schemas/ProcedureParagraph-Output'
+                proceduresUnorderedList: '#/components/schemas/ProcedureUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/ProcedureParagraph-Output'
+            - $ref: '#/components/schemas/ProcedureUnorderedList-Output'
+            - $ref: '#/components/schemas/ProcedureOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: proceduresListItem
+          default: proceduresListItem
+          title: Type
+          type: string
+      title: ProcedureListItem
+      type: object
+    SleepOrderBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/SleepOrderBlockAttrs-Output'
+        type:
+          const: sleepOrder
+          default: sleepOrder
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: SleepOrderBlock
+      type: object
+    FollowupSection-Output:
+      properties:
+        content:
+          items:
+            discriminator:
+              mapping:
+                followUpOrderedList: '#/components/schemas/FollowupOrderedList-Output'
+                followUpParagraph: '#/components/schemas/FollowupParagraph-Output'
+                followUpUnorderedList: '#/components/schemas/FollowupUnorderedList-Output'
+              propertyName: type
+            oneOf:
+            - $ref: '#/components/schemas/FollowupParagraph-Output'
+            - $ref: '#/components/schemas/FollowupUnorderedList-Output'
+            - $ref: '#/components/schemas/FollowupOrderedList-Output'
+          title: Content
+          type: array
+        type:
+          const: followUp
+          default: followUp
+          title: Type
+          type: string
+      title: FollowupSection
+      type: object
+    PatientImmunizationBlock-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/PatientImmunizationAttrs-Output'
+        type:
+          const: patientImmunization
+          default: patientImmunization
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: PatientImmunizationBlock
+      type: object
+    CardiacOrderTest:
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: CardiacOrderTest
+      type: object
+    TwoColumnLayoutNode-Input:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/ColumnLayoutNode-Input'
+          title: Content
+          type: array
+        type:
+          const: twoColumnLayout
+          default: twoColumnLayout
+          title: Type
+          type: string
+      title: TwoColumnLayoutNode
+      type: object
+    InjectionDoseUnit:
+      enum:
+      - dL
+      - g
+      - kg
+      - kL
+      - L
+      - mCi
+      - mg
+      - mL
+      - ug
+      - uL
+      - tab
+      title: InjectionDoseUnit
+      type: string
+    CardiacOrderSummary:
+      properties:
+        clinical_reason:
+          title: Clinical Reason
+          type: string
+        confidential:
+          title: Confidential
+          type: boolean
+        created_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Created Date
+        date_for_test:
+          anyOf:
+          - format: date
+            type: string
+          - type: 'null'
+          title: Date For Test
+        deleted_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Deleted Date
+        icd10_codes:
+          default: []
+          items:
+            type: string
+          title: Icd10 Codes
+          type: array
+        id:
+          title: Id
+          type: integer
+        medications:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medications
+        signed_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Signed By
+        signed_date:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Signed Date
+        tests:
+          default: []
+          items:
+            $ref: '#/components/schemas/CardiacOrderTest'
+          title: Tests
+          type: array
+      required:
+      - id
+      - clinical_reason
+      - confidential
+      title: CardiacOrderSummary
+      type: object
+    ReferencedDocument-Output:
+      properties:
+        attrs:
+          $ref: '#/components/schemas/ReferencedDocumentAttrs'
+        type:
+          const: referencedDocument
+          default: referencedDocument
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: ReferencedDocument
+      type: object
+    LabOrderBlockAttrs-Output:
+      properties:
+        entity_id:
+          title: Entity Id
+          type: integer
+        order:
+          $ref: '#/components/schemas/LabOrderSummary'
+        ref_id:
+          title: Ref Id
+          type: string
+      required:
+      - entity_id
+      - order
+      title: LabOrderBlockAttrs
+      type: object
+    Handout:
+      properties:
+        content_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content Type
+        created_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Created Date
+        deleted_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Deleted Date
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+        original_filename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Original Filename
+        type_name:
+          $ref: '#/components/schemas/HandoutTypeName'
+        vis_barcode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Vis Barcode
+      required:
+      - id
+      - name
+      - type_name
+      title: Handout
+      type: object
+    AnyNodeContent:
+      additionalProperties: true
+      description: 'Placeholder for node content, eliminating cycles in OpenAPI schema generation.
+
+        This should be replaced with any node content type when calling the API'
+      properties: {}
+      title: AnyNodeContent
+      type: object
+    NoteMetadata:
+      description: 'A lightweight version of `Note` that omits certain fields for performance reasons,
+
+        specifically for use with endpoints that return notes in bulk.'
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: ID of the bill associated to the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          description: Whether the note is marked as confidential.
+          title: Confidential
+          type: boolean
+        doctags:
+          default: []
+          items:
+            $ref: '#/components/schemas/Doctag'
+          title: Doctags
+          type: array
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          description: An optional field to store any necessary metadata related to the note.
+          title: Metadata
+        note_v1_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Note V1 Id
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Serviced At
+      required:
+      - id
+      - provider
+      - practice
+      - patient
+      - category
+      - serviced_at
+      - is_draft
+      title: NoteMetadata
+      type: object
+    VitalHeight:
+      properties:
+        edited_by_scribe:
+          default: false
+          title: Edited By Scribe
+          type: boolean
+        extra_note:
+          default: ''
+          title: Extra Note
+          type: string
+        height:
+          default: ''
+          title: Height
+          type: string
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+      title: VitalHeight
+      type: object
+  securitySchemes:
+    RequireAuthentication:
+      type: http
+      scheme: bearer
+    RequirePracticeAuthorization:
+      type: http
+      scheme: bearer
+    RequirePracticeAuthorizationOrHippoAdmin:
+      type: http
+      scheme: bearer

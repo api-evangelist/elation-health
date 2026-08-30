@@ -1,0 +1,317 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Pharmacies API
+  version: '1.0'
+  description: 'Operations tagged Pharmacies across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-reference-data-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Pharmacies
+paths:
+  /pharmacies/{ncpdpid}/:
+    get:
+      summary: Get Pharmacy
+      description: ''
+      operationId: get-pharmacy
+      parameters:
+      - name: ncpdpid
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"ncpdpid\": 0059390,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/pharmacies/0059390/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Pharmacies
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /pharmacies/:
+    get:
+      summary: Find Pharmacy [WIP]
+      description: ''
+      operationId: find-pharmacy-wip
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: active_start_time
+        in: query
+        description: lookup_expr="gte"
+        schema:
+          type: string
+      - name: active_end_time
+        in: query
+        description: lookup_expr="lte"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 70933,\n    \"next\": \"http://127.0.0.1/api/2.0/pharmacies/?limit=100&offset=100\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"ncpdpid\": 0059390,\n            // See Pharmacy Object Definition\n\t\t\t\t}\n    ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n  \"https://sandbox.elationemr.com/api/2.0/pharmacies/\",\n  headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Pharmacies
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/pharmacies/:
+    get:
+      description: Returns a list of physicians
+      operationId: pharmacies_list
+      parameters:
+      - in: query
+        name: active_end_time
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: active_start_time
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPharmacyList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Pharmacies
+      tags:
+      - Pharmacies
+      x-el8-docs-category: Reference Data API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/pharmacies/{ncpdpid}/:
+    get:
+      description: Retrieve a single pharmacy
+      operationId: pharmacies_retrieve
+      parameters:
+      - description: The NCPDP ID of the pharmacy to retrieve
+        in: path
+        name: ncpdpid
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pharmacy'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Pharmacy
+      tags:
+      - Pharmacies
+      x-el8-docs-category: Reference Data API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    Pharmacy:
+      properties:
+        active_end_time:
+          format: date-time
+          type: string
+        active_start_time:
+          format: date-time
+          type: string
+        address_line1:
+          maxLength: 105
+          type:
+          - string
+          - 'null'
+        address_line2:
+          maxLength: 105
+          type:
+          - string
+          - 'null'
+        city:
+          maxLength: 105
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 75
+          type:
+          - string
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        ncpdpid:
+          maxLength: 21
+          type: string
+        npi:
+          maxLength: 30
+          type:
+          - string
+          - 'null'
+        phone_primary:
+          maxLength: 75
+          type:
+          - string
+          - 'null'
+        specialty_types:
+          maxLength: 150
+          type:
+          - string
+          - 'null'
+        state:
+          maxLength: 6
+          type:
+          - string
+          - 'null'
+        store_name:
+          maxLength: 105
+          type:
+          - string
+          - 'null'
+        zip:
+          maxLength: 33
+          type:
+          - string
+          - 'null'
+      required:
+      - active_end_time
+      - active_start_time
+      - id
+      - ncpdpid
+      type: object
+    PaginatedPharmacyList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Pharmacy'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-reference-data-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

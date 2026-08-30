@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Patient Profile Photo API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Patient Profile Photo across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Patient Profile Photo
+paths:
+  /api/2.0/patients/{id}/get_photo/:
+    get:
+      description: Get the patient's profile image
+      operationId: patients_get_photo_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientPhoto'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patients Get Photo
+      tags:
+      - Patient Profile Photo
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patients/{id}/profile_image/:
+    delete:
+      description: Delete the patient's profile image
+      operationId: patients_profile_image_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Patients Profile Image
+      tags:
+      - Patient Profile Photo
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Get the patient's profile image
+      operationId: patients_profile_image_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientPhoto'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patients Profile Image
+      tags:
+      - Patient Profile Photo
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create the patient's profile image
+      operationId: patients_profile_image_create
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientPhoto'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientPhoto'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Patients Profile Image
+      tags:
+      - Patient Profile Photo
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatientPhoto:
+      properties:
+        base_64:
+          type: string
+          writeOnly: true
+        content_type:
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        file:
+          description: "Patient profile image URL generation method\nArgs:\n    obj: PatientPhoto object\n\nReturns: The URL where you can get the image"
+          readOnly: true
+          type: string
+        file_size:
+          readOnly: true
+          type: integer
+        height:
+          readOnly: true
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        original_filename:
+          type: string
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        width:
+          readOnly: true
+          type: integer
+      required:
+      - base_64
+      - original_filename
+      - patient
+      - practice
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-profile-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

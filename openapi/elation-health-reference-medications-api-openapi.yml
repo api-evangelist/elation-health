@@ -1,0 +1,119 @@
+openapi: 3.2.0
+info:
+  title: Settings Reference Medications API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Reference Medications
+paths:
+  /reference_medications/{id}/:
+    get:
+      summary: Get Reference Medication
+      description: ''
+      operationId: get-reference-medication
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Reference Medications
+  /reference_medications/:
+    get:
+      summary: Find Reference Medications
+      description: ''
+      operationId: find-reference-medications
+      parameters:
+      - name: ndc
+        in: query
+        description: Any of the National Drug Codes associated with the reference medication
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: rxnorm_cui
+        in: query
+        description: Any of the RxNorm Concept Identifiers associated with the reference medication
+        schema:
+          type: string
+      - name: practice
+        in: query
+        description: The ID of the practice that created the reference medication
+        schema:
+          type: integer
+          format: int64
+      - name: name
+        in: query
+        description: The name of the reference medication
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Reference Medications
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

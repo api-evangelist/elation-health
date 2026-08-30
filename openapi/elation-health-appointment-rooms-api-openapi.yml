@@ -1,0 +1,94 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Appointment Rooms API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Appointment Rooms across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-scheduling-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Appointment Rooms
+paths:
+  /api/2.0/appointments/rooms/:
+    get:
+      description: List the rooms available per practices
+      operationId: appointments_rooms_retrieve
+      parameters:
+      - description: The practice ID to filter by.
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    example: 123
+                    type: integer
+                  next:
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                    format: uri
+                    nullable: true
+                    type: string
+                  previous:
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                    format: uri
+                    nullable: true
+                    type: string
+                  results:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        practice:
+                          format: int64
+                          type: integer
+                      type: object
+                    type: array
+                required:
+                - results
+                type: object
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Appointment Rooms
+      tags:
+      - Appointment Rooms
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-scheduling-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,265 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Historical Medication Download Requests API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Historical Medication Download Requests across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Historical Medication Download Requests
+paths:
+  /api/2.0/medication_history_downloads/:
+    get:
+      operationId: medication_history_downloads_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRxHistoryDownloadList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Medication History Downloads
+      tags:
+      - Historical Medication Download Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new medication history download.
+      operationId: medication_history_downloads_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RxHistoryDownload'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RxHistoryDownload'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Medication History Download
+      tags:
+      - Historical Medication Download Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/medication_history_downloads/{id}/:
+    get:
+      description: Retrieve a single med history object
+      operationId: medication_history_downloads_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RxHistoryDownload'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Medication History Download
+      tags:
+      - Historical Medication Download Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    ErrorCodeEnum:
+      enum:
+      - Communication problem - try again later
+      - Receiver System Error
+      - Receiver unable to process
+      - Transaction rejected
+      type: string
+    RxHistoryDownload:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        eligibility:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        error_code:
+          oneOf:
+          - $ref: '#/components/schemas/ErrorCodeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        error_description:
+          type:
+          - string
+          - 'null'
+        error_description_code:
+          oneOf:
+          - $ref: '#/components/schemas/ErrorDescriptionCodeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        from_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          type: boolean
+        num_items:
+          readOnly: true
+          type: string
+        patient:
+          format: int64
+          type: integer
+        pbm_member_id:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        pbm_name:
+          readOnly: true
+          type: string
+        pbm_surescripts_participant_id:
+          readOnly: true
+          type: string
+        practice:
+          format: int64
+          type: integer
+        signed_by:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        success:
+          type: boolean
+        until_date:
+          format: date
+          type:
+          - string
+          - 'null'
+      required:
+      - patient
+      - practice
+      type: object
+    NullEnum:
+      type: 'null'
+    ErrorDescriptionCodeEnum:
+      enum:
+      - Internal processing error has occurred.
+      - Invalid password for receiver
+      - Invalid password for sender.
+      - No password on file for receiver.
+      - No password on file for sender.
+      - Receiver ID not on file.
+      - Request timed out before response could be received.
+      - Required segment UIB is missing.
+      - Required segment UIH is missing.
+      - Required segment UIT is missing.
+      - Required segment UIZ is missing.
+      - Sender ID not on file.
+      type: string
+    PaginatedRxHistoryDownloadList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/RxHistoryDownload'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

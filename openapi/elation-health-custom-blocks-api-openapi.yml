@@ -1,0 +1,300 @@
+openapi: 3.2.0
+info:
+  title: Visit Notes Custom Blocks API
+  description: This API supports the management of visit notes.
+  version: 0.1.0
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox Environment
+tags:
+- name: Custom Blocks
+paths:
+  /notes/custom-blocks:
+    get:
+      operationId: list_custom_blocks
+      parameters:
+      - description: Limit for pagination
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          description: Limit for pagination
+          maximum: 100
+          minimum: 1
+          title: Limit
+          type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          description: Offset for pagination
+          title: Offset
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_CustomBlockResponse_'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication:
+        - apiv2
+      summary: List Custom Blocks
+      tags:
+      - Custom Blocks
+components:
+  schemas:
+    CustomBlockResponse:
+      examples:
+      - aliases:
+        - assessment
+        content:
+        - attrs:
+            data: {}
+            dataSchema:
+              properties:
+                bGWCPFTxkamB_sGQWsgqY:
+                  description: ''
+                  oneOf:
+                  - const: option_1
+                    title: 'Yes'
+                  - const: option_2
+                    title: 'No'
+                  title: Did you perform the assessment?
+                  type: string
+                n2aMlkD0XaOWTHYhsX2TP:
+                  format: date
+                  title: Date Assessment Performed
+                  type: string
+              type: object
+            label: Assessment
+            ref_id: a765df04-a773-45ae-88ed-9939f719b469
+            uiSchema:
+              elements:
+              - options: {}
+                scope: '#/properties/bGWCPFTxkamB_sGQWsgqY'
+                type: Control
+              - options: {}
+                scope: '#/properties/n2aMlkD0XaOWTHYhsX2TP'
+                type: Control
+              type: VerticalLayout
+          type: dynamicForm
+        created_by: 4
+        id: 61
+        is_system_template: false
+        label: Assessment
+        practice_id: 65540
+      properties:
+        aliases:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          default: []
+          description: Shortcuts for accessing the custom block in a note 2 editor
+          title: Aliases
+        content:
+          default: []
+          description: The content of the custom block.
+          items:
+            $ref: '#/components/schemas/DynamicFormNode-Output'
+          title: Content
+          type: array
+        created_by:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the user who created the custom block.
+          title: Created By
+        id:
+          description: The ID of the custom block.
+          title: Id
+          type: integer
+        is_system_template:
+          description: Whether the custom block is a system template.
+          title: Is System Template
+          type: boolean
+        label:
+          description: The name of the custom block.
+          title: Label
+          type: string
+        practice_id:
+          description: The ID of the practice to which the custom block belongs.
+          title: Practice Id
+          type: integer
+      required:
+      - label
+      - id
+      - practice_id
+      - is_system_template
+      title: CustomBlockResponse
+      type: object
+    DynamicFormAttrs:
+      properties:
+        ai_generation_info:
+          anyOf:
+          - $ref: '#/components/schemas/AiGenerationInfo'
+          - type: 'null'
+        creation_type:
+          anyOf:
+          - enum:
+            - ai
+            - template
+            type: string
+          - type: 'null'
+          title: Creation Type
+        data:
+          additionalProperties: true
+          default: {}
+          title: Data
+          type: object
+        dataSchema:
+          title: Dataschema
+        is_new:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is New
+        label:
+          title: Label
+          type: string
+        lastEditedBy:
+          additionalProperties:
+            enum:
+            - user
+            - api
+            - note-prediction
+            - template
+            type: string
+          title: Lasteditedby
+          type: object
+        ref_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ref Id
+        uiSchema:
+          title: Uischema
+      required:
+      - dataSchema
+      - uiSchema
+      - label
+      title: DynamicFormAttrs
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    AiGenerationInfo:
+      properties:
+        is_finalized:
+          default: true
+          title: Is Finalized
+          type: boolean
+        transcript_source_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: ''
+          title: Transcript Source Text
+      title: AiGenerationInfo
+      type: object
+    PaginatedResponse_CustomBlockResponse_:
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+        offset:
+          title: Offset
+          type: integer
+        previous:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Previous
+        results:
+          items:
+            $ref: '#/components/schemas/CustomBlockResponse'
+          title: Results
+          type: array
+      required:
+      - results
+      - count
+      - offset
+      - limit
+      title: PaginatedResponse[CustomBlockResponse]
+      type: object
+    DynamicFormNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          $ref: '#/components/schemas/DynamicFormAttrs'
+        type:
+          const: dynamicForm
+          default: dynamicForm
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: DynamicFormNode
+      type: object
+    ValidationError:
+      properties:
+        ctx:
+          title: Context
+          type: object
+        input:
+          title: Input
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+  securitySchemes:
+    RequireAuthentication:
+      type: http
+      scheme: bearer
+    RequirePracticeAuthorization:
+      type: http
+      scheme: bearer
+    RequirePracticeAuthorizationOrHippoAdmin:
+      type: http
+      scheme: bearer

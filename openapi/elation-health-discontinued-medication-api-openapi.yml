@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  title: Settings Discontinued Medication API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Discontinued Medication
+paths:
+  /discontinued_medication/:id/:
+    patch:
+      summary: Patch discontinue med order
+      description: ''
+      operationId: patch-discontinue-med-order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: discontinue reason
+                  default: 'Null'
+                discontinue_date:
+                  type: string
+                  description: discontinue date
+                  default: Today
+                  format: date
+                documenting_personnel:
+                  type: integer
+                  description: UserProfile id
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"reason\": \"new_reason\",\n  \"discontine_date\": \"2020-08-08\"\n}\n\nresp = requests.patch(\n  \"https://sandbox.elationemr.com/api/2.0/discontinued_medication/140758531047450\",\n  data=json.dumps(data),\n  headers={'Authorization': auth_header, 'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Discontinued Medication
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

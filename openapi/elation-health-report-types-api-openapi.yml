@@ -1,0 +1,255 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Report Types API
+  version: '1.0'
+  description: 'Operations tagged Report Types across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Report Types
+paths:
+  /report_types:
+    get:
+      summary: Find Report Types
+      description: ''
+      operationId: find-report-types
+      parameters:
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 10,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/report_types/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Report Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /report_types/{id}:
+    get:
+      summary: Get Report Type
+      description: ''
+      operationId: get-report-type
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 1,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/report_types/1/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Report Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/report_types/:
+    get:
+      operationId: report_types_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReportTypeList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Report Types
+      tags:
+      - Report Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/report_types/{id}/:
+    get:
+      operationId: report_types_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Report Type
+      tags:
+      - Report Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedReportTypeList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ReportType'
+          type: array
+      required:
+      - results
+      type: object
+    ReportType:
+      properties:
+        display_value:
+          description: The display value of the report type.
+          type: string
+        id:
+          description: The id of the report type.
+          type: integer
+        practice:
+          description: The id of the practice.
+          type: integer
+        rank:
+          description: Number that indicates the report type rank in the overall list of report types.
+          type: integer
+        report_type:
+          description: The type of report.
+          type: string
+      required:
+      - display_value
+      - id
+      - rank
+      - report_type
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,696 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Event Subscriptions API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Event Subscriptions across 2 of this provider''s published API definitions: elation-event-subscription-api.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Event Subscriptions
+paths:
+  /api/2.0/app/published_events/:
+    get:
+      description: Returns a list of published events
+      operationId: app_published_events_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedEventList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Published Events
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/app/published_events/{event_id}/:
+    get:
+      operationId: app_published_events_retrieve
+      parameters:
+      - description: The ID of the event to retrieve
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedEvent'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get a Published Event
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      operationId: app_published_events_partial_update
+      parameters:
+      - description: The ID of the event to retrieve
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPublishedEvent'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedEvent'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update App Published Event
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      operationId: app_published_events_update
+      parameters:
+      - description: The ID of the event to retrieve
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedEvent'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedEvent'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update a Published Event
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/app/subscriptions/:
+    get:
+      operationId: app_subscriptions_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSubscriptionList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Subscriptions
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: You can only subscribe to the same resource and the same target once. A status 409 will be returned if you attempt to send duplicate subscription.
+      operationId: app_subscriptions_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Subscribe to a resource updates
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/app/subscriptions/{id}/:
+    delete:
+      operationId: app_subscriptions_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete a Subscription
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: app_subscriptions_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get a Subscription
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/published_events/:
+    get:
+      description: Returns a list of published events
+      operationId: published_events_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedEventList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Published Events
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/published_events/{event_id}/:
+    get:
+      operationId: published_events_retrieve
+      parameters:
+      - description: The ID of the event to retrieve
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedEvent'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get a Published Event
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      operationId: published_events_partial_update
+      parameters:
+      - description: The ID of the event to retrieve
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPublishedEvent'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedEvent'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Published Event
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      operationId: published_events_update
+      parameters:
+      - description: The ID of the event to retrieve
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedEvent'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedEvent'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update a Published Event
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/subscriptions/:
+    get:
+      operationId: subscriptions_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSubscriptionList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Subscriptions
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: You can only subscribe to the same resource and the same target once. A status 409 will be returned if you attempt to send duplicate subscription.
+      operationId: subscriptions_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Subscribe to a resource updates
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/subscriptions/{id}/:
+    delete:
+      operationId: subscriptions_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete a Subscription
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: subscriptions_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get a Subscription
+      tags:
+      - Event Subscriptions
+      x-el8-docs-category: Event Subscription API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PublishedEvent:
+      properties:
+        error_content:
+          type:
+          - string
+          - 'null'
+        event_id:
+          readOnly: true
+          type: integer
+        event_type:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        processed_date:
+          format: date-time
+          type: string
+        resource:
+          readOnly: true
+          type: string
+        resource_id:
+          readOnly: true
+          type: integer
+        status_code:
+          maximum: 2147483647
+          minimum: -2147483648
+          type:
+          - integer
+          - 'null'
+        target:
+          readOnly: true
+          type: string
+      required:
+      - processed_date
+      type: object
+    Subscription:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        properties:
+          description: Properties specific to this subscription.
+          oneOf:
+          - {}
+          - type: 'null'
+        resource:
+          description: The resource name.
+          maxLength: 50
+          type: string
+        signing_pub_key:
+          readOnly: true
+          type: string
+        target:
+          description: Target URL where we would send the POST request on new events.
+          format: uri
+          type: string
+      required:
+      - resource
+      - target
+      type: object
+    PatchedPublishedEvent:
+      properties:
+        error_content:
+          type:
+          - string
+          - 'null'
+        event_id:
+          readOnly: true
+          type: integer
+        event_type:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        processed_date:
+          format: date-time
+          type: string
+        resource:
+          readOnly: true
+          type: string
+        resource_id:
+          readOnly: true
+          type: integer
+        status_code:
+          maximum: 2147483647
+          minimum: -2147483648
+          type:
+          - integer
+          - 'null'
+        target:
+          readOnly: true
+          type: string
+      type: object
+    PaginatedSubscriptionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Subscription'
+          type: array
+      required:
+      - results
+      type: object
+    PaginatedPublishedEventList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PublishedEvent'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-event-subscription-api.json
+- elation-health-api-full-openapi.yaml
+x-readme:
+  headers: []
+x-readme-fauxas: true

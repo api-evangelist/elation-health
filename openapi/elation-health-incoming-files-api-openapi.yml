@@ -1,0 +1,808 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Incoming Files API
+  version: '1.0'
+  description: 'Operations tagged Incoming Files across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Incoming Files
+paths:
+  /incoming_files/:
+    get:
+      summary: Find incoming files
+      description: ''
+      operationId: find-incoming-files
+      parameters:
+      - name: practice
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: practice_fax
+        in: query
+        schema:
+          type: string
+      - name: from_number
+        in: query
+        schema:
+          type: string
+      - name: created_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: created_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: received_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: received_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: process_state
+        in: query
+        description: The current processing state of the file. Choices = complete, error, processing
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 6,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [  // list of objects\n       { // See Object Definition },\n       // ...\n       { // See Object Definition },\n     ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/incomig_files/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Incoming Files
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /incoming_files/{id}:
+    get:
+      summary: Get incoming file
+      description: ''
+      operationId: get-ingoming-file
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 140758830874783,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/incoming_files/140758830874783/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Incoming Files
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /incoming_files:
+    post:
+      summary: Create Incoming Files
+      description: ''
+      operationId: create-incoming-files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - practice
+              - group_name
+              properties:
+                practice:
+                  type: integer
+                  format: int32
+                group_name:
+                  type: string
+                  description: Name of the incoming file group
+                images:
+                  type: array
+                  description: List of Images in base64 to upload
+                files:
+                  type: array
+                  description: List of Files in base64 to upload
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t// see incoming file object\n}"
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"practice\": 12345678,\n  \"group_name\": \"my group name\",\n  \"images\": [\n  \t{\n    \t\"content_type\": \"application/pdf\",  #  required\n      \"base64_content\": \"iVBORw0KGgo==\"  #  required\n    }\n  ],\n  \"files\": [\n  \t{\n    \t\"base64_content\": \"ImNvdW50KCopIgoy==\",  #  required\n      \"content_type\": \"plain/txt\",  #  required\n      \"filename\": \"my_file.txt\"  #  required\n    }\n  ]\n}"
+        samples-languages:
+        - python
+      tags:
+      - Incoming Files
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/incoming_files/:
+    get:
+      operationId: incoming_files_list
+      parameters:
+      - in: query
+        name: created_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: created_date__lte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: from_number
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - in: query
+        name: practice_fax
+        schema:
+          type: string
+      - description: '* `complete` - complete
+
+          * `error` - error
+
+          * `processing` - processing'
+        in: query
+        name: process_state
+        schema:
+          enum:
+          - complete
+          - error
+          - processing
+          type: string
+      - in: query
+        name: received_time__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: received_time__lte
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedIncomingFileGroupList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Incoming Files
+      tags:
+      - Incoming Files
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new incoming file.
+      operationId: incoming_files_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncomingFileGroup'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingFileGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Incoming File
+      tags:
+      - Incoming Files
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/incoming_files/{file_group_id}/files/{file_id}/:
+    get:
+      operationId: incoming_files_files_retrieve
+      parameters:
+      - in: path
+        name: file_group_id
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - in: path
+        name: file_id
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingFileGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Incoming Files File
+      tags:
+      - Incoming Files
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/incoming_files/{file_group_id}/images/{image_id}/:
+    get:
+      operationId: incoming_files_images_retrieve
+      parameters:
+      - in: path
+        name: file_group_id
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - in: path
+        name: image_id
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - description: The size of the image to retrieve (default is 'preview').
+        in: query
+        name: size
+        schema:
+          default: preview
+          enum:
+          - preview
+          - print
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingFileGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Incoming Files Image
+      tags:
+      - Incoming Files
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/incoming_files/{id}/:
+    get:
+      operationId: incoming_files_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingFileGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Incoming File
+      tags:
+      - Incoming Files
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patients/{id}/incoming_files/:
+    post:
+      description: Create a new incoming file for a patient
+      operationId: patients_incoming_files_create
+      parameters:
+      - description: The ID of the patient
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                custom_title:
+                  description: Custom title for the document
+                  type: string
+                document_date:
+                  description: Document date (defaults to current datetime)
+                  format: date-time
+                  type: string
+                document_tags:
+                  description: Array of document tags
+                  items:
+                    type: string
+                  type: array
+                document_type:
+                  description: Type of document (cannot be 'Lab')
+                  type: string
+                files:
+                  description: Array of file IDs
+                  items:
+                    type: integer
+                  type: array
+                import_history:
+                  default: false
+                  description: Whether to import history
+                  type: boolean
+                reviewer_user:
+                  description: User ID of the reviewer
+                  type: integer
+                sign_off:
+                  default: false
+                  description: Whether to sign off the document
+                  type: boolean
+                urgent:
+                  default: false
+                  description: Whether the document is urgent
+                  type: boolean
+              required:
+              - files
+              - document_type
+              type: object
+      responses:
+        '201':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Create a new incoming file
+      tags:
+      - Incoming Files
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    IncomingFileGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        external_fax_id:
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        files:
+          items:
+            $ref: '#/components/schemas/File'
+          type:
+          - array
+          - 'null'
+        from_number:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        group_name:
+          maxLength: 200
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type:
+          - array
+          - 'null'
+        page_count:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        practice_fax:
+          type:
+          - string
+          - 'null'
+        process_complete_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        process_result:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        process_start_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        process_state:
+          allOf:
+          - $ref: '#/components/schemas/ProcessStateEnum'
+          readOnly: true
+        received_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        source:
+          allOf:
+          - $ref: '#/components/schemas/SourceEnum'
+          readOnly: true
+        subject:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        to_company:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        to_name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        to_number:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        transmit_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - group_name
+      - practice
+      type: object
+    ProcessStateEnum:
+      enum:
+      - complete
+      - error
+      - pending
+      - processing
+      type: string
+    File:
+      properties:
+        base64_content:
+          type: string
+          writeOnly: true
+        content_type:
+          maxLength: 200
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        file_url:
+          readOnly: true
+          type: string
+        filename:
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        incoming_file:
+          type: integer
+        practice:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - base64_content
+      - content_type
+      - filename
+      type: object
+    Image:
+      properties:
+        base64_content:
+          type: string
+          writeOnly: true
+        content_type:
+          type: string
+          writeOnly: true
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        height:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        image_url:
+          readOnly: true
+          type: string
+        incoming_file:
+          type: integer
+        original_extension:
+          maxLength: 10
+          type: string
+        original_height:
+          type: integer
+        original_padded:
+          type: integer
+        original_rotation:
+          type: integer
+        original_width:
+          type: integer
+        practice:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        quality_score:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        quality_score_by:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        received_date:
+          format: date-time
+          type: string
+        rotation:
+          readOnly: true
+          type: integer
+        sequence:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        width:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - base64_content
+      - content_type
+      type: object
+    PaginatedIncomingFileGroupList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/IncomingFileGroup'
+          type: array
+      required:
+      - results
+      type: object
+    SourceEnum:
+      enum:
+      - metrofax
+      - plr
+      - refile
+      - softlinx
+      - user
+      type: string
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

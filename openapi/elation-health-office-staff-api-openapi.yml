@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Office Staff API
+  version: '1.0'
+  description: 'Operations tagged Office Staff across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Office Staff
+paths:
+  /office_staff/{id}:
+    get:
+      summary: Get Office Staff
+      description: ''
+      operationId: get-office-staff
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '303':
+          description: '303'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/office_staff/83792571234/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/patients/64184451073/ \
+
+            > -H "Authorization: Bearer XaTtPYZ8Ufy04f0187fPbWFkwcADF0"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - Office Staff
+      security:
+      - sec0: []
+    put:
+      summary: Update Office Staff
+      description: ''
+      operationId: update-office-staff
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                dob:
+                  type: string
+                  format: date
+                email:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                middle_name:
+                  type: string
+                phone:
+                  type: string
+                practice:
+                  type: integer
+                  format: int64
+                prefix:
+                  type: string
+                sex:
+                  type: string
+                suffix:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 140754688737550,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata =   {\n   \t'id': 140754688737550,\n  \t'dob': None,\n   \t'email': None,\n   \t'first_name': 'Charles',\n   \t'last_name': 'Orange',\n   \t'middle_name': '',\n   \t'phone': None,\n   \t'practice': 2593872345435,\n   \t'prefix': '',\n   \t'sex': 'Unknown',\n   \t'suffix': ''\n}\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/office_staff/140754688737550\",\n                    data=json.dumps(data),\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Office Staff
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /office_staff/:
+    get:
+      summary: Find Office Staff
+      description: ''
+      operationId: find-office-staff
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n \t{\n  \t\"id\": 83792571234,\n  \t// See Object Definition\n\t},\n]"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/office_staff/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Office Staff
+      security:
+      - sec0: []
+    post:
+      summary: Create Office Staff
+      description: ''
+      operationId: create-office-staff
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dob:
+                  type: string
+                  format: date
+                email:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                middle_name:
+                  type: string
+                phone:
+                  type: string
+                practice:
+                  type: number
+                  format: float
+                prefix:
+                  type: string
+                sex:
+                  type: string
+                suffix:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 140754688737550,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata =   {\n  \t'dob': None,\n   \t'email': None,\n   \t'first_name': 'Charles',\n   \t'last_name': 'Orange',\n   \t'middle_name': '',\n   \t'phone': None,\n   \t'practice': 2593872345435,\n   \t'prefix': '',\n   \t'sex': 'Unknown',\n   \t'suffix': ''\n}\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/office_staff/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Office Staff
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/office_staff/:
+    get:
+      description: Returns a list of office staff
+      operationId: office_staff_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPracticeToStaffList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Office Staffs
+      tags:
+      - Office Staff
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/office_staff/{staff_id}/:
+    get:
+      description: Retrieve an office staff
+      operationId: office_staff_retrieve
+      parameters:
+      - description: The ID of the staff member to retrieve
+        in: path
+        name: staff_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PracticeToStaff'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Office Staff
+      tags:
+      - Office Staff
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedPracticeToStaffList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PracticeToStaff'
+          type: array
+      required:
+      - results
+      type: object
+    PracticeToStaffSexEnum:
+      enum:
+      - Female
+      - Intersex/Other
+      - Male
+      - None selected
+      type: string
+    PracticeToStaff:
+      properties:
+        created_date:
+          description: When staff was added to the system.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        dob:
+          format: date
+          type:
+          - string
+          - 'null'
+        email:
+          description: Get office email using fallbacks
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        last_name:
+          maxLength: 60
+          type: string
+        middle_name:
+          maxLength: 50
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        prefix:
+          maxLength: 20
+          type: string
+        sex:
+          $ref: '#/components/schemas/PracticeToStaffSexEnum'
+        suffix:
+          maxLength: 20
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - last_name
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-practice-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

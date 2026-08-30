@@ -1,0 +1,1159 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Referrals API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Referrals across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Referrals
+paths:
+  /api/2.0/letters/:
+    get:
+      description: Find letters by patient, practice, and date range
+      operationId: letters_list
+      parameters:
+      - in: query
+        name: document_date__gt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      - in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      - in: query
+        name: recipient_id
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      - in: query
+        name: recipient_name
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLetterList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Letters
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new letter.
+      operationId: letters_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Letter'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Letter
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/letters/{id}/:
+    get:
+      operationId: letters_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Letter
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing letter.
+      operationId: letters_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLetter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Letter
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing letter.
+      operationId: letters_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Letter'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Letter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Letter
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/referral_orders/:
+    get:
+      operationId: referral_orders_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReferralOrderList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Referral Orders
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new referral order.
+      operationId: referral_orders_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferralOrder'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Referral Order
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/referral_orders/{id}/:
+    get:
+      operationId: referral_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Referral Order
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing referral order.
+      operationId: referral_orders_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReferralOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Referral Order
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing referral order.
+      operationId: referral_orders_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferralOrder'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Referral Order
+      tags:
+      - Referrals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    LetterAttachment:
+      properties:
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentTypeEnum'
+        entity_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        entity_description:
+          type:
+          - string
+          - 'null'
+        entity_id:
+          format: int64
+          type: integer
+        entity_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        handout:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          type:
+          - string
+          - 'null'
+      required:
+      - attachment_type
+      type: object
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    PaginatedLetterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Letter'
+          type: array
+      required:
+      - results
+      type: object
+    AttachmentTypeEnum:
+      description: '* `Entity` - Entity
+
+        * `RefPanel` - RefPanel
+
+        * `PatientDemog` - PatientDemog
+
+        * `ImmHistory` - ImmHistory
+
+        * `MedsList` - MedsList
+
+        * `CompMedsList` - CompMedsList
+
+        * `WhoHeightChart` - WhoHeightChart
+
+        * `WhoWeightChart` - WhoWeightChart
+
+        * `WhoHcChart` - WhoHcChart
+
+        * `WhoWflChart` - WhoWflChart
+
+        * `CdcHeightChart` - CdcHeightChart
+
+        * `CdcWeightChart` - CdcWeightChart
+
+        * `CdcBmiChart` - CdcBmiChart
+
+        * `CdcHcChart` - CdcHcChart
+
+        * `PremieHeightChart` - PremieHeightChart
+
+        * `PremieWeightChart` - PremieWeightChart
+
+        * `PremieHcChart` - PremieHcChart
+
+        * `DsinfantHeightChart` - DsinfantHeightChart
+
+        * `DsinfantWeightChart` - DsinfantWeightChart
+
+        * `DsinfantHcChart` - DsinfantHcChart
+
+        * `DsHeightChart` - DsHeightChart
+
+        * `DsWeightChart` - DsWeightChart
+
+        * `DsBmiChart` - DsBmiChart
+
+        * `DsHcChart` - DsHcChart'
+      enum:
+      - Entity
+      - RefPanel
+      - PatientDemog
+      - ImmHistory
+      - MedsList
+      - CompMedsList
+      - WhoHeightChart
+      - WhoWeightChart
+      - WhoHcChart
+      - WhoWflChart
+      - CdcHeightChart
+      - CdcWeightChart
+      - CdcBmiChart
+      - CdcHcChart
+      - PremieHeightChart
+      - PremieWeightChart
+      - PremieHcChart
+      - DsinfantHeightChart
+      - DsinfantWeightChart
+      - DsinfantHcChart
+      - DsHeightChart
+      - DsWeightChart
+      - DsBmiChart
+      - DsHcChart
+      type: string
+    PatchedLetter:
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/LetterAttachment'
+          type: array
+        body:
+          description: The body of the letter.
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        delivery_method:
+          $ref: '#/components/schemas/DeliveryMethodEnum'
+        direct_message_status:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        direct_message_to:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        display_to:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        email_to:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        failure_unacknowledged:
+          type: string
+        fax_attachments:
+          type: boolean
+        fax_status:
+          readOnly: true
+          type: string
+        fax_to:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_processed:
+          readOnly: true
+          type: boolean
+        letter_type:
+          readOnly: true
+          type: string
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        referral_order:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        send_out:
+          type: boolean
+        send_to_contact:
+          $ref: '#/components/schemas/SendToContact'
+        send_to_elation_user:
+          description: If a letter is sent to another elation user, this will be that user's id.
+          readOnly: true
+          type: integer
+        send_to_name:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The user who signed the letter.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        subject:
+          description: The subject of the letter (Not needed with referral_order).
+          maxLength: 200
+          type: string
+        tags:
+          description: A list of Document Tags associated with the letter.
+          items:
+            format: int64
+            type: integer
+          type: array
+        to_number:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        viewed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        with_archive:
+          type: boolean
+      type: object
+    MedicalSpecialtyCategory:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+      required:
+      - name
+      type: object
+    AuthorizationForEnum:
+      enum:
+      - Consult (One Visit Only)
+      - Procedure / Testing Only
+      - Referral For Treatment, includes Consult Visit
+      type: string
+    DeliveryMethodEnum:
+      enum:
+      - direct
+      - email
+      - emr
+      - fax
+      - passport
+      - printed
+      type: string
+    ReferralOrder:
+      properties:
+        auth_number:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        authorization_for:
+          oneOf:
+          - $ref: '#/components/schemas/AuthorizationForEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        authorization_for_short:
+          type:
+          - string
+          - 'null'
+        consultant_name:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+        date_for_reEval:
+          format: date
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          items:
+            $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        letter:
+          deprecated: true
+          description: The letter associated with this referral order. Use referral_letter for the full nested letter object.
+          format: int64
+          readOnly: true
+          type: integer
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        referral_letter:
+          allOf:
+          - $ref: '#/components/schemas/ReferralLetter'
+          description: Nested letter object with full details.
+          readOnly: true
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        short_consultant_name:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+        sign_date:
+          description: The datetime when this referral order was signed.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The ID of the user who signed this referral order.
+          readOnly: true
+          type: integer
+        specialty:
+          $ref: '#/components/schemas/MedicalSpecialty'
+      required:
+      - auth_number
+      - consultant_name
+      - date_for_reEval
+      - patient
+      - practice
+      - short_consultant_name
+      - specialty
+      type: object
+    NullEnum:
+      type: 'null'
+    DocumentResolutionState:
+      properties:
+        created_date:
+          description: The datetime when this resolution state was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: Internal id to represent the resolution state.
+          readOnly: true
+          type: integer
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
+      required:
+      - state
+      type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    ReferralLetter:
+      properties:
+        body:
+          description: The body of the letter.
+          type: string
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    Letter:
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/LetterAttachment'
+          type: array
+        body:
+          description: The body of the letter.
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        delivery_method:
+          $ref: '#/components/schemas/DeliveryMethodEnum'
+        direct_message_status:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        direct_message_to:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        display_to:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        email_to:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        failure_unacknowledged:
+          type: string
+        fax_attachments:
+          type: boolean
+        fax_status:
+          readOnly: true
+          type: string
+        fax_to:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_processed:
+          readOnly: true
+          type: boolean
+        letter_type:
+          readOnly: true
+          type: string
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        referral_order:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        send_out:
+          type: boolean
+        send_to_contact:
+          $ref: '#/components/schemas/SendToContact'
+        send_to_elation_user:
+          description: If a letter is sent to another elation user, this will be that user's id.
+          readOnly: true
+          type: integer
+        send_to_name:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The user who signed the letter.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        subject:
+          description: The subject of the letter (Not needed with referral_order).
+          maxLength: 200
+          type: string
+        tags:
+          description: A list of Document Tags associated with the letter.
+          items:
+            format: int64
+            type: integer
+          type: array
+        to_number:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        viewed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        with_archive:
+          type: boolean
+      required:
+      - patient
+      - practice
+      - send_to_contact
+      type: object
+    PatchedReferralOrder:
+      properties:
+        auth_number:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        authorization_for:
+          oneOf:
+          - $ref: '#/components/schemas/AuthorizationForEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        authorization_for_short:
+          type:
+          - string
+          - 'null'
+        consultant_name:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+        date_for_reEval:
+          format: date
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          items:
+            $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        letter:
+          deprecated: true
+          description: The letter associated with this referral order. Use referral_letter for the full nested letter object.
+          format: int64
+          readOnly: true
+          type: integer
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        referral_letter:
+          allOf:
+          - $ref: '#/components/schemas/ReferralLetter'
+          description: Nested letter object with full details.
+          readOnly: true
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        short_consultant_name:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+        sign_date:
+          description: The datetime when this referral order was signed.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The ID of the user who signed this referral order.
+          readOnly: true
+          type: integer
+        specialty:
+          $ref: '#/components/schemas/MedicalSpecialty'
+      type: object
+    MedicalSpecialty:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type: string
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - abbreviation
+      - name
+      type: object
+    PaginatedReferralOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ReferralOrder'
+          type: array
+      required:
+      - results
+      type: object
+    SendToContact:
+      properties:
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          format: int64
+          type: integer
+        last_name:
+          maxLength: 60
+          type: string
+        middle_name:
+          maxLength: 50
+          title: MiddleName
+          type: string
+        npi:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        org_name:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        specialties:
+          items: {}
+          type: array
+      required:
+      - id
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Report Internal Notes API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Report Internal Notes across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Report Internal Notes
+paths:
+  /api/2.0/reports/{id}/internal_notes/:
+    get:
+      description: List all internal notes for a report
+      operationId: reports_internal_notes_list
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InternalPracticeNoteSerializerProxy'
+                type: array
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Reports Internal Notes
+      tags:
+      - Report Internal Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create an internal note
+      operationId: reports_internal_notes_create
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalPracticeNoteSerializerProxy'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalPracticeNoteSerializerProxy'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Reports Internal Note
+      tags:
+      - Report Internal Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/reports/{id}/internal_notes/{note_id}/:
+    delete:
+      description: Delete a specific internal note
+      operationId: reports_internal_notes_destroy
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: Internal Note ID
+        in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Reports Internal Note
+      tags:
+      - Report Internal Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a specific internal note for a report
+      operationId: reports_internal_notes_retrieve
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: Internal Note ID
+        in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalPracticeNoteSerializerProxy'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Reports Internal Note
+      tags:
+      - Report Internal Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update a specific internal note
+      operationId: reports_internal_notes_partial_update
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: Internal Note ID
+        in: path
+        name: note_id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedInternalPracticeNoteSerializerProxy'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalPracticeNoteSerializerProxy'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Reports Internal Note
+      tags:
+      - Report Internal Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    InternalPracticeNoteSerializerProxy:
+      properties:
+        document:
+          description: The report (document) ID this note belongs to
+          readOnly: true
+          type: integer
+        id:
+          description: The id of the internal note.
+          readOnly: true
+          type: integer
+        text:
+          description: The internal note text content
+          maxLength: 256
+          type: string
+      required:
+      - text
+      type: object
+    PatchedInternalPracticeNoteSerializerProxy:
+      properties:
+        document:
+          description: The report (document) ID this note belongs to
+          readOnly: true
+          type: integer
+        id:
+          description: The id of the internal note.
+          readOnly: true
+          type: integer
+        text:
+          description: The internal note text content
+          maxLength: 256
+          type: string
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

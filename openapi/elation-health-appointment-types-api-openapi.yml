@@ -1,0 +1,554 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Appointment Types API
+  version: '1.0'
+  description: 'Operations tagged Appointment Types across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-scheduling-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Appointment Types
+paths:
+  /appointment_types/:
+    get:
+      summary: Find Appointment Types
+      description: ''
+      operationId: find-appointment-types
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 10,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 12345678910,\n          \t// See Object Definition\n        }\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/appointment_types/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Appointment Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /appointment_types/{id}:
+    get:
+      summary: Get Appointment Type
+      description: ''
+      operationId: get-appointment-type
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"abbreviation\": \"T/APT\",\n    // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/appointment_types/12345678910\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Appointment Types
+      security:
+      - sec0: []
+    patch:
+      summary: Update Appointment Type
+      description: ''
+      operationId: update-appointment-type
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                abbreviation:
+                  type: string
+                  description: Abbreviated name for the appointment type
+                color:
+                  type: string
+                  description: The color of the appointment types when shown on the Elation calendar
+                default_duration:
+                  type: integer
+                  description: Default duration of the appointment type, in minutes
+                  format: int32
+                description:
+                  type: string
+                  description: Description of the appointment type
+                patient_forms_hours_prior:
+                  type: integer
+                  description: Patient forms advance hours for this appointment type
+                  format: int32
+                is_telehealth:
+                  type: boolean
+                  description: If appointment type is telehealth
+                name:
+                  type: string
+                  description: Name of the appointment type
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"abbreviation\": \"T/APT\",\n    // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"abbreviation\": \"T/APT\",\n    \"color\": \"\",\n    \"default_duration\": 30, \t\n    \"description\": \"Test appointment type PATCH\",\n    \"patient_forms\": [],\n    \"patient_form_hours_prior\": 72,\n    \"is_telehealth\": true,\n    \"name\": \"Test Appointment Type\"\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/appointment_types/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Appointment Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/appointment_types/:
+    get:
+      operationId: appointment_types_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAppointmentTypeList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Appointment Types
+      tags:
+      - Appointment Types
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new appointment type.
+      operationId: appointment_types_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentType'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Appointment Type
+      tags:
+      - Appointment Types
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/appointment_types/{id}/:
+    delete:
+      description: Delete an existing appointment type.
+      operationId: appointment_types_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Appointment Type
+      tags:
+      - Appointment Types
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: appointment_types_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Appointment Type
+      tags:
+      - Appointment Types
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing appointment type.
+      operationId: appointment_types_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAppointmentType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Appointment Type
+      tags:
+      - Appointment Types
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing appointment type.
+      operationId: appointment_types_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentType'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Appointment Type
+      tags:
+      - Appointment Types
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    VisitNoteFormatEnum:
+      enum:
+      - note2
+      - oneCol.oneField
+      - oneCol.preOp
+      - oneCol.preOp2
+      - oneCol.simple
+      - twoCol.complex
+      - twoCol.complex2
+      type: string
+    PaginatedAppointmentTypeList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/AppointmentType'
+          type: array
+      required:
+      - results
+      type: object
+    NullEnum:
+      type: 'null'
+    PatchedAppointmentType:
+      properties:
+        abbreviation:
+          type: string
+        color:
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        default_duration:
+          type: integer
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          type: string
+        elation_note_template_ids:
+          items:
+            type: integer
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        is_telehealth:
+          type: boolean
+        name:
+          type: string
+        patient_bookable:
+          type: boolean
+        patient_form_hours_prior:
+          type: integer
+        patient_forms:
+          items:
+            type: integer
+          type: array
+        practice:
+          format: int64
+          type: integer
+        sequence:
+          readOnly: true
+          type: integer
+        visit_note_format:
+          oneOf:
+          - $ref: '#/components/schemas/VisitNoteFormatEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        visit_note_templates:
+          items:
+            format: int64
+            type: integer
+          type: array
+        visit_note_type:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
+    AppointmentType:
+      properties:
+        abbreviation:
+          type: string
+        color:
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        default_duration:
+          type: integer
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          type: string
+        elation_note_template_ids:
+          items:
+            type: integer
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        is_telehealth:
+          type: boolean
+        name:
+          type: string
+        patient_bookable:
+          type: boolean
+        patient_form_hours_prior:
+          type: integer
+        patient_forms:
+          items:
+            type: integer
+          type: array
+        practice:
+          format: int64
+          type: integer
+        sequence:
+          readOnly: true
+          type: integer
+        visit_note_format:
+          oneOf:
+          - $ref: '#/components/schemas/VisitNoteFormatEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        visit_note_templates:
+          items:
+            format: int64
+            type: integer
+          type: array
+        visit_note_type:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - default_duration
+      - name
+      - practice
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-scheduling-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

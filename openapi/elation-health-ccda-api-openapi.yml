@@ -1,0 +1,266 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Ccda API
+  version: '1.0'
+  description: 'Operations tagged Ccda across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Ccda
+paths:
+  /ccda/:
+    post:
+      summary: Create CCDA
+      description: ''
+      operationId: create-ccda
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - base64_ccda
+              properties:
+                base64_ccda:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"base64_ccda\": \"PD94bWwgdmVyc2lvbj0iMS4wIj8+.....................\"\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/ccda/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Ccda
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /ccda/{patient_id}:
+    get:
+      summary: Get CCDA
+      description: We include an endpoint to allow you to retrieve a CCDA v2.1 representation of the data in a patient's chart.
+      operationId: get-ccda
+      parameters:
+      - name: patient_id
+        in: path
+        description: The id of the patient chart.
+        schema:
+          type: string
+        required: true
+      - name: start_date
+        in: query
+        description: iso8601 datetime before which we'll exclude data from the CCDA output. See note in supported sections below.
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: iso8601 datetime after which we'll exclude data from the CCDA output. See note in supported sections below.
+        schema:
+          type: string
+          format: date
+      - name: sections
+        in: query
+        description: Comma separated list of sections. See supported sections below.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: template
+        in: query
+        description: The template used to display the desired information on the CCDA
+        schema:
+          type: string
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/ccda/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Ccda
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /ccda/{patient-id}:
+    get:
+      summary: Get CCDA (CEHRT 2022)
+      description: We include an endpoint to allow you to retrieve a CCDA v2.1 representation of the data in a patient's chart.
+      operationId: get-ccda-cehrt-2022
+      parameters:
+      - name: patient_id
+        in: path
+        description: The id of the patient chart.
+        schema:
+          type: string
+        required: true
+      - name: start_date
+        in: query
+        description: iso8601 datetime before which we'll exclude data from the CCDA output. See note in supported sections below.
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: iso8601 datetime after which we'll exclude data from the CCDA output. See note in supported sections below.
+        schema:
+          type: string
+          format: date
+      - name: sections
+        in: query
+        description: Comma separated list of sections. See supported sections below.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: template
+        in: query
+        description: The template used to display the desired information on the CCDA
+        schema:
+          type: string
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/ccda/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Ccda
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/ccda/{id}/:
+    get:
+      description: Retrieve a single patient's ccda
+      operationId: ccda_retrieve
+      parameters:
+      - description: The end date of the CCDA to retrieve.
+        in: query
+        name: end_date
+        schema:
+          format: date
+          type: string
+      - description: The id of the patient to retrieve the CCDA for.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: A comma-separated list of sections to include in the CCDA. If not provided, all sections will be included.
+        in: query
+        name: sections
+        schema:
+          items:
+            type: string
+          type: array
+      - description: The start date of the CCDA to retrieve.
+        in: query
+        name: start_date
+        schema:
+          format: date
+          type: string
+      - description: The template used to display the desired information on the CCDA
+        in: query
+        name: template
+        schema:
+          enum:
+          - generateCCD
+          - generateCarePlan
+          - generateProgressNote
+          - generateReferralNote
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CCDA'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Ccda
+      tags:
+      - Ccda
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    CCDA:
+      properties:
+        base64_ccda:
+          format: binary
+          readOnly: true
+          type: string
+        id:
+          format: int64
+          type: integer
+      required:
+      - id
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

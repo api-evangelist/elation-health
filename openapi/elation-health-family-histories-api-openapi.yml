@@ -1,0 +1,457 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Family Histories API
+  version: '1.0'
+  description: 'Operations tagged Family Histories across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Family Histories
+paths:
+  /family_histories/{id}/:
+    get:
+      summary: Get Family History
+      description: ''
+      operationId: get-family-history
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/family_histories/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Family Histories
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Family History
+      description: ''
+      operationId: delete-family-history
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/family_histories/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Family Histories
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /family_histories/:
+    get:
+      summary: Find Family Histories
+      description: ''
+      operationId: find-family-histories
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/family_histories/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/family_histories/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/family_histories/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Family Histories
+      security:
+      - sec0: []
+    post:
+      summary: Create Family History
+      description: ''
+      operationId: create-family-history
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - relationship
+              - patient
+              properties:
+                relationship:
+                  type: string
+                text:
+                  type: string
+                icd9_code:
+                  type: string
+                snomed_code:
+                  type: string
+                patient:
+                  type: string
+                  description: Patient ID
+                rank:
+                  type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"relationship\": \"Mother\",\n  \"snomed_code\": \"49436004\",\n  \"patient\": 64901939201\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/family_histories/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)\n\n# if you dont have snomed, you can send us free text\n# for example:\ndata = {\n  \"relationship\": \"Mother\",\n  \"text\": \"Cancer\",\n  \"patient\": 64901939201\n}\n"
+        samples-languages:
+        - python
+      tags:
+      - Family Histories
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/family_histories/:
+    get:
+      description: Returns a list of patient family histories
+      operationId: family_histories_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientFamilyHistoryList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Family Histories
+      tags:
+      - Family Histories
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: You have to specify either `text` or a valid `icd9_code` or a `snomed_code`. If you send `text` along with any of the two codes, the request will be rejected.
+      operationId: family_histories_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientFamilyHistory'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFamilyHistory'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Family History
+      tags:
+      - Family Histories
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/family_histories/{id}/:
+    delete:
+      description: Delete an existing family history.
+      operationId: family_histories_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Family History
+      tags:
+      - Family Histories
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single patient family history
+      operationId: family_histories_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFamilyHistory'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Family History
+      tags:
+      - Family Histories
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatientFamilyHistoryRelationshipEnum:
+      enum:
+      - Aunt
+      - Brother
+      - Daughter
+      - Father
+      - Grandfather
+      - Grandmother
+      - Mother
+      - Other
+      - Sister
+      - Son
+      - Uncle
+      type: string
+    PatientFamilyHistory:
+      properties:
+        created_date:
+          description: The date the family history was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The date the family history was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        icd9_code:
+          description: The icd9 code of the family history.
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The id of the patient.
+          format: int64
+          type: integer
+        rank:
+          type: integer
+        relationship:
+          allOf:
+          - $ref: '#/components/schemas/PatientFamilyHistoryRelationshipEnum'
+          description: The relationship of the family member of the family history.
+        snomed_code:
+          description: The SNOMED code for the family history.
+          type:
+          - string
+          - 'null'
+        text:
+          description: The value (or text) of the family history.
+          type: string
+      required:
+      - patient
+      - relationship
+      type: object
+    PaginatedPatientFamilyHistoryList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientFamilyHistory'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-profile-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

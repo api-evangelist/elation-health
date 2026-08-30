@@ -1,0 +1,898 @@
+openapi: 3.2.0
+info:
+  title: Visit Notes Notes v1 API
+  description: This API supports the management of visit notes.
+  version: 0.1.0
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+  description: Sandbox Environment
+tags:
+- name: Notes v1
+paths:
+  /v1/notes:
+    get:
+      description: Returns a paginated list of note metadata.
+      operationId: list_notes_v1
+      parameters:
+      - description: Limit for pagination
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          description: Limit for pagination
+          maximum: 100
+          minimum: 1
+          title: Limit
+          type: integer
+      - description: Offset for pagination
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          description: Offset for pagination
+          title: Offset
+          type: integer
+      - description: Filter by practice ID
+        in: query
+        name: practice_id
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filter by practice ID
+          title: Practice Id
+      - description: True to filter to draft notes only. False to include only signed notes. Omit to include both.
+        in: query
+        name: is_draft
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: True to filter to draft notes only. False to include only signed notes. Omit to include both.
+          title: Is Draft
+      - description: Filter by patient ID
+        in: query
+        name: patient
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filter by patient ID
+          title: Patient
+      - description: Comma separated list of provider IDs
+        in: query
+        name: providers
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Comma separated list of provider IDs
+          title: Providers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_NoteMetadata_'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: List Notes V1
+      tags:
+      - Notes v1
+    post:
+      description: Create a legacy Note.
+      operationId: create_note_v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteCreate'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Create Note V1
+      tags:
+      - Notes v1
+  /v1/notes/{note_id}:
+    delete:
+      description: Delete a specific draft legacy Note.
+      operationId: delete_note_by_id_v1
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Delete Note By Id V1
+      tags:
+      - Notes v1
+    get:
+      description: Get a specific legacy Note. Returns HTTP 400 if the note uses the EN2.1 schema.
+      operationId: get_note_by_id_v1
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Get Note By Id V1
+      tags:
+      - Notes v1
+    patch:
+      description: 'Update a legacy Note. Returns HTTP 400 if the note uses the EN2.1 schema
+
+        (pass ``content_map`` and use the /v2/ endpoint instead).'
+      operationId: update_note_by_id_v1
+      parameters:
+      - in: path
+        name: note_id
+        required: true
+        schema:
+          title: Note Id
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - RequireAuthentication: []
+      - RequirePracticeAuthorization: []
+      summary: Update Note By Id V1
+      tags:
+      - Notes v1
+components:
+  schemas:
+    ColumnLayoutNode-Input:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          default: []
+          items:
+            $ref: '#/components/schemas/AnyNodeContent'
+          title: Content
+          type: array
+        type:
+          const: columnLayout
+          default: columnLayout
+          title: Type
+          type: string
+      title: ColumnLayoutNode
+      type: object
+    DocumentSignature:
+      description: A signature on a document.
+      properties:
+        amendment_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: ID of the note amendment this signature applies to, if any; null for signatures on the base note or legacy records.
+          title: Amendment Id
+        on_behalf_of_user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: On Behalf Of User Id
+        on_behalf_of_user_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: On Behalf Of User Name
+        signature_comments:
+          title: Signature Comments
+          type: string
+        signature_role:
+          $ref: '#/components/schemas/DocumentSignatureRole'
+        signed_at:
+          description: When the associated document was signed with this signature.
+          format: date-time
+          title: Signed At
+          type: string
+        user_id:
+          description: The ID of the user who authored the signature.
+          title: User Id
+          type: integer
+        user_name:
+          description: The name of the user who authored the signature.
+          title: User Name
+          type: string
+      required:
+      - user_id
+      - user_name
+      - signed_at
+      - signature_role
+      - signature_comments
+      title: DocumentSignature
+      type: object
+    PaginatedResponse_NoteMetadata_:
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+        offset:
+          title: Offset
+          type: integer
+        previous:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Previous
+        results:
+          items:
+            $ref: '#/components/schemas/NoteMetadata'
+          title: Results
+          type: array
+      required:
+      - results
+      - count
+      - offset
+      - limit
+      title: PaginatedResponse[NoteMetadata]
+      type: object
+    el8_note_models__note__content__base_node__Node__NodeAttrs:
+      properties:
+        ai_generation_info:
+          anyOf:
+          - $ref: '#/components/schemas/AiGenerationInfo'
+          - type: 'null'
+        creation_type:
+          anyOf:
+          - enum:
+            - ai
+            - template
+            type: string
+          - type: 'null'
+          title: Creation Type
+        is_new:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is New
+        ref_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ref Id
+      title: NodeAttrs
+      type: object
+    DocumentNode-Input:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/DocumentNodeChild-Input'
+          title: Content
+          type: array
+        type:
+          const: document
+          default: document
+          title: Type
+          type: string
+      title: DocumentNode
+      type: object
+    DocumentNodeChild-Output:
+      discriminator:
+        mapping:
+          columnLayout: '#/components/schemas/ColumnLayoutNode-Output'
+          twoColumnLayout: '#/components/schemas/TwoColumnLayoutNode-Output'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/TwoColumnLayoutNode-Output'
+      - $ref: '#/components/schemas/ColumnLayoutNode-Output'
+    DocumentSignatureRole:
+      description: The role the user is performing when adding a signature to a visit note
+      enum:
+      - amender
+      - cosigner
+      - rendering_provider
+      - staff_autofiler
+      title: DocumentSignatureRole
+      type: string
+    NoteCreate:
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the bill associated with the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          description: Whether the note is marked as confidential.
+          title: Confidential
+          type: boolean
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Input'
+          - type: 'null'
+          description: An object representing the body of the note.
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          default: {}
+          description: Unstructured data for storing related metadata.
+          title: Metadata
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Serviced At
+      required:
+      - provider
+      - practice
+      - patient
+      - category
+      title: NoteCreate
+      type: object
+    ValidationError:
+      properties:
+        ctx:
+          title: Context
+          type: object
+        input:
+          title: Input
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+    CODE_TYPE:
+      enum:
+      - CPT
+      - SNOMED
+      - HL7
+      - ICD9
+      - LOINC
+      - CVX
+      - RXNORM
+      - ICD10
+      - CPTII
+      - HCPCS
+      - EL8
+      title: CODE_TYPE
+      type: string
+    DocumentNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/DocumentNodeChild-Output'
+          title: Content
+          type: array
+        type:
+          const: document
+          default: document
+          title: Type
+          type: string
+      title: DocumentNode
+      type: object
+    TwoColumnLayoutNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/ColumnLayoutNode-Output'
+          title: Content
+          type: array
+        type:
+          const: twoColumnLayout
+          default: twoColumnLayout
+          title: Type
+          type: string
+      title: TwoColumnLayoutNode
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    AiGenerationInfo:
+      properties:
+        is_finalized:
+          default: true
+          title: Is Finalized
+          type: boolean
+        transcript_source_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: ''
+          title: Transcript Source Text
+      title: AiGenerationInfo
+      type: object
+    TwoColumnLayoutNode-Input:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          items:
+            $ref: '#/components/schemas/ColumnLayoutNode-Input'
+          title: Content
+          type: array
+        type:
+          const: twoColumnLayout
+          default: twoColumnLayout
+          title: Type
+          type: string
+      title: TwoColumnLayoutNode
+      type: object
+    Doctag:
+      description: 'A doctag is an identifier that can be applied to a document.
+
+        This implementation of doctag mirrors VN1''s coded document tag'
+      properties:
+        code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code
+        code_type:
+          anyOf:
+          - $ref: '#/components/schemas/CODE_TYPE'
+          - type: 'null'
+        concept_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Concept Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        id:
+          title: Id
+          type: integer
+        is_cpc_plus:
+          title: Is Cpc Plus
+          type: boolean
+        is_mips:
+          title: Is Mips
+          type: boolean
+        practice:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Practice
+        shared:
+          title: Shared
+          type: boolean
+        snomed_result_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Snomed Result Code
+        value:
+          title: Value
+          type: string
+      required:
+      - value
+      - id
+      - shared
+      - is_mips
+      - is_cpc_plus
+      title: Doctag
+      type: object
+    NoteUpdate:
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bill
+        category:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Category
+        close_snapshot:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Close Snapshot
+        confidential:
+          default: false
+          title: Confidential
+          type: boolean
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Input'
+          - type: 'null'
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Metadata
+        provider:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Provider
+        serviced_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - type: 'null'
+          title: Serviced At
+        snapshot_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Snapshot Id
+      title: NoteUpdate
+      type: object
+    ColumnLayoutNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          anyOf:
+          - $ref: '#/components/schemas/el8_note_models__note__content__base_node__Node__NodeAttrs'
+          - type: 'null'
+        content:
+          default: []
+          items:
+            $ref: '#/components/schemas/AnyNodeContent'
+          title: Content
+          type: array
+        type:
+          const: columnLayout
+          default: columnLayout
+          title: Type
+          type: string
+      title: ColumnLayoutNode
+      type: object
+    DocumentNodeChild-Input:
+      discriminator:
+        mapping:
+          columnLayout: '#/components/schemas/ColumnLayoutNode-Input'
+          twoColumnLayout: '#/components/schemas/TwoColumnLayoutNode-Input'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/TwoColumnLayoutNode-Input'
+      - $ref: '#/components/schemas/ColumnLayoutNode-Input'
+    Note:
+      description: 'A full representation of a note.
+
+
+        Do not use this for endpoints that return notes in bulk. Use `NoteMetadata`
+
+        for that instead.'
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: The ID of the bill associated with the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          description: Whether the note is marked as confidential.
+          title: Confidential
+          type: boolean
+        content:
+          anyOf:
+          - $ref: '#/components/schemas/DocumentNode-Output'
+          - type: 'null'
+          description: An object representing the body of the note.
+        doctags:
+          default: []
+          items:
+            $ref: '#/components/schemas/Doctag'
+          title: Doctags
+          type: array
+        exam_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exam Reason
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        is_outdated:
+          default: false
+          title: Is Outdated
+          type: boolean
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          default: {}
+          description: Unstructured data for storing related metadata.
+          title: Metadata
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Serviced At
+        signatures:
+          default: []
+          items:
+            $ref: '#/components/schemas/DocumentSignature'
+          title: Signatures
+          type: array
+        snapshot_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Snapshot Id
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+      required:
+      - provider
+      - practice
+      - patient
+      - category
+      - serviced_at
+      - id
+      - is_draft
+      title: Note
+      type: object
+    AnyNodeContent:
+      additionalProperties: true
+      description: 'Placeholder for node content, eliminating cycles in OpenAPI schema generation.
+
+        This should be replaced with any node content type when calling the API'
+      properties: {}
+      title: AnyNodeContent
+      type: object
+    NoteMetadata:
+      description: 'A lightweight version of `Note` that omits certain fields for performance reasons,
+
+        specifically for use with endpoints that return notes in bulk.'
+      properties:
+        bill:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: ID of the bill associated to the note
+          title: Bill
+        category:
+          description: 'Practice-created identifiers for note category.
+
+            A category is a Visit Note Type object.
+
+            See https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.'
+          title: Category
+          type: integer
+        confidential:
+          default: false
+          description: Whether the note is marked as confidential.
+          title: Confidential
+          type: boolean
+        doctags:
+          default: []
+          items:
+            $ref: '#/components/schemas/Doctag'
+          title: Doctags
+          type: array
+        id:
+          title: Id
+          type: integer
+        is_draft:
+          title: Is Draft
+          type: boolean
+        metadata:
+          anyOf:
+          - {}
+          - type: 'null'
+          description: An optional field to store any necessary metadata related to the note.
+          title: Metadata
+        note_v1_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Note V1 Id
+        patient:
+          description: The ID of the patient for whom the note was created.
+          title: Patient
+          type: integer
+        practice:
+          description: Authoring practice ID.
+          title: Practice
+          type: integer
+        provider:
+          description: The ID of the assigned provider.
+          title: Provider
+          type: integer
+        serviced_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Serviced At
+      required:
+      - id
+      - provider
+      - practice
+      - patient
+      - category
+      - serviced_at
+      - is_draft
+      title: NoteMetadata
+      type: object
+  securitySchemes:
+    RequireAuthentication:
+      type: http
+      scheme: bearer
+    RequirePracticeAuthorization:
+      type: http
+      scheme: bearer
+    RequirePracticeAuthorizationOrHippoAdmin:
+      type: http
+      scheme: bearer

@@ -1,0 +1,573 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Recurring Event Groups API
+  version: '1.0'
+  description: 'Operations tagged Recurring Event Groups across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-scheduling-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Recurring Event Groups
+paths:
+  /recurring_event_groups/{id}/:
+    get:
+      summary: Get Recurring Event Group
+      description: ''
+      operationId: get-recurring-event-group
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65097433178,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/recurring_event_groups/234234/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Recurring Event Groups
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Recurring Event Group
+      description: ''
+      operationId: delete-recurring-event-group
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/recurring_event_groups/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Recurring Event Groups
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /recurring_event_groups/:
+    post:
+      summary: Create Recurring Event Group
+      description: ''
+      operationId: create-recurring-event-group
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65097433178,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"practice\": 12323,\n  \"reason\": \"followup\",\n  \"time_slot_type\": \"appointment_slot\",\n  \"schedules\": [\n    {\n      \"series_start\": \"2000-01-01\",\n      \"series_stop\": \"2000-02-01\",\n      \"event_time\": \"10:30:00\",\n      \"physician\": 342343,\n      \"duration\": 15,\n      \"repeats\": \"Weekly\",\n      \"dow_monday\": True,\n      \"dow_tuesday\": False,\n      \"dow_wednesday\": False,\n      \"dow_thursday\": False,\n      \"dow_friday\": False,\n      \"dow_saturday\": False,\n      \"dow_sunday\": False,\n      \"description\": \"test description\"\n    }\n  ]\n}\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/recurring_event_groups/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)\n\n"
+        samples-languages:
+        - python
+      tags:
+      - Recurring Event Groups
+      security:
+      - sec0: []
+    get:
+      summary: Find Recurring Event Groups
+      description: ''
+      operationId: find-recurring-event-group
+      parameters:
+      - name: physician
+        in: query
+        description: The ids of providers associated with these recurring event groups.
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        description: The practice for these recurring event groups.
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: reason
+        in: query
+        description: The name of the recurring event group.
+        schema:
+          type: string
+      - name: start_date
+        in: query
+        description: Start of range to filter event groups by schedule date. Returns any group with schedules that don't end before this date.
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: End of range to filter event groups by schedule date. Returns any group with schedules that don't start after this date.
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/recurring_event_groups/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/recurring_event_groups/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Recurring Event Groups
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /recurring_event_groups/:id/:
+    put:
+      summary: Update Recurring Event Group
+      description: ''
+      operationId: update-recurring-event-group
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"reason\": \"followup\",\n  \"schedules\": [\n    {\n      \"series_start\": \"2000-01-01\",\n      \"series_stop\": \"2000-02-01\",\n      \"event_time\": \"10:30:00\",\n      \"physician\": 342343,\n      \"duration\": 15,\n      \"repeats\": \"Weekly\",\n      \"dow_monday\": True,\n      \"dow_tuesday\": False,\n      \"dow_wednesday\": False,\n      \"dow_thursday\": False,\n      \"dow_friday\": False,\n      \"dow_saturday\": False,\n      \"dow_sunday\": False,\n      \"description\": \"test description\"\n    }\n  ]\n}\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/recurring_event_groups/\",\n                    data=json.dumps(data),\n                    headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)\n\n"
+        samples-languages:
+        - python
+      tags:
+      - Recurring Event Groups
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/recurring_event_groups/:
+    get:
+      operationId: recurring_event_groups_list
+      parameters:
+      - description: End of range to filter event groups by schedule date. Returns any group with schedules that don't start after this date.
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: The ids of providers associated with these recurring event groups.
+        in: query
+        name: physician
+        schema:
+          items:
+            type: string
+          type: array
+      - description: The practice for these recurring event groups.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: The name of the recurring event group.
+        explode: false
+        in: query
+        name: reason
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Start of range to filter event groups by schedule date. Returns any group with schedules that don't end before this date.
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - in: query
+        name: time_slot_type
+        schema:
+          enum:
+          - appointment
+          - appointment_slot
+          - event
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRecurringEventGroupList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Recurring Event Groups
+      tags:
+      - Recurring Event Groups
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new recurring event group.
+      operationId: recurring_event_groups_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecurringEventGroup'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecurringEventGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Recurring Event Group
+      tags:
+      - Recurring Event Groups
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/recurring_event_groups/{id}/:
+    delete:
+      description: Delete an existing recurring event group.
+      operationId: recurring_event_groups_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Recurring Event Group
+      tags:
+      - Recurring Event Groups
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: recurring_event_groups_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecurringEventGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Recurring Event Group
+      tags:
+      - Recurring Event Groups
+      x-el8-docs-category: Scheduling API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    RecurringEventSchedule:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          type: string
+        dow_friday:
+          type: boolean
+        dow_monday:
+          type: boolean
+        dow_saturday:
+          type: boolean
+        dow_sunday:
+          type: boolean
+        dow_thursday:
+          type: boolean
+        dow_tuesday:
+          type: boolean
+        dow_wednesday:
+          type: boolean
+        duration:
+          type: integer
+        event_time:
+          format: time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        physician:
+          format: int64
+          type: integer
+        repeats:
+          $ref: '#/components/schemas/RepeatsEnum'
+        series_start:
+          format: date
+          type: string
+        series_stop:
+          format: date
+          type:
+          - string
+          - 'null'
+      required:
+      - duration
+      - event_time
+      - physician
+      - series_start
+      type: object
+    RecurringEventGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_blocking:
+          readOnly: true
+          type: boolean
+        practice:
+          format: int64
+          type: integer
+        reason:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        schedules:
+          items:
+            $ref: '#/components/schemas/RecurringEventSchedule'
+          type: array
+        time_slot_type:
+          $ref: '#/components/schemas/TimeSlotTypeEnum'
+      required:
+      - practice
+      - schedules
+      - time_slot_type
+      type: object
+    TimeSlotTypeEnum:
+      enum:
+      - appointment
+      - appointment_slot
+      - event
+      type: string
+    PaginatedRecurringEventGroupList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/RecurringEventGroup'
+          type: array
+      required:
+      - results
+      type: object
+    RepeatsEnum:
+      enum:
+      - Monthly
+      - Weekly
+      type: string
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-scheduling-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

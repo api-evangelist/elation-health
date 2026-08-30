@@ -1,0 +1,286 @@
+openapi: 3.2.0
+info:
+  title: Settings Patient Insurances API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Patient Insurances
+paths:
+  /patient_insurances/{id}/eligibility/:
+    get:
+      summary: Get Eligibility
+      description: ''
+      operationId: get-eligibility
+      parameters:
+      - name: id
+        in: path
+        description: patient insurance ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "// See Insurance Eligibility Object Definition\n{\n    \"eligibility_details\": {\n        \"copay\": null,\n        \"copay_ambiguous\": true,\n        \"coinsurance\": \"0\",\n        \"coinsurance_ambiguous\": false,\n        \"deductible\": \"2000\",\n        \"deductible_ambiguous\": false,\n        \"deductible_remaining\": \"1827.12\",\n        \"deductible_remaining_ambiguous\": false,\n        \"errors\": []\n    },\n    \"eligibility_check_timestamp\": \"2022-05-05T19:39:26+00:00\",\n    \"eligibility_status\": \"active\",\n    \"patient_id\": 140658474356545,\n    \"patient_insurance_id\": 130754515763059,\n    \"practice_id\": 6558432\n}"
+              schema:
+                type: object
+                properties:
+                  eligibility_details:
+                    type: object
+                    properties:
+                      copay: {}
+                      copay_ambiguous:
+                        type: boolean
+                        example: true
+                        default: true
+                      coinsurance:
+                        type: string
+                        example: '0'
+                      coinsurance_ambiguous:
+                        type: boolean
+                        example: false
+                        default: true
+                      deductible:
+                        type: string
+                        example: '2000'
+                      deductible_ambiguous:
+                        type: boolean
+                        example: false
+                        default: true
+                      deductible_remaining:
+                        type: string
+                        example: '1827.12'
+                      deductible_remaining_ambiguous:
+                        type: boolean
+                        example: false
+                        default: true
+                      errors:
+                        type: array
+                  eligibility_check_timestamp:
+                    type: string
+                    example: '2022-05-05T19:39:26+00:00'
+                  eligibility_status:
+                    type: string
+                    example: active
+                  patient_id:
+                    type: integer
+                    example: 140658474356545
+                    default: 0
+                  patient_insurance_id:
+                    type: integer
+                    example: 130754515763059
+                    default: 0
+                  practice_id:
+                    type: integer
+                    example: 6558432
+                    default: 0
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/patient_insurances/130754515763059/eligibility/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/patients/64184451073/ \
+
+            > -H "Authorization: Bearer XaTtPYZ8Ufy04f0187fPbWFkwcADF0"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - Patient Insurances
+    post:
+      summary: Create Eligibility
+      description: ''
+      operationId: create-eligibility
+      parameters:
+      - name: id
+        in: path
+        description: Patient Insurance ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                group_id:
+                  type: integer
+                  description: ID that matches the group record in Elation system
+                  format: int32
+                group_name:
+                  type: string
+                  description: Name of the group / organization. group_npi field is required if this is populated.
+                group_npi:
+                  type: string
+                  description: NPI of the group / organization. group_name field is required if this is populated.
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "// See Insurance Elgibility Object Definition\n{\n    \"eligibility_details\": {\n        \"copay\": null,\n        \"copay_ambiguous\": true,\n        \"coinsurance\": \"0\",\n        \"coinsurance_ambiguous\": false,\n        \"deductible\": \"2000\",\n        \"deductible_ambiguous\": false,\n        \"deductible_remaining\": \"1827.12\",\n        \"deductible_remaining_ambiguous\": false,\n        \"errors\": []\n    },\n    \"eligibility_check_timestamp\": \"2022-05-05T19:39:26+00:00\",\n    \"eligibility_status\": \"active\",\n    \"patient_id\": 140658474356545,\n    \"patient_insurance_id\": 130754515763059,\n    \"practice_id\": 6558432\n}"
+              schema:
+                type: object
+                properties:
+                  eligibility_details:
+                    type: object
+                    properties:
+                      copay: {}
+                      copay_ambiguous:
+                        type: boolean
+                        example: true
+                        default: true
+                      coinsurance:
+                        type: string
+                        example: '0'
+                      coinsurance_ambiguous:
+                        type: boolean
+                        example: false
+                        default: true
+                      deductible:
+                        type: string
+                        example: '2000'
+                      deductible_ambiguous:
+                        type: boolean
+                        example: false
+                        default: true
+                      deductible_remaining:
+                        type: string
+                        example: '1827.12'
+                      deductible_remaining_ambiguous:
+                        type: boolean
+                        example: false
+                        default: true
+                      errors:
+                        type: array
+                  eligibility_check_timestamp:
+                    type: string
+                    example: '2022-05-05T19:39:26+00:00'
+                  eligibility_status:
+                    type: string
+                    example: active
+                  patient_id:
+                    type: integer
+                    example: 140658474356545
+                    default: 0
+                  patient_insurance_id:
+                    type: integer
+                    example: 130754515763059
+                    default: 0
+                  practice_id:
+                    type: integer
+                    example: 6558432
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/patient_insurances/130754515763059/eligibility/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/patients/64184451073/ \
+
+            > -H "Authorization: Bearer XaTtPYZ8Ufy04f0187fPbWFkwcADF0"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - Patient Insurances
+  /patient_insurances/{id}/eligibility_full_report/:
+    get:
+      summary: Get Eligibility Full Report
+      description: ''
+      operationId: get-eligibility-full-report
+      parameters:
+      - name: id
+        in: path
+        description: patient insurance ID
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Patient Insurances
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,60 @@
+openapi: 3.2.0
+info:
+  title: Settings Reports Ext API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Reports Ext
+paths:
+  /reports-ext/:
+    post:
+      summary: Create External Report
+      description: ''
+      operationId: create-external-report
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 67176497153, \n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n    \"custom_title\": \"Custom Title\",\n    \"report_type\": \"Misc\",\n    \"chart_date\": \"2012-04-06T22:01:08Z\",     # when the document should show up in the chart feed.  usually the same as `document_date`\n    \"document_date\": \"2012-04-06T22:01:08Z\",  # actual date of the document\n    \"patient\": 2433235,\n    'physician': 131074,\n    'files': [\n        {\n            \"external_content\": {\n                \"summary\": \"this is summary line 1\\nthis is line2\",\n                \"referenced_url\": \"https://external.data.com/path_to_data\"\n            }\n        }\n    ]\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/reports/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Reports Ext
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

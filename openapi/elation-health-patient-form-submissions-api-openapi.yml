@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Patient Form Submissions API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Patient Form Submissions across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Patient Form Submissions
+paths:
+  /api/2.0/patient_form_submissions/:
+    get:
+      description: Returns a list of patient form submissions; supports direct creation.
+      operationId: patient_form_submissions_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - in: query
+        name: report__patient
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientFormSubmissionList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Patient Form Submissions
+      tags:
+      - Patient Form Submissions
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new patient form submission.
+      operationId: patient_form_submissions_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientFormSubmission'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFormSubmission'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Patient Form Submission
+      tags:
+      - Patient Form Submissions
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient_form_submissions/{id}/:
+    get:
+      description: Retrieve a single patient form object
+      operationId: patient_form_submissions_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFormSubmission'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patient Form Submission
+      tags:
+      - Patient Form Submissions
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatientFormSubmission:
+      properties:
+        appointment:
+          description: ID of the appointment this submission is linked to.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: Date of the clinical document. For past appointments, set this to the appointment date so the record appears at the correct position in the chart feed.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        form_name:
+          readOnly: true
+          type: string
+        form_response_json:
+          description: Form response data in the patient form submission JSON format.
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: ID of the patient.
+          format: int64
+          type: integer
+        patient_form:
+          description: ID of the PatientForm to create a response for.
+          format: int64
+          type: integer
+        reported_date_time:
+          description: Date and time the form was reported.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        topics:
+          readOnly: true
+      required:
+      - form_response_json
+      - patient
+      - patient_form
+      type: object
+    PaginatedPatientFormSubmissionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientFormSubmission'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

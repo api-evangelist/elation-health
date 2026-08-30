@@ -1,0 +1,392 @@
+openapi: 3.2.0
+info:
+  title: Settings App API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: App
+paths:
+  /app/subscriptions/:
+    post:
+      summary: Subscribe to a resource updates
+      description: ''
+      operationId: subscribe-to-a-resource-updates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource:
+                  type: string
+                  description: The resource name
+                target:
+                  type: string
+                  description: The target URL where the data will be sent when an update occurs
+                properties:
+                  type: string
+                  description: Properties specific to this subscription. See below for usage.
+                  default: 'null'
+                  format: json
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"resource\": \"patients\",\n \"target\": \"https://requestb.in/18pqnk11\",\n \"created_date\": \"2017-01-01T01:05:00Z\",\n \"deleted_date\": null\n}"
+              schema:
+                type: object
+                properties:
+                  resource:
+                    type: string
+                    example: patients
+                  target:
+                    type: string
+                    example: https://requestb.in/18pqnk11
+                  created_date:
+                    type: string
+                    example: '2017-01-01T01:05:00Z'
+                  deleted_date: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"resource\": \"patients\",\n  \"target\": \"https://requestb.in/18pqnk11\" \t\t# Target url as example, insert your own\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/app/subscriptions/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - App
+    get:
+      summary: Find Subscriptions
+      description: ''
+      operationId: find-subscriptions
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 3,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [  // list of objects\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/app/subscriptions/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/app/subscriptions/ \
+
+            > -H "Authorization: Bearer SftJozdkIuEObwOvI6WpSN6jndCHad"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - App
+  /app/published_events/:
+    get:
+      summary: Find published events
+      description: ''
+      operationId: find-published-events
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/app/published_events/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/app/published_events/?limit=10\",\n  \"results\": [  // list of objects\n    {\n      \"resource\": \"patients\",\n      \"target\": \"https://requestb.in/18pqnk11\",\n      \"status_code\": null,\n      \"received_date\": \"2016-11-22T08:32:10Z\",\n      \"processed_date\": null\n\t\t},\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/app/published_events/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/app/published_events/ \
+
+            > -H "Authorization: Bearer SftJozdkIuEObwOvI6WpSN6jndCHad"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - App
+  /app/subscriptions/{id}/:
+    delete:
+      summary: Delete a Subscription
+      description: ''
+      operationId: delete-a-subscription
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/app/subscriptions/64811630598/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - App
+  /app/published_events/{event_id}/:
+    patch:
+      summary: Update published event
+      description: ''
+      operationId: update-published-event-1
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: event_id
+        in: path
+        description: The event ID of the published event. See Event object
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status_code:
+                  type: string
+                  description: nullable
+                processed_date:
+                  type: string
+                error_content:
+                  type: string
+                  description: nullable
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t// See Object Definition\n}"
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"status_code\": 400\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/app/published_events/123/\",\n                    data=json.dumps(data),\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/app/published_events/ \
+
+            > -H "Authorization: Bearer SftJozdkIuEObwOvI6WpSN6jndCHad"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - App
+    put:
+      summary: Update published event
+      description: ''
+      operationId: update-published-event
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: event_id
+        in: path
+        description: The event ID of the published event. See Event object
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status_code
+              - processed_date
+              - error_content
+              properties:
+                status_code:
+                  type: string
+                  description: nullable
+                processed_date:
+                  type: string
+                error_content:
+                  type: string
+                  description: nullable
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/app/published_events/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/app/published_events/?limit=10\",\n  \"results\": [  // list of objects\n    {\n      \"resource\": \"patients\",\n      \"target\": \"https://requestb.in/18pqnk11\",\n      \"status_code\": null,\n      \"received_date\": \"2016-11-22T08:32:10Z\",\n      \"processed_date\": null\n\t\t},\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"status_code\": 400,\n  \"processed_date\": \"2016-11-22T08:32:10Z\",\n  \"error_content\": \"Failed to update.\"\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/app/published_events/123/\",\n                    data=json.dumps(data),\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/app/published_events/ \
+
+            > -H "Authorization: Bearer SftJozdkIuEObwOvI6WpSN6jndCHad"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - App
+    get:
+      summary: Get published event
+      description: ''
+      operationId: get-published-event
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: event_id
+        in: path
+        description: The event ID of the published event. See Event object
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/app/published_events/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/app/published_events/?limit=10\",\n  \"results\": [  // list of objects\n    {\n      \"resource\": \"patients\",\n      \"target\": \"https://requestb.in/18pqnk11\",\n      \"status_code\": null,\n      \"received_date\": \"2016-11-22T08:32:10Z\",\n      \"processed_date\": null\n\t\t},\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/app/published_events/123/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/app/published_events/ \
+
+            > -H "Authorization: Bearer SftJozdkIuEObwOvI6WpSN6jndCHad"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - App
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

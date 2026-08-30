@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Insurance Eligibility Usage API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Insurance Eligibility Usage across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Insurance Eligibility Usage
+paths:
+  /api/2.0/practices/{id}/eligibility_usage/:
+    get:
+      description: Get the real time eligibility usage for a practice
+      operationId: practices_eligibility_usage_retrieve
+      parameters:
+      - description: End date for usage period (YYYY-MM-DD)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: The id of the practice
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: Start date for usage period (YYYY-MM-DD)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibilityUsage'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get Practice Eligibility Usage
+      tags:
+      - Insurance Eligibility Usage
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    EligibilityUsage:
+      properties:
+        end_date:
+          description: End date of the usage period.
+          format: date
+          type: string
+        failed_checks:
+          description: Number of failed eligibility checks.
+          type: integer
+        start_date:
+          description: Start date of the usage period.
+          format: date
+          type: string
+        successful_checks:
+          description: Number of successful eligibility checks.
+          type: integer
+        total_checks:
+          description: Total number of eligibility checks performed.
+          type: integer
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-practice-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

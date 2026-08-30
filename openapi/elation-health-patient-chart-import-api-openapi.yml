@@ -1,0 +1,390 @@
+openapi: 3.2.0
+info:
+  description: "This set of API resources allows you to import patient data into the Elation\nEMR.  For more information on Elation APIs, view [our\ndocumentation](https://docs.elationhealth.com/reference).\n\nThe expected flow for an import is:\n1. Create a Data Import Request for each batch of imports. There is no size limit on an import batch, though larger batches will take longer to process. You may separate your imports into batches using whatever logic you like. Each batch must be for a single practice and a single provider within that practice.\n\n2. Create Patient Chart Import Requests for each chart you want to import. Some validation will occur at create time, but final validation only occurs when the import is attempted. Patient Chart Import Requests are initially created in the `open` status.\n\n3. When you are ready to begin importing data, update the Patient Chart Import Request status to `pending`. It will not be imported immediately, but it will be added to the queue.  \n\n4. Alternatively, a convenience is provided at the Data Import Request level. POSTing to `/data-import-request/{dir-id}/run` will transition all child Patient Chart Import Requests in `open` to `pending`.\n\n5. Check the status of the import by polling the Data Import Request item. If import failures occur, you can review the Patient Chart Import Requests that failed and then update and rerun them individually.\n\n6. Once all Patient Chart Import Requests have succeeded, you should consider the Data Import Request to be successful. Please review your data within the web application to ensure that charts imported as you expected.\n\nIf you encounter any problems, please contact Elation at api-support@elationhealth.com."
+  version: 1.0.2
+  title: Elation Import patient chart import API
+  termsOfService: https://www.elationhealth.com/terms-of-use/
+  contact:
+    email: api-support@elationhealth.com
+servers:
+- description: Elation Production API
+  url: https://api.app.elationemr.com/api/2.0
+- description: Elation Sandbox API
+  url: https://sandbox.elationemr.com/api/2.0
+tags:
+- name: patient chart import
+paths:
+  /data-import-requests/{dir-id}/patient-chart-imports:
+    parameters:
+    - name: dir-id
+      in: path
+      description: ID of the data-import-request
+      required: true
+      schema:
+        type: integer
+    get:
+      tags:
+      - patient chart import
+      summary: Finds patient_chart_import records by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findchartsByStatus
+      parameters:
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            default: open
+            enum:
+            - open
+            - pending
+            - processing
+            - failed
+            - completed
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PatientChartInputGetList'
+              example:
+              - id: 10
+                patientId: 11
+                dataImportRequestId: 12
+                completedAt: 12341234123
+                errors: null
+                sectionStatus: []
+                status: open
+                startedProcessingAt: null
+        '400':
+          description: Invalid status value
+          content: {}
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Data Import Request not found
+      security:
+      - elation_auth:
+        - import
+    post:
+      tags:
+      - patient chart import
+      summary: Add a new patient-chart-import to the associated data import request
+      operationId: addchart
+      requestBody:
+        description: patient-chart-import object that needs to be added to the DIR
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientChartInputPost'
+        required: true
+      responses:
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Existing Data Import Request not found
+        '422':
+          description: The request body could not be parsed as JSON
+      security:
+      - elation_auth:
+        - import
+  /data-import-requests/{dir-id}/patient-chart-imports/{pci-id}:
+    parameters:
+    - name: dir-id
+      in: path
+      description: ID of the data-import-request
+      required: true
+      schema:
+        type: integer
+        format: int64
+    - name: pci-id
+      in: path
+      description: ID of patient-chart-import to return
+      required: true
+      schema:
+        type: integer
+        format: int64
+    get:
+      tags:
+      - patient chart import
+      summary: Find patient-chart-import by ID
+      description: Returns a single patient-chart-import
+      operationId: getPatientChartImportById
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientChartInputGetId'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Data Import Request or Patient Chart Import not found
+          content: {}
+      security:
+      - elation_auth:
+        - import
+    put:
+      tags:
+      - patient chart import
+      summary: Update an existing patient-chart-import
+      operationId: updatepatient-chart-import
+      requestBody:
+        description: patient-chart-import object that needs to be added to the DIR
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientChartInputPut'
+        required: true
+      responses:
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Data Import Request or Patient Chart Import not found
+          content: {}
+        '422':
+          description: The request body could not be parsed as JSON
+      security:
+      - elation_auth:
+        - import
+    patch:
+      tags:
+      - patient chart import
+      summary: Updates a patient-chart-import in the store with form data
+      operationId: updatepatient-chart-importWithForm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Updated name of the patient-chart-import
+                status:
+                  $ref: '#/components/schemas/JobStatus'
+      responses:
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '405':
+          description: Invalid input
+          content: {}
+      security:
+      - elation_auth:
+        - import
+    delete:
+      tags:
+      - patient chart import
+      summary: Deletes a patient-chart-import
+      operationId: deletepatient-chart-import
+      responses:
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Patient Chart Import is in a state where it cannot be deleted; or your credentials are not authorized to use the import API resources
+        '404':
+          description: Data Import Request or Patient Chart Import not found
+          content: {}
+      security:
+      - elation_auth:
+        - import
+  /data-import-requests/{dir-id}/patient-chart-imports/{pci-id}/render-requests:
+    parameters:
+    - name: dir-id
+      in: path
+      description: ID of data-import-request to update
+      required: true
+      schema:
+        type: integer
+        format: int64
+    - name: pci-id
+      in: path
+      description: ID of patient-chart-import to update
+      required: true
+      schema:
+        type: integer
+        format: int64
+    post:
+      tags:
+      - patient chart import
+      summary: uploads an document for rendering
+      operationId: uploadFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                additionalMetadata:
+                  type: string
+                  description: Additional data to pass to server
+                file:
+                  type: string
+                  description: file to upload
+                  format: binary
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '404':
+          description: Data Import Request or Patient Chart Import not found
+          content: {}
+      security:
+      - elation_auth:
+        - import
+components:
+  schemas:
+    ValidationErrorResponse:
+      type: object
+      additionalProperties:
+        description: Name of the field with validation errors
+        type: array
+        items:
+          type: string
+          description: Validation error string
+    PatientChartInputGetId:
+      allOf:
+      - $ref: '#/components/schemas/PatientChartInputGetList'
+      - type: object
+      properties:
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+    PatientChartInputPut:
+      required:
+      - chart_json
+      - status
+      type: object
+      properties:
+        patient_id:
+          type: integer
+          format: int64
+          description: read-only, Only set after import has occurred
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+    PatientChartInputPost:
+      required:
+      - chart_json
+      - status
+      type: object
+      properties:
+        source_patient_id:
+          type: string
+          description: a patient key, normally (fname|lname|dob|gender)
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+    PatientChartInputGetList:
+      required:
+      - chart_json
+      - status
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: read-only
+        patient_id:
+          type: integer
+          format: int64
+          description: read-only, Only set after import has occurred
+        data_import_request_id:
+          type: integer
+          format: int64
+          description: read-only after initial creation
+        completed_at:
+          type: integer
+          format: date-time
+          description: unix UTC timestamp
+        errors:
+          type: array
+          items:
+            type: object
+            format: json
+            description: List of field/message tuples describing the issues with the latest attempt to import the associated chart_json
+        section_status:
+          type: object
+          description: TBD.  Some object that indicates which sections of the chart were successfully imported and which failed.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        started_processing_at:
+          type: string
+          format: date-time
+          description: (iso8601) datetime. read-only
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    ChartBuilderJson:
+      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
+      type: object
+    JobStatus:
+      type: string
+      default: open
+      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
+      enum:
+      - open
+      - pending
+      - processing
+      - failed
+      - completed
+  securitySchemes:
+    elation_auth:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: http://www.elationhealth.com/api/2.0/oauth
+          refreshUrl: http://www.elationhealth.com/api/2.0/oauth
+          scopes:
+            import: interact with data imports in your practice
+externalDocs:
+  description: Elation API v2 Documentation
+  url: https://docs.elationhealth.com/reference

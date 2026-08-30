@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Packaged Medication (Beta) API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Packaged Medication (Beta) across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-reference-data-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Packaged Medication (Beta)
+paths:
+  /api/2.0/packaged_medications/:
+    get:
+      description: Requests to this endpoint must specify at least one query parameter.
+      operationId: packaged_medications_list
+      parameters:
+      - in: query
+        name: is_active
+        schema:
+          type: boolean
+      - description: If `true`, return only soft-deleted packaged medications. If `false`, exclude soft-deleted packaged medications. If omitted, both are returned.
+        in: query
+        name: is_deleted
+        schema:
+          type: boolean
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The name of the packaged medication.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The National Drug Code associated with the packaged medication.
+        explode: false
+        in: query
+        name: ndc
+        schema:
+          items:
+            type:
+            - string
+            - 'null'
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: The id of the reference medication associated with the packaged medication.
+        explode: false
+        in: query
+        name: reference_medication_id
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPackagedMedicationList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Packaged Medications
+      tags:
+      - Packaged Medication (Beta)
+      x-el8-docs-category: Reference Data API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/packaged_medications/{id}/:
+    get:
+      description: Retrieve a single packaged medication
+      operationId: packaged_medications_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagedMedication'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Packaged Medication
+      tags:
+      - Packaged Medication (Beta)
+      x-el8-docs-category: Reference Data API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PackagedMedication:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        din:
+          description: Drug Identification Number.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        gpi:
+          description: Generic Product Identifier.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        has_outer_packaged_drug:
+          readOnly: true
+          type:
+          - boolean
+          - 'null'
+        hri:
+          description: Health Related Item.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          readOnly: true
+          type: boolean
+        is_clinic_pack:
+          description: '`true` if the packaged medication is a clinic pack.'
+          readOnly: true
+          type:
+          - boolean
+          - 'null'
+        is_repackaged:
+          description: '`true` if the packaged medication is a repackaged medication.'
+          readOnly: true
+          type:
+          - boolean
+          - 'null'
+        labeler_id:
+          format: int64
+          readOnly: true
+          type: integer
+        market_end_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        medispanppid:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        multi_source:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        name:
+          readOnly: true
+          type: string
+        ndc:
+          description: National Drug Code.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        obsolete_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        packaging_name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        reference_medication_id:
+          format: int64
+          readOnly: true
+          type: integer
+        size_description:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        upc:
+          description: Universal Product Code.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedPackagedMedicationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PackagedMedication'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-reference-data-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

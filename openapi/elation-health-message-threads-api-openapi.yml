@@ -1,0 +1,1116 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Message Threads API
+  version: '1.0'
+  description: 'Operations tagged Message Threads across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-messaging-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Message Threads
+paths:
+  /message_threads/{id}:
+    get:
+      summary: Get Message Thread
+      description: ''
+      operationId: get-message-thread
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '303':
+          description: '303'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/message_threads/83792571234/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/patients/64184451073/ \
+
+            > -H "Authorization: Bearer XaTtPYZ8Ufy04f0187fPbWFkwcADF0"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /message_threads/:
+    get:
+      summary: Find Message Threads
+      description: ''
+      operationId: find-message-threads
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: document_date__gt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__lt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/message_threads/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/message_threads/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/message_threads/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    post:
+      summary: Create Message Thread
+      description: ''
+      operationId: create-message-thread
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - sender
+              - practice
+              - document_date
+              - chart_date
+              properties:
+                patient:
+                  type: integer
+                  description: The patient chart for which the thread is about
+                  format: int32
+                sender:
+                  type: integer
+                  description: The id of the user who initiated the message thread
+                  format: int32
+                practice:
+                  type: integer
+                  description: The id of the practice that owns the patient chart
+                  format: int32
+                document_date:
+                  type: string
+                  format: date
+                chart_date:
+                  type: string
+                  format: date
+                delivery_date:
+                  type: string
+                  format: date
+                members:
+                  type: array
+                  description: List of Thread Members, when creating only need to specify the id of the thread member and their status
+                messages:
+                  type: array
+                  description: List of Thread Messages, when creating only need to provide the body, send_date and sender
+                is_urgent:
+                  type: boolean
+                  description: Whether the message is currently urgent
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /message_threads/{id}/:
+    patch:
+      summary: Update Message Thread
+      description: ''
+      operationId: update-message-thread
+      parameters:
+      - name: id
+        in: path
+        description: The id of the message thread
+        schema:
+          type: integer
+          format: int32
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_urgent:
+                  type: boolean
+                delivery_date:
+                  type: string
+                  description: The time at which the message thread will be "delivered" to users and made visible in the UI.
+                  format: date
+                document_date:
+                  type: string
+                  format: date
+                chart_date:
+                  type: string
+                  format: date
+                members:
+                  type: array
+                  description: List of members to replace existing list.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Message Thread
+      description: ''
+      operationId: delete-message-thread
+      parameters:
+      - name: id
+        in: path
+        description: The id of the message thread
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /message_threads/ [WIP]:
+    post:
+      summary: Create Message Thread [WIP]
+      description: ''
+      operationId: create-message-thread-wip
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - practice
+              - document_date
+              - chart_date
+              properties:
+                patient:
+                  type: integer
+                  description: The patient chart for which the thread is about
+                  format: int32
+                practice:
+                  type: integer
+                  description: The id of the practice that owns the patient chart
+                  format: int32
+                document_date:
+                  type: string
+                  format: date
+                chart_date:
+                  type: string
+                  format: date
+                delivery_date:
+                  type: string
+                  format: date
+                members:
+                  type: array
+                  description: List of Thread Members, when creating only need to specify the id of the thread member and their status
+                  items:
+                    properties:
+                      status:
+                        type: string
+                        enum:
+                        - ("ReqAct"
+                        - '"Requiring Action")'
+                        - ("Addressed"
+                        - '"Addressed")'
+                      ack_time:
+                        type: string
+                        format: date
+                      user:
+                        type: integer
+                        description: must provide or user or group
+                        format: int32
+                      group:
+                        type: integer
+                        description: must provide or user or group
+                        format: int32
+                      thread:
+                        type: integer
+                        format: int32
+                    required:
+                    - status
+                    type: object
+                messages:
+                  type: array
+                  description: List of Thread Messages, when creating only need to provide the body, send_date and sender
+                  items:
+                    properties:
+                      body:
+                        type: string
+                      sender:
+                        type: integer
+                        format: int32
+                      send_date:
+                        type: string
+                        format: date
+                      to_document:
+                        type: integer
+                        format: int32
+                      thread:
+                        type: integer
+                        format: int32
+                    required:
+                    - body
+                    - sender
+                    - send_date
+                    type: object
+                is_urgent:
+                  type: boolean
+                  description: Whether the message is currently urgent
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"created_date\": \"2022-06-22T15:37:11Z\",\n    \"deleted_date\": null,\n    \"delivery_date\": \"2001-06-22T13:12:21Z\",\n    \"document_date\": \"2001-10-20T17:43:19Z\",\n    \"chart_date\": \"2022-06-22T15:37:11Z\",\n    \"patient\": 1638401,\n    \"practice\": 140758918627332,\n    \"id\": 140758939467867,\n    \"is_urgent\": true,\n    \"members\": [\n        {\n            \"id\": 140758939533404,\n            \"thread\": 140758939467867,\n            \"user\": null,\n            \"group\": 262157,\n            \"status\": \"Addressed\",\n            \"ack_time\": \"2011-03-01T09:06:02Z\"\n        }\n    ],\n    \"messages\": [\n        {\n            \"body\": \"Patient should have appointment already booked.\",\n            \"id\": 140758939598942,\n            \"patient\": 1638401,\n            \"practice\": 140758918627332,\n            \"thread\": 140758939467867,\n            \"sender\": 4,\n            \"send_date\": \"2010-12-13T15:18:11\",\n            \"to_document\": null\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  created_date:
+                    type: string
+                    example: '2022-06-22T15:37:11Z'
+                  deleted_date: {}
+                  delivery_date:
+                    type: string
+                    example: '2001-06-22T13:12:21Z'
+                  document_date:
+                    type: string
+                    example: '2001-10-20T17:43:19Z'
+                  chart_date:
+                    type: string
+                    example: '2022-06-22T15:37:11Z'
+                  patient:
+                    type: integer
+                    example: 1638401
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758918627332
+                    default: 0
+                  id:
+                    type: integer
+                    example: 140758939467867
+                    default: 0
+                  is_urgent:
+                    type: boolean
+                    example: true
+                    default: true
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758939533404
+                          default: 0
+                        thread:
+                          type: integer
+                          example: 140758939467867
+                          default: 0
+                        user: {}
+                        group:
+                          type: integer
+                          example: 262157
+                          default: 0
+                        status:
+                          type: string
+                          example: Addressed
+                        ack_time:
+                          type: string
+                          example: '2011-03-01T09:06:02Z'
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        body:
+                          type: string
+                          example: Patient should have appointment already booked.
+                        id:
+                          type: integer
+                          example: 140758939598942
+                          default: 0
+                        patient:
+                          type: integer
+                          example: 1638401
+                          default: 0
+                        practice:
+                          type: integer
+                          example: 140758918627332
+                          default: 0
+                        thread:
+                          type: integer
+                          example: 140758939467867
+                          default: 0
+                        sender:
+                          type: integer
+                          example: 4
+                          default: 0
+                        send_date:
+                          type: string
+                          example: '2010-12-13T15:18:11'
+                        to_document: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n    \"delivery_date\": \"2001-06-22T13:12:21Z\",\n    \"document_date\": \"2001-10-20T17:43:19Z\",\n    \"chart_date\": \"2011-10-20T17:43:19Z\",\n    \"patient\": 1638401,\n    \"practice\": 140758918627332,\n    \"is_urgent\": true,\n    \"members\": [\n        {\n            \"thread\": 6422619,\n            \"group\": 262157,\n            \"status\": \"Addressed\",\n            \"ack_time\": \"2011-03-01T09:06:02Z\"\n        }\n    ],\n    \"messages\": [\n                {\n                    \"body\": \"Patient should have appointment already booked.\",\n                    \"thread\": 6422619,\n                    \"sender\": 4,\n                    \"send_date\": \"2010-12-13T15:18:11\"\n                }\n    ]\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/message_threads/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /message_threads/{id}/ [WIP]:
+    delete:
+      summary: Delete Message Thread [WIP]
+      description: ''
+      operationId: delete-message-thread-wip
+      parameters:
+      - name: id
+        in: path
+        description: The id of the message thread
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Message Threads
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/message_threads/:
+    get:
+      operationId: message_threads_list
+      parameters:
+      - in: query
+        name: document_date__gt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMessageThreadList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Message Threads
+      tags:
+      - Message Threads
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new message thread.
+      operationId: message_threads_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThread'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Message Thread
+      tags:
+      - Message Threads
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/message_threads/{id}/:
+    delete:
+      description: Delete an existing message thread.
+      operationId: message_threads_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Message Thread
+      tags:
+      - Message Threads
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: message_threads_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Message Thread
+      tags:
+      - Message Threads
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing message thread.
+      operationId: message_threads_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMessageThread'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Message Thread
+      tags:
+      - Message Threads
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing message thread.
+      operationId: message_threads_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageThread'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageThread'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Message Thread
+      tags:
+      - Message Threads
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
+    PatchedMessageThread:
+      properties:
+        chart_date:
+          description: When the message thread's patient chart was created.
+          format: date-time
+          type: string
+        created_date:
+          description: When the message thread was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the message thread was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: When the message thread's document was created.
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          description: Whether the message is currently urgent.
+          type: boolean
+        members:
+          description: List of Thread Members, when creating only need to specify the id of the thread member and their status.
+          items:
+            $ref: '#/components/schemas/ThreadMember'
+          type: array
+        messages:
+          description: List of Thread Messages, when creating only need to provide the body, send_date and sender.
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          type: array
+        patient:
+          description: The patient chart for which the thread is about.
+          format: int64
+          type: integer
+        practice:
+          description: The id of the practice that owns the patient chart.
+          format: int64
+          type: integer
+        signed_by:
+          description: The user who signed the thread
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The date and time when the thread was signed
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    ThreadMessage:
+      properties:
+        body:
+          description: The actual message body.
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient id.
+          format: int64
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice id.
+          format: int64
+          readOnly: true
+          type: integer
+        send_date:
+          description: The date of when the message was sent.
+          format: date-time
+          type: string
+        sender:
+          description: The id of who sent the message.
+          type: integer
+        thread:
+          description: The message thread id.
+          format: int64
+          type: integer
+        to_document:
+          $ref: '#/components/schemas/Document'
+      required:
+      - body
+      - send_date
+      - sender
+      type: object
+    MessageThread:
+      properties:
+        chart_date:
+          description: When the message thread's patient chart was created.
+          format: date-time
+          type: string
+        created_date:
+          description: When the message thread was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the message thread was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: When the message thread's document was created.
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          description: Whether the message is currently urgent.
+          type: boolean
+        members:
+          description: List of Thread Members, when creating only need to specify the id of the thread member and their status.
+          items:
+            $ref: '#/components/schemas/ThreadMember'
+          type: array
+        messages:
+          description: List of Thread Messages, when creating only need to provide the body, send_date and sender.
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          type: array
+        patient:
+          description: The patient chart for which the thread is about.
+          format: int64
+          type: integer
+        practice:
+          description: The id of the practice that owns the patient chart.
+          format: int64
+          type: integer
+        signed_by:
+          description: The user who signed the thread
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The date and time when the thread was signed
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - chart_date
+      - document_date
+      - patient
+      - practice
+      type: object
+    ThreadMemberStatusEnum:
+      enum:
+      - Addressed
+      - Requiring Action
+      type: string
+    ThreadMember:
+      properties:
+        ack_time:
+          description: The time at which the member acknowledged the message thread.
+          format: date-time
+          type: string
+        group:
+          description: The id of the group referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ThreadMemberStatusEnum'
+          description: Whether this member has acknowledged the message thread.
+        thread:
+          description: The id of the thread this thread member is a member of.
+          format: int64
+          type: integer
+        user:
+          description: The id of the user referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
+          type:
+          - integer
+          - 'null'
+      required:
+      - status
+      type: object
+    PaginatedMessageThreadList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MessageThread'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-messaging-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

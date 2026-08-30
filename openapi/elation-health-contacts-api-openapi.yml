@@ -1,0 +1,1179 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Contacts API
+  version: '1.0'
+  description: 'Operations tagged Contacts across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Contacts
+paths:
+  /contacts/search/:
+    get:
+      summary: Search Contacts
+      description: ''
+      operationId: get-contacts
+      parameters:
+      - name: q
+        in: query
+        description: Contact name or fax number to look for
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: City name where to look contacts
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: State where to look contacts
+        schema:
+          type: string
+      - name: specialties
+        in: query
+        description: 'Comma separated specialties to look for contacts. Examples: "psychology,dental care" or "pharmacy"'
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[ // List of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n]"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: 'import json
+
+            import requests
+
+
+            url = "https://sandbox.elationemr.com/api/2.0/contacts/?name=Beverly Crusher, MD"
+
+
+            access_token = "mAnkEq6vThAFVAska6nzZwqQtjLWPb"
+
+            auth_header = "Bearer %s" % (access_token)
+
+
+            response = requests.get(url, headers={''Authorization'': auth_header})
+
+
+            print(response.status_code)
+
+            print(json.dumps(json.loads(response.content), indent=2))'
+        - language: curl
+          code: 'curl "https://sandbox.elationemr.com/api/2.0/contacts/?name=Beverly Crusher, MD" \
+
+            > -H "Authorization: Bearer mAnkEq6vThAFVAska6nzZwqQtjLWPb"'
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /contacts/:
+    post:
+      summary: Create Contact
+      description: ''
+      operationId: create-contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'The first name of the physician. Ignored if contact is a medical_group. Maximum length: 50 characters.'
+                middle_name:
+                  type: string
+                  description: 'The middle name of the physician. Ignored if contact is a medical_group. Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'The last name of the physician. Ignored if contact is a medical_group. Maximum length: 60 characters.'
+                credentials:
+                  type: string
+                  description: The credentials of the physician, e.g. MD or DO. Ignored if contact is a medical_group.
+                fax:
+                  type: string
+                direct_address:
+                  type: string
+                address:
+                  type: string
+                suite:
+                  type: string
+                email:
+                  type: string
+                zip:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                contact_type:
+                  type: string
+                  description: Use physician for individuals and medical_group for organizations
+                  default: medical_group
+                  enum:
+                  - physician
+                  - medical_group
+                phone:
+                  type: string
+                cell_phone:
+                  type: string
+                back_office_phone:
+                  type: string
+                is_elation_confirmed:
+                  type: boolean
+                accepting_insurance:
+                  type: boolean
+                accepting_new_patients:
+                  type: boolean
+                practice:
+                  type: integer
+                  format: int32
+                specialty:
+                  type: object
+                  properties: {}
+                other_specialties:
+                  type: array
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65097302057,\n\t// See object definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\n\ndata = {\n  \"first_name\": \"Leroy\",\n  \"middle_name\": \"J\",\n  \"last_name\": \"Fuller\",\n  \"credentials\": \"MD\",\n  \"fax\": \"050-080-6703\",\n  \"direct_address\": \"\",\n  \"address\": \"925 Cantrell Wall Suite 969, Sethfort, VT 66010\",\n  \"suite\": \"Suite 151\",\n  \"email\": \"betle+Wilson.Hall@elationhealth.com\",\n  \"zip\": \"55098\",\n  \"city\": \"Sethfort\",\n  \"state\": \"VT\",\n  \"contact_type\": \"physician\",\n  \"phone\": \"506-729-3449\",\n  \"cell_phone\": \"506-729-3449\",\n  \"back_office_phone\": \"506-729-3449\",\n  \"is_elation_confirmed\": True,\n  \"accepting_insurance\": True,\n  \"accepting_new_patients\": True,\n\t\"practice\": 64901939456,\n  \"specialty\": {\"name\": \"Biochemist\"},\n  \"other_specialties\": [\n    {\"name\": \"Adult Day Care\"},\n    {\"name\": \"Anatomic Pathology\"},\n  ]\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/contacts/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    get:
+      summary: List Contacts
+      description: ''
+      operationId: find-contacts
+      parameters:
+      - name: npi
+        in: query
+        description: The NPI of the contact
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /contacts/{id}/:
+    put:
+      summary: Update Contacts
+      description: ''
+      operationId: update-contacts
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                middle_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'Maximum length: 60 characters.'
+                credentials:
+                  type: string
+                fax:
+                  type: string
+                direct_address:
+                  type: string
+                address:
+                  type: string
+                suite:
+                  type: string
+                email:
+                  type: string
+                zip:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                contact_type:
+                  type: string
+                phone:
+                  type: string
+                cell_phone:
+                  type: string
+                back_office_phone:
+                  type: string
+                is_elation_confirmed:
+                  type: boolean
+                accepting_insurance:
+                  type: boolean
+                accepting_new_patients:
+                  type: boolean
+                practice:
+                  type: integer
+                  format: int32
+                specialty:
+                  type: object
+                  properties: {}
+                other_specialties:
+                  type: array
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 67176497153,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"first_name\": \"Leroy\",\n  \"middle_name\": \"J\",\n  \"last_name\": \"Fuller\",\n  \"credentials\": \"MD\",\n  \"fax\": \"050-080-6703\",\n  \"direct_address\": \"\",\n  \"address\": \"925 Cantrell Wall Suite 969, Sethfort, VT 66010\",\n  \"suite\": \"Suite 151\",\n  \"email\": \"betle+Wilson.Hall@elationhealth.com\",\n  \"zip\": \"55098\",\n  \"city\": \"Sethfort\",\n  \"state\": \"VT\",\n  \"contact_type\": \"physician\",\n  \"phone\": \"506-729-3449\",\n  \"cell_phone\": \"506-729-3449\",\n  \"back_office_phone\": \"506-729-3449\",\n  \"is_elation_confirmed\": True,\n  \"accepting_insurance\": True,\n  \"accepting_new_patients\": True,\n\t\"practice\": 64901939456,\n  \"specialty\": {\"name\": \"Biochemist\"},\n  \"other_specialties\": [\n    {\"name\": \"Adult Day Care\"},\n    {\"name\": \"Anatomic Pathology\"},\n  ]\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/contacts/67176497153/\",\n                       data=json.dumps(data),\n                       headers={'Authorization': auth_header,\n                                'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    patch:
+      summary: Update Contacts
+      description: ''
+      operationId: update-contacts-1
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                middle_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'Maximum length: 60 characters.'
+                credentials:
+                  type: string
+                fax:
+                  type: string
+                direct_address:
+                  type: string
+                address:
+                  type: string
+                suite:
+                  type: string
+                email:
+                  type: string
+                zip:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                contact_type:
+                  type: string
+                phone:
+                  type: string
+                cell_phone:
+                  type: string
+                back_office_phone:
+                  type: string
+                is_elation_confirmed:
+                  type: boolean
+                accepting_insurance:
+                  type: boolean
+                accepting_new_patients:
+                  type: boolean
+                practice:
+                  type: integer
+                  format: int32
+                specialty:
+                  type: object
+                  properties: {}
+                other_specialties:
+                  type: array
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 67176497153,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"suite\": \"Apt 807\"\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/contacts/67176497153/\",\n                       data=json.dumps(data),\n                       headers={'Authorization': auth_header,\n                                'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /contacts/:id/:
+    delete:
+      summary: Delete Contacts
+      description: ''
+      operationId: delete-contacts
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /contacts/{contact_id}/:
+    get:
+      summary: Fetch Contact
+      description: ''
+      operationId: fetch-contact
+      parameters:
+      - name: contact_id
+        in: path
+        description: The id of the contact
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Contacts
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/contacts/:
+    get:
+      operationId: contacts_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The NPI of the contact.
+        in: query
+        name: npi
+        schema:
+          items:
+            type: string
+          type: array
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedContactList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Contacts
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new contact.
+      operationId: contacts_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Contact
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/contacts/search/:
+    get:
+      operationId: contacts_search_list
+      parameters:
+      - description: The city to search for contacts.
+        in: query
+        name: city
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Contact name or fax number to look for.
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: 'Comma separated specialties to look for contacts. Examples: "psychology,dental care" or "pharmacy".'
+        in: query
+        name: specialties
+        schema:
+          type: string
+      - description: The state to search for contacts.
+        in: query
+        name: state
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedContactsSearchResultList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Search Contacts
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/contacts/{id}/:
+    delete:
+      description: Delete an existing contact.
+      operationId: contacts_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Contact
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: contacts_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Contact
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing contact.
+      operationId: contacts_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedContact'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Contact
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing contact.
+      operationId: contacts_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Contact
+      tags:
+      - Contacts
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedContactList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+      required:
+      - results
+      type: object
+    PaginatedContactsSearchResultList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ContactsSearchResult'
+          type: array
+      required:
+      - results
+      type: object
+    MedicalSpecialtyCategory:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+      required:
+      - name
+      type: object
+    Contact:
+      properties:
+        accepting_insurance:
+          description: Whether the contact indicates they accept insurance.
+          type:
+          - boolean
+          - 'null'
+        accepting_new_patients:
+          description: Whether the contact indicates they are accepting new patients.
+          type:
+          - boolean
+          - 'null'
+        address:
+          description: The specific address line registered for this contact.
+          maxLength: 200
+          type: string
+        back_office_phone:
+          maxLength: 20
+          type: string
+        cell_phone:
+          description: The mobile phone registered to the contact.
+          maxLength: 20
+          type: string
+        city:
+          description: The city of the contact.
+          maxLength: 50
+          type: string
+        contact_type:
+          description: The type of contact. {physician, medical_group}
+          maxLength: 15
+          type: string
+        created_date:
+          description: The timestamp when the contact was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        credentials:
+          description: The credentials for the provider, e.g. MD or DO. Ignored if contact is a medical_group.
+          maxLength: 200
+          type: string
+        deleted_date:
+          description: The timestamp when the contact was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        direct_address:
+          maxLength: 500
+          type: string
+        email:
+          type: string
+        fax:
+          maxLength: 15
+          type: string
+        first_name:
+          description: The first name of the contact. Ignored if contact is a medical_group.
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_elation_confirmed:
+          description: Whether the contact has been verified by someone on the elation team to be available for search within the application. Will always be false for any contact created within a practice.
+          type:
+          - boolean
+          - 'null'
+        is_verified:
+          description: Whether the contact has been verified to be a available for search within the application. Will always be true for any contact created by a practice.
+          type:
+          - boolean
+          - 'null'
+        last_name:
+          description: The last name of the contact. Ignored if contact is a medical_group.
+          maxLength: 60
+          type: string
+        middle_name:
+          description: The middle name of the contact. Ignored if contact is a medical_group.
+          maxLength: 50
+          type: string
+        npi:
+          type: string
+        org_name:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        other_specialties:
+          description: The list of specialties after the primary specialty related to this contact.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/MedicalSpecialty'
+          type: array
+        phone:
+          maxLength: 20
+          type: string
+        practice:
+          description: The id of the practice that the contact belongs to.
+          format: int64
+          type: integer
+        specialty:
+          allOf:
+          - $ref: '#/components/schemas/MedicalSpecialty'
+          description: The id of the specialty of the contact.
+        specialty_categories:
+          items: {}
+          type: array
+        state:
+          description: The state of the contact.
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 20
+          type: string
+        user:
+          description: The user id of the contact.
+          readOnly: true
+          type: integer
+        zip:
+          maxLength: 10
+          type: string
+      required:
+      - contact_type
+      - credentials
+      - first_name
+      - last_name
+      - middle_name
+      - practice
+      type: object
+    PatchedContact:
+      properties:
+        accepting_insurance:
+          description: Whether the contact indicates they accept insurance.
+          type:
+          - boolean
+          - 'null'
+        accepting_new_patients:
+          description: Whether the contact indicates they are accepting new patients.
+          type:
+          - boolean
+          - 'null'
+        address:
+          description: The specific address line registered for this contact.
+          maxLength: 200
+          type: string
+        back_office_phone:
+          maxLength: 20
+          type: string
+        cell_phone:
+          description: The mobile phone registered to the contact.
+          maxLength: 20
+          type: string
+        city:
+          description: The city of the contact.
+          maxLength: 50
+          type: string
+        contact_type:
+          description: The type of contact. {physician, medical_group}
+          maxLength: 15
+          type: string
+        created_date:
+          description: The timestamp when the contact was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        credentials:
+          description: The credentials for the provider, e.g. MD or DO. Ignored if contact is a medical_group.
+          maxLength: 200
+          type: string
+        deleted_date:
+          description: The timestamp when the contact was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        direct_address:
+          maxLength: 500
+          type: string
+        email:
+          type: string
+        fax:
+          maxLength: 15
+          type: string
+        first_name:
+          description: The first name of the contact. Ignored if contact is a medical_group.
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_elation_confirmed:
+          description: Whether the contact has been verified by someone on the elation team to be available for search within the application. Will always be false for any contact created within a practice.
+          type:
+          - boolean
+          - 'null'
+        is_verified:
+          description: Whether the contact has been verified to be a available for search within the application. Will always be true for any contact created by a practice.
+          type:
+          - boolean
+          - 'null'
+        last_name:
+          description: The last name of the contact. Ignored if contact is a medical_group.
+          maxLength: 60
+          type: string
+        middle_name:
+          description: The middle name of the contact. Ignored if contact is a medical_group.
+          maxLength: 50
+          type: string
+        npi:
+          type: string
+        org_name:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        other_specialties:
+          description: The list of specialties after the primary specialty related to this contact.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/MedicalSpecialty'
+          type: array
+        phone:
+          maxLength: 20
+          type: string
+        practice:
+          description: The id of the practice that the contact belongs to.
+          format: int64
+          type: integer
+        specialty:
+          allOf:
+          - $ref: '#/components/schemas/MedicalSpecialty'
+          description: The id of the specialty of the contact.
+        specialty_categories:
+          items: {}
+          type: array
+        state:
+          description: The state of the contact.
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 20
+          type: string
+        user:
+          description: The user id of the contact.
+          readOnly: true
+          type: integer
+        zip:
+          maxLength: 10
+          type: string
+      type: object
+    ContactsSearchResult:
+      description: Serializer used to work with contacts found via elasticsearch
+      properties:
+        accepting_insurance:
+          type:
+          - boolean
+          - 'null'
+        accepting_new_patients:
+          type:
+          - boolean
+          - 'null'
+        address_line:
+          maxLength: 100
+          type: string
+        city:
+          maxLength: 30
+          type: string
+        contact_type:
+          maxLength: 15
+          type: string
+        direct_address:
+          maxLength: 500
+          type: string
+        fax:
+          maxLength: 15
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_elation_confirmed:
+          type:
+          - boolean
+          - 'null'
+        is_verified:
+          type:
+          - boolean
+          - 'null'
+        name:
+          maxLength: 200
+          type: string
+        npi:
+          type: string
+        phone:
+          maxLength: 25
+          type: string
+        specialties:
+          items: {}
+          type: array
+        specialty_categories:
+          items: {}
+          type: array
+        state:
+          maxLength: 20
+          type: string
+      required:
+      - name
+      type: object
+    MedicalSpecialty:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type: string
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - abbreviation
+      - name
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-practice-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

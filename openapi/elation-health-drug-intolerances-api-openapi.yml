@@ -1,0 +1,555 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Drug Intolerances API
+  version: '1.0'
+  description: 'Operations tagged Drug Intolerances across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Drug Intolerances
+paths:
+  /drug_intolerances/:
+    get:
+      summary: Find Drug Intolerances
+      description: ''
+      operationId: find-drug-intolerances
+      parameters:
+      - name: patients
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/drug_intolerances/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/drug_intolerances/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/drug_intolerances/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Drug Intolerances
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /drug_intolerances/{id}/:
+    get:
+      summary: Get Drug Intolerance
+      description: ''
+      operationId: get-drug-intolerance
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65097302057,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/drug_intolerances/65097302057/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Drug Intolerances
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Drug Intolerance
+      description: ''
+      operationId: delete-drug-intolerance
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/drug_intolerances/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint(resp.status_code)"
+        samples-languages:
+        - python
+      tags:
+      - Drug Intolerances
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/drug_intolerances/:
+    get:
+      description: Returns a list of drug intolerances
+      operationId: drug_intolerances_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientDrugIntoleranceList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Drug Intolerances
+      tags:
+      - Drug Intolerances
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new drug intolerance.
+      operationId: drug_intolerances_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientDrugIntolerance'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDrugIntolerance'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Drug Intolerance
+      tags:
+      - Drug Intolerances
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/drug_intolerances/{id}/:
+    delete:
+      description: Delete an existing drug intolerance.
+      operationId: drug_intolerances_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Drug Intolerance
+      tags:
+      - Drug Intolerances
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single drug intolerance
+      operationId: drug_intolerances_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDrugIntolerance'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Drug Intolerance
+      tags:
+      - Drug Intolerances
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing drug intolerance.
+      operationId: drug_intolerances_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatientDrugIntolerance'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDrugIntolerance'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Drug Intolerance
+      tags:
+      - Drug Intolerances
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing drug intolerance.
+      operationId: drug_intolerances_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientDrugIntolerance'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDrugIntolerance'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Drug Intolerance
+      tags:
+      - Drug Intolerances
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    BlankEnum:
+      enum:
+      - ''
+    PatientDrugIntolerance:
+      properties:
+        created_date:
+          description: When the record was created in Elation's systems.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the record was recorded deleted in Elation's systems.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          description: The Drug Intolerance's name; e.g. what drug the patient cannot tolerate.
+          type: string
+        patient:
+          description: The id of the patient.
+          format: int64
+          type: integer
+        reaction:
+          description: The type of reaction the patient experiences when taking the drug
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        severity:
+          description: 'The severity of the patient''s reaction.
+
+
+            * `` - unknown
+
+            * `255604002` - mild
+
+            * `6736007` - moderate
+
+            * `24484000` - severe'
+          oneOf:
+          - $ref: '#/components/schemas/PatientDrugIntoleranceSeverityEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        start_date:
+          description: The date of onset for the drug intolerance.
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PatientDrugIntoleranceStatusEnum'
+          description: 'Whether the drug intolerance is active or not.
+
+
+            * `1` - Active
+
+            * `2` - Inactive'
+          maximum: 65535
+          minimum: 0
+      required:
+      - name
+      - patient
+      type: object
+    PatchedPatientDrugIntolerance:
+      properties:
+        created_date:
+          description: When the record was created in Elation's systems.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the record was recorded deleted in Elation's systems.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          description: The Drug Intolerance's name; e.g. what drug the patient cannot tolerate.
+          type: string
+        patient:
+          description: The id of the patient.
+          format: int64
+          type: integer
+        reaction:
+          description: The type of reaction the patient experiences when taking the drug
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        severity:
+          description: 'The severity of the patient''s reaction.
+
+
+            * `` - unknown
+
+            * `255604002` - mild
+
+            * `6736007` - moderate
+
+            * `24484000` - severe'
+          oneOf:
+          - $ref: '#/components/schemas/PatientDrugIntoleranceSeverityEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        start_date:
+          description: The date of onset for the drug intolerance.
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PatientDrugIntoleranceStatusEnum'
+          description: 'Whether the drug intolerance is active or not.
+
+
+            * `1` - Active
+
+            * `2` - Inactive'
+          maximum: 65535
+          minimum: 0
+      type: object
+    PatientDrugIntoleranceStatusEnum:
+      description: '* `1` - Active
+
+        * `2` - Inactive'
+      enum:
+      - 1
+      - 2
+      type: integer
+    PaginatedPatientDrugIntoleranceList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientDrugIntolerance'
+          type: array
+      required:
+      - results
+      type: object
+    PatientDrugIntoleranceSeverityEnum:
+      description: '* `` - unknown
+
+        * `255604002` - mild
+
+        * `6736007` - moderate
+
+        * `24484000` - severe'
+      enum:
+      - '255604002'
+      - '6736007'
+      - '24484000'
+      type: string
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-profile-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

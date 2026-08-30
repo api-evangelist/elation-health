@@ -1,0 +1,158 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Packaged Medication Labeler (Beta) API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Packaged Medication Labeler (Beta) across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-reference-data-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Packaged Medication Labeler (Beta)
+paths:
+  /api/2.0/packaged_medication_labelers/:
+    get:
+      description: Requests to this endpoint must specify at least one query parameter.
+      operationId: packaged_medication_labelers_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The name of the packaged medication labeler.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPackagedMedicationLabelerList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Packaged Medication Labelers
+      tags:
+      - Packaged Medication Labeler (Beta)
+      x-el8-docs-category: Reference Data API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/packaged_medication_labelers/{id}/:
+    get:
+      description: Retrieve a single packaged medication labeler
+      operationId: packaged_medication_labelers_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagedMedicationLabeler'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Packaged Medication Labeler
+      tags:
+      - Packaged Medication Labeler (Beta)
+      x-el8-docs-category: Reference Data API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PackagedMedicationLabeler:
+      properties:
+        id:
+          format: int64
+          type: integer
+        medispanid:
+          maxLength: 32
+          type: string
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - id
+      - medispanid
+      - name
+      type: object
+    PaginatedPackagedMedicationLabelerList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PackagedMedicationLabeler'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-reference-data-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

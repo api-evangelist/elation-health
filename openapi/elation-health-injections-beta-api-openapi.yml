@@ -1,0 +1,452 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Injections (BETA) API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Injections (BETA) across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Injections (BETA)
+paths:
+  /api/2.0/injections/:
+    get:
+      description: Returns a list of injections
+      operationId: injections_list
+      parameters:
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: id
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInjectionList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Injections
+      tags:
+      - Injections (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/injections/{id}/:
+    get:
+      description: Retrieve a single injection
+      operationId: injections_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Injection'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Injection
+      tags:
+      - Injections (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    Injection:
+      properties:
+        contraindication:
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        dose:
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
+          type:
+          - string
+          - 'null'
+        dose_in_series:
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        dose_unit:
+          oneOf:
+          - $ref: '#/components/schemas/DoseUnitEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        expiration_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        given_by:
+          oneOf:
+          - $ref: '#/components/schemas/Actor'
+          - type: 'null'
+        given_date:
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_confidential:
+          readOnly: true
+          type: boolean
+        is_new:
+          type: boolean
+        is_permanent:
+          type: boolean
+        lot_number:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        manufacturer:
+          type:
+          - string
+          - 'null'
+        method:
+          oneOf:
+          - $ref: '#/components/schemas/MethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        ndc:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        ordered_by:
+          oneOf:
+          - $ref: '#/components/schemas/Actor'
+          - type: 'null'
+        packaged_medication_id:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        patient:
+          format: int64
+          readOnly: true
+          type: integer
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        procedures:
+          oneOf:
+          - $ref: '#/components/schemas/ProcedureCodes'
+          - type: 'null'
+        reason:
+          type:
+          - string
+          - 'null'
+        reference_medication_id:
+          format: int64
+          readOnly: true
+          type: integer
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        site:
+          oneOf:
+          - $ref: '#/components/schemas/SiteEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      required:
+      - dose
+      - given_date
+      - ndc
+      type: object
+    SiteEnum:
+      description: '* `Abdomen` - Abdomen
+
+        * `R Anterolateral Thigh` - R Anterolateral Thigh
+
+        * `L Anterolateral Thigh` - L Anterolateral Thigh
+
+        * `R Posterior Upper Arm` - R Posterior Upper Arm
+
+        * `L Posterior Upper Arm` - L Posterior Upper Arm
+
+        * `R Upper Arm` - R Upper Arm
+
+        * `L Upper Arm` - L Upper Arm
+
+        * `R Deltoid` - R Deltoid
+
+        * `L Deltoid` - L Deltoid
+
+        * `R Gluteus Maximus` - R Gluteus Maximus
+
+        * `L Gluteus Maximus` - L Gluteus Maximus
+
+        * `R Gluteus Medius` - R Gluteus Medius
+
+        * `L Gluteus Medius` - L Gluteus Medius
+
+        * `R Thigh` - R Thigh
+
+        * `L Thigh` - L Thigh
+
+        * `Back` - Back
+
+        * `R Forearm` - R Forearm
+
+        * `L Forearm` - L Forearm
+
+        * `R Antecubital Fossa` - R Antecubital Fossa
+
+        * `L Antecubital Fossa` - L Antecubital Fossa
+
+        * `R Hand` - R Hand
+
+        * `L Hand` - L Hand
+
+        * `Other` - Other'
+      enum:
+      - Abdomen
+      - R Anterolateral Thigh
+      - L Anterolateral Thigh
+      - R Posterior Upper Arm
+      - L Posterior Upper Arm
+      - R Upper Arm
+      - L Upper Arm
+      - R Deltoid
+      - L Deltoid
+      - R Gluteus Maximus
+      - L Gluteus Maximus
+      - R Gluteus Medius
+      - L Gluteus Medius
+      - R Thigh
+      - L Thigh
+      - Back
+      - R Forearm
+      - L Forearm
+      - R Antecubital Fossa
+      - L Antecubital Fossa
+      - R Hand
+      - L Hand
+      - Other
+      type: string
+    NullEnum:
+      type: 'null'
+    MethodEnum:
+      description: '* `Intravenous` - Intravenous
+
+        * `Intramuscular` - Intramuscular
+
+        * `Subcutaneous` - Subcutaneous
+
+        * `Intradermal` - Intradermal
+
+        * `Other` - Other'
+      enum:
+      - Intravenous
+      - Intramuscular
+      - Subcutaneous
+      - Intradermal
+      - Other
+      type: string
+    DoseUnitEnum:
+      description: '* `dL` - Deciliter
+
+        * `g` - Gram
+
+        * `kg` - Kilogram
+
+        * `kL` - Kiloliter
+
+        * `L` - Liter
+
+        * `mCi` - Millicurie
+
+        * `mg` - Milligram
+
+        * `mL` - Milliliter
+
+        * `ug` - Microgram
+
+        * `uL` - Microliter
+
+        * `tab` - Tablet'
+      enum:
+      - dL
+      - g
+      - kg
+      - kL
+      - L
+      - mCi
+      - mg
+      - mL
+      - ug
+      - uL
+      - tab
+      type: string
+    ProcedureCodes:
+      properties:
+        code:
+          maxLength: 10
+          type: string
+        dxs:
+          items:
+            $ref: '#/components/schemas/DiagnosisCode'
+          type: array
+        modifier_1:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_2:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_3:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_4:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      - dxs
+      type: object
+    PaginatedInjectionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Injection'
+          type: array
+      required:
+      - results
+      type: object
+    DiagnosisCode:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        system:
+          type: string
+      required:
+      - code
+      - system
+      type: object
+    Actor:
+      properties:
+        name:
+          type: string
+        type:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - name
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

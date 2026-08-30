@@ -1,0 +1,343 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Cardiac Centers API
+  version: '1.0'
+  description: 'Operations tagged Cardiac Centers across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Cardiac Centers
+paths:
+  /cardiac_centers/:
+    get:
+      summary: Find Cardiac Centers
+      description: ''
+      operationId: find-cardiac-centers
+      parameters:
+      - name: company
+        in: query
+        description: The ancillary company associated with the cardiac center.
+        schema:
+          type: integer
+          format: int32
+      - name: location_name
+        in: query
+        description: The location name of the cardiac center you're searching for
+        schema:
+          type: string
+      - name: practice
+        in: query
+        description: The practice the cardiac order test is associated with.
+        schema:
+          type: integer
+          format: int32
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 0,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n      // array of Cardiac Center objects\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 0
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/cardiac_centers/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Cardiac Centers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /cardiac_centers/{id}:
+    get:
+      summary: Get Cardiac Center
+      description: ''
+      operationId: get-cardiac-center
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140755855671306,\n  // See Cardiac Center Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/cardiac_center/140755855671306/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Cardiac Centers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/cardiac_centers/:
+    get:
+      description: Returns a list of cardiac centers
+      operationId: cardiac_centers_list
+      parameters:
+      - description: The ancillary company associated with the cardiac center.
+        explode: false
+        in: query
+        name: company
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The location name of the cardiac center you're searching for.
+        explode: false
+        in: query
+        name: location_name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: The practice the cardiac center is associated with.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCardiacCenterList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Cardiac Centers
+      tags:
+      - Cardiac Centers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/cardiac_centers/{id}/:
+    get:
+      description: Retrieve a single cardiac center
+      operationId: cardiac_centers_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardiacCenter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Cardiac Center
+      tags:
+      - Cardiac Centers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedCardiacCenterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/CardiacCenter'
+          type: array
+      required:
+      - results
+      type: object
+    CardiacCenter:
+      properties:
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        company:
+          description: Maps to the Ancillary Company object ID attribute.
+          format: int64
+          type: integer
+        company_name:
+          description: Maps to the Ancillary Company object name attribute.
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        location_name:
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        state:
+          maxLength: 2
+          type: string
+        zip:
+          maxLength: 10
+          type: string
+      required:
+      - address_line1
+      - address_line2
+      - company
+      - company_name
+      - location_name
+      - practice
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,277 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Vaccine API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Vaccine across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Vaccine
+paths:
+  /api/2.0/vaccine/:
+    get:
+      description: Returns a list of vaccines
+      operationId: vaccine_list
+      parameters:
+      - in: query
+        name: cdc_type
+        schema:
+          type: string
+      - description: '* `user` - user
+
+          * `medispan` - medispan
+
+          * `elation` - elation'
+        in: query
+        name: creation_type
+        schema:
+          enum:
+          - elation
+          - medispan
+          - user
+          type: string
+      - in: query
+        name: cvx
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: name
+        schema:
+          type: string
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVaccineList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Vaccines
+      tags:
+      - Vaccine
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new vaccine.
+      operationId: vaccine_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vaccine'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccine'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Vaccine
+      tags:
+      - Vaccine
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/vaccine/{id}/:
+    delete:
+      description: Delete an existing vaccine.
+      operationId: vaccine_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Vaccine
+      tags:
+      - Vaccine
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single vaccine
+      operationId: vaccine_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccine'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Vaccine
+      tags:
+      - Vaccine
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    VaccineCreationType:
+      enum:
+      - elation
+      - medispan
+      - user
+      type: string
+    PaginatedVaccineList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Vaccine'
+          type: array
+      required:
+      - results
+      type: object
+    Vaccine:
+      properties:
+        cdc_type:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        creation_type:
+          allOf:
+          - $ref: '#/components/schemas/VaccineCreationType'
+          readOnly: true
+        cvx:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_user_created:
+          readOnly: true
+          type: boolean
+        name:
+          readOnly: true
+          type: string
+        ndc:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        ndc_values:
+          items:
+            type: string
+          readOnly: true
+          type: array
+        practice:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-profile-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

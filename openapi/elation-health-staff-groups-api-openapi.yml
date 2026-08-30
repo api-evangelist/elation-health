@@ -1,0 +1,555 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Staff Groups API
+  version: '1.0'
+  description: 'Operations tagged Staff Groups across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Staff Groups
+paths:
+  /staff_groups/:
+    get:
+      summary: Find Staff Group
+      description: ''
+      operationId: find-staff-group
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: practice
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n \t{\n  \t\"id\": 83792571234,\n  \t// See Object Definition\n\t},\n]"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/staff_groups/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Staff Groups
+      security:
+      - sec0: []
+    post:
+      summary: Create Staff Group
+      description: ''
+      operationId: create-staff-group
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                is_elation_group:
+                  type: boolean
+                users:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
+                practice:
+                  type: integer
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 140754688737550,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n       'name': 'group,         \n       'is_elation_group': False, \n       'users': [\n         140754687361026,\n         140754687361027\n       ], \n       'practice': 211,\n}\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/staff_groups/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Staff Groups
+      security:
+      - sec0: []
+    delete:
+      summary: Delete a Staff Group
+      description: ''
+      operationId: delete-a-staff-group
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/staff_groups/140754688737550\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Staff Groups
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /staff_groups/{id}:
+    put:
+      summary: Update Staff Group
+      description: ''
+      operationId: update-staff-group
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                name:
+                  type: string
+                is_elation_group:
+                  type: boolean
+                users:
+                  type: array
+                  items:
+                    type: integer
+                    format: int64
+                practice:
+                  type: integer
+                  format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 140754688737550,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n       'id': 140754688737550,   \n       'name': 'group,         \n       'is_elation_group': False, \n       'users': [\n         140754687361026,\n         140754687361027\n       ], \n       'practice': 211,\n}\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/staff_groups/140754688737550\",\n                    data=json.dumps(data),\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Staff Groups
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/staff_groups/:
+    get:
+      operationId: staff_groups_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStaffGroupList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Staff Groups
+      tags:
+      - Staff Groups
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new staff group.
+      operationId: staff_groups_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffGroup'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Staff Group
+      tags:
+      - Staff Groups
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/staff_groups/{id}/:
+    delete:
+      description: Delete an existing staff group.
+      operationId: staff_groups_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Staff Group
+      tags:
+      - Staff Groups
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: staff_groups_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Staff Group
+      tags:
+      - Staff Groups
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing staff group.
+      operationId: staff_groups_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffGroup'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Staff Group
+      tags:
+      - Staff Groups
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing staff group.
+      operationId: staff_groups_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffGroup'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffGroup'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Staff Group
+      tags:
+      - Staff Groups
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatchedStaffGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_elation_group:
+          description: Whether the staff group is an Elation group.
+          type: boolean
+        name:
+          description: The name of the staff group.
+          maxLength: 50
+          type: string
+        practice:
+          description: The id of the practice that the staff group belongs to.
+          format: int64
+          type: integer
+        users:
+          description: A list of user ids inside the group.
+          items:
+            type: integer
+          type: array
+      type: object
+    StaffGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_elation_group:
+          description: Whether the staff group is an Elation group.
+          type: boolean
+        name:
+          description: The name of the staff group.
+          maxLength: 50
+          type: string
+        practice:
+          description: The id of the practice that the staff group belongs to.
+          format: int64
+          type: integer
+        users:
+          description: A list of user ids inside the group.
+          items:
+            type: integer
+          type: array
+      required:
+      - name
+      - practice
+      - users
+      type: object
+    PaginatedStaffGroupList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/StaffGroup'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-practice-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

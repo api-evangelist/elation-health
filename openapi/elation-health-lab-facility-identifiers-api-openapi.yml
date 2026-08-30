@@ -1,0 +1,1017 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Lab Facility Identifiers API
+  version: '1.0'
+  description: 'Operations tagged Lab Facility Identifiers across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Lab Facility Identifiers
+paths:
+  /lab_facility_identifiers/{id}:
+    delete:
+      summary: Delete Lab Facility Identifiers
+      description: ''
+      operationId: delete-lab-facility-identifiers
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/lab_facility_identifiers/3234234\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Facility Identifiers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_facility_identifiers/{id} [WIP]:
+    get:
+      summary: Get Lab Facility Identifiers
+      description: ''
+      operationId: get-lab-facility-identifiers
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"vendor\": {\n        \"id\": 63929778422,\n        \"name\": \"DLS\",\n        \"display_name\": \"DLS\"\n    },\n    \"practice_facility\": \"KAWAMOTO\",\n    \"practice_secondary_id\": null,\n    \"lab_facility\": \"LABFACID\",\n    \"description\": \"DLS e-ordering\",\n    \"user_facing\": true,\n    \"compendium\": 140745672360379,\n    \"deleted_date\": null,\n    \"created_date\": \"2019-10-04T05:37:31Z\",\n    \"active\": true,\n    \"practice\": 140758831005700\n}"
+              schema:
+                type: object
+                properties:
+                  vendor:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 63929778422
+                        default: 0
+                      name:
+                        type: string
+                        example: DLS
+                      display_name:
+                        type: string
+                        example: DLS
+                  practice_facility:
+                    type: string
+                    example: KAWAMOTO
+                  practice_secondary_id: {}
+                  lab_facility:
+                    type: string
+                    example: LABFACID
+                  description:
+                    type: string
+                    example: DLS e-ordering
+                  user_facing:
+                    type: boolean
+                    example: true
+                    default: true
+                  compendium:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  deleted_date: {}
+                  created_date:
+                    type: string
+                    example: '2019-10-04T05:37:31Z'
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_facility_identifiers/1234567\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Facility Identifiers
+      security:
+      - sec0: []
+    put:
+      summary: Put Lab Facility Identifiers
+      description: ''
+      operationId: put-lab-facility-identifiers
+      parameters:
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor
+              - practice
+              - active
+              - lab_facility
+              - practice_facility
+              properties:
+                vendor:
+                  type: integer
+                  description: lab vendor id
+                  format: int32
+                practice:
+                  type: integer
+                  description: practice id
+                  format: int32
+                active:
+                  type: boolean
+                  description: Whether the facility identifier should be used. Should be true in most cases.
+                user_facing:
+                  type: boolean
+                  description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+                lab_facility:
+                  type: string
+                  description: The id that represents the lab
+                practice_facility:
+                  type: string
+                  description: The id that represents the practice; often an account number provided by the lab vendor
+                compendium:
+                  type: integer
+                  description: The id of the compendium that will be used when the user selects this facility identifier
+                  format: int64
+                description:
+                  type: string
+                  description: The text that will displayed to users in the lab order dialog
+                practice_secondary_id:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758850863531,\n    \"vendor\": {\n        \"id\": 63929778422,\n        \"name\": \"DLS\",\n        \"display_name\": \"DLS\"\n    },\n    \"practice_facility\": \"KAWAMOTO\",\n    \"practice_secondary_id\": \"54\",\n    \"lab_facility\": \"LABFACID\",\n    \"description\": \"DLS e-ordering\",\n    \"user_facing\": true,\n    \"compendium\": 140745672360379,\n    \"deleted_date\": null,\n    \"created_date\": \"2022-06-07T09:52:18.599593Z\",\n    \"active\": true,\n    \"practice\": 140758831005700\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758850863531
+                    default: 0
+                  vendor:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 63929778422
+                        default: 0
+                      name:
+                        type: string
+                        example: DLS
+                      display_name:
+                        type: string
+                        example: DLS
+                  practice_facility:
+                    type: string
+                    example: KAWAMOTO
+                  practice_secondary_id:
+                    type: string
+                    example: '54'
+                  lab_facility:
+                    type: string
+                    example: LABFACID
+                  description:
+                    type: string
+                    example: DLS e-ordering
+                  user_facing:
+                    type: boolean
+                    example: true
+                    default: true
+                  compendium:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  deleted_date: {}
+                  created_date:
+                    type: string
+                    example: '2022-06-07T09:52:18.599593Z'
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  'vendor': 140758909976822, \n  'compendium': 140758910042555, \n  'practice': 140758905192452, \n  'active': True, \n  'user_facing': True, \n  'lab_facility': 'indicate', \n  'practice_facility': 'national', \n  'description': 'test'\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/lab_facility_identifiers/1234567/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Facility Identifiers
+      security:
+      - sec0: []
+    patch:
+      summary: Patch Lab Facility Identifiers
+      description: ''
+      operationId: patch-lab-facility-identifiers
+      parameters:
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vendor:
+                  type: integer
+                  description: lab vendor id
+                  format: int64
+                practice:
+                  type: integer
+                  description: practice id
+                  format: int64
+                active:
+                  type: boolean
+                  description: Whether the facility identifier should be used. Should be true in most cases.
+                user_facing:
+                  type: boolean
+                  description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+                lab_facility:
+                  type: string
+                  description: The id that represents the lab
+                practice_facility:
+                  type: string
+                  description: The id that represents the practice; often an account number provided by the lab vendor
+                compendium:
+                  type: integer
+                  description: The id of the compendium that will be used when the user selects this facility identifier
+                  format: int64
+                description:
+                  type: string
+                  description: The text that will displayed to users in the lab order dialog
+                practice_secondary_id:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758850863531,\n    \"vendor\": {\n        \"id\": 63929778422,\n        \"name\": \"DLS\",\n        \"display_name\": \"DLS\"\n    },\n    \"practice_facility\": \"KAWAMOTO\",\n    \"practice_secondary_id\": \"54\",\n    \"lab_facility\": \"LABFACID\",\n    \"description\": \"DLS e-ordering\",\n    \"user_facing\": true,\n    \"compendium\": 140745672360379,\n    \"deleted_date\": null,\n    \"created_date\": \"2022-06-07T09:52:18.599593Z\",\n    \"active\": true,\n    \"practice\": 140758831005700\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758850863531
+                    default: 0
+                  vendor:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 63929778422
+                        default: 0
+                      name:
+                        type: string
+                        example: DLS
+                      display_name:
+                        type: string
+                        example: DLS
+                  practice_facility:
+                    type: string
+                    example: KAWAMOTO
+                  practice_secondary_id:
+                    type: string
+                    example: '54'
+                  lab_facility:
+                    type: string
+                    example: LABFACID
+                  description:
+                    type: string
+                    example: DLS e-ordering
+                  user_facing:
+                    type: boolean
+                    example: true
+                    default: true
+                  compendium:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  deleted_date: {}
+                  created_date:
+                    type: string
+                    example: '2022-06-07T09:52:18.599593Z'
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  'vendor': 140758909976822, \n  'compendium': 140758910042555, \n  'practice': 140758905192452, \n  'active': True, \n  'user_facing': True, \n  'lab_facility': 'indicate', \n  'practice_facility': 'national', \n  'description': 'test'\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/lab_facility_identifiers/1234567/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Facility Identifiers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_facility_identifiers/:
+    get:
+      summary: Find Lab Facility Identifiers
+      description: ''
+      operationId: find-lab-facility-identifiers
+      parameters:
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 8,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 140743139328427,\n            \"vendor\": {\n                \"id\": 63929778422,\n                \"name\": \"DLS\",\n                \"display_name\": \"DLS\"\n            },\n            \"practice_facility\": \"KAWAMOTO\",\n            \"practice_secondary_id\": null,\n            \"lab_facility\": \"LABFACID\",\n            \"description\": \"DLS e-ordering\",\n            \"user_facing\": true,\n            \"compendium\": 140745672360379,\n            \"deleted_date\": null,\n            \"created_date\": \"2019-10-04T05:37:31Z\",\n            \"active\": true,\n            \"practice\": 65540\n        },\n      ....\n    ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_facility_identifiers/\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Facility Identifiers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_facility_identifiers/ [WIP]:
+    post:
+      summary: Create Lab Facility Identifiers
+      description: ''
+      operationId: create-lab-facility-identifiers
+      parameters:
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor
+              - practice
+              - active
+              - lab_facility
+              - practice_facility
+              properties:
+                vendor:
+                  type: integer
+                  description: lab vendor id
+                  format: int32
+                compendium:
+                  type: integer
+                  description: The id of the compendium that will be used when the user selects this facility identifier
+                  format: int32
+                practice:
+                  type: integer
+                  description: practice id
+                  format: int32
+                active:
+                  type: boolean
+                  description: Whether the facility identifier should be used. Should be true in most cases.
+                user_facing:
+                  type: boolean
+                  description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+                lab_facility:
+                  type: string
+                  description: The id that represents the lab
+                practice_facility:
+                  type: string
+                  description: The id that represents the practice; often an account number provided by the lab vendor
+                description:
+                  type: string
+                  description: The text that will displayed to users in the lab order dialog
+                practice_secondary_id:
+                  type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758850863531,\n    \"vendor\": {\n        \"id\": 63929778422,\n        \"name\": \"DLS\",\n        \"display_name\": \"DLS\"\n    },\n    \"practice_facility\": \"KAWAMOTO\",\n    \"practice_secondary_id\": \"54\",\n    \"lab_facility\": \"LABFACID\",\n    \"description\": \"DLS e-ordering\",\n    \"user_facing\": true,\n    \"compendium\": 140745672360379,\n    \"deleted_date\": null,\n    \"created_date\": \"2022-06-07T09:52:18.599593Z\",\n    \"active\": true,\n    \"practice\": 140758831005700\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758850863531
+                    default: 0
+                  vendor:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 63929778422
+                        default: 0
+                      name:
+                        type: string
+                        example: DLS
+                      display_name:
+                        type: string
+                        example: DLS
+                  practice_facility:
+                    type: string
+                    example: KAWAMOTO
+                  practice_secondary_id:
+                    type: string
+                    example: '54'
+                  lab_facility:
+                    type: string
+                    example: LABFACID
+                  description:
+                    type: string
+                    example: DLS e-ordering
+                  user_facing:
+                    type: boolean
+                    example: true
+                    default: true
+                  compendium:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  deleted_date: {}
+                  created_date:
+                    type: string
+                    example: '2022-06-07T09:52:18.599593Z'
+                  active:
+                    type: boolean
+                    example: true
+                    default: true
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  'vendor': 140758909976822, \n  'compendium': 140758910042555, \n  'practice': 140758905192452, \n  'active': True, \n  'user_facing': True, \n  'lab_facility': 'indicate', \n  'practice_facility': 'national', \n  'description': 'test'\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/lab_facility_identifiers/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Facility Identifiers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/lab_facility_identifiers/:
+    get:
+      description: Returns a list of lab vendor integrations
+      operationId: lab_facility_identifiers_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFacilityIdentifierList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Lab Facility Identifiers
+      tags:
+      - Lab Facility Identifiers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new lab facility identifier.
+      operationId: lab_facility_identifiers_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacilityIdentifier'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityIdentifier'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Lab Facility Identifier
+      tags:
+      - Lab Facility Identifiers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/lab_facility_identifiers/{id}/:
+    delete:
+      description: Delete an existing lab facility identifier.
+      operationId: lab_facility_identifiers_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Lab Facility Identifier
+      tags:
+      - Lab Facility Identifiers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single lab vendor integration
+      operationId: lab_facility_identifiers_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityIdentifier'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Lab Facility Identifier
+      tags:
+      - Lab Facility Identifiers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing lab facility identifier.
+      operationId: lab_facility_identifiers_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFacilityIdentifier'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityIdentifier'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Lab Facility Identifier
+      tags:
+      - Lab Facility Identifiers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing lab facility identifier.
+      operationId: lab_facility_identifiers_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacilityIdentifier'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityIdentifier'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Lab Facility Identifier
+      tags:
+      - Lab Facility Identifiers
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatchedFacilityIdentifier:
+      properties:
+        active:
+          description: Whether the facility identifier should be used. Should be true in most cases.
+          type: boolean
+        bidi_connection:
+          oneOf:
+          - $ref: '#/components/schemas/BiDiLabConnection'
+          - type: 'null'
+          readOnly: true
+        compendium:
+          description: The id of the compendium that will be used when the user selects this facility identifier.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          description: The text that will displayed to users in the lab order dialog.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_connection:
+          type:
+          - integer
+          - 'null'
+        lab_facility:
+          description: The id that represents the lab.
+          maxLength: 50
+          type: string
+        practice:
+          format: int64
+          type: integer
+        practice_facility:
+          description: The id that represents the practice; often an account number provided by the lab vendor.
+          maxLength: 50
+          type: string
+        practice_secondary_id:
+          type:
+          - string
+          - 'null'
+        user_facing:
+          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+          type: boolean
+        vendor:
+          properties:
+            display_name:
+              type: string
+            id:
+              format: int64
+              type: integer
+            name:
+              type: string
+          type: object
+      type: object
+    PaginatedFacilityIdentifierList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/FacilityIdentifier'
+          type: array
+      required:
+      - results
+      type: object
+    BiDiLabConnection:
+      properties:
+        alias:
+          description: Get the alias of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        enabled:
+          description: Get the enabled status of the connection.
+          readOnly: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        priority:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        protocol:
+          description: Get the protocol of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      type: object
+    FacilityIdentifier:
+      properties:
+        active:
+          description: Whether the facility identifier should be used. Should be true in most cases.
+          type: boolean
+        bidi_connection:
+          oneOf:
+          - $ref: '#/components/schemas/BiDiLabConnection'
+          - type: 'null'
+          readOnly: true
+        compendium:
+          description: The id of the compendium that will be used when the user selects this facility identifier.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          description: The text that will displayed to users in the lab order dialog.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_connection:
+          type:
+          - integer
+          - 'null'
+        lab_facility:
+          description: The id that represents the lab.
+          maxLength: 50
+          type: string
+        practice:
+          format: int64
+          type: integer
+        practice_facility:
+          description: The id that represents the practice; often an account number provided by the lab vendor.
+          maxLength: 50
+          type: string
+        practice_secondary_id:
+          type:
+          - string
+          - 'null'
+        user_facing:
+          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+          type: boolean
+        vendor:
+          properties:
+            display_name:
+              type: string
+            id:
+              format: int64
+              type: integer
+            name:
+              type: string
+          type: object
+      required:
+      - active
+      - lab_facility
+      - practice
+      - practice_facility
+      - vendor
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

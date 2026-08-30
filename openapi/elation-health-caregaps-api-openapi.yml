@@ -1,0 +1,439 @@
+openapi: 3.2.0
+info:
+  title: Care Gaps Caregaps API
+  description: This API supports the management of definitions, gaps, and webhook notifications.
+  version: 0.0.1
+servers:
+- url: https://caregaps.sandbox.elationemr.com/
+  description: CareGaps API - Sandbox Environment
+tags:
+- name: Caregaps
+paths:
+  /caregaps/api/{quality_program}/caregap/:
+    get:
+      tags:
+      - Caregaps
+      summary: Retrieve a list of existing caregap.
+      description: Retrieve a list of Care Gaps with filters specified by query parameters.
+      operationId: caregaps_list_caregaps_api__quality_program__caregap__get
+      parameters:
+      - required: true
+        schema:
+          title: Quality Program
+          type: string
+        name: quality_program
+        in: path
+      - required: false
+        schema:
+          title: Practice Id
+          type: string
+        name: practice_id
+        in: query
+      - required: false
+        schema:
+          title: Page Size
+          maximum: 50
+          minimum: 1
+          type: integer
+          default: 5
+        name: page_size
+        in: query
+      - required: false
+        schema:
+          title: Cursor
+          type: string
+        name: cursor
+        in: query
+      - required: false
+        schema:
+          title: Patient Id
+          type: string
+        name: patient_id
+        in: query
+      - required: false
+        schema:
+          title: Definition Id
+          type: string
+        name: definition_id
+        in: query
+      - required: false
+        schema:
+          $ref: '#/components/schemas/StatusEnum'
+        name: status
+        in: query
+      - required: false
+        schema:
+          title: Closed Date Begin
+          type: string
+          format: date
+        name: closed_date_begin
+        in: query
+      - required: false
+        schema:
+          title: Closed Date End
+          type: string
+          format: date
+        name: closed_date_end
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Closing Code
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaregapAPIPaginatedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+    post:
+      tags:
+      - Caregaps
+      summary: Create a new caregap.
+      description: Create a new caregap.
+      operationId: caregaps_post_caregaps_api__quality_program__caregap__post
+      parameters:
+      - required: true
+        schema:
+          title: Quality Program
+          type: string
+        name: quality_program
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaregapAPIModel'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaregapAPI'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+  /caregaps/api/{quality_program}/caregap/{caregap_id}/:
+    get:
+      tags:
+      - Caregaps
+      summary: Retrieve an existing caregap.
+      description: Retrieve a specific Care Gap.
+      operationId: caregaps_get_caregaps_api__quality_program__caregap__caregap_id___get
+      parameters:
+      - required: true
+        schema:
+          title: Quality Program
+          type: string
+        name: quality_program
+        in: path
+      - required: true
+        schema:
+          title: Caregap Id
+          type: string
+        name: caregap_id
+        in: path
+      - required: false
+        schema:
+          title: Practice Id
+          type: string
+        name: practice_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaregapAPI'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+    delete:
+      tags:
+      - Caregaps
+      summary: Delete an existing caregap.
+      description: Delete a specific Care Gap.
+      operationId: caregaps_delete_caregaps_api__quality_program__caregap__caregap_id___delete
+      parameters:
+      - required: true
+        schema:
+          title: Quality Program
+          type: string
+        name: quality_program
+        in: path
+      - required: true
+        schema:
+          title: Caregap Id
+          type: string
+        name: caregap_id
+        in: path
+      - required: false
+        schema:
+          title: Practice Id
+          type: string
+        name: practice_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+    patch:
+      tags:
+      - Caregaps
+      summary: Modifies an existing caregap's closed status.
+      operationId: caregaps_modify_caregaps_api__quality_program__caregap__caregap_id___patch
+      parameters:
+      - required: true
+        schema:
+          title: Quality Program
+          type: string
+        name: quality_program
+        in: path
+      - required: true
+        schema:
+          title: Caregap Id
+          type: string
+        name: caregap_id
+        in: path
+      - required: false
+        schema:
+          title: Practice Id
+          type: string
+        name: practice_id
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaregapPatchAPI'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaregapAPI'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    StatusEnum:
+      title: StatusEnum
+      enum:
+      - open
+      - closed
+      type: string
+      description: An enumeration.
+    CaregapPatchAPI:
+      title: CaregapPatchAPI
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          description: Current status of the caregap
+    CaregapAPI:
+      title: CaregapAPI
+      required:
+      - definition_id
+      - patient_id
+      - practice_id
+      - created_date
+      - status
+      - id
+      - quality_program
+      type: object
+      properties:
+        definition_id:
+          title: Definition Id
+          type: string
+          description: Definition id this caregap is associated with.
+        patient_id:
+          title: Patient Id
+          type: string
+          description: Patient id this caregap is associated with.
+        practice_id:
+          title: Practice Id
+          type: string
+          description: Practice id this caregap is associated with.
+        created_date:
+          title: Created Date
+          type: string
+          description: ISO timestamp for when this caregap was created.
+          format: date
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          description: Current status of the caregap
+        detail:
+          title: Detail
+          type: string
+          description: Extra detail about the caregap.
+        closed_date:
+          title: Closed Date
+          type: string
+          description: ISO timestamp for when the caregap was closed.
+          format: date
+        closed_by:
+          allOf:
+          - $ref: '#/components/schemas/ClosedByEnum'
+          description: Who or what action closed the caregap.
+        id:
+          title: Id
+          type: string
+          description: UUID to identify the caregap
+        quality_program:
+          title: Quality Program
+          type: string
+          description: Quality program this caregap is associated with.
+    CaregapAPIPaginatedResponse:
+      title: CaregapAPIPaginatedResponse
+      required:
+      - results
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            $ref: '#/components/schemas/CaregapAPI'
+          description: Page of results requested
+        cursor:
+          title: Cursor
+          type: string
+          description: Cursor to query for the next page
+        next_page_url:
+          title: Next Page Url
+          type: string
+          description: Full URL to query for the next page
+    ClosedByEnum:
+      title: ClosedByEnum
+      enum:
+      - API
+      - condition-saved
+      - feedback
+      type: string
+      description: An enumeration.
+    CaregapAPIModel:
+      title: CaregapAPIModel
+      required:
+      - definition_id
+      - patient_id
+      - practice_id
+      - created_date
+      - status
+      type: object
+      properties:
+        definition_id:
+          title: Definition Id
+          type: string
+          description: Definition id this caregap is associated with.
+        patient_id:
+          title: Patient Id
+          type: string
+          description: Patient id this caregap is associated with.
+        practice_id:
+          title: Practice Id
+          type: string
+          description: Practice id this caregap is associated with.
+        created_date:
+          title: Created Date
+          type: string
+          description: ISO timestamp for when this caregap was created.
+          format: date
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          description: Current status of the caregap
+        detail:
+          title: Detail
+          type: string
+          description: Extra detail about the caregap.
+        closed_date:
+          title: Closed Date
+          type: string
+          description: ISO timestamp for when the caregap was closed.
+          format: date
+        closed_by:
+          allOf:
+          - $ref: '#/components/schemas/ClosedByEnum'
+          description: Who or what action closed the caregap.
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: token

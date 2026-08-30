@@ -1,0 +1,448 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Clinical Documents API
+  version: '1.0'
+  description: 'Operations tagged Clinical Documents across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Clinical Documents
+paths:
+  /clinical_documents/:
+    get:
+      summary: Find Clinical Documents
+      description: ''
+      operationId: find-clinical-documents
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/clinical_documents/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/clinical_documents/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/clinical_documents/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Clinical Documents
+      security:
+      - sec0: []
+    post:
+      summary: Create Clinical Document
+      description: ''
+      operationId: create-clinical-document
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - authoring_practice
+              - data_format
+              properties:
+                patient:
+                  type: integer
+                  description: The id of the patient
+                  format: int32
+                authoring_practice:
+                  type: integer
+                  description: The id of the patient's practice
+                  format: int32
+                xml_file:
+                  properties:
+                    original_filename:
+                      type: string
+                      description: The filename of the xml file
+                    content_type:
+                      type: string
+                      description: The context type of the uploaded file (must be "application/octet-stream")
+                      default: application/octet-stream
+                    base64_content:
+                      type: string
+                      description: The base64 of the uploaded file
+                  required:
+                  - original_filename
+                  - content_type
+                  - base64_content
+                  type: object
+                  description: The xml file to be used as clinical document
+                data_format:
+                  type: integer
+                  description: The format of the clinical document data
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"patient\": 437635,\n  \"authoring_practice\": 138261,\n  \"xml_file\": {\n    \"original_filename\": \"full_ccda.xml\",\n    \"content_type\": \"application/octet-stream\",\n    \"base64_content\": <BASE 64>\n  },\n  \"data_format\": \"ccda\"\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/clinical_documents/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Clinical Documents
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /clinical_documents/{id}/:
+    get:
+      summary: Get Clinical Document
+      description: ''
+      operationId: get-clinical-document
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/clinical_documents/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Clinical Documents
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/clinical_documents/:
+    get:
+      operationId: clinical_documents_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedXmlPatientSummaryList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Clinical Documents
+      tags:
+      - Clinical Documents
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new clinical document.
+      operationId: clinical_documents_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/XmlPatientSummary'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XmlPatientSummary'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Clinical Document
+      tags:
+      - Clinical Documents
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/clinical_documents/{id}/:
+    delete:
+      description: Delete an existing clinical document.
+      operationId: clinical_documents_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Clinical Document
+      tags:
+      - Clinical Documents
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: clinical_documents_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/XmlPatientSummary'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Clinical Document
+      tags:
+      - Clinical Documents
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    XmlFile:
+      description: Alias for S3RetrievingDocumentFileSerializer with proper OpenAPI schema name.
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
+    DataFormatEnum:
+      enum:
+      - ccda
+      - ccr
+      - qrda_1
+      type: string
+    PaginatedXmlPatientSummaryList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/XmlPatientSummary'
+          type: array
+      required:
+      - results
+      type: object
+    XmlPatientSummary:
+      properties:
+        allergies_imported:
+          type: boolean
+        author_name:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        authoring_practice:
+          format: int64
+          type: integer
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        data_format:
+          allOf:
+          - $ref: '#/components/schemas/DataFormatEnum'
+          description: The format of the clinical document data.
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        demographics_imported:
+          type: boolean
+        encounters_imported:
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        immunizations_imported:
+          type: boolean
+        labs_imported:
+          type: boolean
+        medications_imported:
+          type: boolean
+        patient:
+          format: int64
+          type: integer
+        problems_imported:
+          type: boolean
+        procedures_imported:
+          type: boolean
+        vitals_imported:
+          type: boolean
+        xml_file:
+          allOf:
+          - $ref: '#/components/schemas/XmlFile'
+          description: The xml file to be used as clinical document.
+      required:
+      - authoring_practice
+      - patient
+      - xml_file
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

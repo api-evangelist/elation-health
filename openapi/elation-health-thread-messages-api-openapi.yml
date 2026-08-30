@@ -1,0 +1,655 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Thread Messages API
+  version: '1.0'
+  description: 'Operations tagged Thread Messages across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-messaging-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Thread Messages
+paths:
+  /thread_messages/{id}:
+    get:
+      summary: Get Thread Message
+      description: ''
+      operationId: get-thread-message
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '303':
+          description: '303'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/thread_messages/83792571234/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: curl
+          code: 'curl https://sandbox.elationemr.com/api/2.0/patients/64184451073/ \
+
+            > -H "Authorization: Bearer XaTtPYZ8Ufy04f0187fPbWFkwcADF0"'
+          name: cURL
+        samples-languages:
+        - python
+        - curl
+      tags:
+      - Thread Messages
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Thread Message
+      description: ''
+      operationId: delete-thread-message
+      parameters:
+      - name: id
+        in: path
+        description: The id of the thread message.
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Thread Messages
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /thread_messages/:
+    get:
+      summary: Find Thread Messages
+      description: ''
+      operationId: find-thread-messages
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/thread_messages/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/thread_messages/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/thread_messages/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Thread Messages
+      security:
+      - sec0: []
+    post:
+      summary: Create Thread Message
+      description: ''
+      operationId: create-thread-message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - thread
+              - sender
+              - body
+              - send_date
+              properties:
+                thread:
+                  type: integer
+                  description: The message thread we're replying to
+                  format: int32
+                sender:
+                  type: integer
+                  description: The user id of the sender
+                  format: int32
+                body:
+                  type: string
+                  description: The message
+                send_date:
+                  type: string
+                  description: The timestamp of when this message was sent
+                  format: date
+                to_document:
+                  type: object
+                  description: A document this message is in reference to
+                  properties: {}
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Thread Messages
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /thread_messages/ [WIP]:
+    get:
+      summary: Find Thread Messages [WIP]
+      description: ''
+      operationId: find-thread-messages-wip
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: thread
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: sender
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/thread_messages/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/thread_messages/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/thread_messages/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Thread Messages
+      security:
+      - sec0: []
+    post:
+      summary: Create Thread Message [WIP]
+      description: ''
+      operationId: create-thread-message-wip
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - thread
+              - sender
+              - body
+              - send_date
+              properties:
+                thread:
+                  type: integer
+                  description: The message thread we're replying to
+                  format: int32
+                sender:
+                  type: integer
+                  description: The user id of the sender
+                  format: int32
+                body:
+                  type: string
+                  description: The message
+                send_date:
+                  type: string
+                  description: The timestamp of when this message was sent
+                  format: date
+                to_document:
+                  type: object
+                  description: A document this message is in reference to
+                  required:
+                  - id
+                  properties:
+                    id:
+                      type: integer
+                      description: object id
+                      format: int64
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Thread Messages
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/thread_messages/:
+    get:
+      operationId: thread_messages_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: sender
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: thread
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedThreadMessageList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Thread Messages
+      tags:
+      - Thread Messages
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new thread message.
+      operationId: thread_messages_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreadMessage'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadMessage'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Thread Message
+      tags:
+      - Thread Messages
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/thread_messages/{id}/:
+    delete:
+      description: Delete an existing thread message.
+      operationId: thread_messages_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Thread Message
+      tags:
+      - Thread Messages
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: thread_messages_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadMessage'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Thread Message
+      tags:
+      - Thread Messages
+      x-el8-docs-category: Messaging API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    ThreadMessage:
+      properties:
+        body:
+          description: The actual message body.
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient id.
+          format: int64
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice id.
+          format: int64
+          readOnly: true
+          type: integer
+        send_date:
+          description: The date of when the message was sent.
+          format: date-time
+          type: string
+        sender:
+          description: The id of who sent the message.
+          type: integer
+        thread:
+          description: The message thread id.
+          format: int64
+          type: integer
+        to_document:
+          $ref: '#/components/schemas/Document'
+      required:
+      - body
+      - send_date
+      - sender
+      type: object
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
+    PaginatedThreadMessageList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-messaging-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

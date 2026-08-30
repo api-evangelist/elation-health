@@ -1,0 +1,301 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Print Headers API
+  version: '1.0'
+  description: 'Operations tagged Print Headers across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Print Headers
+paths:
+  /print_headers/:
+    get:
+      summary: Find Print Headers
+      description: ''
+      operationId: find-print-headers
+      parameters:
+      - name: practice
+        in: query
+        description: The practice id that we want to filter print headers by.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{'count': 7,\n 'next': None,\n 'previous': None,\n 'results': [{'id': 140755885818184,\n   'created_date': '2021-11-24T06:31:41Z',\n   'deleted_date': None,\n   'name': 'Elation Practice Header',\n   'content_type': '0',\n   'header': 'Yoder, Howell and Blanchard\\n6415 Spencer Extension Apt. 821 Suite 092, Port Heather, LA 88981\\nOffice: 1742215; Fax: 021678',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196},\n  {'id': 140755885883720,\n   'created_date': '2021-11-24T06:31:41Z',\n   'deleted_date': None,\n   'name': 'Header test101',\n   'content_type': '0',\n   'header': 'This is a simple test1.',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196},\n  {'id': 140755885949256,\n   'created_date': '2021-11-24T06:31:41Z',\n   'deleted_date': None,\n   'name': 'Header test102',\n   'content_type': '0',\n   'header': 'This is a simple test2.',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196},\n  {'id': 140755886014792,\n   'created_date': '2021-11-24T06:31:42Z',\n   'deleted_date': None,\n   'name': 'Header test101',\n   'content_type': '0',\n   'header': 'This is a simple test1.',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196},\n  {'id': 140755886080328,\n   'created_date': '2021-11-24T06:31:42Z',\n   'deleted_date': None,\n   'name': 'Header test102',\n   'content_type': '0',\n   'header': 'This is a simple test2.',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196},\n  {'id': 140755886145864,\n   'created_date': '2021-11-24T06:31:42Z',\n   'deleted_date': '2021-11-24T06:31:42Z',\n   'name': 'Header test101',\n   'content_type': '0',\n   'header': 'This is a simple test1.',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196},\n  {'id': 140755886211400,\n   'created_date': '2021-11-24T06:31:42Z',\n   'deleted_date': None,\n   'name': 'Header test102',\n   'content_type': '0',\n   'header': 'This is a simple test2.',\n   'header_image': None,\n   'image_placement': '2',\n   'practice': 140755880968196}]}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Print Headers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /print_headers/{id}:
+    get:
+      summary: Get Print Header
+      description: ''
+      operationId: get-print-header
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{'id': 140755886080328,\n 'created_date': '2021-11-24T06:31:42Z',\n 'deleted_date': None,\n 'name': 'Header test102',\n 'content_type': '0',\n 'header': 'This is a simple test2.',\n 'header_image': None,\n 'image_placement': '2',\n 'practice': 140755880968196}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Print Headers
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/print_headers/:
+    get:
+      description: Returns a list of print headers
+      operationId: print_headers_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPracticePrintHeaderList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Print Headers
+      tags:
+      - Print Headers
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/print_headers/{id}/:
+    delete:
+      description: Delete an existing print header.
+      operationId: print_headers_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Print Header
+      tags:
+      - Print Headers
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: print_headers_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PracticePrintHeader'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Print Header
+      tags:
+      - Print Headers
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    UploadedPhoto:
+      description: 'Serializer for UploadedPhoto model.
+
+        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
+      properties:
+        content_type:
+          readOnly: true
+          type: string
+        file_size:
+          readOnly: true
+          type: integer
+        height:
+          readOnly: true
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        original_filename:
+          readOnly: true
+          type: string
+        width:
+          readOnly: true
+          type: integer
+      type: object
+    PaginatedPracticePrintHeaderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PracticePrintHeader'
+          type: array
+      required:
+      - results
+      type: object
+    PracticePrintHeader:
+      properties:
+        content_type:
+          description: The type of print header; whether its pure text or is an image. {0, 1} 0=text 1=image.
+          maxLength: 5
+          type: string
+        created_date:
+          description: The timestamp when the print header was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The timestamp when the print header was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        header:
+          description: The text header. Will be null if not a text print header.
+          maxLength: 500
+          type: string
+        header_image:
+          allOf:
+          - $ref: '#/components/schemas/UploadedPhoto'
+          description: The header image. Will be null if not an image header.
+        id:
+          readOnly: true
+          type: integer
+        image_placement:
+          description: Specifies where the image header is placed. {0, 1, 2, 3} 0=left 1=right 2=center 3=fit to width.
+          maxLength: 12
+          type: string
+        name:
+          description: The name of the print header displayed in the app.
+          maxLength: 200
+          type: string
+        practice:
+          description: The practice that owns this print header.
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - name
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-practice-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

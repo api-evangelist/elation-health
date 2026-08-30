@@ -1,0 +1,253 @@
+openapi: 3.2.0
+info:
+  title: Settings Patient Provider Team Members API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Patient Provider Team Members
+paths:
+  /patient-provider-team-members:
+    post:
+      summary: Create a Provider Team Member
+      description: ''
+      operationId: create-a-patientproviderteammember
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient_provider_team_id
+              - physician_id
+              properties:
+                patient_provider_team_id:
+                  type: integer
+                  format: int64
+                physician_id:
+                  type: integer
+                  format: int64
+                treatment_reason:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"patient_provider_team_id\": 58726220062,\n    \"patient_provider_team_member_id\": 140758911484191,\n    \"patient_id\": 887422977,\n    \"physician_id\": 983042,\n    \"group\": \"main\",\n    \"rank\": 1,\n    \"treatment_reason\": \"pcp at sacred heart\",\n    \"earliest_activity\": null,\n    \"latest_activity\": null,\n    \"activity_summary_last_refreshed\": null\n}"
+              schema:
+                type: object
+                properties:
+                  patient_provider_team_id:
+                    type: integer
+                    example: 58726220062
+                    default: 0
+                  patient_provider_team_member_id:
+                    type: integer
+                    example: 140758911484191
+                    default: 0
+                  patient_id:
+                    type: integer
+                    example: 887422977
+                    default: 0
+                  physician_id:
+                    type: integer
+                    example: 983042
+                    default: 0
+                  group:
+                    type: string
+                    example: main
+                  rank:
+                    type: integer
+                    example: 1
+                    default: 0
+                  treatment_reason:
+                    type: string
+                    example: pcp at sacred heart
+                  earliest_activity: {}
+                  latest_activity: {}
+                  activity_summary_last_refreshed: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"detail\": \"Patient provider team not found.\"\n}"
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Patient provider team not found.
+        '409':
+          description: '409'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n    \"detail\": \"Physician already a member of the specified patient-provider team.\"\n}"
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Physician already a member of the specified patient-provider team.
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nbody = {\"patient_provider_team_id\": 58726220062, \"physician_id\": 983042, \"treatment_reason\": \"pcp at sacred heart\"}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/patient-provider-teams\",\n                    headers={'Authorization': auth_header}, data=body)\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Patient Provider Team Members
+  /patient-provider-team-members/{team_member_id}:
+    patch:
+      summary: Update Team Member
+      description: ''
+      operationId: update-patientproviderteammember-details
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: team_member_id
+        in: path
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                treatment_reason:
+                  type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"patient_provider_team_id\": 58726220062,\n    \"patient_provider_team_member_id\": 140758911484191,\n    \"patient_id\": 887422977,\n    \"physician_id\": 983042,\n    \"group\": \"main\",\n    \"rank\": 1,\n    \"treatment_reason\": \"surgeon at sacred heart\",\n    \"earliest_activity\": null,\n    \"latest_activity\": null,\n    \"activity_summary_last_refreshed\": null\n}"
+              schema:
+                type: object
+                properties:
+                  patient_provider_team_id:
+                    type: integer
+                    example: 58726220062
+                    default: 0
+                  patient_provider_team_member_id:
+                    type: integer
+                    example: 140758911484191
+                    default: 0
+                  patient_id:
+                    type: integer
+                    example: 887422977
+                    default: 0
+                  physician_id:
+                    type: integer
+                    example: 983042
+                    default: 0
+                  group:
+                    type: string
+                    example: main
+                  rank:
+                    type: integer
+                    example: 1
+                    default: 0
+                  treatment_reason:
+                    type: string
+                    example: surgeon at sacred heart
+                  earliest_activity: {}
+                  latest_activity: {}
+                  activity_summary_last_refreshed: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nbody = {\"treatment_reason\": \"surgeon at sacred heart\"}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/patient-provider-teams/140758911484191\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Patient Provider Team Members
+    delete:
+      summary: Delete a Team Member
+      description: ''
+      operationId: delete-patientproviderteammember
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: team_member_id
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"detail\": \"Patient provider team member not found.\"\n}"
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Patient provider team member not found.
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/patient-provider-teams/140758911484191\",\n                    headers={'Authorization': auth_header})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Patient Provider Team Members
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

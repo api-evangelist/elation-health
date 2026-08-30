@@ -1,0 +1,1090 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Imaging Orders API
+  version: '1.0'
+  description: 'Operations tagged Imaging Orders across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Imaging Orders
+paths:
+  /imaging_orders/{id}:
+    get:
+      summary: Get Imaging Order
+      description: ''
+      operationId: get-imaging-order
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Imaging Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/imaging_orders/140756377075740/\",\n    headers={'Authorization': auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Imaging Orders
+      security:
+      - sec0: []
+    put:
+      summary: Update Imaging Order
+      description: ''
+      operationId: put-imaging-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ancillary_company
+              - chart_date
+              - clinical_reason
+              - document_date
+              - patient
+              - practice
+              - prescribing_user
+              properties:
+                ancillary_company:
+                  type: integer
+                  description: The ancillary company the order is associated with.
+                  format: int32
+                ccs:
+                  type: array
+                  description: Array of Physician IDs to copy for the order.
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                clinical_reason:
+                  type: string
+                  description: The clinical reason for the order.
+                confidential:
+                  type: boolean
+                  description: Whether the order is confidential.
+                  default: false
+                document_date:
+                  type: string
+                  format: date
+                follow_up_method:
+                  type: string
+                  description: How to notify the patient of the results.
+                icd10_codes:
+                  type: array
+                  description: Array of ICD-10 diagnosis codes associated with the order
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                imaging_center:
+                  type: integer
+                  description: The imaging center the order is associated with.
+                  default: null
+                  format: int32
+                patient:
+                  type: integer
+                  description: The patient the order is associated with. Patient must belong to the specified practice. Not allowed to be changed for updates.
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice the order is associated with. Not allowed to be changed for updates.
+                  format: int32
+                prescribing_user:
+                  type: integer
+                  description: The user associated with the order. User ID must tie to a physician in the practice.
+                  format: int32
+                statmethod:
+                  type: string
+                  description: The type of report to get for the order if urgent. Options are "wet_reading_phone" and "wet_reading_fax"
+                tests:
+                  properties:
+                    ? ''
+                    : properties:
+                        id:
+                          type: integer
+                          description: The ID of the imaging order test to be associated with the order. Imaging order test must belong to the specified practice.
+                          format: int32
+                      required:
+                      - id
+                      type: object
+                  required: []
+                  type: object
+                  description: An array of imaging order tests associated with the order.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Imaging Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nupdated_imaging_order_data = {\n    \"ancillary_company\": 140755855605768,\n    \"ccs\": [\n        131074\n    ],\n    \"chart_date\": \"2021-05-26T03:49:04Z\",\n    \"clinical_reason\": \"sickness\",\n    \"confidential\": true,\n    \"document_date\": \"2021-05-26T03:49:04Z\",\n    \"follow_up_method\": \"email\",\n    \"icd10_codes\": [\n        {\n            \"code\": \"O09.529\",\n            \"description\": \"Supervision of elderly multigravida, unspecified trimester\"\n        }\n    ],\n    \"imaging_center\": 140755855671306,\n    \"patient\": 140756664516609,\n    \"practice\": 140756660256772,\n    \"prescribing_user\": 2032,\n    \"statmethod\": \"wet_reading_fax\",\n    \"tests\": [\n        {\n            \"id\": 140756665106487\n        }\n    ]\n}\n\nresp = requests.put(\n    \"https://sandbox.elationemr.com/api/2.0/imaging_orders/140756377075740\",\n    headers={\"Authorization\": auth_header},\n  \tjson=updated_imaging_order_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Imaging Orders
+      security:
+      - sec0: []
+    patch:
+      summary: Update Imaging Order
+      description: ''
+      operationId: patch-imaging-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ancillary_company:
+                  type: integer
+                  description: The ancillary company the order is associated with.
+                  format: int32
+                ccs:
+                  type: array
+                  description: Array of Physician IDs to copy for the cardiac order.
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                clinical_reason:
+                  type: string
+                  description: The clinical reason for the order.
+                confidential:
+                  type: boolean
+                  description: Whether the order is confidential.
+                  default: false
+                document_date:
+                  type: string
+                  format: date
+                follow_up_method:
+                  type: string
+                  description: How to notify the patient of the results.
+                icd10_codes:
+                  type: array
+                  description: Array of ICD-10 diagnosis codes associated with the cardiac order
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                imaging_center:
+                  type: integer
+                  description: The imaging center the order is associated with.
+                  default: null
+                  format: int32
+                patient:
+                  type: integer
+                  description: The patient the order is associated with. Patient must belong to the specified practice. Not allowed to be changed for updates.
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice the order is associated with. Not allowed to be changed for updates.
+                  format: int32
+                prescribing_user:
+                  type: integer
+                  description: The user associated with the order. User ID must tie to a physician in the practice.
+                  format: int32
+                statmethod:
+                  type: string
+                  description: The type of report to get for the order if urgent. Options are "wet_reading_phone" and "wet_reading_fax"
+                tests:
+                  properties:
+                    ? ''
+                    : properties:
+                        id:
+                          type: integer
+                          description: The ID of the imaging order test to be associated with the order. Imaging order test must belong to the specified practice.
+                          format: int32
+                      required:
+                      - id
+                      type: object
+                  required: []
+                  type: object
+                  description: An array of imaging order tests associated with the order.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Imaging Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nupdated_imaging_order_data = {\n    \"clinical_reason\": \"sickness\",\n}\n\nresp = requests.patch(\n    \"https://sandbox.elationemr.com/api/2.0/imaging_orders/140756377075740\",\n    headers={\"Authorization\": auth_header},\n  \tjson=updated_imaging_order_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Imaging Orders
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Imaging Order
+      description: ''
+      operationId: delete-imaging-order
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.delete(\n    \"https://sandbox.elationemr.com/api/2.0/imaging_orders/140756377075740/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Imaging Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /imaging_orders/:
+    get:
+      summary: Find Imaging Orders
+      description: ''
+      operationId: find-imaging-orders
+      parameters:
+      - name: patient
+        in: query
+        description: The patient the imaging order belongs to.
+        schema:
+          type: string
+      - name: practice
+        in: query
+        description: The practice the imaging order belongs to.
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n      // See Imaging Order Object definition\n     ]\n}"
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/imaging_orders/\",\n    headers={'Authorization': auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Imaging Orders
+      security:
+      - sec0: []
+    post:
+      summary: Create Imaging Order
+      description: ''
+      operationId: create-imaging-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ancillary_company
+              - chart_date
+              - clinical_reason
+              - document_date
+              - patient
+              - practice
+              - prescribing_user
+              properties:
+                ancillary_company:
+                  type: integer
+                  description: The ancillary company the order is associated with.
+                  format: int32
+                ccs:
+                  type: array
+                  description: Array of Physician IDs to copy for the order.
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                clinical_reason:
+                  type: string
+                  description: The clinical reason for the order.
+                confidential:
+                  type: boolean
+                  description: Whether the order is confidential.
+                  default: false
+                document_date:
+                  type: string
+                  format: date
+                follow_up_method:
+                  type: string
+                  description: How to notify the patient of the results.
+                icd10_codes:
+                  type: array
+                  description: Array of ICD-10 diagnosis codes associated with the order
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                imaging_center:
+                  type: integer
+                  description: The imaging center the order is associated with.
+                  default: null
+                  format: int32
+                patient:
+                  type: integer
+                  description: The patient the order is associated with. Patient must belong to the specified practice.
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice the order is associated with.
+                  format: int32
+                prescribing_user:
+                  type: integer
+                  description: The user associated with the order. User ID must tie to a physician in the practice.
+                  format: int32
+                statmethod:
+                  type: string
+                  description: The type of report to get for the order if urgent. Options are "wet_reading_phone" and "wet_reading_fax"
+                tests:
+                  properties:
+                    ? ''
+                    : properties:
+                        id:
+                          type: integer
+                          description: The ID of the imaging order test to be associated with the order. Imaging order test must belong to the specified practice.
+                          format: int32
+                      required:
+                      - id
+                      type: object
+                  required: []
+                  type: object
+                  description: An array of imaging tests associated with the order.
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Imaging Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nnew_imaging_order_data = {\n    \"ancillary_company\": 140755855605768,\n    \"ccs\": [\n        131074\n    ],\n    \"chart_date\": \"2021-05-26T03:49:04Z\",\n    \"clinical_reason\": \"sickness\",\n    \"confidential\": true,\n    \"document_date\": \"2021-05-26T03:49:04Z\",\n    \"follow_up_method\": \"email\",\n    \"icd10_codes\": [\n        {\n            \"code\": \"O09.529\",\n            \"description\": \"Supervision of elderly multigravida, unspecified trimester\"\n        }\n    ],\n    \"imaging_center\": 140755855671306,\n    \"patient\": 140756664516609,\n    \"practice\": 140756660256772,\n    \"prescribing_user\": 2032,\n    \"statmethod\": \"wet_reading_fax\",\n    \"tests\": [\n        {\n            \"id\": 140756665106487\n        }\n    ]\n}\n\nresp = requests.post(\n    \"https://sandbox.elationemr.com/api/2.0/imaging_orders/\",\n    headers={\"Authorization\": auth_header},\n  \tjson=new_imaging_order_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Imaging Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/imaging_orders/:
+    get:
+      description: Returns a list of imaging orders
+      operationId: imaging_orders_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: The patient the imaging order belongs to.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: The practice the imaging order belongs to.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedImagingOrderList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Imaging Orders
+      tags:
+      - Imaging Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new imaging order.
+      operationId: imaging_orders_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImagingOrder'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagingOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Imaging Order
+      tags:
+      - Imaging Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/imaging_orders/{id}/:
+    delete:
+      description: Delete an existing imaging order.
+      operationId: imaging_orders_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Imaging Order
+      tags:
+      - Imaging Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single imaging order
+      operationId: imaging_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagingOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Imaging Order
+      tags:
+      - Imaging Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing imaging order.
+      operationId: imaging_orders_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedImagingOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagingOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Imaging Order
+      tags:
+      - Imaging Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing imaging order.
+      operationId: imaging_orders_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImagingOrder'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagingOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Imaging Order
+      tags:
+      - Imaging Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    ImagingOrderTest:
+      properties:
+        code:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 255
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - name
+      - practice
+      type: object
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    ImagingOrder:
+      properties:
+        ancillary_company:
+          format: int64
+          type: integer
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        imaging_center:
+          description: The imaging center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        statmethod:
+          description: The type of report to get for the order if urgent.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of imaging tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ImagingOrderTest'
+          type: array
+      required:
+      - ancillary_company
+      - chart_date
+      - clinical_reason
+      - document_date
+      - patient
+      - practice
+      - prescribing_user
+      - tests
+      type: object
+    PaginatedImagingOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ImagingOrder'
+          type: array
+      required:
+      - results
+      type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    DocumentResolutionState:
+      properties:
+        created_date:
+          description: The datetime when this resolution state was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: Internal id to represent the resolution state.
+          readOnly: true
+          type: integer
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
+      required:
+      - state
+      type: object
+    PatchedImagingOrder:
+      properties:
+        ancillary_company:
+          format: int64
+          type: integer
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        imaging_center:
+          description: The imaging center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        statmethod:
+          description: The type of report to get for the order if urgent.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of imaging tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ImagingOrderTest'
+          type: array
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

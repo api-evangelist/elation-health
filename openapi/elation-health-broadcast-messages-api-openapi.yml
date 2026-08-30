@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  title: Settings Broadcast Messages API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Broadcast Messages
+paths:
+  /broadcast_messages/:
+    get:
+      summary: Find BroadcastMessages
+      description: ''
+      operationId: find-broadcastmessages
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 1,\n  \"next\": null,\n  \"previous\": null,\n  \"results\": [  // list of objects\n    {\n      'id': 64811630595,\n      'message': 'View your weekly Care Gaps Assessment Report',\n      'referenced_url': 'https://portal.myenterprise.com/report?id=123456',\n      'referenced_url_description': 'Care Gaps Assessment Report',\n      'message_start': \"2016-10-10T17:00:00\",\n      'message_end': \"2016-10-17T17:00:00\",\n      'created_date': \"2016-10-09T12:52:33\",\n      'target_practices': [65540],\n      'target_users': []\n    }\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/broadcast_messages/\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Broadcast Messages
+    post:
+      summary: Create a BroadcastMessage
+      description: ''
+      operationId: create-a-broadcastmessage
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    'id': 64811630595,\n    'message': 'View your weekly ',\n    'referenced_url': 'https://portal.myenterprise.com/report?id=123456',\n    'referenced_url_description': 'Care Gaps Assessment Report',\n    'message_start': \"2016-10-10T17:00:00\",\n    'message_end': \"2016-10-17T17:00:00\",\n    'created_date': \"2016-10-09T12:52:33\",\n    'target_practices': [65540],\n    'target_users': []\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    'message': 'View your weekly Care Gaps Assessment Report',\n    'referenced_url': 'https://portal.myenterprise.com/report?id=123456',\n    'referenced_url_description': 'Care Gaps Assessment Report',\n    'message_start': \"2016-10-10T17:00:00\",\n    'message_end': \"2016-10-17T17:00:00\",\n    'target_practices': [65540],\n    'target_users': [],\n}\n\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/broadcast_messages/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Broadcast Messages
+  /broadcast_messages/{id}/:
+    delete:
+      summary: Delete a BroadcastMessage
+      description: ''
+      operationId: delete-a-broadcastmessage
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/broadcast_messages/64811630595/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Broadcast Messages
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

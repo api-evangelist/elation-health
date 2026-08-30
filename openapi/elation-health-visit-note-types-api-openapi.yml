@@ -1,0 +1,525 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Visit Note Types API
+  version: '1.0'
+  description: 'Operations tagged Visit Note Types across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Visit Note Types
+paths:
+  /visit_note_types/:
+    get:
+      summary: Find Visit Note Types
+      description: ''
+      operationId: find-visit-note-types
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 16,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 58716782701,\n          \t// See Object Definition\n        }\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/visit_note_types/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Visit Note Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /visit_note_types/{id}:
+    get:
+      summary: Get Visit Note Type
+      description: ''
+      operationId: get-visit-note-types
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \t\"id\": 12345678910,\n    // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/visit_note_types/12345678910\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Visit Note Types
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Visit Note Type
+      description: ''
+      operationId: delete-visit-note-type
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/visit_note_types/123456789\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Visit Note Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /visit_note_types/:id:
+    patch:
+      summary: Update Visit Note Type
+      description: ''
+      operationId: update-visit-note-types
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the visit note type
+                is_mu_office_visit:
+                  type: boolean
+                snomed_code:
+                  type: object
+                  description: Snomed code associated with visit note type
+                  properties: {}
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \t\"content\": \"test\",\n    // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"name\": \"Test Visit Note\",\n    \"is_mu_office_visit\": false,\n    \"snomed_code\": {\n        \"code\": \"308335008\"\n    }\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/visit_note_types/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Visit Note Types
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/visit_note_types/:
+    get:
+      operationId: visit_note_types_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice_created
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVisitNoteTypeList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Visit Note Types
+      tags:
+      - Visit Note Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new visit note type.
+      operationId: visit_note_types_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitNoteType'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNoteType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Visit Note Type
+      tags:
+      - Visit Note Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/visit_note_types/{id}/:
+    delete:
+      description: Delete an existing visit note type.
+      operationId: visit_note_types_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Visit Note Type
+      tags:
+      - Visit Note Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: visit_note_types_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNoteType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Visit Note Type
+      tags:
+      - Visit Note Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing visit note type.
+      operationId: visit_note_types_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVisitNoteType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNoteType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Visit Note Type
+      tags:
+      - Visit Note Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing visit note type.
+      operationId: visit_note_types_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitNoteType'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNoteType'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Visit Note Type
+      tags:
+      - Visit Note Types
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedVisitNoteTypeList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VisitNoteType'
+          type: array
+      required:
+      - results
+      type: object
+    SnomedCode:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    PatchedVisitNoteType:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_mu_office_visit:
+          type: boolean
+        name:
+          maxLength: 50
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        rank:
+          readOnly: true
+          type: integer
+        snomed_code:
+          $ref: '#/components/schemas/SnomedCode'
+      type: object
+    VisitNoteType:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_mu_office_visit:
+          type: boolean
+        name:
+          maxLength: 50
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        rank:
+          readOnly: true
+          type: integer
+        snomed_code:
+          $ref: '#/components/schemas/SnomedCode'
+      required:
+      - name
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

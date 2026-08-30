@@ -1,0 +1,717 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Document Tags API
+  version: '1.0'
+  description: 'Operations tagged Document Tags across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Document Tags
+paths:
+  /document_tags/:
+    get:
+      summary: Find Document Tags
+      description: ''
+      operationId: find-document-tags
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/document_tags/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/document_tags/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/document_tags/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Document Tags
+      security:
+      - sec0: []
+    post:
+      summary: Create Document Tag
+      description: ''
+      operationId: create-document-tag
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+                  description: The value of the tag
+                description:
+                  type: object
+                  description: The description of the tag
+                  properties: {}
+                code_type:
+                  type: string
+                  description: The type of the tag's cod. Choices = CPT, SNOMED, HL7, ICD9, LOINC, CVX, RXNORM, ICD10, CPTII, HCPCS or EL8
+                code:
+                  type: integer
+                  description: The code of the tag
+                  format: int32
+                practice_created:
+                  type: integer
+                  description: The id of the tag's practice
+                  format: int32
+                concept_name:
+                  type: string
+                  description: The name of the tag's concept
+                  format: date
+                context:
+                  type: string
+                  description: The context of the tag. Choices = rejected, ordered or reviewed
+                  format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"value\": \"My Tag\",\n  \"description\": \"Test document tag\",\n  \"code_type\": \"CPT\", # CPT, SNOMED, HL7, ICD9, LOINC, CVX, RXNORM, ICD10, CPTII, HCPCS or EL8\n  \"code\": \"1\",\n  \"practice_created\": 131074,\n  \"concept_name\": \"diet-counsel\",\n  \"context\": \"ordered\", # rejected, ordered or reviewed\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/document_tags/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Document Tags
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /document_tags/{id}/:
+    get:
+      summary: Get Document Tag
+      description: ''
+      operationId: get-document-tag
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/document_tags/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Document Tags
+      security:
+      - sec0: []
+    patch:
+      summary: Update Document Tag
+      description: ''
+      operationId: update-document-tag
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: The id of the document tag
+                  format: int32
+                value:
+                  type: string
+                  description: The value of the tag
+                description:
+                  type: object
+                  description: The description of the tag
+                  properties: {}
+                code_type:
+                  type: string
+                  description: The type of the tag's cod. Choices = CPT, SNOMED, HL7, ICD9, LOINC, CVX, RXNORM, ICD10, CPTII, HCPCS or EL8
+                code:
+                  type: integer
+                  description: The code of the tag
+                  format: int32
+                practice_created:
+                  type: integer
+                  description: The id of the tag's practice
+                  format: int32
+                concept_name:
+                  type: string
+                  description: The name of the tag's concept
+                  format: date
+                context:
+                  type: string
+                  description: The context of the tag. Choices = rejected, ordered or reviewed
+                  format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"id\": 127362,\n  \"value\": \"My Tag\",\n  \"description\": \"Test document tag\",\n  \"code_type\": \"CPT\", # CPT, SNOMED, HL7, ICD9, LOINC, CVX, RXNORM, ICD10, CPTII, HCPCS or EL8\n  \"code\": \"1\",\n  \"practice_created\": 131074,\n  \"concept_name\": \"diet-counsel\",\n  \"context\": \"ordered\", # rejected, ordered or reviewed\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/document_tags/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Document Tags
+      security:
+      - sec0: []
+    put:
+      summary: Update Document Tag
+      description: ''
+      operationId: update-document-tag-1
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: The id of the document tag
+                  format: int32
+                value:
+                  type: string
+                  description: The value of the tag
+                description:
+                  type: object
+                  description: The description of the tag
+                  properties: {}
+                code_type:
+                  type: string
+                  description: The type of the tag's cod. Choices = CPT, SNOMED, HL7, ICD9, LOINC, CVX, RXNORM, ICD10, CPTII, HCPCS or EL8
+                code:
+                  type: integer
+                  description: The code of the tag
+                  format: int32
+                practice_created:
+                  type: integer
+                  description: The id of the tag's practice
+                  format: int32
+                concept_name:
+                  type: string
+                  description: The name of the tag's concept
+                  format: date
+                context:
+                  type: string
+                  description: The context of the tag. Choices = rejected, ordered or reviewed
+                  format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"id\": 127362,\n  \"value\": \"My Tag\",\n  \"description\": \"Test document tag\",\n  \"code_type\": \"CPT\", # CPT, SNOMED, HL7, ICD9, LOINC, CVX, RXNORM, ICD10, CPTII, HCPCS or EL8\n  \"code\": \"1\",\n  \"practice_created\": 131074,\n  \"concept_name\": \"diet-counsel\",\n  \"context\": \"ordered\", # rejected, ordered or reviewed\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/document_tags/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Document Tags
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/document_tags/:
+    get:
+      operationId: document_tags_list
+      parameters:
+      - in: query
+        name: code
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: practice_created
+        schema:
+          type: integer
+      - in: query
+        name: value
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCodedDocumentTagList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Document Tags
+      tags:
+      - Document Tags
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new document tag.
+      operationId: document_tags_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodedDocumentTag'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodedDocumentTag'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Document Tag
+      tags:
+      - Document Tags
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/document_tags/{id}/:
+    get:
+      operationId: document_tags_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodedDocumentTag'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Document Tag
+      tags:
+      - Document Tags
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing document tag.
+      operationId: document_tags_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCodedDocumentTag'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodedDocumentTag'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Document Tag
+      tags:
+      - Document Tags
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing document tag.
+      operationId: document_tags_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodedDocumentTag'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodedDocumentTag'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Document Tag
+      tags:
+      - Document Tags
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    CodedDocumentTag:
+      properties:
+        code:
+          description: The code of the tag.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        code_type:
+          description: The type of the tag's code.
+          oneOf:
+          - $ref: '#/components/schemas/CodeTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        concept_name:
+          description: The name of the tag's concept.
+          oneOf:
+          - $ref: '#/components/schemas/ConceptNameEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        context:
+          description: The context of the tag. Choices = rejected, ordered or reviewed.
+          maxLength: 15
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        practice_created:
+          description: The id of the tag's practice.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        snomed_result_code:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        value:
+          maxLength: 100
+          type: string
+      required:
+      - value
+      type: object
+    ConceptNameEnum:
+      enum:
+      - cognitive-assessment
+      - depression-screening-adolescent-declined
+      - depression-screening-adult-declined
+      - diet-counsel
+      - dietic-service-referral
+      - dietician-referral
+      - exercise-counsel
+      - falls-assessment
+      - flu-vaccine-contraindicated
+      - flu-vaccine-declined
+      - flu-vaccine-elsewhere
+      - flu-vaccine-referred
+      - hospice-care
+      - hpv-test
+      - nutrition-counsel
+      - pap-smear
+      - phys-activity-counsel
+      - procedure-contraindicated
+      - tobacco-counsel-long
+      - tobacco-counsel-short
+      - unable-to-walk
+      - wt-mgmt-referral
+      type: string
+    NullEnum:
+      type: 'null'
+    CodeTypeEnum:
+      enum:
+      - CPT
+      - CPTII
+      - CVX
+      - EL8
+      - HCPCS
+      - HL7
+      - ICD10
+      - ICD9
+      - LOINC
+      - RXNORM
+      - SNOMED
+      type: string
+    PatchedCodedDocumentTag:
+      properties:
+        code:
+          description: The code of the tag.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        code_type:
+          description: The type of the tag's code.
+          oneOf:
+          - $ref: '#/components/schemas/CodeTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        concept_name:
+          description: The name of the tag's concept.
+          oneOf:
+          - $ref: '#/components/schemas/ConceptNameEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        context:
+          description: The context of the tag. Choices = rejected, ordered or reviewed.
+          maxLength: 15
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        practice_created:
+          description: The id of the tag's practice.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        snomed_result_code:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        value:
+          maxLength: 100
+          type: string
+      type: object
+    PaginatedCodedDocumentTagList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/CodedDocumentTag'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

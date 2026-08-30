@@ -1,0 +1,773 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Patient Letters (BETA) API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Patient Letters (BETA) across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Patient Letters (BETA)
+paths:
+  /api/2.0/patient-letters/{patient_letters}/comments/:
+    get:
+      operationId: patient_letters_comments_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - in: path
+        name: patient_letters
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCommentList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Patient Letters Comments
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new patient letters comment.
+      operationId: patient_letters_comments_create
+      parameters:
+      - in: path
+        name: patient_letters
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Patient Letters Comment
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient-letters/{patient_letters}/comments/{id}/:
+    delete:
+      description: Delete an existing patient letters comment.
+      operationId: patient_letters_comments_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: patient_letters
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Patient Letters Comment
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: patient_letters_comments_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: patient_letters
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patient Letters Comment
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient_letters/:
+    get:
+      description: List patient-facing letters (both directions). Filter by patient, practice, or unread=true.
+      operationId: patient_letters_list
+      parameters:
+      - in: query
+        name: document_date__gt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      - in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      - in: query
+        name: unread
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientLetterList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Patient Letters
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a patient letter. Set is_patient_initiated=true when patient is the author (requires active ChartAccessGrant). Sign separately, then PATCH send_out=true to send.
+      operationId: patient_letters_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientLetter'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientLetter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Patient Letter
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient_letters/{id}/:
+    get:
+      description: Retrieve a single patient letter.
+      operationId: patient_letters_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientLetter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patient Letter
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update a patient letter. PATCH {signLog:...} to sign. PATCH {send_out:true} to send after signing. PATCH {patient_read_time:<ts>} to acknowledge.
+      operationId: patient_letters_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatientLetter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientLetter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Patient Letter
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing patient letter.
+      operationId: patient_letters_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientLetter'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientLetter'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Patient Letter
+      tags:
+      - Patient Letters (BETA)
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    LetterAttachment:
+      properties:
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentTypeEnum'
+        entity_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        entity_description:
+          type:
+          - string
+          - 'null'
+        entity_id:
+          format: int64
+          type: integer
+        entity_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        handout:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          type:
+          - string
+          - 'null'
+      required:
+      - attachment_type
+      type: object
+    Comment:
+      properties:
+        author:
+          description: Elation ID of the physician or staff member to attribute this comment to.
+          format: int64
+          type: integer
+          writeOnly: true
+        create_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        letter:
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          default: ''
+          type: string
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - author
+      type: object
+    AttachmentTypeEnum:
+      description: '* `Entity` - Entity
+
+        * `RefPanel` - RefPanel
+
+        * `PatientDemog` - PatientDemog
+
+        * `ImmHistory` - ImmHistory
+
+        * `MedsList` - MedsList
+
+        * `CompMedsList` - CompMedsList
+
+        * `WhoHeightChart` - WhoHeightChart
+
+        * `WhoWeightChart` - WhoWeightChart
+
+        * `WhoHcChart` - WhoHcChart
+
+        * `WhoWflChart` - WhoWflChart
+
+        * `CdcHeightChart` - CdcHeightChart
+
+        * `CdcWeightChart` - CdcWeightChart
+
+        * `CdcBmiChart` - CdcBmiChart
+
+        * `CdcHcChart` - CdcHcChart
+
+        * `PremieHeightChart` - PremieHeightChart
+
+        * `PremieWeightChart` - PremieWeightChart
+
+        * `PremieHcChart` - PremieHcChart
+
+        * `DsinfantHeightChart` - DsinfantHeightChart
+
+        * `DsinfantWeightChart` - DsinfantWeightChart
+
+        * `DsinfantHcChart` - DsinfantHcChart
+
+        * `DsHeightChart` - DsHeightChart
+
+        * `DsWeightChart` - DsWeightChart
+
+        * `DsBmiChart` - DsBmiChart
+
+        * `DsHcChart` - DsHcChart'
+      enum:
+      - Entity
+      - RefPanel
+      - PatientDemog
+      - ImmHistory
+      - MedsList
+      - CompMedsList
+      - WhoHeightChart
+      - WhoWeightChart
+      - WhoHcChart
+      - WhoWflChart
+      - CdcHeightChart
+      - CdcWeightChart
+      - CdcBmiChart
+      - CdcHcChart
+      - PremieHeightChart
+      - PremieWeightChart
+      - PremieHcChart
+      - DsinfantHeightChart
+      - DsinfantWeightChart
+      - DsinfantHcChart
+      - DsHeightChart
+      - DsWeightChart
+      - DsBmiChart
+      - DsHcChart
+      type: string
+    PatientLetter:
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/LetterAttachment'
+          type: array
+        body:
+          type: string
+        category:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        files:
+          description: 'Files attached to this letter. Binary upload: set content_type=''application/octet-stream'' and provide ''base64_content'' (and optional ''original_filename''). When any file uses base64, all files in the same request must use base64. On GET, returns file references.'
+          items:
+            $ref: '#/components/schemas/S3RetrievingDocumentFile'
+          type:
+          - array
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_patient_initiated:
+          type:
+          - boolean
+          - 'null'
+        is_processed:
+          readOnly: true
+          type: boolean
+        letter_type:
+          readOnly: true
+          type: string
+        patient:
+          format: int64
+          type: integer
+        patient_read_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        send_out:
+          type: boolean
+        send_to_patient:
+          readOnly: true
+          type: boolean
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The user who signed the letter.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        subject:
+          maxLength: 200
+          type: string
+        tags:
+          description: A list of Document Tags associated with the letter.
+          items:
+            format: int64
+            type: integer
+          type: array
+        viewed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - patient
+      - practice
+      type: object
+    PatchedPatientLetter:
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/LetterAttachment'
+          type: array
+        body:
+          type: string
+        category:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        files:
+          description: 'Files attached to this letter. Binary upload: set content_type=''application/octet-stream'' and provide ''base64_content'' (and optional ''original_filename''). When any file uses base64, all files in the same request must use base64. On GET, returns file references.'
+          items:
+            $ref: '#/components/schemas/S3RetrievingDocumentFile'
+          type:
+          - array
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_patient_initiated:
+          type:
+          - boolean
+          - 'null'
+        is_processed:
+          readOnly: true
+          type: boolean
+        letter_type:
+          readOnly: true
+          type: string
+        patient:
+          format: int64
+          type: integer
+        patient_read_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        send_out:
+          type: boolean
+        send_to_patient:
+          readOnly: true
+          type: boolean
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The user who signed the letter.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        subject:
+          maxLength: 200
+          type: string
+        tags:
+          description: A list of Document Tags associated with the letter.
+          items:
+            format: int64
+            type: integer
+          type: array
+        viewed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedPatientLetterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientLetter'
+          type: array
+      required:
+      - results
+      type: object
+    S3RetrievingDocumentFile:
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
+    PaginatedCommentList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Comment'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

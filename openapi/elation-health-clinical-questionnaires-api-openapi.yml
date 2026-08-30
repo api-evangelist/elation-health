@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Settings Clinical Questionnaires API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Clinical Questionnaires
+paths:
+  /clinical_questionnaires:
+    get:
+      summary: Find Clinical Questionnaire
+      description: ''
+      operationId: find-clinical-questionnaire
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"count\": 2,\n\t\"next\": null,\n\t\"previous\": null,\n\t\"results\": [\n\t\t{\n\t\t\t\"id\": 140737488290228,\n\t\t\t\"name\": \"Education Level\",\n\t\t\t\"category\": \"Social\",\n\t\t\t\"label\": \"Education level\",\n\t\t\t\"summary_format_string\": null,\n\t\t\t\"questions\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": 1,\n\t\t\t\t\t\"prompt\": \"What is the highest grade or level of school you have completed or the highest degree you have received?\",\n\t\t\t\t\t\"sequence\": 0,\n\t\t\t\t\t\"loinc\": 68921852068,\n\t\t\t\t\t\"answer_type\": \"select_one\",\n\t\t\t\t\t\"help_text\": null,\n\t\t\t\t\t\"min_value\": null,\n\t\t\t\t\t\"max_value\": null,\n\t\t\t\t\t\"identifier\": null,\n\t\t\t\t\t\"answer_choices\": [\n\t\t\t\t\t\t\"High school graduate\",\n\t\t\t\t\t\t\"GED or equivalent\",\n\t\t\t\t\t\t\"Some college, no degree\",\n\t\t\t\t\t\t\"Associate degree: occupational, technical, or vocational program\",\n\t\t\t\t\t\t\"Associate degree: academic program\",\n\t\t\t\t\t\t\"Bachelor's degree (e.g., BA, AB, BS)\",\n\t\t\t\t\t\t\"Master's degree (e.g., MA, MS, MEng, MEd, MSW, MBA)\",\n\t\t\t\t\t\t\"Professional school degree (example: MD, DDS, DVM, JD)\",\n\t\t\t\t\t\t\"Doctoral degree (example: PhD, EdD)\",\n\t\t\t\t\t\t\"Never attended/kindergarten only\",\n\t\t\t\t\t\t\"1st grade\",\n\t\t\t\t\t\t\"2nd grade\",\n\t\t\t\t\t\t\"3rd grade\",\n\t\t\t\t\t\t\"4th grade\",\n\t\t\t\t\t\t\"5th grade\",\n\t\t\t\t\t\t\"6th grade\",\n\t\t\t\t\t\t\"7th grade\",\n\t\t\t\t\t\t\"8th grade\",\n\t\t\t\t\t\t\"9th grade\",\n\t\t\t\t\t\t\"10th grade\",\n\t\t\t\t\t\t\"11th grade\",\n\t\t\t\t\t\t\"12th grade, no diploma\",\n\t\t\t\t\t\t\"Refused\",\n\t\t\t\t\t\t\"Don't know\",\n\t\t\t\t\t\t\"Declined to Specify\"\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"total_score_questions\": null,\n\t\t\t\"information_url\": null\n\t\t},\n\t\t{\n\t\t\t\"id\": 140737488355764,\n\t\t\t\"name\": \"Stress Level\",\n\t\t\t\"category\": \"Psychological\",\n\t\t\t\"label\": \"Stress level\",\n\t\t\t\"summary_format_string\": null,\n\t\t\t\"questions\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": 2,\n\t\t\t\t\t\"prompt\": \"Do you feel stress - tense, restless, nervous, or anxious, or unable to sleep at night because your mind is troubled all the time - these days?\",\n\t\t\t\t\t\"sequence\": 0,\n\t\t\t\t\t\"loinc\": 69748654244,\n\t\t\t\t\t\"answer_type\": \"select_one\",\n\t\t\t\t\t\"help_text\": null,\n\t\t\t\t\t\"min_value\": null,\n\t\t\t\t\t\"max_value\": null,\n\t\t\t\t\t\"identifier\": null,\n\t\t\t\t\t\"answer_choices\": [\n\t\t\t\t\t\t\"Not at all\",\n\t\t\t\t\t\t\"Only a little\",\n\t\t\t\t\t\t\"To some extent\",\n\t\t\t\t\t\t\"Rather much\",\n\t\t\t\t\t\t\"Very much\",\n\t\t\t\t\t\t\"Declined to specify\"\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"total_score_questions\": null,\n\t\t\t\"information_url\": null\n\t\t},\n\t\t{\n\t\t\t\"id\": 140737488421300,\n\t\t\t\"name\": \"Financial Strain\",\n\t\t\t\"category\": \"Social\",\n\t\t\t\"label\": \"Financial strain\",\n\t\t\t\"summary_format_string\": null,\n\t\t\t\"questions\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": 3,\n\t\t\t\t\t\"prompt\": \"How hard is it for you to pay for the very basics like food, housing, medical care, and heating?\",\n\t\t\t\t\t\"sequence\": 0,\n\t\t\t\t\t\"loinc\": 69747015844,\n\t\t\t\t\t\"answer_type\": \"select_one\",\n\t\t\t\t\t\"help_text\": null,\n\t\t\t\t\t\"min_value\": null,\n\t\t\t\t\t\"max_value\": null,\n\t\t\t\t\t\"identifier\": null,\n\t\t\t\t\t\"answer_choices\": [\n\t\t\t\t\t\t\"Very hard\",\n\t\t\t\t\t\t\"Hard\",\n\t\t\t\t\t\t\"Somewhat hard\",\n\t\t\t\t\t\t\"Not very hard\",\n\t\t\t\t\t\t\"Declined to specify\"\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"total_score_questions\": null,\n\t\t\t\"information_url\": null\n\t\t},\n\t]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Clinical Questionnaires
+  /clinical_questionnaires/{id}:
+    get:
+      summary: GET Clinical Questionnaire
+      description: ''
+      operationId: get-clinical-questionnaire
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"id\": 140737488421300,\n\t\"name\": \"Financial Strain\",\n\t\"category\": \"Social\",\n\t\"label\": \"Financial strain\",\n\t\"summary_format_string\": null,\n\t\"questions\": [\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"prompt\": \"How hard is it for you to pay for the very basics like food, housing, medical care, and heating?\",\n\t\t\t\"sequence\": 0,\n\t\t\t\"loinc\": 69747015844,\n\t\t\t\"answer_type\": \"select_one\",\n\t\t\t\"help_text\": null,\n\t\t\t\"min_value\": null,\n\t\t\t\"max_value\": null,\n\t\t\t\"identifier\": null,\n\t\t\t\"answer_choices\": [\n\t\t\t\t\"Very hard\",\n\t\t\t\t\"Hard\",\n\t\t\t\t\"Somewhat hard\",\n\t\t\t\t\"Not very hard\",\n\t\t\t\t\"Declined to specify\"\n\t\t\t]\n\t\t}\n\t],\n\t\"total_score_questions\": null,\n\t\"information_url\": null\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140737488421300
+                    default: 0
+                  name:
+                    type: string
+                    example: Financial Strain
+                  category:
+                    type: string
+                    example: Social
+                  label:
+                    type: string
+                    example: Financial strain
+                  summary_format_string: {}
+                  questions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 3
+                          default: 0
+                        prompt:
+                          type: string
+                          example: How hard is it for you to pay for the very basics like food, housing, medical care, and heating?
+                        sequence:
+                          type: integer
+                          example: 0
+                          default: 0
+                        loinc:
+                          type: integer
+                          example: 69747015844
+                          default: 0
+                        answer_type:
+                          type: string
+                          example: select_one
+                        help_text: {}
+                        min_value: {}
+                        max_value: {}
+                        identifier: {}
+                        answer_choices:
+                          type: array
+                          items:
+                            type: string
+                            example: Very hard
+                  total_score_questions: {}
+                  information_url: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Clinical Questionnaires
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,461 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Users API
+  version: '1.0'
+  description: 'Operations tagged Users across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-user-management-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Users
+paths:
+  /users:
+    post:
+      summary: Create User
+      description: ''
+      operationId: post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - first_name
+              - last_name
+              - email
+              - practice
+              - is_active
+              - user_type
+              properties:
+                first_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'Maximum length: 60 characters.'
+                email:
+                  type: string
+                practice:
+                  type: integer
+                  format: int32
+                is_active:
+                  type: boolean
+                user_type:
+                  type: string
+                has_chart_access:
+                  type: boolean
+                  default: false
+                physician_qualifications:
+                  type: object
+                  required:
+                  - credentials
+                  - npi
+                  - license_state
+                  - license
+                  properties:
+                    credentials:
+                      type: string
+                    npi:
+                      type: integer
+                      format: int64
+                    license_state:
+                      type: string
+                    license:
+                      type: string
+                    dea:
+                      type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Users
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /users/{user_id}/:
+    patch:
+      summary: Update User
+      description: ''
+      operationId: update-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'Maximum length: 60 characters.'
+                email:
+                  type: string
+                is_active:
+                  type: boolean
+                has_chart_access:
+                  type: boolean
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Users
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/users/:
+    get:
+      description: Returns a list of users
+      operationId: users_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Users
+      tags:
+      - Users
+      x-el8-docs-category: User Management API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new user
+      operationId: users_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create User
+      tags:
+      - Users
+      x-el8-docs-category: User Management API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/users/{id}/:
+    get:
+      description: Retrieve a single user
+      operationId: users_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve User
+      tags:
+      - Users
+      x-el8-docs-category: User Management API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing user
+      operationId: users_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update User
+      tags:
+      - Users
+      x-el8-docs-category: User Management API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PaginatedUserList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedUser:
+      properties:
+        account_type:
+          oneOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        credentialed:
+          default: false
+          type: boolean
+        email:
+          maxLength: 255
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        has_chart_access:
+          default: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          type: boolean
+        is_practice_admin:
+          default: false
+          type: boolean
+        is_read_only:
+          default: false
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        physician_qualifications:
+          $ref: '#/components/schemas/PhysicianQualifications'
+        practice:
+          format: int64
+          type: integer
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
+      type: object
+    PhysicianQualifications:
+      properties:
+        credentials:
+          maxLength: 50
+          type: string
+        dea:
+          maxLength: 50
+          type: string
+        license:
+          maxLength: 50
+          type: string
+        license_state:
+          maxLength: 2
+          type: string
+        npi:
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+      required:
+      - credentials
+      - license
+      - license_state
+      type: object
+    User:
+      properties:
+        account_type:
+          oneOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        credentialed:
+          default: false
+          type: boolean
+        email:
+          maxLength: 255
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        has_chart_access:
+          default: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          type: boolean
+        is_practice_admin:
+          default: false
+          type: boolean
+        is_read_only:
+          default: false
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        physician_qualifications:
+          $ref: '#/components/schemas/PhysicianQualifications'
+        practice:
+          format: int64
+          type: integer
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
+      required:
+      - email
+      - first_name
+      - is_active
+      - last_name
+      - practice
+      - user_type
+      type: object
+    AccountTypeEnum:
+      description: '* `regular` - Regular staff
+
+        * `oncall` - On call (not paid)
+
+        * `ft_non_prescribing` - Full-Time Non-Prescribing
+
+        * `pt_prescribing` - Limited Use'
+      enum:
+      - regular
+      - oncall
+      - ft_non_prescribing
+      - pt_prescribing
+      type: string
+    NullEnum:
+      type: 'null'
+    UserTypeEnum:
+      enum:
+      - physician
+      - staff
+      type: string
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-user-management-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

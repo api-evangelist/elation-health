@@ -1,0 +1,406 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Pulmonary Order Tests API
+  version: '1.0'
+  description: 'Operations tagged Pulmonary Order Tests across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Pulmonary Order Tests
+paths:
+  /pulmonary_order_tests/:
+    get:
+      summary: Find Pulmonary Order Tests
+      description: ''
+      operationId: find-pulmonary-order-tests
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: The name of the pulmonary order test you're searching for
+        schema:
+          type: string
+      - name: practice
+        in: query
+        description: The practice the pulmonary order test is associated with.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 0,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n      // array of Pulmonary Order Test Objects\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 0
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/pulmonary_order_tests/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Pulmonary Order Tests
+      security:
+      - sec0: []
+    post:
+      summary: Create Pulmonary Order Test
+      description: ''
+      operationId: create-pulmonary-order-test
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - practice
+              properties:
+                code:
+                  type: string
+                  description: Can be up to 50 characters long.
+                  default: 'null'
+                name:
+                  type: string
+                  description: Can be up to 255 characters long.
+                practice:
+                  type: integer
+                  description: Must specify a practice the pulmonary order test is for.
+                  format: int32
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Pulmonary Order Test Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nnew_pulmonary_order_test_data = {\n\t\t\"code\": None,\n  \t\"name\": \"Pulmonary test\",\n\t\t\"practice\": 65540,\n}\n\nresp = requests.post(\n    \"https://sandbox.elationemr.com/api/2.0/pulmonary_order_tests/\",\n    headers={\"Authorization\": auth_header},\n  \tjson=new_pulmonary_order_test_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Pulmonary Order Tests
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /pulmonary_order_tests/{id}:
+    get:
+      summary: Get Pulmonary Order Test
+      description: ''
+      operationId: get-pulmonary-order-test
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Pulmonary Order Test Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/pulmonary_order_tests/140756377075740/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Pulmonary Order Tests
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/pulmonary_order_tests/:
+    get:
+      description: Returns a list of pulmonary order test
+      operationId: pulmonary_order_tests_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The name of the pulmonary order test you're searching for.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: The practice the pulmonary order test is associated with.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPulmonaryOrderTestList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Pulmonary Order Tests
+      tags:
+      - Pulmonary Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new pulmonary order test.
+      operationId: pulmonary_order_tests_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PulmonaryOrderTest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PulmonaryOrderTest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Pulmonary Order Test
+      tags:
+      - Pulmonary Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/pulmonary_order_tests/{id}/:
+    delete:
+      description: Delete an existing pulmonary order test.
+      operationId: pulmonary_order_tests_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Pulmonary Order Test
+      tags:
+      - Pulmonary Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single pulmonary order test
+      operationId: pulmonary_order_tests_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PulmonaryOrderTest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Pulmonary Order Test
+      tags:
+      - Pulmonary Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PulmonaryOrderTest:
+      properties:
+        code:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 255
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - name
+      - practice
+      type: object
+    PaginatedPulmonaryOrderTestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PulmonaryOrderTest'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

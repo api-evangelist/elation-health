@@ -1,0 +1,562 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Patient Forms API
+  version: '1.0'
+  description: 'Operations tagged Patient Forms across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Patient Forms
+paths:
+  /patient_forms:
+    get:
+      summary: Find Patient Forms
+      description: ''
+      operationId: find-patient-forms
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: practice
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: created_date__gte
+        in: query
+        description: Greater than or equal to created date
+        schema:
+          type: string
+          format: date
+      - name: created_date__lte
+        in: query
+        description: Lower than or equal to created date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"count\": 2,\n\t\"next\": null,\n\t\"previous\": null,\n\t\"results\": [\n\t\t{\n\t\t\t\"id\": 7,\n\t\t\t\"created_date\": \"2022-07-07T12:43:57Z\",\n\t\t\t\"created_by\": 29,\n\t\t\t\"deleted_date\": null,\n\t\t\t\"deleted_by\": null,\n\t\t\t\"last_modified_date\": \"2022-07-07T12:43:57Z\",\n\t\t\t\"last_modified_by\": 29,\n\t\t\t\"sequence\": 1,\n\t\t\t\"topics\": [\n\t\t\t\t{\n\t\t\t\t\t\"default_sequence\": 3,\n\t\t\t\t\t\"form_type\": \"medical_history\",\n\t\t\t\t\t\"can_skip_explicitly\": true,\n\t\t\t\t\t\"concept\": \"alcohol_use\",\n\t\t\t\t\t\"exports_to_profile_section\": \"Habits\",\n\t\t\t\t\t\"label\": \"Alcohol Use\",\n\t\t\t\t\t\"exports_to_note_section\": \"Habits\",\n\t\t\t\t\t\"exports_to_label\": \"Exports to Habits\",\n\t\t\t\t\t\"display_prompts_in_report\": false,\n\t\t\t\t\t\"exports_to_tooltip\": \"In the patient's chart, this will be exportable to the Habits section in the Clinical Profile, and to the Subjective section of the Visit Note.\",\n\t\t\t\t\t\"can_modify_export_location\": false,\n\t\t\t\t\t\"disabled\": false,\n\t\t\t\t\t\"form_library_id\": 3,\n\t\t\t\t\t\"id\": \"5a7db3f9-762a-404d-9422-ce39a4442a34\",\n\t\t\t\t\t\"questions\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": \"Alcohol use: ${alcohol_use}\",\n\t\t\t\t\t\t\t\"prompt\": \"Briefly describe any alcohol use - e.g. how many drinks a week?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"max_length\": 5000,\n\t\t\t\t\t\t\t\t\"type\": \"free_text\",\n\t\t\t\t\t\t\t\t\"name\": \"alcohol_use\",\n\t\t\t\t\t\t\t\t\"placeholder_text\": \"e.g. 3-4 drinks a week\",\n\t\t\t\t\t\t\t\t\"can_edit_placeholder_text\": true\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"display_format\": \"${alcohol_use}\",\n\t\t\t\t\t\t\t\"can_edit_prompt\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"form_url\": \"http://127.0.0.1/patient-forms/chambers-group/7/?key=2244ff699c785937a20326079ae58843ea549897801ac5e4f8e9dcd37cce2d8a\",\n\t\t\t\"form_name\": \"(Blank Form)\",\n\t\t\t\"appointment_types\": []\n\t\t},\n\t\t{\n\t\t\t\"id\": 8,\n\t\t\t\"created_date\": \"2022-07-07T15:31:42Z\",\n\t\t\t\"created_by\": 29,\n\t\t\t\"deleted_date\": \"2022-07-07T15:36:04Z\",\n\t\t\t\"deleted_by\": 29,\n\t\t\t\"last_modified_date\": \"2022-07-07T15:36:04Z\",\n\t\t\t\"last_modified_by\": 29,\n\t\t\t\"sequence\": 2,\n\t\t\t\"topics\": [\n\t\t\t\t{\n\t\t\t\t\t\"default_sequence\": 3,\n\t\t\t\t\t\"form_type\": \"medical_history\",\n\t\t\t\t\t\"can_skip_explicitly\": true,\n\t\t\t\t\t\"concept\": \"alcohol_use\",\n\t\t\t\t\t\"exports_to_profile_section\": \"Habits\",\n\t\t\t\t\t\"label\": \"Alcohol Use\",\n\t\t\t\t\t\"exports_to_note_section\": \"Habits\",\n\t\t\t\t\t\"exports_to_label\": \"Exports to Habits\",\n\t\t\t\t\t\"display_prompts_in_report\": false,\n\t\t\t\t\t\"exports_to_tooltip\": \"In the patient's chart, this will be exportable to the Habits section in the Clinical Profile, and to the Subjective section of the Visit Note.\",\n\t\t\t\t\t\"can_modify_export_location\": false,\n\t\t\t\t\t\"disabled\": false,\n\t\t\t\t\t\"form_library_id\": 3,\n\t\t\t\t\t\"id\": \"996a74cc-1791-4bd9-bf25-71ed7e366d40\",\n\t\t\t\t\t\"questions\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": \"Alcohol use: ${alcohol_use}\",\n\t\t\t\t\t\t\t\"prompt\": \"Briefly describe any alcohol use - e.g. how many drinks a week?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"max_length\": 5000,\n\t\t\t\t\t\t\t\t\"type\": \"free_text\",\n\t\t\t\t\t\t\t\t\"name\": \"alcohol_use\",\n\t\t\t\t\t\t\t\t\"placeholder_text\": \"e.g. 3-4 drinks a week\",\n\t\t\t\t\t\t\t\t\"can_edit_placeholder_text\": true\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"display_format\": \"${alcohol_use}\",\n\t\t\t\t\t\t\t\"can_edit_prompt\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"default_sequence\": 21,\n\t\t\t\t\t\"form_type\": \"medical_history\",\n\t\t\t\t\t\"can_skip_explicitly\": false,\n\t\t\t\t\t\"concept\": \"depression_gad_7\",\n\t\t\t\t\t\"exports_to_profile_section\": \"ClinicalForm\",\n\t\t\t\t\t\"label\": \"Anxiety (GAD-7)\",\n\t\t\t\t\t\"exports_to_note_section\": \"Psych\",\n\t\t\t\t\t\"exports_to_label\": \"Exports to Psych\",\n\t\t\t\t\t\"display_prompts_in_report\": true,\n\t\t\t\t\t\"exports_to_tooltip\": \"In the patient's chart, the calculated score will be exportable to the Psych section in the Clinical Profile, and to the Data section of the Visit Note.\",\n\t\t\t\t\t\"can_modify_export_location\": false,\n\t\t\t\t\t\"disabled\": false,\n\t\t\t\t\t\"form_library_id\": 22,\n\t\t\t\t\t\"id\": \"d051b116-7ea9-4790-a481-e5ed611b2d8e\",\n\t\t\t\t\t\"questions\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Feeling nervous, anxious or on edge in last 2 weeks?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"69725-0\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Over the past 2 weeks have you not been able to stop or control worrying?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"68509-9\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Worrying too much about different things in last 2 weeks?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"69733-4\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Trouble relaxing in last 2 weeks?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"69734-2\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Being so restless that it is hard to sit still in last 2 weeks?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"69735-9\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Becoming easily annoyed or irritable in last 4 weeks?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"69689-8\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"export_format\": null,\n\t\t\t\t\t\t\t\"prompt\": \"Feeling afraid as if something awful might happen?\",\n\t\t\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\t\t\"can_edit_prompt\": false,\n\t\t\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\t\t\"type\": \"select\",\n\t\t\t\t\t\t\t\t\"name\": \"69736-7\",\n\t\t\t\t\t\t\t\t\"options\": [\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6568-5\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Not at all\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6569-3\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Several Days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6570-1\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"More than half the days\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\"value\": \"LA6571-9\",\n\t\t\t\t\t\t\t\t\t\t\"label\": \"Nearly every day\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"form_url\": \"http://127.0.0.1/patient-forms/chambers-group/8/?key=65687c88852259c2663d64252060d89d629b1c2d050d5301e32aec35941bad2f\",\n\t\t\t\"form_name\": \"(Blank Form)\",\n\t\t\t\"appointment_types\": []\n\t\t}\n\t]\n}"
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 2
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 7
+                          default: 0
+                        created_date:
+                          type: string
+                          example: '2022-07-07T12:43:57Z'
+                        created_by:
+                          type: integer
+                          example: 29
+                          default: 0
+                        deleted_date: {}
+                        deleted_by: {}
+                        last_modified_date:
+                          type: string
+                          example: '2022-07-07T12:43:57Z'
+                        last_modified_by:
+                          type: integer
+                          example: 29
+                          default: 0
+                        sequence:
+                          type: integer
+                          example: 1
+                          default: 0
+                        topics:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              default_sequence:
+                                type: integer
+                                example: 3
+                                default: 0
+                              form_type:
+                                type: string
+                                example: medical_history
+                              can_skip_explicitly:
+                                type: boolean
+                                example: true
+                                default: true
+                              concept:
+                                type: string
+                                example: alcohol_use
+                              exports_to_profile_section:
+                                type: string
+                                example: Habits
+                              label:
+                                type: string
+                                example: Alcohol Use
+                              exports_to_note_section:
+                                type: string
+                                example: Habits
+                              exports_to_label:
+                                type: string
+                                example: Exports to Habits
+                              display_prompts_in_report:
+                                type: boolean
+                                example: false
+                                default: true
+                              exports_to_tooltip:
+                                type: string
+                                example: In the patient's chart, this will be exportable to the Habits section in the Clinical Profile, and to the Subjective section of the Visit Note.
+                              can_modify_export_location:
+                                type: boolean
+                                example: false
+                                default: true
+                              disabled:
+                                type: boolean
+                                example: false
+                                default: true
+                              form_library_id:
+                                type: integer
+                                example: 3
+                                default: 0
+                              id:
+                                type: string
+                                example: 5a7db3f9-762a-404d-9422-ce39a4442a34
+                              questions:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    export_format:
+                                      type: string
+                                      example: 'Alcohol use: ${alcohol_use}'
+                                    prompt:
+                                      type: string
+                                      example: Briefly describe any alcohol use - e.g. how many drinks a week?
+                                    provider_help_text: {}
+                                    input:
+                                      type: object
+                                      properties:
+                                        max_length:
+                                          type: integer
+                                          example: 5000
+                                          default: 0
+                                        type:
+                                          type: string
+                                          example: free_text
+                                        name:
+                                          type: string
+                                          example: alcohol_use
+                                        placeholder_text:
+                                          type: string
+                                          example: e.g. 3-4 drinks a week
+                                        can_edit_placeholder_text:
+                                          type: boolean
+                                          example: true
+                                          default: true
+                                    display_format:
+                                      type: string
+                                      example: ${alcohol_use}
+                                    can_edit_prompt:
+                                      type: boolean
+                                      example: true
+                                      default: true
+                        form_url:
+                          type: string
+                          example: http://127.0.0.1/patient-forms/chambers-group/7/?key=2244ff699c785937a20326079ae58843ea549897801ac5e4f8e9dcd37cce2d8a
+                        form_name:
+                          type: string
+                          example: (Blank Form)
+                        appointment_types:
+                          type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Patient Forms
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /patient_forms/:id:
+    get:
+      summary: Get Patient Form
+      description: ''
+      operationId: get-patient-form
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"id\": 7,\n\t\"created_date\": \"2022-07-07T12:43:57Z\",\n\t\"created_by\": 29,\n\t\"deleted_date\": null,\n\t\"deleted_by\": null,\n\t\"last_modified_date\": \"2022-07-07T12:43:57Z\",\n\t\"last_modified_by\": 29,\n\t\"sequence\": 1,\n\t\"topics\": [\n\t\t{\n\t\t\t\"default_sequence\": 3,\n\t\t\t\"form_type\": \"medical_history\",\n\t\t\t\"can_skip_explicitly\": true,\n\t\t\t\"concept\": \"alcohol_use\",\n\t\t\t\"exports_to_profile_section\": \"Habits\",\n\t\t\t\"label\": \"Alcohol Use\",\n\t\t\t\"exports_to_note_section\": \"Habits\",\n\t\t\t\"exports_to_label\": \"Exports to Habits\",\n\t\t\t\"display_prompts_in_report\": false,\n\t\t\t\"exports_to_tooltip\": \"In the patient's chart, this will be exportable to the Habits section in the Clinical Profile, and to the Subjective section of the Visit Note.\",\n\t\t\t\"can_modify_export_location\": false,\n\t\t\t\"disabled\": false,\n\t\t\t\"form_library_id\": 3,\n\t\t\t\"id\": \"5a7db3f9-762a-404d-9422-ce39a4442a34\",\n\t\t\t\"questions\": [\n\t\t\t\t{\n\t\t\t\t\t\"export_format\": \"Alcohol use: ${alcohol_use}\",\n\t\t\t\t\t\"prompt\": \"Briefly describe any alcohol use - e.g. how many drinks a week?\",\n\t\t\t\t\t\"provider_help_text\": null,\n\t\t\t\t\t\"input\": {\n\t\t\t\t\t\t\"max_length\": 5000,\n\t\t\t\t\t\t\"type\": \"free_text\",\n\t\t\t\t\t\t\"name\": \"alcohol_use\",\n\t\t\t\t\t\t\"placeholder_text\": \"e.g. 3-4 drinks a week\",\n\t\t\t\t\t\t\"can_edit_placeholder_text\": true\n\t\t\t\t\t},\n\t\t\t\t\t\"display_format\": \"${alcohol_use}\",\n\t\t\t\t\t\"can_edit_prompt\": true\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"form_url\": \"http://127.0.0.1/patient-forms/chambers-group/7/?key=2244ff699c785937a20326079ae58843ea549897801ac5e4f8e9dcd37cce2d8a\",\n\t\"form_name\": \"(Blank Form)\",\n\t\"appointment_types\": []\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 7
+                    default: 0
+                  created_date:
+                    type: string
+                    example: '2022-07-07T12:43:57Z'
+                  created_by:
+                    type: integer
+                    example: 29
+                    default: 0
+                  deleted_date: {}
+                  deleted_by: {}
+                  last_modified_date:
+                    type: string
+                    example: '2022-07-07T12:43:57Z'
+                  last_modified_by:
+                    type: integer
+                    example: 29
+                    default: 0
+                  sequence:
+                    type: integer
+                    example: 1
+                    default: 0
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        default_sequence:
+                          type: integer
+                          example: 3
+                          default: 0
+                        form_type:
+                          type: string
+                          example: medical_history
+                        can_skip_explicitly:
+                          type: boolean
+                          example: true
+                          default: true
+                        concept:
+                          type: string
+                          example: alcohol_use
+                        exports_to_profile_section:
+                          type: string
+                          example: Habits
+                        label:
+                          type: string
+                          example: Alcohol Use
+                        exports_to_note_section:
+                          type: string
+                          example: Habits
+                        exports_to_label:
+                          type: string
+                          example: Exports to Habits
+                        display_prompts_in_report:
+                          type: boolean
+                          example: false
+                          default: true
+                        exports_to_tooltip:
+                          type: string
+                          example: In the patient's chart, this will be exportable to the Habits section in the Clinical Profile, and to the Subjective section of the Visit Note.
+                        can_modify_export_location:
+                          type: boolean
+                          example: false
+                          default: true
+                        disabled:
+                          type: boolean
+                          example: false
+                          default: true
+                        form_library_id:
+                          type: integer
+                          example: 3
+                          default: 0
+                        id:
+                          type: string
+                          example: 5a7db3f9-762a-404d-9422-ce39a4442a34
+                        questions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              export_format:
+                                type: string
+                                example: 'Alcohol use: ${alcohol_use}'
+                              prompt:
+                                type: string
+                                example: Briefly describe any alcohol use - e.g. how many drinks a week?
+                              provider_help_text: {}
+                              input:
+                                type: object
+                                properties:
+                                  max_length:
+                                    type: integer
+                                    example: 5000
+                                    default: 0
+                                  type:
+                                    type: string
+                                    example: free_text
+                                  name:
+                                    type: string
+                                    example: alcohol_use
+                                  placeholder_text:
+                                    type: string
+                                    example: e.g. 3-4 drinks a week
+                                  can_edit_placeholder_text:
+                                    type: boolean
+                                    example: true
+                                    default: true
+                              display_format:
+                                type: string
+                                example: ${alcohol_use}
+                              can_edit_prompt:
+                                type: boolean
+                                example: true
+                                default: true
+                  form_url:
+                    type: string
+                    example: http://127.0.0.1/patient-forms/chambers-group/7/?key=2244ff699c785937a20326079ae58843ea549897801ac5e4f8e9dcd37cce2d8a
+                  form_name:
+                    type: string
+                    example: (Blank Form)
+                  appointment_types:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Patient Forms
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/patient_forms/:
+    get:
+      description: Returns a list of patient form objects
+      operationId: patient_forms_list
+      parameters:
+      - in: query
+        name: created_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: created_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientFormList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Patient Forms
+      tags:
+      - Patient Forms
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient_forms/{id}/:
+    get:
+      description: Retrieve a single patient form object
+      operationId: patient_forms_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientForm'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patient Form
+      tags:
+      - Patient Forms
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatientForm:
+      properties:
+        appointment_types:
+          items:
+            format: int64
+            type: integer
+          readOnly: true
+          type: array
+        created_by:
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          type: string
+        deleted_by:
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          type: string
+        form_name:
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        last_modified_by:
+          type:
+          - integer
+          - 'null'
+        last_modified_date:
+          format: date-time
+          type: string
+        practice:
+          format: int64
+          type: integer
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        topics: {}
+      required:
+      - created_date
+      - deleted_date
+      - form_name
+      - last_modified_date
+      - practice
+      - sequence
+      - topics
+      type: object
+    PaginatedPatientFormList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientForm'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

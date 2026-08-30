@@ -1,0 +1,364 @@
+openapi: 3.2.0
+info:
+  title: Settings Letters API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Letters
+paths:
+  /letters:
+    get:
+      summary: Find Letters
+      description: ''
+      operationId: find-letters
+      parameters:
+      - name: patient
+        in: query
+        description: Patient ID
+        schema:
+          type: integer
+          format: int32
+      - name: practice
+        in: query
+        description: Practice ID
+        schema:
+          type: integer
+          format: int32
+      - name: document_date__gt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__lt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: recipient_name
+        in: query
+        description: Recipient Name
+        schema:
+          type: string
+      - name: recipient_id
+        in: query
+        description: Recipient ID
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Letters
+  /letters/{id}:
+    get:
+      summary: Get Letter
+      description: ''
+      operationId: get-letter
+      parameters:
+      - name: id
+        in: path
+        description: Letter ID
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Letters
+    put:
+      summary: Update Letter
+      description: ''
+      operationId: update-letter
+      parameters:
+      - name: id
+        in: path
+        description: Letter ID
+        schema:
+          type: integer
+          format: int32
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - practice
+              - referral_order
+              properties:
+                patient:
+                  type: string
+                  description: The id of the patient
+                practice:
+                  type: string
+                  description: The id of the practice
+                body:
+                  type: string
+                  description: body of the letter
+                subject:
+                  type: string
+                  description: subject of the letter (Not needed with referral_order)
+                send_to_contact:
+                  type: string
+                  description: object with the recipient of the letter
+                referral_order:
+                  type: string
+                  description: Id of the Referral Order  (Not needed with subject)
+                signed_by:
+                  type: integer
+                  description: The id of the signer. A signer can be the practice or staff with delegated permission for letter signing off
+                  format: int32
+                sign_date:
+                  type: string
+                  description: 'The time of signing off. Example: 2022-11-10T01:06:22Z'
+                  format: date
+                send_out:
+                  type: boolean
+                  description: A flag to indicate if the referral letter should be sent out or not
+                  default: false
+                delivery_date:
+                  type: string
+                  description: If given, the letter will be sent on the given date instead of today.
+                  format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"practice\" : 64901939456,\n  \"patient\": 64901939201\n  \"body\": \"Body of a letter\",\n  \"subject\" : \"Subject of a letter\",\n  \"send_to_contact\": {\"id\": 64901939893}\n\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/letters/67176497153/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Letters
+    patch:
+      summary: Update Letter
+      description: ''
+      operationId: patch-letter
+      parameters:
+      - name: id
+        in: path
+        description: Letter ID
+        schema:
+          type: integer
+          format: int32
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - practice
+              - referral_order
+              properties:
+                patient:
+                  type: string
+                  description: The id of the patient
+                practice:
+                  type: string
+                  description: The id of the practice
+                body:
+                  type: string
+                  description: body of the letter
+                subject:
+                  type: string
+                  description: subject of the letter (Not needed with referral_order)
+                send_to_contact:
+                  type: string
+                  description: object with the recipient of the letter
+                referral_order:
+                  type: string
+                  description: Id of the Referral Order  (Not needed with subject)
+                signed_by:
+                  type: integer
+                  description: The id of the signer. A signer can be the practice or staff with delegated permission for letter signing off
+                  format: int32
+                sign_date:
+                  type: string
+                  description: 'The time of signing off. Example: 2022-11-10T01:06:22Z'
+                  format: date
+                send_out:
+                  type: boolean
+                  description: A flag to indicate if the referral letter should be sent out or not
+                  default: false
+                delivery_date:
+                  type: string
+                  description: If given, the letter will be sent on the given date instead of today.
+                  format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"practice\" : 64901939456,\n  \"patient\": 64901939201\n  \"body\": \"Body of a letter\",\n  \"subject\" : \"Subject of a letter\",\n  \"send_to_contact\": {\"id\": 64901939893}\n\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/letters/67176497153/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Letters
+  /letters/:
+    post:
+      summary: Post Letter
+      description: ''
+      operationId: post-letter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - practice
+              - body
+              - send_to_contact
+              - referral_order
+              properties:
+                patient:
+                  type: integer
+                  description: The id of the patient
+                  format: int64
+                practice:
+                  type: integer
+                  description: The id of the practice
+                  format: int64
+                body:
+                  type: string
+                  description: body of the letter
+                subject:
+                  type: string
+                  description: subject of the letter (Not needed with referral_order)
+                send_to_contact:
+                  type: object
+                  description: object with the recipient of the letter
+                  properties: {}
+                referral_order:
+                  type: integer
+                  description: Id of the Referral Order  (Not needed with subject)
+                  format: int64
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65097302057,\n\t// See object definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"practice\" : 64901939456,\n  \"patient\": 64901939201\n  \"body\": \"Body of a letter\",\n  \"subject\" : \"Subject of a letter\",\n  \"send_to_contact\": {\"id\": 64901939893}\n\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/letters/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Letters
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

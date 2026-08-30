@@ -1,0 +1,834 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Immunizations API
+  version: '1.0'
+  description: 'Operations tagged Immunizations across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Immunizations
+paths:
+  /immunizations/{id}/:
+    delete:
+      summary: Delete Immunization
+      description: ''
+      operationId: delete-immunization
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/immunizations/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Immunizations
+      security:
+      - sec0: []
+    get:
+      summary: Get Immunization
+      description: ''
+      operationId: get-immunization
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/immunizations/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Immunizations
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /immunizations/:
+    get:
+      summary: Find Immunizations
+      description: ''
+      operationId: find-immunizations
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/immunizations/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/immunizations/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/immunizations/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Immunizations
+      security:
+      - sec0: []
+    post:
+      summary: Create Immunization
+      description: ''
+      operationId: create-immunization
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - vaccine
+              - administered_date
+              - administering_physician
+              - ordering_physician
+              - qty
+              properties:
+                patient:
+                  type: integer
+                  description: patient id
+                  format: int32
+                vaccine:
+                  type: object
+                  required:
+                  - cvx
+                  properties:
+                    cvx:
+                      type: integer
+                      format: int32
+                administered_date:
+                  type: string
+                  format: date
+                administering_physician:
+                  type: integer
+                  format: int32
+                ordering_physician:
+                  type: integer
+                  format: int32
+                qty:
+                  type: string
+                description:
+                  type: string
+                reason:
+                  type: string
+                qty_units:
+                  type: string
+                lot_number:
+                  type: string
+                manufacturer_name:
+                  type: string
+                manufacturer_code:
+                  type: string
+                expiration_date:
+                  type: string
+                  format: date
+                vis:
+                  type: string
+                method:
+                  type: string
+                site:
+                  type: string
+                notes:
+                  type: string
+                publicity_code:
+                  type: string
+                  enum:
+                  - ("01"
+                  - '"No reminder/recall")'
+                  - ("02"
+                  - '"Reminder/recall - any method")'
+                  - ("03"
+                  - '"Reminder/recall - no calls")'
+                  - ("04"
+                  - '"Reminder only - any method")'
+                  - ("05"
+                  - '"Reminder only - no calls")'
+                  - ("06"
+                  - '"Recall only - any method")'
+                  - ("07"
+                  - '"Recall only - no calls")'
+                  - ("08"
+                  - '"Reminder/recall - to provider")'
+                  - ("09"
+                  - '"Reminder to provider")'
+                  - ("10"
+                  - '"Only reminder to provider'
+                  - no recall")
+                  - ("11"
+                  - '"Recall to provider")'
+                  - ("12"
+                  - '"Only recall to provider'
+                  - no reminder")
+                vfc_eligibility:
+                  type: string
+                  enum:
+                  - ("V01"
+                  - '"Not VFC eligible")'
+                  - ("V02"
+                  - '"VFC eligible - Medicaid/Medicaid Managed Care")'
+                  - ("V03"
+                  - '"VFC eligible - Uninsured")'
+                  - ("V04"
+                  - '"VFC eligible - American Indian/Alaskan Native")'
+                  - ("V05"
+                  - '"VFC eligible - Under-insured)")'
+                  - ("V07"
+                  - '"Local-specific eligibility")'
+                  - ("V22"
+                  - '"CHIP")'
+                  - ("V23"
+                  - '"317")'
+                  - ("V24"
+                  - '"Medicare")'
+                  - ("V25"
+                  - '"State program eligibility")'
+                  - ("CAA01"
+                  - '"CA State General Fund Vaccines")'
+                  - ("ORA01"
+                  - '"OR Special Projects")'
+                  - ("ORA02"
+                  - '"OR Locally Owned")'
+                  - ("HI02"
+                  - '"HI Birthing Hospital Hepatitis B")'
+                  - ("HI03"
+                  - '"HI Adult Insured")'
+                  - ("HI04"
+                  - '"HI Adult Not Insured")'
+                funding_source:
+                  type: string
+                  enum:
+                  - ("PHC70"
+                  - '"Privately funded vaccine stock")'
+                  - ("VXC50"
+                  - '"Publicly funded vaccine stock")'
+                  - ("VXC51"
+                  - '"Publicly funded vaccine stock - VFC")'
+                  - ("VXC52"
+                  - '"Publicly funded vaccine stock - Non-VFC")'
+                info_source:
+                  type: string
+                  enum:
+                  - ("00"
+                  - '"New immunization record")'
+                  - ("01"
+                  - '"Historical information - source unspecified")'
+                  - ("02"
+                  - '"Historical information - from other provider")'
+                  - ("03"
+                  - '"Historical information - from parent''s written record")'
+                  - ("04"
+                  - '"Historical information - from parent''s recall")'
+                  - ("05"
+                  - '"Historical information - from other registry")'
+                  - ("06"
+                  - '"Historical information - from birth certificate")'
+                  - ("07"
+                  - '"Historical information - from school record")'
+                  - ("08"
+                  - '"Historical information - from public agency")'
+                allowed_sharing:
+                  type: boolean
+                dose_in_series:
+                  type: integer
+                  format: int32
+                priority_population:
+                  type: string
+                  description: For Immunization Registry Integrations (less than 9 symbols)
+                ndc:
+                  type: string
+                  description: Should be 10-11 digits, 2 dashes, but field have no validation
+                patient_consent:
+                  type: boolean
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758870130858,\n    \"administered_date\": \"2021-09-22T17:01:00Z\",\n    \"administering_physician\": 720898,\n    \"ordering_physician\": 720898,\n    \"description\": null,\n    \"reason\": null,\n    \"vaccine\": {\n        \"name\": \"pertussis\",\n        \"cvx\": 11,\n        \"cdc_name\": null,\n        \"cdc_type\": null\n    },\n    \"qty\": \"25\",\n    \"qty_units\": null,\n    \"lot_number\": null,\n    \"manufacturer_name\": null,\n    \"manufacturer_code\": null,\n    \"expiration_date\": null,\n    \"vis\": null,\n    \"method\": null,\n    \"site\": null,\n    \"notes\": null,\n    \"publicity_code\": null,\n    \"vfc_eligibility\": null,\n    \"funding_source\": null,\n    \"info_source\": null,\n    \"allowed_sharing\": null,\n    \"practice\": 140758835265540,\n    \"patient\": 140758844637185,\n    \"created_date\": \"2022-06-29T13:00:59Z\",\n    \"deleted_date\": null,\n    \"dose_in_series\": null,\n    \"priority_population\": null,\n    \"ndc\": null,\n    \"patient_consent\": null\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758870130858
+                    default: 0
+                  administered_date:
+                    type: string
+                    example: '2021-09-22T17:01:00Z'
+                  administering_physician:
+                    type: integer
+                    example: 720898
+                    default: 0
+                  ordering_physician:
+                    type: integer
+                    example: 720898
+                    default: 0
+                  description: {}
+                  reason: {}
+                  vaccine:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: pertussis
+                      cvx:
+                        type: integer
+                        example: 11
+                        default: 0
+                      cdc_name: {}
+                      cdc_type: {}
+                  qty:
+                    type: string
+                    example: '25'
+                  qty_units: {}
+                  lot_number: {}
+                  manufacturer_name: {}
+                  manufacturer_code: {}
+                  expiration_date: {}
+                  vis: {}
+                  method: {}
+                  site: {}
+                  notes: {}
+                  publicity_code: {}
+                  vfc_eligibility: {}
+                  funding_source: {}
+                  info_source: {}
+                  allowed_sharing: {}
+                  practice:
+                    type: integer
+                    example: 140758835265540
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140758844637185
+                    default: 0
+                  created_date:
+                    type: string
+                    example: '2022-06-29T13:00:59Z'
+                  deleted_date: {}
+                  dose_in_series: {}
+                  priority_population: {}
+                  ndc: {}
+                  patient_consent: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n    \"patient\": 140758844637185,\n    \"administered_date\": \"2021-09-22T17:01:00Z\",\n    \"administering_physician\": 720898,\n    \"ordering_physician\": 720898,\n    \"vaccine\": {\n        \"cvx\": 11\n    },\n    \"qty\": 25\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/immunizations/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Immunizations
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/immunizations/:
+    get:
+      description: Returns a list of immunizations
+      operationId: immunizations_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientImmunizationList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Immunizations
+      tags:
+      - Immunizations
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new immunization.
+      operationId: immunizations_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientImmunization'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientImmunization'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Immunization
+      tags:
+      - Immunizations
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/immunizations/{id}/:
+    delete:
+      description: Delete an existing immunization.
+      operationId: immunizations_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Immunization
+      tags:
+      - Immunizations
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single immunization
+      operationId: immunizations_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientImmunization'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Immunization
+      tags:
+      - Immunizations
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    FundingSourceEnum:
+      enum:
+      - Privately funded vaccine stock
+      - Publicly funded vaccine stock
+      - Publicly funded vaccine stock - Non-VFC
+      - Publicly funded vaccine stock - VFC
+      type: string
+    ImmunizationVaccine:
+      properties:
+        cdc_name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        cdc_type:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        cvx:
+          maximum: 2147483647
+          minimum: -2147483648
+          type:
+          - integer
+          - 'null'
+        name:
+          readOnly: true
+          type: string
+      type: object
+    InfoSourceEnum:
+      enum:
+      - Historical information - from birth certificate
+      - Historical information - from other provider
+      - Historical information - from other registry
+      - Historical information - from parent's recall
+      - Historical information - from parent's written record
+      - Historical information - from public agency
+      - Historical information - from school record
+      - Historical information - source unspecified
+      - New immunization record
+      type: string
+    VfcEligibilityEnum:
+      enum:
+      - '317'
+      - CA State General Fund Vaccines
+      - CHIP
+      - HI Adult Insured
+      - HI Adult Not Insured
+      - HI Birthing Hospital Hepatitis B
+      - Local-specific eligibility
+      - ME State Eligible - Insured - Under 19
+      - Medicare
+      - Not VFC eligible
+      - OR Locally Owned
+      - OR Special Projects
+      - State program eligibility
+      - VFC eligible - American Indian/Alaskan Native
+      - VFC eligible - Medicaid/Medicaid Managed Care
+      - VFC eligible - Under-insured
+      - VFC eligible - Uninsured
+      type: string
+    PatientImmunization:
+      properties:
+        administered_date:
+          format: date-time
+          type: string
+        administering_physician:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        allowed_sharing:
+          description: Whether this immunization should be sent to Immunization Registry (true/false/null)
+          type:
+          - boolean
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        dose_in_series:
+          maximum: 2147483647
+          minimum: -2147483648
+          type:
+          - integer
+          - 'null'
+        expiration_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        funding_source:
+          oneOf:
+          - $ref: '#/components/schemas/FundingSourceEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        id:
+          readOnly: true
+          type: integer
+        info_source:
+          oneOf:
+          - $ref: '#/components/schemas/InfoSourceEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        lot_number:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        manufacturer_code:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        manufacturer_name:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        method:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        ndc:
+          description: Should be 10-11 digits, 2 dashes.
+          maxLength: 31
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        ordering_physician:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        patient:
+          format: int64
+          type: integer
+        patient_consent:
+          type:
+          - boolean
+          - 'null'
+        practice:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        priority_population:
+          description: For Immunization Registry Integrations (less than 9 symbols).
+          maxLength: 8
+          type:
+          - string
+          - 'null'
+        publicity_code:
+          oneOf:
+          - $ref: '#/components/schemas/PublicityCodeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        qty:
+          type:
+          - string
+          - 'null'
+        qty_units:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        reason:
+          type:
+          - string
+          - 'null'
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        site:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        vaccine:
+          $ref: '#/components/schemas/ImmunizationVaccine'
+        vfc_eligibility:
+          oneOf:
+          - $ref: '#/components/schemas/VfcEligibilityEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        vis:
+          type:
+          - string
+          - 'null'
+        vis_given_date:
+          format: date
+          type:
+          - string
+          - 'null'
+      required:
+      - administered_date
+      - administering_physician
+      - ordering_physician
+      - patient
+      - qty
+      - vaccine
+      type: object
+    NullEnum:
+      type: 'null'
+    PublicityCodeEnum:
+      enum:
+      - No reminder/recall
+      - Only recall to provider, no reminder
+      - Only reminder to provider, no recall
+      - Recall only - any method
+      - Recall only - no calls
+      - Recall to provider
+      - Reminder only - any method
+      - Reminder only - no calls
+      - Reminder to provider
+      - Reminder/recall - any method
+      - Reminder/recall - no calls
+      - Reminder/recall - to provider
+      type: string
+    PaginatedPatientImmunizationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientImmunization'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-profile-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

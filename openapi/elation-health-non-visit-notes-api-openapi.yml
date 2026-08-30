@@ -1,0 +1,1495 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Non Visit Notes API
+  version: '1.0'
+  description: 'Operations tagged Non Visit Notes across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Non Visit Notes
+paths:
+  /non_visit_notes/{id}/:
+    get:
+      summary: Get Non-Visit Note
+      description: ''
+      operationId: get-non-visit-note
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/non_visit_notes/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Non Visit Notes
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Non-Visit Note
+      description: ''
+      operationId: delete-non-visit-note
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/non_visit_notes/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Non Visit Notes
+      security:
+      - sec0: []
+    put:
+      summary: Update Non-Visit Note
+      description: ''
+      operationId: update-non-visit-note
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - type
+              - document_date
+              - chart_date
+              properties:
+                type:
+                  type: string
+                  description: The type of the non visit note
+                document_date:
+                  type: string
+                  description: The date of the document
+                  format: date
+                chart_date:
+                  type: string
+                  description: The date of the patient chart
+                  format: date
+                bullets:
+                  type: array
+                  description: The bullets of the non visit note
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        description: Bullet ID
+                        format: int64
+                      author:
+                        type: integer
+                        description: The author of the bullet
+                        format: int32
+                      text:
+                        type: string
+                        description: The text of the bullet
+                    required:
+                    - id
+                    - text
+                    type: object
+                patient:
+                  type: integer
+                  description: The oid of the patient
+                  format: int32
+                practice:
+                  type: integer
+                  description: The id of the practice
+                  format: int32
+                tags:
+                  type: array
+                  description: The ids of the document tags you want to attach
+                  items:
+                    type: integer
+                    format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758520102937,\n    \"type\": \"nonvisit\",\n    \"notes\": [\n        {\n            \"id\": 140758520168536,\n            \"author\": 64,\n            \"text\": \"this is phone note\",\n            \"version\": 3,\n            \"updated_date\": \"2022-05-13T13:25:43Z\"\n        }\n    ],\n    \"bullets\": [\n        {\n            \"id\": 140758520168536,\n            \"author\": 64,\n            \"text\": \"this is phone note\",\n            \"version\": 3,\n            \"updated_date\": \"2022-05-13T13:25:43Z\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"code\": \"408289007\",\n            \"code_type\": 2,\n            \"concept_name\": \"wt-mgmt-referral\",\n            \"context\": null,\n            \"created_date\": \"2015-07-23T19:30:51Z\",\n            \"deleted_date\": \"2019-05-29T00:06:03Z\",\n            \"description\": \"Referral to weight management program\",\n            \"id\": 58719011162,\n            \"practice_created\": null,\n            \"snomed_result_code\": null,\n            \"value\": \"CQM: Ref to Wt Mgt Program\"\n        }\n    ],\n    \"patient\": 140758510600193,\n    \"document_date\": \"2022-05-05T07:50:20Z\",\n    \"chart_date\": \"2022-05-05T07:50:20Z\",\n    \"signed_date\": null,\n    \"signed_by\": null,\n    \"created_date\": \"2022-05-13T13:25:43.137904Z\",\n    \"deleted_date\": null\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758520102937
+                    default: 0
+                  type:
+                    type: string
+                    example: nonvisit
+                  notes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758520168536
+                          default: 0
+                        author:
+                          type: integer
+                          example: 64
+                          default: 0
+                        text:
+                          type: string
+                          example: this is phone note
+                        version:
+                          type: integer
+                          example: 3
+                          default: 0
+                        updated_date:
+                          type: string
+                          example: '2022-05-13T13:25:43Z'
+                  bullets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758520168536
+                          default: 0
+                        author:
+                          type: integer
+                          example: 64
+                          default: 0
+                        text:
+                          type: string
+                          example: this is phone note
+                        version:
+                          type: integer
+                          example: 3
+                          default: 0
+                        updated_date:
+                          type: string
+                          example: '2022-05-13T13:25:43Z'
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '408289007'
+                        code_type:
+                          type: integer
+                          example: 2
+                          default: 0
+                        concept_name:
+                          type: string
+                          example: wt-mgmt-referral
+                        context: {}
+                        created_date:
+                          type: string
+                          example: '2015-07-23T19:30:51Z'
+                        deleted_date:
+                          type: string
+                          example: '2019-05-29T00:06:03Z'
+                        description:
+                          type: string
+                          example: Referral to weight management program
+                        id:
+                          type: integer
+                          example: 58719011162
+                          default: 0
+                        practice_created: {}
+                        snomed_result_code: {}
+                        value:
+                          type: string
+                          example: 'CQM: Ref to Wt Mgt Program'
+                  patient:
+                    type: integer
+                    example: 140758510600193
+                    default: 0
+                  document_date:
+                    type: string
+                    example: '2022-05-05T07:50:20Z'
+                  chart_date:
+                    type: string
+                    example: '2022-05-05T07:50:20Z'
+                  signed_date: {}
+                  signed_by: {}
+                  created_date:
+                    type: string
+                    example: '2022-05-13T13:25:43.137904Z'
+                  deleted_date: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"id\": 126532,\n  \"type\": \"phone\",\n  \"bullets\": [\n    {\n      \"id\": 126153,\n      \"author\": 64,\n      \"text\": \"this is phone note\"\n    }\n  ],\n  \"patient\": 123467,\n  \"practice\": 131074,\n  \"document_date\": \"2017-03-05T07:22:13Z\",\n  \"chart_date\": \"2017-03-05T07:22:13Z\",\n  \"tags\": [\n    365784\n  ],\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/non_visit_notes/126532/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Non Visit Notes
+      security:
+      - sec0: []
+    patch:
+      summary: Update Non-Visit Note
+      description: ''
+      operationId: update-non-visit-note-1
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of the non visit note
+                bullets:
+                  type: array
+                  description: The bullets of the non visit note.
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        description: Bullet ID
+                        format: int64
+                      author:
+                        type: integer
+                        description: The author of the bullet
+                        format: int32
+                      text:
+                        type: string
+                        description: The text of the bullet
+                    required:
+                    - id
+                    - text
+                    type: object
+                patient:
+                  type: integer
+                  description: The oid of the patient
+                  format: int32
+                practice:
+                  type: integer
+                  description: The id of the practice
+                  format: int32
+                document_date:
+                  type: string
+                  description: The date of the document
+                  format: date
+                chart_date:
+                  type: string
+                  description: The date of the patient chart
+                  format: date
+                tags:
+                  type: array
+                  description: The ids of the document tags you want to attach
+                  items:
+                    type: integer
+                    format: int64
+                sign_date:
+                  type: string
+                  description: The date and time to sign off the note. It is expected to be the current UTC time. eg. "2022-11-10T01:06:22Z"
+                  format: date
+                signed_by:
+                  type: integer
+                  description: The user id of the physician who is signing off the note
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758520102937,\n    \"type\": \"nonvisit\",\n    \"notes\": [\n        {\n            \"id\": 140758520168536,\n            \"author\": 64,\n            \"text\": \"this is phone note\",\n            \"version\": 2,\n            \"updated_date\": \"2022-05-13T13:25:43Z\"\n        }\n    ],\n    \"bullets\": [\n        {\n            \"id\": 140758520168536,\n            \"author\": 64,\n            \"text\": \"this is phone note\",\n            \"version\": 2,\n            \"updated_date\": \"2022-05-13T13:25:43Z\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"code\": \"408289007\",\n            \"code_type\": 2,\n            \"concept_name\": \"wt-mgmt-referral\",\n            \"context\": null,\n            \"created_date\": \"2015-07-23T19:30:51Z\",\n            \"deleted_date\": \"2019-05-29T00:06:03Z\",\n            \"description\": \"Referral to weight management program\",\n            \"id\": 58719011162,\n            \"practice_created\": null,\n            \"snomed_result_code\": null,\n            \"value\": \"CQM: Ref to Wt Mgt Program\"\n        }\n    ],\n    \"patient\": 140758510600193,\n    \"document_date\": \"2022-05-05T07:50:20Z\",\n    \"chart_date\": \"2022-05-05T07:50:20Z\",\n    \"signed_date\": null,\n    \"signed_by\": null,\n    \"created_date\": \"2022-05-13T13:25:43.137904Z\",\n    \"deleted_date\": null\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758520102937
+                    default: 0
+                  type:
+                    type: string
+                    example: nonvisit
+                  notes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758520168536
+                          default: 0
+                        author:
+                          type: integer
+                          example: 64
+                          default: 0
+                        text:
+                          type: string
+                          example: this is phone note
+                        version:
+                          type: integer
+                          example: 2
+                          default: 0
+                        updated_date:
+                          type: string
+                          example: '2022-05-13T13:25:43Z'
+                  bullets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758520168536
+                          default: 0
+                        author:
+                          type: integer
+                          example: 64
+                          default: 0
+                        text:
+                          type: string
+                          example: this is phone note
+                        version:
+                          type: integer
+                          example: 2
+                          default: 0
+                        updated_date:
+                          type: string
+                          example: '2022-05-13T13:25:43Z'
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '408289007'
+                        code_type:
+                          type: integer
+                          example: 2
+                          default: 0
+                        concept_name:
+                          type: string
+                          example: wt-mgmt-referral
+                        context: {}
+                        created_date:
+                          type: string
+                          example: '2015-07-23T19:30:51Z'
+                        deleted_date:
+                          type: string
+                          example: '2019-05-29T00:06:03Z'
+                        description:
+                          type: string
+                          example: Referral to weight management program
+                        id:
+                          type: integer
+                          example: 58719011162
+                          default: 0
+                        practice_created: {}
+                        snomed_result_code: {}
+                        value:
+                          type: string
+                          example: 'CQM: Ref to Wt Mgt Program'
+                  patient:
+                    type: integer
+                    example: 140758510600193
+                    default: 0
+                  document_date:
+                    type: string
+                    example: '2022-05-05T07:50:20Z'
+                  chart_date:
+                    type: string
+                    example: '2022-05-05T07:50:20Z'
+                  signed_date: {}
+                  signed_by: {}
+                  created_date:
+                    type: string
+                    example: '2022-05-13T13:25:43.137904Z'
+                  deleted_date: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"id\": 126532,\n  \"type\": \"phone\",\n  \"bullets\": [\n    {\n      \"id\": 126153,\n      \"text\": \"this is phone note\"\n    }\n  ],\n  \"patient\": 123467,\n  \"practice\": 131074,\n  \"document_date\": \"2017-03-05T07:22:13Z\",\n  \"chart_date\": \"2017-03-05T07:22:13Z\",\n  \"tags\": [\n    365784\n  ],\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/non_visit_notes/126532/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Non Visit Notes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /non_visit_notes/:
+    get:
+      summary: Find Non-Visit Notes
+      description: ''
+      operationId: find-non-visit-notes
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/non_visit_notes/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/non_visit_notes/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/non_visit_notes/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Non Visit Notes
+      security:
+      - sec0: []
+    post:
+      summary: Create Non-Visit Note
+      description: ''
+      operationId: create-non-visit-note
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - type
+              - patient
+              - document_date
+              - chart_date
+              properties:
+                type:
+                  type: string
+                  description: The type of the non visit note
+                bullets:
+                  type: array
+                  description: The bullets of the non visit note
+                  items:
+                    properties:
+                      text:
+                        type: string
+                        description: The text of the bullet
+                      author:
+                        type: integer
+                        description: The author of the bullet
+                        format: int32
+                      category:
+                        type: string
+                        description: The category of the bullet
+                        enum:
+                        - Problem
+                        - Past
+                        - Family
+                        - Social
+                        - Instr
+                        - PE
+                        - ROS
+                        - Med
+                        - Data
+                        - Assessment
+                        - Test
+                        - Tx
+                        - Narrative
+                        - Followup
+                        - Reason
+                        - Plan
+                        - Objective
+                        - Hpi
+                        - Allergies
+                        - Habits
+                        - Assessplan
+                        - Consultant
+                        - Attending
+                        - Dateprocedure
+                        - Surgical
+                        - Orders
+                        - Referenced
+                        - Procedure
+                      sequence:
+                        type: integer
+                        description: The sequence of the bullet
+                        format: int32
+                      note_document:
+                        type: object
+                        description: A document referenced by the bullet
+                        properties:
+                          document:
+                            type: integer
+                            description: the id of the document, e.g. the id of the report or order
+                            format: int32
+                          document_summary:
+                            type: string
+                            description: A textual summary of the document. Will show up in the visit note editor view, while the bullet text will be used in views outisde the editor.
+                      note_item:
+                        type: object
+                        description: An item in the clinical record on the left hand side of the chart referenced by the bullet.
+                        properties:
+                          id:
+                            type: string
+                            description: The id of the item being referenced, e.g. the problem or history id.
+                      handout:
+                        type: integer
+                        description: The id of the handout to attach to this bullet.
+                        format: int32
+                      children:
+                        type: array
+                        description: bullet childrens
+                        items:
+                          properties:
+                            text:
+                              type: string
+                              description: The text of the bullet
+                            author:
+                              type: integer
+                              description: The author of the bullet
+                              format: int32
+                            category:
+                              type: string
+                              description: The category of the bullet
+                              enum:
+                              - Problem
+                              - Past
+                              - Family
+                              - Social
+                              - Instr
+                              - PE
+                              - ROS
+                              - Med
+                              - Data
+                              - Assessment
+                              - Test
+                              - Tx
+                              - Narrative
+                              - Followup
+                              - Reason
+                              - Plan
+                              - Objective
+                              - Hpi
+                              - Allergies
+                              - Habits
+                              - Assessplan
+                              - Consultant
+                              - Attending
+                              - Dateprocedure
+                              - Surgical
+                              - Orders
+                              - Referenced
+                              - Procedure
+                            sequence:
+                              type: integer
+                              description: The sequence of the bullet
+                              format: int32
+                            note_document:
+                              type: object
+                              description: A document referenced by the bullet
+                              properties:
+                                document:
+                                  type: integer
+                                  description: the id of the document, e.g. the id of the report or order
+                                  format: int32
+                                document_summary:
+                                  type: string
+                                  description: A textual summary of the document. Will show up in the visit note editor view, while the bullet text will be used in views outisde the editor.
+                            note_item:
+                              type: object
+                              description: An item in the clinical record on the left hand side of the chart referenced by the bullet.
+                              properties:
+                                id:
+                                  type: string
+                                  description: The id of the item being referenced, e.g. the problem or history id.
+                            handout:
+                              type: integer
+                              description: The id of the handout to attach to this bullet.
+                              format: int32
+                            children:
+                              type: array
+                              description: bullet childrens
+                              default: []
+                          required:
+                          - text
+                          - author
+                          - category
+                          type: object
+                    required:
+                    - text
+                    - author
+                    - category
+                    type: object
+                patient:
+                  type: integer
+                  description: The oid of the patient
+                  format: int32
+                practice:
+                  type: integer
+                  description: The id of the practice
+                  format: int32
+                document_date:
+                  type: string
+                  description: The date of the document
+                  format: date
+                chart_date:
+                  type: string
+                  description: The date of the patient chart
+                  format: date
+                tags:
+                  type: array
+                  description: The ids of the document tags you want to attach
+                  items:
+                    type: integer
+                    format: int64
+                note_document:
+                  type: array
+                  description: The ids of the documents and summary
+                note_item:
+                  type: array
+                  description: The ids of the patient items
+                  items:
+                    type: integer
+                    format: int64
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758520102937,\n    \"type\": \"nonvisit\",\n    \"notes\": [\n        {\n            \"id\": 140758520168536,\n            \"author\": 64,\n            \"text\": \"New POST non visit\",\n            \"version\": 1,\n            \"updated_date\": \"2022-05-13T13:25:43Z\"\n        }\n    ],\n    \"bullets\": [\n        {\n            \"id\": 140758520168536,\n            \"author\": 64,\n            \"text\": \"New POST non visit\",\n            \"version\": 1,\n            \"updated_date\": \"2022-05-13T13:25:43Z\"\n        }\n    ],\n    \"tags\": [\n        {\n            \"code\": \"408289007\",\n            \"code_type\": 2,\n            \"concept_name\": \"wt-mgmt-referral\",\n            \"context\": null,\n            \"created_date\": \"2015-07-23T19:30:51Z\",\n            \"deleted_date\": \"2019-05-29T00:06:03Z\",\n            \"description\": \"Referral to weight management program\",\n            \"id\": 58719011162,\n            \"practice_created\": null,\n            \"snomed_result_code\": null,\n            \"value\": \"CQM: Ref to Wt Mgt Program\"\n        }\n    ],\n    \"patient\": 140758510600193,\n    \"document_date\": \"2022-05-05T07:50:20Z\",\n    \"chart_date\": \"2022-05-05T07:50:20Z\",\n    \"signed_date\": null,\n    \"signed_by\": null,\n    \"created_date\": \"2022-05-13T13:25:43.137904Z\",\n    \"deleted_date\": null,\n    \"note_documents\": [\n        {\n            \"id\": 140758834872453,\n            \"document\": {\n                \"authoring_practice\": 65540,\n                \"chart_date\": \"2010-10-21T18:22:35Z\",\n                \"created_date\": \"2010-10-21T18:22:35Z\",\n                \"deleted_date\": null,\n                \"document_date\": \"2010-10-21T18:22:35Z\",\n                \"document_type\": 33,\n                \"id\": 3342369,\n                \"last_modified\": null,\n                \"patient\": 1638401,\n                \"sign_date\": \"2010-10-21T18:22:35Z\",\n                \"signed_by\": 4\n            },\n            \"summary\": \"some_text\"\n        },\n        {\n            \"id\": 140758835003525,\n            \"document\": {\n                \"authoring_practice\": 65540,\n                \"chart_date\": \"2011-07-19T18:19:19Z\",\n                \"created_date\": \"2013-04-09T18:38:04Z\",\n                \"deleted_date\": null,\n                \"document_date\": \"2011-07-19T18:19:19Z\",\n                \"document_type\": 26,\n                \"id\": 5046298,\n                \"last_modified\": null,\n                \"patient\": 1638401,\n                \"sign_date\": \"2011-07-19T18:19:19Z\",\n                \"signed_by\": 4\n            },\n            \"summary\": \"some_text\"\n        }\n    ],\n  \"note_item\": [\n        {\n            \"id\": 1407585389143534,\n            \"item\": {\n               \"id\": 140000000000000,\n               \"created_date\": null,\n               \"deleted_date\": null,\n               \"patient\": 1638401,\n               \"type\": \"PatientHistoryItem\",\n               \"is_confidential\": false\n             }\n         }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758520102937
+                    default: 0
+                  type:
+                    type: string
+                    example: nonvisit
+                  notes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758520168536
+                          default: 0
+                        author:
+                          type: integer
+                          example: 64
+                          default: 0
+                        text:
+                          type: string
+                          example: New POST non visit
+                        version:
+                          type: integer
+                          example: 1
+                          default: 0
+                        updated_date:
+                          type: string
+                          example: '2022-05-13T13:25:43Z'
+                  bullets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758520168536
+                          default: 0
+                        author:
+                          type: integer
+                          example: 64
+                          default: 0
+                        text:
+                          type: string
+                          example: New POST non visit
+                        version:
+                          type: integer
+                          example: 1
+                          default: 0
+                        updated_date:
+                          type: string
+                          example: '2022-05-13T13:25:43Z'
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '408289007'
+                        code_type:
+                          type: integer
+                          example: 2
+                          default: 0
+                        concept_name:
+                          type: string
+                          example: wt-mgmt-referral
+                        context: {}
+                        created_date:
+                          type: string
+                          example: '2015-07-23T19:30:51Z'
+                        deleted_date:
+                          type: string
+                          example: '2019-05-29T00:06:03Z'
+                        description:
+                          type: string
+                          example: Referral to weight management program
+                        id:
+                          type: integer
+                          example: 58719011162
+                          default: 0
+                        practice_created: {}
+                        snomed_result_code: {}
+                        value:
+                          type: string
+                          example: 'CQM: Ref to Wt Mgt Program'
+                  patient:
+                    type: integer
+                    example: 140758510600193
+                    default: 0
+                  document_date:
+                    type: string
+                    example: '2022-05-05T07:50:20Z'
+                  chart_date:
+                    type: string
+                    example: '2022-05-05T07:50:20Z'
+                  signed_date: {}
+                  signed_by: {}
+                  created_date:
+                    type: string
+                    example: '2022-05-13T13:25:43.137904Z'
+                  deleted_date: {}
+                  note_documents:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758834872453
+                          default: 0
+                        document:
+                          type: object
+                          properties:
+                            authoring_practice:
+                              type: integer
+                              example: 65540
+                              default: 0
+                            chart_date:
+                              type: string
+                              example: '2010-10-21T18:22:35Z'
+                            created_date:
+                              type: string
+                              example: '2010-10-21T18:22:35Z'
+                            deleted_date: {}
+                            document_date:
+                              type: string
+                              example: '2010-10-21T18:22:35Z'
+                            document_type:
+                              type: integer
+                              example: 33
+                              default: 0
+                            id:
+                              type: integer
+                              example: 3342369
+                              default: 0
+                            last_modified: {}
+                            patient:
+                              type: integer
+                              example: 1638401
+                              default: 0
+                            sign_date:
+                              type: string
+                              example: '2010-10-21T18:22:35Z'
+                            signed_by:
+                              type: integer
+                              example: 4
+                              default: 0
+                        summary:
+                          type: string
+                          example: some_text
+                  note_item:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1407585389143534
+                          default: 0
+                        item:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 140000000000000
+                              default: 0
+                            created_date: {}
+                            deleted_date: {}
+                            patient:
+                              type: integer
+                              example: 1638401
+                              default: 0
+                            type:
+                              type: string
+                              example: PatientHistoryItem
+                            is_confidential:
+                              type: boolean
+                              example: false
+                              default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"type\": \"nonvisit\",\n  \"bullets\": [\n    {\n      \"author\": 64,\n      \"text\": \"this is phone note\"\n    }\n  ],\n  \"patient\": 123467,\n  \"practice\": 131074,\n  \"document_date\": \"2017-03-05T07:22:13Z\",\n  \"chart_date\": \"2017-03-05T07:22:13Z\",\n  \"tags\": [\n    365784\n  ],\n  \"note_documents\": [\n      {\n        \"document\": 3342369,\n        \"document_summary\": \"some_text\"\n      },\n        {\n        \"document\": 5046298,\n        \"document_summary\": \"some_text\"\n      }\n  ],\n  \"note_items\": [\n    140000000000000\n  ]\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/non_visit_notes/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Non Visit Notes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/non_visit_notes/:
+    get:
+      operationId: non_visit_notes_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNonVisitNoteList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Non Visit Notes
+      tags:
+      - Non Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new non visit note.
+      operationId: non_visit_notes_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NonVisitNote'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonVisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Non Visit Note
+      tags:
+      - Non Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/non_visit_notes/{id}/:
+    delete:
+      description: Delete an existing non visit note.
+      operationId: non_visit_notes_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Non Visit Note
+      tags:
+      - Non Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: non_visit_notes_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonVisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Non Visit Note
+      tags:
+      - Non Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing non visit note.
+      operationId: non_visit_notes_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedNonVisitNote'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonVisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Non Visit Note
+      tags:
+      - Non Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing non visit note.
+      operationId: non_visit_notes_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NonVisitNote'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonVisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Non Visit Note
+      tags:
+      - Non Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    NonVisitNotePatientItem:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        item:
+          $ref: '#/components/schemas/PatientItem'
+      required:
+      - item
+      type: object
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
+    PatientItem:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_confidential:
+          type: boolean
+        patient:
+          format: int64
+          type: integer
+        type:
+          type: string
+      required:
+      - is_confidential
+      - patient
+      - type
+      type: object
+    NonVisitNote:
+      properties:
+        bullets:
+          description: The bullets of the non visit note.
+          items:
+            $ref: '#/components/schemas/NonVisitNoteBullet'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        note_documents:
+          description: The documents referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNoteDocument'
+            - type: 'null'
+          type: array
+        note_items:
+          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNotePatientItem'
+            - type: 'null'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        tags:
+          description: The ids of the document tags you want to attach.
+          items:
+            format: int64
+            type: integer
+          type: array
+        type:
+          description: The type of the non visit note.
+          type: string
+      required:
+      - chart_date
+      - document_date
+      - patient
+      - type
+      type: object
+    PatchedNonVisitNote:
+      properties:
+        bullets:
+          description: The bullets of the non visit note.
+          items:
+            $ref: '#/components/schemas/NonVisitNoteBullet'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        note_documents:
+          description: The documents referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNoteDocument'
+            - type: 'null'
+          type: array
+        note_items:
+          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNotePatientItem'
+            - type: 'null'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        tags:
+          description: The ids of the document tags you want to attach.
+          items:
+            format: int64
+            type: integer
+          type: array
+        type:
+          description: The type of the non visit note.
+          type: string
+      type: object
+    PaginatedNonVisitNoteList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/NonVisitNote'
+          type: array
+      required:
+      - results
+      type: object
+    NonVisitNoteBullet:
+      properties:
+        author:
+          description: The author of the bullet.
+          type: integer
+        id:
+          type: integer
+        text:
+          description: The text of the bullet.
+          type: string
+        updated_date:
+          format: date-time
+          readOnly: true
+          type: string
+        version:
+          maximum: 65535
+          minimum: 0
+          type: integer
+      required:
+      - text
+      type: object
+    NonVisitNoteDocument:
+      properties:
+        document:
+          $ref: '#/components/schemas/Document'
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          type:
+          - string
+          - 'null'
+      required:
+      - document
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,802 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Lab Vendor Integrations API
+  version: '1.0'
+  description: 'Operations tagged Lab Vendor Integrations across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Lab Vendor Integrations
+paths:
+  /lab_vendor_integrations/{id}:
+    get:
+      summary: Get Lab Vendor Integration
+      description: ''
+      operationId: get-lab-vendor-integration
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\t\t\n  \"allow_print\":true,\n  \"created_date\":\"2022-05-06T12:16:10Z\",\n  \"deleted_date\":null,\n  \"id\":140758864036248,\n  \"lab_vendor\":140758863970550,\n  \"orders_status\":\"not_requested\",\n  \"practice\":140758859186180,\n  \"results_status\":\"live\"\n}"
+              schema:
+                type: object
+                properties:
+                  allow_print:
+                    type: boolean
+                    example: true
+                    default: true
+                  created_date:
+                    type: string
+                    example: '2022-05-06T12:16:10Z'
+                  deleted_date: {}
+                  id:
+                    type: integer
+                    example: 140758864036248
+                    default: 0
+                  lab_vendor:
+                    type: integer
+                    example: 140758863970550
+                    default: 0
+                  orders_status:
+                    type: string
+                    example: not_requested
+                  practice:
+                    type: integer
+                    example: 140758859186180
+                    default: 0
+                  results_status:
+                    type: string
+                    example: live
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_vendor_integrations/12345566\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Vendor Integrations
+      security:
+      - sec0: []
+    put:
+      summary: Put Lab Vendor Integration
+      description: ''
+      operationId: put-lab-vendor-integration
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - practice
+              - lab_vendor
+              properties:
+                practice:
+                  type: integer
+                  description: Must bu unique with 'lab_vendor'
+                  format: int32
+                lab_vendor:
+                  type: integer
+                  description: Must bu unique with 'practice'
+                  format: int32
+                results_status:
+                  type: string
+                  enum:
+                  - '"not_requested"'
+                  - '"waiting_on_lab"'
+                  - '"pending_testing"'
+                  - '"completed_testing"'
+                  - '"blocked"'
+                  - '"live"'
+                  - ''
+                orders_status:
+                  type: string
+                  enum:
+                  - '"not_requested"'
+                  - '"waiting_on_lab"'
+                  - '"pending_testing"'
+                  - '"completed_testing"'
+                  - '"blocked"'
+                  - '"live"'
+                  - ''
+                allow_print:
+                  type: boolean
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 123456,\n   // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"ptactice\": 12323456,\n  \"lab_vendor\": 11234544,\n  \"results_status\": \"live\"\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/lab_vendor_integrations/12334567\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Vendor Integrations
+      security:
+      - sec0: []
+    patch:
+      summary: Patch Lab Vendor Integration
+      description: ''
+      operationId: patch-lab-vendor-integration
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                practice:
+                  type: integer
+                  description: Must bu unique with 'lab_vendor'
+                  format: int32
+                lab_vendor:
+                  type: integer
+                  description: Must bu unique with 'practice'
+                  format: int32
+                results_status:
+                  type: string
+                  enum:
+                  - '"not_requested"'
+                  - '"waiting_on_lab"'
+                  - '"pending_testing"'
+                  - '"completed_testing"'
+                  - '"blocked"'
+                  - '"live"'
+                  - ''
+                orders_status:
+                  type: string
+                  enum:
+                  - '"not_requested"'
+                  - '"waiting_on_lab"'
+                  - '"pending_testing"'
+                  - '"completed_testing"'
+                  - '"blocked"'
+                  - '"live"'
+                  - ''
+                allow_print:
+                  type: boolean
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 123456,\n   // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"ptactice\": 12323456,\n  \"lab_vendor\": 11234544,\n  \"results_status\": \"live\"\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/lab_vendor_integrations/12334567\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Vendor Integrations
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Lab Vendor Integration
+      description: ''
+      operationId: delete-lab-vendor-integration
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/lab_vendor_integrations/12345566\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Vendor Integrations
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_vendor_integrations/:
+    get:
+      summary: Find Lab Vendor Integration
+      description: ''
+      operationId: find-lab-vendor-integration
+      parameters:
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      - name: practice
+        in: query
+        description: The id's of practice
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: lab_vendor
+        in: query
+        description: The id's of lab_vendor
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\t\t\n          \"allow_print\":true,\n          \"created_date\":\"2022-05-06T12:16:10Z\",\n          \"deleted_date\":null,\n          \"id\":140758864036248,\n          \"lab_vendor\":140758863970550,\n          \"orders_status\":\"not_requested\",\n          \"practice\":140758859186180,\n          \"results_status\":\"live\"\n        },\n      ...\n     ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_vendor_integrations/\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Vendor Integrations
+      security:
+      - sec0: []
+    post:
+      summary: Create Lab Vendor Integration
+      description: ''
+      operationId: create-lab-vendor-integration
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lab_vendor
+              - practice
+              - orders_status
+              - results_status
+              properties:
+                lab_vendor:
+                  type: integer
+                  description: Must bu unique with 'practice'
+                  format: int32
+                practice:
+                  type: integer
+                  description: Must bu unique with 'lab_vendor'
+                  format: int32
+                orders_status:
+                  type: string
+                  enum:
+                  - '"not_requested"'
+                  - '"waiting_on_lab"'
+                  - '"pending_testing"'
+                  - '"completed_testing"'
+                  - '"blocked"'
+                  - '"live"'
+                  - ''
+                results_status:
+                  type: string
+                  enum:
+                  - '"not_requested"'
+                  - '"waiting_on_lab"'
+                  - '"pending_testing"'
+                  - '"completed_testing"'
+                  - '"blocked"'
+                  - '"live"'
+                allow_print:
+                  type: boolean
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"allow_print\": true,\n    \"created_date\": \"2022-06-06T18:24:32.446237Z\",\n    \"deleted_date\": null,\n    \"id\": 140758850273688,\n    \"lab_vendor\": 64426082550,\n    \"orders_status\": \"not_requested\",\n    \"practice\": 140758831005700,\n    \"results_status\": \"not_requested\"\n}"
+              schema:
+                type: object
+                properties:
+                  allow_print:
+                    type: boolean
+                    example: true
+                    default: true
+                  created_date:
+                    type: string
+                    example: '2022-06-06T18:24:32.446237Z'
+                  deleted_date: {}
+                  id:
+                    type: integer
+                    example: 140758850273688
+                    default: 0
+                  lab_vendor:
+                    type: integer
+                    example: 64426082550
+                    default: 0
+                  orders_status:
+                    type: string
+                    example: not_requested
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+                  results_status:
+                    type: string
+                    example: not_requested
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"lab_vendor\": 1234567889, \n\t\"practice\": 123455, \n\t\"orders_status\": \"not_requested\",\n  \"results_status\": \"live\"\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/lab_vendor_integrations/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)\n"
+        samples-languages:
+        - python
+      tags:
+      - Lab Vendor Integrations
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/lab_vendor_integrations/:
+    get:
+      description: Returns a list of lab vendor integrations
+      operationId: lab_vendor_integrations_list
+      parameters:
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: lab_vendor
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabVendorIntegrationList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Lab Vendor Integrations
+      tags:
+      - Lab Vendor Integrations
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new lab vendor integration.
+      operationId: lab_vendor_integrations_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabVendorIntegration'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVendorIntegration'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Lab Vendor Integration
+      tags:
+      - Lab Vendor Integrations
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/lab_vendor_integrations/{id}/:
+    delete:
+      description: Delete an existing lab vendor integration.
+      operationId: lab_vendor_integrations_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Lab Vendor Integration
+      tags:
+      - Lab Vendor Integrations
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single lab vendor integration
+      operationId: lab_vendor_integrations_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVendorIntegration'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Lab Vendor Integration
+      tags:
+      - Lab Vendor Integrations
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing lab vendor integration.
+      operationId: lab_vendor_integrations_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLabVendorIntegration'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVendorIntegration'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Lab Vendor Integration
+      tags:
+      - Lab Vendor Integrations
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing lab vendor integration.
+      operationId: lab_vendor_integrations_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabVendorIntegration'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVendorIntegration'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Lab Vendor Integration
+      tags:
+      - Lab Vendor Integrations
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatchedLabVendorIntegration:
+      description: Serializer for non-internal usage to align better with APIv2 conventions
+      properties:
+        allow_print:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        orders_status:
+          $ref: '#/components/schemas/LabVendorIntegrationStatus'
+        practice:
+          format: int64
+          type: integer
+        results_status:
+          $ref: '#/components/schemas/LabVendorIntegrationStatus'
+      type: object
+    LabVendorIntegrationStatus:
+      enum:
+      - blocked
+      - completed_testing
+      - live
+      - not_requested
+      - pending_testing
+      - waiting_on_lab
+      type: string
+    PaginatedLabVendorIntegrationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabVendorIntegration'
+          type: array
+      required:
+      - results
+      type: object
+    LabVendorIntegration:
+      description: Serializer for non-internal usage to align better with APIv2 conventions
+      properties:
+        allow_print:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        orders_status:
+          $ref: '#/components/schemas/LabVendorIntegrationStatus'
+        practice:
+          format: int64
+          type: integer
+        results_status:
+          $ref: '#/components/schemas/LabVendorIntegrationStatus'
+      required:
+      - lab_vendor
+      - orders_status
+      - practice
+      - results_status
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

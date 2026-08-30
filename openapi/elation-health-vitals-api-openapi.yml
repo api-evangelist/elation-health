@@ -1,0 +1,1065 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Vitals API
+  version: '1.0'
+  description: 'Operations tagged Vitals across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Vitals
+paths:
+  /vitals/{id}/:
+    get:
+      summary: Get Vital
+      description: ''
+      operationId: get-vital
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65098023184,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/vitals/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Vitals
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /vitals/:
+    get:
+      summary: Find Vitals
+      description: ''
+      operationId: find-vitals
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: visit_note
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: non_visit_note
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/vitals/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/vitals/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/vitals/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Vitals
+      security:
+      - sec0: []
+    post:
+      summary: Create Vitals
+      description: ''
+      operationId: create-vital
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - practice
+              properties:
+                patient:
+                  type: integer
+                  description: Patient ID
+                  format: int32
+                practice:
+                  type: integer
+                  description: Practice ID
+                  format: int32
+                visit_note:
+                  type: integer
+                  description: Will only allow unsigned visit notes
+                  format: int32
+                non_visit_note:
+                  type: integer
+                  description: Will only allow unsigned non-visit notes
+                  format: int32
+                bmi:
+                  type: number
+                  description: Optional. Will be automatically calculated from height and weight otherwise
+                  format: double
+                height:
+                  type: array
+                  description: Will only allow array of one.
+                weight:
+                  type: array
+                  description: Will only allow array of one.
+                oxygen:
+                  type: array
+                  description: Will only allow array of one.
+                rr:
+                  type: array
+                  description: Will only allow array of one.
+                hr:
+                  type: array
+                  description: Will only allow array of one.
+                hc:
+                  type: array
+                  description: Will only allow array of one.
+                temperature:
+                  type: array
+                  description: Will only allow array of one.
+                bp:
+                  type: array
+                  description: Will allow multiple items in array
+                ketone:
+                  type: array
+                  description: Optional. See Vital Object Definition for supported observations.
+                bodyfat:
+                  type: array
+                  description: Optional. Will only allow array of one
+                dlm:
+                  type: array
+                  description: Optional. Will only allow array of one
+                bfm:
+                  type: array
+                  description: Optional. Will only allow array of one
+                wc:
+                  type: array
+                  description: Optional. Will only allow array of one
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65098023184,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending a list of vitals in single call\ndata = {\n  \"patient\": 64901939201,\n  \"practice\": 65540,\n  \"visit_note\": 79923773464,\n  \"bmi\": 21.52,\n  \"height\": [{\n    \"value\": \"70\",\n    \"note\": \"no shoes\"\n  }],\n  \"weight\": [{\n    \"value\": \"150\",\n    \"note\": \"in shorts\"\n  }],\n  \"oxygen\": [{\n    \"value\": \"98\",\n    \"note\": \"good\"\n  }],\n  \"rr\": [{\n    \"value\": \"20\",\n    \"note\": \"deep\"\n  }],\n  \"hr\": [{\n    \"value\": \"60\",\n    \"note\": \"calm\"\n  }],\n  \"hc\": [{\n    \"value\": \"30\",\n    \"note\": \"big\"\n  }],\n  \"temperature\": [{\n    \"value\": \"98\",\n    \"note\": \"t-shirt\"\n  }],\n  \"bp\": [{\n    \"systolic\": \"120\",\n    \"diastolic\": \"80\",\n    \"note\": \"sitting down\"\n  }],\n  \"ketone\": [\n    {\n      \"note\": \"\",\n      \"value\": \"1.3\"\n    }\n  ],\n  \"bodyfat\": [\n    {\n      \"note\": \"\",\n      \"value\": \"35.9\"\n    }\n  ],\n  \"dlm\": [\n    {\n      \"note\": \"\",\n      \"value\": \"26.9\"\n    }\n  ],\n  \"bfm\": [\n    {\n      \"note\": \"\",\n      \"value\": \"57.0\"\n    }\n  ],\n  \"wc\": [\n    {\n      \"note\": \"\",\n      \"value\": \"47\"\n    }\n  ]\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/vitals/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Vitals
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /vitals/:id/:
+    patch:
+      summary: Update Vitals
+      description: ''
+      operationId: update-vitals-1
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 64184451073,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"oxygen\": [{\n    \"value\": \"98\",\n    \"note\": \"good\"\n  }]\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/vitals/64184451073/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Vitals
+      security:
+      - sec0: []
+    put:
+      summary: Update Vitals
+      description: ''
+      operationId: update-vitals
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - practice
+              - bp
+              - height
+              - weight
+              - oxygen
+              - rr
+              - hr
+              - hc
+              - temperature
+              properties:
+                patient:
+                  type: integer
+                  description: Patient ID
+                  format: int32
+                practice:
+                  type: integer
+                  description: Practice ID
+                  format: int32
+                bmi:
+                  type: number
+                  description: Optional. Will be automatically calculated from height and weight otherwise
+                  format: double
+                bp:
+                  type: array
+                  description: Will allow multiple items in array.
+                height:
+                  type: array
+                  description: Will only allow array of one.
+                weight:
+                  type: array
+                  description: Will only allow array of one.
+                oxygen:
+                  type: array
+                  description: Will only allow array of one.
+                rr:
+                  type: array
+                  description: Will only allow array of one.
+                hr:
+                  type: array
+                  description: Will only allow array of one.
+                hc:
+                  type: array
+                  description: Will only allow array of one.
+                temperature:
+                  type: array
+                  description: Will only allow array of one.
+                ketone:
+                  type: array
+                  description: Optional. Will only allow array of one
+                bodyfat:
+                  type: array
+                  description: Optional. Will only allow array of one
+                dlm:
+                  type: array
+                  description: Optional. Will only allow array of one
+                bfm:
+                  type: array
+                  description: Optional. Will only allow array of one
+                wc:
+                  type: array
+                  description: Optional. Will only allow array of one
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 64184451073,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending a list of vitals in single call\ndata = {\n  \"patient\": 64901939201,\n  \"practice\": 65540,\n  \"visit_note\": 79923773464,\n  \"bmi\": 21.52,\n  \"height\": [{\n    \"value\": \"70\",\n    \"note\": \"no shoes\"\n  }],\n  \"weight\": [{\n    \"value\": \"150\",\n    \"note\": \"in shorts\"\n  }],\n  \"oxygen\": [{\n    \"value\": \"98\",\n    \"note\": \"good\"\n  }],\n  \"rr\": [{\n    \"value\": \"20\",\n    \"note\": \"deep\"\n  }],\n  \"hr\": [{\n    \"value\": \"60\",\n    \"note\": \"calm\"\n  }],\n  \"hc\": [{\n    \"value\": \"30\",\n    \"note\": \"big\"\n  }],\n  \"temperature\": [{\n    \"value\": \"98\",\n    \"note\": \"t-shirt\"\n  }],\n  \"bp\": [{\n    \"systolic\": \"120\",\n    \"diastolic\": \"80\",\n    \"note\": \"sitting down\"\n  }],\n  \"ketone\": [\n    {\n      \"note\": \"\",\n      \"value\": \"1.3\"\n    }\n  ],\n  \"bodyfat\": [\n    {\n      \"note\": \"\",\n      \"value\": \"35.9\"\n    }\n  ],\n  \"dlm\": [\n    {\n      \"note\": \"\",\n      \"value\": \"26.9\"\n    }\n  ],\n  \"bfm\": [\n    {\n      \"note\": \"\",\n      \"value\": \"57.0\"\n    }\n  ],\n  \"wc\": [\n    {\n      \"note\": \"\",\n      \"value\": \"47\"\n    }\n  ]\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/vitals/64184451073\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Vitals
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/vitals/:
+    get:
+      operationId: vitals_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: non_visit_note
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: visit_note
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVitalsCollectionList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Vitals
+      tags:
+      - Vitals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new vital.
+      operationId: vitals_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VitalsCollection'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VitalsCollection'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Vital
+      tags:
+      - Vitals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/vitals/{id}/:
+    get:
+      operationId: vitals_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VitalsCollection'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Vital
+      tags:
+      - Vitals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing vital.
+      operationId: vitals_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVitalsCollection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VitalsCollection'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Vital
+      tags:
+      - Vitals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing vital.
+      operationId: vitals_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VitalsCollection'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VitalsCollection'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Vital
+      tags:
+      - Vitals
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    VitalOxygenUnitsEnum:
+      enum:
+      - '%'
+      type: string
+    VitalHeightUnitsEnum:
+      enum:
+      - inches
+      type: string
+    VitalBP:
+      properties:
+        diastolic:
+          type:
+          - string
+          - 'null'
+        note:
+          type:
+          - string
+          - 'null'
+        systolic:
+          type:
+          - string
+          - 'null'
+      type: object
+    PatchedVitalsCollection:
+      properties:
+        bmi:
+          format: double
+          type:
+          - number
+          - 'null'
+        bmi_percentile:
+          description: The BMI percentile of the patient. Optional. Will be automatically calculated from height and weight otherwise.
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        bp:
+          description: The blood pressure of the patient. Will allow multiple items in array.
+          items:
+            $ref: '#/components/schemas/VitalBP'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        custom_observations:
+          additionalProperties:
+            properties:
+              label:
+                type: string
+              note:
+                type:
+                - string
+                - 'null'
+              units:
+                type:
+                - string
+                - 'null'
+              value:
+                type: string
+            type: object
+          type: object
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        hc:
+          description: The head circumference of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHC'
+          type: array
+        height:
+          description: The height of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHeight'
+          type: array
+        hr:
+          description: The heart rate of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHR'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        length_for_weight_percentile:
+          description: The length for weight percentile for the patient.
+          format: double
+          readOnly: true
+          type:
+          - number
+          - 'null'
+        non_visit_note:
+          description: The non-visit note that the vital belongs to. Will only allow unsigned non-visit notes.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        oxygen:
+          description: The oxygen saturation of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalOxygen'
+          type: array
+        pain:
+          description: The pain of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalPain'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        rr:
+          description: The respiratory rate of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalRR'
+          type: array
+        signed_by:
+          format: int64
+          readOnly: true
+          type: integer
+        signed_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        temperature:
+          description: The temperature of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalTemperature'
+          type: array
+        visit_note:
+          description: The visit note that the vital belongs to. Will only allow unsigned visit notes.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        weight:
+          description: The weight of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalWeight'
+          type: array
+      type: object
+    VitalHR:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHRUnits'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHCUnitsEnum:
+      enum:
+      - cm
+      type: string
+    VitalTemperature:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalTemperatureUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalPain:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHC:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        percentile:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHCUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHRUnits:
+      enum:
+      - bpm
+      type: string
+    VitalWeightUnitsEnum:
+      enum:
+      - lbs
+      type: string
+    VitalTemperatureUnitsEnum:
+      enum:
+      - celsius
+      - fahrenheit
+      type: string
+    VitalRR:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHRUnits'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedVitalsCollectionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VitalsCollection'
+          type: array
+      required:
+      - results
+      type: object
+    VitalOxygen:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalOxygenUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalsCollection:
+      properties:
+        bmi:
+          format: double
+          type:
+          - number
+          - 'null'
+        bmi_percentile:
+          description: The BMI percentile of the patient. Optional. Will be automatically calculated from height and weight otherwise.
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        bp:
+          description: The blood pressure of the patient. Will allow multiple items in array.
+          items:
+            $ref: '#/components/schemas/VitalBP'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        custom_observations:
+          additionalProperties:
+            properties:
+              label:
+                type: string
+              note:
+                type:
+                - string
+                - 'null'
+              units:
+                type:
+                - string
+                - 'null'
+              value:
+                type: string
+            type: object
+          type: object
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        hc:
+          description: The head circumference of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHC'
+          type: array
+        height:
+          description: The height of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHeight'
+          type: array
+        hr:
+          description: The heart rate of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHR'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        length_for_weight_percentile:
+          description: The length for weight percentile for the patient.
+          format: double
+          readOnly: true
+          type:
+          - number
+          - 'null'
+        non_visit_note:
+          description: The non-visit note that the vital belongs to. Will only allow unsigned non-visit notes.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        oxygen:
+          description: The oxygen saturation of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalOxygen'
+          type: array
+        pain:
+          description: The pain of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalPain'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        rr:
+          description: The respiratory rate of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalRR'
+          type: array
+        signed_by:
+          format: int64
+          readOnly: true
+          type: integer
+        signed_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        temperature:
+          description: The temperature of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalTemperature'
+          type: array
+        visit_note:
+          description: The visit note that the vital belongs to. Will only allow unsigned visit notes.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        weight:
+          description: The weight of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalWeight'
+          type: array
+      required:
+      - patient
+      - practice
+      type: object
+    VitalHeight:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHeightUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalWeight:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalWeightUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

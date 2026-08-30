@@ -1,0 +1,257 @@
+openapi: 3.2.0
+info:
+  title: Settings Medication History Downloads API
+  version: unknown
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+security:
+- sec0: []
+tags:
+- name: Medication History Downloads
+paths:
+  /medication_history_downloads/{medication_history_download_id}:
+    get:
+      summary: Get Historical Medication Download Requests
+      description: ''
+      operationId: get-history-object
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: medication_history_download_id
+        in: path
+        description: The id of the download
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 123,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 140759728259218,\n            \"practice\": 140754475089924,\n            \"patient\": 140754479349761,\n            \"is_active\": true,\n            \"success\": true,\n            \"error_code\": null,\n            \"error_description\": null,\n            \"error_description_code\": null,\n            \"num_items\": \"50\",\n            \"pbm_name\": \"PROINFORMA PBM\",\n            \"pbm_surescripts_participant_id\": \"T00000000022652\",\n            \"pbm_member_id\": \"PRO-PBM^FL^33256\",\n            \"eligibility\": 140759727734801,\n            \"from_date\": null,\n            \"until_date\": null,\n            \"created_date\": \"2022-06-15T15:12:30Z\",\n            \"signed_date\": null,\n            \"signed_by\": null,\n            \"deleted_date\": null\n        },\n      {\n        //...\n        //...\n      }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140759728259218
+                          default: 0
+                        practice:
+                          type: integer
+                          example: 140754475089924
+                          default: 0
+                        patient:
+                          type: integer
+                          example: 140754479349761
+                          default: 0
+                        is_active:
+                          type: boolean
+                          example: true
+                          default: true
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        error_code: {}
+                        error_description: {}
+                        error_description_code: {}
+                        num_items:
+                          type: string
+                          example: '50'
+                        pbm_name:
+                          type: string
+                          example: PROINFORMA PBM
+                        pbm_surescripts_participant_id:
+                          type: string
+                          example: T00000000022652
+                        pbm_member_id:
+                          type: string
+                          example: PRO-PBM^FL^33256
+                        eligibility:
+                          type: integer
+                          example: 140759727734801
+                          default: 0
+                        from_date: {}
+                        until_date: {}
+                        created_date:
+                          type: string
+                          example: '2022-06-15T15:12:30Z'
+                        signed_date: {}
+                        signed_by: {}
+                        deleted_date: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Medication History Downloads
+  /medication_history_downloads/:
+    post:
+      summary: Create an Historical Medication Download Request
+      description: ''
+      operationId: create-history-object
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - practice
+              - patient
+              properties:
+                practice:
+                  type: integer
+                  description: Practice ID
+                  format: int32
+                patient:
+                  type: integer
+                  description: Patient ID
+                  format: int32
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{
+
+                    }'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Medication History Downloads
+    get:
+      summary: Find Historical Medication Download Requests
+      description: ''
+      operationId: find-history-object
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\n    \"id\":140759728259218,\n    \"practice\":140754475089924,\n    \"patient\":140754479349761,\n    \"is_active\":true,\n    \"success\":true,\n    \"error_code\":null,\n    \"error_description\":null,\n    \"error_description_code\":null,\n    \"num_items\":\"50\",\n    \"pbm_name\":\"PROINFORMA PBM\",\n    \"pbm_surescripts_participant_id\":\"T00000000022652\",\n    \"pbm_member_id\":\"PRO-PBM^FL^33256\",\n    \"eligibility\":140759727734801,\n    \"from_date\":null,\n    \"until_date\":null,\n    \"created_date\":\"2022-06-15T15:12:30Z\",\n    \"signed_date\":null,\n    \"signed_by\":null,\n    \"deleted_date\":null\n\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140759728259218
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140754475089924
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140754479349761
+                    default: 0
+                  is_active:
+                    type: boolean
+                    example: true
+                    default: true
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  error_code: {}
+                  error_description: {}
+                  error_description_code: {}
+                  num_items:
+                    type: string
+                    example: '50'
+                  pbm_name:
+                    type: string
+                    example: PROINFORMA PBM
+                  pbm_surescripts_participant_id:
+                    type: string
+                    example: T00000000022652
+                  pbm_member_id:
+                    type: string
+                    example: PRO-PBM^FL^33256
+                  eligibility:
+                    type: integer
+                    example: 140759727734801
+                    default: 0
+                  from_date: {}
+                  until_date: {}
+                  created_date:
+                    type: string
+                    example: '2022-06-15T15:12:30Z'
+                  signed_date: {}
+                  signed_by: {}
+                  deleted_date: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Medication History Downloads
+components:
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+x-readme:
+  headers: []
+x-readme-fauxas: true

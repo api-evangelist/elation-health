@@ -1,0 +1,717 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Patient Form Requests API
+  version: '1.0'
+  description: 'Operations tagged Patient Form Requests across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Patient Form Requests
+paths:
+  /patient_form_requests:
+    post:
+      summary: Create Patient Form Request
+      description: ''
+      operationId: create-patient-form-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient
+              - patient_forms
+              properties:
+                patient:
+                  type: integer
+                  description: The ID of the patient that should be associated with the request.
+                  format: int64
+                patient_forms:
+                  type: array
+                  description: The IDs of the forms that should be associated to the request.  Please note that you must create these forms before trying to create a request.
+                  items:
+                    type: integer
+                    format: int64
+                notification_date:
+                  type: string
+                  description: This is the date that the request will appear in the Practice's action queue. This value must be in the future, excluding the current day.  The default value is one week into the future.
+                  format: date
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"created_date\": \"2024-01-31T15:57:54Z\",\n    \"forms_url\": \"http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=aeNZ4gjq2L8g1vGl9XUxF0VLtIqKZQkXJuAy5hKq\",\n    \"id\": 140775209894361,\n    \"notification_date\": \"2024-02-07\",\n    \"patient_forms\": [\n        6\n    ],\n    \"patient\": 64058687489,\n    \"practice\": 655364\n}"
+              schema:
+                type: object
+                properties:
+                  created_date:
+                    type: string
+                    example: '2024-01-31T15:57:54Z'
+                  forms_url:
+                    type: string
+                    example: http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=aeNZ4gjq2L8g1vGl9XUxF0VLtIqKZQkXJuAy5hKq
+                  id:
+                    type: integer
+                    example: 140775209894361
+                    default: 0
+                  notification_date:
+                    type: string
+                    example: '2024-02-07'
+                  patient_forms:
+                    type: array
+                    items:
+                      type: integer
+                      example: 6
+                      default: 0
+                  patient:
+                    type: integer
+                    example: 64058687489
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 655364
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Empty Forms Array:
+                  value: "{\n    \"patient_forms\": [\n        \"No patient form IDs provided.\"\n    ]\n}"
+                Invalid Form IDs:
+                  value: "{\n    \"patient_forms\": [\n        \"Unable to locate any patient forms with the provided IDs.\"\n    ]\n}"
+                Invalid Date Format:
+                  value: "{\n    \"notification_date\": [\n        \"Date has wrong format. Use one of these formats instead: YYYY-MM-DD.\"\n    ]\n}"
+                Empty Patient ID:
+                  value: "{\n    \"patient\": [\n        \"This field is required.\"\n    ]\n}"
+              schema:
+                oneOf:
+                - title: Empty Forms Array
+                  type: object
+                  properties:
+                    patient_forms:
+                      type: array
+                      items:
+                        type: string
+                        example: No patient form IDs provided.
+                - title: Invalid Form IDs
+                  type: object
+                  properties:
+                    patient_forms:
+                      type: array
+                      items:
+                        type: string
+                        example: Unable to locate any patient forms with the provided IDs.
+                - title: Invalid Date Format
+                  type: object
+                  properties:
+                    notification_date:
+                      type: array
+                      items:
+                        type: string
+                        example: 'Date has wrong format. Use one of these formats instead: YYYY-MM-DD.'
+                - title: Empty Patient ID
+                  type: object
+                  properties:
+                    patient:
+                      type: array
+                      items:
+                        type: string
+                        example: This field is required.
+      deprecated: false
+      tags:
+      - Patient Form Requests
+      security:
+      - sec0: []
+    get:
+      summary: List Patient Form Requests
+      description: ''
+      operationId: list-patient-form-requests
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"created_date\": \"2024-01-31T13:09:31Z\",\n            \"forms_url\": \"http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=rh3oAXE73txk48BQoppyD8YJpJEmLoT8EUBIQ9zM\",\n            \"id\": 140775209566681,\n            \"notification_date\": \"2024-02-07\",\n            \"patient_forms\": [\n                1,\n                2\n            ],\n            \"patient\": 64058687489,\n            \"practice\": 655364\n        },\n        {\n            \"created_date\": \"2024-01-31T13:14:47Z\",\n            \"forms_url\": \"http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=uAm3304Gil5rH0acpBbeVgWR4idSXhlM1ThLwngk\",\n            \"id\": 140775209632217,\n            \"notification_date\": \"2024-02-07\",\n            \"patient_forms\": [\n                6\n            ],\n            \"patient\": 64058687489,\n            \"practice\": 655364\n        }\n    ]\n}"
+                Empty List:
+                  value: "{\n    \"count\": 0,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": []\n}"
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    count:
+                      type: integer
+                      example: 2
+                      default: 0
+                    next: {}
+                    previous: {}
+                    results:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          created_date:
+                            type: string
+                            example: '2024-01-31T13:09:31Z'
+                          forms_url:
+                            type: string
+                            example: http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=rh3oAXE73txk48BQoppyD8YJpJEmLoT8EUBIQ9zM
+                          id:
+                            type: integer
+                            example: 140775209566681
+                            default: 0
+                          notification_date:
+                            type: string
+                            example: '2024-02-07'
+                          patient_forms:
+                            type: array
+                            items:
+                              type: integer
+                              example: 1
+                              default: 0
+                          patient:
+                            type: integer
+                            example: 64058687489
+                            default: 0
+                          practice:
+                            type: integer
+                            example: 655364
+                            default: 0
+                - title: Empty List
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      example: 0
+                      default: 0
+                    next: {}
+                    previous: {}
+                    results:
+                      type: array
+      deprecated: false
+      tags:
+      - Patient Form Requests
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /patient_form_requests/{patient_form_request_id}:
+    delete:
+      summary: Delete Patient Form Request
+      description: ''
+      operationId: delete-patient-form-request
+      parameters:
+      - name: patient_form_request_id
+        in: path
+        description: The ID of the PatientFormRequest object to be deleted.
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Patient Form Requests
+      security:
+      - sec0: []
+    get:
+      summary: Get Patient Form Request
+      description: ''
+      operationId: get-patient-form-request
+      parameters:
+      - name: patient_form_request_id
+        in: path
+        description: The ID of the PatientFormRequest object.
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"created_date\": \"2024-01-31T13:09:31Z\",\n    \"forms_url\": \"http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=rh3oAXE73txk48BQoppyD8YJpJEmLoT8EUBIQ9zM\",\n    \"id\": 140775209566681,\n    \"notification_date\": \"2024-02-07\",\n    \"patient_forms\": [\n        1,\n        2\n    ],\n    \"patient\": 64058687489,\n    \"practice\": 655364\n}"
+              schema:
+                type: object
+                properties:
+                  created_date:
+                    type: string
+                    example: '2024-01-31T13:09:31Z'
+                  forms_url:
+                    type: string
+                    example: http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=rh3oAXE73txk48BQoppyD8YJpJEmLoT8EUBIQ9zM
+                  id:
+                    type: integer
+                    example: 140775209566681
+                    default: 0
+                  notification_date:
+                    type: string
+                    example: '2024-02-07'
+                  patient_forms:
+                    type: array
+                    items:
+                      type: integer
+                      example: 1
+                      default: 0
+                  patient:
+                    type: integer
+                    example: 64058687489
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 655364
+                    default: 0
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                ID Not Found:
+                  value: "{\n    \"detail\": \"Not found.\"\n}"
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Not found.
+      deprecated: false
+      tags:
+      - Patient Form Requests
+      security:
+      - sec0: []
+    put:
+      summary: Update Patient Form Request
+      description: ''
+      operationId: update-patient-form-request
+      parameters:
+      - name: patient_form_request_id
+        in: path
+        description: The ID of the request that should be updated.
+        schema:
+          type: integer
+          format: int64
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - patient_forms
+              - patient
+              properties:
+                notification_date:
+                  type: string
+                  description: This is the date that the request will appear in the Practice's action queue. This value must be in the future, excluding the current day.
+                  format: date
+                patient_forms:
+                  type: array
+                  description: The IDs of the PatientForm objects to associate with this request.
+                  items:
+                    type: integer
+                    format: int64
+                patient:
+                  type: integer
+                  description: The ID of the Patient object this request should be associated with.
+                  format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"created_date\": \"2024-01-31T15:57:54Z\",\n    \"forms_url\": \"http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=aeNZ4gjq2L8g1vGl9XUxF0VLtIqKZQkXJuAy5hKq\",\n    \"id\": 140775209894361,\n    \"notification_date\": \"2024-02-07\",\n    \"patient_forms\": [\n        6\n    ],\n    \"patient\": 64058687489,\n    \"practice\": 655364\n}"
+              schema:
+                type: object
+                properties:
+                  created_date:
+                    type: string
+                    example: '2024-01-31T15:57:54Z'
+                  forms_url:
+                    type: string
+                    example: http://app.elationemr.com/practice/655364/patient/64058687489/patient-forms/?key=aeNZ4gjq2L8g1vGl9XUxF0VLtIqKZQkXJuAy5hKq
+                  id:
+                    type: integer
+                    example: 140775209894361
+                    default: 0
+                  notification_date:
+                    type: string
+                    example: '2024-02-07'
+                  patient_forms:
+                    type: array
+                    items:
+                      type: integer
+                      example: 6
+                      default: 0
+                  patient:
+                    type: integer
+                    example: 64058687489
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 655364
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Cannot Update Patient ID:
+                  value: "{\n    \"detail\": \"Patient ID cannot be modified.\"\n}"
+                Cannot Modify Patient Forms:
+                  value: "{\n    \"detail\": \"Patient forms cannot be modified.\"\n}"
+              schema:
+                oneOf:
+                - title: Cannot Update Patient ID
+                  type: object
+                  properties:
+                    detail:
+                      type: string
+                      example: Patient ID cannot be modified.
+                - title: Cannot Modify Patient Forms
+                  type: object
+                  properties:
+                    detail:
+                      type: string
+                      example: Patient forms cannot be modified.
+      deprecated: false
+      tags:
+      - Patient Form Requests
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/patient_form_requests/:
+    get:
+      operationId: patient_form_requests_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientFormRequestList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Patient Form Requests
+      tags:
+      - Patient Form Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new patient form request.
+      operationId: patient_form_requests_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientFormRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFormRequest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Patient Form Request
+      tags:
+      - Patient Form Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/patient_form_requests/{id}/:
+    delete:
+      description: Delete an existing patient form request.
+      operationId: patient_form_requests_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Patient Form Request
+      tags:
+      - Patient Form Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: patient_form_requests_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFormRequest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Patient Form Request
+      tags:
+      - Patient Form Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing patient form request.
+      operationId: patient_form_requests_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatientFormRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFormRequest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Patient Form Request
+      tags:
+      - Patient Form Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing patient form request.
+      operationId: patient_form_requests_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientFormRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientFormRequest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Patient Form Request
+      tags:
+      - Patient Form Requests
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatientFormRequest:
+      properties:
+        appointment:
+          description: The ID of an appointment to associate with this form request. When the appointment is in the past, the notification_date validation is skipped.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        forms_url:
+          format: uri
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        notification_date:
+          description: This is the date that the request will appear in the Practice's action queue. Must be in the future unless an appointment in the past is provided. Defaults to one week from today.
+          format: date
+          type: string
+        patient:
+          description: The ID of the patient that should be associated with the request.
+          format: int64
+          type: integer
+        patient_forms:
+          description: The IDs of the forms that should be associated to the request. Please note that you must create these forms before trying to create a request.
+          items:
+            type: integer
+          type: array
+        practice:
+          readOnly: true
+          type: integer
+      required:
+      - patient
+      - patient_forms
+      type: object
+    PaginatedPatientFormRequestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientFormRequest'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedPatientFormRequest:
+      properties:
+        appointment:
+          description: The ID of an appointment to associate with this form request. When the appointment is in the past, the notification_date validation is skipped.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        forms_url:
+          format: uri
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        notification_date:
+          description: This is the date that the request will appear in the Practice's action queue. Must be in the future unless an appointment in the past is provided. Defaults to one week from today.
+          format: date
+          type: string
+        patient:
+          description: The ID of the patient that should be associated with the request.
+          format: int64
+          type: integer
+        patient_forms:
+          description: The IDs of the forms that should be associated to the request. Please note that you must create these forms before trying to create a request.
+          items:
+            type: integer
+          type: array
+        practice:
+          readOnly: true
+          type: integer
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

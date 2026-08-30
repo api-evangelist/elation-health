@@ -1,0 +1,730 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Lab Order Tests API
+  version: '1.0'
+  description: 'Operations tagged Lab Order Tests across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Lab Order Tests
+paths:
+  /lab_order_tests/{id}:
+    get:
+      summary: Get Lab Order Tests
+      description: ''
+      operationId: get-lab-order-tests
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140745672360379,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_order_tests/140745672360379/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Tests
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Lab Order Test
+      description: ''
+      operationId: delete-lab-order-test
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/lab_order_tests/12345\",\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Tests
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_order_tests/:
+    get:
+      summary: Find Lab Order Tests
+      description: ''
+      operationId: find-lab-order-tests
+      parameters:
+      - name: code
+        in: query
+        description: The codes of the lab tests you want to find
+        schema:
+          type: array
+          items:
+            type: string
+      - name: lab_vendor
+        in: query
+        description: The ids of the lab vendors of the lab tests you want to find
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice_created
+        in: query
+        description: The id's of practice
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        description: The id's of practice. Has field_name="practice_created"
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: compendium
+        in: query
+        description: The id's of compendium
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 2848,\n    \"next\": \"http://127.0.0.1/api/2.0/lab_order_tests/?compendium=140745672360379&limit=100&offset=100\",\n    \"previous\": null,\n    \"results\": [\n        {\n          //look the object definition\n        },\n      ....\n    ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_order_tests/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Tests
+      security:
+      - sec0: []
+    post:
+      summary: Create Lab Order Test
+      description: ''
+      operationId: create-lab-order-test
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - code
+              - practice_created
+              - compendium
+              - lab_vendor
+              properties:
+                name:
+                  type: string
+                code:
+                  type: string
+                practice_created:
+                  type: integer
+                  format: int32
+                compendium:
+                  type: integer
+                  format: int32
+                lab_vendor:
+                  type: integer
+                  format: int32
+                questions:
+                  type: array
+                  items:
+                    properties:
+                      required:
+                        type: boolean
+                      sequence:
+                        type: integer
+                        format: int32
+                      question:
+                        type: object
+                    required:
+                    - sequence
+                    - question
+                    type: object
+                synonyms:
+                  type: array
+                  items:
+                    type: string
+                cpts:
+                  type: array
+                  description: list of cpts associated with the lab order test
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"code\": \"Sean Howard\",\n    \"compendium\": 140745672360379,\n    \"cpts\": [],\n    \"created_date\": \"2022-06-03T16:41:20.584324Z\",\n    \"deleted_date\": null,\n    \"id\": 140758916530238,\n    \"lab_vendor\": 63929778422,\n    \"name\": \"Ariana Jones\",\n    \"practice_created\": null,\n    \"procedure_class\": null,\n    \"questions\": [],\n    \"synonyms\": []\n}"
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: Sean Howard
+                  compendium:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  cpts:
+                    type: array
+                  created_date:
+                    type: string
+                    example: '2022-06-03T16:41:20.584324Z'
+                  deleted_date: {}
+                  id:
+                    type: integer
+                    example: 140758916530238
+                    default: 0
+                  lab_vendor:
+                    type: integer
+                    example: 63929778422
+                    default: 0
+                  name:
+                    type: string
+                    example: Ariana Jones
+                  practice_created: {}
+                  procedure_class: {}
+                  questions:
+                    type: array
+                  synonyms:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"name\": \"Ariana Jones\", \n  \"code\": \"Sean Howard\", \n  \"practice_created\": 140758884417540, \n  \"compendium\": 140758889267643, \n  \"lab_vendor\": 140758889201910\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/lab_order_tests/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Tests
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/lab_order_tests/:
+    get:
+      description: Returns a list of lab order tests
+      operationId: lab_order_tests_list
+      parameters:
+      - description: The codes of the lab tests you want to find.
+        explode: false
+        in: query
+        name: code
+        schema:
+          items:
+            type:
+            - string
+            - 'null'
+          type: array
+        style: form
+      - description: The ids of compendiums.
+        explode: false
+        in: query
+        name: compendium
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: The ids of the lab vendors of the lab tests you want to find.
+        explode: false
+        in: query
+        name: lab_vendor
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The name of the lab order test.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice_created
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabOrderTestList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Lab Order Tests
+      tags:
+      - Lab Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new lab order test.
+      operationId: lab_order_tests_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderTest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrderTest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Lab Order Test
+      tags:
+      - Lab Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/lab_order_tests/{id}/:
+    delete:
+      description: Delete an existing lab order test.
+      operationId: lab_order_tests_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Lab Order Test
+      tags:
+      - Lab Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single lab order test
+      operationId: lab_order_tests_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrderTest'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Lab Order Test
+      tags:
+      - Lab Order Tests
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    LabOrderAOEQuestion:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
+          type: array
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        example_format:
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        max_length:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        secondary_code:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        value:
+          type: string
+      required:
+      - choices
+      - code
+      - value
+      type: object
+    LabOrderAOEQuestionChoice:
+      properties:
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        value:
+          type: string
+      required:
+      - code
+      - value
+      type: object
+    LabOrderTestToLabOrderAOEQuestion:
+      properties:
+        question:
+          $ref: '#/components/schemas/LabOrderAOEQuestion'
+        required:
+          type: boolean
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        test:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - question
+      - sequence
+      type: object
+    LabOrderTest:
+      properties:
+        code:
+          description: Any code associated with the test, usually provided by the lab vendor's compendium.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        compendium:
+          description: The id of the compendium provided the lab vendor that provides the lab order test. All tests in the same order **MUST** share the same compendium.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cpts:
+          description: A list of CPT codes associated with the lab order test.
+          items:
+            type: string
+          type: array
+        created_date:
+          description: Time at which Elation created this Lab Order Test.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: Time at which this Lab Order Test was deleted. Can happen when a lab order compendium update deprecates a test.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          description: The id of the lab vendor who provides the lab order test.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        name:
+          description: The name of the Lab Order Test.
+          maxLength: 255
+          type: string
+        practice_created:
+          description: The id of the practice that created the test if practice created.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        procedure_class:
+          description: Code provided by specific compendiums that indicate the "class" of test, e.g. histology vs cytology. Some lab vendors require that tests with specific procedure classes need to ordered separately.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        questions:
+          description: A list of Ask on Entry (AOE) Questions that need to be answered by the orderer when creating the order.
+          items:
+            $ref: '#/components/schemas/LabOrderTestToLabOrderAOEQuestion'
+          type: array
+        synonyms:
+          description: A list of synonyms that are useful when searching for a specific test.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      type: object
+    PaginatedLabOrderTestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrderTest'
+          type: array
+      required:
+      - results
+      type: object
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
+      enum:
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
+      type: string
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

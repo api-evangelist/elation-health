@@ -1,0 +1,1565 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Reports API
+  version: '1.0'
+  description: 'Operations tagged Reports across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Reports
+paths:
+  /reports/{id}/:
+    get:
+      summary: Get Report
+      description: ''
+      operationId: get-report
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/reports/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Reports
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Report
+      description: ''
+      operationId: delete-report
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/reports/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Reports
+      security:
+      - sec0: []
+    patch:
+      summary: Sign Report
+      description: ''
+      operationId: sign-report
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - signed_date
+              - signed_by
+              properties:
+                signed_date:
+                  type: string
+                  description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+                  format: date
+                signed_by:
+                  type: string
+                  description: The user id of the provider who signed the visit note. (Requires special permission).
+                  format: date
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/reports/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Reports
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /reports/:
+    get:
+      summary: Find Reports
+      description: ''
+      operationId: find-reports
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: reported_date__gt
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects report dates that follow it (exclusive). It may be null in some cases, use document_date instead
+        schema:
+          type: string
+          format: date
+      - name: reported_date__lt
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects report dates that precede it (exclusive). It may be null in some cases, use document_date instead
+        schema:
+          type: string
+          format: date
+      - name: reported_date__gte
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects report dates that follow it (inclusive). It may be null in some cases, use document_date instead
+        schema:
+          type: string
+          format: date
+      - name: reported_date__lte
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects report dates that precede it (exclusive). It may be null in some cases, use document_date instead
+        schema:
+          type: string
+          format: date
+      - name: document_date__gt
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects document dates that follow it (exclusive)
+        schema:
+          type: string
+          format: date
+      - name: document_date__lt
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects document dates that precede it (exclusive)
+        schema:
+          type: string
+          format: date
+      - name: document_date__gte
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects document dates that follow it (inclusive)
+        schema:
+          type: string
+          format: date
+      - name: document_date__lte
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects document dates that precede it (inclusive)
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/reports/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/reports/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/reports/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Reports
+      security:
+      - sec0: []
+    post:
+      summary: Create Report
+      description: ''
+      operationId: create-report
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - report_type
+              - patient
+              - physician
+              - practice
+              - document_date
+              - chart_date
+              properties:
+                report_type:
+                  type: string
+                  description: Value must be Lab for laboratory reports
+                  enum:
+                  - Look REPORT_DOCUMENT_SUB_TYPE_DATA
+                requisition_number:
+                  type: string
+                custom_title:
+                  type: string
+                patient:
+                  type: integer
+                  description: patient id
+                  format: int32
+                physician:
+                  type: integer
+                  description: physician id
+                  format: int32
+                practice:
+                  type: integer
+                  description: practice id
+                  format: int32
+                vendor:
+                  type: integer
+                  format: int32
+                document_date:
+                  type: string
+                  description: The date when the report was created
+                  format: date
+                reported_date:
+                  type: string
+                  description: The timestamp when the report was created by an external system, usually the same as "document_date".
+                  format: date
+                chart_date:
+                  type: string
+                  format: date
+                grids:
+                  type: array
+                  items:
+                    properties:
+                      accession_number:
+                        type: string
+                      resulted_date:
+                        type: string
+                        format: date
+                      collected_date:
+                        type: string
+                        format: date
+                      status:
+                        type: string
+                        enum:
+                        - ("C"
+                        - '"CORRECTED")'
+                        - ("D"
+                        - '"DELETED")'
+                        - ("F"
+                        - '"FINAL")'
+                        - ("I"
+                        - '"PENDING")'
+                        - ("P"
+                        - '"PRELIMINARY")'
+                        - ("R"
+                        - '"RESULTS ENTERED -- NOT VERIFIED")'
+                        - ("S"
+                        - '"PARTIAL")'
+                        - (         "U"
+                        - '"RESULTS STATUS CHANGE TO FINAL. RESULTS DID NOT CHANGE ( DON"         "T TRANSMIT TEST)."'
+                        - )
+                        - ("X"
+                        - '"RESULT CANCELED DUE TO NON-PERFORMANCE")'
+                        - ("E"
+                        - '"ERROR")'
+                        - ("A"
+                        - '"AMENDED")'
+                        - ''
+                      note:
+                        type: string
+                      results:
+                        type: array
+                        default: []
+                    required:
+                    - accession_number
+                    - resulted_date
+                    - collected_date
+                    - status
+                    - note
+                    - results
+                    type: object
+                files:
+                  type: array
+                  description: An array with files and/or photos that you want to attach to the report. These files can either be uploaded as json or base64.
+                  items:
+                    properties:
+                      content_type:
+                        type: string
+                      external_content:
+                        type: string
+                        format: json
+                      base64_content:
+                        type: string
+                      original_filename:
+                        type: string
+                    type: object
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758850535464,\n    \"patient\": 140758844637185,\n    \"custom_title\": \"null\",\n    \"report_type\": \"Lab\",\n    \"requisition_number\": \"25\",\n    \"tags\": [],\n    \"reported_date\": \"2001-05-05T02:33:22Z\",\n    \"grids\": [\n        {\n            \"accession_number\": \"0909641947\",\n            \"resulted_date\": \"2009-04-07T05:10:00Z\",\n            \"collected_date\": \"2009-04-06T22:54:00Z\",\n            \"status\": \"FINAL\",\n            \"note\": \"\",\n            \"results\": [\n                {\n                    \"status\": \"AMENDED\",\n                    \"value\": \"0.88\",\n                    \"value_type\": \"Numeric\",\n                    \"text\": \"1\",\n                    \"note\": \"1\",\n                    \"reference_min\": \"0.55\",\n                    \"reference_max\": \"1.66\",\n                    \"units\": \"ng/dL7\",\n                    \"is_abnormal\": true,\n                    \"abnormal_flag\": \"Critical\",\n                    \"test\": {\n                        \"code\": \"FRT54\",\n                        \"name\": \"T45-Free\",\n                        \"loinc\": \"10007-3\"\n                    },\n                    \"test_category\": {\n                        \"value\": \"12010&LPW1\",\n                        \"description\": \"T4, FREE (THYROXINE, FREE)\"\n                    }\n                }\n            ]\n        }\n    ],\n    \"images\": [],\n    \"files\": [\n        {\n            \"content_type\": \"application/json; schema=el8_external_content_report\",\n            \"external_content\": {},\n            \"base64_content\": null,\n            \"original_filename\": \"99914b932bd37a50b983c5e7c90ae93b.JSON\"\n        }\n    ],\n    \"practice\": 140758835265540,\n    \"physician\": 131074,\n    \"document_date\": \"2011-05-05T02:33:22Z\",\n    \"chart_date\": \"2001-05-05T02:33:22Z\",\n    \"signed_date\": null,\n    \"signed_by\": null,\n    \"created_date\": \"2022-06-27T10:18:36Z\",\n    \"deleted_date\": null,\n    \"printable_view\": \"http://127.0.0.1/api/2.0/reports/140758850535464/printable\",\n    \"vendor\": 67186655478\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758850535464
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140758844637185
+                    default: 0
+                  custom_title:
+                    type: string
+                    example: 'null'
+                  report_type:
+                    type: string
+                    example: Lab
+                  requisition_number:
+                    type: string
+                    example: '25'
+                  tags:
+                    type: array
+                  reported_date:
+                    type: string
+                    example: '2001-05-05T02:33:22Z'
+                  grids:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        accession_number:
+                          type: string
+                          example: 0909641947
+                        resulted_date:
+                          type: string
+                          example: '2009-04-07T05:10:00Z'
+                        collected_date:
+                          type: string
+                          example: '2009-04-06T22:54:00Z'
+                        status:
+                          type: string
+                          example: FINAL
+                        note:
+                          type: string
+                          example: ''
+                        results:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              status:
+                                type: string
+                                example: AMENDED
+                              value:
+                                type: string
+                                example: '0.88'
+                              value_type:
+                                type: string
+                                example: Numeric
+                              text:
+                                type: string
+                                example: '1'
+                              note:
+                                type: string
+                                example: '1'
+                              reference_min:
+                                type: string
+                                example: '0.55'
+                              reference_max:
+                                type: string
+                                example: '1.66'
+                              units:
+                                type: string
+                                example: ng/dL7
+                              is_abnormal:
+                                type: boolean
+                                example: true
+                                default: true
+                              abnormal_flag:
+                                type: string
+                                example: Critical
+                              test:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                    example: FRT54
+                                  name:
+                                    type: string
+                                    example: T45-Free
+                                  loinc:
+                                    type: string
+                                    example: 10007-3
+                              test_category:
+                                type: object
+                                properties:
+                                  value:
+                                    type: string
+                                    example: 12010&LPW1
+                                  description:
+                                    type: string
+                                    example: T4, FREE (THYROXINE, FREE)
+                  images:
+                    type: array
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        content_type:
+                          type: string
+                          example: application/json; schema=el8_external_content_report
+                        external_content:
+                          type: object
+                          properties: {}
+                        base64_content: {}
+                        original_filename:
+                          type: string
+                          example: 99914b932bd37a50b983c5e7c90ae93b.JSON
+                  practice:
+                    type: integer
+                    example: 140758835265540
+                    default: 0
+                  physician:
+                    type: integer
+                    example: 131074
+                    default: 0
+                  document_date:
+                    type: string
+                    example: '2011-05-05T02:33:22Z'
+                  chart_date:
+                    type: string
+                    example: '2001-05-05T02:33:22Z'
+                  signed_date: {}
+                  signed_by: {}
+                  created_date:
+                    type: string
+                    example: '2022-06-27T10:18:36Z'
+                  deleted_date: {}
+                  printable_view:
+                    type: string
+                    example: http://127.0.0.1/api/2.0/reports/140758850535464/printable
+                  vendor:
+                    type: integer
+                    example: 67186655478
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"practice\": 140758835265540,\n    \"patient\": 140758844637185,\n    \"physician\": 131074,\n    \"custom_title\": \"null\",\n    \"report_type\": \"Lab\",\n    \"reported_date\": \"2001-05-05T02:33:22Z\",\n    \"document_date\": \"2011-05-05T02:33:22Z\",\n    \"chart_date\": \"2001-05-05T02:33:22Z\",\n    \"requisition_number\": \"25\",\n    \"grids\": [\n                {\n                    \"accession_number\": \"0909641947\",\n                    \"resulted_date\": \"2009-04-07T05:10:00Z\",\n                    \"collected_date\": \"2009-04-06T22:54:00Z\",\n                    \"status\": \"FINAL\",\n                    \"note\": \"\",\n                    \"results\": [\n                        {\n                            \"status\": \"AMENDED\",\n                            \"value\": \"0.88\",\n                            \"value_type\": \"Numeric\",\n                            \"text\": \"1\",\n                            \"note\": \"1\",\n                            \"reference_min\": 0.55,\n                            \"reference_max\": \"1.66\",\n                            \"units\": \"ng/dL7\",\n                            \"is_abnormal\": \"1\",\n                            \"abnormal_flag\": \"Critical\",\n                            \"test\": {\n                                \"code\": \"FRT54\",\n                                \"name\": \"T45-Free\",\n                                \"loinc\": \"10007-3\"\n                            },\n                            \"test_category\": {\n                                \"value\": \"12010&LPW1\",\n                                \"description\": \"T4, FREE (THYROXINE, FREE)\"\n                            }\n                        }\n                    ]\n                }\n    ],\n    \"files\": [{\n        \"base64_content\": \"456\",\n        \"external_content\": {},\n        \"content_type\": \"application/json; schema=el8_external_content_report\",\n        \"original_filename\": \"FileName.txt\"\n    }],\n    \"vendor\": 67186655478\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/reports/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Reports
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /reports/{id}/printable:
+    get:
+      summary: Retrieve the Printable Report View
+      description: 'Providers are able to print a view of the lab report including the data provided behind this endpoint.
+
+
+        Each report response includes a link to obtain this view; a PDF file.
+
+
+        When you GET the link you''ll receive a response with application/pdf and the bytes of the PDF.'
+      operationId: retrieve-the-printable-report-view
+      parameters:
+      - name: report_id
+        in: path
+        description: The Report's id.
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: print_header
+        in: query
+        description: The id of the print header that you want to use for the printable view
+        schema:
+          type: integer
+          format: int32
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\nreport_id = 2345\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/reports/{report_id}/printable\".format(report_id=report_id),\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nwith open('/tmp/out.pdf', 'wb') as outpdf:\n    outpdf.write(resp.content)"
+        samples-languages:
+        - python
+      tags:
+      - Reports
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/reports/:
+    get:
+      operationId: reports_list
+      parameters:
+      - description: Date/time in ISO 8601 UTC format that selects document dates that follow it (exclusive).
+        in: query
+        name: document_date__gt
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects document dates that follow it (inclusive).
+        in: query
+        name: document_date__gte
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects document dates that precede it (exclusive).
+        in: query
+        name: document_date__lt
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects document dates that precede it (inclusive).
+        in: query
+        name: document_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Date/time in ISO 8601 UTC format that selects report dates that follow it (exclusive). It may be null in some cases, use document_date instead.
+        in: query
+        name: reported_date__gt
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects report dates that follow it (inclusive). It may be null in some cases, use document_date instead.
+        in: query
+        name: reported_date__gte
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects report dates that precede it (exclusive). It may be null in some cases, use document_date instead.
+        in: query
+        name: reported_date__lt
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects report dates that precede it (exclusive). It may be null in some cases, use document_date instead.
+        in: query
+        name: reported_date__lte
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReportList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Reports
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new report.
+      operationId: reports_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/reports/{id}/:
+    delete:
+      description: Delete an existing report.
+      operationId: reports_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: reports_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing report.
+      operationId: reports_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateReport'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReport'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing report.
+      operationId: reports_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReport'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReport'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/reports/{id}/delegates/:
+    delete:
+      description: 'Soft-delete one or more delegates for the report. Send a JSON body with `ids`: a list of delegate IDs to remove (e.g. `{"ids": [1, 2]}`). Only non-deleted delegates for this report are removed.'
+      operationId: reports_delegates_destroy
+      parameters:
+      - description: The report ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: No response body
+        '400':
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ''
+      security:
+      - oauth2: []
+      summary: Remove delegate(s) from a report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Assign a user or a staff group as a delegate for the report. Provide exactly one of `user` (user ID) or `group` (staff group ID). Report delegation must be enabled for the practice (FaxDelegateModal or ReportQueueDelegate). For group delegation, StaffGroupDelegates must be enabled.
+      operationId: reports_delegates_create
+      parameters:
+      - description: The report ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoutedDocumentDelegate'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutedDocumentDelegate'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                type: object
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create a delegate for a report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/reports/{id}/files/:
+    get:
+      operationId: reports_files_list
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  additionalProperties: {}
+                  type: object
+                type: array
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Reports Files
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/reports/{id}/files/{file_id}/:
+    get:
+      operationId: reports_files_retrieve
+      parameters:
+      - in: path
+        name: file_id
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                format: binary
+                type: string
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Reports File
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/reports/{id}/printable/:
+    get:
+      operationId: reports_printable_retrieve
+      parameters:
+      - description: The id of the report to retrieve the printable view for.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: The id of the print header that you want to use for the printable view.
+        in: query
+        name: print_header
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve a printable view of a report
+      tags:
+      - Reports
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    ValueTypeEnum:
+      enum:
+      - Coded Entry
+      - Encapsulated Data
+      - Numeric
+      - String Data
+      - Text
+      type: string
+    Report:
+      properties:
+        chart_date:
+          description: The date used for chart chronology and ordering. May differ from document_date.
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        custom_title:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date when the report was created.
+          format: date-time
+          type: string
+        files:
+          description: 'Files and photos to attach. Two modes: (1) External JSON metadata: set content_type=''application/json; schema=el8_external_content_report'' and provide ''external_content'' JSON that includes a ''referenced_url'' (and optional metadata). The JSON is stored and used to reference the external file; file bytes are not uploaded. (2) Binary upload: set content_type=''application/octet-stream'' and provide ''base64_content'' (and optional ''original_filename''). When any file uses base64, all files in the same request must use base64. On GET, returns file references; download via the files retrieval endpoint. For JSON content, the retrieval endpoint returns the stored JSON metadata.'
+          items:
+            $ref: '#/components/schemas/S3RetrievingDocumentFile'
+          type:
+          - array
+          - 'null'
+        grids:
+          description: Structured lab results grids. Each grid groups results by accession number and collection/resulted timestamps.
+          items:
+            $ref: '#/components/schemas/LabResultsGrid'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        images:
+          description: Read-only. Images derived from uploaded files. Upload using the 'files' field; retrieve specific images via the images endpoint.
+          items:
+            $ref: '#/components/schemas/ReportImage'
+          readOnly: true
+          type:
+          - array
+          - 'null'
+        is_urgent:
+          default: false
+          type: boolean
+        order_status:
+          description: Status of a linked order, when applicable.
+          oneOf:
+          - $ref: '#/components/schemas/OrderStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        patient:
+          description: The patient this report belongs to. The patient must belong to the specified practice.
+          format: int64
+          type: integer
+        physician:
+          format: int64
+          type: integer
+        practice:
+          description: The authoring practice for this report. Required on create.
+          format: int64
+          type: integer
+        printable_view:
+          description: URL to a printable PDF view of the report. You may pass the optional 'print_header' query param to select a header.
+          format: uri
+          type: string
+        report_type:
+          allOf:
+          - $ref: '#/components/schemas/ReportTypeEnum'
+          description: The type of report. For laboratory reports, use 'Lab'.
+        reported_date:
+          description: The timestamp when the report was created by an external system, usually the same as "document_date".
+          format: date-time
+          type: string
+        requisition_number:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        routed_document_delegates:
+          description: Read-only. Users and groups that have been delegated to review this report.
+          items:
+            $ref: '#/components/schemas/RoutedDocumentDelegate'
+          readOnly: true
+          type: array
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        tags:
+          description: Practice-scoped document tags.
+          items:
+            format: int64
+            type: integer
+          type: array
+        vendor:
+          description: Optional vendor for this report.
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - chart_date
+      - document_date
+      - patient
+      - physician
+      - practice
+      - report_type
+      type: object
+    ReportTypeEnum:
+      enum:
+      - Allergist
+      - Audiology
+      - Billing
+      - Business
+      - Cardiac
+      - CarePlan
+      - Consent
+      - Consultation
+      - Correspondence
+      - Cosmetic
+      - DME
+      - Dermatology
+      - Diabetes
+      - Directives
+      - EKG
+      - ENT
+      - Endocrinology
+      - Exams
+      - EyeVision
+      - Forms
+      - GI
+      - History
+      - Home
+      - Hospice
+      - Hospital
+      - Imaging
+      - Incoming
+      - Injection
+      - Insurance
+      - Intake
+      - Lab
+      - Legal
+      - Misc
+      - Neuro
+      - Nursing
+      - OBGYN
+      - OT
+      - OldRecord
+      - Oncology
+      - Ophth
+      - Ortho
+      - Outgoing
+      - PT
+      - PaperRx
+      - Pathology
+      - PatientForm
+      - Pediatric
+      - Pharmacy
+      - Preop
+      - PriorAuth
+      - Procedures
+      - Psych
+      - Pulmonary
+      - Quality
+      - Radiology
+      - SNF
+      - Screening
+      - Sleep
+      - Surgery
+      - Testing
+      - Therapy
+      - Ultrasound
+      - UrgentCare
+      - Urology
+      - Women
+      type: string
+    RoutedDocumentDelegate:
+      description: 'Nested serializer for RoutedDocumentDelegate.
+
+
+        Returns delegation information for users and groups assigned to review a report.
+
+        Either user or group will be populated, but not both.'
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        group:
+          description: ID of the delegated group. Null if this is a user delegation.
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        user:
+          description: ID of the delegated user. Null if this is a group delegation.
+          type:
+          - integer
+          - 'null'
+      type: object
+    OrderStatusEnum:
+      enum:
+      - CANCELED
+      - COMPLETED
+      - DISCONTINUED
+      - ERROR, ORDER NOT FOUND
+      - IN PROCESS
+      - ON HOLD
+      - REPLACED
+      - SCHEDULED
+      type: string
+    LabResultStatus:
+      enum:
+      - AMENDED
+      - CORRECTED
+      - DELETED
+      - ERROR
+      - FINAL
+      - PARTIAL
+      - PENDING
+      - PRELIMINARY
+      - RESULT CANCELED DUE TO NON-PERFORMANCE
+      - RESULTS ENTERED -- NOT VERIFIED
+      - RESULTS STATUS CHANGE TO FINAL. RESULTS DID NOT CHANGE ( DONT TRANSMIT TEST).
+      type: string
+    PatchedUpdateReport:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          type: boolean
+        signed_by:
+          description: Signer to apply.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: Signature timestamp to apply.
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedReportList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Report'
+          type: array
+      required:
+      - results
+      type: object
+    UpdateReport:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          type: boolean
+        signed_by:
+          description: Signer to apply.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: Signature timestamp to apply.
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    NullEnum:
+      type: 'null'
+    S3RetrievingDocumentFile:
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
+    LabTest:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        loinc:
+          type:
+          - string
+          - 'null'
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - code
+      - loinc
+      - name
+      type: object
+    ReportImage:
+      properties:
+        document:
+          format: uri
+          type: string
+        id:
+          readOnly: true
+          type: integer
+      required:
+      - document
+      type: object
+    LabTestCategory:
+      properties:
+        description:
+          maxLength: 200
+          type: string
+        value:
+          maxLength: 50
+          type: string
+      required:
+      - description
+      - value
+      type: object
+    AbnormalFlagEnum:
+      enum:
+      - Abnormal
+      - Abnormal (applies to non-numeric results)
+      - Above high normal
+      - Alert high
+      - Alert low
+      - Below low normal
+      - Beta-lactamase Pos (B-lactamase antibiotic resistant).
+      - Better-use when direction not relevant
+      - Critical
+      - Critical abnormal
+      - Intermediate result
+      - Intermediate. Indicates for microbiology susceptibilities only.
+      - Moderately susceptible. Indicates for microbiology susceptibilities only.
+      - Negative
+      - Negative result
+      - Normal (applies to non-numeric results)
+      - Not Applicable
+      - Panic high
+      - Panic low
+      - Positive result
+      - Resistant. Indicates for microbiology susceptibilities only.
+      - Significant change down
+      - Significant change up
+      - Susceptible. Indicates for microbiology susceptibilities only.
+      - Very High
+      - Very susceptible. Indicates for microbiology susceptibilities only.
+      - Worse-use when direction not relevant
+      type: string
+    LabResult:
+      properties:
+        abnormal_flag:
+          $ref: '#/components/schemas/AbnormalFlagEnum'
+        is_abnormal:
+          type: boolean
+        note:
+          type:
+          - string
+          - 'null'
+        reference_max:
+          type:
+          - string
+          - 'null'
+        reference_min:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/LabResultStatus'
+        test:
+          $ref: '#/components/schemas/LabTest'
+        test_category:
+          $ref: '#/components/schemas/LabTestCategory'
+        text:
+          type:
+          - string
+          - 'null'
+        units:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        value:
+          maxLength: 500
+          type: string
+        value_type:
+          oneOf:
+          - $ref: '#/components/schemas/ValueTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      required:
+      - abnormal_flag
+      - is_abnormal
+      - note
+      - reference_max
+      - reference_min
+      - status
+      - test
+      - test_category
+      - text
+      - value
+      type: object
+    LabResultsGrid:
+      properties:
+        accession_number:
+          type: string
+        collected_date:
+          description: The datetime the specimens for this grid of data was collected from the patient.
+          format: date-time
+          type: string
+        note:
+          type:
+          - string
+          - 'null'
+        resulted_date:
+          description: The datetime this grid of data was calculated and resulted by the lab.
+          format: date-time
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabResult'
+          type: array
+        status:
+          $ref: '#/components/schemas/LabResultStatus'
+      required:
+      - accession_number
+      - collected_date
+      - note
+      - resulted_date
+      - results
+      - status
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-patient-document-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,1299 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Medication Order Templates API
+  version: '1.0'
+  description: 'Operations tagged Medication Order Templates across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Medication Order Templates
+paths:
+  /medication_order_templates/:
+    get:
+      summary: Find Medication Order Templates
+      description: ''
+      operationId: find-medication-order-templates
+      parameters:
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: deleted_date__isnull
+        in: query
+        schema:
+          type: boolean
+      - name: deleted_date__gte
+        in: query
+        description: Date/time in ISO 8601 UTC format
+        schema:
+          type: string
+          format: date
+      - name: deleted_date__lte
+        in: query
+        description: Date/time in ISO 8601 UTC format
+        schema:
+          type: string
+          format: date
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "\"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 140758500770181,\n            \"auth_refills\": null,\n            \"deleted_date\": null,\n            \"directions\": \"\",\n            \"medication\": {\n                \"id\": 10239344687,\n                \"rxnorm_cuis\": [\n                    \"855178\"\n                ],\n                \"ndcs\": [\n                    \"00093-2056-06\",\n                    \"00093-2056-05\",\n                    \"00378-5445-91\",\n                    \"59762-0170-01\",\n                    \"59762-0170-06\",\n                    \"33342-0097-15\",\n                    \"00093-0010-06\",\n                    \"33342-0097-09\",\n                    \"73152-0026-60\",\n                    \"31722-0805-60\",\n                    \"71205-0319-90\",\n                    \"10135-0706-60\",\n                    \"16571-0126-06\",\n                    \"29300-0239-16\",\n                    \"10135-0706-05\"\n                ],\n                \"name\": \"Tolterodine Tartrate Tab 1 mg\",\n                \"brand_name\": \"Tolterodine Tartrate\",\n                \"generic_name\": \"Tolterodine Tartrate Tab 1 mg\",\n                \"is_controlled\": false,\n                \"type\": \"prescription\",\n                \"route\": \"Oral\",\n                \"strength\": \"1 mg\",\n                \"form\": \"Tab\"\n            },\n            \"qty\": null,\n            \"qty_units\": \"\",\n            \"practice\": 140758485303300,\n            \"rank\": 0\n        },\n        {\n            \"id\": 140758500835717,\n            \"auth_refills\": 98,\n            \"deleted_date\": null,\n            \"directions\": \"today_direction\",\n            \"medication\": {\n                \"id\": 10239344687,\n                \"rxnorm_cuis\": [\n                    \"855178\"\n                ],\n                \"ndcs\": [\n                    \"00093-2056-06\",\n                    \"00093-2056-05\",\n                    \"00378-5445-91\",\n                    \"59762-0170-01\",\n                    \"59762-0170-06\",\n                    \"33342-0097-15\",\n                    \"00093-0010-06\",\n                    \"33342-0097-09\",\n                    \"73152-0026-60\",\n                    \"31722-0805-60\",\n                    \"71205-0319-90\",\n                    \"10135-0706-60\",\n                    \"16571-0126-06\",\n                    \"29300-0239-16\",\n                    \"10135-0706-05\"\n                ],\n                \"name\": \"Tolterodine Tartrate Tab 1 mg\",\n                \"brand_name\": \"Tolterodine Tartrate\",\n                \"generic_name\": \"Tolterodine Tartrate Tab 1 mg\",\n                \"is_controlled\": false,\n                \"type\": \"prescription\",\n                \"route\": \"Oral\",\n                \"strength\": \"1 mg\",\n                \"form\": \"Tab\"\n            },\n            \"qty\": \"3.000000000\",\n            \"qty_units\": \"BAG\",\n            \"practice\": 140758485303300,\n            \"rank\": 1\n        }\n    ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/medication_order_templates/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medication Order Templates
+      security:
+      - sec0: []
+    post:
+      summary: Create Medication Order Template
+      description: ''
+      operationId: create-medication-order-template
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - practice
+              - medication
+              properties:
+                practice:
+                  type: integer
+                  description: Practice id
+                  format: int32
+                medication:
+                  type: array
+                  description: Must contains only one from id, ndcs or rxnorm_cuis fields
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        description: Medication id
+                        format: int32
+                      ndcs:
+                        type: array
+                        description: The NDC code of the medication(must contains only one ndc code)
+                        default: []
+                        items:
+                          type: string
+                      rxnorm_cuis:
+                        type: array
+                        description: The Rxnorm.cui code of the medication(must contains only one cui code)
+                        default: []
+                        items:
+                          type: string
+                    type: object
+                qty:
+                  type: integer
+                  description: The quantity of the medication
+                  format: int32
+                qty_units:
+                  type: string
+                  description: Type of medication(e.g "CAPSULE", "DROP")
+                auth_refills:
+                  type: integer
+                  description: The number of refills, excluding this order, that the patient is authorized for
+                  format: int32
+                directions:
+                  type: string
+                  description: The sig
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758500835717,\n    \"auth_refills\": 98,\n    \"deleted_date\": null,\n    \"directions\": \"today_direction\",\n    \"medication\": {\n        \"id\": 10239344687,\n        \"rxnorm_cuis\": [\n            \"855178\"\n        ],\n        \"ndcs\": [\n            \"00093-2056-06\",\n            \"00093-2056-05\",\n            \"00378-5445-91\",\n            \"59762-0170-01\",\n            \"59762-0170-06\",\n            \"33342-0097-15\",\n            \"00093-0010-06\",\n            \"33342-0097-09\",\n            \"73152-0026-60\",\n            \"31722-0805-60\",\n            \"71205-0319-90\",\n            \"10135-0706-60\",\n            \"16571-0126-06\",\n            \"29300-0239-16\",\n            \"10135-0706-05\"\n        ],\n        \"name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"brand_name\": \"Tolterodine Tartrate\",\n        \"generic_name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"is_controlled\": false,\n        \"type\": \"prescription\",\n        \"route\": \"Oral\",\n        \"strength\": \"1 mg\",\n        \"form\": \"Tab\"\n    },\n    \"qty\": \"3.000000000\",\n    \"qty_units\": \"BAG\",\n    \"practice\": 140758485303300,\n    \"rank\": 1\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758500835717
+                    default: 0
+                  auth_refills:
+                    type: integer
+                    example: 98
+                    default: 0
+                  deleted_date: {}
+                  directions:
+                    type: string
+                    example: today_direction
+                  medication:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10239344687
+                        default: 0
+                      rxnorm_cuis:
+                        type: array
+                        items:
+                          type: string
+                          example: '855178'
+                      ndcs:
+                        type: array
+                        items:
+                          type: string
+                          example: 00093-2056-06
+                      name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      brand_name:
+                        type: string
+                        example: Tolterodine Tartrate
+                      generic_name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      is_controlled:
+                        type: boolean
+                        example: false
+                        default: true
+                      type:
+                        type: string
+                        example: prescription
+                      route:
+                        type: string
+                        example: Oral
+                      strength:
+                        type: string
+                        example: 1 mg
+                      form:
+                        type: string
+                        example: Tab
+                  qty:
+                    type: string
+                    example: '3.000000000'
+                  qty_units:
+                    type: string
+                    example: BAG
+                  practice:
+                    type: integer
+                    example: 140758485303300
+                    default: 0
+                  rank:
+                    type: integer
+                    example: 1
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '409':
+          description: '409'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: '"detail": "Record already exists"'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = { \n    \"medication\": {\"rxnorm_cuis\": [\"855178\"]},\n    \"directions\": \"today_direction\", \n    \"qty\": 3, \n    \"qty_units\": \"BAG\", \n    \"auth_refills\": 3, \n    \"practice\": 140758616768516\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0//medication_order_templates/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medication Order Templates
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /medication_order_templates/{id}/:
+    get:
+      summary: Get Medication Order Template
+      description: ''
+      operationId: get-medication-order-template
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758500835717,\n    \"auth_refills\": null,\n    \"deleted_date\": null,\n    \"directions\": \"Edit\",\n    \"medication\": {\n        \"id\": 10239344687,\n        \"rxnorm_cuis\": [\n            \"855178\"\n        ],\n        \"ndcs\": [\n            \"00093-2056-06\",\n            \"00093-2056-05\",\n            \"00378-5445-91\",\n            \"59762-0170-01\",\n            \"59762-0170-06\",\n            \"33342-0097-15\",\n            \"00093-0010-06\",\n            \"33342-0097-09\",\n            \"73152-0026-60\",\n            \"31722-0805-60\",\n            \"71205-0319-90\",\n            \"10135-0706-60\",\n            \"16571-0126-06\",\n            \"29300-0239-16\",\n            \"10135-0706-05\"\n        ],\n        \"name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"brand_name\": \"Tolterodine Tartrate\",\n        \"generic_name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"is_controlled\": false,\n        \"type\": \"prescription\",\n        \"route\": \"Oral\",\n        \"strength\": \"1 mg\",\n        \"form\": \"Tab\"\n    },\n    \"qty\": \"40.000000000\",\n    \"qty_units\": \"BOTTLE\",\n    \"practice\": 140758485303300,\n    \"rank\": 1\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758500835717
+                    default: 0
+                  auth_refills: {}
+                  deleted_date: {}
+                  directions:
+                    type: string
+                    example: Edit
+                  medication:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10239344687
+                        default: 0
+                      rxnorm_cuis:
+                        type: array
+                        items:
+                          type: string
+                          example: '855178'
+                      ndcs:
+                        type: array
+                        items:
+                          type: string
+                          example: 00093-2056-06
+                      name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      brand_name:
+                        type: string
+                        example: Tolterodine Tartrate
+                      generic_name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      is_controlled:
+                        type: boolean
+                        example: false
+                        default: true
+                      type:
+                        type: string
+                        example: prescription
+                      route:
+                        type: string
+                        example: Oral
+                      strength:
+                        type: string
+                        example: 1 mg
+                      form:
+                        type: string
+                        example: Tab
+                  qty:
+                    type: string
+                    example: '40.000000000'
+                  qty_units:
+                    type: string
+                    example: BOTTLE
+                  practice:
+                    type: integer
+                    example: 140758485303300
+                    default: 0
+                  rank:
+                    type: integer
+                    example: 1
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/medication_order_templates/140758547628421/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medication Order Templates
+      security:
+      - sec0: []
+    put:
+      summary: Update an existing Medication Order Template
+      description: ''
+      operationId: update-an-existing-medication-order-template
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - practice
+              - medication
+              properties:
+                practice:
+                  type: integer
+                  description: Practice id
+                  format: int32
+                medication:
+                  type: array
+                  description: Must contains only one from id, ndcs or rxnorm_cuis fields
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        description: Medication id
+                        format: int32
+                      ndcs:
+                        type: array
+                        description: The NDC code of the medication(must contains only one ndc code)
+                        default: []
+                        items:
+                          type: string
+                      rxnorm_cuis:
+                        type: array
+                        description: The Rxnorm.cui code of the medication(must contains only one cui code)
+                        default: []
+                        items:
+                          type: string
+                    type: object
+                qty:
+                  type: integer
+                  description: The quantity of the medication
+                  format: int32
+                qty_units:
+                  type: string
+                  description: Type of medication(e.g "CAPSULE", "DROP")
+                auth_refills:
+                  type: integer
+                  description: The number of refills, excluding this order, that the patient is authorized for
+                  format: int32
+                directions:
+                  type: string
+                  description: The sig
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758500835717,\n    \"auth_refills\": null,\n    \"deleted_date\": null,\n    \"directions\": \"Edit\",\n    \"medication\": {\n        \"id\": 10239344687,\n        \"rxnorm_cuis\": [\n            \"855178\"\n        ],\n        \"ndcs\": [\n            \"00093-2056-06\",\n            \"00093-2056-05\",\n            \"00378-5445-91\",\n            \"59762-0170-01\",\n            \"59762-0170-06\",\n            \"33342-0097-15\",\n            \"00093-0010-06\",\n            \"33342-0097-09\",\n            \"73152-0026-60\",\n            \"31722-0805-60\",\n            \"71205-0319-90\",\n            \"10135-0706-60\",\n            \"16571-0126-06\",\n            \"29300-0239-16\",\n            \"10135-0706-05\"\n        ],\n        \"name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"brand_name\": \"Tolterodine Tartrate\",\n        \"generic_name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"is_controlled\": false,\n        \"type\": \"prescription\",\n        \"route\": \"Oral\",\n        \"strength\": \"1 mg\",\n        \"form\": \"Tab\"\n    },\n    \"qty\": \"40.000000000\",\n    \"qty_units\": \"BOTTLE\",\n    \"practice\": 140758485303300,\n    \"rank\": 1\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758500835717
+                    default: 0
+                  auth_refills: {}
+                  deleted_date: {}
+                  directions:
+                    type: string
+                    example: Edit
+                  medication:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10239344687
+                        default: 0
+                      rxnorm_cuis:
+                        type: array
+                        items:
+                          type: string
+                          example: '855178'
+                      ndcs:
+                        type: array
+                        items:
+                          type: string
+                          example: 00093-2056-06
+                      name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      brand_name:
+                        type: string
+                        example: Tolterodine Tartrate
+                      generic_name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      is_controlled:
+                        type: boolean
+                        example: false
+                        default: true
+                      type:
+                        type: string
+                        example: prescription
+                      route:
+                        type: string
+                        example: Oral
+                      strength:
+                        type: string
+                        example: 1 mg
+                      form:
+                        type: string
+                        example: Tab
+                  qty:
+                    type: string
+                    example: '40.000000000'
+                  qty_units:
+                    type: string
+                    example: BOTTLE
+                  practice:
+                    type: integer
+                    example: 140758485303300
+                    default: 0
+                  rank:
+                    type: integer
+                    example: 1
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"medication\": {\"id\": \"10239344687\"}, \n    \"directions\": \"Edit\", \n    \"qty\": 40, \n    \"qty_units\": \"BOTTLE\", \n    \"auth_refills\": null, \n    \"practice\": \"140758485303300\"\n}\n\nresp = requests.put(\n  \"https://sandbox.elationemr.com/api/2.0//medication_order_templates/10239344687/\",\n  data=json.dumps(data),\n  headers={'Authorization': auth_header, 'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medication Order Templates
+      security:
+      - sec0: []
+    patch:
+      summary: Update an existing Medication Order Template
+      description: ''
+      operationId: update-an-existing-medication-order-template-1
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                medication:
+                  type: array
+                  description: Must contains only one from id, ndcs or rxnorm_cuis fields
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        description: Medication id
+                        format: int32
+                      ndcs:
+                        type: array
+                        description: The NDC code of the medication(must contains only one ndc code)
+                        default: []
+                        items:
+                          type: string
+                      rxnorm_cuis:
+                        type: array
+                        description: The Rxnorm.cui code of the medication(must contains only one cui code)
+                        default: []
+                        items:
+                          type: string
+                    type: object
+                qty:
+                  type: integer
+                  description: The quantity of the medication
+                  format: int32
+                qty_units:
+                  type: string
+                  description: Type of medication(e.g "CAPSULE", "DROP")
+                auth_refills:
+                  type: integer
+                  description: The number of refills, excluding this order, that the patient is authorized for
+                  format: int32
+                directions:
+                  type: string
+                  description: The sig
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758500835717,\n    \"auth_refills\": null,\n    \"deleted_date\": null,\n    \"directions\": \"Edit\",\n    \"medication\": {\n        \"id\": 10239344687,\n        \"rxnorm_cuis\": [\n            \"855178\"\n        ],\n        \"ndcs\": [\n            \"00093-2056-06\",\n            \"00093-2056-05\",\n            \"00378-5445-91\",\n            \"59762-0170-01\",\n            \"59762-0170-06\",\n            \"33342-0097-15\",\n            \"00093-0010-06\",\n            \"33342-0097-09\",\n            \"73152-0026-60\",\n            \"31722-0805-60\",\n            \"71205-0319-90\",\n            \"10135-0706-60\",\n            \"16571-0126-06\",\n            \"29300-0239-16\",\n            \"10135-0706-05\"\n        ],\n        \"name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"brand_name\": \"Tolterodine Tartrate\",\n        \"generic_name\": \"Tolterodine Tartrate Tab 1 mg\",\n        \"is_controlled\": false,\n        \"type\": \"prescription\",\n        \"route\": \"Oral\",\n        \"strength\": \"1 mg\",\n        \"form\": \"Tab\"\n    },\n    \"qty\": \"30.000000000\",\n    \"qty_units\": \"BOTTLE\",\n    \"practice\": 140758485303300,\n    \"rank\": 1\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758500835717
+                    default: 0
+                  auth_refills: {}
+                  deleted_date: {}
+                  directions:
+                    type: string
+                    example: Edit
+                  medication:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10239344687
+                        default: 0
+                      rxnorm_cuis:
+                        type: array
+                        items:
+                          type: string
+                          example: '855178'
+                      ndcs:
+                        type: array
+                        items:
+                          type: string
+                          example: 00093-2056-06
+                      name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      brand_name:
+                        type: string
+                        example: Tolterodine Tartrate
+                      generic_name:
+                        type: string
+                        example: Tolterodine Tartrate Tab 1 mg
+                      is_controlled:
+                        type: boolean
+                        example: false
+                        default: true
+                      type:
+                        type: string
+                        example: prescription
+                      route:
+                        type: string
+                        example: Oral
+                      strength:
+                        type: string
+                        example: 1 mg
+                      form:
+                        type: string
+                        example: Tab
+                  qty:
+                    type: string
+                    example: '30.000000000'
+                  qty_units:
+                    type: string
+                    example: BOTTLE
+                  practice:
+                    type: integer
+                    example: 140758485303300
+                    default: 0
+                  rank:
+                    type: integer
+                    example: 1
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"qty\": 30,\n    \"medication\": {\"id\": 10239344687}\n}\n\nresp = requests.put(\n  \"https://sandbox.elationemr.com/api/2.0//medication_order_templates/10239344687/\",\n  data=json.dumps(data),\n  headers={'Authorization': auth_header, 'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medication Order Templates
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Medication Order Template
+      description: ''
+      operationId: delete-medication-order-template
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\n  \"https://sandbox.elationemr.com/api/2.0//medication_order_templates/10239344687/\",\n  data=json.dumps(data),\n  headers={'Authorization': auth_header, 'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medication Order Templates
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/medication_order_templates/:
+    get:
+      operationId: medication_order_templates_list
+      parameters:
+      - in: query
+        name: deleted_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: deleted_date__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: deleted_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedOrderTemplateList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Medication Order Templates
+      tags:
+      - Medication Order Templates
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new medication order template.
+      operationId: medication_order_templates_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedOrderTemplate'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedOrderTemplate'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Medication Order Template
+      tags:
+      - Medication Order Templates
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/medication_order_templates/{id}/:
+    delete:
+      description: Delete an existing medication order template.
+      operationId: medication_order_templates_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Medication Order Template
+      tags:
+      - Medication Order Templates
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: medication_order_templates_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedOrderTemplate'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Medication Order Template
+      tags:
+      - Medication Order Templates
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing medication order template.
+      operationId: medication_order_templates_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMedOrderTemplate'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedOrderTemplate'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Medication Order Template
+      tags:
+      - Medication Order Templates
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing medication order template.
+      operationId: medication_order_templates_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedOrderTemplate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedOrderTemplate'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Medication Order Template
+      tags:
+      - Medication Order Templates
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    BlankEnum:
+      enum:
+      - ''
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
+    NullEnum:
+      type: 'null'
+    Medication:
+      properties:
+        active_ndcs:
+          items:
+            type: string
+          type: array
+        brand_name:
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        creation_type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationDrugType'
+          default: user
+          readOnly: true
+        form:
+          readOnly: true
+          type: string
+        generic_name:
+          readOnly: true
+          type: string
+        id:
+          description: The id of the medication.
+          format: int64
+          type: integer
+        is_controlled:
+          default: false
+          description: Whether the drug is a controlled substance or not.
+          type: boolean
+        market_end_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        name:
+          description: The name that will display for the medication in the search and when referenced by the prescription or documented med.
+          type: string
+        ndcs:
+          description: The NDCs of the medication (must contain only one ndc code when creating).
+          items:
+            type: string
+          type: array
+        obsolete_date:
+          description: The date at which this practice medication became obsolete.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          description: The practice that created the medication. `null` for medications from the standard formulary.
+          format: int64
+          type: integer
+        route:
+          readOnly: true
+          type: string
+        rxnorm_cuis:
+          description: The Rxnorm.cui code of the medication (must contain only one cui code when creating).
+          items:
+            type: string
+          type: array
+        strength:
+          description: The strength of the drug, e.g. 40mg.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationType'
+          default: prescription
+          description: 'Whether the practice medication is an OTC or Prescription drug.
+
+
+            * `otc` - otc
+
+            * `prescription` - prescription
+
+            * `discontinued` - discontinued'
+      type: object
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
+      type: string
+    PatchedMedOrderTemplate:
+      description: 'Contains only webhooks
+
+        All other fields inherited'
+      properties:
+        auth_refills:
+          maximum: 99
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        directions:
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        medication:
+          allOf:
+          - $ref: '#/components/schemas/Medication'
+          description: When creating, must contains only one from id, ndcs or rxnorm_cuis fields.
+        practice:
+          format: int64
+          type: integer
+        qty:
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
+          type:
+          - string
+          - 'null'
+        qty_units:
+          oneOf:
+          - $ref: '#/components/schemas/QtyUnitsEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        rank:
+          readOnly: true
+          type: integer
+        specific_ndc:
+          type:
+          - string
+          - 'null'
+      type: object
+    MedOrderTemplate:
+      description: 'Contains only webhooks
+
+        All other fields inherited'
+      properties:
+        auth_refills:
+          maximum: 99
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        directions:
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        medication:
+          allOf:
+          - $ref: '#/components/schemas/Medication'
+          description: When creating, must contains only one from id, ndcs or rxnorm_cuis fields.
+        practice:
+          format: int64
+          type: integer
+        qty:
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
+          type:
+          - string
+          - 'null'
+        qty_units:
+          oneOf:
+          - $ref: '#/components/schemas/QtyUnitsEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        rank:
+          readOnly: true
+          type: integer
+        specific_ndc:
+          type:
+          - string
+          - 'null'
+      required:
+      - medication
+      - practice
+      type: object
+    PaginatedMedOrderTemplateList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedOrderTemplate'
+          type: array
+      required:
+      - results
+      type: object
+    QtyUnitsEnum:
+      description: "* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
+      enum:
+      - BAG
+      - BOTTLE
+      - BOX
+      - CAPSULE
+      - CARTRIDGE
+      - CONTAINER
+      - DROP
+      - GRAM
+      - INHALER
+      - INTERNATIONAL UNITE
+      - KIT
+      - LITER
+      - LOZENGE
+      - MILLIGRAM
+      - MILLILITER
+      - MILLION UNITS
+      - MUTUALLY DEFINED
+      - FLUID OUNCE
+      - NOT SPECIFIED
+      - PACK
+      - PACKET
+      - PINT
+      - SUPPOSITORY
+      - SYRINGE
+      - TABLESPOON
+      - TABLET
+      - TEASPOON
+      - TRANSDERMAL PATCH
+      - TUBE
+      - UNIT
+      - VIAL
+      - EACH
+      - GUM
+      - AMPULE
+      - APPLICATOR
+      - APPLICATORFUL
+      - BAR
+      - BEAD
+      - BLISTER
+      - BLOCK
+      - BOLUS
+      - CAN
+      - CANISTER
+      - CAPLET
+      - CARTON
+      - CASE
+      - CASSETTE
+      - CYLINDER
+      - DISK
+      - DOSE PACK
+      - DUAL PACK
+      - FILM
+      - GALLON
+      - IMPLANT
+      - INHALATION
+      - INHALER REFILL
+      - INSERT
+      - INTRAVENOUS BAG
+      - KILOGRAM
+      - METRIC DROP
+      - MILLIMETER
+      - NEBULE
+      - NEEDLE FREE INJECTION
+      - OCULAR SYSTEM
+      - OUNCE
+      - PACKAGE
+      - PAD
+      - PAPER
+      - PATCH
+      - PEN NEEDLE
+      - POUCH
+      - POUND
+      - PRE-FILLED PEN SYRINGE
+      - PUFF
+      - QUART
+      - RING
+      - SACHET
+      - SCOOPFUL
+      - SPONGE
+      - SPRAY
+      - STICK
+      - STRIP
+      - SWAB
+      - TABMINDER
+      - TAMPON
+      - TRAY
+      - TROCHE
+      - WAFER
+      type: string
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-practice-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,1069 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Sleep Orders API
+  version: '1.0'
+  description: 'Operations tagged Sleep Orders across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Sleep Orders
+paths:
+  /sleep_orders/{id}:
+    get:
+      summary: Get Sleep Order
+      description: ''
+      operationId: get-sleep-order
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Sleep Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/sleep_orders/140756377075740/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Sleep Orders
+      security:
+      - sec0: []
+    put:
+      summary: Update Sleep Order
+      description: ''
+      operationId: put-sleep-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ancillary_company
+              - chart_date
+              - clinical_reason
+              - document_date
+              - patient
+              - practice
+              - prescribing_user
+              properties:
+                ancillary_company:
+                  type: integer
+                  description: The ancillary company the order is associated with.
+                  format: int32
+                ccs:
+                  type: array
+                  description: Array of Physician IDs to copy for the order.
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                clinical_reason:
+                  type: string
+                  description: The clinical reason for the order.
+                confidential:
+                  type: boolean
+                  description: Whether the order is confidential.
+                  default: false
+                document_date:
+                  type: string
+                  format: date
+                follow_up_method:
+                  type: string
+                  description: How to notify the patient of the results.
+                icd10_codes:
+                  type: array
+                  description: Array of ICD-10 diagnosis codes associated with the order
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                patient:
+                  type: integer
+                  description: The patient the order is associated with. Patient must belong to the specified practice. Not allowed to be changed for updates.
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice the order is associated with. Not allowed to be changed for updates.
+                  format: int32
+                prescribing_user:
+                  type: integer
+                  description: The user associated with the order. User ID must tie to a physician in the practice.
+                  format: int32
+                sleep_center:
+                  type: integer
+                  description: The sleep center the order is associated with.
+                  default: null
+                  format: int32
+                tests:
+                  properties:
+                    ? ''
+                    : properties:
+                        id:
+                          type: integer
+                          description: The ID of the sleep order test to be associated with the order. Sleep order test must belong to the specified practice.
+                          format: int32
+                      required:
+                      - id
+                      type: object
+                  required: []
+                  type: object
+                  description: An array of sleep order tests associated with the order.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Sleep Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nupdated_sleep_order_data = {\n    \"ancillary_company\": 140755855605768,\n    \"ccs\": [\n        131074\n    ],\n    \"chart_date\": \"2021-05-26T03:49:04Z\",\n    \"clinical_reason\": \"sickness\",\n    \"confidential\": true,\n    \"document_date\": \"2021-05-26T03:49:04Z\",\n    \"follow_up_method\": \"email\",\n    \"icd10_codes\": [\n        {\n            \"code\": \"O09.529\",\n            \"description\": \"Supervision of elderly multigravida, unspecified trimester\"\n        }\n    ],\n    \"patient\": 140756664516609,\n    \"practice\": 140756660256772,\n    \"prescribing_user\": 2032,\n    \"sleep_center\": 140755855671306,\n    \"tests\": [\n        {\n            \"id\": 140756665106487\n        }\n    ]\n}\n\nresp = requests.put(\n    \"https://sandbox.elationemr.com/api/2.0/sleep_orders/140756377075740\",\n    headers={\"Authorization\": auth_header},\n  \tjson=updated_sleep_order_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Sleep Orders
+      security:
+      - sec0: []
+    patch:
+      summary: Update Sleep Order
+      description: ''
+      operationId: patch-sleep-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ancillary_company:
+                  type: integer
+                  description: The ancillary company the order is associated with.
+                  format: int32
+                ccs:
+                  type: array
+                  description: Array of Physician IDs to copy for the cardiac order.
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                clinical_reason:
+                  type: string
+                  description: The clinical reason for the order.
+                confidential:
+                  type: boolean
+                  description: Whether the order is confidential.
+                  default: false
+                document_date:
+                  type: string
+                  format: date
+                follow_up_method:
+                  type: string
+                  description: How to notify the patient of the results.
+                icd10_codes:
+                  type: array
+                  description: Array of ICD-10 diagnosis codes associated with the cardiac order
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                patient:
+                  type: integer
+                  description: The patient the order is associated with. Patient must belong to the specified practice. Not allowed to be changed for updates.
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice the order is associated with. Not allowed to be changed for updates.
+                  format: int32
+                prescribing_user:
+                  type: integer
+                  description: The user associated with the order. User ID must tie to a physician in the practice.
+                  format: int32
+                sleep_center:
+                  type: integer
+                  description: The sleep center the order is associated with.
+                  default: null
+                  format: int32
+                tests:
+                  properties:
+                    ? ''
+                    : properties:
+                        id:
+                          type: integer
+                          description: The ID of the sleep order test to be associated with the order. Sleep order test must belong to the specified practice.
+                          format: int32
+                      required:
+                      - id
+                      type: object
+                  required: []
+                  type: object
+                  description: An array of sleep order tests associated with the order.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Sleep Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nupdated_sleep_order_data = {\n    \"clinical_reason\": \"sickness\",\n}\n\nresp = requests.patch(\n    \"https://sandbox.elationemr.com/api/2.0/sleep_orders/140756377075740\",\n    headers={\"Authorization\": auth_header},\n  \tjson=updated_sleep_order_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Sleep Orders
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Sleep Order
+      description: ''
+      operationId: delete-sleep-order
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.delete(\n    \"https://sandbox.elationemr.com/api/2.0/sleep_orders/140756377075740/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Sleep Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /sleep_orders/:
+    get:
+      summary: Find Sleep Orders
+      description: ''
+      operationId: find-sleep-orders
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: patient
+        in: query
+        description: The patient the order belongs to.
+        schema:
+          type: string
+      - name: practice
+        in: query
+        description: The practice the order belongs to.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 0,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n      // array of Sleep Order Objects\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 0
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\n    \"https://sandbox.elationemr.com/api/2.0/sleep_orders/\",\n    headers={\"Authorization\": auth_header},\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Sleep Orders
+      security:
+      - sec0: []
+    post:
+      summary: Create Sleep Order
+      description: ''
+      operationId: create-sleep-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ancillary_company
+              - chart_date
+              - clinical_reason
+              - document_date
+              - patient
+              - practice
+              - prescribing_user
+              properties:
+                ancillary_company:
+                  type: integer
+                  description: The ancillary company the order is associated with.
+                  format: int32
+                ccs:
+                  type: array
+                  description: Array of Physician IDs to copy for the order.
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                clinical_reason:
+                  type: string
+                  description: The clinical reason for the order.
+                confidential:
+                  type: boolean
+                  description: Whether the order is confidential.
+                  default: false
+                document_date:
+                  type: string
+                  format: date
+                follow_up_method:
+                  type: string
+                  description: How to notify the patient of the results.
+                icd10_codes:
+                  type: array
+                  description: Array of ICD-10 diagnosis codes associated with the order
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                patient:
+                  type: integer
+                  description: The patient the order is associated with. Patient must belong to the specified practice.
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice the order is associated with.
+                  format: int32
+                prescribing_user:
+                  type: integer
+                  description: The user associated with the order. User ID must tie to a physician in the practice.
+                  format: int32
+                sleep_center:
+                  type: integer
+                  description: The sleep center the order is associated with.
+                  default: null
+                  format: int32
+                tests:
+                  properties:
+                    ? ''
+                    : properties:
+                        id:
+                          type: integer
+                          description: The ID of the sleep order test to be associated with the order. Sleep order test must belong to the specified practice.
+                          format: int32
+                      required:
+                      - id
+                      type: object
+                  required: []
+                  type: object
+                  description: An array of sleep tests associated with the order.
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140756377075740,\n  // See Sleep Order Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = f\"Bearer {access_token}\"\n\nnew_sleep_order_data = {\n    \"ancillary_company\": 140755855605768,\n    \"ccs\": [\n        131074\n    ],\n    \"chart_date\": \"2021-05-26T03:49:04Z\",\n    \"clinical_reason\": \"sickness\",\n    \"confidential\": true,\n    \"document_date\": \"2021-05-26T03:49:04Z\",\n    \"follow_up_method\": \"email\",\n    \"icd10_codes\": [\n        {\n            \"code\": \"O09.529\",\n            \"description\": \"Supervision of elderly multigravida, unspecified trimester\"\n        }\n    ],\n    \"patient\": 140756664516609,\n    \"practice\": 140756660256772,\n    \"prescribing_user\": 2032,\n    \"sleep_center\": 140755855671306,\n    \"tests\": [\n        {\n            \"id\": 140756665106487\n        }\n    ]\n}\n\nresp = requests.post(\n    \"https://sandbox.elationemr.com/api/2.0/sleep_orders/\",\n    headers={\"Authorization\": auth_header},\n  \tjson=new_sleep_order_data,\n)\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Sleep Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/sleep_orders/:
+    get:
+      description: Returns a list of sleep orders
+      operationId: sleep_orders_list
+      parameters:
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: The patient the sleep order belongs to.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: The practice the sleep order is associated with.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSleepOrderList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Sleep Orders
+      tags:
+      - Sleep Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new sleep order.
+      operationId: sleep_orders_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SleepOrder'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SleepOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Sleep Order
+      tags:
+      - Sleep Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/sleep_orders/{id}/:
+    delete:
+      description: Delete an existing sleep order.
+      operationId: sleep_orders_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Sleep Order
+      tags:
+      - Sleep Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single sleep order
+      operationId: sleep_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SleepOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Sleep Order
+      tags:
+      - Sleep Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing sleep order.
+      operationId: sleep_orders_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSleepOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SleepOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Sleep Order
+      tags:
+      - Sleep Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing sleep order.
+      operationId: sleep_orders_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SleepOrder'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SleepOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Sleep Order
+      tags:
+      - Sleep Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatchedSleepOrder:
+      properties:
+        ancillary_company:
+          format: int64
+          type: integer
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        sleep_center:
+          description: The sleep center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of sleep tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SleepOrderTest'
+          type: array
+      type: object
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    SleepOrder:
+      properties:
+        ancillary_company:
+          format: int64
+          type: integer
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        sleep_center:
+          description: The sleep center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of sleep tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SleepOrderTest'
+          type: array
+      required:
+      - ancillary_company
+      - chart_date
+      - clinical_reason
+      - document_date
+      - patient
+      - practice
+      - prescribing_user
+      - tests
+      type: object
+    DocumentResolutionState:
+      properties:
+        created_date:
+          description: The datetime when this resolution state was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: Internal id to represent the resolution state.
+          readOnly: true
+          type: integer
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
+      required:
+      - state
+      type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    PaginatedSleepOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/SleepOrder'
+          type: array
+      required:
+      - results
+      type: object
+    SleepOrderTest:
+      properties:
+        code:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 255
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - name
+      - practice
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true

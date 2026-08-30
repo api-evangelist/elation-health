@@ -1,0 +1,329 @@
+openapi: 3.2.0
+info:
+  description: "This set of API resources allows you to import patient data into the Elation\nEMR.  For more information on Elation APIs, view [our\ndocumentation](https://docs.elationhealth.com/reference).\n\nThe expected flow for an import is:\n1. Create a Data Import Request for each batch of imports. There is no size limit on an import batch, though larger batches will take longer to process. You may separate your imports into batches using whatever logic you like. Each batch must be for a single practice and a single provider within that practice.\n\n2. Create Patient Chart Import Requests for each chart you want to import. Some validation will occur at create time, but final validation only occurs when the import is attempted. Patient Chart Import Requests are initially created in the `open` status.\n\n3. When you are ready to begin importing data, update the Patient Chart Import Request status to `pending`. It will not be imported immediately, but it will be added to the queue.  \n\n4. Alternatively, a convenience is provided at the Data Import Request level. POSTing to `/data-import-request/{dir-id}/run` will transition all child Patient Chart Import Requests in `open` to `pending`.\n\n5. Check the status of the import by polling the Data Import Request item. If import failures occur, you can review the Patient Chart Import Requests that failed and then update and rerun them individually.\n\n6. Once all Patient Chart Import Requests have succeeded, you should consider the Data Import Request to be successful. Please review your data within the web application to ensure that charts imported as you expected.\n\nIf you encounter any problems, please contact Elation at api-support@elationhealth.com."
+  version: 1.0.2
+  title: Elation Import Data Import Request API
+  termsOfService: https://www.elationhealth.com/terms-of-use/
+  contact:
+    email: api-support@elationhealth.com
+servers:
+- description: Elation Production API
+  url: https://api.app.elationemr.com/api/2.0
+- description: Elation Sandbox API
+  url: https://sandbox.elationemr.com/api/2.0
+tags:
+- name: Data Import Request
+  description: The parent resource for tracking batches of individual patient chart imports.
+paths:
+  /data-import-requests:
+    get:
+      tags:
+      - Data Import Request
+      summary: Retrieve a list of existing data import requests.
+      description: ''
+      operationId: getDIRs
+      responses:
+        '200':
+          description: An array of Data Import Request details without statuses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataImportRequestArray'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+      security:
+      - elation_auth:
+        - import
+    post:
+      tags:
+      - Data Import Request
+      summary: Create a new data import request.
+      description: ''
+      operationId: createDIR
+      responses:
+        '200':
+          description: Details of the created Data Import Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExistingDataImportRequest'
+        '201':
+          description: New Data Import Request successfully created; check Location reponse header
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '422':
+          description: The request body could not be parsed as JSON
+      security:
+      - elation_auth:
+        - import
+      requestBody:
+        $ref: '#/components/requestBodies/CreateDataImportRequest'
+  /data-import-requests/{dir-id}:
+    parameters:
+    - in: path
+      name: dir-id
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: The id of the existing Data Import Request
+    get:
+      tags:
+      - Data Import Request
+      summary: Retrieve an existing data import request.
+      description: This can be used to check on the status of all child Patient Chart Import Requests.
+      operationId: getDIR
+      responses:
+        '200':
+          description: Details of the Data Import Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExistingDataImportRequest'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Existing Data Import Request not found
+      security:
+      - elation_auth:
+        - import
+    put:
+      tags:
+      - Data Import Request
+      summary: Update an existing data import request.
+      description: All editable fields must be included even if the value is unchanged.
+      operationId: updateDIR
+      responses:
+        '200':
+          description: Details of the updated Data Import Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExistingDataImportRequest'
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Existing Data Import Request not found
+        '422':
+          description: The request body could not be parsed as JSON
+      security:
+      - elation_auth:
+        - import
+      requestBody:
+        $ref: '#/components/requestBodies/ExistingDataImportRequest'
+    patch:
+      tags:
+      - Data Import Request
+      summary: Update an existing data import request.
+      description: Only include fields where the value is changing.
+      operationId: patchDIR
+      responses:
+        '400':
+          description: Validation error(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+        '404':
+          description: Existing Data Import Request not found
+        '422':
+          description: The request body could not be parsed as JSON
+      security:
+      - elation_auth:
+        - import
+      requestBody:
+        $ref: '#/components/requestBodies/ExistingDataImportRequest'
+    delete:
+      tags:
+      - Data Import Request
+      summary: Delete an existing data import request.
+      description: Only possible if no Patient Chart Import Requests have ever been created for this Data Import Request.
+      operationId: deleteDIR
+      responses:
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: The Data Import Request cannot be deleted because child records already exist; or your credentials are not authorized to use the import API resources
+        '404':
+          description: Existing Data Import Request not found
+      security:
+      - elation_auth:
+        - import
+  /data-import-requests/{dir-id}/run:
+    parameters:
+    - in: path
+      name: dir-id
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: The id of the existing Data Import Request
+    post:
+      tags:
+      - Data Import Request
+      summary: Convenience call
+      description: Convenience call to transition all child Patient Chart Import Requests in `open` to `pending`
+      operationId: runDIR
+      responses:
+        '202':
+          description: Request accepted; Patient Chart Import Requests will be updated
+        '401':
+          description: No valid credentials provided
+        '403':
+          description: Your credentials are not authorized to use the import API resources
+      security:
+      - elation_auth:
+        - import
+components:
+  schemas:
+    DataImportRequestArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExistingDataImportRequestWithoutStatus'
+    ExistingDataImportRequestWithoutStatus:
+      required:
+      - id
+      - created_at
+      - physician_id
+      - practice_id
+      - sections_to_import
+      allOf:
+      - $ref: '#/components/schemas/BaseDataImportRequest'
+      - type: object
+      properties:
+        physician_id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The id of the physician provider to import all child patient charts for; cannot be updated after initial create
+        practice_id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The id of the practice to import all child patient charts for; cannot be updated after initial create
+    ValidationErrorResponse:
+      type: object
+      additionalProperties:
+        description: Name of the field with validation errors
+        type: array
+        items:
+          type: string
+          description: Validation error string
+    BaseDataImportRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The id of the Data Import Request
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: The creation timestamp for the Data Import Request
+        notes:
+          type: string
+          description: Arbitrary notes to associate with the Data Import Request
+    ExistingDataImportRequest:
+      required:
+      - id
+      - created_at
+      - physician_id
+      - practice_id
+      - sections_to_import
+      - status
+      allOf:
+      - $ref: '#/components/schemas/ExistingDataImportRequestWithoutStatus'
+      - type: object
+      properties:
+        status:
+          type: array
+          readOnly: true
+          items:
+            type: object
+            properties:
+              importStatus:
+                $ref: '#/components/schemas/JobStatus'
+              numPatientImports:
+                type: integer
+                format: int32
+                description: The number of child Patient Chart Import Requests in the associated status
+    CreateDataImportRequest:
+      required:
+      - physician_id
+      - practice_id
+      - sections_to_import
+      allOf:
+      - $ref: '#/components/schemas/BaseDataImportRequest'
+      - type: object
+      properties:
+        physician_id:
+          type: integer
+          format: int64
+          description: The id of the physician provider to import all child patient charts for; cannot be updated after initial create
+        practice_id:
+          type: integer
+          format: int64
+          description: The id of the practice to import all child patient charts for; cannot be updated after initial create
+    JobStatus:
+      type: string
+      default: open
+      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
+      enum:
+      - open
+      - pending
+      - processing
+      - failed
+      - completed
+  requestBodies:
+    ExistingDataImportRequest:
+      description: Data Import Request object
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExistingDataImportRequest'
+    CreateDataImportRequest:
+      description: Data Import Request object
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDataImportRequest'
+  securitySchemes:
+    elation_auth:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: http://www.elationhealth.com/api/2.0/oauth
+          refreshUrl: http://www.elationhealth.com/api/2.0/oauth
+          scopes:
+            import: interact with data imports in your practice
+externalDocs:
+  description: Elation API v2 Documentation
+  url: https://docs.elationhealth.com/reference

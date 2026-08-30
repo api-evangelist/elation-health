@@ -1,0 +1,87 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Outstanding Balance API
+  version: 2.0.0
+  contact:
+    name: Elation Health
+    url: https://www.elationhealth.com/
+  description: 'Operations tagged Outstanding Balance across 2 of this provider''s published API definitions: elation-billing-api.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Outstanding Balance
+paths:
+  /api/2.0/patients/{id}/outstanding_balance/:
+    post:
+      description: The outstanding balance is a write-only resource that can be used to update the balance of a specific patient. It requires that the OutstandingBalance feature must be enabled for the practice.
+      operationId: patients_outstanding_balance_create
+      parameters:
+      - description: The id of the patient
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientOutstandingBalance'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientOutstandingBalance'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Outstanding Balance
+      tags:
+      - Outstanding Balance
+      x-el8-docs-category: Billing API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatientOutstandingBalance:
+      properties:
+        balance:
+          description: The outstanding balance in cents.
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          type: string
+        patient_id:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - balance
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-billing-api.json
+- elation-health-api-full-openapi.yaml
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,0 +1,786 @@
+openapi: 3.2.0
+info:
+  title: Elation Health Lab Order Compendiums API
+  version: '1.0'
+  description: 'Operations tagged Lab Order Compendiums across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
+tags:
+- name: Lab Order Compendiums
+paths:
+  /lab_order_compendiums/{id}:
+    get:
+      summary: Get Lab Order Compendium
+      description: ''
+      operationId: get-lab-order-compendium
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n \"id\": 140745672294843,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_order_compendiums/140745672294843/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Compendiums
+      security:
+      - sec0: []
+    patch:
+      summary: Update Lab Order Compendium
+      description: ''
+      operationId: update-lab-order-compendium
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lab_vendor
+              properties:
+                lab_vendor:
+                  type: integer
+                  description: lab vendor id
+                  format: int32
+                code:
+                  type: string
+                  description: must be unique with each individual 'lab_vendor'
+                name:
+                  type: string
+                  description: must be unique with each individual 'lab_vendor'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"code\": \"Harris PLC2022-05-06 10:54:18+00:00\",\n    \"created_date\": \"2020-01-16T17:52:09Z\",\n    \"deleted_date\": null,\n    \"id\": 140745672360379,\n    \"lab_vendor\": 67186196726,\n    \"last_updated\": \"2022-06-06T11:26:50.671853Z\",\n    \"name\": \"Harris PLC2022-05-06 10:54:18+00:00 Compendium\"\n}"
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: Harris PLC2022-05-06 10:54:18+00:00
+                  created_date:
+                    type: string
+                    example: '2020-01-16T17:52:09Z'
+                  deleted_date: {}
+                  id:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  lab_vendor:
+                    type: integer
+                    example: 67186196726
+                    default: 0
+                  last_updated:
+                    type: string
+                    example: '2022-06-06T11:26:50.671853Z'
+                  name:
+                    type: string
+                    example: Harris PLC2022-05-06 10:54:18+00:00 Compendium
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"lab_vendor\": 1234567889, \n\t\"code\": \"Harris PLC2022-05-06 10:54:18+00:00\", \n\t\"name\": \"Harris PLC2022-05-06 10:54:18+00:00 Compendium\"\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/lab_order_compendiums/1233445566\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)\n"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Compendiums
+      security:
+      - sec0: []
+    put:
+      summary: Update Lab Order Compendium
+      description: ''
+      operationId: update-lab-order-compendium-1
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authentication
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lab_vendor
+              - code
+              - name
+              properties:
+                lab_vendor:
+                  type: integer
+                  description: lab vendor id
+                  format: int32
+                code:
+                  type: string
+                  description: must be unique with each individual 'lab_vendor'
+                name:
+                  type: string
+                  description: must be unique with each individual 'lab_vendor'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"code\": \"Harris PLC2022-05-06 10:54:18+00:00\",\n    \"created_date\": \"2020-01-16T17:52:09Z\",\n    \"deleted_date\": null,\n    \"id\": 140745672360379,\n    \"lab_vendor\": 67186196726,\n    \"last_updated\": \"2022-06-06T11:26:50.671853Z\",\n    \"name\": \"Harris PLC2022-05-06 10:54:18+00:00 Compendium\"\n}"
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: Harris PLC2022-05-06 10:54:18+00:00
+                  created_date:
+                    type: string
+                    example: '2020-01-16T17:52:09Z'
+                  deleted_date: {}
+                  id:
+                    type: integer
+                    example: 140745672360379
+                    default: 0
+                  lab_vendor:
+                    type: integer
+                    example: 67186196726
+                    default: 0
+                  last_updated:
+                    type: string
+                    example: '2022-06-06T11:26:50.671853Z'
+                  name:
+                    type: string
+                    example: Harris PLC2022-05-06 10:54:18+00:00 Compendium
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"lab_vendor\": 1234567889, \n\t\"code\": \"Harris PLC2022-05-06 10:54:18+00:00\", \n\t\"name\": \"Harris PLC2022-05-06 10:54:18+00:00 Compendium\"\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/lab_order_compendiums/1233445566\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)\n"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Compendiums
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Lab Order Compendium
+      description: ''
+      operationId: delete-lab-order-compendium
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/lab_order_compendiums/140745672294843/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Compendiums
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_order_compendiums/:
+    get:
+      summary: Find Lab Order Compendium
+      description: ''
+      operationId: find-lab-order-compendium
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: code
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: lab_vendor
+        in: query
+        description: The id's of lab_vendor
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice_created
+        in: query
+        description: The id's of practice. Has field_name="lab_vendor__practice_created"
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 28,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 140745672360379,\n  \t\t\t\t\t// See Object Definition\n        },\n      ....\n     ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_order_compendiums/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Compendiums
+      security:
+      - sec0: []
+    post:
+      summary: Create Lab Order Compendium
+      description: ''
+      operationId: create-lab-order-compendium
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lab_vendor
+              - code
+              - name
+              properties:
+                lab_vendor:
+                  type: integer
+                  description: lab vendor id
+                  format: int32
+                code:
+                  type: string
+                  description: must be unique with each individual 'lab_vendor'
+                name:
+                  type: string
+                  description: must be unique with each individual 'lab_vendor'
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"code\": \"Harris PLC2022-05-06 10:54:18+00:00\",\n    \"created_date\": \"2022-06-06T11:16:29.316252Z\",\n    \"deleted_date\": null,\n    \"id\": 140758847783355,\n    \"lab_vendor\": 67186196726,\n    \"last_updated\": \"2022-06-06T11:16:29.317032Z\",\n    \"name\": \"Harris PLC2022-05-06 10:54:18+00:00 Compendium\"\n}"
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: Harris PLC2022-05-06 10:54:18+00:00
+                  created_date:
+                    type: string
+                    example: '2022-06-06T11:16:29.316252Z'
+                  deleted_date: {}
+                  id:
+                    type: integer
+                    example: 140758847783355
+                    default: 0
+                  lab_vendor:
+                    type: integer
+                    example: 67186196726
+                    default: 0
+                  last_updated:
+                    type: string
+                    example: '2022-06-06T11:16:29.317032Z'
+                  name:
+                    type: string
+                    example: Harris PLC2022-05-06 10:54:18+00:00 Compendium
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n\ndata = {\n  \"lab_vendor\": 67186196726, \n\t\"code\": \"Harris PLC2022-05-06 10:54:18+00:00\", \n\t\"name\": \"Harris PLC2022-05-06 10:54:18+00:00 Compendium\"\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/lab_order_compendiums/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Order Compendiums
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/lab_order_compendiums/:
+    get:
+      description: Returns a list of lab order compendiums
+      operationId: lab_order_compendiums_list
+      parameters:
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: code
+        schema:
+          items:
+            type:
+            - string
+            - 'null'
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: lab_vendor
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: name
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice_created
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabOrderTestCompendiumList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Lab Order Compendiums
+      tags:
+      - Lab Order Compendiums
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new lab order compendium.
+      operationId: lab_order_compendiums_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderTestCompendium'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrderTestCompendium'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Lab Order Compendium
+      tags:
+      - Lab Order Compendiums
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/lab_order_compendiums/{id}/:
+    delete:
+      description: Delete an existing lab order compendium.
+      operationId: lab_order_compendiums_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Lab Order Compendium
+      tags:
+      - Lab Order Compendiums
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single lab order compendium
+      operationId: lab_order_compendiums_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrderTestCompendium'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Lab Order Compendium
+      tags:
+      - Lab Order Compendiums
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing lab order compendium.
+      operationId: lab_order_compendiums_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLabOrderTestCompendium'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrderTestCompendium'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Lab Order Compendium
+      tags:
+      - Lab Order Compendiums
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing lab order compendium.
+      operationId: lab_order_compendiums_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrderTestCompendium'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrderTestCompendium'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Lab Order Compendium
+      tags:
+      - Lab Order Compendiums
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+components:
+  schemas:
+    PatchedLabOrderTestCompendium:
+      description: The serializer for LabOrderTestCompendium
+      properties:
+        code:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          maxLength: 200
+          type: string
+      type: object
+    LabOrderTestCompendium:
+      description: The serializer for LabOrderTestCompendium
+      properties:
+        code:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          maxLength: 200
+          type: string
+      required:
+      - lab_vendor
+      - name
+      type: object
+    PaginatedLabOrderTestCompendiumList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrderTestCompendium'
+          type: array
+      required:
+      - results
+      type: object
+  securitySchemes:
+    sec0:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-orders-api.json
+x-readme:
+  headers: []
+x-readme-fauxas: true
