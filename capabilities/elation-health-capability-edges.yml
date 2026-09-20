@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 40
+edge_count: 51
 edges:
 - tag: Visit Notes
   spec_file: elation-health-visit-notes-api-openapi.yml
@@ -239,6 +239,16 @@ edges:
     ICD10Code, ImagingOrder
   reason: CRUD over provider-entered imaging orders with diagnosis codes and ordered tests inside an EHR
     — this is provider order entry for diagnostics, not the operation of imaging modalities themselves.
+- tag: Lab Order Compendiums
+  spec_file: elation-health-lab-order-compendiums-api-openapi.yml
+  capability_id: BC-2860.10
+  capability_id_l1: BC-2860
+  capability_name: Laboratory Services Management
+  confidence: 0.75
+  evidence: 'POST /api/2.0/lab_order_compendiums/ Create Lab Order Compendium; schemas: LabOrderTestCompendium'
+  reason: Maintenance of the orderable lab test compendium for a lab, a core laboratory services/orderables
+    catalogue function.
+  recovered_from: healthcare-vertical-edges.json
 - tag: Medication Order Templates
   spec_file: elation-health-medication-order-templates-api-openapi.yml
   capability_id: BC-2830.20
@@ -301,6 +311,27 @@ edges:
     a clinical EHR — this is documentation of the active clinical record (BC-2830). No sub-capability
     is clearly named: allergy lists are structured chart data rather than specifically notes, order entry
     or results review, so L2 is left null.'
+- tag: Appointment Rooms
+  spec_file: elation-health-appointment-rooms-api-openapi.yml
+  capability_id: BC-2800.10
+  capability_id_l1: BC-2800
+  capability_name: Scheduling & Appointment Management
+  confidence: 0.72
+  evidence: GET /api/2.0/appointments/rooms/ — "List Appointment Rooms"
+  reason: A reference list of rooms used for appointments in an EHR scheduling API; supports provider/resource
+    scheduling. Thin (single read-only operation), so confidence is moderate.
+  recovered_from: healthcare-vertical-edges.json
+- tag: Fills
+  spec_file: elation-health-fills-api-openapi.yml
+  capability_id: BC-2850
+  capability_id_l1: BC-2850
+  capability_name: Pharmacy & Medication Management
+  confidence: 0.72
+  evidence: '''List Prescription Fills'' / ''Retrieve Prescription Fill''; schemas ''PrescriptionFill'',
+    ''FillStatusEnum'', ''MedicationHistoryDownloadFill'''
+  reason: Prescription fill records and medication-history fill data are provider-side medication management;
+    the split between dispensing operations and reconciliation is ambiguous so only L1 is asserted.
+  recovered_from: healthcare-vertical-edges.json
 - tag: Imaging Order Tests
   spec_file: elation-health-imaging-order-tests-api-openapi.yml
   capability_id: BC-2830.20
@@ -382,6 +413,59 @@ edges:
     "PermissionTypeEnum"'
   reason: Manages delegation of access rights between users in the practice — access management plumbing
     rather than a clinical capability.
+- tag: Historical Medication Download Requests
+  spec_file: elation-health-historical-medication-download-requests-api-openapi.yml
+  capability_id: BC-2850
+  capability_id_l1: BC-2850
+  capability_name: Pharmacy & Medication Management
+  confidence: 0.7
+  evidence: '''Create Medication History Download'', schema ''RxHistoryDownload'''
+  reason: Requesting external medication history downloads is a pharmacy/medication management function
+    (typically feeding medication reconciliation); L1 only given thin evidence on the exact sub-process.
+  recovered_from: healthcare-vertical-edges.json
+- tag: Injections
+  spec_file: elation-health-injections-api-openapi.yml
+  capability_id: BC-2850.40
+  capability_id_l1: BC-2850
+  capability_name: Medication Administration & Reconciliation
+  confidence: 0.7
+  evidence: GET /injections/{id}/ Get Injection; GET /injections/ Find Injections
+  reason: Injections in an EHR represent administered injectable medications/immunizations recorded at
+    the point of care, which maps to medication administration records. Read-only surface, so some ambiguity
+    remains vs. clinical documentation.
+  recovered_from: healthcare-vertical-edges.json
+- tag: Insurance Card
+  spec_file: elation-health-insurance-card-api-openapi.yml
+  capability_id: BC-2800.30
+  capability_id_l1: BC-2800
+  capability_name: Eligibility & Benefits Verification
+  confidence: 0.7
+  evidence: 'POST /api/2.0/patients/{id}/insurance_cards/ Create Patients Insurance Card; schemas: InsuranceCard,
+    InsuranceCardImage'
+  reason: Capture and storage of patient insurance card images/data per patient, part of registration
+    and coverage verification workflow at patient access.
+  recovered_from: healthcare-vertical-edges.json
+- tag: Lab Facility Identifiers
+  spec_file: elation-health-lab-facility-identifiers-api-openapi.yml
+  capability_id: BC-2860.10
+  capability_id_l1: BC-2860
+  capability_name: Laboratory Services Management
+  confidence: 0.7
+  evidence: 'GET /api/2.0/lab_facility_identifiers/ List Lab Facility Identifiers; schemas: FacilityIdentifier,
+    BiDiLabConnection'
+  reason: Configuration of laboratory facility identifiers and bidirectional lab connections used for
+    lab ordering/result interfacing — laboratory services/LIS integration setup.
+  recovered_from: healthcare-vertical-edges.json
+- tag: Lab Order Tests
+  spec_file: elation-health-lab-order-tests-api-openapi.yml
+  capability_id: BC-2860.10
+  capability_id_l1: BC-2860
+  capability_name: Laboratory Services Management
+  confidence: 0.7
+  evidence: 'POST /api/2.0/lab_order_tests/ Create Lab Order Test; schemas: LabOrderTest, LabOrderAOEQuestion'
+  reason: Definition of individual orderable lab tests with AOE questions — laboratory test catalogue
+    management; could also be read as CPOE configuration, hence moderate confidence.
+  recovered_from: healthcare-vertical-edges.json
 - tag: Problems
   spec_file: elation-health-problems-api-openapi.yml
   capability_id: BC-2830
@@ -403,6 +487,16 @@ edges:
   reason: Full lifecycle of pulmonary diagnostic orders with associated diagnosis codes and tests — provider
     order entry for diagnostics (CPOE). Alternative reading as cardiopulmonary diagnostic service management
     keeps this at 0.7.
+- tag: Reports
+  spec_file: elation-health-reports-api-openapi.yml
+  capability_id: BC-2830.30
+  capability_id_l1: BC-2830
+  capability_name: Results Review & Endorsement
+  confidence: 0.7
+  evidence: PATCH /reports/{id}/ "Sign Report"; schemas LabResult, LabTest, LabResultsGrid, AbnormalFlagEnum
+  reason: Reports here carry lab test/result payloads and are signed by clinicians, i.e. routing, review
+    and endorsement of diagnostic results; could alternatively read as diagnostic results management.
+  recovered_from: healthcare-vertical-edges.json
 - tag: Visit Note Types
   spec_file: elation-health-visit-note-types-api-openapi.yml
   capability_id: BC-2830.10
@@ -412,3 +506,25 @@ edges:
   evidence: POST /api/2.0/visit_note_types/ visit_note_types_create; schemas VisitNoteType, SnomedCode
   reason: Configuration of visit note categories coded to SNOMED supports authoring of clinical notes
     across encounter types; it is documentation configuration rather than a distinct capability.
+- tag: Vitals
+  spec_file: elation-health-vitals-api-openapi.yml
+  capability_id: BC-2830
+  capability_id_l1: BC-2830
+  capability_name: Clinical Documentation Management
+  confidence: 0.7
+  evidence: '"Create Vitals", schemas VitalBP, VitalHR, VitalTemperature, VitalOxygen, VitalsCollection'
+  reason: Capture of structured vital-sign observations into the patient record — documentation of clinical
+    data. Left at L1 because it straddles note documentation and bedside care delivery.
+  recovered_from: healthcare-vertical-edges.json
+- tag: patient chart import
+  spec_file: elation-health-patient-chart-import-api-openapi.yml
+  capability_id: BC-2900
+  capability_id_l1: BC-2900
+  capability_name: Health Information Management
+  confidence: 0.7
+  evidence: '"This set of API resources allows you to import patient data into the Elation EMR"; "Add
+    a new patient-chart-import to the associated data import request"'
+  reason: Bulk ingestion of patient charts into the health record is health information management (record
+    creation/migration). L2 left null because it sits between health record lifecycle and interoperability
+    operations.
+  recovered_from: healthcare-vertical-edges.json
