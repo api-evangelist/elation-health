@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Patient Letters (BETA) API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Patient Letters (BETA) across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Patient Letters (BETA) API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -90,11 +90,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient-letters/{patient_letters}/comments/{id}/:
     delete:
       description: Delete an existing patient letters comment.
@@ -155,11 +150,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient_letters/:
     get:
       description: List patient-facing letters (both directions). Filter by patient, practice, or unread=true.
@@ -256,11 +246,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient_letters/{id}/:
     get:
       description: Retrieve a single patient letter.
@@ -289,7 +274,7 @@ paths:
       - '2.1'
       - '2.0'
     patch:
-      description: Update a patient letter. PATCH {signLog:...} to sign. PATCH {send_out:true} to send after signing. PATCH {patient_read_time:<ts>} to acknowledge.
+      description: Update a patient letter. PATCH {signLog:...} to sign. PATCH {send_out:true} to send after signing. PATCH {patient_read_time:} to acknowledge.
       operationId: patient_letters_partial_update
       parameters:
       - in: path
@@ -351,78 +336,24 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
-    LetterAttachment:
+    S3RetrievingDocumentFile:
       properties:
-        attachment_type:
-          $ref: '#/components/schemas/AttachmentTypeEnum'
-        entity_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        entity_description:
-          type:
-          - string
-          - 'null'
-        entity_id:
-          format: int64
-          type: integer
-        entity_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        handout:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        summary:
-          type:
-          - string
-          - 'null'
-      required:
-      - attachment_type
-      type: object
-    Comment:
-      properties:
-        author:
-          description: Elation ID of the physician or staff member to attribute this comment to.
-          format: int64
-          type: integer
-          writeOnly: true
-        create_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        letter:
-          format: int64
-          readOnly: true
-          type: integer
-        message:
-          default: ''
+        base64_content:
           type: string
-        practice:
-          format: int64
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
           readOnly: true
           type: integer
-      required:
-      - author
+        original_filename:
+          type: string
       type: object
     AttachmentTypeEnum:
       description: '* `Entity` - Entity
@@ -498,6 +429,80 @@ components:
       - DsBmiChart
       - DsHcChart
       type: string
+    Comment:
+      properties:
+        author:
+          description: Elation ID of the physician or staff member to attribute this comment to.
+          format: int64
+          type: integer
+          writeOnly: true
+        create_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        letter:
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          default: ''
+          type: string
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - author
+      type: object
+    PaginatedCommentList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Comment'
+          type: array
+      required:
+      - results
+      type: object
+    PaginatedPatientLetterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientLetter'
+          type: array
+      required:
+      - results
+      type: object
     PatientLetter:
       properties:
         attachments:
@@ -693,66 +698,41 @@ components:
           - string
           - 'null'
       type: object
-    PaginatedPatientLetterList:
+    LetterAttachment:
       properties:
-        count:
-          example: 123
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentTypeEnum'
+        entity_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        entity_description:
+          type:
+          - string
+          - 'null'
+        entity_id:
+          format: int64
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientLetter'
-          type: array
-      required:
-      - results
-      type: object
-    S3RetrievingDocumentFile:
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          type: string
-        document:
-          description: URL to retrieve the document
-          format: uri
-          type: string
-        external_content: {}
+        entity_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        handout:
+          format: int64
+          type:
+          - integer
+          - 'null'
         id:
           readOnly: true
           type: integer
-        original_filename:
-          type: string
-      type: object
-    PaginatedCommentList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Comment'
-          type: array
+        summary:
+          type:
+          - string
+          - 'null'
       required:
-      - results
+      - attachment_type
       type: object
   securitySchemes:
     oauth2:
@@ -765,9 +745,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

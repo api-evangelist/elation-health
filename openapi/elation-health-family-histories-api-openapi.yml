@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Family Histories API
   version: '1.0'
-  description: 'Operations tagged Family Histories across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Family Histories across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -349,20 +349,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientFamilyHistoryRelationshipEnum:
-      enum:
-      - Aunt
-      - Brother
-      - Daughter
-      - Father
-      - Grandfather
-      - Grandmother
-      - Mother
-      - Other
-      - Sister
-      - Son
-      - Uncle
-      type: string
     PatientFamilyHistory:
       properties:
         created_date:
@@ -409,6 +395,20 @@ components:
       - patient
       - relationship
       type: object
+    PatientFamilyHistoryRelationshipEnum:
+      enum:
+      - Aunt
+      - Brother
+      - Daughter
+      - Father
+      - Grandfather
+      - Grandmother
+      - Mother
+      - Other
+      - Sister
+      - Son
+      - Uncle
+      type: string
     PaginatedPatientFamilyHistoryList:
       properties:
         count:
@@ -451,7 +451,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-profile-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

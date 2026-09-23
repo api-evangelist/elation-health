@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Provider Team API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Provider Team across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Provider Team API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -40,11 +40,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient-provider-team-members/{id}/:
     delete:
       description: Delete an existing patient provider team member.
@@ -130,11 +125,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient-provider-teams/:
     get:
       operationId: patient_provider_teams_list
@@ -173,11 +163,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient-provider-teams/{id}/:
     get:
       operationId: patient_provider_teams_retrieve
@@ -204,11 +189,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient-provider-teams/{id}/team_members/:
     get:
       operationId: patient_provider_teams_team_members_retrieve
@@ -235,11 +215,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patients/{id}/patient_provider_team/:
     get:
       description: 'Creates a PatientProviderTeam for a given patient_id if one does not already
@@ -303,65 +278,32 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedPatientProviderTeamMemberUpdate:
+    GroupEnum:
+      description: '* `main` - main
+
+        * `other` - other'
+      enum:
+      - main
+      - other
+      type: string
+    PatientProviderTeam:
       properties:
-        activity_summary_last_refreshed:
-          description: The last known time when this team member's activity was synced.
-          format: date-time
-          readOnly: true
-          type: string
-        earliest_activity:
-          description: Displays the earliest known interaction between the team member and the patient.
-          format: date-time
-          readOnly: true
-          type: string
-        group:
-          allOf:
-          - $ref: '#/components/schemas/GroupEnum'
-          default: main
-          description: 'Can either be `main` or `other`. By default members are placed in the `main` group. Only members in the `main` group will be displayed on the Patient chart in the web application.
-
-
-            * `main` - main
-
-            * `other` - other'
-        latest_activity:
-          description: Displays the latest known interaction between the team member and the patient.
-          format: date-time
-          readOnly: true
-          type: string
         patient_id:
-          description: The id of the Patient that this team is associated with.
+          description: The id of the Patient object that this team is associated with.
           readOnly: true
           type: integer
         patient_provider_team_id:
-          description: Patient Provider team ID
-          readOnly: true
           type: integer
-        patient_provider_team_member_id:
+        team_members:
+          description: The list of providers that are providing care to the above patient.
+          items:
+            $ref: '#/components/schemas/PatientProviderTeamMember'
           readOnly: true
-          type: integer
-        physician_id:
-          description: The Physician that this team member represents.
-          readOnly: true
-          type: integer
-        rank:
-          description: Used for displaying a sorted patient provider team in the patient chart. Rank is sequential and begins at 1.
-          minimum: 1
-          readOnly: true
-          type: integer
-        treatment_reason:
-          description: The reason why this physician is in this team
-          type:
-          - string
-          - 'null'
+          type: array
+      required:
+      - patient_provider_team_id
       type: object
     PatientProviderTeamMemberUpdate:
       properties:
@@ -415,28 +357,6 @@ components:
           type:
           - string
           - 'null'
-      type: object
-    PaginatedPatientProviderTeamList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientProviderTeam'
-          type: array
-      required:
-      - results
       type: object
     PatientProviderTeamMember:
       properties:
@@ -492,30 +412,80 @@ components:
       - patient_provider_team_id
       - physician_id
       type: object
-    GroupEnum:
-      description: '* `main` - main
-
-        * `other` - other'
-      enum:
-      - main
-      - other
-      type: string
-    PatientProviderTeam:
+    PaginatedPatientProviderTeamList:
       properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientProviderTeam'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedPatientProviderTeamMemberUpdate:
+      properties:
+        activity_summary_last_refreshed:
+          description: The last known time when this team member's activity was synced.
+          format: date-time
+          readOnly: true
+          type: string
+        earliest_activity:
+          description: Displays the earliest known interaction between the team member and the patient.
+          format: date-time
+          readOnly: true
+          type: string
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupEnum'
+          default: main
+          description: 'Can either be `main` or `other`. By default members are placed in the `main` group. Only members in the `main` group will be displayed on the Patient chart in the web application.
+
+
+            * `main` - main
+
+            * `other` - other'
+        latest_activity:
+          description: Displays the latest known interaction between the team member and the patient.
+          format: date-time
+          readOnly: true
+          type: string
         patient_id:
-          description: The id of the Patient object that this team is associated with.
+          description: The id of the Patient that this team is associated with.
           readOnly: true
           type: integer
         patient_provider_team_id:
-          type: integer
-        team_members:
-          description: The list of providers that are providing care to the above patient.
-          items:
-            $ref: '#/components/schemas/PatientProviderTeamMember'
+          description: Patient Provider team ID
           readOnly: true
-          type: array
-      required:
-      - patient_provider_team_id
+          type: integer
+        patient_provider_team_member_id:
+          readOnly: true
+          type: integer
+        physician_id:
+          description: The Physician that this team member represents.
+          readOnly: true
+          type: integer
+        rank:
+          description: Used for displaying a sorted patient provider team in the patient chart. Rank is sequential and begins at 1.
+          minimum: 1
+          readOnly: true
+          type: integer
+        treatment_reason:
+          description: The reason why this physician is in this team
+          type:
+          - string
+          - 'null'
       type: object
   securitySchemes:
     oauth2:
@@ -528,9 +498,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-profile-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

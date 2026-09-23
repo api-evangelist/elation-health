@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Patient Form Submissions API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Patient Form Submissions across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Patient Form Submissions API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -93,11 +93,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient_form_submissions/{id}/:
     get:
       description: Retrieve a single patient form object
@@ -125,13 +120,30 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedPatientFormSubmissionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientFormSubmission'
+          type: array
+      required:
+      - results
+      type: object
     PatientFormSubmission:
       properties:
         appointment:
@@ -181,28 +193,6 @@ components:
       - patient
       - patient_form
       type: object
-    PaginatedPatientFormSubmissionList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientFormSubmission'
-          type: array
-      required:
-      - results
-      type: object
   securitySchemes:
     oauth2:
       flows:
@@ -214,9 +204,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

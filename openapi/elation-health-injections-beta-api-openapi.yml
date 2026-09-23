@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Injections (BETA) API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Injections (BETA) across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Injections (BETA) API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -63,11 +63,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/injections/{id}/:
     get:
       description: Retrieve a single injection
@@ -95,13 +90,129 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
+    DiagnosisCode:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        system:
+          type: string
+      required:
+      - code
+      - system
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+    ProcedureCodes:
+      properties:
+        code:
+          maxLength: 10
+          type: string
+        dxs:
+          items:
+            $ref: '#/components/schemas/DiagnosisCode'
+          type: array
+        modifier_1:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_2:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_3:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_4:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      - dxs
+      type: object
+    DoseUnitEnum:
+      description: '* `dL` - Deciliter
+
+        * `g` - Gram
+
+        * `kg` - Kilogram
+
+        * `kL` - Kiloliter
+
+        * `L` - Liter
+
+        * `mCi` - Millicurie
+
+        * `mg` - Milligram
+
+        * `mL` - Milliliter
+
+        * `ug` - Microgram
+
+        * `uL` - Microliter
+
+        * `tab` - Tablet'
+      enum:
+      - dL
+      - g
+      - kg
+      - kL
+      - L
+      - mCi
+      - mg
+      - mL
+      - ug
+      - uL
+      - tab
+      type: string
+    PaginatedInjectionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Injection'
+          type: array
+      required:
+      - results
+      type: object
+    Actor:
+      properties:
+        name:
+          type: string
+        type:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - name
+      type: object
     Injection:
       properties:
         contraindication:
@@ -295,8 +406,6 @@ components:
       - L Hand
       - Other
       type: string
-    NullEnum:
-      type: 'null'
     MethodEnum:
       description: '* `Intravenous` - Intravenous
 
@@ -314,125 +423,6 @@ components:
       - Intradermal
       - Other
       type: string
-    DoseUnitEnum:
-      description: '* `dL` - Deciliter
-
-        * `g` - Gram
-
-        * `kg` - Kilogram
-
-        * `kL` - Kiloliter
-
-        * `L` - Liter
-
-        * `mCi` - Millicurie
-
-        * `mg` - Milligram
-
-        * `mL` - Milliliter
-
-        * `ug` - Microgram
-
-        * `uL` - Microliter
-
-        * `tab` - Tablet'
-      enum:
-      - dL
-      - g
-      - kg
-      - kL
-      - L
-      - mCi
-      - mg
-      - mL
-      - ug
-      - uL
-      - tab
-      type: string
-    ProcedureCodes:
-      properties:
-        code:
-          maxLength: 10
-          type: string
-        dxs:
-          items:
-            $ref: '#/components/schemas/DiagnosisCode'
-          type: array
-        modifier_1:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        modifier_2:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        modifier_3:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        modifier_4:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      - dxs
-      type: object
-    PaginatedInjectionList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Injection'
-          type: array
-      required:
-      - results
-      type: object
-    DiagnosisCode:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        system:
-          type: string
-      required:
-      - code
-      - system
-      type: object
-    Actor:
-      properties:
-        name:
-          type: string
-        type:
-          readOnly: true
-          type: string
-        user_id:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-      required:
-      - name
-      type: object
-    BlankEnum:
-      enum:
-      - ''
   securitySchemes:
     oauth2:
       flows:
@@ -444,9 +434,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

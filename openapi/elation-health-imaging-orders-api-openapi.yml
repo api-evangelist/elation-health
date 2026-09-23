@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Imaging Orders API
   version: '1.0'
-  description: 'Operations tagged Imaging Orders across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Imaging Orders across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -732,38 +732,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    ImagingOrderTest:
-      properties:
-        code:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 255
-          type: string
-        practice:
-          format: int64
-          type: integer
-      required:
-      - name
-      - practice
-      type: object
     ICD10Code:
       properties:
         code:
@@ -905,68 +873,6 @@ components:
       required:
       - results
       type: object
-    StateEnum:
-      description: '* `outstanding` - Outstanding
-
-        * `fulfilled` - Fulfilled
-
-        * `cancelled` - Cancelled'
-      enum:
-      - outstanding
-      - fulfilled
-      - cancelled
-      type: string
-    DocumentResolutionState:
-      properties:
-        created_date:
-          description: The datetime when this resolution state was created.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document:
-          description: Will be the same as the id of the lab order.
-          format: int64
-          readOnly: true
-          type: integer
-        id:
-          description: Internal id to represent the resolution state.
-          readOnly: true
-          type: integer
-        note:
-          description: Any note that was added to represent why an order was cancelled.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        resolving_document:
-          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        state:
-          allOf:
-          - $ref: '#/components/schemas/StateEnum'
-          description: 'The resolution state of the order.
-
-
-            * `outstanding` - Outstanding
-
-            * `fulfilled` - Fulfilled
-
-            * `cancelled` - Cancelled'
-      required:
-      - state
-      type: object
     PatchedImagingOrder:
       properties:
         ancillary_company:
@@ -1064,6 +970,100 @@ components:
             - $ref: '#/components/schemas/ImagingOrderTest'
           type: array
       type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    DocumentResolutionState:
+      properties:
+        created_date:
+          description: The datetime when this resolution state was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: Internal id to represent the resolution state.
+          readOnly: true
+          type: integer
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
+      required:
+      - state
+      type: object
+    ImagingOrderTest:
+      properties:
+        code:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 255
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - name
+      - practice
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1084,7 +1084,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-orders-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

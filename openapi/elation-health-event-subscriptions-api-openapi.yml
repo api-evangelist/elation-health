@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Event Subscriptions API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Event Subscriptions across 2 of this provider''s published API definitions: elation-event-subscription-api.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Event Subscriptions API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -53,11 +53,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/app/published_events/{event_id}/:
     get:
       operationId: app_published_events_retrieve
@@ -85,6 +80,7 @@ paths:
       - '2.1'
       - '2.0'
     patch:
+      description: Update an existing app published event.
       operationId: app_published_events_partial_update
       parameters:
       - description: The ID of the event to retrieve
@@ -115,6 +111,7 @@ paths:
       - '2.1'
       - '2.0'
     put:
+      description: Replace an existing app published event.
       operationId: app_published_events_update
       parameters:
       - description: The ID of the event to retrieve
@@ -145,11 +142,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/app/subscriptions/:
     get:
       operationId: app_subscriptions_list
@@ -213,13 +205,9 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/app/subscriptions/{id}/:
     delete:
+      description: Delete an existing app subscription.
       operationId: app_subscriptions_destroy
       parameters:
       - in: path
@@ -265,11 +253,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/published_events/:
     get:
       description: Returns a list of published events
@@ -309,11 +292,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/published_events/{event_id}/:
     get:
       operationId: published_events_retrieve
@@ -341,6 +319,7 @@ paths:
       - '2.1'
       - '2.0'
     patch:
+      description: Update an existing published event.
       operationId: published_events_partial_update
       parameters:
       - description: The ID of the event to retrieve
@@ -371,6 +350,7 @@ paths:
       - '2.1'
       - '2.0'
     put:
+      description: Replace an existing published event.
       operationId: published_events_update
       parameters:
       - description: The ID of the event to retrieve
@@ -401,11 +381,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/subscriptions/:
     get:
       operationId: subscriptions_list
@@ -469,13 +444,9 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/subscriptions/{id}/:
     delete:
+      description: Delete an existing subscription.
       operationId: subscriptions_destroy
       parameters:
       - in: path
@@ -521,14 +492,31 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
-    PublishedEvent:
+    PaginatedPublishedEventList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PublishedEvent'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedPublishedEvent:
       properties:
         error_content:
           type:
@@ -561,8 +549,6 @@ components:
         target:
           readOnly: true
           type: string
-      required:
-      - processed_date
       type: object
     Subscription:
       properties:
@@ -599,7 +585,7 @@ components:
       - resource
       - target
       type: object
-    PatchedPublishedEvent:
+    PublishedEvent:
       properties:
         error_content:
           type:
@@ -632,6 +618,8 @@ components:
         target:
           readOnly: true
           type: string
+      required:
+      - processed_date
       type: object
     PaginatedSubscriptionList:
       properties:
@@ -655,28 +643,6 @@ components:
       required:
       - results
       type: object
-    PaginatedPublishedEventList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PublishedEvent'
-          type: array
-      required:
-      - results
-      type: object
   securitySchemes:
     oauth2:
       flows:
@@ -688,9 +654,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-event-subscription-api.json
-- elation-health-api-full-openapi.yaml
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Service Locations API
   version: '1.0'
-  description: 'Operations tagged Service Locations across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Service Locations across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -1114,6 +1114,8 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
     PatchedServiceLocation:
       properties:
         address_line1:
@@ -1187,12 +1189,6 @@ components:
           maxLength: 10
           type: string
       type: object
-    ServiceLocationStatusEnum:
-      enum:
-      - active
-      - inactive
-      - suspended
-      type: string
     PaginatedServiceLocationList:
       properties:
         count:
@@ -1215,141 +1211,9 @@ components:
       required:
       - results
       type: object
-    ServiceLocation:
-      properties:
-        address_line1:
-          description: The service location address.
-          type: string
-        address_line2:
-          description: The service location suite.
-          type: string
-        city:
-          default: ''
-          maxLength: 50
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        email:
-          format: email
-          maxLength: 254
-          type:
-          - string
-          - 'null'
-        fax:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_primary:
-          default: false
-          type: boolean
-        name:
-          maxLength: 200
-          type: string
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        place_of_service:
-          $ref: '#/components/schemas/ServiceLocationPlaceOfServiceEnum'
-        place_of_service_code:
-          type: integer
-        practice:
-          description: The id of the practice that the service location belongs to.
-          format: int64
-          type: integer
-        state:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ServiceLocationStatusEnum'
-          default: active
-          readOnly: true
-        timezone:
-          oneOf:
-          - $ref: '#/components/schemas/TimezoneEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        zip:
-          default: ''
-          maxLength: 10
-          type: string
-      required:
-      - address_line1
-      - name
-      - practice
-      - state
-      type: object
-    NullEnum:
-      type: 'null'
-    ServiceLocationPlaceOfServiceEnum:
+    BlankEnum:
       enum:
-      - Ambulance - Air or Water
-      - Ambulance - Land
-      - Ambulatory Surgical Center
-      - Assisted Living Facility
-      - Birthing Center
-      - Community Mental Health Center
-      - Comprehensive Inpatient Rehabilitation Facility
-      - Comprehensive Outpatient Rehabilitation Facility
-      - Custodial Care Facility
-      - Emergency Room - Hospital
-      - End-Stage Renal Disease Treatment Facility
-      - Federally Qualified Health Center
-      - Group Home
-      - Home
-      - Homeless Shelter
-      - Hospice
-      - Independent Clinic
-      - Independent Laboratory
-      - Indian Health ServiceFree-standing Facility
-      - Indian Health ServiceProvider-based Facility
-      - Inpatient Hospital
-      - Inpatient Psychiatric Facility
-      - Intermediate Care Facility/Individuals with Intellectual Disabilities
-      - Mass Immunization Center
-      - Military Treatment Facility
-      - Mobile Unit
-      - Non-residential Substance Abuse Treatment Facility
-      - Nursing Facility
-      - Off Campus Outpatient-Hospital
-      - Office
-      - On Campus-Outpatient Hospital
-      - Other Place of Service
-      - Outreach Site/Street
-      - Pharmacy
-      - Place of Employment-Worksite
-      - Prison/Correctional Facility
-      - Programs of All-Inclusive Care for the Elderly (PACE) Center
-      - Psychiatric Facility-Partial Hospitalization
-      - Psychiatric Residential Treatment Center
-      - Public Health Clinic
-      - Residential Substance Abuse Treatment Facility
-      - Rural Health Clinic
-      - School
-      - Skilled Nursing Facility
-      - Telehealth Provided Other than in Patient’s Home
-      - Telehealth Provided in Patient’s Home
-      - Temporary Lodging
-      - Tribal 638Free-standingFacility
-      - Tribal 638Provider-basedFacility
-      - Urgent Care Facility
-      - Walk-in Retail Health Clinic
-      type: string
+      - ''
     TimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -1786,9 +1650,145 @@ components:
       - US/Pacific
       - UTC
       type: string
-    BlankEnum:
+    ServiceLocation:
+      properties:
+        address_line1:
+          description: The service location address.
+          type: string
+        address_line2:
+          description: The service location suite.
+          type: string
+        city:
+          default: ''
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          maxLength: 254
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_primary:
+          default: false
+          type: boolean
+        name:
+          maxLength: 200
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        place_of_service:
+          $ref: '#/components/schemas/ServiceLocationPlaceOfServiceEnum'
+        place_of_service_code:
+          type: integer
+        practice:
+          description: The id of the practice that the service location belongs to.
+          format: int64
+          type: integer
+        state:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ServiceLocationStatusEnum'
+          default: active
+          readOnly: true
+        timezone:
+          oneOf:
+          - $ref: '#/components/schemas/TimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        zip:
+          default: ''
+          maxLength: 10
+          type: string
+      required:
+      - address_line1
+      - name
+      - practice
+      - state
+      type: object
+    ServiceLocationStatusEnum:
       enum:
-      - ''
+      - active
+      - inactive
+      - suspended
+      type: string
+    ServiceLocationPlaceOfServiceEnum:
+      enum:
+      - Ambulance - Air or Water
+      - Ambulance - Land
+      - Ambulatory Surgical Center
+      - Assisted Living Facility
+      - Birthing Center
+      - Community Mental Health Center
+      - Comprehensive Inpatient Rehabilitation Facility
+      - Comprehensive Outpatient Rehabilitation Facility
+      - Custodial Care Facility
+      - Emergency Room - Hospital
+      - End-Stage Renal Disease Treatment Facility
+      - Federally Qualified Health Center
+      - Group Home
+      - Home
+      - Homeless Shelter
+      - Hospice
+      - Independent Clinic
+      - Independent Laboratory
+      - Indian Health ServiceFree-standing Facility
+      - Indian Health ServiceProvider-based Facility
+      - Inpatient Hospital
+      - Inpatient Psychiatric Facility
+      - Intermediate Care Facility/Individuals with Intellectual Disabilities
+      - Mass Immunization Center
+      - Military Treatment Facility
+      - Mobile Unit
+      - Non-residential Substance Abuse Treatment Facility
+      - Nursing Facility
+      - Off Campus Outpatient-Hospital
+      - Office
+      - On Campus-Outpatient Hospital
+      - Other Place of Service
+      - Outreach Site/Street
+      - Pharmacy
+      - Place of Employment-Worksite
+      - Prison/Correctional Facility
+      - Programs of All-Inclusive Care for the Elderly (PACE) Center
+      - Psychiatric Facility-Partial Hospitalization
+      - Psychiatric Residential Treatment Center
+      - Public Health Clinic
+      - Residential Substance Abuse Treatment Facility
+      - Rural Health Clinic
+      - School
+      - Skilled Nursing Facility
+      - Telehealth Provided Other than in Patient’s Home
+      - Telehealth Provided in Patient’s Home
+      - Temporary Lodging
+      - Tribal 638Free-standingFacility
+      - Tribal 638Provider-basedFacility
+      - Urgent Care Facility
+      - Walk-in Retail Health Clinic
+      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -1809,7 +1809,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-practice-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

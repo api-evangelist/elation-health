@@ -1,80 +1,356 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Problems API
-  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
-  version: '2.0'
-  contact:
-    name: Elation Health Developer Support
-    url: https://docs.elationhealth.com/reference/api-overview
-  termsOfService: https://www.elationhealth.com/
+  title: Elation Health Problems API
+  version: '1.0'
+  description: 'Operations tagged Problems across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-health-elation-health-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
 - url: https://app.elationemr.com/api/2.0
   description: Production
-- url: https://sandbox.elationemr.com/api/2.0
-  description: Sandbox
-security:
-- oauth2: []
 tags:
 - name: Problems
-  description: Patient problem list management
 paths:
   /problems/:
     get:
-      operationId: problems_list
-      summary: List problems
-      description: Retrieve a paginated list of patient problems.
-      tags:
-      - Problems
+      summary: Find Problems
+      description: ''
+      operationId: list-problems
       parameters:
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/offset'
-      - name: patient
-        in: query
+      - name: Authorization
+        in: header
+        required: true
         schema:
-          type: integer
-        description: Filter by patient ID
+          type: string
+      - name: patient
+        in: path
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+        required: true
       responses:
         '200':
-          description: Paginated list of problems
+          description: '200'
           content:
             application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/problems/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/problems/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
               schema:
-                $ref: '#/components/schemas/PaginatedProblemList'
-    post:
-      operationId: problems_create
-      summary: Create a problem
-      description: Add a new problem to a patient's problem list.
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/problems/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        - language: text
+          code: 'url https://sandbox.elationemr.com/api/2.0/problems/ \
+
+            > -H "Authorization: Bearer e2itiEbVvhqGSxj5V6xjyFy1A4xfIi"'
+          name: cURL
+        samples-languages:
+        - python
+        - text
       tags:
       - Problems
-      requestBody:
+      security:
+      - sec0: []
+    post:
+      summary: Create Problem
+      description: ''
+      operationId: create-problem
+      parameters:
+      - name: Authorization
+        in: header
         required: true
+        schema:
+          type: string
+      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProblemCreate'
-      responses:
-        '201':
-          description: Problem created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-  /problems/{id}/:
-    get:
-      operationId: problems_retrieve
-      summary: Retrieve a problem
-      description: Get details for a specific patient problem.
-      tags:
-      - Problems
-      parameters:
-      - $ref: '#/components/parameters/id'
+              type: object
+              required:
+              - patient
+              - status
+              - dx
+              - practice
+              properties:
+                patient:
+                  type: integer
+                  description: The Patient id
+                  format: int32
+                status:
+                  type: string
+                  description: problem status
+                  enum:
+                  - Active
+                  - Controlled
+                  - Resolved
+                dx:
+                  type: array
+                  description: diagnosed object
+                  items:
+                    properties:
+                      icd10:
+                        type: array
+                        items:
+                          properties:
+                            code:
+                              type: string
+                              description: icd10 code
+                          type: object
+                      snomed:
+                        type: integer
+                        description: snomed code
+                        format: int32
+                    type: object
+                description:
+                  type: string
+                  description: problem description
+                synopsis:
+                  type: string
+                  description: problem detail
+                start_date:
+                  type: string
+                  description: problem start date
+                  format: date
+                resolved_date:
+                  type: string
+                  description: problem resolved date
+                  format: date
+                rank:
+                  type: integer
+                  description: count of problems
+                  default: null
+                  format: int32
+                practice:
+                  type: integer
+                  description: The practice id
+                  format: int32
+                created_date:
+                  type: string
+                  description: date problem was created
+                  format: date
+                deleted_date:
+                  type: string
+                  description: date problem was deleted
+                  format: date
       responses:
         '200':
-          description: Problem details
+          description: '200'
           content:
             application/json:
+              examples:
+                Result:
+                  value: '{}'
               schema:
-                $ref: '#/components/schemas/Problem'
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {\n  \"dx\": [{\"snomed\": \"216267008\"}],\n  \"patient\": 64901939201,\n  \"status\": \"Active\"\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/problems/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Problems
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /problems/{id}/:
+    get:
+      summary: Get Problem
+      description: ''
+      operationId: get-problem
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 65097170987,\n  // See Object Definition\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/problems/65097170987/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Problems
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Problem
+      description: ''
+      operationId: delete-problem
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/problems/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Problems
+      security:
+      - sec0: []
+    patch:
+      summary: Update Problem
+      description: ''
+      operationId: patch-problem
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: problem status
+                  enum:
+                  - Active
+                  - Controlled
+                  - Resolved
+                dx:
+                  type: array
+                  description: diagnosed object
+                  items:
+                    properties:
+                      icd10:
+                        type: array
+                        items:
+                          properties:
+                            code:
+                              type: string
+                              description: icd10 code
+                          type: object
+                      snomed:
+                        type: integer
+                        description: snomed code
+                        format: int32
+                    type: object
+                description:
+                  type: string
+                  description: problem description
+                rank:
+                  type: integer
+                  description: count of problems
+                  default: null
+                  format: int32
+                resolved_date:
+                  type: string
+                  description: problem resolved date
+                  format: date
+                synopsis:
+                  type: string
+                  description: problem details
+                start_date:
+                  type: string
+                  description: problem start date
+                  format: date
+                created_date:
+                  type: string
+                  description: creation date
+                  format: date
+                deleted_date:
+                  type: string
+                  description: date problem was deleted
+                  format: date
+                patient:
+                  type: integer
+                  description: patient Id
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n  \"status\": \"Resolved\",\n  \"resolved_date\": \"2016-10-12\"\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/problems/67176497153/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2))"
+        samples-languages:
+        - python
+      tags:
+      - Problems
+      security:
+      - sec0: []
     put:
       operationId: problems_update
       summary: Update a problem
@@ -96,40 +372,406 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Problem'
-    patch:
-      operationId: problems_partial_update
-      summary: Partially update a problem
-      description: Update one or more problem fields.
-      tags:
-      - Problems
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/problems/:
+    get:
+      description: Returns a list of problems
+      operationId: problems_list
       parameters:
-      - $ref: '#/components/parameters/id'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProblemCreate'
+      - in: query
+        name: created_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: created_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: '* `Active` - Active
+
+          * `Controlled` - Controlled
+
+          * `Resolved` - Resolved'
+        in: query
+        name: status
+        schema:
+          enum:
+          - Active
+          - Controlled
+          - Resolved
+          type: string
       responses:
         '200':
-          description: Problem updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Problem'
-    delete:
-      operationId: problems_destroy
-      summary: Delete a problem
-      description: Remove a problem from the patient's problem list.
+                $ref: '#/components/schemas/PaginatedPatientProblemList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Problems
       tags:
       - Problems
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new problem.
+      operationId: problems_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientProblem'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientProblem'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Problem
+      tags:
+      - Problems
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/problems/{id}/:
+    delete:
+      description: Delete an existing problem.
+      operationId: problems_destroy
       parameters:
-      - $ref: '#/components/parameters/id'
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
       responses:
         '204':
-          description: Problem deleted
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Problem
+      tags:
+      - Problems
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single problem
+      operationId: problems_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientProblem'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Problem
+      tags:
+      - Problems
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing problem.
+      operationId: problems_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatientProblem'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientProblem'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Problem
+      tags:
+      - Problems
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing problem.
+      operationId: problems_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientProblem'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientProblem'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Problem
+      tags:
+      - Problems
+      x-el8-docs-category: Patient Profile API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
+    ImoCodeRelation:
+      properties:
+        icd10:
+          items:
+            type: string
+          type: array
+        icd9:
+          items:
+            type: string
+          type: array
+        snomed:
+          type: string
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+    PaginatedPatientProblemList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientProblem'
+          type: array
+      required:
+      - results
+      type: object
+    VerificationStatusEnum:
+      enum:
+      - confirmed
+      - differential
+      - entered_in_error
+      - provisional
+      - refuted
+      - unconfirmed
+      type: string
+    PatchedPatientProblem:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 200
+          type: string
+        dx:
+          description: The diagnoses for imo codes.
+          items:
+            $ref: '#/components/schemas/ImoCodeRelation'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        rank:
+          type: integer
+        resolved_date:
+          description: Date the problem was resolved. Set only if `status` is `Resolved`.
+          format: date
+          type:
+          - string
+          - 'null'
+        start_date:
+          format: date
+          type: string
+        status:
+          $ref: '#/components/schemas/PatientProblemStatusEnum'
+        synopsis:
+          type: string
+        verification_status:
+          oneOf:
+          - $ref: '#/components/schemas/VerificationStatusEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      type: object
+    PatientProblem:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 200
+          type: string
+        dx:
+          description: The diagnoses for imo codes.
+          items:
+            $ref: '#/components/schemas/ImoCodeRelation'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        rank:
+          type: integer
+        resolved_date:
+          description: Date the problem was resolved. Set only if `status` is `Resolved`.
+          format: date
+          type:
+          - string
+          - 'null'
+        start_date:
+          format: date
+          type: string
+        status:
+          $ref: '#/components/schemas/PatientProblemStatusEnum'
+        synopsis:
+          type: string
+        verification_status:
+          oneOf:
+          - $ref: '#/components/schemas/VerificationStatusEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      required:
+      - description
+      - dx
+      - patient
+      - start_date
+      - status
+      type: object
+    PatientProblemStatusEnum:
+      enum:
+      - Active
+      - Controlled
+      - Resolved
+      type: string
     ProblemCreate:
       type: object
       required:
@@ -155,9 +797,10 @@ components:
           format: date-time
           description: Date the problem started
         resolved_date:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: Date the problem was resolved (required when status is Resolved)
         patient:
           type: integer
@@ -190,9 +833,10 @@ components:
             format: date-time
             readOnly: true
           deleted_date:
-            type: string
+            type:
+            - string
+            - 'null'
             format: date-time
-            nullable: true
             readOnly: true
     PaginatedProblemList:
       allOf:
@@ -210,28 +854,16 @@ components:
           type: integer
           description: Total number of results
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for next page
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for previous page
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -239,11 +871,41 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
-    oauth2:
+    sec0:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
           scopes:
-            apiv2: Full API access
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-health-elation-health-api-openapi.yml
+x-readme:
+  headers: []
+x-readme-fauxas: true

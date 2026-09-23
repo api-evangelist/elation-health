@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Report Internal Notes API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Report Internal Notes across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Report Internal Notes API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -75,11 +75,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/reports/{id}/internal_notes/{note_id}/:
     delete:
       description: Delete a specific internal note
@@ -178,13 +173,23 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedInternalPracticeNoteSerializerProxy:
+      properties:
+        document:
+          description: The report (document) ID this note belongs to
+          readOnly: true
+          type: integer
+        id:
+          description: The id of the internal note.
+          readOnly: true
+          type: integer
+        text:
+          description: The internal note text content
+          maxLength: 256
+          type: string
+      type: object
     InternalPracticeNoteSerializerProxy:
       properties:
         document:
@@ -202,21 +207,6 @@ components:
       required:
       - text
       type: object
-    PatchedInternalPracticeNoteSerializerProxy:
-      properties:
-        document:
-          description: The report (document) ID this note belongs to
-          readOnly: true
-          type: integer
-        id:
-          description: The id of the internal note.
-          readOnly: true
-          type: integer
-        text:
-          description: The internal note text content
-          maxLength: 256
-          type: string
-      type: object
   securitySchemes:
     oauth2:
       flows:
@@ -228,9 +218,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

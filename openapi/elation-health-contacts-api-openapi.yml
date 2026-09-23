@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Contacts API
   version: '1.0'
-  description: 'Operations tagged Contacts across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Contacts across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -747,72 +747,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedContactList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Contact'
-          type: array
-      required:
-      - results
-      type: object
-    PaginatedContactsSearchResultList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ContactsSearchResult'
-          type: array
-      required:
-      - results
-      type: object
-    MedicalSpecialtyCategory:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-      required:
-      - name
-      type: object
     Contact:
       properties:
         accepting_insurance:
@@ -944,6 +878,78 @@ components:
       - middle_name
       - practice
       type: object
+    MedicalSpecialty:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type: string
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - abbreviation
+      - name
+      type: object
+    MedicalSpecialtyCategory:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+      required:
+      - name
+      type: object
+    PaginatedContactList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+      required:
+      - results
+      type: object
     PatchedContact:
       properties:
         accepting_insurance:
@@ -1068,6 +1074,28 @@ components:
           maxLength: 10
           type: string
       type: object
+    PaginatedContactsSearchResultList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ContactsSearchResult'
+          type: array
+      required:
+      - results
+      type: object
     ContactsSearchResult:
       description: Serializer used to work with contacts found via elasticsearch
       properties:
@@ -1125,34 +1153,6 @@ components:
       required:
       - name
       type: object
-    MedicalSpecialty:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type: string
-        category:
-          $ref: '#/components/schemas/MedicalSpecialtyCategory'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      required:
-      - abbreviation
-      - name
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1173,7 +1173,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-practice-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

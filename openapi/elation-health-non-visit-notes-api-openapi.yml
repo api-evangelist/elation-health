@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Non Visit Notes API
   version: '1.0'
-  description: 'Operations tagged Non Visit Notes across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Non Visit Notes across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -1179,6 +1179,41 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    NonVisitNoteDocument:
+      properties:
+        document:
+          $ref: '#/components/schemas/Document'
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          type:
+          - string
+          - 'null'
+      required:
+      - document
+      type: object
+    NonVisitNoteBullet:
+      properties:
+        author:
+          description: The author of the bullet.
+          type: integer
+        id:
+          type: integer
+        text:
+          description: The text of the bullet.
+          type: string
+        updated_date:
+          format: date-time
+          readOnly: true
+          type: string
+        version:
+          maximum: 65535
+          minimum: 0
+          type: integer
+      required:
+      - text
+      type: object
     NonVisitNotePatientItem:
       properties:
         id:
@@ -1188,6 +1223,163 @@ components:
           $ref: '#/components/schemas/PatientItem'
       required:
       - item
+      type: object
+    NonVisitNote:
+      properties:
+        bullets:
+          description: The bullets of the non visit note.
+          items:
+            $ref: '#/components/schemas/NonVisitNoteBullet'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        note_documents:
+          description: The documents referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNoteDocument'
+            - type: 'null'
+          type: array
+        note_items:
+          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNotePatientItem'
+            - type: 'null'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        tags:
+          description: The ids of the document tags you want to attach.
+          items:
+            format: int64
+            type: integer
+          type: array
+        type:
+          description: The type of the non visit note.
+          type: string
+      required:
+      - chart_date
+      - document_date
+      - patient
+      - type
+      type: object
+    PaginatedNonVisitNoteList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/NonVisitNote'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedNonVisitNote:
+      properties:
+        bullets:
+          description: The bullets of the non visit note.
+          items:
+            $ref: '#/components/schemas/NonVisitNoteBullet'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        note_documents:
+          description: The documents referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNoteDocument'
+            - type: 'null'
+          type: array
+        note_items:
+          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNotePatientItem'
+            - type: 'null'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        tags:
+          description: The ids of the document tags you want to attach.
+          items:
+            format: int64
+            type: integer
+          type: array
+        type:
+          description: The type of the non visit note.
+          type: string
       type: object
     Document:
       properties:
@@ -1277,198 +1469,6 @@ components:
       - patient
       - type
       type: object
-    NonVisitNote:
-      properties:
-        bullets:
-          description: The bullets of the non visit note.
-          items:
-            $ref: '#/components/schemas/NonVisitNoteBullet'
-          type: array
-        chart_date:
-          format: date-time
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        note_documents:
-          description: The documents referenced by the non visit note.
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/NonVisitNoteDocument'
-            - type: 'null'
-          type: array
-        note_items:
-          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/NonVisitNotePatientItem'
-            - type: 'null'
-          type: array
-        patient:
-          format: int64
-          type: integer
-        signed_by:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        tags:
-          description: The ids of the document tags you want to attach.
-          items:
-            format: int64
-            type: integer
-          type: array
-        type:
-          description: The type of the non visit note.
-          type: string
-      required:
-      - chart_date
-      - document_date
-      - patient
-      - type
-      type: object
-    PatchedNonVisitNote:
-      properties:
-        bullets:
-          description: The bullets of the non visit note.
-          items:
-            $ref: '#/components/schemas/NonVisitNoteBullet'
-          type: array
-        chart_date:
-          format: date-time
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        note_documents:
-          description: The documents referenced by the non visit note.
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/NonVisitNoteDocument'
-            - type: 'null'
-          type: array
-        note_items:
-          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/NonVisitNotePatientItem'
-            - type: 'null'
-          type: array
-        patient:
-          format: int64
-          type: integer
-        signed_by:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        tags:
-          description: The ids of the document tags you want to attach.
-          items:
-            format: int64
-            type: integer
-          type: array
-        type:
-          description: The type of the non visit note.
-          type: string
-      type: object
-    PaginatedNonVisitNoteList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/NonVisitNote'
-          type: array
-      required:
-      - results
-      type: object
-    NonVisitNoteBullet:
-      properties:
-        author:
-          description: The author of the bullet.
-          type: integer
-        id:
-          type: integer
-        text:
-          description: The text of the bullet.
-          type: string
-        updated_date:
-          format: date-time
-          readOnly: true
-          type: string
-        version:
-          maximum: 65535
-          minimum: 0
-          type: integer
-      required:
-      - text
-      type: object
-    NonVisitNoteDocument:
-      properties:
-        document:
-          $ref: '#/components/schemas/Document'
-        id:
-          readOnly: true
-          type: integer
-        summary:
-          type:
-          - string
-          - 'null'
-      required:
-      - document
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1489,7 +1489,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

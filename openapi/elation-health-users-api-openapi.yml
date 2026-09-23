@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Users API
   version: '1.0'
-  description: 'Operations tagged Users across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-user-management-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Users across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -281,92 +281,22 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedUserList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedUser:
-      properties:
-        account_type:
-          oneOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        credentialed:
-          default: false
-          type: boolean
-        email:
-          maxLength: 255
-          type: string
-        first_name:
-          maxLength: 50
-          type: string
-        has_chart_access:
-          default: true
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        is_active:
-          type: boolean
-        is_practice_admin:
-          default: false
-          type: boolean
-        is_read_only:
-          default: false
-          type: boolean
-        last_name:
-          maxLength: 60
-          type: string
-        physician_qualifications:
-          $ref: '#/components/schemas/PhysicianQualifications'
-        practice:
-          format: int64
-          type: integer
-        user_type:
-          $ref: '#/components/schemas/UserTypeEnum'
-      type: object
-    PhysicianQualifications:
-      properties:
-        credentials:
-          maxLength: 50
-          type: string
-        dea:
-          maxLength: 50
-          type: string
-        license:
-          maxLength: 50
-          type: string
-        license_state:
-          maxLength: 2
-          type: string
-        npi:
-          maxLength: 10
-          type:
-          - string
-          - 'null'
-      required:
-      - credentials
-      - license
-      - license_state
-      type: object
+    NullEnum:
+      type: 'null'
+    AccountTypeEnum:
+      description: '* `regular` - Regular staff
+
+        * `oncall` - On call (not paid)
+
+        * `ft_non_prescribing` - Full-Time Non-Prescribing
+
+        * `pt_prescribing` - Limited Use'
+      enum:
+      - regular
+      - oncall
+      - ft_non_prescribing
+      - pt_prescribing
+      type: string
     User:
       properties:
         account_type:
@@ -414,27 +344,97 @@ components:
       - practice
       - user_type
       type: object
-    AccountTypeEnum:
-      description: '* `regular` - Regular staff
-
-        * `oncall` - On call (not paid)
-
-        * `ft_non_prescribing` - Full-Time Non-Prescribing
-
-        * `pt_prescribing` - Limited Use'
-      enum:
-      - regular
-      - oncall
-      - ft_non_prescribing
-      - pt_prescribing
-      type: string
-    NullEnum:
-      type: 'null'
+    PatchedUser:
+      properties:
+        account_type:
+          oneOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        credentialed:
+          default: false
+          type: boolean
+        email:
+          maxLength: 255
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        has_chart_access:
+          default: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          type: boolean
+        is_practice_admin:
+          default: false
+          type: boolean
+        is_read_only:
+          default: false
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        physician_qualifications:
+          $ref: '#/components/schemas/PhysicianQualifications'
+        practice:
+          format: int64
+          type: integer
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
+      type: object
+    PaginatedUserList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      required:
+      - results
+      type: object
     UserTypeEnum:
       enum:
       - physician
       - staff
       type: string
+    PhysicianQualifications:
+      properties:
+        credentials:
+          maxLength: 50
+          type: string
+        dea:
+          maxLength: 50
+          type: string
+        license:
+          maxLength: 50
+          type: string
+        license_state:
+          maxLength: 2
+          type: string
+        npi:
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+      required:
+      - credentials
+      - license
+      - license_state
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -455,7 +455,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-user-management-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

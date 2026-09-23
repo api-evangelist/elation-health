@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Message Threads API
   version: '1.0'
-  description: 'Operations tagged Message Threads across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-messaging-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Message Threads across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -798,168 +798,11 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    Document:
-      properties:
-        authoring_practice:
-          format: int64
-          type: integer
-        chart_date:
-          description: The creation date of the patient chart.
-          format: date-time
-          type: string
-        created_date:
-          description: The creation date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The deleted date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
-          format: date-time
-          type: string
-        document_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        id:
-          format: int64
-          type: integer
-        last_modified:
-          format: date-time
-          type: string
-        patient:
-          format: int64
-          type: integer
-        sign_date:
-          description: The date of when the document was signed (if signed).
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        signed_by:
-          description: The id of whoever signed the document (if signed).
-          readOnly: true
-          type: integer
-      required:
-      - authoring_practice
-      - chart_date
-      - document_date
-      - id
-      - patient
-      type: object
-    PatchedMessageThread:
-      properties:
-        chart_date:
-          description: When the message thread's patient chart was created.
-          format: date-time
-          type: string
-        created_date:
-          description: When the message thread was created.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: When the message thread was deleted.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        delivery_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: When the message thread's document was created.
-          format: date-time
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        is_urgent:
-          default: false
-          description: Whether the message is currently urgent.
-          type: boolean
-        members:
-          description: List of Thread Members, when creating only need to specify the id of the thread member and their status.
-          items:
-            $ref: '#/components/schemas/ThreadMember'
-          type: array
-        messages:
-          description: List of Thread Messages, when creating only need to provide the body, send_date and sender.
-          items:
-            $ref: '#/components/schemas/ThreadMessage'
-          type: array
-        patient:
-          description: The patient chart for which the thread is about.
-          format: int64
-          type: integer
-        practice:
-          description: The id of the practice that owns the patient chart.
-          format: int64
-          type: integer
-        signed_by:
-          description: The user who signed the thread
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          description: The date and time when the thread was signed
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    ThreadMessage:
-      properties:
-        body:
-          description: The actual message body.
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        patient:
-          description: The patient id.
-          format: int64
-          readOnly: true
-          type: integer
-        practice:
-          description: The practice id.
-          format: int64
-          readOnly: true
-          type: integer
-        send_date:
-          description: The date of when the message was sent.
-          format: date-time
-          type: string
-        sender:
-          description: The id of who sent the message.
-          type: integer
-        thread:
-          description: The message thread id.
-          format: int64
-          type: integer
-        to_document:
-          $ref: '#/components/schemas/Document'
-      required:
-      - body
-      - send_date
-      - sender
-      type: object
+    ThreadMemberStatusEnum:
+      enum:
+      - Addressed
+      - Requiring Action
+      type: string
     MessageThread:
       properties:
         chart_date:
@@ -1032,11 +875,190 @@ components:
       - patient
       - practice
       type: object
-    ThreadMemberStatusEnum:
-      enum:
-      - Addressed
-      - Requiring Action
-      type: string
+    PatchedMessageThread:
+      properties:
+        chart_date:
+          description: When the message thread's patient chart was created.
+          format: date-time
+          type: string
+        created_date:
+          description: When the message thread was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the message thread was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: When the message thread's document was created.
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          description: Whether the message is currently urgent.
+          type: boolean
+        members:
+          description: List of Thread Members, when creating only need to specify the id of the thread member and their status.
+          items:
+            $ref: '#/components/schemas/ThreadMember'
+          type: array
+        messages:
+          description: List of Thread Messages, when creating only need to provide the body, send_date and sender.
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          type: array
+        patient:
+          description: The patient chart for which the thread is about.
+          format: int64
+          type: integer
+        practice:
+          description: The id of the practice that owns the patient chart.
+          format: int64
+          type: integer
+        signed_by:
+          description: The user who signed the thread
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The date and time when the thread was signed
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedMessageThreadList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MessageThread'
+          type: array
+      required:
+      - results
+      type: object
+    ThreadMessage:
+      properties:
+        body:
+          description: The actual message body.
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient id.
+          format: int64
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice id.
+          format: int64
+          readOnly: true
+          type: integer
+        send_date:
+          description: The date of when the message was sent.
+          format: date-time
+          type: string
+        sender:
+          description: The id of who sent the message.
+          type: integer
+        thread:
+          description: The message thread id.
+          format: int64
+          type: integer
+        to_document:
+          $ref: '#/components/schemas/Document'
+      required:
+      - body
+      - send_date
+      - sender
+      type: object
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
     ThreadMember:
       properties:
         ack_time:
@@ -1068,28 +1090,6 @@ components:
       required:
       - status
       type: object
-    PaginatedMessageThreadList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/MessageThread'
-          type: array
-      required:
-      - results
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1110,7 +1110,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-messaging-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

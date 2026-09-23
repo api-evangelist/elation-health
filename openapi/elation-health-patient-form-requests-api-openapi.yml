@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Patient Form Requests API
   version: '1.0'
-  description: 'Operations tagged Patient Form Requests across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Patient Form Requests across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -590,47 +590,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientFormRequest:
-      properties:
-        appointment:
-          description: The ID of an appointment to associate with this form request. When the appointment is in the past, the notification_date validation is skipped.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        forms_url:
-          format: uri
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        notification_date:
-          description: This is the date that the request will appear in the Practice's action queue. Must be in the future unless an appointment in the past is provided. Defaults to one week from today.
-          format: date
-          type: string
-        patient:
-          description: The ID of the patient that should be associated with the request.
-          format: int64
-          type: integer
-        patient_forms:
-          description: The IDs of the forms that should be associated to the request. Please note that you must create these forms before trying to create a request.
-          items:
-            type: integer
-          type: array
-        practice:
-          readOnly: true
-          type: integer
-      required:
-      - patient
-      - patient_forms
-      type: object
     PaginatedPatientFormRequestList:
       properties:
         count:
@@ -691,6 +650,47 @@ components:
           readOnly: true
           type: integer
       type: object
+    PatientFormRequest:
+      properties:
+        appointment:
+          description: The ID of an appointment to associate with this form request. When the appointment is in the past, the notification_date validation is skipped.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        forms_url:
+          format: uri
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        notification_date:
+          description: This is the date that the request will appear in the Practice's action queue. Must be in the future unless an appointment in the past is provided. Defaults to one week from today.
+          format: date
+          type: string
+        patient:
+          description: The ID of the patient that should be associated with the request.
+          format: int64
+          type: integer
+        patient_forms:
+          description: The IDs of the forms that should be associated to the request. Please note that you must create these forms before trying to create a request.
+          items:
+            type: integer
+          type: array
+        practice:
+          readOnly: true
+          type: integer
+      required:
+      - patient
+      - patient_forms
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -711,7 +711,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

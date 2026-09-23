@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Ccda API
   version: '1.0'
-  description: 'Operations tagged Ccda across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Ccda across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -10,7 +10,7 @@ servers:
 - description: Production Server
   url: https://api.app.elationemr.com
 tags:
-- name: Ccda
+- name: CCDA
 paths:
   /ccda/:
     post:
@@ -62,7 +62,7 @@ paths:
         samples-languages:
         - python
       tags:
-      - Ccda
+      - CCDA
       security:
       - sec0: []
     servers:
@@ -111,7 +111,7 @@ paths:
         samples-languages:
         - python
       tags:
-      - Ccda
+      - CCDA
       security:
       - sec0: []
     servers:
@@ -160,7 +160,7 @@ paths:
         samples-languages:
         - python
       tags:
-      - Ccda
+      - CCDA
       security:
       - sec0: []
     servers:
@@ -216,7 +216,7 @@ paths:
       - oauth2: []
       summary: Retrieve Ccda
       tags:
-      - Ccda
+      - CCDA
       x-el8-docs-category: Patient Document API
       x-el8-docs-versions:
       - '2.1'
@@ -260,7 +260,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

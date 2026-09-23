@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Handouts API
   version: '1.0'
-  description: 'Operations tagged Handouts across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Handouts across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -907,38 +907,120 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    ContentSerializerNoBase64Content:
-      description: The Content serializer. It serialize file data without base64_content
+    Content:
+      description: The Content serializer. It serialize file data
       properties:
+        base64_content:
+          type: string
         content_type:
+          readOnly: true
           type: string
         original_filename:
+          maxLength: 200
           type: string
       required:
-      - content_type
+      - base64_content
       - original_filename
       type: object
-    PaginatedHandoutsSerializerNoBase64ContentList:
+    HandoutType:
+      enum:
+      - Patient Resource
+      - VIS
+      type: string
+    PatchedHandout:
+      description: 'Contains only webhooks
+
+        All other fields inherited'
       properties:
-        count:
-          example: 123
+        content:
+          $ref: '#/components/schemas/Content'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        name:
+          description: The name of the handout.
+          maxLength: 255
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
+        practice_created:
+          format: int64
+          type: integer
+        received_date:
+          format: date-time
+          readOnly: true
           type: string
-        results:
+        tags:
           items:
-            $ref: '#/components/schemas/HandoutsSerializerNoBase64Content'
+            type: string
           type: array
+        type:
+          $ref: '#/components/schemas/HandoutType'
+        vis_barcode:
+          description: Should only be set if the type == VIS.
+          maxLength: 30
+          type:
+          - string
+          - 'null'
+      type: object
+    HandoutsSerializerNoBase64Content:
+      description: Handout serializer that returns content without base64_content
+      properties:
+        content:
+          $ref: '#/components/schemas/ContentSerializerNoBase64Content'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the handout.
+          maxLength: 255
+          type: string
+        practice_created:
+          format: int64
+          type: integer
+        received_date:
+          format: date-time
+          readOnly: true
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/HandoutType'
+        vis_barcode:
+          description: Should only be set if the type == VIS.
+          maxLength: 30
+          type:
+          - string
+          - 'null'
       required:
-      - results
+      - content
+      - name
+      - practice_created
+      - type
       type: object
     Handout:
       description: 'Contains only webhooks
@@ -991,121 +1073,39 @@ components:
       - practice_created
       - type
       type: object
-    HandoutsSerializerNoBase64Content:
-      description: Handout serializer that returns content without base64_content
+    PaginatedHandoutsSerializerNoBase64ContentList:
       properties:
-        content:
-          $ref: '#/components/schemas/ContentSerializerNoBase64Content'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
+        count:
+          example: 123
           type: integer
-        name:
-          description: The name of the handout.
-          maxLength: 255
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
           type: string
-        practice_created:
-          format: int64
-          type: integer
-        received_date:
-          format: date-time
-          readOnly: true
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
           type: string
-        tags:
+        results:
           items:
-            type: string
+            $ref: '#/components/schemas/HandoutsSerializerNoBase64Content'
           type: array
-        type:
-          $ref: '#/components/schemas/HandoutType'
-        vis_barcode:
-          description: Should only be set if the type == VIS.
-          maxLength: 30
-          type:
-          - string
-          - 'null'
       required:
-      - content
-      - name
-      - practice_created
-      - type
+      - results
       type: object
-    PatchedHandout:
-      description: 'Contains only webhooks
-
-        All other fields inherited'
+    ContentSerializerNoBase64Content:
+      description: The Content serializer. It serialize file data without base64_content
       properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          description: The name of the handout.
-          maxLength: 255
-          type: string
-        practice_created:
-          format: int64
-          type: integer
-        received_date:
-          format: date-time
-          readOnly: true
-          type: string
-        tags:
-          items:
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/HandoutType'
-        vis_barcode:
-          description: Should only be set if the type == VIS.
-          maxLength: 30
-          type:
-          - string
-          - 'null'
-      type: object
-    Content:
-      description: The Content serializer. It serialize file data
-      properties:
-        base64_content:
-          type: string
         content_type:
-          readOnly: true
           type: string
         original_filename:
-          maxLength: 200
           type: string
       required:
-      - base64_content
+      - content_type
       - original_filename
       type: object
-    HandoutType:
-      enum:
-      - Patient Resource
-      - VIS
-      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -1126,7 +1126,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-practice-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

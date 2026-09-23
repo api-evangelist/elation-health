@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Vitals API
   version: '1.0'
-  description: 'Operations tagged Vitals across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Vitals across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -589,29 +589,48 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    VitalOxygenUnitsEnum:
-      enum:
-      - '%'
-      type: string
-    VitalHeightUnitsEnum:
-      enum:
-      - inches
-      type: string
-    VitalBP:
+    VitalWeight:
       properties:
-        diastolic:
-          type:
-          - string
-          - 'null'
         note:
           type:
           - string
           - 'null'
-        systolic:
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalWeightUnitsEnum'
+          readOnly: true
+        value:
           type:
           - string
           - 'null'
       type: object
+    VitalHCUnitsEnum:
+      enum:
+      - cm
+      type: string
+    VitalTemperature:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalTemperatureUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalWeightUnitsEnum:
+      enum:
+      - lbs
+      type: string
+    VitalOxygenUnitsEnum:
+      enum:
+      - '%'
+      type: string
     PatchedVitalsCollection:
       properties:
         bmi:
@@ -744,51 +763,10 @@ components:
             $ref: '#/components/schemas/VitalWeight'
           type: array
       type: object
-    VitalHR:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHRUnits'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalHCUnitsEnum:
+    VitalHeightUnitsEnum:
       enum:
-      - cm
+      - inches
       type: string
-    VitalTemperature:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalTemperatureUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalPain:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
     VitalHC:
       properties:
         note:
@@ -803,34 +781,6 @@ components:
         units:
           allOf:
           - $ref: '#/components/schemas/VitalHCUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalHRUnits:
-      enum:
-      - bpm
-      type: string
-    VitalWeightUnitsEnum:
-      enum:
-      - lbs
-      type: string
-    VitalTemperatureUnitsEnum:
-      enum:
-      - celsius
-      - fahrenheit
-      type: string
-    VitalRR:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHRUnits'
           readOnly: true
         value:
           type:
@@ -858,6 +808,41 @@ components:
           type: array
       required:
       - results
+      type: object
+    VitalTemperatureUnitsEnum:
+      enum:
+      - celsius
+      - fahrenheit
+      type: string
+    VitalHR:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHRUnits'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHeight:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHeightUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
       type: object
     VitalOxygen:
       properties:
@@ -1009,7 +994,7 @@ components:
       - patient
       - practice
       type: object
-    VitalHeight:
+    VitalRR:
       properties:
         note:
           type:
@@ -1017,28 +1002,43 @@ components:
           - 'null'
         units:
           allOf:
-          - $ref: '#/components/schemas/VitalHeightUnitsEnum'
+          - $ref: '#/components/schemas/VitalHRUnits'
           readOnly: true
         value:
           type:
           - string
           - 'null'
       type: object
-    VitalWeight:
+    VitalBP:
+      properties:
+        diastolic:
+          type:
+          - string
+          - 'null'
+        note:
+          type:
+          - string
+          - 'null'
+        systolic:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalPain:
       properties:
         note:
           type:
           - string
           - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalWeightUnitsEnum'
-          readOnly: true
         value:
           type:
           - string
           - 'null'
       type: object
+    VitalHRUnits:
+      enum:
+      - bpm
+      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -1059,7 +1059,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Thread Members API
   version: '1.0'
-  description: 'Operations tagged Thread Members across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-messaging-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Thread Members across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -555,6 +555,11 @@ components:
       required:
       - status
       type: object
+    ThreadMemberStatusEnum:
+      enum:
+      - Addressed
+      - Requiring Action
+      type: string
     PatchedThreadMember:
       properties:
         ack_time:
@@ -606,11 +611,6 @@ components:
       required:
       - results
       type: object
-    ThreadMemberStatusEnum:
-      enum:
-      - Addressed
-      - Requiring Action
-      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -631,7 +631,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-messaging-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

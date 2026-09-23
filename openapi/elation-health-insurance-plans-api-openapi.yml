@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Insurance Plans API
   version: '1.0'
-  description: 'Operations tagged Insurance Plans across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-insurance-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Insurance Plans across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -546,6 +546,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedInsurancePlanList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/InsurancePlan'
+          type: array
+      required:
+      - results
+      type: object
     InsurancePlan:
       properties:
         created_date:
@@ -577,61 +599,6 @@ components:
       - insurance_company
       - name
       - practice
-      type: object
-    PaginatedInsurancePlanList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/InsurancePlan'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedInsurancePlanSingleInstance:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        insurance_company:
-          description: The insurance company that the plan is associated with.
-          format: int64
-          type: integer
-        name:
-          maxLength: 200
-          type: string
-        patients:
-          items:
-            type: integer
-          readOnly: true
-          type: array
-        practice:
-          format: int64
-          type: integer
       type: object
     InsurancePlanSingleInstance:
       properties:
@@ -670,6 +637,39 @@ components:
       - name
       - practice
       type: object
+    PatchedInsurancePlanSingleInstance:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        insurance_company:
+          description: The insurance company that the plan is associated with.
+          format: int64
+          type: integer
+        name:
+          maxLength: 200
+          type: string
+        patients:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        practice:
+          format: int64
+          type: integer
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -690,7 +690,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-insurance-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

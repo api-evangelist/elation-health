@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Cardiac Orders API
   version: '1.0'
-  description: 'Operations tagged Cardiac Orders across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Cardiac Orders across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -833,6 +833,112 @@ components:
       required:
       - code
       type: object
+    CardiacOrder:
+      properties:
+        ancillary_company:
+          format: int64
+          type: integer
+        cardiac_center:
+          description: The cardiac center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        medications:
+          description: Description of beta blockers/medications the patient is taking.
+          maxLength: 400
+          type:
+          - string
+          - 'null'
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of cardiac tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/CardiacOrderTest'
+          type: array
+      required:
+      - ancillary_company
+      - chart_date
+      - clinical_reason
+      - document_date
+      - patient
+      - practice
+      - prescribing_user
+      - tests
+      type: object
     PaginatedCardiacOrderList:
       properties:
         count:
@@ -949,112 +1055,6 @@ components:
       required:
       - state
       type: object
-    CardiacOrder:
-      properties:
-        ancillary_company:
-          format: int64
-          type: integer
-        cardiac_center:
-          description: The cardiac center the order is associated with.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        ccs:
-          description: Array of Physician IDs to copy for the order.
-          items:
-            format: int64
-            type: integer
-          type: array
-        chart_date:
-          format: date-time
-          type: string
-        clinical_reason:
-          description: The clinical reason for the order.
-          type: string
-        confidential:
-          type: boolean
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        follow_up_method:
-          description: How to notify the patient of the results.
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        icd10_codes:
-          description: Array of ICD-10 diagnosis codes associated with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        medications:
-          description: Description of beta blockers/medications the patient is taking.
-          maxLength: 400
-          type:
-          - string
-          - 'null'
-        patient:
-          description: The patient the order is associated with. Patient must belong to the specified practice.
-          format: int64
-          type: integer
-        practice:
-          description: The practice the order is associated with.
-          format: int64
-          type: integer
-        prescribing_user:
-          description: The user associated with the order. User ID must tie to a physician in the practice.
-          type: integer
-        resolution:
-          $ref: '#/components/schemas/DocumentResolutionState'
-        signed_by:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        test_date:
-          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
-          format: date
-          type:
-          - string
-          - 'null'
-        tests:
-          description: An array of cardiac tests associated with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/CardiacOrderTest'
-          type: array
-      required:
-      - ancillary_company
-      - chart_date
-      - clinical_reason
-      - document_date
-      - patient
-      - practice
-      - prescribing_user
-      - tests
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1075,7 +1075,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-orders-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

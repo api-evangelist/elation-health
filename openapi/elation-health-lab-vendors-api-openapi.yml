@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Lab Vendors API
   version: '1.0'
-  description: 'Operations tagged Lab Vendors across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Lab Vendors across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -810,6 +810,32 @@ components:
       - lab_vendor
       - name
       type: object
+    BiDiLabConnection:
+      properties:
+        alias:
+          description: Get the alias of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        enabled:
+          description: Get the enabled status of the connection.
+          readOnly: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        priority:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        protocol:
+          description: Get the protocol of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      type: object
     LabVendor:
       description: The serializer for LabVendor
       properties:
@@ -903,32 +929,6 @@ components:
         results_integration_available:
           type: boolean
       type: object
-    BiDiLabConnection:
-      properties:
-        alias:
-          description: Get the alias of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        enabled:
-          description: Get the enabled status of the connection.
-          readOnly: true
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        priority:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        protocol:
-          description: Get the protocol of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-      type: object
     PaginatedLabVendorList:
       properties:
         count:
@@ -971,7 +971,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-orders-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

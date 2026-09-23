@@ -1,121 +1,941 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Physicians API
-  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
-  version: '2.0'
-  contact:
-    name: Elation Health Developer Support
-    url: https://docs.elationhealth.com/reference/api-overview
-  termsOfService: https://www.elationhealth.com/
+  title: Elation Health Physicians API
+  version: '1.0'
+  description: 'Operations tagged Physicians across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-health-elation-health-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
 - url: https://app.elationemr.com/api/2.0
   description: Production
-- url: https://sandbox.elationemr.com/api/2.0
-  description: Sandbox
-security:
-- oauth2: []
 tags:
 - name: Physicians
-  description: Provider and staff management
 paths:
   /physicians/:
     get:
-      operationId: physicians_list
-      summary: List physicians
-      description: Retrieve a list of physicians in the practice.
-      tags:
-      - Physicians
+      summary: Find Physicians
+      description: ''
+      operationId: find-physicians
       parameters:
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/offset'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: first_name
+        in: query
+        schema:
+          type: string
+      - name: last_name
+        in: query
+        schema:
+          type: string
+      - name: npi
+        in: query
+        schema:
+          type: string
       responses:
         '200':
-          description: Paginated list of physicians
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/physicians/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Physicians
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /physicians/{id}/:
+    get:
+      summary: Get Physician
+      description: ''
+      operationId: get-physician
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: the physician ID
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  // see Physician object\n}"
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/physicians/123/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Physicians
+      security:
+      - sec0: []
+    put:
+      summary: Update Physician
+      description: ''
+      operationId: update-physician-wip
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: the physician ID
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - first_name
+              - last_name
+              - email
+              properties:
+                first_name:
+                  type: string
+                  description: 'Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'Maximum length: 60 characters.'
+                email:
+                  type: string
+                metadata:
+                  type: object
+                  description: nullable. See Metadata section
+                  properties:
+                    object_id:
+                      type: integer
+                      description: for updating object must provide 'object_id' or 'data'
+                      format: int32
+                    data:
+                      type: string
+                      description: for updating object must provide 'object_id' or 'data'
+                    object_web_link:
+                      type: string
+                      description: for updating object must provide 'object_id' or 'data'
+                npi:
+                  type: string
+                license:
+                  type: string
+                license_state:
+                  type: string
+                credentials:
+                  type: string
+                telehealth_settings:
+                  type: object
+                  description: The telehealth settings for the physician
+                  properties:
+                    default_telehealth_instructions:
+                      type: string
+                      description: The default instructions populated for telehealth appointments
+                    zoom_join_url:
+                      type: string
+                      description: If the provider is set up with Zoom® integration, then this is their personal meeting url
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758834544642,\n    \"first_name\": \"Christopher\",\n    \"last_name\": \"Morales\",\n    \"credentials\": \"cred\",\n    \"is_active\": true,\n    \"email\": \"betle+Riley._Love_and_Chavez@elationhealth.com\",\n    \"npi\": \"155532\",\n    \"license\": \"20977\",\n    \"license_state\": \"YY\",\n    \"specialty\": null,\n    \"user_id\": 64,\n    \"practice\": 140758831005700,\n    \"metadata\": {\n        \"object_id\": \"1234\",\n        \"data\": \"text\",\n        \"object_web_link\": \"link\"\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758834544642
+                    default: 0
+                  first_name:
+                    type: string
+                    example: Christopher
+                  last_name:
+                    type: string
+                    example: Morales
+                  credentials:
+                    type: string
+                    example: cred
+                  is_active:
+                    type: boolean
+                    example: true
+                    default: true
+                  email:
+                    type: string
+                    example: betle+Riley._Love_and_Chavez@elationhealth.com
+                  npi:
+                    type: string
+                    example: '155532'
+                  license:
+                    type: string
+                    example: '20977'
+                  license_state:
+                    type: string
+                    example: YY
+                  specialty: {}
+                  user_id:
+                    type: integer
+                    example: 64
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+                  metadata:
+                    type: object
+                    properties:
+                      object_id:
+                        type: string
+                        example: '1234'
+                      data:
+                        type: string
+                        example: text
+                      object_web_link:
+                        type: string
+                        example: link
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"first_name\": \"Christopher\",\n    \"last_name\": \"Morales\",\n    \"credentials\": \"cred\",\n    \"email\": \"betle+Riley._Love_and_Chavez@elationhealth.com\",\n    \"npi\": \"155532\",\n    \"license\": \"20977\",\n    \"license_state\": \"YY\",\n    \"metadata\": {\n        \"object_id\": 1234, \n        \"data\": \"text\",\n        \"object_web_link\": \"link\"\n    }\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/physicians/123/\",\n                    json=data,\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Physicians
+      security:
+      - sec0: []
+    patch:
+      summary: Update Physician
+      description: ''
+      operationId: update-physician-wip-1
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: the physician ID
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'The physicians first name. Maximum length: 50 characters.'
+                last_name:
+                  type: string
+                  description: 'The physicians last name. Maximum length: 60 characters.'
+                email:
+                  type: string
+                  description: The physicians email. Usually used for login.
+                metadata:
+                  type: object
+                  description: nullable. See Metadata section
+                  properties:
+                    object_id:
+                      type: integer
+                      description: for updating object must provide 'object_id' or 'data'
+                      format: int32
+                    data:
+                      type: string
+                      description: for updating object must provide 'object_id' or 'data'
+                    object_web_link:
+                      type: string
+                      description: for updating object must provide 'object_id' or 'data'
+                npi:
+                  type: string
+                license:
+                  type: string
+                license_state:
+                  type: string
+                credentials:
+                  type: string
+                telehealth_settings:
+                  type: object
+                  description: The telehealth settings for the physician
+                  properties:
+                    default_telehealth_instructions:
+                      type: string
+                      description: The default instructions populated for telehealth appointments
+                    zoom_join_url:
+                      type: string
+                      description: If the provider is set up with Zoom® integration, then this is their personal meeting url
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758834544642,\n    \"first_name\": \"Christopher\",\n    \"last_name\": \"Morales\",\n    \"credentials\": \"cred\",\n    \"is_active\": true,\n    \"email\": \"betle+Riley._Love_and_Chavez@elationhealth.com\",\n    \"npi\": \"155532\",\n    \"license\": \"20977\",\n    \"license_state\": \"YY\",\n    \"specialty\": null,\n    \"user_id\": 64,\n    \"practice\": 140758831005700,\n    \"metadata\": {\n        \"object_id\": \"1234\",\n        \"data\": \"text\",\n        \"object_web_link\": \"link\"\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758834544642
+                    default: 0
+                  first_name:
+                    type: string
+                    example: Christopher
+                  last_name:
+                    type: string
+                    example: Morales
+                  credentials:
+                    type: string
+                    example: cred
+                  is_active:
+                    type: boolean
+                    example: true
+                    default: true
+                  email:
+                    type: string
+                    example: betle+Riley._Love_and_Chavez@elationhealth.com
+                  npi:
+                    type: string
+                    example: '155532'
+                  license:
+                    type: string
+                    example: '20977'
+                  license_state:
+                    type: string
+                    example: YY
+                  specialty: {}
+                  user_id:
+                    type: integer
+                    example: 64
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+                  metadata:
+                    type: object
+                    properties:
+                      object_id:
+                        type: string
+                        example: '1234'
+                      data:
+                        type: string
+                        example: text
+                      object_web_link:
+                        type: string
+                        example: link
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"first_name\": \"Christopher\",\n    \"last_name\": \"Morales\",\n    \"credentials\": \"cred\",\n    \"email\": \"betle+Riley._Love_and_Chavez@elationhealth.com\",\n    \"npi\": \"155532\",\n    \"license\": \"20977\",\n    \"license_state\": \"YY\",\n    \"metadata\": {\n        \"object_id\": 1234, \n        \"data\": \"text\",\n        \"object_web_link\": \"link\"\n    }\n}\n\nresp = requests.patch(\"https://sandbox.elationemr.com/api/2.0/physicians/123/\",\n                    json=data,\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Physicians
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /physicians/{id}/availabilities:
+    put:
+      summary: Update Physician Availabilities
+      description: ''
+      operationId: update-physician-availabilities
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Physicians
+      security:
+      - sec0: []
+    get:
+      summary: Get Physician Availabilities
+      description: ''
+      operationId: get-physician-availabilities
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Physicians
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/physicians/:
+    get:
+      operationId: physicians_list
+      parameters:
+      - in: query
+        name: first_name
+        schema:
+          type: string
+      - in: query
+        name: last_name
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: npi
+        schema:
+          type: string
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedPhysicianList'
-  /physicians/{id}/:
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Physicians
+      tags:
+      - Physicians
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/physicians/{id}/:
     get:
       operationId: physicians_retrieve
-      summary: Retrieve a physician
-      tags:
-      - Physicians
       parameters:
-      - $ref: '#/components/parameters/id'
-      responses:
-        '200':
-          description: Physician details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Physician'
-    put:
-      operationId: physicians_update
-      summary: Update a physician
-      tags:
-      - Physicians
-      parameters:
-      - $ref: '#/components/parameters/id'
-      requestBody:
+      - in: path
+        name: id
         required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Physician'
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
-          description: Physician updated
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Physician'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Physician
+      tags:
+      - Physicians
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
     patch:
+      description: Update an existing physician.
       operationId: physicians_partial_update
-      summary: Partially update a physician
-      tags:
-      - Physicians
       parameters:
-      - $ref: '#/components/parameters/id'
-      requestBody:
+      - in: path
+        name: id
         required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Physician'
+              $ref: '#/components/schemas/PatchedPhysician'
       responses:
         '200':
-          description: Physician updated
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Physician'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Physician
+      tags:
+      - Physicians
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing physician.
+      operationId: physicians_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Physician'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Physician'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Physician
+      tags:
+      - Physicians
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/physicians/{id}/availabilities/:
+    get:
+      description: Get the availabilities for a physician
+      operationId: physicians_availabilities_list
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProviderAvailabilityBlockSerializerPracticeTimeZone'
+                type: array
+          description: ''
+      security:
+      - oauth2: []
+      summary: Get Physician Availabilities
+      tags:
+      - Physicians
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Update the availabilities for a physician
+      operationId: physicians_availabilities_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                availabilities:
+                  items:
+                    properties:
+                      appointment_types:
+                        items:
+                          format: int64
+                          type: integer
+                        type: array
+                      end_time:
+                        format: time
+                        type: string
+                      service_location_id:
+                        format: int64
+                        nullable: true
+                        type: integer
+                      start_time:
+                        format: time
+                        type: string
+                      weekday:
+                        description: The day of the week the availability is for. 0 is Monday, 6 is Sunday.
+                        enum:
+                        - 0
+                        - 1
+                        - 2
+                        - 3
+                        - 4
+                        - 5
+                        - 6
+                        type: integer
+                    type: object
+                  type: array
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProviderAvailabilityBlock'
+                type: array
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Physician Availabilities
+      tags:
+      - Physicians
+      x-el8-docs-category: Practice API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedPhysicianList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Physician'
-    PaginationMeta:
+    ProviderAvailabilityBlock:
+      properties:
+        end_time:
+          format: time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        provider_id:
+          format: int64
+          type: integer
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        start_time:
+          format: time
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        use_service_location_timezone:
+          type: boolean
+        weekday:
+          type: integer
+      required:
+      - end_time
+      - provider_id
+      - start_time
+      - weekday
       type: object
+    Physician:
+      properties:
+        credentials:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          type: string
+        fax:
+          description: The physician's fax number.
+          readOnly: true
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          description: Whether or not the physician is still active at the practice.
+          readOnly: true
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        license:
+          type: string
+        license_state:
+          type: string
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        npi:
+          type: string
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        specialty:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - email
+      - first_name
+      - last_name
+      - license
+      - license_state
+      - npi
+      type: object
+    PaginatedPhysicianList:
       properties:
         count:
+          example: 123
           type: integer
-          description: Total number of results
         next:
-          type: string
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
           nullable: true
-          description: URL for next page
+          type: string
         previous:
-          type: string
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
           nullable: true
-          description: URL for previous page
-    Physician:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Physician'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedPhysician:
+      properties:
+        credentials:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          type: string
+        fax:
+          description: The physician's fax number.
+          readOnly: true
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          description: Whether or not the physician is still active at the practice.
+          readOnly: true
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        license:
+          type: string
+        license_state:
+          type: string
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        npi:
+          type: string
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        specialty:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      type: object
+    ProviderAvailabilityBlockSerializerPracticeTimeZone:
+      properties:
+        end_time:
+          format: time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        provider_id:
+          format: int64
+          type: integer
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        start_time:
+          format: time
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        use_service_location_timezone:
+          type: boolean
+        weekday:
+          type: integer
+      required:
+      - end_time
+      - provider_id
+      - start_time
+      - weekday
+      type: object
+    Physician_2:
       type: object
       properties:
         id:
@@ -141,21 +961,32 @@ components:
           format: email
         is_active:
           type: boolean
+    PaginatedPhysicianList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Physician_2'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -163,11 +994,41 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
-    oauth2:
+    sec0:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
           scopes:
-            apiv2: Full API access
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-health-elation-health-api-openapi.yml
+x-readme:
+  headers: []
+x-readme-fauxas: true

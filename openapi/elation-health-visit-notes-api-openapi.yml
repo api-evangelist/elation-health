@@ -1,85 +1,183 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Visit Notes API
-  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
-  version: '2.0'
-  contact:
-    name: Elation Health Developer Support
-    url: https://docs.elationhealth.com/reference/api-overview
-  termsOfService: https://www.elationhealth.com/
+  title: Elation Health Visit Notes API
+  version: '1.0'
+  description: 'Operations tagged Visit Notes across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-health-elation-health-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
 - url: https://app.elationemr.com/api/2.0
   description: Production
-- url: https://sandbox.elationemr.com/api/2.0
-  description: Sandbox
-security:
-- oauth2: []
 tags:
 - name: Visit Notes
-  description: Clinical encounter documentation
 paths:
-  /visit_notes/:
+  /visit_notes/{id}/:
     get:
-      operationId: visit_notes_list
-      summary: List visit notes
-      description: Retrieve a paginated list of visit notes.
-      tags:
-      - Visit Notes
+      summary: Get Visit Note
+      description: ''
+      operationId: get-visit-note
       parameters:
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/offset'
-      - name: patient
-        in: query
+      - name: id
+        in: path
+        required: true
         schema:
           type: integer
-        description: Filter by patient ID
-      - name: physician
-        in: query
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
         schema:
-          type: integer
-        description: Filter by physician ID
+          type: string
       responses:
         '200':
-          description: Paginated list of visit notes
+          description: '200'
           content:
             application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 83792571234,\n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
               schema:
-                $ref: '#/components/schemas/PaginatedVisitNoteList'
-    post:
-      operationId: visit_notes_create
-      summary: Create a visit note
-      description: Create a new clinical visit note.
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/visit_notes/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
       tags:
       - Visit Notes
-      requestBody:
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Visit Note
+      description: ''
+      operationId: delete-visit-note
+      parameters:
+      - name: id
+        in: path
         required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/visit_notes/54233202689/\",\n                       headers={'Authorization': auth_header})\n\nprint resp.status_code"
+        samples-languages:
+        - python
+      tags:
+      - Visit Notes
+      security:
+      - sec0: []
+    patch:
+      summary: Sign Visit Note
+      description: Users can sign a draft visit note using PATCH requests
+      operationId: sign-visit-note
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int64
+        required: true
+      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VisitNoteCreate'
-      responses:
-        '201':
-          description: Visit note created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VisitNote'
-  /visit_notes/{id}/:
-    get:
-      operationId: visit_notes_retrieve
-      summary: Retrieve a visit note
-      description: Get details for a specific visit note.
-      tags:
-      - Visit Notes
-      parameters:
-      - $ref: '#/components/parameters/id'
+              type: object
+              required:
+              - signed_date
+              - signed_by
+              properties:
+                signed_date:
+                  type: string
+                  description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+                  format: date
+                signed_by:
+                  type: string
+                  description: The user id of the provider who signed the visit note. (Requires special permission).
+                signatures:
+                  type: array
+                  description: Requires special co-signature permissions. If enabled, users can add co-signatures to the visit note by providing them in this field.
+                  items:
+                    properties:
+                      user:
+                        type: string
+                        description: ID of the user whose signature this represents
+                      user_name:
+                        type: string
+                        description: The full name and title of the user whose signature this represents
+                      signed_date:
+                        type: string
+                        description: date-time timestamp for when this signature occurred
+                        format: date
+                      role:
+                        type: string
+                        description: the function of the signer
+                        enum:
+                        - '''cosigner'''
+                        - '''rendering_provider'''
+                        - '''amender'''
+                      comments:
+                        type: string
+                        description: additional comments
+                    type: object
       responses:
         '200':
-          description: Visit note details
+          description: '200'
           content:
             application/json:
+              examples:
+                Result:
+                  value: '{}'
               schema:
-                $ref: '#/components/schemas/VisitNote'
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Visit Notes
+      security:
+      - sec0: []
     put:
       operationId: visit_notes_update
       summary: Update a visit note
@@ -100,94 +198,1158 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisitNote'
-    patch:
-      operationId: visit_notes_partial_update
-      summary: Partially update a visit note
-      description: Update one or more visit note fields.
+                $ref: '#/components/schemas/VisitNote_2'
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /visit_notes/:
+    get:
+      summary: Find Visit Notes
+      description: ''
+      operationId: find-visit-notes
+      parameters:
+      - name: patient
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: physician
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: practice
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: unsigned
+        in: query
+        schema:
+          type: boolean
+      - name: from_signed_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: to_signed_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: last_modified__gt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: last_modified__lt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: last_modified__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: last_modified__lte
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/visit_notes/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/visit_notes/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\nfrom datetime import datetime, timedelta\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nquery_params = {\n  \"from_signed_date\": (datetime.now() - timedelta(days=2))..strftime(\"%Y-%m-%dT%H:%M:%SZ\"),\n  \"to_signed_date\": datetime.now().strftime(\"%Y-%m-%dT%H:%M:%SZ\")\n}\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/visit_notes/\",\n                    params=query_params,\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
       tags:
       - Visit Notes
+      security:
+      - sec0: []
+    post:
+      summary: Create Visit Note
+      description: ''
+      operationId: create-visit-note
       parameters:
-      - $ref: '#/components/parameters/id'
-      requestBody:
+      - name: Authorization
+        in: header
         required: true
+        schema:
+          type: string
+      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VisitNoteCreate'
+              type: object
+              required:
+              - bullets
+              - chart_date
+              - document_date
+              - patient
+              - template
+              - physician
+              properties:
+                bullets:
+                  type: array
+                  description: bullets in visit note
+                  items:
+                    properties:
+                      text:
+                        type: string
+                        description: The text of the bullet
+                      author:
+                        type: integer
+                        description: The author of the bullet
+                        format: int32
+                      category:
+                        type: string
+                        description: The category of the bullet
+                        enum:
+                        - Problem
+                        - Past
+                        - Family
+                        - Social
+                        - Instr
+                        - PE
+                        - ROS
+                        - Med
+                        - Data
+                        - Assessment
+                        - Test
+                        - Tx
+                        - Narrative
+                        - Followup
+                        - Reason
+                        - Plan
+                        - Objective
+                        - Hpi
+                        - Allergies
+                        - Habits
+                        - Assessplan
+                        - Consultant
+                        - Attending
+                        - Dateprocedure
+                        - Surgical
+                        - Orders
+                        - Referenced
+                        - Procedure
+                      sequence:
+                        type: integer
+                        description: The sequence of the bullet
+                        format: int32
+                      note_document:
+                        type: object
+                        description: A document referenced by the bullet
+                        properties:
+                          document:
+                            type: integer
+                            description: the id of the document, e.g. the id of the report or order
+                            format: int32
+                          document_summary:
+                            type: string
+                            description: A textual summary of the document. Will show up in the visit note editor view, while the bullet text will be used in views outisde the editor.
+                      note_item:
+                        type: object
+                        description: An item in the clinical record on the left hand side of the chart referenced by the bullet.
+                        properties:
+                          id:
+                            type: string
+                            description: The id of the item being referenced, e.g. the problem or history id.
+                      handout:
+                        type: integer
+                        description: The id of the handout to attach to this bullet.
+                        format: int32
+                      children:
+                        type: array
+                        description: bullet childrens
+                        items:
+                          properties:
+                            text:
+                              type: string
+                              description: The text of the bullet
+                            author:
+                              type: integer
+                              description: The author of the bullet
+                              format: int32
+                            category:
+                              type: string
+                              description: The category of the bullet
+                              enum:
+                              - Problem
+                              - Past
+                              - Family
+                              - Social
+                              - Instr
+                              - PE
+                              - ROS
+                              - Med
+                              - Data
+                              - Assessment
+                              - Test
+                              - Tx
+                              - Narrative
+                              - Followup
+                              - Reason
+                              - Plan
+                              - Objective
+                              - Hpi
+                              - Allergies
+                              - Habits
+                              - Assessplan
+                              - Consultant
+                              - Attending
+                              - Dateprocedure
+                              - Surgical
+                              - Orders
+                              - Referenced
+                              - Procedure
+                            sequence:
+                              type: integer
+                              description: The sequence of the bullet
+                              format: int32
+                            note_document:
+                              type: object
+                              description: A document referenced by the bullet
+                              properties:
+                                document:
+                                  type: integer
+                                  description: the id of the document, e.g. the id of the report or order
+                                  format: int32
+                                document_summary:
+                                  type: string
+                                  description: A textual summary of the document. Will show up in the visit note editor view, while the bullet text will be used in views outisde the editor.
+                            note_item:
+                              type: object
+                              description: An item in the clinical record on the left hand side of the chart referenced by the bullet.
+                              properties:
+                                id:
+                                  type: string
+                                  description: The id of the item being referenced, e.g. the problem or history id.
+                            handout:
+                              type: integer
+                              description: The id of the handout to attach to this bullet.
+                              format: int32
+                            children:
+                              type: array
+                              description: bullet childrens
+                              default: []
+                          required:
+                          - text
+                          - author
+                          - category
+                          type: object
+                    required:
+                    - text
+                    - author
+                    - category
+                    type: object
+                chart_date:
+                  type: string
+                  description: visit note chart date
+                  format: date
+                document_date:
+                  type: string
+                  description: visit note document date
+                  format: date
+                patient:
+                  type: integer
+                  description: id patient
+                  format: int32
+                template:
+                  type: string
+                  description: visit note template
+                  enum:
+                  - Simple
+                  - SOAP
+                  - Complete H&P (1 col)
+                  - Complete H&P (2 col)
+                  - Complete H&P (2 col A/P)
+                  - Pre-Op
+                physician:
+                  type: integer
+                  description: ip prescribing physician
+                  format: int32
+                type:
+                  type: string
+                  description: type of visit note
+                  default: Office Visit Note
+                confidential:
+                  type: boolean
+                  description: Whether this note is confidential to the practice and shouldn't be shared automatically with third parties
+                  default: false
+                signed_by:
+                  type: integer
+                  description: The user id of the provider who signed the visit note. (Requires special permission).
+                  format: int32
+                signed_date:
+                  type: string
+                  description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+                  format: date
+                signatures:
+                  type: array
+                  description: The list of signatures if co-signing is enabled for the practice. (Requires Special Permission).
+                  items:
+                    properties:
+                      user:
+                        type: string
+                        description: ID of the user whose signature this represents
+                      user_name:
+                        type: string
+                        description: The full name and title of the user whose signature this represents
+                      signed_date:
+                        type: string
+                        description: date-time timestamp for when this signature occurred
+                        format: date
+                      role:
+                        type: string
+                        description: the function of the signer
+                        enum:
+                        - '''cosigner'''
+                        - '''rendering_provider'''
+                        - '''amender'''
+                      comments:
+                        type: string
+                        description: additional comments
+                    type: object
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 67176497153, \n  // See Object Definition\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data to create a \"Simple\" visit note\n# for \"Simple\" template, at least one of \"Reason\", \"Narrative\", \"Followup\" \n# is required\ndata = {\n  \"bullets\": [\n    {\n      \"category\": \"Reason\",\n      \"text\": \"Sample Exam Reason\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Narrative\",\n      \"text\": \"Sample Narrative\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Followup\",\n      \"text\": \"Sample Followup\",\n      \"author\": 10,\n      \"sequence\": 3\n    }\n  ],\n  \"type\": \"Office Visit Note\",\n  \"template\": \"Simple\",\n  \"patient\": 64058687489,\n  \"physician\": 131074,\n  \"document_date\": \"2017-03-05T07:22:13Z\",\n  \"chart_date\": \"2017-03-05T07:22:13Z\"\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/visit_notes/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)\n\n# sending only required data to create a \"SOAP\" visit note\n# for SOAP note, at least one of \"Reason\", \"Problem\", \"Objective\", \n# \"Assessment\", \"Plan\", \"Followup\" is required\ndata = {\n  \"bullets\": [\n    {\n      \"category\": \"Reason\",\n      \"text\": \"Sample Exam Reason\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Problem\",\n      \"text\": \"Sample Subjective\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Objective\",\n      \"text\": \"Sample Objective\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Assessment\",\n      \"text\": \"Sample Assessment\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Plan\",\n      \"text\": \"Sample Plan\",\n      \"author\": 10\n    },\n    {\n      \"category\": \"Followup\",\n      \"text\": \"Sample Followup\",\n      \"author\": 10\n    }\n  ],\n  \"type\": \"Office Visit Note\",\n  \"template\": \"SOAP\",\n  \"patient\": 64057638913,\n  \"physician\": 131074,\n  \"document_date\": \"2017-03-05T07:26:16Z\",\n  \"chart_date\": \"2017-03-05T07:26:16Z\"\n}\n\n# example of a care plan visit note type\n# with Two Column H&P Note\ndata = {\n    \"bullets\": [\n        {\n            \"category\": \"Reason\",\n            \"text\": \"Progress Towards Goal of Weight - Goal Not Achieved as of 6/22/2015\",\n\t\t\t      \"author\": 10,\n            \"note_document\": {\n            \"document\": 3342369,\n            \"document_summary\": \"some_text\"\n             },\n            \"note_item\": 8716332,\n            \"handout\": 140755830505637    \n        },\n        {\n            \"category\": \"Assessplan\",\n            \"text\": \"Progress Towards Goal of Weight - Goal Not Achieved as of 6/22/2015\",\n          \t\"note_item\": 234245664,\n\t\t\t      \"author\": 10\n        },\n        {\n            \"category\": \"Instr\",\n            \"text\": \"Schedule follow on visit with Neighborhood Physicians Practice on 7/1/2015\",\n\t\t\t      \"author\": 10\n            \"children\": [\n                {\n                    \"category\": \"Instr\",\n                    \"text\": \"Get rid of intermittent fever that is occurring every few weeks,\n                  \t\"author\": 10\n                },\n                {\n                    \"category\": \"Instr\",\n                    \"text\": \"Need to gain more energy to do regular activities\",\n                  \t\"author\": 10\n                },\n                {\n                  \"category\": \"Instr\",\n                  \"text\": \"Keep weight under 105kg.\",\n                  \"author\": 10\n                },\n            ],\n        },\n        {\n            \"category\": \"Followup\",\n            \"text\": \"Nutrition Recommendations:\\n\\n1. Follow dietary regime as discussed\\n2. Read about nutrition as discussed\",\n          \t\"author\": 10\n        },\n    ],\n    \"type\": \"Care Plan\",\n    \"template\": \"Complete H&P (2 col A/P)\",\n    \"patient\": 64057638913,\n    \"physician\": 131074,\n    \"practice\": 12345,\n    \"document_date\": \"2017-03-05T07:22:13Z\",\n    \"chart_date\": \"2017-03-05T07:22:13Z\",\n}\n"
+        samples-languages:
+        - python
+      tags:
+      - Visit Notes
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/visit_notes/:
+    get:
+      operationId: visit_notes_list
+      parameters:
+      - in: query
+        name: from_signed_date
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: last_modified__gt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: last_modified__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: last_modified__lt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: last_modified__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: physician
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - in: query
+        name: to_signed_date
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: unsigned
+        schema:
+          type: boolean
       responses:
         '200':
-          description: Visit note updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVisitNoteList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Visit Notes
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new visit note.
+      operationId: visit_notes_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitNote'
+        required: true
+      responses:
+        '201':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/VisitNote'
-    delete:
-      operationId: visit_notes_destroy
-      summary: Delete a visit note
-      description: Soft-delete a visit note.
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Visit Note
       tags:
       - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/visit_notes/{id}/:
+    delete:
+      description: Delete an existing visit note.
+      operationId: visit_notes_destroy
       parameters:
-      - $ref: '#/components/parameters/id'
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
       responses:
         '204':
-          description: Visit note deleted
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Visit Note
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: visit_notes_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Visit Note
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing visit note.
+      operationId: visit_notes_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAddSignaturesToNote'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddSignaturesToNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Visit Note
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing visit note.
+      operationId: visit_notes_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddSignaturesToNote'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddSignaturesToNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Visit Note
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/visit_notes/{id}/clinical_summary/:
+    get:
+      operationId: visit_notes_clinical_summary_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Visit Notes Clinical Summary
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/visit_notes/{id}/visit_summary/:
+    get:
+      operationId: visit_notes_visit_summary_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitNote'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Visit Notes Visit Summary
+      tags:
+      - Visit Notes
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
 components:
   schemas:
+    VisitNoteDocument:
+      properties:
+        document:
+          allOf:
+          - $ref: '#/components/schemas/Document'
+          description: The id of the document, e.g. the id of the report or order.
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          description: A textual summary of the document. Will show up in the visit note editor view, while the bullet text will be used in views outside the editor.
+          type:
+          - string
+          - 'null'
+      required:
+      - document
+      type: object
+    AmendmentRequestStatusEnum:
+      enum:
+      - accepted
+      - denied
+      type: string
+    AddSignaturesToNote:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        signatures:
+          allOf:
+          - $ref: '#/components/schemas/VisitNoteSignatureList'
+          description: Requires special co-signature permissions. If enabled, users can add co-signatures to the visit note by providing them in this field.
+        signed_by:
+          description: The user id of the provider who signed the visit note. (Requires special permission).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    VisitNoteEdit:
+      properties:
+        create_user:
+          type: integer
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        new_bmi:
+          format: double
+          type: number
+        new_note_time:
+          format: date-time
+          type: string
+        new_note_type:
+          type: string
+        new_prev_bmi:
+          format: double
+          type: number
+        new_prev_time:
+          format: date-time
+          type: string
+        new_prev_weight:
+          maxLength: 10
+          type: string
+        previous_bmi:
+          format: double
+          type: number
+        previous_note_time:
+          format: date-time
+          type: string
+        previous_note_type:
+          type: string
+        previous_prev_bmi:
+          format: double
+          type: number
+        previous_prev_time:
+          format: date-time
+          type: string
+        previous_prev_weight:
+          maxLength: 10
+          type: string
+        visit_note:
+          format: int64
+          type: integer
+      required:
+      - visit_note
+      type: object
     VisitNote:
-      allOf:
-      - $ref: '#/components/schemas/VisitNoteCreate'
-      - type: object
+      properties:
+        amendment_request:
+          allOf:
+          - $ref: '#/components/schemas/AmendmentRequest'
+          readOnly: true
+        bullets:
+          description: The bullets of the visit note.
+          items:
+            $ref: '#/components/schemas/BulletWithMeta'
+          type: array
+        chart_date:
+          description: Visit note chart date.
+          format: date-time
+          type: string
+        checklists:
+          additionalProperties:
+            items:
+              properties:
+                name:
+                  description: Name of the checklist field
+                  type: string
+                sequence:
+                  description: Order of the field in the checklist
+                  type: integer
+                value:
+                  description: Value of the checklist field
+                  type: string
+              required:
+              - name
+              - value
+              - sequence
+              type: object
+            type: array
+          description: Dictionary of checklists by type (e.g. 'pe', 'ros'), where each checklist contains a list of fields with name, value and sequence
+          type: object
+        clinical_summary_link:
+          format: uri
+          readOnly: true
+          type: string
+        confidential:
+          default: false
+          description: Whether this note is confidential to the practice and shouldn't be shared automatically with third parties.
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: Visit note document date.
+          format: date-time
+          type: string
+        edits:
+          items:
+            $ref: '#/components/schemas/VisitNoteEdit'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        physician:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        signatures:
+          allOf:
+          - $ref: '#/components/schemas/VisitNoteSignatureList'
+          description: The list of signatures if co-signing is enabled for the practice. (Requires Special Permission).
+        signed_by:
+          description: The user id of the provider who signed the visit note. (Requires special permission).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+          format: date-time
+          type:
+          - string
+          - 'null'
+        template:
+          $ref: '#/components/schemas/TemplateEnum'
+        type:
+          default: Office Visit Note
+          description: Visit note type.
+          type: string
+        visit_summary_link:
+          format: uri
+          readOnly: true
+          type: string
+      required:
+      - bullets
+      - chart_date
+      - document_date
+      - patient
+      - physician
+      - template
+      type: object
+    AmendmentSourceEnum:
+      enum:
+      - Patient
+      - Provider or Organization
+      type: string
+    BulletWithMeta:
+      properties:
+        author:
+          description: The author of the bullet.
+          type: integer
+        category:
+          allOf:
+          - $ref: '#/components/schemas/CategoryEnum'
+          description: The category of the bullet.
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        edit:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        note_document:
+          description: A document referenced by the bullet.
+          oneOf:
+          - $ref: '#/components/schemas/VisitNoteDocument'
+          - type: 'null'
+        replaced_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        replaced_by_edit:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        sequence:
+          description: The sequence number of the bullet.
+          minimum: 0
+          type: integer
+        text:
+          description: The text of the bullet.
+          type: string
+        updated_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        version:
+          maximum: 65535
+          minimum: 0
+          type: integer
+      required:
+      - category
+      - text
+      type: object
+    CategoryEnum:
+      enum:
+      - Allergies
+      - Assessment
+      - Assessplan
+      - Attending
+      - Consultant
+      - Data
+      - Dateprocedure
+      - ElationNoteColOne
+      - ElationNoteColTwo
+      - ElationNoteCustomBlock
+      - ElationNoteOtherData
+      - Family
+      - Followup
+      - Habits
+      - Hpi
+      - Instr
+      - Med
+      - Narrative
+      - Objective
+      - Orders
+      - PE
+      - Past
+      - Plan
+      - Problem
+      - Procedure
+      - ROS
+      - Reason
+      - Referenced
+      - Social
+      - Surgical
+      - Test
+      - Tx
+      type: string
+    TemplateEnum:
+      enum:
+      - Complete H&P (1 col)
+      - Complete H&P (2 col A/P)
+      - Complete H&P (2 col)
+      - Pre-Op
+      - SOAP
+      - Simple
+      type: string
+    VisitNoteSignatureList:
+      items:
         properties:
-          id:
-            type: integer
-            format: int64
-            readOnly: true
-          checklists:
-            type: object
-            description: PE and ROS checklist items
-          edits:
-            type: array
-            readOnly: true
-            items:
-              type: object
-          signatures:
-            type: array
-            readOnly: true
-            items:
-              type: object
+          comments:
+            description: Any comments the signer made about the signature.
+            type: string
+          role:
+            description: The function of the signer.
+            type: string
           signed_date:
-            type: string
+            description: Date-time timestamp for when this signature occurred.
             format: date-time
-            nullable: true
-          signed_by:
-            type: integer
-            nullable: true
-          amendment_request:
-            type: object
-            nullable: true
-          created_date:
             type: string
-            format: date-time
-            readOnly: true
-          last_modified:
+          user:
+            description: ID of the user whose signature this represents.
             type: string
-            format: date-time
-            readOnly: true
-          deleted_date:
+          user_name:
+            description: The full name and title of the user whose signature this represents.
             type: string
-            format: date-time
-            nullable: true
-            readOnly: true
-          clinical_summary_link:
-            type: string
-            format: uri
-            readOnly: true
-          visit_summary_link:
-            type: string
-            format: uri
-            readOnly: true
+        required:
+        - comments
+        - role
+        - signed_date
+        - user
+        - user_name
+        type: object
+      type: array
+    PaginatedVisitNoteList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VisitNote'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedAddSignaturesToNote:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        signatures:
+          allOf:
+          - $ref: '#/components/schemas/VisitNoteSignatureList'
+          description: Requires special co-signature permissions. If enabled, users can add co-signatures to the visit note by providing them in this field.
+        signed_by:
+          description: The user id of the provider who signed the visit note. (Requires special permission).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    AmendmentRequest:
+      properties:
+        amendment_source:
+          $ref: '#/components/schemas/AmendmentSourceEnum'
+        request_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        request_description:
+          type: string
+        status:
+          $ref: '#/components/schemas/AmendmentRequestStatusEnum'
+        status_updated_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - amendment_source
+      - request_description
+      - status
+      type: object
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
     VisitNoteCreate:
       type: object
       required:
@@ -248,7 +1410,64 @@ components:
           type: array
           items:
             type: string
-    PaginatedVisitNoteList:
+    VisitNote_2:
+      allOf:
+      - $ref: '#/components/schemas/VisitNoteCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            readOnly: true
+          checklists:
+            type: object
+            description: PE and ROS checklist items
+          edits:
+            type: array
+            readOnly: true
+            items:
+              type: object
+          signatures:
+            type: array
+            readOnly: true
+            items:
+              type: object
+          signed_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+          signed_by:
+            type:
+            - integer
+            - 'null'
+          amendment_request:
+            type:
+            - object
+            - 'null'
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          last_modified:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            readOnly: true
+          clinical_summary_link:
+            type: string
+            format: uri
+            readOnly: true
+          visit_summary_link:
+            type: string
+            format: uri
+            readOnly: true
+    PaginatedVisitNoteList_2:
       allOf:
       - $ref: '#/components/schemas/PaginationMeta'
       - type: object
@@ -256,7 +1475,7 @@ components:
           results:
             type: array
             items:
-              $ref: '#/components/schemas/VisitNote'
+              $ref: '#/components/schemas/VisitNote_2'
     PaginationMeta:
       type: object
       properties:
@@ -264,28 +1483,16 @@ components:
           type: integer
           description: Total number of results
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for next page
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for previous page
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -293,11 +1500,41 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
-    oauth2:
+    sec0:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
           scopes:
-            apiv2: Full API access
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-health-elation-health-api-openapi.yml
+x-readme:
+  headers: []
+x-readme-fauxas: true

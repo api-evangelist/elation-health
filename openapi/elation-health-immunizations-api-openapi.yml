@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Immunizations API
   version: '1.0'
-  description: 'Operations tagged Immunizations across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Immunizations across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -551,13 +551,30 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    FundingSourceEnum:
-      enum:
-      - Privately funded vaccine stock
-      - Publicly funded vaccine stock
-      - Publicly funded vaccine stock - Non-VFC
-      - Publicly funded vaccine stock - VFC
-      type: string
+    NullEnum:
+      type: 'null'
+    PaginatedPatientImmunizationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientImmunization'
+          type: array
+      required:
+      - results
+      type: object
     ImmunizationVaccine:
       properties:
         cdc_name:
@@ -611,6 +628,13 @@ components:
       - VFC eligible - Medicaid/Medicaid Managed Care
       - VFC eligible - Under-insured
       - VFC eligible - Uninsured
+      type: string
+    FundingSourceEnum:
+      enum:
+      - Privately funded vaccine stock
+      - Publicly funded vaccine stock
+      - Publicly funded vaccine stock - Non-VFC
+      - Publicly funded vaccine stock - VFC
       type: string
     PatientImmunization:
       properties:
@@ -769,8 +793,6 @@ components:
       - qty
       - vaccine
       type: object
-    NullEnum:
-      type: 'null'
     PublicityCodeEnum:
       enum:
       - No reminder/recall
@@ -786,28 +808,6 @@ components:
       - Reminder/recall - no calls
       - Reminder/recall - to provider
       type: string
-    PaginatedPatientImmunizationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientImmunization'
-          type: array
-      required:
-      - results
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -828,7 +828,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-profile-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

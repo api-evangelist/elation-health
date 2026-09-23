@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Document Tags API
   version: '1.0'
-  description: 'Operations tagged Document Tags across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Document Tags across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -508,6 +508,8 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
     CodedDocumentTag:
       properties:
         code:
@@ -569,47 +571,28 @@ components:
       required:
       - value
       type: object
-    ConceptNameEnum:
-      enum:
-      - cognitive-assessment
-      - depression-screening-adolescent-declined
-      - depression-screening-adult-declined
-      - diet-counsel
-      - dietic-service-referral
-      - dietician-referral
-      - exercise-counsel
-      - falls-assessment
-      - flu-vaccine-contraindicated
-      - flu-vaccine-declined
-      - flu-vaccine-elsewhere
-      - flu-vaccine-referred
-      - hospice-care
-      - hpv-test
-      - nutrition-counsel
-      - pap-smear
-      - phys-activity-counsel
-      - procedure-contraindicated
-      - tobacco-counsel-long
-      - tobacco-counsel-short
-      - unable-to-walk
-      - wt-mgmt-referral
-      type: string
-    NullEnum:
-      type: 'null'
-    CodeTypeEnum:
-      enum:
-      - CPT
-      - CPTII
-      - CVX
-      - EL8
-      - HCPCS
-      - HL7
-      - ICD10
-      - ICD9
-      - LOINC
-      - RXNORM
-      - SNOMED
-      type: string
+    PaginatedCodedDocumentTagList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/CodedDocumentTag'
+          type: array
+      required:
+      - results
+      type: object
     PatchedCodedDocumentTag:
       properties:
         code:
@@ -669,28 +652,45 @@ components:
           maxLength: 100
           type: string
       type: object
-    PaginatedCodedDocumentTagList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/CodedDocumentTag'
-          type: array
-      required:
-      - results
-      type: object
+    ConceptNameEnum:
+      enum:
+      - cognitive-assessment
+      - depression-screening-adolescent-declined
+      - depression-screening-adult-declined
+      - diet-counsel
+      - dietic-service-referral
+      - dietician-referral
+      - exercise-counsel
+      - falls-assessment
+      - flu-vaccine-contraindicated
+      - flu-vaccine-declined
+      - flu-vaccine-elsewhere
+      - flu-vaccine-referred
+      - hospice-care
+      - hpv-test
+      - nutrition-counsel
+      - pap-smear
+      - phys-activity-counsel
+      - procedure-contraindicated
+      - tobacco-counsel-long
+      - tobacco-counsel-short
+      - unable-to-walk
+      - wt-mgmt-referral
+      type: string
+    CodeTypeEnum:
+      enum:
+      - CPT
+      - CPTII
+      - CVX
+      - EL8
+      - HCPCS
+      - HL7
+      - ICD10
+      - ICD9
+      - LOINC
+      - RXNORM
+      - SNOMED
+      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -711,7 +711,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

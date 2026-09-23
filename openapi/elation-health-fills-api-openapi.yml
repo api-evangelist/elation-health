@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Fills API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Fills across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Fills API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -110,11 +110,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/medication_history_download_fills/{id}/:
     get:
       operationId: medication_history_download_fills_retrieve
@@ -141,11 +136,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/prescription_fills/:
     get:
       description: Returns a list of prescription fills
@@ -233,11 +223,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/prescription_fills/{id}/:
     get:
       description: Retrieve a single prescription fill
@@ -265,11 +250,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
     MedicationHistoryDownloadFill:
@@ -376,87 +356,20 @@ components:
       - substitutions
       - written_date
       type: object
-    PaginatedMedicationHistoryDownloadFillList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/MedicationHistoryDownloadFill'
-          type: array
-      required:
-      - results
-      type: object
-    PrescriptionFill:
-      properties:
-        fill_date:
-          format: date
-          type:
-          - string
-          - 'null'
-        fill_status:
-          $ref: '#/components/schemas/FillStatusEnum'
-        id:
-          readOnly: true
-          type: integer
-        medication_order:
-          format: int64
-          type: integer
-        note_from_pharmacy:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        patient:
-          format: int64
-          type: integer
-        pharmacy_ncpdpid:
-          maxLength: 21
-          title: Pharmacy this fill occurred at
-          type: string
-        practice:
-          format: int64
-          type: integer
-      required:
-      - fill_status
-      - medication_order
-      - patient
-      - pharmacy_ncpdpid
-      - practice
-      type: object
-    PaginatedPrescriptionFillList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PrescriptionFill'
-          type: array
-      required:
-      - results
-      type: object
+    FillStatusEnum:
+      description: '* `AH` - Dispensed
+
+        * `AJ` - PartiallyDispensed
+
+        * `AK` - NotDispensed
+
+        * `AL` - Transferred'
+      enum:
+      - AH
+      - AJ
+      - AK
+      - AL
+      type: string
     PriorAuthQualifierEnum:
       description: '* `94` - Pharmacy or Prescriber File ID
 
@@ -540,6 +453,87 @@ components:
       - WI
       - ZZ
       type: string
+    PrescriptionFill:
+      properties:
+        fill_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        fill_status:
+          $ref: '#/components/schemas/FillStatusEnum'
+        id:
+          readOnly: true
+          type: integer
+        medication_order:
+          format: int64
+          type: integer
+        note_from_pharmacy:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        patient:
+          format: int64
+          type: integer
+        pharmacy_ncpdpid:
+          maxLength: 21
+          title: Pharmacy this fill occurred at
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - fill_status
+      - medication_order
+      - patient
+      - pharmacy_ncpdpid
+      - practice
+      type: object
+    PaginatedPrescriptionFillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PrescriptionFill'
+          type: array
+      required:
+      - results
+      type: object
+    PaginatedMedicationHistoryDownloadFillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedicationHistoryDownloadFill'
+          type: array
+      required:
+      - results
+      type: object
     RequestingPhysicianActionEnum:
       description: '* `ReqAct` - Requiring Action
 
@@ -547,20 +541,6 @@ components:
       enum:
       - ReqAct
       - Addressed
-      type: string
-    FillStatusEnum:
-      description: '* `AH` - Dispensed
-
-        * `AJ` - PartiallyDispensed
-
-        * `AK` - NotDispensed
-
-        * `AL` - Transferred'
-      enum:
-      - AH
-      - AJ
-      - AK
-      - AL
       type: string
   securitySchemes:
     oauth2:
@@ -573,9 +553,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

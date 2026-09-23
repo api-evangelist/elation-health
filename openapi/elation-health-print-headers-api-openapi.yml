@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Print Headers API
   version: '1.0'
-  description: 'Operations tagged Print Headers across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Print Headers across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -178,6 +178,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedPracticePrintHeaderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PracticePrintHeader'
+          type: array
+      required:
+      - results
+      type: object
     UploadedPhoto:
       description: 'Serializer for UploadedPhoto model.
 
@@ -205,28 +227,6 @@ components:
         width:
           readOnly: true
           type: integer
-      type: object
-    PaginatedPracticePrintHeaderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PracticePrintHeader'
-          type: array
-      required:
-      - results
       type: object
     PracticePrintHeader:
       properties:
@@ -295,7 +295,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-practice-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

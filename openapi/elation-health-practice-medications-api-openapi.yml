@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Practice Medications API
   version: '1.0'
-  description: 'Operations tagged Practice Medications across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Practice Medications across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -416,20 +416,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
     PatchedMedication:
       properties:
         active_ndcs:
@@ -514,6 +500,53 @@ components:
 
             * `discontinued` - discontinued'
       type: object
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
+    PaginatedMedicationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Medication'
+          type: array
+      required:
+      - results
+      type: object
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
+      type: string
     Medication:
       properties:
         active_ndcs:
@@ -598,39 +631,6 @@ components:
 
             * `discontinued` - discontinued'
       type: object
-    MedicationType:
-      description: '* `otc` - otc
-
-        * `prescription` - prescription
-
-        * `discontinued` - discontinued'
-      enum:
-      - otc
-      - prescription
-      - discontinued
-      type: string
-    PaginatedMedicationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Medication'
-          type: array
-      required:
-      - results
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -651,7 +651,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-practice-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

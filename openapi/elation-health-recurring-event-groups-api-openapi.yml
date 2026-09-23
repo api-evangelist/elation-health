@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Recurring Event Groups API
   version: '1.0'
-  description: 'Operations tagged Recurring Event Groups across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-scheduling-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Recurring Event Groups across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -424,6 +424,56 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    TimeSlotTypeEnum:
+      enum:
+      - appointment
+      - appointment_slot
+      - event
+      type: string
+    RepeatsEnum:
+      enum:
+      - Monthly
+      - Weekly
+      type: string
+    RecurringEventGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_blocking:
+          readOnly: true
+          type: boolean
+        practice:
+          format: int64
+          type: integer
+        reason:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        schedules:
+          items:
+            $ref: '#/components/schemas/RecurringEventSchedule'
+          type: array
+        time_slot_type:
+          $ref: '#/components/schemas/TimeSlotTypeEnum'
+      required:
+      - practice
+      - schedules
+      - time_slot_type
+      type: object
     RecurringEventSchedule:
       properties:
         created_date:
@@ -475,51 +525,6 @@ components:
       - physician
       - series_start
       type: object
-    RecurringEventGroup:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_blocking:
-          readOnly: true
-          type: boolean
-        practice:
-          format: int64
-          type: integer
-        reason:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        schedules:
-          items:
-            $ref: '#/components/schemas/RecurringEventSchedule'
-          type: array
-        time_slot_type:
-          $ref: '#/components/schemas/TimeSlotTypeEnum'
-      required:
-      - practice
-      - schedules
-      - time_slot_type
-      type: object
-    TimeSlotTypeEnum:
-      enum:
-      - appointment
-      - appointment_slot
-      - event
-      type: string
     PaginatedRecurringEventGroupList:
       properties:
         count:
@@ -542,11 +547,6 @@ components:
       required:
       - results
       type: object
-    RepeatsEnum:
-      enum:
-      - Monthly
-      - Weekly
-      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -567,7 +567,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-scheduling-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

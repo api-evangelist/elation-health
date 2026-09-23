@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Languages API
   version: '1.0'
-  description: 'Operations tagged Languages across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-reference-data-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Languages across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -100,6 +100,14 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    Language:
+      properties:
+        name:
+          maxLength: 100
+          type: string
+      required:
+      - name
+      type: object
     PaginatedLanguageList:
       properties:
         count:
@@ -122,14 +130,6 @@ components:
       required:
       - results
       type: object
-    Language:
-      properties:
-        name:
-          maxLength: 100
-          type: string
-      required:
-      - name
-      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -150,7 +150,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-reference-data-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

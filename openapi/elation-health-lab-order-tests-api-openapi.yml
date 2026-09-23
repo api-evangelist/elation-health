@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Lab Order Tests API
   version: '1.0'
-  description: 'Operations tagged Lab Order Tests across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Lab Order Tests across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -496,98 +496,29 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    LabOrderAOEQuestion:
-      properties:
-        choices:
-          items:
-            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
-          type: array
-        code:
-          maxLength: 100
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        example_format:
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        max_length:
-          maximum: 65535
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        question_type:
-          $ref: '#/components/schemas/QuestionTypeEnum'
-        secondary_code:
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        value:
-          type: string
-      required:
-      - choices
-      - code
-      - value
-      type: object
-    LabOrderAOEQuestionChoice:
-      properties:
-        code:
-          maxLength: 100
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        value:
-          type: string
-      required:
-      - code
-      - value
-      type: object
-    LabOrderTestToLabOrderAOEQuestion:
-      properties:
-        question:
-          $ref: '#/components/schemas/LabOrderAOEQuestion'
-        required:
-          type: boolean
-        sequence:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        test:
-          format: int64
-          readOnly: true
-          type: integer
-      required:
-      - question
-      - sequence
-      type: object
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
+      enum:
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
+      type: string
     LabOrderTest:
       properties:
         code:
@@ -659,6 +590,24 @@ components:
       required:
       - name
       type: object
+    LabOrderTestToLabOrderAOEQuestion:
+      properties:
+        question:
+          $ref: '#/components/schemas/LabOrderAOEQuestion'
+        required:
+          type: boolean
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        test:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - question
+      - sequence
+      type: object
     PaginatedLabOrderTestList:
       properties:
         count:
@@ -681,29 +630,80 @@ components:
       required:
       - results
       type: object
-    QuestionTypeEnum:
-      description: '* `enum` - enum
-
-        * `enum_multiselect` - enum_multiselect
-
-        * `freetext` - freetext
-
-        * `y_or_n` - y_or_n
-
-        * `numeric` - numeric
-
-        * `yyyymmdd` - yyyymmdd
-
-        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
-      enum:
-      - enum
-      - enum_multiselect
-      - freetext
-      - y_or_n
-      - numeric
-      - yyyymmdd
-      - 2_numeric_1_decimal
-      type: string
+    LabOrderAOEQuestionChoice:
+      properties:
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        value:
+          type: string
+      required:
+      - code
+      - value
+      type: object
+    LabOrderAOEQuestion:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
+          type: array
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        example_format:
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        max_length:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        secondary_code:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        value:
+          type: string
+      required:
+      - choices
+      - code
+      - value
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -724,7 +724,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-orders-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

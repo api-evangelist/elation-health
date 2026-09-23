@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Billing API
+  title: Elation Health REST Billing API
   description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
   version: '2.0'
   contact:
@@ -119,42 +119,29 @@ paths:
         '204':
           description: Billing code deleted
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   schemas:
-    PaginatedBillingCodeList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/BillingCode'
-    BillingCode:
-      allOf:
-      - $ref: '#/components/schemas/BillingCodeCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type: string
-          nullable: true
-          description: URL for next page
-        previous:
-          type: string
-          nullable: true
-          description: URL for previous page
     BillingCodeCreate:
       type: object
       required:
@@ -174,28 +161,43 @@ components:
         code_type:
           type: string
           description: Type of billing code (CPT, ICD10, etc.)
-  parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 25
-      description: Number of results to return
+    BillingCode:
+      allOf:
+      - $ref: '#/components/schemas/BillingCodeCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+    PaginatedBillingCodeList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BillingCode'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
   securitySchemes:
     oauth2:
       type: oauth2

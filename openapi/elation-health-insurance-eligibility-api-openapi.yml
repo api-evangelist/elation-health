@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Insurance Eligibility API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Insurance Eligibility across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-premium-patient-insurance-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Insurance Eligibility API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -72,11 +72,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/patient_insurances/{id}/eligibility_full_report/:
     get:
       description: Get eligibility full report for a patient insurance
@@ -104,59 +99,31 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
-    CreateInsuranceEligibility:
-      properties:
-        group_id:
-          description: ID that matches the group record in Elation system
-          type: integer
-        group_name:
-          description: Name of the group / organization. group_npi field is required if this is populated.
-          type: string
-        group_npi:
-          description: NPI of the group / organization. group_name field is required if this is populated.
-          type: string
-      type: object
-    EligibilityDetails:
+    EligibilityBenefits:
       properties:
         coinsurance:
-          description: Coinsurance percentage value as a decimal (e.g. 0.25).
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-          type: string
-        coinsurance_ambiguous:
-          type: boolean
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
         copay:
-          description: copayment amount in dollars.
-          format: double
-          type:
-          - number
-          - 'null'
-        copay_ambiguous:
-          description: If true, the given copay value may not be accurate and the full eligibility report will need to be referenced for better details.
-          type: boolean
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
         deductible:
-          description: Deductible amount in dollars.
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-          type: string
-        deductible_ambiguous:
-          type: boolean
-        deductible_remaining:
-          description: Remaining deductible amount in dollars.
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-          type: string
-        deductible_remaining_ambiguous:
-          type: boolean
-        errors:
-          description: Error messages showing reason for failed eligibility check.
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        limitations:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        out_of_pocket:
           items:
             additionalProperties: {}
             type: object
@@ -241,6 +208,96 @@ components:
           format: date
           type: string
       type: object
+    EligibilityDetails:
+      properties:
+        coinsurance:
+          description: Coinsurance percentage value as a decimal (e.g. 0.25).
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type: string
+        coinsurance_ambiguous:
+          type: boolean
+        copay:
+          description: copayment amount in dollars.
+          format: double
+          type:
+          - number
+          - 'null'
+        copay_ambiguous:
+          description: If true, the given copay value may not be accurate and the full eligibility report will need to be referenced for better details.
+          type: boolean
+        deductible:
+          description: Deductible amount in dollars.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type: string
+        deductible_ambiguous:
+          type: boolean
+        deductible_remaining:
+          description: Remaining deductible amount in dollars.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type: string
+        deductible_remaining_ambiguous:
+          type: boolean
+        errors:
+          description: Error messages showing reason for failed eligibility check.
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+      type: object
+    EligibilityProvider:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        npi:
+          type: string
+        organization_name:
+          type: string
+      type: object
+    CreateInsuranceEligibility:
+      properties:
+        group_id:
+          description: ID that matches the group record in Elation system
+          type: integer
+        group_name:
+          description: Name of the group / organization. group_npi field is required if this is populated.
+          type: string
+        group_npi:
+          description: NPI of the group / organization. group_name field is required if this is populated.
+          type: string
+      type: object
+    EligibilityStatusEnum:
+      description: '* `active` - active
+
+        * `inactive` - inactive
+
+        * `error` - error'
+      enum:
+      - active
+      - inactive
+      - error
+      type: string
+    EligibilitySubscriber:
+      properties:
+        address:
+          $ref: '#/components/schemas/EligibilityAddress'
+        first_name:
+          type: string
+        last_name:
+          type: string
+        member_id:
+          type: string
+        middle_name:
+          type: string
+        name:
+          type: string
+        sex_at_birth:
+          type: string
+      type: object
     InsuranceEligibilityFullReport:
       properties:
         benefits:
@@ -267,73 +324,6 @@ components:
         subscriber:
           $ref: '#/components/schemas/EligibilitySubscriber'
       type: object
-    EligibilityBenefits:
-      properties:
-        coinsurance:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        copay:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        deductible:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        limitations:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        out_of_pocket:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-      type: object
-    EligibilityStatusEnum:
-      description: '* `active` - active
-
-        * `inactive` - inactive
-
-        * `error` - error'
-      enum:
-      - active
-      - inactive
-      - error
-      type: string
-    EligibilityProvider:
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        npi:
-          type: string
-        organization_name:
-          type: string
-      type: object
-    EligibilitySubscriber:
-      properties:
-        address:
-          $ref: '#/components/schemas/EligibilityAddress'
-        first_name:
-          type: string
-        last_name:
-          type: string
-        member_id:
-          type: string
-        middle_name:
-          type: string
-        name:
-          type: string
-        sex_at_birth:
-          type: string
-      type: object
   securitySchemes:
     oauth2:
       flows:
@@ -345,9 +335,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-premium-patient-insurance-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

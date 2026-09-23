@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Referrals API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Referrals across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Referrals API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -119,11 +119,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/letters/{id}/:
     get:
       operationId: letters_retrieve
@@ -213,11 +208,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/referral_orders/:
     get:
       operationId: referral_orders_list
@@ -281,11 +271,6 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
   /api/2.0/referral_orders/{id}/:
     get:
       operationId: referral_orders_retrieve
@@ -375,84 +360,67 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
-    LetterAttachment:
+    NullEnum:
+      type: 'null'
+    DocumentResolutionState:
       properties:
-        attachment_type:
-          $ref: '#/components/schemas/AttachmentTypeEnum'
-        entity_date:
+        created_date:
+          description: The datetime when this resolution state was created.
           format: date-time
-          type:
-          - string
-          - 'null'
-        entity_description:
-          type:
-          - string
-          - 'null'
-        entity_id:
-          format: int64
-          type: integer
-        entity_type:
           readOnly: true
           type:
-          - integer
+          - string
           - 'null'
-        handout:
-          format: int64
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
           type:
-          - integer
+          - string
           - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
         id:
+          description: Internal id to represent the resolution state.
           readOnly: true
           type: integer
-        summary:
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
           type:
           - string
           - 'null'
-      required:
-      - attachment_type
-      type: object
-    ICD10Code:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          maxLength: 500
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
           type:
-          - string
+          - integer
           - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
       required:
-      - code
+      - state
       type: object
-    PaginatedLetterList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Letter'
-          type: array
-      required:
-      - results
-      type: object
+    AuthorizationForEnum:
+      enum:
+      - Consult (One Visit Only)
+      - Procedure / Testing Only
+      - Referral For Treatment, includes Consult Visit
+      type: string
     AttachmentTypeEnum:
       description: '* `Entity` - Entity
 
@@ -527,6 +495,19 @@ components:
       - DsBmiChart
       - DsHcChart
       type: string
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
     PatchedLetter:
       properties:
         attachments:
@@ -657,43 +638,6 @@ components:
         with_archive:
           type: boolean
       type: object
-    MedicalSpecialtyCategory:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-      required:
-      - name
-      type: object
-    AuthorizationForEnum:
-      enum:
-      - Consult (One Visit Only)
-      - Procedure / Testing Only
-      - Referral For Treatment, includes Consult Visit
-      type: string
-    DeliveryMethodEnum:
-      enum:
-      - direct
-      - email
-      - emr
-      - fax
-      - passport
-      - printed
-      type: string
     ReferralOrder:
       properties:
         auth_number:
@@ -771,89 +715,6 @@ components:
       - practice
       - short_consultant_name
       - specialty
-      type: object
-    NullEnum:
-      type: 'null'
-    DocumentResolutionState:
-      properties:
-        created_date:
-          description: The datetime when this resolution state was created.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document:
-          description: Will be the same as the id of the lab order.
-          format: int64
-          readOnly: true
-          type: integer
-        id:
-          description: Internal id to represent the resolution state.
-          readOnly: true
-          type: integer
-        note:
-          description: Any note that was added to represent why an order was cancelled.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        resolving_document:
-          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        state:
-          allOf:
-          - $ref: '#/components/schemas/StateEnum'
-          description: 'The resolution state of the order.
-
-
-            * `outstanding` - Outstanding
-
-            * `fulfilled` - Fulfilled
-
-            * `cancelled` - Cancelled'
-      required:
-      - state
-      type: object
-    StateEnum:
-      description: '* `outstanding` - Outstanding
-
-        * `fulfilled` - Fulfilled
-
-        * `cancelled` - Cancelled'
-      enum:
-      - outstanding
-      - fulfilled
-      - cancelled
-      type: string
-    ReferralLetter:
-      properties:
-        body:
-          description: The body of the letter.
-          type: string
-        delivery_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        sign_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
       type: object
     Letter:
       properties:
@@ -989,6 +850,109 @@ components:
       - practice
       - send_to_contact
       type: object
+    PaginatedLetterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Letter'
+          type: array
+      required:
+      - results
+      type: object
+    MedicalSpecialty:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type: string
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - abbreviation
+      - name
+      type: object
+    MedicalSpecialtyCategory:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+      required:
+      - name
+      type: object
+    SendToContact:
+      properties:
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          format: int64
+          type: integer
+        last_name:
+          maxLength: 60
+          type: string
+        middle_name:
+          maxLength: 50
+          title: MiddleName
+          type: string
+        npi:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        org_name:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        specialties:
+          items: {}
+          type: array
+      required:
+      - id
+      type: object
     PatchedReferralOrder:
       properties:
         auth_number:
@@ -1059,33 +1023,44 @@ components:
         specialty:
           $ref: '#/components/schemas/MedicalSpecialty'
       type: object
-    MedicalSpecialty:
+    DeliveryMethodEnum:
+      enum:
+      - direct
+      - email
+      - emr
+      - fax
+      - passport
+      - printed
+      type: string
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    ReferralLetter:
       properties:
-        abbreviation:
-          maxLength: 20
+        body:
+          description: The body of the letter.
           type: string
-        category:
-          $ref: '#/components/schemas/MedicalSpecialtyCategory'
-        created_date:
+        delivery_date:
           format: date-time
-          readOnly: true
           type:
           - string
           - 'null'
         id:
           readOnly: true
           type: integer
-        name:
-          maxLength: 100
-          type: string
-        practice_created:
-          format: int64
+        sign_date:
+          format: date-time
           type:
-          - integer
+          - string
           - 'null'
-      required:
-      - abbreviation
-      - name
       type: object
     PaginatedReferralOrderList:
       properties:
@@ -1109,36 +1084,41 @@ components:
       required:
       - results
       type: object
-    SendToContact:
+    LetterAttachment:
       properties:
-        first_name:
-          maxLength: 50
-          type: string
-        id:
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentTypeEnum'
+        entity_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        entity_description:
+          type:
+          - string
+          - 'null'
+        entity_id:
           format: int64
           type: integer
-        last_name:
-          maxLength: 60
-          type: string
-        middle_name:
-          maxLength: 50
-          title: MiddleName
-          type: string
-        npi:
-          maxLength: 20
+        entity_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        handout:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        summary:
           type:
           - string
           - 'null'
-        org_name:
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        specialties:
-          items: {}
-          type: array
       required:
-      - id
+      - attachment_type
       type: object
   securitySchemes:
     oauth2:
@@ -1151,9 +1131,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

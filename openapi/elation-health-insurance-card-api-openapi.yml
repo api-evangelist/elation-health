@@ -1,11 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Elation Health Insurance Card API
-  version: 2.0.0
   contact:
     name: Elation Health
     url: https://www.elationhealth.com/
-  description: 'Operations tagged Insurance Card across 2 of this provider''s published API definitions: elation-health-api-full-openapi.yaml, elation-patient-profile-api.json. Each path carries the servers of the definition it was published in.'
+  description: Elation Health API v2.0
+  title: Elation Health Insurance Card API
+  version: 2.0.0
 servers:
 - description: Sandbox Server
   url: https://sandbox.elationemr.com
@@ -110,13 +110,36 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
-    servers:
-    - description: Sandbox Server
-      url: https://sandbox.elationemr.com
-    - description: Production Server
-      url: https://api.app.elationemr.com
 components:
   schemas:
+    InsuranceCardImage:
+      properties:
+        side:
+          description: Insurance card side. Usually front (1) or back (2).
+          type: integer
+        ttl:
+          type: integer
+        url:
+          format: uri
+          type: string
+      required:
+      - side
+      - ttl
+      - url
+      type: object
+    InsuranceCard:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/InsuranceCardImage'
+          type: array
+        rank:
+          description: Primary or secondary insurances (1 or 2).
+          type: integer
+      required:
+      - images
+      - rank
+      type: object
     ImageContent:
       properties:
         base64_content:
@@ -144,34 +167,6 @@ components:
       - rank
       - side
       type: object
-    InsuranceCard:
-      properties:
-        images:
-          items:
-            $ref: '#/components/schemas/InsuranceCardImage'
-          type: array
-        rank:
-          description: Primary or secondary insurances (1 or 2).
-          type: integer
-      required:
-      - images
-      - rank
-      type: object
-    InsuranceCardImage:
-      properties:
-        side:
-          description: Insurance card side. Usually front (1) or back (2).
-          type: integer
-        ttl:
-          type: integer
-        url:
-          format: uri
-          type: string
-      required:
-      - side
-      - ttl
-      - url
-      type: object
   securitySchemes:
     oauth2:
       flows:
@@ -183,9 +178,5 @@ components:
             system/{resource_name}.write: Write access to a specific resource
           tokenUrl: /api/2.0/oauth2/token/
       type: oauth2
-x-refined-from:
-- elation-health-api-full-openapi.yaml
-- elation-patient-profile-api.json
 x-readme:
-  headers: []
-x-readme-fauxas: true
+  proxy-enabled: true

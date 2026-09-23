@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Incoming Files API
   version: '1.0'
-  description: 'Operations tagged Incoming Files across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Incoming Files across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -507,6 +507,172 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    Image:
+      properties:
+        base64_content:
+          type: string
+          writeOnly: true
+        content_type:
+          type: string
+          writeOnly: true
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        height:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        image_url:
+          readOnly: true
+          type: string
+        incoming_file:
+          type: integer
+        original_extension:
+          maxLength: 10
+          type: string
+        original_height:
+          type: integer
+        original_padded:
+          type: integer
+        original_rotation:
+          type: integer
+        original_width:
+          type: integer
+        practice:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        quality_score:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        quality_score_by:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        received_date:
+          format: date-time
+          type: string
+        rotation:
+          readOnly: true
+          type: integer
+        sequence:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        width:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - base64_content
+      - content_type
+      type: object
+    ProcessStateEnum:
+      enum:
+      - complete
+      - error
+      - pending
+      - processing
+      type: string
+    File:
+      properties:
+        base64_content:
+          type: string
+          writeOnly: true
+        content_type:
+          maxLength: 200
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        file_url:
+          readOnly: true
+          type: string
+        filename:
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        incoming_file:
+          type: integer
+        practice:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - base64_content
+      - content_type
+      - filename
+      type: object
+    SourceEnum:
+      enum:
+      - metrofax
+      - plr
+      - refile
+      - softlinx
+      - user
+      type: string
+    PaginatedIncomingFileGroupList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/IncomingFileGroup'
+          type: array
+      required:
+      - results
+      type: object
     IncomingFileGroup:
       properties:
         created_date:
@@ -616,172 +782,6 @@ components:
       - group_name
       - practice
       type: object
-    ProcessStateEnum:
-      enum:
-      - complete
-      - error
-      - pending
-      - processing
-      type: string
-    File:
-      properties:
-        base64_content:
-          type: string
-          writeOnly: true
-        content_type:
-          maxLength: 200
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        file_size:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        file_url:
-          readOnly: true
-          type: string
-        filename:
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        incoming_file:
-          type: integer
-        practice:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      required:
-      - base64_content
-      - content_type
-      - filename
-      type: object
-    Image:
-      properties:
-        base64_content:
-          type: string
-          writeOnly: true
-        content_type:
-          type: string
-          writeOnly: true
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        file_size:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        height:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        image_url:
-          readOnly: true
-          type: string
-        incoming_file:
-          type: integer
-        original_extension:
-          maxLength: 10
-          type: string
-        original_height:
-          type: integer
-        original_padded:
-          type: integer
-        original_rotation:
-          type: integer
-        original_width:
-          type: integer
-        practice:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        quality_score:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        quality_score_by:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        received_date:
-          format: date-time
-          type: string
-        rotation:
-          readOnly: true
-          type: integer
-        sequence:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        width:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-      required:
-      - base64_content
-      - content_type
-      type: object
-    PaginatedIncomingFileGroupList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/IncomingFileGroup'
-          type: array
-      required:
-      - results
-      type: object
-    SourceEnum:
-      enum:
-      - metrofax
-      - plr
-      - refile
-      - softlinx
-      - user
-      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -802,7 +802,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

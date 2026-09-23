@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Bills API
   version: '1.0'
-  description: 'Operations tagged Bills across 3 of this provider''s published API definitions: elation-api-settings.json, elation-billing-api.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Bills across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -865,6 +865,7 @@ paths:
       - '2.1'
       - '2.0'
     post:
+      description: Create a new bill.
       operationId: bills_create
       requestBody:
         content:
@@ -920,6 +921,7 @@ paths:
       - '2.1'
       - '2.0'
     patch:
+      description: Update an existing bill.
       operationId: bills_partial_update
       parameters:
       - in: path
@@ -988,6 +990,15 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
+    BillingStatusEnum:
+      enum:
+      - Unbilled
+      - Billed
+      - UnresolvedError
+      - ResolvedError
+      type: string
     ListCPT:
       properties:
         alt_dxs:
@@ -1037,6 +1048,287 @@ components:
       - ndc_measure
       - unit_charge
       - units
+      type: object
+    CPT:
+      properties:
+        cpt:
+          type: string
+        dxs:
+          items:
+            $ref: '#/components/schemas/DX'
+          type: array
+        modifier_1:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        modifier_2:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        modifier_3:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        modifier_4:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        ndc:
+          maxLength: 11
+          type:
+          - string
+          - 'null'
+        ndc_dose:
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,3})?$
+          type:
+          - string
+          - 'null'
+        ndc_measure:
+          oneOf:
+          - $ref: '#/components/schemas/NdcMeasureEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        unit_charge:
+          type: string
+        units:
+          type: string
+      required:
+      - cpt
+      - dxs
+      - unit_charge
+      - units
+      type: object
+    PaginatedBillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Bill'
+          type: array
+      required:
+      - results
+      type: object
+    DX:
+      properties:
+        icd10_code:
+          type: string
+        icd9_codes:
+          items:
+            type: string
+          type: array
+      required:
+      - icd10_code
+      type: object
+    BillUpdate:
+      properties:
+        billing_date:
+          description: The date the bill was billed. Required if marking a bill as processed.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        billing_error:
+          description: The error message for the bill. Required if marking a bill as failed. This is the human readable error that users will see.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        billing_provider:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        billing_raw_error:
+          description: Further details on the billing error. Optional when marking a bill as failed. Useful when debugging why a bill failed to process.
+          type:
+          - string
+          - 'null'
+        cpts:
+          description: CPT objects for the bill.
+          items:
+            $ref: '#/components/schemas/CPT'
+          type: array
+        metadata:
+          additionalProperties: {}
+          type: object
+        notes:
+          description: Additional billing notes.
+          maxLength: 1000
+          type:
+          - string
+          - 'null'
+        ordering_provider:
+          description: The id of the provider who orders non-physician services for the patient.
+          oneOf:
+          - $ref: '#/components/schemas/ReferringProvider'
+          - type: 'null'
+        payment_amount:
+          description: Dollar amount of the patient payment.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type:
+          - string
+          - 'null'
+        place_of_service:
+          oneOf:
+          - $ref: '#/components/schemas/BillUpdatePlaceOfServiceEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        practice:
+          format: int64
+          type: integer
+        prior_authorization:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        ref_number:
+          description: The reference number of the bill. Required if marking a bill as processed.
+          type: string
+        referring_provider:
+          oneOf:
+          - $ref: '#/components/schemas/ReferringProvider'
+          - type: 'null'
+        rendering_provider:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        service_location:
+          description: The id of the service location the bill is associated with.
+          format: int64
+          type: integer
+        supervising_provider:
+          description: The id of the provider who has undertaken primary responsibility for the patient's health.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        visit_note:
+          format: int64
+          type: integer
+      type: object
+    BillUpdatePlaceOfServiceEnum:
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      - '22'
+      - '23'
+      - '24'
+      - '25'
+      - '26'
+      - '27'
+      - '31'
+      - '32'
+      - '33'
+      - '34'
+      - '41'
+      - '42'
+      - '49'
+      - '50'
+      - '51'
+      - '52'
+      - '53'
+      - '54'
+      - '55'
+      - '56'
+      - '57'
+      - '60'
+      - '61'
+      - '62'
+      - '65'
+      - '66'
+      - '71'
+      - '72'
+      - '81'
+      - '99'
+      type: string
+    Payment:
+      properties:
+        amount:
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          type: string
+        appointment:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        bill:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        create_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delete_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        when_collected:
+          format: date-time
+          type: string
+      required:
+      - amount
+      - when_collected
+      type: object
+    ReferringProvider:
+      properties:
+        name:
+          type: string
+        npi:
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+        state:
+          type: string
+      required:
+      - name
+      - state
       type: object
     BillSingleInstance:
       properties:
@@ -2678,313 +2970,6 @@ components:
       - billing_error
       - billing_raw_error
       type: object
-    DX:
-      properties:
-        icd10_code:
-          type: string
-        icd9_codes:
-          items:
-            type: string
-          type: array
-      required:
-      - icd10_code
-      type: object
-    BillingStatusEnum:
-      enum:
-      - Unbilled
-      - Billed
-      - UnresolvedError
-      - ResolvedError
-      type: string
-    NdcMeasureEnum:
-      description: '* `GR` - GR
-
-        * `F2` - F2
-
-        * `ME` - ME
-
-        * `ML` - ML
-
-        * `UN` - UN'
-      enum:
-      - GR
-      - F2
-      - ME
-      - ML
-      - UN
-      type: string
-    BillUpdatePlaceOfServiceEnum:
-      enum:
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      - '11'
-      - '12'
-      - '13'
-      - '14'
-      - '15'
-      - '16'
-      - '17'
-      - '18'
-      - '19'
-      - '20'
-      - '21'
-      - '22'
-      - '23'
-      - '24'
-      - '25'
-      - '26'
-      - '27'
-      - '31'
-      - '32'
-      - '33'
-      - '34'
-      - '41'
-      - '42'
-      - '49'
-      - '50'
-      - '51'
-      - '52'
-      - '53'
-      - '54'
-      - '55'
-      - '56'
-      - '57'
-      - '60'
-      - '61'
-      - '62'
-      - '65'
-      - '66'
-      - '71'
-      - '72'
-      - '81'
-      - '99'
-      type: string
-    NullEnum:
-      type: 'null'
-    CPT:
-      properties:
-        cpt:
-          type: string
-        dxs:
-          items:
-            $ref: '#/components/schemas/DX'
-          type: array
-        modifier_1:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        modifier_2:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        modifier_3:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        modifier_4:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        ndc:
-          maxLength: 11
-          type:
-          - string
-          - 'null'
-        ndc_dose:
-          format: decimal
-          pattern: ^-?\d{0,7}(?:\.\d{0,3})?$
-          type:
-          - string
-          - 'null'
-        ndc_measure:
-          oneOf:
-          - $ref: '#/components/schemas/NdcMeasureEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        unit_charge:
-          type: string
-        units:
-          type: string
-      required:
-      - cpt
-      - dxs
-      - unit_charge
-      - units
-      type: object
-    ReferringProvider:
-      properties:
-        name:
-          type: string
-        npi:
-          maxLength: 10
-          type:
-          - string
-          - 'null'
-        state:
-          type: string
-      required:
-      - name
-      - state
-      type: object
-    PaginatedBillList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Bill'
-          type: array
-      required:
-      - results
-      type: object
-    BillUpdate:
-      properties:
-        billing_date:
-          description: The date the bill was billed. Required if marking a bill as processed.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        billing_error:
-          description: The error message for the bill. Required if marking a bill as failed. This is the human readable error that users will see.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        billing_provider:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        billing_raw_error:
-          description: Further details on the billing error. Optional when marking a bill as failed. Useful when debugging why a bill failed to process.
-          type:
-          - string
-          - 'null'
-        cpts:
-          description: CPT objects for the bill.
-          items:
-            $ref: '#/components/schemas/CPT'
-          type: array
-        metadata:
-          additionalProperties: {}
-          type: object
-        notes:
-          description: Additional billing notes.
-          maxLength: 1000
-          type:
-          - string
-          - 'null'
-        ordering_provider:
-          description: The id of the provider who orders non-physician services for the patient.
-          oneOf:
-          - $ref: '#/components/schemas/ReferringProvider'
-          - type: 'null'
-        payment_amount:
-          description: Dollar amount of the patient payment.
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-          type:
-          - string
-          - 'null'
-        place_of_service:
-          oneOf:
-          - $ref: '#/components/schemas/BillUpdatePlaceOfServiceEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        practice:
-          format: int64
-          type: integer
-        prior_authorization:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        ref_number:
-          description: The reference number of the bill. Required if marking a bill as processed.
-          type: string
-        referring_provider:
-          oneOf:
-          - $ref: '#/components/schemas/ReferringProvider'
-          - type: 'null'
-        rendering_provider:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        service_location:
-          description: The id of the service location the bill is associated with.
-          format: int64
-          type: integer
-        supervising_provider:
-          description: The id of the provider who has undertaken primary responsibility for the patient's health.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        visit_note:
-          format: int64
-          type: integer
-      type: object
-    Payment:
-      properties:
-        amount:
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
-          type: string
-        appointment:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        bill:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        create_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        delete_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        when_collected:
-          format: date-time
-          type: string
-      required:
-      - amount
-      - when_collected
-      type: object
     PatchedBillUpdate:
       properties:
         billing_date:
@@ -3073,6 +3058,23 @@ components:
           format: int64
           type: integer
       type: object
+    NdcMeasureEnum:
+      description: '* `GR` - GR
+
+        * `F2` - F2
+
+        * `ME` - ME
+
+        * `ML` - ML
+
+        * `UN` - UN'
+      enum:
+      - GR
+      - F2
+      - ME
+      - ML
+      - UN
+      type: string
   securitySchemes:
     sec0:
       type: oauth2
@@ -3092,7 +3094,6 @@ components:
       type: oauth2
 x-refined-from:
 - elation-api-settings.json
-- elation-billing-api.json
 - elation-health-api-full-openapi.yaml
 x-readme:
   headers: []

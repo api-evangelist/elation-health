@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Lab Order Sets API
   version: '1.0'
-  description: 'Operations tagged Lab Order Sets across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-orders-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Lab Order Sets across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -807,93 +807,31 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    ICD10Code:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
-    LabOrderAOEQuestion:
-      properties:
-        choices:
-          items:
-            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
-          type: array
-        code:
-          maxLength: 100
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        example_format:
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        max_length:
-          maximum: 65535
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        question_type:
-          $ref: '#/components/schemas/QuestionTypeEnum'
-        secondary_code:
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        value:
-          type: string
-      required:
-      - choices
-      - code
-      - value
-      type: object
-    LabOrderAOEQuestionChoice:
-      properties:
-        code:
-          maxLength: 100
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        value:
-          type: string
-      required:
-      - code
-      - value
-      type: object
+    NullEnum:
+      type: 'null'
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
+      enum:
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
+      type: string
     PaginatedLabOrderSetList:
       properties:
         count:
@@ -916,49 +854,22 @@ components:
       required:
       - results
       type: object
-    NullEnum:
-      type: 'null'
-    LabOrderSet:
+    ICD10Code:
       properties:
-        compendium_code:
-          description: "RM-9598 Guard against missing code/name. Can't repro issue from ticket\n    locally so being extra careful with the guards here."
-          readOnly: true
+        code:
+          maxLength: 50
           type: string
-        content:
-          $ref: '#/components/schemas/LabOrderContent'
-        created_date:
-          description: Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.
-          format: date-time
-          readOnly: true
+        description:
+          maxLength: 500
           type:
           - string
           - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_vendor:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        name:
-          description: The name of the lab order set.
-          maxLength: 250
-          type: string
-        practice:
-          format: int64
-          type: integer
       required:
-      - content
-      - name
-      - practice
+      - code
       type: object
+    BlankEnum:
+      enum:
+      - ''
     LabOrderTestToLabOrderAOEQuestion:
       properties:
         question:
@@ -1031,69 +942,6 @@ components:
           format: int64
           type: integer
       type: object
-    LabOrderContent:
-      properties:
-        collection_datetime:
-          description: If lab specimen collection is done onsite, this is the time at which the collection was taken.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        fasting_method:
-          description: 'Instructions for patient and lab on how long they should fast before specimen collection.
-
-
-            * `fasting_12_hour` - Fasting - 12 hours
-
-            * `fasting_8_hours` - Fasting - 8 hours
-
-            * `fasting_2_hours` - Fasting - 2 hours
-
-            * `fasting_none` - Non-Fasting
-
-            * `fasting_random` - Fasting or non-fasting does not matter (Random)'
-          oneOf:
-          - $ref: '#/components/schemas/FastingMethodEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        icd10_codes:
-          description: ICD10 diagnosis codes provided along with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        patient_instructions:
-          description: Notes for patient.
-          type: string
-        standing_order_end_date:
-          description: Date at which standing order should be canceled.
-          format: date
-          type:
-          - string
-          - 'null'
-        standing_order_frequency:
-          description: Number of times order should be performed on a standing basis.
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        stat_method:
-          oneOf:
-          - $ref: '#/components/schemas/StatMethodEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        test_center_notes:
-          description: Notes for Lab.
-          type: string
-        tests:
-          description: The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.
-          items:
-            $ref: '#/components/schemas/LabOrderTestWithDiagnoses'
-          type: array
-      type: object
     FastingMethodEnum:
       description: '* `fasting_12_hour` - Fasting - 12 hours
 
@@ -1111,29 +959,32 @@ components:
       - fasting_none
       - fasting_random
       type: string
-    QuestionTypeEnum:
-      description: '* `enum` - enum
-
-        * `enum_multiselect` - enum_multiselect
-
-        * `freetext` - freetext
-
-        * `y_or_n` - y_or_n
-
-        * `numeric` - numeric
-
-        * `yyyymmdd` - yyyymmdd
-
-        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
-      enum:
-      - enum
-      - enum_multiselect
-      - freetext
-      - y_or_n
-      - numeric
-      - yyyymmdd
-      - 2_numeric_1_decimal
-      type: string
+    LabOrderAOEQuestionChoice:
+      properties:
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        value:
+          type: string
+      required:
+      - code
+      - value
+      type: object
     LabOrderTestWithDiagnoses:
       properties:
         code:
@@ -1210,9 +1061,158 @@ components:
       - icd10_codes
       - name
       type: object
-    BlankEnum:
-      enum:
-      - ''
+    LabOrderContent:
+      properties:
+        collection_datetime:
+          description: If lab specimen collection is done onsite, this is the time at which the collection was taken.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        fasting_method:
+          description: 'Instructions for patient and lab on how long they should fast before specimen collection.
+
+
+            * `fasting_12_hour` - Fasting - 12 hours
+
+            * `fasting_8_hours` - Fasting - 8 hours
+
+            * `fasting_2_hours` - Fasting - 2 hours
+
+            * `fasting_none` - Non-Fasting
+
+            * `fasting_random` - Fasting or non-fasting does not matter (Random)'
+          oneOf:
+          - $ref: '#/components/schemas/FastingMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        icd10_codes:
+          description: ICD10 diagnosis codes provided along with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient_instructions:
+          description: Notes for patient.
+          type: string
+        standing_order_end_date:
+          description: Date at which standing order should be canceled.
+          format: date
+          type:
+          - string
+          - 'null'
+        standing_order_frequency:
+          description: Number of times order should be performed on a standing basis.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        stat_method:
+          oneOf:
+          - $ref: '#/components/schemas/StatMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        test_center_notes:
+          description: Notes for Lab.
+          type: string
+        tests:
+          description: The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.
+          items:
+            $ref: '#/components/schemas/LabOrderTestWithDiagnoses'
+          type: array
+      type: object
+    LabOrderAOEQuestion:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
+          type: array
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        example_format:
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        max_length:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        secondary_code:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        value:
+          type: string
+      required:
+      - choices
+      - code
+      - value
+      type: object
+    LabOrderSet:
+      properties:
+        compendium_code:
+          description: "RM-9598 Guard against missing code/name. Can't repro issue from ticket\n    locally so being extra careful with the guards here."
+          readOnly: true
+          type: string
+        content:
+          $ref: '#/components/schemas/LabOrderContent'
+        created_date:
+          description: Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        name:
+          description: The name of the lab order set.
+          maxLength: 250
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - content
+      - name
+      - practice
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1233,7 +1233,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-orders-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

@@ -1,64 +1,2181 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Lab Orders API
-  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
-  version: '2.0'
-  contact:
-    name: Elation Health Developer Support
-    url: https://docs.elationhealth.com/reference/api-overview
-  termsOfService: https://www.elationhealth.com/
+  title: Elation Health Lab Orders API
+  version: '1.0'
+  description: 'Operations tagged Lab Orders across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-health-elation-health-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
 - url: https://app.elationemr.com/api/2.0
   description: Production
-- url: https://sandbox.elationemr.com/api/2.0
-  description: Sandbox
-security:
-- oauth2: []
 tags:
 - name: Lab Orders
-  description: Laboratory order management
 paths:
   /lab_orders/:
     get:
-      operationId: lab_orders_list
-      summary: List lab orders
-      description: Retrieve a paginated list of laboratory orders.
-      tags:
-      - Lab Orders
+      summary: Find Lab Orders
+      description: ''
+      operationId: find-lab-orders
       parameters:
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/offset'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
       - name: patient
         in: query
         schema:
           type: integer
-        description: Filter by patient ID
+          format: int32
+      - name: practice
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: unsigned
+        in: query
+        schema:
+          type: boolean
+      - name: from_signed_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: to_signed_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__gt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__gte
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__lt
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: document_date__lte
+        in: query
+        schema:
+          type: string
+          format: date
       responses:
         '200':
-          description: Paginated list of lab orders
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"count\": 123,\n  \"next\": \"https://sandbox.elationemr.com/api/2.0/lab_orders/?limit=10&offset=10\",\n  \"previous\": \"https://sandbox.elationemr.com/api/2.0/lab_orders/?limit=10\",\n  \"results\": [  // list of objects\n    { // See Object Definition },\n    // ...\n    { // See Object Definition },\n  ]\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_orders/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    post:
+      summary: Create Lab Order
+      description: ''
+      operationId: create-lab-order
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - document_date
+              - ordering_physician
+              - patient
+              - practice
+              properties:
+                answers:
+                  type: array
+                  description: Value must be Lab for laboratory reports
+                  items:
+                    properties:
+                      test:
+                        type: integer
+                        format: int32
+                      question:
+                        type: integer
+                        format: int32
+                      value:
+                        type: string
+                    required:
+                    - test
+                    - question
+                    - value
+                    type: object
+                bill_type:
+                  type: string
+                  enum:
+                  - ("thirdparty"
+                  - '"Third Party (e.g. Insurance)")'
+                  - ("patient"
+                  - '"Patient")'
+                  - ("client"
+                  - '"Client")'
+                  - ("workerscomp"
+                  - '"Worker''s Comp")'
+                  - ("specialbilling"
+                  - '"Special Billing")'
+                ccs:
+                  type: array
+                  description: Physician id
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                confidential:
+                  type: boolean
+                content:
+                  type: object
+                  description: The Lab Order Content Object
+                  properties:
+                    tests:
+                      type: array
+                      description: LabOrderTest id
+                      items:
+                        properties:
+                          id:
+                            type: integer
+                            description: object id
+                            format: int64
+                        required:
+                        - id
+                        type: object
+                    stat_method:
+                      type: string
+                      enum:
+                      - wet_reading_phone
+                      - wet_reading_fax
+                      - stat_phone
+                      - stat_fax
+                      - stat_phone_fax
+                    patient_instructions:
+                      type: string
+                    test_center_notes:
+                      type: string
+                    fasting_method:
+                      type: string
+                      enum:
+                      - fasting_12_hour
+                      - fasting_8_hours
+                      - fasting_2_hours
+                      - fasting_none
+                      - fasting_random
+                    standing_order_frequency:
+                      type: string
+                    standing_order_end_date:
+                      type: string
+                      format: date
+                    collection_datetime:
+                      type: string
+                      format: date
+                    icd10_codes:
+                      type: array
+                      items:
+                        properties:
+                          code:
+                            type: string
+                            description: icd10 code
+                        type: object
+                document_date:
+                  type: string
+                  format: date
+                facility:
+                  type: object
+                  required:
+                  - id
+                  properties:
+                    id:
+                      type: integer
+                      description: object id
+                      format: int64
+                follow_up_method:
+                  type: string
+                ordering_physician:
+                  type: integer
+                  format: int32
+                patient:
+                  type: integer
+                  format: int32
+                practice:
+                  type: integer
+                  format: int32
+                resolution:
+                  type: object
+                  required:
+                  - state
+                  properties:
+                    state:
+                      type: string
+                      enum:
+                      - ("outstanding"
+                      - '"Outstanding")'
+                      - ("fulfilled"
+                      - '"Fulfilled")'
+                      - ("cancelled"
+                      - '"Cancelled")'
+                    resolving_document:
+                      type: integer
+                      description: The document id (requisition id number)
+                      format: int32
+                site:
+                  type: integer
+                  description: The location where the patient will have the lab performed.   Sites are specific to their lab vendor.
+                  format: int32
+                tags:
+                  type: array
+                  description: List of Coded Document Tags.
+                  items:
+                    type: integer
+                    format: int32
+                test_date:
+                  type: string
+                  format: date
+                vendor:
+                  type: integer
+                  format: int32
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"answers\": [\n        {\n            \"id\": 140758874784147,\n            \"test\": 140755679510590,\n            \"question\": 67220537746,\n            \"value\": \"v1\",\n            \"created_date\": \"2022-06-07T21:06:44Z\",\n            \"deleted_date\": null\n        }\n    ],\n    \"bill_type\": \"Worker's Comp\",\n    \"ccs\": [\n        140755710312450\n    ],\n    \"chart_date\": \"2002-06-07T12:55:44.059474Z\",\n    \"confidential\": true,\n    \"content\": {\n        \"collection_datetime\": \"2002-06-07T12:55:44.059474Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\n                \"code\": \"Z3A.23\",\n                \"description\": \"23 weeks gestation of pregnancy\"\n            }\n        ],\n        \"id\": 140758874587237,\n        \"patient_instructions\": \"23\",\n        \"standing_order_end_date\": \"2002-06-07\",\n        \"standing_order_frequency\": \"null\",\n        \"stat_method\": \"wet_reading_phone\",\n        \"test_center_notes\": \"11\",\n        \"tests\": [\n            {\n                \"code\": null,\n                \"compendium\": null,\n                \"cpts\": [],\n                \"created_date\": \"2014-05-09T20:34:33Z\",\n                \"deleted_date\": null,\n                \"id\": 24504107070,\n                \"lab_vendor\": null,\n                \"name\": \"TSH\",\n                \"practice_created\": 65540,\n                \"procedure_class\": null,\n                \"questions\": [],\n                \"synonyms\": []\n            }\n        ]\n    },\n    \"created_date\": \"2022-06-07T21:06:43.614753Z\",\n    \"document_date\": \"2022-06-06T15:27:52Z\",\n    \"facility\": {\n        \"id\": 140743194837419,\n        \"vendor\": {\n            \"id\": 67186196726,\n            \"name\": \"labcorp\",\n            \"display_name\": \"LabCorp\"\n        },\n        \"practice_facility\": \"practice\",\n        \"practice_secondary_id\": null,\n        \"lab_facility\": \"labcorp\",\n        \"description\": \"Labcorp e-ordering\",\n        \"user_facing\": true,\n        \"compendium\": 140745672294843,\n        \"deleted_date\": null,\n        \"created_date\": \"2019-10-04T05:37:38Z\",\n        \"active\": true,\n        \"practice\": 65540\n    },\n    \"follow_up_method\": \"fol1\",\n    \"id\": 140758874652705,\n    \"ordering_physician\": 140758834544642,\n    \"patient\": 140758838542337,\n    \"practice\": 140758831005700,\n    \"requisition\": 140758874652705,\n    \"resolution\": {\n        \"id\": \"140758874849685\",\n        \"document\": \"<class 'elation.orders.models.LabOrder'>: 140758874652705\",\n        \"resolving_document\": 140758868754465,\n        \"state\": \"outstanding\",\n        \"note\": null,\n        \"created_date\": \"2022-06-07T21:06:44Z\",\n        \"deleted_date\": null\n    },\n    \"signed_by\": null,\n    \"signed_date\": null,\n    \"site\": {\n        \"address\": \"94-307 Farrington Hwy\",\n        \"city\": \"Waipahu\",\n        \"created_date\": \"2017-01-26T22:06:57Z\",\n        \"deleted_date\": null,\n        \"fax\": \"8086773731\",\n        \"id\": 68827742612,\n        \"name\": \"CLH\",\n        \"phone\": \"8086773870\",\n        \"practice_created\": null,\n        \"state\": \"HI\",\n        \"suite\": \"Suite B4\",\n        \"vendor\": {\n            \"id\": 67556802806,\n            \"name\": \"Clinical Labs of Hawaii\",\n            \"display_name\": \"Clinical Labs of Hawaii\"\n        },\n        \"zip\": \"96797\"\n    },\n    \"special_insurance\": null,\n    \"submissions\": [],\n    \"specimens\": [],\n    \"tags\": [\n        {\n            \"code\": \"408289007\",\n            \"code_type\": 2,\n            \"concept_name\": \"wt-mgmt-referral\",\n            \"context\": null,\n            \"created_date\": \"2015-07-23T19:30:51Z\",\n            \"deleted_date\": \"2019-05-29T00:06:03Z\",\n            \"description\": \"Referral to weight management program\",\n            \"id\": 58719011162,\n            \"practice_created\": null,\n            \"snomed_result_code\": null,\n            \"value\": \"CQM: Ref to Wt Mgt Program\"\n        }\n    ],\n    \"test_date\": \"2002-06-07\",\n    \"vendor\": 67191701750,\n    \"printable_view\": \"http://127.0.0.1/api/2.0/lab_orders/140758874652705/printable\"\n}"
+              schema:
+                type: object
+                properties:
+                  answers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758874784147
+                          default: 0
+                        test:
+                          type: integer
+                          example: 140755679510590
+                          default: 0
+                        question:
+                          type: integer
+                          example: 67220537746
+                          default: 0
+                        value:
+                          type: string
+                          example: v1
+                        created_date:
+                          type: string
+                          example: '2022-06-07T21:06:44Z'
+                        deleted_date: {}
+                  bill_type:
+                    type: string
+                    example: Worker's Comp
+                  ccs:
+                    type: array
+                    items:
+                      type: integer
+                      example: 140755710312450
+                      default: 0
+                  chart_date:
+                    type: string
+                    example: '2002-06-07T12:55:44.059474Z'
+                  confidential:
+                    type: boolean
+                    example: true
+                    default: true
+                  content:
+                    type: object
+                    properties:
+                      collection_datetime:
+                        type: string
+                        example: '2002-06-07T12:55:44.059474Z'
+                      fasting_method:
+                        type: string
+                        example: fasting_12_hour
+                      icd10_codes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              example: Z3A.23
+                            description:
+                              type: string
+                              example: 23 weeks gestation of pregnancy
+                      id:
+                        type: integer
+                        example: 140758874587237
+                        default: 0
+                      patient_instructions:
+                        type: string
+                        example: '23'
+                      standing_order_end_date:
+                        type: string
+                        example: '2002-06-07'
+                      standing_order_frequency:
+                        type: string
+                        example: 'null'
+                      stat_method:
+                        type: string
+                        example: wet_reading_phone
+                      test_center_notes:
+                        type: string
+                        example: '11'
+                      tests:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code: {}
+                            compendium: {}
+                            cpts:
+                              type: array
+                            created_date:
+                              type: string
+                              example: '2014-05-09T20:34:33Z'
+                            deleted_date: {}
+                            id:
+                              type: integer
+                              example: 24504107070
+                              default: 0
+                            lab_vendor: {}
+                            name:
+                              type: string
+                              example: TSH
+                            practice_created:
+                              type: integer
+                              example: 65540
+                              default: 0
+                            procedure_class: {}
+                            questions:
+                              type: array
+                            synonyms:
+                              type: array
+                  created_date:
+                    type: string
+                    example: '2022-06-07T21:06:43.614753Z'
+                  document_date:
+                    type: string
+                    example: '2022-06-06T15:27:52Z'
+                  facility:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 140743194837419
+                        default: 0
+                      vendor:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 67186196726
+                            default: 0
+                          name:
+                            type: string
+                            example: labcorp
+                          display_name:
+                            type: string
+                            example: LabCorp
+                      practice_facility:
+                        type: string
+                        example: practice
+                      practice_secondary_id: {}
+                      lab_facility:
+                        type: string
+                        example: labcorp
+                      description:
+                        type: string
+                        example: Labcorp e-ordering
+                      user_facing:
+                        type: boolean
+                        example: true
+                        default: true
+                      compendium:
+                        type: integer
+                        example: 140745672294843
+                        default: 0
+                      deleted_date: {}
+                      created_date:
+                        type: string
+                        example: '2019-10-04T05:37:38Z'
+                      active:
+                        type: boolean
+                        example: true
+                        default: true
+                      practice:
+                        type: integer
+                        example: 65540
+                        default: 0
+                  follow_up_method:
+                    type: string
+                    example: fol1
+                  id:
+                    type: integer
+                    example: 140758874652705
+                    default: 0
+                  ordering_physician:
+                    type: integer
+                    example: 140758834544642
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140758838542337
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+                  requisition:
+                    type: integer
+                    example: 140758874652705
+                    default: 0
+                  resolution:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '140758874849685'
+                      document:
+                        type: string
+                        example: '<class ''elation.orders.models.LabOrder''>: 140758874652705'
+                      resolving_document:
+                        type: integer
+                        example: 140758868754465
+                        default: 0
+                      state:
+                        type: string
+                        example: outstanding
+                      note: {}
+                      created_date:
+                        type: string
+                        example: '2022-06-07T21:06:44Z'
+                      deleted_date: {}
+                  signed_by: {}
+                  signed_date: {}
+                  site:
+                    type: object
+                    properties:
+                      address:
+                        type: string
+                        example: 94-307 Farrington Hwy
+                      city:
+                        type: string
+                        example: Waipahu
+                      created_date:
+                        type: string
+                        example: '2017-01-26T22:06:57Z'
+                      deleted_date: {}
+                      fax:
+                        type: string
+                        example: '8086773731'
+                      id:
+                        type: integer
+                        example: 68827742612
+                        default: 0
+                      name:
+                        type: string
+                        example: CLH
+                      phone:
+                        type: string
+                        example: '8086773870'
+                      practice_created: {}
+                      state:
+                        type: string
+                        example: HI
+                      suite:
+                        type: string
+                        example: Suite B4
+                      vendor:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 67556802806
+                            default: 0
+                          name:
+                            type: string
+                            example: Clinical Labs of Hawaii
+                          display_name:
+                            type: string
+                            example: Clinical Labs of Hawaii
+                      zip:
+                        type: string
+                        example: '96797'
+                  special_insurance: {}
+                  submissions:
+                    type: array
+                  specimens:
+                    type: array
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '408289007'
+                        code_type:
+                          type: integer
+                          example: 2
+                          default: 0
+                        concept_name:
+                          type: string
+                          example: wt-mgmt-referral
+                        context: {}
+                        created_date:
+                          type: string
+                          example: '2015-07-23T19:30:51Z'
+                        deleted_date:
+                          type: string
+                          example: '2019-05-29T00:06:03Z'
+                        description:
+                          type: string
+                          example: Referral to weight management program
+                        id:
+                          type: integer
+                          example: 58719011162
+                          default: 0
+                        practice_created: {}
+                        snomed_result_code: {}
+                        value:
+                          type: string
+                          example: 'CQM: Ref to Wt Mgt Program'
+                  test_date:
+                    type: string
+                    example: '2002-06-07'
+                  vendor:
+                    type: integer
+                    example: 67191701750
+                    default: 0
+                  printable_view:
+                    type: string
+                    example: http://127.0.0.1/api/2.0/lab_orders/140758874652705/printable
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"site\": 68827742612,\n    \"answers\": [\n        {\n            \"question\": 67220537746,\n            \"test\": 140755679510590,\n            \"value\": \"v1\"\n        }\n    ],\n    \"bill_type\": \"Worker's Comp\",\n    \"ccs\": [\n        140755710312450\n    ],\n    \"content\": {\n        \"collection_datetime\": \"2002-06-07T12:55:44.059474Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\"code\": \"Z3A.23\"}\n        ],\n        \"patient_instructions\": \"23\",\n        \"standing_order_end_date\": \"2002-06-07\",\n        \"standing_order_frequency\": \"null\",\n        \"stat_method\": \"wet_reading_phone\",\n        \"test_center_notes\": \"11\",\n        \"tests\": [\n          {\"id\": 24504107070}\n        ]\n    },\n    \"chart_date\": \"2002-06-07T12:55:44.059474Z\",\n    \"confidential\": true,\n    \"document_date\": \"2022-06-06T15:27:52Z\",\n    \"facility\": {\"id\": 140743194837419},\n    \"follow_up_method\": \"fol1\",\n    \"ordering_physician\": 140758834544642,\n    \"patient\": 140758838542337,\n    \"practice\": 140758831005700,\n    \"resolution\": {\n        \"state\": \"outstanding\",\n        \"resolving_document\": 140758868754465\n    },\n    \"tags\": [\n      58719011162\n    ],\n    \"test_date\": \"2002-06-07\",\n    \"vendor\": 67191701750\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/lab_orders/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_orders/{id}/printable:
+    get:
+      summary: Retrieve the Printable Lab Order View
+      description: 'Providers are able to print a view of the lab order including the data provided behind this endpoint.
+
+
+        Each lab order response includes a link to obtain this view; a PDF file.
+
+
+        When you GET the link you''ll receive a response with application/pdf and the bytes of the PDF.'
+      operationId: retrieve-the-printable-lab-order-view
+      parameters:
+      - name: lab_order_id
+        in: path
+        description: The Report's id.
+        schema:
+          type: integer
+          format: int32
+        required: true
+      - name: print_header
+        in: query
+        description: The id of the print header that you want to use for the printable view
+        schema:
+          type: integer
+          format: int32
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\nreport_id = 2345\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_orders/{lab_order_id}/printable\".format(report_id=report_id),\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nwith open('/tmp/out.pdf', 'wb') as outpdf:\n    outpdf.write(resp.content)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /lab_orders/{id}:
+    get:
+      summary: Get Lab Order
+      description: ''
+      operationId: get-lab-order
+      parameters:
+      - name: id
+        in: path
+        description: The object id
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"answers\": [],\n    \"bill_type\": \"\",\n    \"ccs\": [],\n    \"chart_date\": \"2022-05-31T16:23:41Z\",\n    \"confidential\": false,\n    \"content\": {\n        \"collection_datetime\": \"2022-05-31T16:23:00Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\n                \"code\": \"Z51.0\",\n                \"description\": \"Encounter for antineoplastic radiation therapy\"\n            }\n        ],\n        \"id\": 140758879240293,\n        \"patient_instructions\": \"\",\n        \"standing_order_end_date\": null,\n        \"standing_order_frequency\": \"\",\n        \"stat_method\": \"\",\n        \"test_center_notes\": \"\",\n        \"tests\": [\n            {\n                \"code\": \"\",\n                \"compendium\": null,\n                \"cpts\": [],\n                \"created_date\": \"2020-01-27T16:17:44Z\",\n                \"deleted_date\": null,\n                \"id\": 140748310052926,\n                \"lab_vendor\": null,\n                \"name\": \"Testosterone\",\n                \"practice_created\": null,\n                \"procedure_class\": null,\n                \"questions\": [],\n                \"synonyms\": []\n            }\n        ]\n    },\n    \"created_date\": \"2022-05-31T16:23:41Z\",\n    \"document_date\": \"2022-05-31T16:23:40Z\",\n    \"facility\": null,\n    \"follow_up_method\": \"\",\n    \"id\": 140758879305761,\n    \"ordering_physician\": 140758867050498,\n    \"patient\": 140758871048193,\n    \"practice\": 140758863511556,\n    \"requisition\": 140758879305761,\n    \"resolution\": null,\n    \"signed_by\": 140758867050498,\n    \"signed_date\": \"2022-05-31T16:23:41Z\",\n    \"site\": null,\n    \"special_insurance\": null,\n    \"submissions\": [],\n    \"specimens\": [],\n    \"tags\": [],\n    \"test_date\": null,\n    \"vendor\": 67186196726,\n    \"printable_view\": \"http://127.0.0.1/api/2.0/lab_orders/140758879305761/printable\"\n}"
+              schema:
+                type: object
+                properties:
+                  answers:
+                    type: array
+                  bill_type:
+                    type: string
+                    example: ''
+                  ccs:
+                    type: array
+                  chart_date:
+                    type: string
+                    example: '2022-05-31T16:23:41Z'
+                  confidential:
+                    type: boolean
+                    example: false
+                    default: true
+                  content:
+                    type: object
+                    properties:
+                      collection_datetime:
+                        type: string
+                        example: '2022-05-31T16:23:00Z'
+                      fasting_method:
+                        type: string
+                        example: fasting_12_hour
+                      icd10_codes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              example: Z51.0
+                            description:
+                              type: string
+                              example: Encounter for antineoplastic radiation therapy
+                      id:
+                        type: integer
+                        example: 140758879240293
+                        default: 0
+                      patient_instructions:
+                        type: string
+                        example: ''
+                      standing_order_end_date: {}
+                      standing_order_frequency:
+                        type: string
+                        example: ''
+                      stat_method:
+                        type: string
+                        example: ''
+                      test_center_notes:
+                        type: string
+                        example: ''
+                      tests:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              example: ''
+                            compendium: {}
+                            cpts:
+                              type: array
+                            created_date:
+                              type: string
+                              example: '2020-01-27T16:17:44Z'
+                            deleted_date: {}
+                            id:
+                              type: integer
+                              example: 140748310052926
+                              default: 0
+                            lab_vendor: {}
+                            name:
+                              type: string
+                              example: Testosterone
+                            practice_created: {}
+                            procedure_class: {}
+                            questions:
+                              type: array
+                            synonyms:
+                              type: array
+                  created_date:
+                    type: string
+                    example: '2022-05-31T16:23:41Z'
+                  document_date:
+                    type: string
+                    example: '2022-05-31T16:23:40Z'
+                  facility: {}
+                  follow_up_method:
+                    type: string
+                    example: ''
+                  id:
+                    type: integer
+                    example: 140758879305761
+                    default: 0
+                  ordering_physician:
+                    type: integer
+                    example: 140758867050498
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140758871048193
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758863511556
+                    default: 0
+                  requisition:
+                    type: integer
+                    example: 140758879305761
+                    default: 0
+                  resolution: {}
+                  signed_by:
+                    type: integer
+                    example: 140758867050498
+                    default: 0
+                  signed_date:
+                    type: string
+                    example: '2022-05-31T16:23:41Z'
+                  site: {}
+                  special_insurance: {}
+                  submissions:
+                    type: array
+                  specimens:
+                    type: array
+                  tags:
+                    type: array
+                  test_date: {}
+                  vendor:
+                    type: integer
+                    example: 67186196726
+                    default: 0
+                  printable_view:
+                    type: string
+                    example: http://127.0.0.1/api/2.0/lab_orders/140758879305761/printable
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/lab_orders/140758879305761\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    put:
+      summary: Update Lab Order
+      description: ''
+      operationId: update-lab-order
+      parameters:
+      - name: id
+        in: path
+        description: Object id
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - document_date
+              - ordering_physician
+              - patient
+              - practice
+              properties:
+                answers:
+                  type: array
+                  description: Value must be Lab for laboratory reports
+                  items:
+                    properties:
+                      test:
+                        type: integer
+                        format: int32
+                      question:
+                        type: integer
+                        format: int32
+                      value:
+                        type: string
+                    required:
+                    - test
+                    - question
+                    - value
+                    type: object
+                bill_type:
+                  type: string
+                  enum:
+                  - ("thirdparty"
+                  - '"Third Party (e.g. Insurance)")'
+                  - ("patient"
+                  - '"Patient")'
+                  - ("client"
+                  - '"Client")'
+                  - ("workerscomp"
+                  - '"Worker''s Comp")'
+                  - ("specialbilling"
+                  - '"Special Billing")'
+                ccs:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
+                chart_date:
+                  type: string
+                  format: date
+                confidential:
+                  type: boolean
+                content:
+                  type: object
+                  description: The Lab Order Content Object
+                  properties:
+                    tests:
+                      type: array
+                      description: LabOrderTest id
+                      items:
+                        properties:
+                          id:
+                            type: integer
+                            description: object id
+                            format: int64
+                        required:
+                        - id
+                        type: object
+                    stat_method:
+                      type: string
+                      enum:
+                      - wet_reading_phone
+                      - wet_reading_fax
+                      - stat_phone
+                      - stat_fax
+                      - stat_phone_fax
+                    patient_instructions:
+                      type: string
+                    test_center_notes:
+                      type: string
+                    fasting_method:
+                      type: string
+                      enum:
+                      - fasting_12_hour
+                      - fasting_8_hours
+                      - fasting_2_hours
+                      - fasting_none
+                      - fasting_random
+                    standing_order_frequency:
+                      type: string
+                    standing_order_end_date:
+                      type: string
+                      format: date
+                    collection_datetime:
+                      type: string
+                      format: date
+                    icd10_codes:
+                      type: array
+                      items:
+                        properties:
+                          code:
+                            type: string
+                            description: icd10 code
+                        type: object
+                document_date:
+                  type: string
+                  format: date
+                facility:
+                  type: object
+                  properties: {}
+                follow_up_method:
+                  type: string
+                ordering_physician:
+                  type: integer
+                  format: int32
+                patient:
+                  type: integer
+                  format: int32
+                practice:
+                  type: integer
+                  format: int32
+                resolution:
+                  type: object
+                  required:
+                  - state
+                  properties:
+                    state:
+                      type: string
+                      enum:
+                      - ("outstanding"
+                      - '"Outstanding")'
+                      - ("fulfilled"
+                      - '"Fulfilled")'
+                      - ("cancelled"
+                      - '"Cancelled")'
+                    resolving_document:
+                      type: integer
+                      description: The document id (requisition id number)
+                      format: int32
+                site:
+                  type: integer
+                  description: The location where the patient will have the lab performed.   Sites are specific to their lab vendor.
+                  format: int32
+                tags:
+                  type: array
+                  description: List of Coded Document Tags.
+                  items:
+                    type: integer
+                    format: int32
+                test_date:
+                  type: string
+                  format: date
+                vendor:
+                  type: integer
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"answers\": [\n        {\n            \"id\": 140758874784147,\n            \"test\": 140755679510590,\n            \"question\": 67220537746,\n            \"value\": \"v1\",\n            \"created_date\": \"2022-06-07T21:06:44Z\",\n            \"deleted_date\": null\n        }\n    ],\n    \"bill_type\": \"Worker's Comp\",\n    \"ccs\": [\n        140755710312450\n    ],\n    \"chart_date\": \"2002-06-07T12:55:44.059474Z\",\n    \"confidential\": true,\n    \"content\": {\n        \"collection_datetime\": \"2002-06-07T12:55:44.059474Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\n                \"code\": \"Z3A.23\",\n                \"description\": \"23 weeks gestation of pregnancy\"\n            }\n        ],\n        \"id\": 140758874587237,\n        \"patient_instructions\": \"23\",\n        \"standing_order_end_date\": \"2002-06-07\",\n        \"standing_order_frequency\": \"null\",\n        \"stat_method\": \"wet_reading_phone\",\n        \"test_center_notes\": \"11\",\n        \"tests\": [\n            {\n                \"code\": null,\n                \"compendium\": null,\n                \"cpts\": [],\n                \"created_date\": \"2014-05-09T20:34:33Z\",\n                \"deleted_date\": null,\n                \"id\": 24504107070,\n                \"lab_vendor\": null,\n                \"name\": \"TSH\",\n                \"practice_created\": 65540,\n                \"procedure_class\": null,\n                \"questions\": [],\n                \"synonyms\": []\n            }\n        ]\n    },\n    \"created_date\": \"2022-06-07T21:06:43.614753Z\",\n    \"document_date\": \"2022-06-06T15:27:52Z\",\n    \"facility\": {\n        \"id\": 140743194837419,\n        \"vendor\": {\n            \"id\": 67186196726,\n            \"name\": \"labcorp\",\n            \"display_name\": \"LabCorp\"\n        },\n        \"practice_facility\": \"practice\",\n        \"practice_secondary_id\": null,\n        \"lab_facility\": \"labcorp\",\n        \"description\": \"Labcorp e-ordering\",\n        \"user_facing\": true,\n        \"compendium\": 140745672294843,\n        \"deleted_date\": null,\n        \"created_date\": \"2019-10-04T05:37:38Z\",\n        \"active\": true,\n        \"practice\": 65540\n    },\n    \"follow_up_method\": \"fol1\",\n    \"id\": 140758874652705,\n    \"ordering_physician\": 140758834544642,\n    \"patient\": 140758838542337,\n    \"practice\": 140758831005700,\n    \"requisition\": 140758874652705,\n    \"resolution\": {\n        \"id\": \"140758874849685\",\n        \"document\": \"<class 'elation.orders.models.LabOrder'>: 140758874652705\",\n        \"resolving_document\": 140758868754465,\n        \"state\": \"outstanding\",\n        \"note\": null,\n        \"created_date\": \"2022-06-07T21:06:44Z\",\n        \"deleted_date\": null\n    },\n    \"signed_by\": null,\n    \"signed_date\": null,\n    \"site\": {\n        \"address\": \"94-307 Farrington Hwy\",\n        \"city\": \"Waipahu\",\n        \"created_date\": \"2017-01-26T22:06:57Z\",\n        \"deleted_date\": null,\n        \"fax\": \"8086773731\",\n        \"id\": 68827742612,\n        \"name\": \"CLH\",\n        \"phone\": \"8086773870\",\n        \"practice_created\": null,\n        \"state\": \"HI\",\n        \"suite\": \"Suite B4\",\n        \"vendor\": {\n            \"id\": 67556802806,\n            \"name\": \"Clinical Labs of Hawaii\",\n            \"display_name\": \"Clinical Labs of Hawaii\"\n        },\n        \"zip\": \"96797\"\n    },\n    \"special_insurance\": null,\n    \"submissions\": [],\n    \"specimens\": [],\n    \"tags\": [\n        {\n            \"code\": \"408289007\",\n            \"code_type\": 2,\n            \"concept_name\": \"wt-mgmt-referral\",\n            \"context\": null,\n            \"created_date\": \"2015-07-23T19:30:51Z\",\n            \"deleted_date\": \"2019-05-29T00:06:03Z\",\n            \"description\": \"Referral to weight management program\",\n            \"id\": 58719011162,\n            \"practice_created\": null,\n            \"snomed_result_code\": null,\n            \"value\": \"CQM: Ref to Wt Mgt Program\"\n        }\n    ],\n    \"test_date\": \"2002-06-07\",\n    \"vendor\": 67191701750,\n    \"printable_view\": \"http://127.0.0.1/api/2.0/lab_orders/140758874652705/printable\"\n}"
+              schema:
+                type: object
+                properties:
+                  answers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758874784147
+                          default: 0
+                        test:
+                          type: integer
+                          example: 140755679510590
+                          default: 0
+                        question:
+                          type: integer
+                          example: 67220537746
+                          default: 0
+                        value:
+                          type: string
+                          example: v1
+                        created_date:
+                          type: string
+                          example: '2022-06-07T21:06:44Z'
+                        deleted_date: {}
+                  bill_type:
+                    type: string
+                    example: Worker's Comp
+                  ccs:
+                    type: array
+                    items:
+                      type: integer
+                      example: 140755710312450
+                      default: 0
+                  chart_date:
+                    type: string
+                    example: '2002-06-07T12:55:44.059474Z'
+                  confidential:
+                    type: boolean
+                    example: true
+                    default: true
+                  content:
+                    type: object
+                    properties:
+                      collection_datetime:
+                        type: string
+                        example: '2002-06-07T12:55:44.059474Z'
+                      fasting_method:
+                        type: string
+                        example: fasting_12_hour
+                      icd10_codes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              example: Z3A.23
+                            description:
+                              type: string
+                              example: 23 weeks gestation of pregnancy
+                      id:
+                        type: integer
+                        example: 140758874587237
+                        default: 0
+                      patient_instructions:
+                        type: string
+                        example: '23'
+                      standing_order_end_date:
+                        type: string
+                        example: '2002-06-07'
+                      standing_order_frequency:
+                        type: string
+                        example: 'null'
+                      stat_method:
+                        type: string
+                        example: wet_reading_phone
+                      test_center_notes:
+                        type: string
+                        example: '11'
+                      tests:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code: {}
+                            compendium: {}
+                            cpts:
+                              type: array
+                            created_date:
+                              type: string
+                              example: '2014-05-09T20:34:33Z'
+                            deleted_date: {}
+                            id:
+                              type: integer
+                              example: 24504107070
+                              default: 0
+                            lab_vendor: {}
+                            name:
+                              type: string
+                              example: TSH
+                            practice_created:
+                              type: integer
+                              example: 65540
+                              default: 0
+                            procedure_class: {}
+                            questions:
+                              type: array
+                            synonyms:
+                              type: array
+                  created_date:
+                    type: string
+                    example: '2022-06-07T21:06:43.614753Z'
+                  document_date:
+                    type: string
+                    example: '2022-06-06T15:27:52Z'
+                  facility:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 140743194837419
+                        default: 0
+                      vendor:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 67186196726
+                            default: 0
+                          name:
+                            type: string
+                            example: labcorp
+                          display_name:
+                            type: string
+                            example: LabCorp
+                      practice_facility:
+                        type: string
+                        example: practice
+                      practice_secondary_id: {}
+                      lab_facility:
+                        type: string
+                        example: labcorp
+                      description:
+                        type: string
+                        example: Labcorp e-ordering
+                      user_facing:
+                        type: boolean
+                        example: true
+                        default: true
+                      compendium:
+                        type: integer
+                        example: 140745672294843
+                        default: 0
+                      deleted_date: {}
+                      created_date:
+                        type: string
+                        example: '2019-10-04T05:37:38Z'
+                      active:
+                        type: boolean
+                        example: true
+                        default: true
+                      practice:
+                        type: integer
+                        example: 65540
+                        default: 0
+                  follow_up_method:
+                    type: string
+                    example: fol1
+                  id:
+                    type: integer
+                    example: 140758874652705
+                    default: 0
+                  ordering_physician:
+                    type: integer
+                    example: 140758834544642
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140758838542337
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+                  requisition:
+                    type: integer
+                    example: 140758874652705
+                    default: 0
+                  resolution:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '140758874849685'
+                      document:
+                        type: string
+                        example: '<class ''elation.orders.models.LabOrder''>: 140758874652705'
+                      resolving_document:
+                        type: integer
+                        example: 140758868754465
+                        default: 0
+                      state:
+                        type: string
+                        example: outstanding
+                      note: {}
+                      created_date:
+                        type: string
+                        example: '2022-06-07T21:06:44Z'
+                      deleted_date: {}
+                  signed_by: {}
+                  signed_date: {}
+                  site:
+                    type: object
+                    properties:
+                      address:
+                        type: string
+                        example: 94-307 Farrington Hwy
+                      city:
+                        type: string
+                        example: Waipahu
+                      created_date:
+                        type: string
+                        example: '2017-01-26T22:06:57Z'
+                      deleted_date: {}
+                      fax:
+                        type: string
+                        example: '8086773731'
+                      id:
+                        type: integer
+                        example: 68827742612
+                        default: 0
+                      name:
+                        type: string
+                        example: CLH
+                      phone:
+                        type: string
+                        example: '8086773870'
+                      practice_created: {}
+                      state:
+                        type: string
+                        example: HI
+                      suite:
+                        type: string
+                        example: Suite B4
+                      vendor:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 67556802806
+                            default: 0
+                          name:
+                            type: string
+                            example: Clinical Labs of Hawaii
+                          display_name:
+                            type: string
+                            example: Clinical Labs of Hawaii
+                      zip:
+                        type: string
+                        example: '96797'
+                  special_insurance: {}
+                  submissions:
+                    type: array
+                  specimens:
+                    type: array
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '408289007'
+                        code_type:
+                          type: integer
+                          example: 2
+                          default: 0
+                        concept_name:
+                          type: string
+                          example: wt-mgmt-referral
+                        context: {}
+                        created_date:
+                          type: string
+                          example: '2015-07-23T19:30:51Z'
+                        deleted_date:
+                          type: string
+                          example: '2019-05-29T00:06:03Z'
+                        description:
+                          type: string
+                          example: Referral to weight management program
+                        id:
+                          type: integer
+                          example: 58719011162
+                          default: 0
+                        practice_created: {}
+                        snomed_result_code: {}
+                        value:
+                          type: string
+                          example: 'CQM: Ref to Wt Mgt Program'
+                  test_date:
+                    type: string
+                    example: '2002-06-07'
+                  vendor:
+                    type: integer
+                    example: 67191701750
+                    default: 0
+                  printable_view:
+                    type: string
+                    example: http://127.0.0.1/api/2.0/lab_orders/140758874652705/printable
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"site\": 68827742612,\n    \"answers\": [\n        {\n            \"question\": 67220537746,\n            \"test\": 140755679510590,\n            \"value\": \"v1\"\n        }\n    ],\n    \"bill_type\": \"Worker's Comp\",\n    \"ccs\": [\n        140755710312450\n    ],\n    \"content\": {\n        \"collection_datetime\": \"2002-06-07T12:55:44.059474Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\"code\": \"Z3A.23\"}\n        ],\n        \"patient_instructions\": \"23\",\n        \"standing_order_end_date\": \"2002-06-07\",\n        \"standing_order_frequency\": \"null\",\n        \"stat_method\": \"wet_reading_phone\",\n        \"test_center_notes\": \"11\",\n        \"tests\": [\n          {\"id\": 24504107070}\n        ]\n    },\n    \"chart_date\": \"2002-06-07T12:55:44.059474Z\",\n    \"confidential\": true,\n    \"document_date\": \"2022-06-06T15:27:52Z\",\n    \"facility\": {\"id\": 140743194837419},\n    \"follow_up_method\": \"fol1\",\n    \"ordering_physician\": 140758834544642,\n    \"patient\": 140758838542337,\n    \"practice\": 140758831005700,\n    \"resolution\": {\n        \"state\": \"outstanding\",\n        \"resolving_document\": 140758868754465\n    },\n    \"tags\": [\n      58719011162\n    ],\n    \"test_date\": \"2002-06-07\",\n    \"vendor\": 67191701750\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/lab_orders/12345678/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    patch:
+      summary: Update Lab Order
+      description: ''
+      operationId: update-lab-order-1
+      parameters:
+      - name: id
+        in: path
+        description: Object id
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ordering_physician
+              properties:
+                answers:
+                  type: array
+                  description: Value must be Lab for laboratory reports
+                  items:
+                    properties:
+                      test:
+                        type: integer
+                        format: int32
+                      question:
+                        type: integer
+                        format: int32
+                      value:
+                        type: string
+                    required:
+                    - test
+                    - question
+                    - value
+                    type: object
+                bill_type:
+                  type: string
+                ccs:
+                  type: array
+                  items:
+                    type: string
+                'chart_date ':
+                  properties:
+                    WIP:
+                      type: string
+                      description: '[WIP] maybe mistake in code, line 208 lab_order.py'
+                      format: date
+                  required: []
+                  type: object
+                confidential:
+                  type: boolean
+                content:
+                  type: object
+                  description: The Lab Order Content Object
+                  properties:
+                    tests:
+                      type: array
+                      description: LabOrderTest id
+                      items:
+                        properties:
+                          id:
+                            type: integer
+                            description: object id
+                            format: int64
+                        required:
+                        - id
+                        type: object
+                    stat_method:
+                      type: string
+                      enum:
+                      - wet_reading_phone
+                      - wet_reading_fax
+                      - stat_phone
+                      - stat_fax
+                      - stat_phone_fax
+                    patient_instructions:
+                      type: string
+                    test_center_notes:
+                      type: string
+                    fasting_method:
+                      type: string
+                      enum:
+                      - fasting_12_hour
+                      - fasting_8_hours
+                      - fasting_2_hours
+                      - fasting_none
+                      - fasting_random
+                    standing_order_frequency:
+                      type: string
+                    standing_order_end_date:
+                      type: string
+                      format: date
+                    collection_datetime:
+                      type: string
+                      format: date
+                    icd10_codes:
+                      type: array
+                      items:
+                        properties:
+                          code:
+                            type: string
+                            description: icd10 code
+                        type: object
+                document_date:
+                  type: string
+                  format: date
+                facility:
+                  type: object
+                  properties: {}
+                follow_up_method:
+                  type: string
+                ordering_physician:
+                  type: integer
+                  format: int32
+                patient:
+                  type: integer
+                  format: int32
+                practice:
+                  type: integer
+                  format: int32
+                resolution:
+                  type: object
+                  required:
+                  - state
+                  properties:
+                    state:
+                      type: string
+                      enum:
+                      - ("outstanding"
+                      - '"Outstanding")'
+                      - ("fulfilled"
+                      - '"Fulfilled")'
+                      - ("cancelled"
+                      - '"Cancelled")'
+                    resolving_document:
+                      type: integer
+                      description: The document id (requisition id number)
+                      format: int32
+                site:
+                  type: integer
+                  description: The location where the patient will have the lab performed.   Sites are specific to their lab vendor.
+                  format: int32
+                tags:
+                  type: array
+                  description: List of Coded Document Tags.
+                test_date:
+                  type: string
+                  format: date
+                vendor:
+                  type: integer
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"answers\": [\n        {\n            \"id\": 140758874784147,\n            \"test\": 140755679510590,\n            \"question\": 67220537746,\n            \"value\": \"v1\",\n            \"created_date\": \"2022-06-07T21:06:44Z\",\n            \"deleted_date\": null\n        }\n    ],\n    \"bill_type\": \"Worker's Comp\",\n    \"ccs\": [\n        140755710312450\n    ],\n    \"chart_date\": \"2002-06-07T12:55:44.059474Z\",\n    \"confidential\": true,\n    \"content\": {\n        \"collection_datetime\": \"2002-06-07T12:55:44.059474Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\n                \"code\": \"Z3A.23\",\n                \"description\": \"23 weeks gestation of pregnancy\"\n            }\n        ],\n        \"id\": 140758874587237,\n        \"patient_instructions\": \"23\",\n        \"standing_order_end_date\": \"2002-06-07\",\n        \"standing_order_frequency\": \"null\",\n        \"stat_method\": \"wet_reading_phone\",\n        \"test_center_notes\": \"11\",\n        \"tests\": [\n            {\n                \"code\": null,\n                \"compendium\": null,\n                \"cpts\": [],\n                \"created_date\": \"2014-05-09T20:34:33Z\",\n                \"deleted_date\": null,\n                \"id\": 24504107070,\n                \"lab_vendor\": null,\n                \"name\": \"TSH\",\n                \"practice_created\": 65540,\n                \"procedure_class\": null,\n                \"questions\": [],\n                \"synonyms\": []\n            }\n        ]\n    },\n    \"created_date\": \"2022-06-07T21:06:43.614753Z\",\n    \"document_date\": \"2022-06-06T15:27:52Z\",\n    \"facility\": {\n        \"id\": 140743194837419,\n        \"vendor\": {\n            \"id\": 67186196726,\n            \"name\": \"labcorp\",\n            \"display_name\": \"LabCorp\"\n        },\n        \"practice_facility\": \"practice\",\n        \"practice_secondary_id\": null,\n        \"lab_facility\": \"labcorp\",\n        \"description\": \"Labcorp e-ordering\",\n        \"user_facing\": true,\n        \"compendium\": 140745672294843,\n        \"deleted_date\": null,\n        \"created_date\": \"2019-10-04T05:37:38Z\",\n        \"active\": true,\n        \"practice\": 65540\n    },\n    \"follow_up_method\": \"fol1\",\n    \"id\": 140758874652705,\n    \"ordering_physician\": 140758834544642,\n    \"patient\": 140758838542337,\n    \"practice\": 140758831005700,\n    \"requisition\": 140758874652705,\n    \"resolution\": {\n        \"id\": \"140758874849685\",\n        \"document\": \"<class 'elation.orders.models.LabOrder'>: 140758874652705\",\n        \"resolving_document\": 140758868754465,\n        \"state\": \"outstanding\",\n        \"note\": null,\n        \"created_date\": \"2022-06-07T21:06:44Z\",\n        \"deleted_date\": null\n    },\n    \"signed_by\": null,\n    \"signed_date\": null,\n    \"site\": {\n        \"address\": \"94-307 Farrington Hwy\",\n        \"city\": \"Waipahu\",\n        \"created_date\": \"2017-01-26T22:06:57Z\",\n        \"deleted_date\": null,\n        \"fax\": \"8086773731\",\n        \"id\": 68827742612,\n        \"name\": \"CLH\",\n        \"phone\": \"8086773870\",\n        \"practice_created\": null,\n        \"state\": \"HI\",\n        \"suite\": \"Suite B4\",\n        \"vendor\": {\n            \"id\": 67556802806,\n            \"name\": \"Clinical Labs of Hawaii\",\n            \"display_name\": \"Clinical Labs of Hawaii\"\n        },\n        \"zip\": \"96797\"\n    },\n    \"special_insurance\": null,\n    \"submissions\": [],\n    \"specimens\": [],\n    \"tags\": [\n        {\n            \"code\": \"408289007\",\n            \"code_type\": 2,\n            \"concept_name\": \"wt-mgmt-referral\",\n            \"context\": null,\n            \"created_date\": \"2015-07-23T19:30:51Z\",\n            \"deleted_date\": \"2019-05-29T00:06:03Z\",\n            \"description\": \"Referral to weight management program\",\n            \"id\": 58719011162,\n            \"practice_created\": null,\n            \"snomed_result_code\": null,\n            \"value\": \"CQM: Ref to Wt Mgt Program\"\n        }\n    ],\n    \"test_date\": \"2002-06-07\",\n    \"vendor\": 67191701750,\n    \"printable_view\": \"http://127.0.0.1/api/2.0/lab_orders/140758874652705/printable\"\n}"
+              schema:
+                type: object
+                properties:
+                  answers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758874784147
+                          default: 0
+                        test:
+                          type: integer
+                          example: 140755679510590
+                          default: 0
+                        question:
+                          type: integer
+                          example: 67220537746
+                          default: 0
+                        value:
+                          type: string
+                          example: v1
+                        created_date:
+                          type: string
+                          example: '2022-06-07T21:06:44Z'
+                        deleted_date: {}
+                  bill_type:
+                    type: string
+                    example: Worker's Comp
+                  ccs:
+                    type: array
+                    items:
+                      type: integer
+                      example: 140755710312450
+                      default: 0
+                  chart_date:
+                    type: string
+                    example: '2002-06-07T12:55:44.059474Z'
+                  confidential:
+                    type: boolean
+                    example: true
+                    default: true
+                  content:
+                    type: object
+                    properties:
+                      collection_datetime:
+                        type: string
+                        example: '2002-06-07T12:55:44.059474Z'
+                      fasting_method:
+                        type: string
+                        example: fasting_12_hour
+                      icd10_codes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              example: Z3A.23
+                            description:
+                              type: string
+                              example: 23 weeks gestation of pregnancy
+                      id:
+                        type: integer
+                        example: 140758874587237
+                        default: 0
+                      patient_instructions:
+                        type: string
+                        example: '23'
+                      standing_order_end_date:
+                        type: string
+                        example: '2002-06-07'
+                      standing_order_frequency:
+                        type: string
+                        example: 'null'
+                      stat_method:
+                        type: string
+                        example: wet_reading_phone
+                      test_center_notes:
+                        type: string
+                        example: '11'
+                      tests:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code: {}
+                            compendium: {}
+                            cpts:
+                              type: array
+                            created_date:
+                              type: string
+                              example: '2014-05-09T20:34:33Z'
+                            deleted_date: {}
+                            id:
+                              type: integer
+                              example: 24504107070
+                              default: 0
+                            lab_vendor: {}
+                            name:
+                              type: string
+                              example: TSH
+                            practice_created:
+                              type: integer
+                              example: 65540
+                              default: 0
+                            procedure_class: {}
+                            questions:
+                              type: array
+                            synonyms:
+                              type: array
+                  created_date:
+                    type: string
+                    example: '2022-06-07T21:06:43.614753Z'
+                  document_date:
+                    type: string
+                    example: '2022-06-06T15:27:52Z'
+                  facility:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 140743194837419
+                        default: 0
+                      vendor:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 67186196726
+                            default: 0
+                          name:
+                            type: string
+                            example: labcorp
+                          display_name:
+                            type: string
+                            example: LabCorp
+                      practice_facility:
+                        type: string
+                        example: practice
+                      practice_secondary_id: {}
+                      lab_facility:
+                        type: string
+                        example: labcorp
+                      description:
+                        type: string
+                        example: Labcorp e-ordering
+                      user_facing:
+                        type: boolean
+                        example: true
+                        default: true
+                      compendium:
+                        type: integer
+                        example: 140745672294843
+                        default: 0
+                      deleted_date: {}
+                      created_date:
+                        type: string
+                        example: '2019-10-04T05:37:38Z'
+                      active:
+                        type: boolean
+                        example: true
+                        default: true
+                      practice:
+                        type: integer
+                        example: 65540
+                        default: 0
+                  follow_up_method:
+                    type: string
+                    example: fol1
+                  id:
+                    type: integer
+                    example: 140758874652705
+                    default: 0
+                  ordering_physician:
+                    type: integer
+                    example: 140758834544642
+                    default: 0
+                  patient:
+                    type: integer
+                    example: 140758838542337
+                    default: 0
+                  practice:
+                    type: integer
+                    example: 140758831005700
+                    default: 0
+                  requisition:
+                    type: integer
+                    example: 140758874652705
+                    default: 0
+                  resolution:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '140758874849685'
+                      document:
+                        type: string
+                        example: '<class ''elation.orders.models.LabOrder''>: 140758874652705'
+                      resolving_document:
+                        type: integer
+                        example: 140758868754465
+                        default: 0
+                      state:
+                        type: string
+                        example: outstanding
+                      note: {}
+                      created_date:
+                        type: string
+                        example: '2022-06-07T21:06:44Z'
+                      deleted_date: {}
+                  signed_by: {}
+                  signed_date: {}
+                  site:
+                    type: object
+                    properties:
+                      address:
+                        type: string
+                        example: 94-307 Farrington Hwy
+                      city:
+                        type: string
+                        example: Waipahu
+                      created_date:
+                        type: string
+                        example: '2017-01-26T22:06:57Z'
+                      deleted_date: {}
+                      fax:
+                        type: string
+                        example: '8086773731'
+                      id:
+                        type: integer
+                        example: 68827742612
+                        default: 0
+                      name:
+                        type: string
+                        example: CLH
+                      phone:
+                        type: string
+                        example: '8086773870'
+                      practice_created: {}
+                      state:
+                        type: string
+                        example: HI
+                      suite:
+                        type: string
+                        example: Suite B4
+                      vendor:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 67556802806
+                            default: 0
+                          name:
+                            type: string
+                            example: Clinical Labs of Hawaii
+                          display_name:
+                            type: string
+                            example: Clinical Labs of Hawaii
+                      zip:
+                        type: string
+                        example: '96797'
+                  special_insurance: {}
+                  submissions:
+                    type: array
+                  specimens:
+                    type: array
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: '408289007'
+                        code_type:
+                          type: integer
+                          example: 2
+                          default: 0
+                        concept_name:
+                          type: string
+                          example: wt-mgmt-referral
+                        context: {}
+                        created_date:
+                          type: string
+                          example: '2015-07-23T19:30:51Z'
+                        deleted_date:
+                          type: string
+                          example: '2019-05-29T00:06:03Z'
+                        description:
+                          type: string
+                          example: Referral to weight management program
+                        id:
+                          type: integer
+                          example: 58719011162
+                          default: 0
+                        practice_created: {}
+                        snomed_result_code: {}
+                        value:
+                          type: string
+                          example: 'CQM: Ref to Wt Mgt Program'
+                  test_date:
+                    type: string
+                    example: '2002-06-07'
+                  vendor:
+                    type: integer
+                    example: 67191701750
+                    default: 0
+                  printable_view:
+                    type: string
+                    example: http://127.0.0.1/api/2.0/lab_orders/140758874652705/printable
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\ndata = {\n    \"site\": 68827742612,\n    \"answers\": [\n        {\n            \"question\": 67220537746,\n            \"test\": 140755679510590,\n            \"value\": \"v1\"\n        }\n    ],\n    \"bill_type\": \"Worker's Comp\",\n    \"ccs\": [\n        140755710312450\n    ],\n    \"content\": {\n        \"collection_datetime\": \"2002-06-07T12:55:44.059474Z\",\n        \"fasting_method\": \"fasting_12_hour\",\n        \"icd10_codes\": [\n            {\"code\": \"Z3A.23\"}\n        ],\n        \"patient_instructions\": \"23\",\n        \"standing_order_end_date\": \"2002-06-07\",\n        \"standing_order_frequency\": \"null\",\n        \"stat_method\": \"wet_reading_phone\",\n        \"test_center_notes\": \"11\",\n        \"tests\": [\n          {\"id\": 24504107070}\n        ]\n    },\n    \"chart_date\": \"2002-06-07T12:55:44.059474Z\",\n    \"confidential\": true,\n    \"document_date\": \"2022-06-06T15:27:52Z\",\n    \"facility\": {\"id\": 140743194837419},\n    \"follow_up_method\": \"fol1\",\n    \"ordering_physician\": 140758834544642,\n    \"patient\": 140758838542337,\n    \"practice\": 140758831005700,\n    \"resolution\": {\n        \"state\": \"outstanding\",\n        \"resolving_document\": 140758868754465\n    },\n    \"tags\": [\n      58719011162\n    ],\n    \"test_date\": \"2002-06-07\",\n    \"vendor\": 67191701750\n}\n\nresp = requests.put(\"https://sandbox.elationemr.com/api/2.0/lab_orders/12345678/\",\n                     json=data,\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint(resp.status_code)\nprint(resp.text)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    delete:
+      summary: Delete Lab Order
+      description: ''
+      operationId: delete-lab-order
+      parameters:
+      - name: id
+        in: path
+        description: The object id
+        schema:
+          type: integer
+          format: int64
+        required: true
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.delete(\"https://sandbox.elationemr.com/api/2.0/lab_orders/140756377075740/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Lab Orders
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/lab_orders/:
+    get:
+      description: Returns a list of lab orders
+      operationId: lab_orders_list
+      parameters:
+      - in: query
+        name: document_date__gt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__gte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lt
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: document_date__lte
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: from_signed_date
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - in: query
+        name: to_signed_date
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: unsigned
+        schema:
+          type: boolean
+      responses:
+        '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedLabOrderList'
-    post:
-      operationId: lab_orders_create
-      summary: Create a lab order
-      description: Place a new laboratory order for a patient.
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Lab Orders
       tags:
       - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new lab order.
+      operationId: lab_orders_create
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LabOrderCreate'
+              $ref: '#/components/schemas/LabOrder'
+        required: true
       responses:
         '201':
-          description: Lab order created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LabOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Lab Order
+      tags:
+      - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/lab_orders/{id}/:
+    delete:
+      description: Delete an existing lab order.
+      operationId: lab_orders_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Lab Order
+      tags:
+      - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      description: Retrieve a single lab order
+      operationId: lab_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Lab Order
+      tags:
+      - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    patch:
+      description: Update an existing lab order.
+      operationId: lab_orders_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLabOrder'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Partially Update Lab Order
+      tags:
+      - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    put:
+      description: Replace an existing lab order.
+      operationId: lab_orders_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrder'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Update Lab Order
+      tags:
+      - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/lab_orders/{id}/printable/:
+    get:
+      description: Providers are able to print a view of the lab order including the data provided behind this endpoint. Each lab order response includes a link to obtain this view; a PDF file. When you GET the link you'll receive a response with application/pdf and the bytes of the PDF.
+      operationId: lab_orders_printable_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: The id of the print header that you want to use for the printable view.
+        in: query
+        name: print_header
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                format: binary
+                type: string
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve the Printable Lab Order View
+      tags:
+      - Lab Orders
+      x-el8-docs-category: Orders API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
   /lab_orders/{id}/:
     get:
       operationId: lab_orders_retrieve
@@ -73,7 +2190,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LabOrder'
+                $ref: '#/components/schemas/LabOrder_2'
+      security:
+      - oauth2: []
     put:
       operationId: lab_orders_update
       summary: Update a lab order
@@ -93,7 +2212,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LabOrder'
+                $ref: '#/components/schemas/LabOrder_2'
+      security:
+      - oauth2: []
     patch:
       operationId: lab_orders_partial_update
       summary: Partially update a lab order
@@ -113,7 +2234,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LabOrder'
+                $ref: '#/components/schemas/LabOrder_2'
+      security:
+      - oauth2: []
     delete:
       operationId: lab_orders_destroy
       summary: Delete a lab order
@@ -124,31 +2247,1103 @@ paths:
       responses:
         '204':
           description: Lab order deleted
+      security:
+      - oauth2: []
+    servers:
+    - url: https://app.elationemr.com/api/2.0
+      description: Production
+    - url: https://sandbox.elationemr.com/api/2.0
+      description: Sandbox
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 25
-      description: Number of results to return
   schemas:
+    LabVendorIdName:
+      description: LabVendor Serializer useful for simple, read-only reference.
+      properties:
+        display_name:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        name:
+          readOnly: true
+          type: string
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+    LabOrderSpecimenModifier:
+      properties:
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        modifier:
+          $ref: '#/components/schemas/BodySiteCodeModifier'
+        sequence:
+          description: The cardinal position in which the modifiers should be listed.
+          maximum: 65535
+          minimum: 0
+          type: integer
+        specimen:
+          format: int64
+          type: integer
+      required:
+      - modifier
+      - sequence
+      - specimen
+      type: object
+    PatchedLabOrder:
+      properties:
+        answers:
+          description: List of the answers provided for the Ask on Entry (AOE) questions if required by any lab order tests.
+          items:
+            $ref: '#/components/schemas/LabOrderAOEAnswer'
+          type:
+          - array
+          - 'null'
+        bill_type:
+          description: 'Who is financially responsible for the order.
+
+
+            * `thirdparty` - Third Party (e.g. Insurance)
+
+            * `patient` - Patient
+
+            * `client` - Client
+
+            * `workerscomp` - Worker''s Comp
+
+            * `specialbilling` - Special Billing'
+          oneOf:
+          - $ref: '#/components/schemas/BillTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        ccs:
+          description: List of physician ids who should be cc'd on any reports.
+          items:
+            format: int64
+            type:
+            - integer
+            - 'null'
+          type: array
+        chart_date:
+          description: Date at which this order was first seen in the patient's chart.
+          format: date-time
+          type: string
+        confidential:
+          default: false
+          description: Whether the provider has marked the order as confidential. Should not be shared with a patient.
+          type: boolean
+        content:
+          allOf:
+          - $ref: '#/components/schemas/LabOrderContent'
+          description: Represents the content of the lab order report.
+        created_date:
+          description: Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: Time at which this order was created in whichever system created it. Could be historical or same as the create_date.
+          format: date-time
+          type: string
+        facility:
+          description: An identifier that represents the facility placing the order. Usually assigned by the lab vendor.
+          oneOf:
+          - $ref: '#/components/schemas/FacilityIdentifier'
+          - type: 'null'
+        follow_up_method:
+          description: Freetext field communicating how the patient should receive their results.
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        ordering_physician:
+          description: The id of the physician who created the order.
+          format: int64
+          type: integer
+        patient:
+          description: The id of the patient.
+          format: int64
+          type: integer
+        practice:
+          description: The id of the practice.
+          format: int64
+          type: integer
+        printable_view:
+          format: uri
+          type: string
+        requisition:
+          description: The requisition id of the order. Can be different from the order id if and when the order was created outside of Elation.
+          type: integer
+        resolution:
+          description: The current state of the order's resolution.
+          oneOf:
+          - $ref: '#/components/schemas/DocumentResolutionState'
+          - type: 'null'
+        signed_by:
+          description: The id of the physician who signed off on the order.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The time when the order was signed.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        site:
+          description: The location where the patient will have the lab performed. Sites are specific to their lab vendor.
+          oneOf:
+          - $ref: '#/components/schemas/LabVendorPatientSite'
+          - type: 'null'
+        special_insurance:
+          description: Used primarily to support specific electronic lab order integrations.
+          oneOf:
+          - $ref: '#/components/schemas/PracticeSpecialInsuranceCodeName'
+          - type: 'null'
+        specimens:
+          description: Record of any specimens collected when creating the order.
+          items:
+            $ref: '#/components/schemas/LabOrderSpecimen'
+          type:
+          - array
+          - 'null'
+        submissions:
+          description: Record of the attempts to submit.
+          items:
+            $ref: '#/components/schemas/LabOrderSubmission'
+          type:
+          - array
+          - 'null'
+        tags:
+          description: Any tags associated with the lab order.
+          items:
+            format: int64
+            type:
+            - integer
+            - 'null'
+          type: array
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        vendor:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
+    StatMethodEnum:
+      description: '* `wet_reading_phone` - STAT Wet Reading - Please Phone Report
+
+        * `wet_reading_fax` - STAT Wet Reading - Please Fax Report
+
+        * `stat_phone` - STAT - Phone
+
+        * `stat_fax` - STAT - Fax
+
+        * `stat_phone_fax` - STAT - Phone and Fax'
+      enum:
+      - wet_reading_phone
+      - wet_reading_fax
+      - stat_phone
+      - stat_fax
+      - stat_phone_fax
+      type: string
+    FastingMethodEnum:
+      description: '* `fasting_12_hour` - Fasting - 12 hours
+
+        * `fasting_8_hours` - Fasting - 8 hours
+
+        * `fasting_2_hours` - Fasting - 2 hours
+
+        * `fasting_none` - Non-Fasting
+
+        * `fasting_random` - Fasting or non-fasting does not matter (Random)'
+      enum:
+      - fasting_12_hour
+      - fasting_8_hours
+      - fasting_2_hours
+      - fasting_none
+      - fasting_random
+      type: string
+    LabOrderAOEQuestionChoice:
+      properties:
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        value:
+          type: string
+      required:
+      - code
+      - value
+      type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    DocumentResolutionState:
+      properties:
+        created_date:
+          description: The datetime when this resolution state was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: Internal id to represent the resolution state.
+          readOnly: true
+          type: integer
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
+      required:
+      - state
+      type: object
+    LabOrderAOEQuestion:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
+          type: array
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        example_format:
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        max_length:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        secondary_code:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        value:
+          type: string
+      required:
+      - choices
+      - code
+      - value
+      type: object
+    LabVendorPatientSite:
+      description: The serializer for LabVendorPatientSite
+      properties:
+        address:
+          description: The address of the site.
+          maxLength: 200
+          type: string
+        city:
+          description: The city of the site.
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 200
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 40
+          type:
+          - string
+          - 'null'
+        vendor:
+          $ref: '#/components/schemas/LabVendorIdName'
+        zip:
+          maxLength: 10
+          type: string
+      required:
+      - name
+      type: object
+    BodySite:
+      properties:
+        code:
+          description: The HL7 code representing the body site from which a specimen was collected.
+          maxLength: 16
+          type: string
+        deleted_date:
+          description: Represents if the body site was removed from the specimen.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        text:
+          description: A textual description of the body site from which the specimen was collected.
+          maxLength: 64
+          type: string
+      required:
+      - code
+      - text
+      type: object
+    LabOrderTestWithDiagnoses:
+      properties:
+        code:
+          description: Any code associated with the test, usually provided by the lab vendor's compendium.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        compendium:
+          description: The id of the compendium provided the lab vendor that provides the lab order test. All tests in the same order **MUST** share the same compendium.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cpts:
+          description: A list of CPT codes associated with the lab order test.
+          items:
+            type: string
+          type: array
+        created_date:
+          description: Time at which Elation created this Lab Order Test.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: Time at which this Lab Order Test was deleted. Can happen when a lab order compendium update deprecates a test.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          items:
+            $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          description: The id of the lab vendor who provides the lab order test.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        name:
+          description: The name of the Lab Order Test.
+          maxLength: 255
+          type: string
+        practice_created:
+          description: The id of the practice that created the test if practice created.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        procedure_class:
+          description: Code provided by specific compendiums that indicate the "class" of test, e.g. histology vs cytology. Some lab vendors require that tests with specific procedure classes need to ordered separately.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        questions:
+          description: A list of Ask on Entry (AOE) Questions that need to be answered by the orderer when creating the order.
+          items:
+            $ref: '#/components/schemas/LabOrderTestToLabOrderAOEQuestion'
+          type: array
+        synonyms:
+          description: A list of synonyms that are useful when searching for a specific test.
+          items:
+            type: string
+          type: array
+      required:
+      - icd10_codes
+      - name
+      type: object
+    PracticeSpecialInsuranceCodeName:
+      properties:
+        code:
+          maxLength: 5
+          type: string
+        name:
+          maxLength: 64
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    LabOrderSpecimen:
+      properties:
+        body_site:
+          allOf:
+          - $ref: '#/components/schemas/BodySite'
+          description: Information about the body site where the specimen was collected.
+        container_id:
+          description: An identifier representing the container used to store the specimen.
+          maxLength: 2
+          type: string
+        description:
+          description: A freetext description of the specimen.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_order:
+          format: int64
+          readOnly: true
+          type: integer
+        modifiers:
+          description: Coded Modifiers indicating more information about the body site from which the specimen was collected.
+          items:
+            $ref: '#/components/schemas/LabOrderSpecimenModifier'
+          type: array
+        test:
+          description: The lab order test for which the specimen as collected.
+          format: int64
+          type: integer
+      required:
+      - body_site
+      - container_id
+      - modifiers
+      - test
+      type: object
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
+      enum:
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
+      type: string
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    LabOrderSubmission:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        lab_order:
+          format: int64
+          readOnly: true
+          type: integer
+        state:
+          description: The state of the electronic order submission.
+          maxLength: 20
+          type: string
+        state_metadata:
+          description: Useful error information collected as part of the submission. Including ERRORs or ACKs.
+          maxLength: 1500
+          type:
+          - string
+          - 'null'
+        time_acknowledged:
+          description: The time at which a user acknowledged any error shown to them about the electronic submission.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        time_submitted:
+          description: The time the electronic order was submitted to the lab vendor.
+          format: date-time
+          type: string
+      required:
+      - time_submitted
+      type: object
+    PaginatedLabOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrder'
+          type: array
+      required:
+      - results
+      type: object
+    FacilityIdentifier:
+      properties:
+        active:
+          description: Whether the facility identifier should be used. Should be true in most cases.
+          type: boolean
+        bidi_connection:
+          oneOf:
+          - $ref: '#/components/schemas/BiDiLabConnection'
+          - type: 'null'
+          readOnly: true
+        compendium:
+          description: The id of the compendium that will be used when the user selects this facility identifier.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          description: The text that will displayed to users in the lab order dialog.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_connection:
+          type:
+          - integer
+          - 'null'
+        lab_facility:
+          description: The id that represents the lab.
+          maxLength: 50
+          type: string
+        practice:
+          format: int64
+          type: integer
+        practice_facility:
+          description: The id that represents the practice; often an account number provided by the lab vendor.
+          maxLength: 50
+          type: string
+        practice_secondary_id:
+          type:
+          - string
+          - 'null'
+        user_facing:
+          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+          type: boolean
+        vendor:
+          properties:
+            display_name:
+              type: string
+            id:
+              format: int64
+              type: integer
+            name:
+              type: string
+          type: object
+      required:
+      - active
+      - lab_facility
+      - practice
+      - practice_facility
+      - vendor
+      type: object
+    LabOrderTestToLabOrderAOEQuestion:
+      properties:
+        question:
+          $ref: '#/components/schemas/LabOrderAOEQuestion'
+        required:
+          type: boolean
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        test:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - question
+      - sequence
+      type: object
+    BillTypeEnum:
+      description: '* `thirdparty` - Third Party (e.g. Insurance)
+
+        * `patient` - Patient
+
+        * `client` - Client
+
+        * `workerscomp` - Worker''s Comp
+
+        * `specialbilling` - Special Billing'
+      enum:
+      - thirdparty
+      - patient
+      - client
+      - workerscomp
+      - specialbilling
+      type: string
+    LabOrderContent:
+      properties:
+        collection_datetime:
+          description: If lab specimen collection is done onsite, this is the time at which the collection was taken.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        fasting_method:
+          description: 'Instructions for patient and lab on how long they should fast before specimen collection.
+
+
+            * `fasting_12_hour` - Fasting - 12 hours
+
+            * `fasting_8_hours` - Fasting - 8 hours
+
+            * `fasting_2_hours` - Fasting - 2 hours
+
+            * `fasting_none` - Non-Fasting
+
+            * `fasting_random` - Fasting or non-fasting does not matter (Random)'
+          oneOf:
+          - $ref: '#/components/schemas/FastingMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        icd10_codes:
+          description: ICD10 diagnosis codes provided along with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient_instructions:
+          description: Notes for patient.
+          type: string
+        standing_order_end_date:
+          description: Date at which standing order should be canceled.
+          format: date
+          type:
+          - string
+          - 'null'
+        standing_order_frequency:
+          description: Number of times order should be performed on a standing basis.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        stat_method:
+          oneOf:
+          - $ref: '#/components/schemas/StatMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        test_center_notes:
+          description: Notes for Lab.
+          type: string
+        tests:
+          description: The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.
+          items:
+            $ref: '#/components/schemas/LabOrderTestWithDiagnoses'
+          type: array
+      type: object
     LabOrder:
+      properties:
+        answers:
+          description: List of the answers provided for the Ask on Entry (AOE) questions if required by any lab order tests.
+          items:
+            $ref: '#/components/schemas/LabOrderAOEAnswer'
+          type:
+          - array
+          - 'null'
+        bill_type:
+          description: 'Who is financially responsible for the order.
+
+
+            * `thirdparty` - Third Party (e.g. Insurance)
+
+            * `patient` - Patient
+
+            * `client` - Client
+
+            * `workerscomp` - Worker''s Comp
+
+            * `specialbilling` - Special Billing'
+          oneOf:
+          - $ref: '#/components/schemas/BillTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        ccs:
+          description: List of physician ids who should be cc'd on any reports.
+          items:
+            format: int64
+            type:
+            - integer
+            - 'null'
+          type: array
+        chart_date:
+          description: Date at which this order was first seen in the patient's chart.
+          format: date-time
+          type: string
+        confidential:
+          default: false
+          description: Whether the provider has marked the order as confidential. Should not be shared with a patient.
+          type: boolean
+        content:
+          allOf:
+          - $ref: '#/components/schemas/LabOrderContent'
+          description: Represents the content of the lab order report.
+        created_date:
+          description: Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: Time at which this order was created in whichever system created it. Could be historical or same as the create_date.
+          format: date-time
+          type: string
+        facility:
+          description: An identifier that represents the facility placing the order. Usually assigned by the lab vendor.
+          oneOf:
+          - $ref: '#/components/schemas/FacilityIdentifier'
+          - type: 'null'
+        follow_up_method:
+          description: Freetext field communicating how the patient should receive their results.
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        ordering_physician:
+          description: The id of the physician who created the order.
+          format: int64
+          type: integer
+        patient:
+          description: The id of the patient.
+          format: int64
+          type: integer
+        practice:
+          description: The id of the practice.
+          format: int64
+          type: integer
+        printable_view:
+          format: uri
+          type: string
+        requisition:
+          description: The requisition id of the order. Can be different from the order id if and when the order was created outside of Elation.
+          type: integer
+        resolution:
+          description: The current state of the order's resolution.
+          oneOf:
+          - $ref: '#/components/schemas/DocumentResolutionState'
+          - type: 'null'
+        signed_by:
+          description: The id of the physician who signed off on the order.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The time when the order was signed.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        site:
+          description: The location where the patient will have the lab performed. Sites are specific to their lab vendor.
+          oneOf:
+          - $ref: '#/components/schemas/LabVendorPatientSite'
+          - type: 'null'
+        special_insurance:
+          description: Used primarily to support specific electronic lab order integrations.
+          oneOf:
+          - $ref: '#/components/schemas/PracticeSpecialInsuranceCodeName'
+          - type: 'null'
+        specimens:
+          description: Record of any specimens collected when creating the order.
+          items:
+            $ref: '#/components/schemas/LabOrderSpecimen'
+          type:
+          - array
+          - 'null'
+        submissions:
+          description: Record of the attempts to submit.
+          items:
+            $ref: '#/components/schemas/LabOrderSubmission'
+          type:
+          - array
+          - 'null'
+        tags:
+          description: Any tags associated with the lab order.
+          items:
+            format: int64
+            type:
+            - integer
+            - 'null'
+          type: array
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        vendor:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - document_date
+      - ordering_physician
+      - patient
+      - practice
+      type: object
+    NullEnum:
+      type: 'null'
+    LabOrderAOEAnswer:
+      properties:
+        created_date:
+          description: When the answer was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the answer was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        question:
+          description: The id of the AOE question for which this answer pertains.
+          format: int64
+          type: integer
+        test:
+          description: The id of the test for which this answer pertains.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        value:
+          description: The value entered by freetext or chosen by the ordering physician.
+          type:
+          - string
+          - 'null'
+      required:
+      - question
+      type: object
+    BodySiteCodeModifier:
+      properties:
+        code:
+          description: The HL7 code representing the modifier on the body site from which a specimen was collected.
+          maxLength: 3
+          type: string
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        text:
+          description: A textual description of the modifier of the body site from which the specimen was collected.
+          maxLength: 64
+          type: string
+      required:
+      - code
+      - text
+      type: object
+    BiDiLabConnection:
+      properties:
+        alias:
+          description: Get the alias of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        enabled:
+          description: Get the enabled status of the connection.
+          readOnly: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        priority:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        protocol:
+          description: Get the protocol of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedLabOrderList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/LabOrder_2'
+    LabOrder_2:
       allOf:
       - $ref: '#/components/schemas/LabOrderCreate'
       - type: object
@@ -161,33 +3356,11 @@ components:
             format: date-time
             readOnly: true
           deleted_date:
-            type: string
+            type:
+            - string
+            - 'null'
             format: date-time
-            nullable: true
             readOnly: true
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type: string
-          nullable: true
-          description: URL for next page
-        previous:
-          type: string
-          nullable: true
-          description: URL for previous page
-    PaginatedLabOrderList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/LabOrder'
     LabOrderCreate:
       type: object
       required:
@@ -230,11 +3403,65 @@ components:
           - Collected
           - Sent
           - Resulted
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
-    oauth2:
+    sec0:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
           scopes:
-            apiv2: Full API access
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-health-elation-health-api-openapi.yml
+x-readme:
+  headers: []
+x-readme-fauxas: true

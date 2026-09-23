@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Reports API
   version: '1.0'
-  description: 'Operations tagged Reports across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Reports across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -1047,13 +1047,94 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    ValueTypeEnum:
+    NullEnum:
+      type: 'null'
+    ReportImage:
+      properties:
+        document:
+          format: uri
+          type: string
+        id:
+          readOnly: true
+          type: integer
+      required:
+      - document
+      type: object
+    OrderStatusEnum:
       enum:
-      - Coded Entry
-      - Encapsulated Data
-      - Numeric
-      - String Data
-      - Text
+      - CANCELED
+      - COMPLETED
+      - DISCONTINUED
+      - ERROR, ORDER NOT FOUND
+      - IN PROCESS
+      - ON HOLD
+      - REPLACED
+      - SCHEDULED
+      type: string
+    S3RetrievingDocumentFile:
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
+    RoutedDocumentDelegate:
+      description: 'Nested serializer for RoutedDocumentDelegate.
+
+
+        Returns delegation information for users and groups assigned to review a report.
+
+        Either user or group will be populated, but not both.'
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        group:
+          description: ID of the delegated group. Null if this is a user delegation.
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        user:
+          description: ID of the delegated user. Null if this is a group delegation.
+          type:
+          - integer
+          - 'null'
+      type: object
+    LabResultStatus:
+      enum:
+      - AMENDED
+      - CORRECTED
+      - DELETED
+      - ERROR
+      - FINAL
+      - PARTIAL
+      - PENDING
+      - PRELIMINARY
+      - RESULT CANCELED DUE TO NON-PERFORMANCE
+      - RESULTS ENTERED -- NOT VERIFIED
+      - RESULTS STATUS CHANGE TO FINAL. RESULTS DID NOT CHANGE ( DONT TRANSMIT TEST).
       type: string
     Report:
       properties:
@@ -1245,65 +1326,6 @@ components:
       - Urology
       - Women
       type: string
-    RoutedDocumentDelegate:
-      description: 'Nested serializer for RoutedDocumentDelegate.
-
-
-        Returns delegation information for users and groups assigned to review a report.
-
-        Either user or group will be populated, but not both.'
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        group:
-          description: ID of the delegated group. Null if this is a user delegation.
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        user:
-          description: ID of the delegated user. Null if this is a group delegation.
-          type:
-          - integer
-          - 'null'
-      type: object
-    OrderStatusEnum:
-      enum:
-      - CANCELED
-      - COMPLETED
-      - DISCONTINUED
-      - ERROR, ORDER NOT FOUND
-      - IN PROCESS
-      - ON HOLD
-      - REPLACED
-      - SCHEDULED
-      type: string
-    LabResultStatus:
-      enum:
-      - AMENDED
-      - CORRECTED
-      - DELETED
-      - ERROR
-      - FINAL
-      - PARTIAL
-      - PENDING
-      - PRELIMINARY
-      - RESULT CANCELED DUE TO NON-PERFORMANCE
-      - RESULTS ENTERED -- NOT VERIFIED
-      - RESULTS STATUS CHANGE TO FINAL. RESULTS DID NOT CHANGE ( DONT TRANSMIT TEST).
-      type: string
     PatchedUpdateReport:
       properties:
         id:
@@ -1325,138 +1347,6 @@ components:
           - string
           - 'null'
       type: object
-    PaginatedReportList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Report'
-          type: array
-      required:
-      - results
-      type: object
-    UpdateReport:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        is_urgent:
-          default: false
-          type: boolean
-        signed_by:
-          description: Signer to apply.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          description: Signature timestamp to apply.
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    NullEnum:
-      type: 'null'
-    S3RetrievingDocumentFile:
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          type: string
-        document:
-          description: URL to retrieve the document
-          format: uri
-          type: string
-        external_content: {}
-        id:
-          readOnly: true
-          type: integer
-        original_filename:
-          type: string
-      type: object
-    LabTest:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        loinc:
-          type:
-          - string
-          - 'null'
-        name:
-          maxLength: 255
-          type: string
-      required:
-      - code
-      - loinc
-      - name
-      type: object
-    ReportImage:
-      properties:
-        document:
-          format: uri
-          type: string
-        id:
-          readOnly: true
-          type: integer
-      required:
-      - document
-      type: object
-    LabTestCategory:
-      properties:
-        description:
-          maxLength: 200
-          type: string
-        value:
-          maxLength: 50
-          type: string
-      required:
-      - description
-      - value
-      type: object
-    AbnormalFlagEnum:
-      enum:
-      - Abnormal
-      - Abnormal (applies to non-numeric results)
-      - Above high normal
-      - Alert high
-      - Alert low
-      - Below low normal
-      - Beta-lactamase Pos (B-lactamase antibiotic resistant).
-      - Better-use when direction not relevant
-      - Critical
-      - Critical abnormal
-      - Intermediate result
-      - Intermediate. Indicates for microbiology susceptibilities only.
-      - Moderately susceptible. Indicates for microbiology susceptibilities only.
-      - Negative
-      - Negative result
-      - Normal (applies to non-numeric results)
-      - Not Applicable
-      - Panic high
-      - Panic low
-      - Positive result
-      - Resistant. Indicates for microbiology susceptibilities only.
-      - Significant change down
-      - Significant change up
-      - Susceptible. Indicates for microbiology susceptibilities only.
-      - Very High
-      - Very susceptible. Indicates for microbiology susceptibilities only.
-      - Worse-use when direction not relevant
-      type: string
     LabResult:
       properties:
         abnormal_flag:
@@ -1509,6 +1399,94 @@ components:
       - text
       - value
       type: object
+    AbnormalFlagEnum:
+      enum:
+      - Abnormal
+      - Abnormal (applies to non-numeric results)
+      - Above high normal
+      - Alert high
+      - Alert low
+      - Below low normal
+      - Beta-lactamase Pos (B-lactamase antibiotic resistant).
+      - Better-use when direction not relevant
+      - Critical
+      - Critical abnormal
+      - Intermediate result
+      - Intermediate. Indicates for microbiology susceptibilities only.
+      - Moderately susceptible. Indicates for microbiology susceptibilities only.
+      - Negative
+      - Negative result
+      - Normal (applies to non-numeric results)
+      - Not Applicable
+      - Panic high
+      - Panic low
+      - Positive result
+      - Resistant. Indicates for microbiology susceptibilities only.
+      - Significant change down
+      - Significant change up
+      - Susceptible. Indicates for microbiology susceptibilities only.
+      - Very High
+      - Very susceptible. Indicates for microbiology susceptibilities only.
+      - Worse-use when direction not relevant
+      type: string
+    UpdateReport:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          type: boolean
+        signed_by:
+          description: Signer to apply.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: Signature timestamp to apply.
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    LabTest:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        loinc:
+          type:
+          - string
+          - 'null'
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - code
+      - loinc
+      - name
+      type: object
+    ValueTypeEnum:
+      enum:
+      - Coded Entry
+      - Encapsulated Data
+      - Numeric
+      - String Data
+      - Text
+      type: string
+    LabTestCategory:
+      properties:
+        description:
+          maxLength: 200
+          type: string
+        value:
+          maxLength: 50
+          type: string
+      required:
+      - description
+      - value
+      type: object
     LabResultsGrid:
       properties:
         accession_number:
@@ -1539,6 +1517,28 @@ components:
       - results
       - status
       type: object
+    PaginatedReportList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Report'
+          type: array
+      required:
+      - results
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1559,7 +1559,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

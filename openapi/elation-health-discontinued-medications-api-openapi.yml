@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Discontinued Medications API
   version: '1.0'
-  description: 'Operations tagged Discontinued Medications across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-patient-document-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Discontinued Medications across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -502,90 +502,6 @@ components:
       - ss
       - disp
       type: string
-    Medication:
-      properties:
-        active_ndcs:
-          items:
-            type: string
-          type: array
-        brand_name:
-          readOnly: true
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        creation_type:
-          allOf:
-          - $ref: '#/components/schemas/MedicationDrugType'
-          default: user
-          readOnly: true
-        form:
-          readOnly: true
-          type: string
-        generic_name:
-          readOnly: true
-          type: string
-        id:
-          description: The id of the medication.
-          format: int64
-          type: integer
-        is_controlled:
-          default: false
-          description: Whether the drug is a controlled substance or not.
-          type: boolean
-        market_end_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        name:
-          description: The name that will display for the medication in the search and when referenced by the prescription or documented med.
-          type: string
-        ndcs:
-          description: The NDCs of the medication (must contain only one ndc code when creating).
-          items:
-            type: string
-          type: array
-        obsolete_date:
-          description: The date at which this practice medication became obsolete.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        practice:
-          description: The practice that created the medication. `null` for medications from the standard formulary.
-          format: int64
-          type: integer
-        route:
-          readOnly: true
-          type: string
-        rxnorm_cuis:
-          description: The Rxnorm.cui code of the medication (must contain only one cui code when creating).
-          items:
-            type: string
-          type: array
-        strength:
-          description: The strength of the drug, e.g. 40mg.
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        type:
-          allOf:
-          - $ref: '#/components/schemas/MedicationType'
-          default: prescription
-          description: 'Whether the practice medication is an OTC or Prescription drug.
-
-
-            * `otc` - otc
-
-            * `prescription` - prescription
-
-            * `discontinued` - discontinued'
-      type: object
     DiscontinueMedOrder:
       properties:
         chart_date:
@@ -688,6 +604,90 @@ components:
       - prescription
       - discontinued
       type: string
+    Medication:
+      properties:
+        active_ndcs:
+          items:
+            type: string
+          type: array
+        brand_name:
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        creation_type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationDrugType'
+          default: user
+          readOnly: true
+        form:
+          readOnly: true
+          type: string
+        generic_name:
+          readOnly: true
+          type: string
+        id:
+          description: The id of the medication.
+          format: int64
+          type: integer
+        is_controlled:
+          default: false
+          description: Whether the drug is a controlled substance or not.
+          type: boolean
+        market_end_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        name:
+          description: The name that will display for the medication in the search and when referenced by the prescription or documented med.
+          type: string
+        ndcs:
+          description: The NDCs of the medication (must contain only one ndc code when creating).
+          items:
+            type: string
+          type: array
+        obsolete_date:
+          description: The date at which this practice medication became obsolete.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          description: The practice that created the medication. `null` for medications from the standard formulary.
+          format: int64
+          type: integer
+        route:
+          readOnly: true
+          type: string
+        rxnorm_cuis:
+          description: The Rxnorm.cui code of the medication (must contain only one cui code when creating).
+          items:
+            type: string
+          type: array
+        strength:
+          description: The strength of the drug, e.g. 40mg.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationType'
+          default: prescription
+          description: 'Whether the practice medication is an OTC or Prescription drug.
+
+
+            * `otc` - otc
+
+            * `prescription` - prescription
+
+            * `discontinued` - discontinued'
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -708,7 +708,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-patient-document-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true

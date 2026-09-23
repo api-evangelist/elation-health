@@ -1,79 +1,693 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Medications API
-  description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
-  version: '2.0'
-  contact:
-    name: Elation Health Developer Support
-    url: https://docs.elationhealth.com/reference/api-overview
-  termsOfService: https://www.elationhealth.com/
+  title: Elation Health Medications API
+  version: '1.0'
+  description: 'Operations tagged Medications across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-health-elation-health-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://sandbox.elationemr.com/api/2.0
+- description: Sandbox Server
+  url: https://sandbox.elationemr.com
+- description: Production Server
+  url: https://api.app.elationemr.com
 - url: https://app.elationemr.com/api/2.0
   description: Production
-- url: https://sandbox.elationemr.com/api/2.0
-  description: Sandbox
-security:
-- oauth2: []
 tags:
 - name: Medications
-  description: Medication and prescription management
 paths:
   /medications/:
     get:
-      operationId: medications_list
-      summary: List medications
-      description: Retrieve a paginated list of patient medications.
-      tags:
-      - Medications
+      summary: Find Medications
+      description: ''
+      operationId: find-medications
       parameters:
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/offset'
       - name: patient
         in: query
         schema:
           type: integer
-        description: Filter by patient ID
+          format: int32
+      - name: thread
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: practice
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: discontinued
+        in: query
+        description: Whether the thread has a discontinue order or not
+        schema:
+          type: boolean
+      - name: permanent
+        in: query
+        description: Whether the medication is temporary or permanent.
+        schema:
+          type: boolean
+      - name: document_date__lt
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects chart dates that precede it (exclusive)
+        schema:
+          type: string
+      - name: document_date__gt
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects chart dates that follow it (exclusive)
+        schema:
+          type: string
+      - name: document_date__lte
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects chart dates that equal or precede it (inclusive)
+        schema:
+          type: string
+      - name: document_date__gte
+        in: query
+        description: Date/time in ISO 8601 UTC format that selects chart dates that equal or follow it (inclusive)
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Paginated list of medications
+          description: '200'
           content:
             application/json:
+              examples:
+                Result:
+                  value: "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 140758834872346,\n            \"auth_refills\": 1,\n            \"directions\": \"test_direction\",\n            \"chart_date\": \"2022-05-24T19:51:46Z\",\n            \"show_in_chart_feed\": true,\n            \"created_date\": \"2022-05-24T19:51:46Z\",\n            \"deleted_date\": null,\n            \"document_date\": \"2022-05-24T19:51:46Z\",\n            \"fulfillment\": null,\n            \"is_doc_med\": false,\n            \"last_modified\": \"2022-05-24T19:51:46Z\",\n            \"medication\": {\n                \"id\": 5465899055,\n                \"rxnorm_cuis\": [\n                    \"402014\"\n                ],\n                \"ndcs\": [\n                    \"00113-0915-55\",\n                    \"00113-0915-30\",\n                    \"00363-0915-30\",\n                    \"00363-0915-74\",\n                    \"37205-0837-15\",\n                    \"36800-0915-30\",\n                    \"36800-0915-55\",\n                    \"37205-0837-74\",\n                    \"45802-0888-55\",\n                    \"36800-0915-74\",\n                    \"00113-0915-74\",\n                    \"37205-0837-06\",\n                    \"00363-0915-55\",\n                    \"00904-5834-71\",\n                    \"00904-5834-42\",\n                    \"30142-0915-74\",\n                    \"00904-5834-41\",\n                    \"30142-0915-30\",\n                    \"30142-0915-55\",\n                    \"45802-0888-30\",\n                    \"00363-0915-03\",\n                    \"36800-0915-01\",\n                    \"36800-0915-03\",\n                    \"00363-0915-01\",\n                    \"37205-0837-66\",\n                    \"57896-0760-42\",\n                    \"70000-0356-04\",\n                    \"70000-0356-03\",\n                    \"70000-0356-02\",\n                    \"57896-0960-42\",\n                    \"70000-0356-01\",\n                    \"00363-0007-03\",\n                    \"51660-0029-14\",\n                    \"51660-0029-44\",\n                    \"51660-0029-27\",\n                    \"68001-0441-39\",\n                    \"68001-0441-40\",\n                    \"68001-0441-98\"\n                ],\n                \"name\": \"Omeprazole Tab delayed rel 20 mg\",\n                \"brand_name\": \"Omeprazole\",\n                \"generic_name\": \"Omeprazole delayed rel Tab 20 mg\",\n                \"is_controlled\": false,\n                \"type\": \"otc\",\n                \"route\": \"Oral\",\n                \"strength\": \"20 mg\",\n                \"form\": \"Tab delayed rel\"\n            },\n            \"medication_type\": \"otc\",\n            \"notes\": \"test_note\",\n            \"order_type\": \"Refill\",\n            \"patient\": 140754479349761,\n            \"pharmacy_instructions\": \"test_instruction\",\n            \"practice\": 140754475089924,\n            \"prescribing_physician\": 140754478628866,\n            \"documenting_personnel\": null,\n            \"qty\": \"1.000000000\",\n            \"qty_units\": \"AMPULE\",\n            \"num_samples\": null,\n            \"signed_by\": null,\n            \"signed_date\": null,\n            \"start_date\": \"2022-02-23\",\n            \"icd10_codes\": [\n                {\n                    \"code\": \"U07.1\",\n                    \"description\": \"COVID-19\"\n                }\n            ],\n            \"thread\": {\n                \"id\": 140758834806807,\n                \"dc_date\": null,\n                \"is_permanent\": true\n            }\n        }\n    ]\n}"
               schema:
-                $ref: '#/components/schemas/PaginatedMedicationList'
-    post:
-      operationId: medications_create
-      summary: Create a medication
-      description: Add a medication to a patient's medication list.
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                    default: 0
+                  next: {}
+                  previous: {}
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 140758834872346
+                          default: 0
+                        auth_refills:
+                          type: integer
+                          example: 1
+                          default: 0
+                        directions:
+                          type: string
+                          example: test_direction
+                        chart_date:
+                          type: string
+                          example: '2022-05-24T19:51:46Z'
+                        show_in_chart_feed:
+                          type: boolean
+                          example: true
+                          default: true
+                        created_date:
+                          type: string
+                          example: '2022-05-24T19:51:46Z'
+                        deleted_date: {}
+                        document_date:
+                          type: string
+                          example: '2022-05-24T19:51:46Z'
+                        fulfillment: {}
+                        is_doc_med:
+                          type: boolean
+                          example: false
+                          default: true
+                        last_modified:
+                          type: string
+                          example: '2022-05-24T19:51:46Z'
+                        medication:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 5465899055
+                              default: 0
+                            rxnorm_cuis:
+                              type: array
+                              items:
+                                type: string
+                                example: '402014'
+                            ndcs:
+                              type: array
+                              items:
+                                type: string
+                                example: 00113-0915-55
+                            name:
+                              type: string
+                              example: Omeprazole Tab delayed rel 20 mg
+                            brand_name:
+                              type: string
+                              example: Omeprazole
+                            generic_name:
+                              type: string
+                              example: Omeprazole delayed rel Tab 20 mg
+                            is_controlled:
+                              type: boolean
+                              example: false
+                              default: true
+                            type:
+                              type: string
+                              example: otc
+                            route:
+                              type: string
+                              example: Oral
+                            strength:
+                              type: string
+                              example: 20 mg
+                            form:
+                              type: string
+                              example: Tab delayed rel
+                        medication_type:
+                          type: string
+                          example: otc
+                        notes:
+                          type: string
+                          example: test_note
+                        order_type:
+                          type: string
+                          example: Refill
+                        patient:
+                          type: integer
+                          example: 140754479349761
+                          default: 0
+                        pharmacy_instructions:
+                          type: string
+                          example: test_instruction
+                        practice:
+                          type: integer
+                          example: 140754475089924
+                          default: 0
+                        prescribing_physician:
+                          type: integer
+                          example: 140754478628866
+                          default: 0
+                        documenting_personnel: {}
+                        qty:
+                          type: string
+                          example: '1.000000000'
+                        qty_units:
+                          type: string
+                          example: AMPULE
+                        num_samples: {}
+                        signed_by: {}
+                        signed_date: {}
+                        start_date:
+                          type: string
+                          example: '2022-02-23'
+                        icd10_codes:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              code:
+                                type: string
+                                example: U07.1
+                              description:
+                                type: string
+                                example: COVID-19
+                        thread:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 140758834806807
+                              default: 0
+                            dc_date: {}
+                            is_permanent:
+                              type: boolean
+                              example: true
+                              default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"VFroUHsmrErlVI6nJ08Alwhri5RGCW\"\nauth_header = f\"Bearer {access_token}\"\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/medications/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
       tags:
       - Medications
-      requestBody:
+      security:
+      - sec0: []
+    post:
+      summary: Create Medication
+      description: ''
+      operationId: create-medication
+      parameters:
+      - name: Authorization
+        in: header
         required: true
+        schema:
+          type: string
+      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MedicationCreate'
-      responses:
-        '201':
-          description: Medication created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Medication'
-  /medications/{id}/:
-    get:
-      operationId: medications_retrieve
-      summary: Retrieve a medication
-      tags:
-      - Medications
-      parameters:
-      - $ref: '#/components/parameters/id'
+              type: object
+              required:
+              - auth_refills
+              - is_doc_med
+              - medication
+              - medication_type
+              - order_type
+              - patient
+              - practice
+              - prescribing_physician
+              - qty
+              - qty_units
+              - start_date
+              - icd10_codes
+              - thread
+              properties:
+                auth_refills:
+                  type: integer
+                  description: The number of refills, excluding this order, that the patient is authorized for
+                  format: int32
+                is_doc_med:
+                  type: boolean
+                  description: If the medication order is intended to document a med instead of draft a prescription. When it is true, the object will be automatically signed as a documented medication, otherwise the object will be created as a draft prescription
+                medication:
+                  type: object
+                  description: medication object (must provide one of id, ndc, rxnorm_cuis required)
+                  properties:
+                    id:
+                      type: integer
+                      description: Medication id
+                      format: int32
+                    ndcs:
+                      type: array
+                      description: The NDC code of the medication(must contains only one ndc code)
+                      items:
+                        type: string
+                    rxnorm_cuis:
+                      type: array
+                      description: The Rxnorm.cui code of the medication(must contains only one cui code)
+                      items:
+                        type: string
+                medication_type:
+                  type: string
+                  description: If this is OTC or a prescription
+                  enum:
+                  - otc
+                  - prescription
+                order_type:
+                  type: string
+                  description: If the medication order is new, a refill or a change in dosage
+                  enum:
+                  - New
+                  - Refill
+                  - Change
+                patient:
+                  type: integer
+                  description: The id of the patient
+                  format: int32
+                practice:
+                  type: integer
+                  description: The id of the practice
+                  format: int32
+                prescribing_physician:
+                  type: integer
+                  description: prescribing physician ID
+                  format: int32
+                qty:
+                  type: number
+                  description: The amount of the medication to order (decimal)
+                  format: double
+                qty_units:
+                  type: string
+                  description: The units that match the amount, e.g. capsules
+                  enum:
+                  - BAG
+                  - BOTTLE
+                  - BOX
+                  - CAPSULE
+                  - CARTRIDGE
+                  - CONTAINER
+                  - DROP
+                  - GRAM
+                  - INHALER
+                  - INTERNATIONAL UNITE
+                  - KIT
+                  - LITER
+                  - LOZENGE
+                  - MILLIGRAM
+                  - MILLILITER
+                  - MILLION UNITS
+                  - MUTUALLY DEFINED
+                  - FLUID OUNCE
+                  - NOT SPECIFIED
+                  - PACK
+                  - PACKET
+                  - PINT
+                  - SUPPOSITORY
+                  - SYRINGE
+                  - TABLESPOON
+                  - TABLET
+                  - TEASPOON
+                  - TRANSDERMAL PATCH
+                  - TUBE
+                  - UNIT
+                  - VIAL
+                  - EACH
+                  - GUM
+                  - AMPULE
+                  - APPLICATOR
+                  - APPLICATORFUL
+                  - BAR
+                  - BEAD
+                  - BLISTER
+                  - BLOCK
+                  - BOLUS
+                  - CAN
+                  - CANISTER
+                  - CAPLET
+                  - CARTON
+                  - CASE
+                  - CASSETTE
+                  - CYLINDER
+                  - DISK
+                  - DOSE PACK
+                  - DUAL PACK
+                  - FILM
+                  - GALLON
+                  - IMPLANT
+                  - INHALATION
+                  - INHALER REFILL
+                  - INSERT
+                  - INTRAVENOUS BAG
+                  - KILOGRAM
+                  - METRIC DROP
+                  - MILLIMETER
+                  - NEBULE
+                  - NEEDLE FREE INJECTION
+                  - OCULAR SYSTEM
+                  - OUNCE
+                  - PACKAGE
+                  - PAD
+                  - PAPER
+                  - PATCH
+                  - PEN NEEDLE
+                  - POUCH
+                  - POUND
+                  - PRE-FILLED PEN SYRINGE
+                  - PUFF
+                  - QUART
+                  - RING
+                  - SACHET
+                  - SCOOPFUL
+                  - SPONGE
+                  - SPRAY
+                  - STICK
+                  - STRIP
+                  - SWAB
+                  - TABMINDER
+                  - TAMPON
+                  - TRAY
+                  - TROCHE
+                  - WAFER
+                start_date:
+                  type: string
+                  description: The date on which the prescription started or will start.
+                  format: date
+                icd10_codes:
+                  type: array
+                  description: icd10 IDs
+                  items:
+                    properties:
+                      code:
+                        type: string
+                        description: icd10 code
+                    type: object
+                thread:
+                  type: object
+                  description: Refer to the medication thread documentation for more info
+                  required:
+                  - is_permanent
+                  properties:
+                    id:
+                      type: integer
+                      description: Thread id (NOT required)
+                      format: int32
+                    is_permanent:
+                      type: boolean
+                      description: if thread is permanent
+                directions:
+                  type: string
+                  description: The med order directions
+                notes:
+                  type: string
+                  description: Any notes for the patient
+                pharmacy_instructions:
+                  type: string
+                  description: Any notes for the pharmacy
+                num_samples:
+                  type: string
+                  description: med order num samples
+                document_date:
+                  type: string
+                  description: The timestamp for when this prescription was first documented. Will be the same as the creation time unless this an historical data import.
+                  format: date
+                documenting_personnel:
+                  type: integer
+                  description: physician object required if is_doc_med is true
+                  format: int32
       responses:
         '200':
-          description: Medication details
+          description: '200'
           content:
             application/json:
+              examples:
+                Result:
+                  value: '{}'
               schema:
-                $ref: '#/components/schemas/Medication'
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\n# sending only required data\ndata = {  \n    \"auth_refills\": 1,\n    \"is_doc_med\": false,\n    \"medication\":{\n        \"id\": 5465899055\n    },\n    \"medication_type\": \"prescription\",\n    \"order_type\": \"Refill\",\n    \"patient\": 140754479349761,\n    \"practice\": 140754475089924,\n    \"prescribing_physician\": 140754478628866,\n    \"qty\": \"1\",\n    \"qty_units\": \"AMPULE\",\n    \"start_date\": \"2022-02-23\",\n    \"icd10_codes\":  [],\n    \"thread\": {\n        \"is_permanent\": true\n    },\n}\n\nresp = requests.post(\"https://sandbox.elationemr.com/api/2.0/medications/\",\n                     data=json.dumps(data),\n                     headers={'Authorization': auth_header,\n                              'Content-type': 'application/json'})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medications
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /medications/{id}/:
+    get:
+      summary: Get Medication
+      description: ''
+      operationId: get-medication
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"id\": 140758834872346,\n    \"auth_refills\": 1,\n    \"directions\": \"test_direction\",\n    \"chart_date\": \"2022-05-24T19:51:46Z\",\n    \"show_in_chart_feed\": true,\n    \"created_date\": \"2022-05-24T19:51:46Z\",\n    \"deleted_date\": null,\n    \"document_date\": \"2022-05-24T19:51:46Z\",\n    \"fulfillment\": null,\n    \"is_doc_med\": false,\n    \"last_modified\": \"2022-05-24T19:51:46Z\",\n    \"medication\": {\n        \"id\": 5465899055,\n        \"rxnorm_cuis\": [\n            \"402014\"\n        ],\n        \"ndcs\": [\n            \"00113-0915-55\",\n            \"00113-0915-30\",\n            \"00363-0915-30\",\n            \"00363-0915-74\",\n            \"37205-0837-15\",\n            \"36800-0915-30\",\n            \"36800-0915-55\",\n            \"37205-0837-74\",\n            \"45802-0888-55\",\n            \"36800-0915-74\",\n            \"00113-0915-74\",\n            \"37205-0837-06\",\n            \"00363-0915-55\",\n            \"00904-5834-71\",\n            \"00904-5834-42\",\n            \"30142-0915-74\",\n            \"00904-5834-41\",\n            \"30142-0915-30\",\n            \"30142-0915-55\",\n            \"45802-0888-30\",\n            \"00363-0915-03\",\n            \"36800-0915-01\",\n            \"36800-0915-03\",\n            \"00363-0915-01\",\n            \"37205-0837-66\",\n            \"57896-0760-42\",\n            \"70000-0356-04\",\n            \"70000-0356-03\",\n            \"70000-0356-02\",\n            \"57896-0960-42\",\n            \"70000-0356-01\",\n            \"00363-0007-03\",\n            \"51660-0029-14\",\n            \"51660-0029-44\",\n            \"51660-0029-27\",\n            \"68001-0441-39\",\n            \"68001-0441-40\",\n            \"68001-0441-98\"\n        ],\n        \"name\": \"Omeprazole Tab delayed rel 20 mg\",\n        \"brand_name\": \"Omeprazole\",\n        \"generic_name\": \"Omeprazole delayed rel Tab 20 mg\",\n        \"is_controlled\": false,\n        \"type\": \"otc\",\n        \"route\": \"Oral\",\n        \"strength\": \"20 mg\",\n        \"form\": \"Tab delayed rel\"\n    },\n    \"medication_type\": \"otc\",\n    \"notes\": \"test_note\",\n    \"order_type\": \"Refill\",\n    \"patient\": 140754479349761,\n    \"pharmacy_instructions\": \"test_instruction\",\n    \"practice\": 140754475089924,\n    \"prescribing_physician\": 140754478628866,\n    \"documenting_personnel\": null,\n    \"qty\": \"1.000000000\",\n    \"qty_units\": \"AMPULE\",\n    \"num_samples\": null,\n    \"signed_by\": null,\n    \"signed_date\": null,\n    \"start_date\": \"2022-02-23\",\n    \"icd10_codes\": [\n        {\n            \"code\": \"U07.1\",\n            \"description\": \"COVID-19\"\n        }\n    ],\n    \"thread\": {\n        \"id\": 140758834806807,\n        \"dc_date\": null,\n        \"is_permanent\": true\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 140758834872346
+                    default: 0
+                  auth_refills:
+                    type: integer
+                    example: 1
+                    default: 0
+                  directions:
+                    type: string
+                    example: test_direction
+                  chart_date:
+                    type: string
+                    example: '2022-05-24T19:51:46Z'
+                  show_in_chart_feed:
+                    type: boolean
+                    example: true
+                    default: true
+                  created_date:
+                    type: string
+                    example: '2022-05-24T19:51:46Z'
+                  deleted_date: {}
+                  document_date:
+                    type: string
+                    example: '2022-05-24T19:51:46Z'
+                  fulfillment: {}
+                  is_doc_med:
+                    type: boolean
+                    example: false
+                    default: true
+                  last_modified:
+                    type: string
+                    example: '2022-05-24T19:51:46Z'
+                  medication:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5465899055
+                        default: 0
+                      rxnorm_cuis:
+                        type: array
+                        items:
+                          type: string
+                          example: '402014'
+                      ndcs:
+                        type: array
+                        items:
+                          type: string
+                          example: 00113-0915-55
+                      name:
+                        type: string
+                        example: Omeprazole Tab delayed rel 20 mg
+                      brand_name:
+                        type: string
+                        example: Omeprazole
+                      generic_name:
+                        type: string
+                        example: Omeprazole delayed rel Tab 20 mg
+                      is_controlled:
+                        type: boolean
+                        example: false
+                        default: true
+                      type:
+                        type: string
+                        example: otc
+                      route:
+                        type: string
+                        example: Oral
+                      strength:
+                        type: string
+                        example: 20 mg
+                      form:
+                        type: string
+                        example: Tab delayed rel
+                  medication_type:
+                    type: string
+                    example: otc
+                  notes:
+                    type: string
+                    example: test_note
+                  order_type:
+                    type: string
+                    example: Refill
+                  patient:
+                    type: integer
+                    example: 140754479349761
+                    default: 0
+                  pharmacy_instructions:
+                    type: string
+                    example: test_instruction
+                  practice:
+                    type: integer
+                    example: 140754475089924
+                    default: 0
+                  prescribing_physician:
+                    type: integer
+                    example: 140754478628866
+                    default: 0
+                  documenting_personnel: {}
+                  qty:
+                    type: string
+                    example: '1.000000000'
+                  qty_units:
+                    type: string
+                    example: AMPULE
+                  num_samples: {}
+                  signed_by: {}
+                  signed_date: {}
+                  start_date:
+                    type: string
+                    example: '2022-02-23'
+                  icd10_codes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: U07.1
+                        description:
+                          type: string
+                          example: COVID-19
+                  thread:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 140758834806807
+                        default: 0
+                      dc_date: {}
+                      is_permanent:
+                        type: boolean
+                        example: true
+                        default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: python
+          code: "import requests\nimport json\n\naccess_token = \"TyEPKw8fVGRKpCBa81ygwjCLXDNIAm\"\nauth_header = \"Bearer %s\" % (access_token)\n\nresp = requests.get(\"https://sandbox.elationemr.com/api/2.0/medications/64184451073/\",\n                    headers={'Authorization': auth_header})\n\nprint resp.status_code\nprint json.dumps(json.loads(resp.content), indent=2)"
+        samples-languages:
+        - python
+      tags:
+      - Medications
+      security:
+      - sec0: []
     delete:
       operationId: medications_destroy
       summary: Delete a medication
@@ -84,8 +698,1282 @@ paths:
       responses:
         '204':
           description: Medication deleted
+      security:
+      - sec0: []
+    servers:
+    - url: https://sandbox.elationemr.com/api/2.0
+  /api/2.0/medications/:
+    get:
+      operationId: medications_list
+      parameters:
+      - description: Whether the thread has a discontinue order or not.
+        in: query
+        name: discontinued
+        schema:
+          type: boolean
+      - description: Date/time in ISO 8601 UTC format that selects chart dates that follow it (exclusive).
+        in: query
+        name: document_date__gt
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects chart dates that equal or follow it (inclusive).
+        in: query
+        name: document_date__gte
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects chart dates that precede it (exclusive).
+        in: query
+        name: document_date__lt
+        schema:
+          format: date-time
+          type: string
+      - description: Date/time in ISO 8601 UTC format that selects chart dates that equal or precede it (inclusive).
+        in: query
+        name: document_date__lte
+        schema:
+          format: date-time
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+      - description: The initial index from which to return the results.
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Which field to use when ordering the results.
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: patient
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: Whether the medication is temporary or permanent.
+        in: query
+        name: permanent
+        schema:
+          type: boolean
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: practice
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - description: Multiple values may be separated by commas.
+        explode: false
+        in: query
+        name: thread
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedOrderList'
+          description: ''
+      security:
+      - oauth2: []
+      summary: List Medications
+      tags:
+      - Medications
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    post:
+      description: Create a new medication.
+      operationId: medications_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedOrder'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Create Medication
+      tags:
+      - Medications
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
+  /api/2.0/medications/{id}/:
+    delete:
+      description: Delete an existing medication.
+      operationId: medications_destroy
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No response body
+      security:
+      - oauth2: []
+      summary: Delete Medication
+      tags:
+      - Medications
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    get:
+      operationId: medications_retrieve
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedOrder'
+          description: ''
+      security:
+      - oauth2: []
+      summary: Retrieve Medication
+      tags:
+      - Medications
+      x-el8-docs-category: Patient Document API
+      x-el8-docs-versions:
+      - '2.1'
+      - '2.0'
+    servers:
+    - description: Sandbox Server
+      url: https://sandbox.elationemr.com
+    - description: Production Server
+      url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
+    MedicationTypeEnum:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription'
+      enum:
+      - otc
+      - prescription
+      type: string
+    BlankEnum:
+      enum:
+      - ''
+    Thread:
+      properties:
+        dc_date:
+          format: date
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        is_permanent:
+          type: boolean
+      required:
+      - is_permanent
+      type: object
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
+    FulfillmentTypeEnum:
+      description: '* `surescripts` - surescripts
+
+        * `surescripts_cancel` - surescripts_cancel
+
+        * `surescripts_change` - surescripts_change
+
+        * `surescripts_nonfillable` - Surescripts-Nonfillable
+
+        * `paper` - Paper
+
+        * `paper_nonfillable` - Paper-Nonfillable
+
+        * `fax` - Fax
+
+        * `phone` - Phone
+
+        * `mdtoolboxepcs` - MDToolbox EPCS'
+      enum:
+      - surescripts
+      - surescripts_cancel
+      - surescripts_change
+      - surescripts_nonfillable
+      - paper
+      - paper_nonfillable
+      - fax
+      - phone
+      - mdtoolboxepcs
+      type: string
+    OrderTypeEnum:
+      description: '* `New` - New
+
+        * `Refill` - Refill
+
+        * `DoseChange` - Change'
+      enum:
+      - New
+      - Refill
+      - DoseChange
+      type: string
+    QtyUnitsEnum:
+      description: "* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
+      enum:
+      - BAG
+      - BOTTLE
+      - BOX
+      - CAPSULE
+      - CARTRIDGE
+      - CONTAINER
+      - DROP
+      - GRAM
+      - INHALER
+      - INTERNATIONAL UNITE
+      - KIT
+      - LITER
+      - LOZENGE
+      - MILLIGRAM
+      - MILLILITER
+      - MILLION UNITS
+      - MUTUALLY DEFINED
+      - FLUID OUNCE
+      - NOT SPECIFIED
+      - PACK
+      - PACKET
+      - PINT
+      - SUPPOSITORY
+      - SYRINGE
+      - TABLESPOON
+      - TABLET
+      - TEASPOON
+      - TRANSDERMAL PATCH
+      - TUBE
+      - UNIT
+      - VIAL
+      - EACH
+      - GUM
+      - AMPULE
+      - APPLICATOR
+      - APPLICATORFUL
+      - BAR
+      - BEAD
+      - BLISTER
+      - BLOCK
+      - BOLUS
+      - CAN
+      - CANISTER
+      - CAPLET
+      - CARTON
+      - CASE
+      - CASSETTE
+      - CYLINDER
+      - DISK
+      - DOSE PACK
+      - DUAL PACK
+      - FILM
+      - GALLON
+      - IMPLANT
+      - INHALATION
+      - INHALER REFILL
+      - INSERT
+      - INTRAVENOUS BAG
+      - KILOGRAM
+      - METRIC DROP
+      - MILLIMETER
+      - NEBULE
+      - NEEDLE FREE INJECTION
+      - OCULAR SYSTEM
+      - OUNCE
+      - PACKAGE
+      - PAD
+      - PAPER
+      - PATCH
+      - PEN NEEDLE
+      - POUCH
+      - POUND
+      - PRE-FILLED PEN SYRINGE
+      - PUFF
+      - QUART
+      - RING
+      - SACHET
+      - SCOOPFUL
+      - SPONGE
+      - SPRAY
+      - STICK
+      - STRIP
+      - SWAB
+      - TABMINDER
+      - TAMPON
+      - TRAY
+      - TROCHE
+      - WAFER
+      type: string
+    TimezoneEnum:
+      enum:
+      - Africa/Abidjan
+      - Africa/Accra
+      - Africa/Addis_Ababa
+      - Africa/Algiers
+      - Africa/Asmara
+      - Africa/Bamako
+      - Africa/Bangui
+      - Africa/Banjul
+      - Africa/Bissau
+      - Africa/Blantyre
+      - Africa/Brazzaville
+      - Africa/Bujumbura
+      - Africa/Cairo
+      - Africa/Casablanca
+      - Africa/Ceuta
+      - Africa/Conakry
+      - Africa/Dakar
+      - Africa/Dar_es_Salaam
+      - Africa/Djibouti
+      - Africa/Douala
+      - Africa/El_Aaiun
+      - Africa/Freetown
+      - Africa/Gaborone
+      - Africa/Harare
+      - Africa/Johannesburg
+      - Africa/Juba
+      - Africa/Kampala
+      - Africa/Khartoum
+      - Africa/Kigali
+      - Africa/Kinshasa
+      - Africa/Lagos
+      - Africa/Libreville
+      - Africa/Lome
+      - Africa/Luanda
+      - Africa/Lubumbashi
+      - Africa/Lusaka
+      - Africa/Malabo
+      - Africa/Maputo
+      - Africa/Maseru
+      - Africa/Mbabane
+      - Africa/Mogadishu
+      - Africa/Monrovia
+      - Africa/Nairobi
+      - Africa/Ndjamena
+      - Africa/Niamey
+      - Africa/Nouakchott
+      - Africa/Ouagadougou
+      - Africa/Porto-Novo
+      - Africa/Sao_Tome
+      - Africa/Tripoli
+      - Africa/Tunis
+      - Africa/Windhoek
+      - America/Adak
+      - America/Anchorage
+      - America/Anguilla
+      - America/Antigua
+      - America/Araguaina
+      - America/Argentina/Buenos_Aires
+      - America/Argentina/Catamarca
+      - America/Argentina/Cordoba
+      - America/Argentina/Jujuy
+      - America/Argentina/La_Rioja
+      - America/Argentina/Mendoza
+      - America/Argentina/Rio_Gallegos
+      - America/Argentina/Salta
+      - America/Argentina/San_Juan
+      - America/Argentina/San_Luis
+      - America/Argentina/Tucuman
+      - America/Argentina/Ushuaia
+      - America/Aruba
+      - America/Asuncion
+      - America/Atikokan
+      - America/Bahia
+      - America/Bahia_Banderas
+      - America/Barbados
+      - America/Belem
+      - America/Belize
+      - America/Blanc-Sablon
+      - America/Boa_Vista
+      - America/Bogota
+      - America/Boise
+      - America/Cambridge_Bay
+      - America/Campo_Grande
+      - America/Cancun
+      - America/Caracas
+      - America/Cayenne
+      - America/Cayman
+      - America/Chicago
+      - America/Chihuahua
+      - America/Ciudad_Juarez
+      - America/Costa_Rica
+      - America/Creston
+      - America/Cuiaba
+      - America/Curacao
+      - America/Danmarkshavn
+      - America/Dawson
+      - America/Dawson_Creek
+      - America/Denver
+      - America/Detroit
+      - America/Dominica
+      - America/Edmonton
+      - America/Eirunepe
+      - America/El_Salvador
+      - America/Fort_Nelson
+      - America/Fortaleza
+      - America/Glace_Bay
+      - America/Goose_Bay
+      - America/Grand_Turk
+      - America/Grenada
+      - America/Guadeloupe
+      - America/Guatemala
+      - America/Guayaquil
+      - America/Guyana
+      - America/Halifax
+      - America/Havana
+      - America/Hermosillo
+      - America/Indiana/Indianapolis
+      - America/Indiana/Knox
+      - America/Indiana/Marengo
+      - America/Indiana/Petersburg
+      - America/Indiana/Tell_City
+      - America/Indiana/Vevay
+      - America/Indiana/Vincennes
+      - America/Indiana/Winamac
+      - America/Inuvik
+      - America/Iqaluit
+      - America/Jamaica
+      - America/Juneau
+      - America/Kentucky/Louisville
+      - America/Kentucky/Monticello
+      - America/Kralendijk
+      - America/La_Paz
+      - America/Lima
+      - America/Los_Angeles
+      - America/Lower_Princes
+      - America/Maceio
+      - America/Managua
+      - America/Manaus
+      - America/Marigot
+      - America/Martinique
+      - America/Matamoros
+      - America/Mazatlan
+      - America/Menominee
+      - America/Merida
+      - America/Metlakatla
+      - America/Mexico_City
+      - America/Miquelon
+      - America/Moncton
+      - America/Monterrey
+      - America/Montevideo
+      - America/Montserrat
+      - America/Nassau
+      - America/New_York
+      - America/Nome
+      - America/Noronha
+      - America/North_Dakota/Beulah
+      - America/North_Dakota/Center
+      - America/North_Dakota/New_Salem
+      - America/Nuuk
+      - America/Ojinaga
+      - America/Panama
+      - America/Paramaribo
+      - America/Phoenix
+      - America/Port-au-Prince
+      - America/Port_of_Spain
+      - America/Porto_Velho
+      - America/Puerto_Rico
+      - America/Punta_Arenas
+      - America/Rankin_Inlet
+      - America/Recife
+      - America/Regina
+      - America/Resolute
+      - America/Rio_Branco
+      - America/Santarem
+      - America/Santiago
+      - America/Santo_Domingo
+      - America/Sao_Paulo
+      - America/Scoresbysund
+      - America/Sitka
+      - America/St_Barthelemy
+      - America/St_Johns
+      - America/St_Kitts
+      - America/St_Lucia
+      - America/St_Thomas
+      - America/St_Vincent
+      - America/Swift_Current
+      - America/Tegucigalpa
+      - America/Thule
+      - America/Tijuana
+      - America/Toronto
+      - America/Tortola
+      - America/Vancouver
+      - America/Whitehorse
+      - America/Winnipeg
+      - America/Yakutat
+      - Antarctica/Casey
+      - Antarctica/Davis
+      - Antarctica/DumontDUrville
+      - Antarctica/Macquarie
+      - Antarctica/Mawson
+      - Antarctica/McMurdo
+      - Antarctica/Palmer
+      - Antarctica/Rothera
+      - Antarctica/Syowa
+      - Antarctica/Troll
+      - Antarctica/Vostok
+      - Arctic/Longyearbyen
+      - Asia/Aden
+      - Asia/Almaty
+      - Asia/Amman
+      - Asia/Anadyr
+      - Asia/Aqtau
+      - Asia/Aqtobe
+      - Asia/Ashgabat
+      - Asia/Atyrau
+      - Asia/Baghdad
+      - Asia/Bahrain
+      - Asia/Baku
+      - Asia/Bangkok
+      - Asia/Barnaul
+      - Asia/Beirut
+      - Asia/Bishkek
+      - Asia/Brunei
+      - Asia/Chita
+      - Asia/Choibalsan
+      - Asia/Colombo
+      - Asia/Damascus
+      - Asia/Dhaka
+      - Asia/Dili
+      - Asia/Dubai
+      - Asia/Dushanbe
+      - Asia/Famagusta
+      - Asia/Gaza
+      - Asia/Hebron
+      - Asia/Ho_Chi_Minh
+      - Asia/Hong_Kong
+      - Asia/Hovd
+      - Asia/Irkutsk
+      - Asia/Jakarta
+      - Asia/Jayapura
+      - Asia/Jerusalem
+      - Asia/Kabul
+      - Asia/Kamchatka
+      - Asia/Karachi
+      - Asia/Kathmandu
+      - Asia/Khandyga
+      - Asia/Kolkata
+      - Asia/Krasnoyarsk
+      - Asia/Kuala_Lumpur
+      - Asia/Kuching
+      - Asia/Kuwait
+      - Asia/Macau
+      - Asia/Magadan
+      - Asia/Makassar
+      - Asia/Manila
+      - Asia/Muscat
+      - Asia/Nicosia
+      - Asia/Novokuznetsk
+      - Asia/Novosibirsk
+      - Asia/Omsk
+      - Asia/Oral
+      - Asia/Phnom_Penh
+      - Asia/Pontianak
+      - Asia/Pyongyang
+      - Asia/Qatar
+      - Asia/Qostanay
+      - Asia/Qyzylorda
+      - Asia/Riyadh
+      - Asia/Sakhalin
+      - Asia/Samarkand
+      - Asia/Seoul
+      - Asia/Shanghai
+      - Asia/Singapore
+      - Asia/Srednekolymsk
+      - Asia/Taipei
+      - Asia/Tashkent
+      - Asia/Tbilisi
+      - Asia/Tehran
+      - Asia/Thimphu
+      - Asia/Tokyo
+      - Asia/Tomsk
+      - Asia/Ulaanbaatar
+      - Asia/Urumqi
+      - Asia/Ust-Nera
+      - Asia/Vientiane
+      - Asia/Vladivostok
+      - Asia/Yakutsk
+      - Asia/Yangon
+      - Asia/Yekaterinburg
+      - Asia/Yerevan
+      - Atlantic/Azores
+      - Atlantic/Bermuda
+      - Atlantic/Canary
+      - Atlantic/Cape_Verde
+      - Atlantic/Faroe
+      - Atlantic/Madeira
+      - Atlantic/Reykjavik
+      - Atlantic/South_Georgia
+      - Atlantic/St_Helena
+      - Atlantic/Stanley
+      - Australia/Adelaide
+      - Australia/Brisbane
+      - Australia/Broken_Hill
+      - Australia/Darwin
+      - Australia/Eucla
+      - Australia/Hobart
+      - Australia/Lindeman
+      - Australia/Lord_Howe
+      - Australia/Melbourne
+      - Australia/Perth
+      - Australia/Sydney
+      - Canada/Atlantic
+      - Canada/Central
+      - Canada/Eastern
+      - Canada/Mountain
+      - Canada/Newfoundland
+      - Canada/Pacific
+      - Europe/Amsterdam
+      - Europe/Andorra
+      - Europe/Astrakhan
+      - Europe/Athens
+      - Europe/Belgrade
+      - Europe/Berlin
+      - Europe/Bratislava
+      - Europe/Brussels
+      - Europe/Bucharest
+      - Europe/Budapest
+      - Europe/Busingen
+      - Europe/Chisinau
+      - Europe/Copenhagen
+      - Europe/Dublin
+      - Europe/Gibraltar
+      - Europe/Guernsey
+      - Europe/Helsinki
+      - Europe/Isle_of_Man
+      - Europe/Istanbul
+      - Europe/Jersey
+      - Europe/Kaliningrad
+      - Europe/Kirov
+      - Europe/Kyiv
+      - Europe/Lisbon
+      - Europe/Ljubljana
+      - Europe/London
+      - Europe/Luxembourg
+      - Europe/Madrid
+      - Europe/Malta
+      - Europe/Mariehamn
+      - Europe/Minsk
+      - Europe/Monaco
+      - Europe/Moscow
+      - Europe/Oslo
+      - Europe/Paris
+      - Europe/Podgorica
+      - Europe/Prague
+      - Europe/Riga
+      - Europe/Rome
+      - Europe/Samara
+      - Europe/San_Marino
+      - Europe/Sarajevo
+      - Europe/Saratov
+      - Europe/Simferopol
+      - Europe/Skopje
+      - Europe/Sofia
+      - Europe/Stockholm
+      - Europe/Tallinn
+      - Europe/Tirane
+      - Europe/Ulyanovsk
+      - Europe/Vaduz
+      - Europe/Vatican
+      - Europe/Vienna
+      - Europe/Vilnius
+      - Europe/Volgograd
+      - Europe/Warsaw
+      - Europe/Zagreb
+      - Europe/Zurich
+      - GMT
+      - Indian/Antananarivo
+      - Indian/Chagos
+      - Indian/Christmas
+      - Indian/Cocos
+      - Indian/Comoro
+      - Indian/Kerguelen
+      - Indian/Mahe
+      - Indian/Maldives
+      - Indian/Mauritius
+      - Indian/Mayotte
+      - Indian/Reunion
+      - Pacific/Apia
+      - Pacific/Auckland
+      - Pacific/Bougainville
+      - Pacific/Chatham
+      - Pacific/Chuuk
+      - Pacific/Easter
+      - Pacific/Efate
+      - Pacific/Fakaofo
+      - Pacific/Fiji
+      - Pacific/Funafuti
+      - Pacific/Galapagos
+      - Pacific/Gambier
+      - Pacific/Guadalcanal
+      - Pacific/Guam
+      - Pacific/Honolulu
+      - Pacific/Kanton
+      - Pacific/Kiritimati
+      - Pacific/Kosrae
+      - Pacific/Kwajalein
+      - Pacific/Majuro
+      - Pacific/Marquesas
+      - Pacific/Midway
+      - Pacific/Nauru
+      - Pacific/Niue
+      - Pacific/Norfolk
+      - Pacific/Noumea
+      - Pacific/Pago_Pago
+      - Pacific/Palau
+      - Pacific/Pitcairn
+      - Pacific/Pohnpei
+      - Pacific/Port_Moresby
+      - Pacific/Rarotonga
+      - Pacific/Saipan
+      - Pacific/Tahiti
+      - Pacific/Tarawa
+      - Pacific/Tongatapu
+      - Pacific/Wake
+      - Pacific/Wallis
+      - US/Alaska
+      - US/Arizona
+      - US/Central
+      - US/Eastern
+      - US/Hawaii
+      - US/Mountain
+      - US/Pacific
+      - UTC
+      type: string
+    ServiceLocation:
+      properties:
+        address_line1:
+          description: The service location address.
+          type: string
+        address_line2:
+          description: The service location suite.
+          type: string
+        city:
+          default: ''
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          maxLength: 254
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_primary:
+          default: false
+          type: boolean
+        name:
+          maxLength: 200
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        place_of_service:
+          $ref: '#/components/schemas/ServiceLocationPlaceOfServiceEnum'
+        place_of_service_code:
+          type: integer
+        practice:
+          description: The id of the practice that the service location belongs to.
+          format: int64
+          type: integer
+        state:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ServiceLocationStatusEnum'
+          default: active
+          readOnly: true
+        timezone:
+          oneOf:
+          - $ref: '#/components/schemas/TimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        zip:
+          default: ''
+          maxLength: 10
+          type: string
+      required:
+      - address_line1
+      - name
+      - practice
+      - state
+      type: object
+    Fulfillment:
+      properties:
+        detail:
+          type:
+          - string
+          - 'null'
+        pharmacy_ncpdpid:
+          maxLength: 21
+          type:
+          - string
+          - 'null'
+        service_location:
+          $ref: '#/components/schemas/ServiceLocation'
+        state:
+          maxLength: 128
+          type: string
+        time_completed:
+          format: date-time
+          type: string
+        type:
+          $ref: '#/components/schemas/FulfillmentTypeEnum'
+      required:
+      - service_location
+      - time_completed
+      - type
+      type: object
+    PaginatedMedOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedOrder'
+          type: array
+      required:
+      - results
+      type: object
+    ServiceLocationStatusEnum:
+      enum:
+      - active
+      - inactive
+      - suspended
+      type: string
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
+      type: string
+    Medication:
+      properties:
+        active_ndcs:
+          items:
+            type: string
+          type: array
+        brand_name:
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        creation_type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationDrugType'
+          default: user
+          readOnly: true
+        form:
+          readOnly: true
+          type: string
+        generic_name:
+          readOnly: true
+          type: string
+        id:
+          description: The id of the medication.
+          format: int64
+          type: integer
+        is_controlled:
+          default: false
+          description: Whether the drug is a controlled substance or not.
+          type: boolean
+        market_end_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        name:
+          description: The name that will display for the medication in the search and when referenced by the prescription or documented med.
+          type: string
+        ndcs:
+          description: The NDCs of the medication (must contain only one ndc code when creating).
+          items:
+            type: string
+          type: array
+        obsolete_date:
+          description: The date at which this practice medication became obsolete.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          description: The practice that created the medication. `null` for medications from the standard formulary.
+          format: int64
+          type: integer
+        route:
+          readOnly: true
+          type: string
+        rxnorm_cuis:
+          description: The Rxnorm.cui code of the medication (must contain only one cui code when creating).
+          items:
+            type: string
+          type: array
+        strength:
+          description: The strength of the drug, e.g. 40mg.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationType'
+          default: prescription
+          description: 'Whether the practice medication is an OTC or Prescription drug.
+
+
+            * `otc` - otc
+
+            * `prescription` - prescription
+
+            * `discontinued` - discontinued'
+      type: object
+    MedOrder:
+      properties:
+        allow_substitutions:
+          readOnly: true
+          type:
+          - boolean
+          - 'null'
+        auth_refills:
+          description: The number of refills, excluding this order, that the patient is authorized for.
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        chart_date:
+          format: date-time
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        days_supply:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        directions:
+          description: The directions for the medication order.
+          maxLength: 1000
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The timestamp for when this prescription was first documented. Will be the same as the creation time unless this an historical data import.
+          format: date-time
+          type: string
+        documenting_personnel:
+          description: Physician object required if is_doc_med is true when creating.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        fulfillment:
+          oneOf:
+          - $ref: '#/components/schemas/Fulfillment'
+          - type: 'null'
+          readOnly: true
+        icd10_codes:
+          items:
+            $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        is_doc_med:
+          description: If the medication order is intended to document a med instead of draft a prescription. When it is true, the object will be automatically signed as a documented medication, otherwise the object will be created as a draft prescription.
+          type: boolean
+        last_modified:
+          format: date-time
+          readOnly: true
+          type: string
+        medication:
+          allOf:
+          - $ref: '#/components/schemas/Medication'
+          description: Medication object (must provide one of id, ndc, rxnorm_cuis required).
+        medication_type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationTypeEnum'
+          description: 'If this is OTC or a prescription.
+
+
+            * `otc` - otc
+
+            * `prescription` - prescription'
+        notes:
+          description: Any notes for the patient.
+          type:
+          - string
+          - 'null'
+        num_samples:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        order_type:
+          allOf:
+          - $ref: '#/components/schemas/OrderTypeEnum'
+          description: 'If the medication order is new, a refill or a change in dosage.
+
+
+            * `New` - New
+
+            * `Refill` - Refill
+
+            * `DoseChange` - Change'
+        patient:
+          description: The patient the medication order is for.
+          format: int64
+          type: integer
+        pharmacy_instructions:
+          description: Any notes for the pharmacy.
+          type:
+          - string
+          - 'null'
+        practice:
+          description: The practice the medication order is for.
+          format: int64
+          type: integer
+        prescribing_physician:
+          description: The physician who is prescribing the medication.
+          format: int64
+          type: integer
+        qty:
+          description: The quantity of the medication.
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
+          type:
+          - string
+          - 'null'
+        qty_units:
+          description: "The units that match the amount, e.g. capsules.\n\n* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
+          oneOf:
+          - $ref: '#/components/schemas/QtyUnitsEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        send_rx_reminder:
+          readOnly: true
+          type: boolean
+        show_in_chart_feed:
+          type: boolean
+        signed_by:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        start_date:
+          description: The date on which the prescription started or will start.
+          format: date
+          type: string
+        thread:
+          $ref: '#/components/schemas/Thread'
+      required:
+      - auth_refills
+      - icd10_codes
+      - is_doc_med
+      - medication
+      - medication_type
+      - order_type
+      - patient
+      - practice
+      - prescribing_physician
+      - qty
+      - qty_units
+      - start_date
+      - thread
+      type: object
+    ServiceLocationPlaceOfServiceEnum:
+      enum:
+      - Ambulance - Air or Water
+      - Ambulance - Land
+      - Ambulatory Surgical Center
+      - Assisted Living Facility
+      - Birthing Center
+      - Community Mental Health Center
+      - Comprehensive Inpatient Rehabilitation Facility
+      - Comprehensive Outpatient Rehabilitation Facility
+      - Custodial Care Facility
+      - Emergency Room - Hospital
+      - End-Stage Renal Disease Treatment Facility
+      - Federally Qualified Health Center
+      - Group Home
+      - Home
+      - Homeless Shelter
+      - Hospice
+      - Independent Clinic
+      - Independent Laboratory
+      - Indian Health ServiceFree-standing Facility
+      - Indian Health ServiceProvider-based Facility
+      - Inpatient Hospital
+      - Inpatient Psychiatric Facility
+      - Intermediate Care Facility/Individuals with Intellectual Disabilities
+      - Mass Immunization Center
+      - Military Treatment Facility
+      - Mobile Unit
+      - Non-residential Substance Abuse Treatment Facility
+      - Nursing Facility
+      - Off Campus Outpatient-Hospital
+      - Office
+      - On Campus-Outpatient Hospital
+      - Other Place of Service
+      - Outreach Site/Street
+      - Pharmacy
+      - Place of Employment-Worksite
+      - Prison/Correctional Facility
+      - Programs of All-Inclusive Care for the Elderly (PACE) Center
+      - Psychiatric Facility-Partial Hospitalization
+      - Psychiatric Residential Treatment Center
+      - Public Health Clinic
+      - Residential Substance Abuse Treatment Facility
+      - Rural Health Clinic
+      - School
+      - Skilled Nursing Facility
+      - Telehealth Provided Other than in Patient’s Home
+      - Telehealth Provided in Patient’s Home
+      - Temporary Lodging
+      - Tribal 638Free-standingFacility
+      - Tribal 638Provider-basedFacility
+      - Urgent Care Facility
+      - Walk-in Retail Health Clinic
+      type: string
+    PaginatedMedicationList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Medication_2'
     MedicationCreate:
       type: object
       required:
@@ -126,7 +2014,23 @@ components:
           - Inactive
         notes:
           type: string
-    Medication:
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
+    Medication_2:
       allOf:
       - $ref: '#/components/schemas/MedicationCreate'
       - type: object
@@ -139,48 +2043,12 @@ components:
             format: date-time
             readOnly: true
           deleted_date:
-            type: string
+            type:
+            - string
+            - 'null'
             format: date-time
-            nullable: true
             readOnly: true
-    PaginatedMedicationList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Medication'
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type: string
-          nullable: true
-          description: URL for next page
-        previous:
-          type: string
-          nullable: true
-          description: URL for previous page
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -188,11 +2056,41 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
-    oauth2:
+    sec0:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://sandbox.elationemr.com/api/2.0/oauth2/token/
+          tokenUrl: https://example.com/oauth2/token
+          scopes: {}
+    oauth2:
+      flows:
+        clientCredentials:
           scopes:
-            apiv2: Full API access
+            act_as_user: Impersonate a provider via X-On-Behalf-Of (combinable with apiv2 or system scopes)
+            apiv2: Full access to the API
+            system/{resource_name}.read: Read access to a specific resource
+            system/{resource_name}.write: Write access to a specific resource
+          tokenUrl: /api/2.0/oauth2/token/
+      type: oauth2
+x-refined-from:
+- elation-api-settings.json
+- elation-health-api-full-openapi.yaml
+- elation-health-elation-health-api-openapi.yml
+x-readme:
+  headers: []
+x-readme-fauxas: true

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Elation Health REST Allergies Messaging API
+  title: Elation Health REST Messaging API
   description: RESTful API for Elation's primary care EHR platform enabling management of patient profiles, visit notes, clinical documents, problems, allergies, immunizations, vitals, medications, lab orders, imaging orders, referrals, appointments, insurance, billing, pharmacy, messaging, and practice administration. Supports OAuth2 client credentials authentication with both sandbox and production environments.
   version: '2.0'
   contact:
@@ -120,16 +120,29 @@ paths:
         '204':
           description: Message thread deleted
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   schemas:
-    PaginatedMessageThreadList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/MessageThread'
     MessageThread:
       allOf:
       - $ref: '#/components/schemas/MessageThreadCreate'
@@ -147,10 +160,36 @@ components:
             format: date-time
             readOnly: true
           deleted_date:
-            type: string
+            type:
+            - string
+            - 'null'
             format: date-time
-            nullable: true
             readOnly: true
+    PaginatedMessageThreadList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/MessageThread'
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
     MessageThreadCreate:
       type: object
       required:
@@ -165,48 +204,13 @@ components:
             type: integer
           description: User IDs of thread members
         patient:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: Associated patient ID
         note:
           type: string
           description: Initial message content
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type: string
-          nullable: true
-          description: URL for next page
-        previous:
-          type: string
-          nullable: true
-          description: URL for previous page
-  parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 25
-      description: Number of results to return
   securitySchemes:
     oauth2:
       type: oauth2

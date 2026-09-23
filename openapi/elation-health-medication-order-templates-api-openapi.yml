@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Elation Health Medication Order Templates API
   version: '1.0'
-  description: 'Operations tagged Medication Order Templates across 3 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml, elation-practice-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Medication Order Templates across 2 of this provider''s published API definitions: elation-api-settings.json, elation-health-api-full-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://sandbox.elationemr.com/api/2.0
 - description: Sandbox Server
@@ -940,171 +940,8 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    BlankEnum:
-      enum:
-      - ''
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
     NullEnum:
       type: 'null'
-    Medication:
-      properties:
-        active_ndcs:
-          items:
-            type: string
-          type: array
-        brand_name:
-          readOnly: true
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        creation_type:
-          allOf:
-          - $ref: '#/components/schemas/MedicationDrugType'
-          default: user
-          readOnly: true
-        form:
-          readOnly: true
-          type: string
-        generic_name:
-          readOnly: true
-          type: string
-        id:
-          description: The id of the medication.
-          format: int64
-          type: integer
-        is_controlled:
-          default: false
-          description: Whether the drug is a controlled substance or not.
-          type: boolean
-        market_end_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        name:
-          description: The name that will display for the medication in the search and when referenced by the prescription or documented med.
-          type: string
-        ndcs:
-          description: The NDCs of the medication (must contain only one ndc code when creating).
-          items:
-            type: string
-          type: array
-        obsolete_date:
-          description: The date at which this practice medication became obsolete.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        practice:
-          description: The practice that created the medication. `null` for medications from the standard formulary.
-          format: int64
-          type: integer
-        route:
-          readOnly: true
-          type: string
-        rxnorm_cuis:
-          description: The Rxnorm.cui code of the medication (must contain only one cui code when creating).
-          items:
-            type: string
-          type: array
-        strength:
-          description: The strength of the drug, e.g. 40mg.
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        type:
-          allOf:
-          - $ref: '#/components/schemas/MedicationType'
-          default: prescription
-          description: 'Whether the practice medication is an OTC or Prescription drug.
-
-
-            * `otc` - otc
-
-            * `prescription` - prescription
-
-            * `discontinued` - discontinued'
-      type: object
-    MedicationType:
-      description: '* `otc` - otc
-
-        * `prescription` - prescription
-
-        * `discontinued` - discontinued'
-      enum:
-      - otc
-      - prescription
-      - discontinued
-      type: string
-    PatchedMedOrderTemplate:
-      description: 'Contains only webhooks
-
-        All other fields inherited'
-      properties:
-        auth_refills:
-          maximum: 99
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        directions:
-          maxLength: 300
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        medication:
-          allOf:
-          - $ref: '#/components/schemas/Medication'
-          description: When creating, must contains only one from id, ndcs or rxnorm_cuis fields.
-        practice:
-          format: int64
-          type: integer
-        qty:
-          format: decimal
-          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
-          type:
-          - string
-          - 'null'
-        qty_units:
-          oneOf:
-          - $ref: '#/components/schemas/QtyUnitsEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        rank:
-          readOnly: true
-          type: integer
-        specific_ndc:
-          type:
-          - string
-          - 'null'
-      type: object
     MedOrderTemplate:
       description: 'Contains only webhooks
 
@@ -1159,28 +996,23 @@ components:
       - medication
       - practice
       type: object
-    PaginatedMedOrderTemplateList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/MedOrderTemplate'
-          type: array
-      required:
-      - results
-      type: object
+    BlankEnum:
+      enum:
+      - ''
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
     QtyUnitsEnum:
       description: "* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
       enum:
@@ -1273,6 +1105,174 @@ components:
       - TROCHE
       - WAFER
       type: string
+    PaginatedMedOrderTemplateList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedOrderTemplate'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedMedOrderTemplate:
+      description: 'Contains only webhooks
+
+        All other fields inherited'
+      properties:
+        auth_refills:
+          maximum: 99
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        directions:
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        medication:
+          allOf:
+          - $ref: '#/components/schemas/Medication'
+          description: When creating, must contains only one from id, ndcs or rxnorm_cuis fields.
+        practice:
+          format: int64
+          type: integer
+        qty:
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
+          type:
+          - string
+          - 'null'
+        qty_units:
+          oneOf:
+          - $ref: '#/components/schemas/QtyUnitsEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        rank:
+          readOnly: true
+          type: integer
+        specific_ndc:
+          type:
+          - string
+          - 'null'
+      type: object
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
+      type: string
+    Medication:
+      properties:
+        active_ndcs:
+          items:
+            type: string
+          type: array
+        brand_name:
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        creation_type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationDrugType'
+          default: user
+          readOnly: true
+        form:
+          readOnly: true
+          type: string
+        generic_name:
+          readOnly: true
+          type: string
+        id:
+          description: The id of the medication.
+          format: int64
+          type: integer
+        is_controlled:
+          default: false
+          description: Whether the drug is a controlled substance or not.
+          type: boolean
+        market_end_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        name:
+          description: The name that will display for the medication in the search and when referenced by the prescription or documented med.
+          type: string
+        ndcs:
+          description: The NDCs of the medication (must contain only one ndc code when creating).
+          items:
+            type: string
+          type: array
+        obsolete_date:
+          description: The date at which this practice medication became obsolete.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          description: The practice that created the medication. `null` for medications from the standard formulary.
+          format: int64
+          type: integer
+        route:
+          readOnly: true
+          type: string
+        rxnorm_cuis:
+          description: The Rxnorm.cui code of the medication (must contain only one cui code when creating).
+          items:
+            type: string
+          type: array
+        strength:
+          description: The strength of the drug, e.g. 40mg.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationType'
+          default: prescription
+          description: 'Whether the practice medication is an OTC or Prescription drug.
+
+
+            * `otc` - otc
+
+            * `prescription` - prescription
+
+            * `discontinued` - discontinued'
+      type: object
   securitySchemes:
     sec0:
       type: oauth2
@@ -1293,7 +1293,6 @@ components:
 x-refined-from:
 - elation-api-settings.json
 - elation-health-api-full-openapi.yaml
-- elation-practice-api.json
 x-readme:
   headers: []
 x-readme-fauxas: true
