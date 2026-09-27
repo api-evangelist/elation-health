@@ -424,17 +424,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    TimeSlotTypeEnum:
-      enum:
-      - appointment
-      - appointment_slot
-      - event
-      type: string
-    RepeatsEnum:
-      enum:
-      - Monthly
-      - Weekly
-      type: string
     RecurringEventGroup:
       properties:
         created_date:
@@ -474,6 +463,12 @@ components:
       - schedules
       - time_slot_type
       type: object
+    TimeSlotTypeEnum:
+      enum:
+      - appointment
+      - appointment_slot
+      - event
+      type: string
     RecurringEventSchedule:
       properties:
         created_date:
@@ -547,6 +542,11 @@ components:
       required:
       - results
       type: object
+    RepeatsEnum:
+      enum:
+      - Monthly
+      - Weekly
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

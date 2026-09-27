@@ -760,6 +760,95 @@ components:
       - start_time
       - weekday
       type: object
+    ProviderAvailabilityBlockSerializerPracticeTimeZone:
+      properties:
+        end_time:
+          format: time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        provider_id:
+          format: int64
+          type: integer
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        start_time:
+          format: time
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        use_service_location_timezone:
+          type: boolean
+        weekday:
+          type: integer
+      required:
+      - end_time
+      - provider_id
+      - start_time
+      - weekday
+      type: object
+    PatchedPhysician:
+      properties:
+        credentials:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          type: string
+        fax:
+          description: The physician's fax number.
+          readOnly: true
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          description: Whether or not the physician is still active at the practice.
+          readOnly: true
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        license:
+          type: string
+        license_state:
+          type: string
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        npi:
+          type: string
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        specialty:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      type: object
     Physician:
       properties:
         credentials:
@@ -846,95 +935,6 @@ components:
       required:
       - results
       type: object
-    PatchedPhysician:
-      properties:
-        credentials:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        email:
-          format: email
-          type: string
-        fax:
-          description: The physician's fax number.
-          readOnly: true
-          type: string
-        first_name:
-          maxLength: 50
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        is_active:
-          description: Whether or not the physician is still active at the practice.
-          readOnly: true
-          type: boolean
-        last_name:
-          maxLength: 60
-          type: string
-        license:
-          type: string
-        license_state:
-          type: string
-        metadata:
-          properties:
-            data:
-              type: object
-            object_id:
-              type: string
-            object_web_link:
-              type: string
-          type:
-          - object
-          - 'null'
-        npi:
-          type: string
-        practice:
-          format: int64
-          readOnly: true
-          type: integer
-        specialty:
-          readOnly: true
-          type: string
-        user_id:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-      type: object
-    ProviderAvailabilityBlockSerializerPracticeTimeZone:
-      properties:
-        end_time:
-          format: time
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        provider_id:
-          format: int64
-          type: integer
-        service_location_id:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        start_time:
-          format: time
-          type: string
-        timezone:
-          readOnly: true
-          type: string
-        use_service_location_timezone:
-          type: boolean
-        weekday:
-          type: integer
-      required:
-      - end_time
-      - provider_id
-      - start_time
-      - weekday
-      type: object
     Physician_2:
       type: object
       properties:
@@ -987,6 +987,13 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -1001,13 +1008,6 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

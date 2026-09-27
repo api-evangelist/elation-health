@@ -185,6 +185,12 @@ components:
       required:
       - results
       type: object
+    VaccineCreationType:
+      enum:
+      - elation
+      - medispan
+      - user
+      type: string
     Vaccine:
       properties:
         cdc_type:
@@ -242,12 +248,6 @@ components:
           - integer
           - 'null'
       type: object
-    VaccineCreationType:
-      enum:
-      - elation
-      - medispan
-      - user
-      type: string
   securitySchemes:
     oauth2:
       flows:

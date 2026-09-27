@@ -178,56 +178,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedPracticePrintHeaderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PracticePrintHeader'
-          type: array
-      required:
-      - results
-      type: object
-    UploadedPhoto:
-      description: 'Serializer for UploadedPhoto model.
-
-        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
-      properties:
-        content_type:
-          readOnly: true
-          type: string
-        file_size:
-          readOnly: true
-          type: integer
-        height:
-          readOnly: true
-          type: integer
-        id:
-          readOnly: true
-          type: integer
-        last_updated:
-          format: date-time
-          readOnly: true
-          type: string
-        original_filename:
-          readOnly: true
-          type: string
-        width:
-          readOnly: true
-          type: integer
-      type: object
     PracticePrintHeader:
       properties:
         content_type:
@@ -274,6 +224,56 @@ components:
           type: integer
       required:
       - name
+      type: object
+    UploadedPhoto:
+      description: 'Serializer for UploadedPhoto model.
+
+        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
+      properties:
+        content_type:
+          readOnly: true
+          type: string
+        file_size:
+          readOnly: true
+          type: integer
+        height:
+          readOnly: true
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        original_filename:
+          readOnly: true
+          type: string
+        width:
+          readOnly: true
+          type: integer
+      type: object
+    PaginatedPracticePrintHeaderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PracticePrintHeader'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

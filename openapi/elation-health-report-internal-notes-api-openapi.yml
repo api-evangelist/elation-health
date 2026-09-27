@@ -175,21 +175,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PatchedInternalPracticeNoteSerializerProxy:
-      properties:
-        document:
-          description: The report (document) ID this note belongs to
-          readOnly: true
-          type: integer
-        id:
-          description: The id of the internal note.
-          readOnly: true
-          type: integer
-        text:
-          description: The internal note text content
-          maxLength: 256
-          type: string
-      type: object
     InternalPracticeNoteSerializerProxy:
       properties:
         document:
@@ -206,6 +191,21 @@ components:
           type: string
       required:
       - text
+      type: object
+    PatchedInternalPracticeNoteSerializerProxy:
+      properties:
+        document:
+          description: The report (document) ID this note belongs to
+          readOnly: true
+          type: integer
+        id:
+          description: The id of the internal note.
+          readOnly: true
+          type: integer
+        text:
+          description: The internal note text content
+          maxLength: 256
+          type: string
       type: object
   securitySchemes:
     oauth2:

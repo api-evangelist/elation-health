@@ -589,25 +589,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    VitalWeight:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalWeightUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalHCUnitsEnum:
-      enum:
-      - cm
-      type: string
     VitalTemperature:
       properties:
         note:
@@ -623,14 +604,86 @@ components:
           - string
           - 'null'
       type: object
-    VitalWeightUnitsEnum:
-      enum:
-      - lbs
-      type: string
     VitalOxygenUnitsEnum:
       enum:
       - '%'
       type: string
+    VitalHC:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        percentile:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHCUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalPain:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalBP:
+      properties:
+        diastolic:
+          type:
+          - string
+          - 'null'
+        note:
+          type:
+          - string
+          - 'null'
+        systolic:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHRUnits:
+      enum:
+      - bpm
+      type: string
+    VitalHCUnitsEnum:
+      enum:
+      - cm
+      type: string
+    PaginatedVitalsCollectionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VitalsCollection'
+          type: array
+      required:
+      - results
+      type: object
     PatchedVitalsCollection:
       properties:
         bmi:
@@ -767,68 +820,6 @@ components:
       enum:
       - inches
       type: string
-    VitalHC:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        percentile:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHCUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    PaginatedVitalsCollectionList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/VitalsCollection'
-          type: array
-      required:
-      - results
-      type: object
-    VitalTemperatureUnitsEnum:
-      enum:
-      - celsius
-      - fahrenheit
-      type: string
-    VitalHR:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHRUnits'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
     VitalHeight:
       properties:
         note:
@@ -844,7 +835,7 @@ components:
           - string
           - 'null'
       type: object
-    VitalOxygen:
+    VitalHR:
       properties:
         note:
           type:
@@ -852,13 +843,18 @@ components:
           - 'null'
         units:
           allOf:
-          - $ref: '#/components/schemas/VitalOxygenUnitsEnum'
+          - $ref: '#/components/schemas/VitalHRUnits'
           readOnly: true
         value:
           type:
           - string
           - 'null'
       type: object
+    VitalTemperatureUnitsEnum:
+      enum:
+      - celsius
+      - fahrenheit
+      type: string
     VitalsCollection:
       properties:
         bmi:
@@ -994,6 +990,25 @@ components:
       - patient
       - practice
       type: object
+    VitalOxygen:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalOxygenUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalWeightUnitsEnum:
+      enum:
+      - lbs
+      type: string
     VitalRR:
       properties:
         note:
@@ -1009,36 +1024,21 @@ components:
           - string
           - 'null'
       type: object
-    VitalBP:
-      properties:
-        diastolic:
-          type:
-          - string
-          - 'null'
-        note:
-          type:
-          - string
-          - 'null'
-        systolic:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalPain:
+    VitalWeight:
       properties:
         note:
           type:
           - string
           - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalWeightUnitsEnum'
+          readOnly: true
         value:
           type:
           - string
           - 'null'
       type: object
-    VitalHRUnits:
-      enum:
-      - bpm
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

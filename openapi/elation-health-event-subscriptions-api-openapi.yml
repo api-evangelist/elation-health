@@ -494,97 +494,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PaginatedPublishedEventList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PublishedEvent'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedPublishedEvent:
-      properties:
-        error_content:
-          type:
-          - string
-          - 'null'
-        event_id:
-          readOnly: true
-          type: integer
-        event_type:
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        processed_date:
-          format: date-time
-          type: string
-        resource:
-          readOnly: true
-          type: string
-        resource_id:
-          readOnly: true
-          type: integer
-        status_code:
-          maximum: 2147483647
-          minimum: -2147483648
-          type:
-          - integer
-          - 'null'
-        target:
-          readOnly: true
-          type: string
-      type: object
-    Subscription:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type: string
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        properties:
-          description: Properties specific to this subscription.
-          oneOf:
-          - {}
-          - type: 'null'
-        resource:
-          description: The resource name.
-          maxLength: 50
-          type: string
-        signing_pub_key:
-          readOnly: true
-          type: string
-        target:
-          description: Target URL where we would send the POST request on new events.
-          format: uri
-          type: string
-      required:
-      - resource
-      - target
-      type: object
     PublishedEvent:
       properties:
         error_content:
@@ -621,6 +530,40 @@ components:
       required:
       - processed_date
       type: object
+    PatchedPublishedEvent:
+      properties:
+        error_content:
+          type:
+          - string
+          - 'null'
+        event_id:
+          readOnly: true
+          type: integer
+        event_type:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        processed_date:
+          format: date-time
+          type: string
+        resource:
+          readOnly: true
+          type: string
+        resource_id:
+          readOnly: true
+          type: integer
+        status_code:
+          maximum: 2147483647
+          minimum: -2147483648
+          type:
+          - integer
+          - 'null'
+        target:
+          readOnly: true
+          type: string
+      type: object
     PaginatedSubscriptionList:
       properties:
         count:
@@ -642,6 +585,63 @@ components:
           type: array
       required:
       - results
+      type: object
+    PaginatedPublishedEventList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PublishedEvent'
+          type: array
+      required:
+      - results
+      type: object
+    Subscription:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        properties:
+          description: Properties specific to this subscription.
+          oneOf:
+          - {}
+          - type: 'null'
+        resource:
+          description: The resource name.
+          maxLength: 50
+          type: string
+        signing_pub_key:
+          readOnly: true
+          type: string
+        target:
+          description: Target URL where we would send the POST request on new events.
+          format: uri
+          type: string
+      required:
+      - resource
+      - target
       type: object
   securitySchemes:
     oauth2:

@@ -667,6 +667,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedLabOrderTestCompendiumList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrderTestCompendium'
+          type: array
+      required:
+      - results
+      type: object
     PatchedLabOrderTestCompendium:
       description: The serializer for LabOrderTestCompendium
       properties:
@@ -700,28 +722,6 @@ components:
         name:
           maxLength: 200
           type: string
-      type: object
-    PaginatedLabOrderTestCompendiumList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabOrderTestCompendium'
-          type: array
-      required:
-      - results
       type: object
     LabOrderTestCompendium:
       description: The serializer for LabOrderTestCompendium

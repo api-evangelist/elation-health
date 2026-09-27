@@ -836,7 +836,7 @@ paths:
   /api/2.0/medications/{id}/:
     delete:
       description: Delete an existing medication.
-      operationId: medications_destroy
+      operationId: deleteApi20MedicationsById
       parameters:
       - in: path
         name: id
@@ -856,6 +856,8 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
+      x-operation-id-source: normalized
+      x-operation-id-original: medications_destroy
     get:
       operationId: medications_retrieve
       parameters:
@@ -888,34 +890,31 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    MedicationTypeEnum:
-      description: '* `otc` - otc
-
-        * `prescription` - prescription'
-      enum:
-      - otc
-      - prescription
-      type: string
-    BlankEnum:
-      enum:
-      - ''
-    Thread:
+    Fulfillment:
       properties:
-        dc_date:
-          format: date
-          readOnly: true
+        detail:
           type:
           - string
           - 'null'
-        id:
-          format: int64
-          type: integer
-        is_permanent:
-          type: boolean
+        pharmacy_ncpdpid:
+          maxLength: 21
+          type:
+          - string
+          - 'null'
+        service_location:
+          $ref: '#/components/schemas/ServiceLocation'
+        state:
+          maxLength: 128
+          type: string
+        time_completed:
+          format: date-time
+          type: string
+        type:
+          $ref: '#/components/schemas/FulfillmentTypeEnum'
       required:
-      - is_permanent
+      - service_location
+      - time_completed
+      - type
       type: object
     ICD10Code:
       properties:
@@ -930,60 +929,177 @@ components:
       required:
       - code
       type: object
-    MedicationDrugType:
-      description: '* `user` - user
+    MedOrder:
+      properties:
+        allow_substitutions:
+          readOnly: true
+          type:
+          - boolean
+          - 'null'
+        auth_refills:
+          description: The number of refills, excluding this order, that the patient is authorized for.
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        chart_date:
+          format: date-time
+          readOnly: true
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        days_supply:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        directions:
+          description: The directions for the medication order.
+          maxLength: 1000
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The timestamp for when this prescription was first documented. Will be the same as the creation time unless this an historical data import.
+          format: date-time
+          type: string
+        documenting_personnel:
+          description: Physician object required if is_doc_med is true when creating.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        fulfillment:
+          oneOf:
+          - $ref: '#/components/schemas/Fulfillment'
+          - type: 'null'
+          readOnly: true
+        icd10_codes:
+          items:
+            $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        is_doc_med:
+          description: If the medication order is intended to document a med instead of draft a prescription. When it is true, the object will be automatically signed as a documented medication, otherwise the object will be created as a draft prescription.
+          type: boolean
+        last_modified:
+          format: date-time
+          readOnly: true
+          type: string
+        medication:
+          allOf:
+          - $ref: '#/components/schemas/Medication'
+          description: Medication object (must provide one of id, ndc, rxnorm_cuis required).
+        medication_type:
+          allOf:
+          - $ref: '#/components/schemas/MedicationTypeEnum'
+          description: 'If this is OTC or a prescription.
 
-        * `medispan` - medispan
 
-        * `ss` - surescripts
+            * `otc` - otc
 
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
-    FulfillmentTypeEnum:
-      description: '* `surescripts` - surescripts
+            * `prescription` - prescription'
+        notes:
+          description: Any notes for the patient.
+          type:
+          - string
+          - 'null'
+        num_samples:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        order_type:
+          allOf:
+          - $ref: '#/components/schemas/OrderTypeEnum'
+          description: 'If the medication order is new, a refill or a change in dosage.
 
-        * `surescripts_cancel` - surescripts_cancel
 
-        * `surescripts_change` - surescripts_change
+            * `New` - New
 
-        * `surescripts_nonfillable` - Surescripts-Nonfillable
+            * `Refill` - Refill
 
-        * `paper` - Paper
-
-        * `paper_nonfillable` - Paper-Nonfillable
-
-        * `fax` - Fax
-
-        * `phone` - Phone
-
-        * `mdtoolboxepcs` - MDToolbox EPCS'
-      enum:
-      - surescripts
-      - surescripts_cancel
-      - surescripts_change
-      - surescripts_nonfillable
-      - paper
-      - paper_nonfillable
-      - fax
-      - phone
-      - mdtoolboxepcs
-      type: string
-    OrderTypeEnum:
-      description: '* `New` - New
-
-        * `Refill` - Refill
-
-        * `DoseChange` - Change'
-      enum:
-      - New
-      - Refill
-      - DoseChange
-      type: string
+            * `DoseChange` - Change'
+        patient:
+          description: The patient the medication order is for.
+          format: int64
+          type: integer
+        pharmacy_instructions:
+          description: Any notes for the pharmacy.
+          type:
+          - string
+          - 'null'
+        practice:
+          description: The practice the medication order is for.
+          format: int64
+          type: integer
+        prescribing_physician:
+          description: The physician who is prescribing the medication.
+          format: int64
+          type: integer
+        qty:
+          description: The quantity of the medication.
+          format: decimal
+          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
+          type:
+          - string
+          - 'null'
+        qty_units:
+          description: "The units that match the amount, e.g. capsules.\n\n* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
+          oneOf:
+          - $ref: '#/components/schemas/QtyUnitsEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        send_rx_reminder:
+          readOnly: true
+          type: boolean
+        show_in_chart_feed:
+          type: boolean
+        signed_by:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        start_date:
+          description: The date on which the prescription started or will start.
+          format: date
+          type: string
+        thread:
+          $ref: '#/components/schemas/Thread'
+      required:
+      - auth_refills
+      - icd10_codes
+      - is_doc_med
+      - medication
+      - medication_type
+      - order_type
+      - patient
+      - practice
+      - prescribing_physician
+      - qty
+      - qty_units
+      - start_date
+      - thread
+      type: object
     QtyUnitsEnum:
       description: "* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
       enum:
@@ -1075,6 +1191,241 @@ components:
       - TRAY
       - TROCHE
       - WAFER
+      type: string
+    NullEnum:
+      type: 'null'
+    FulfillmentTypeEnum:
+      description: '* `surescripts` - surescripts
+
+        * `surescripts_cancel` - surescripts_cancel
+
+        * `surescripts_change` - surescripts_change
+
+        * `surescripts_nonfillable` - Surescripts-Nonfillable
+
+        * `paper` - Paper
+
+        * `paper_nonfillable` - Paper-Nonfillable
+
+        * `fax` - Fax
+
+        * `phone` - Phone
+
+        * `mdtoolboxepcs` - MDToolbox EPCS'
+      enum:
+      - surescripts
+      - surescripts_cancel
+      - surescripts_change
+      - surescripts_nonfillable
+      - paper
+      - paper_nonfillable
+      - fax
+      - phone
+      - mdtoolboxepcs
+      type: string
+    ServiceLocation:
+      properties:
+        address_line1:
+          description: The service location address.
+          type: string
+        address_line2:
+          description: The service location suite.
+          type: string
+        city:
+          default: ''
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          maxLength: 254
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_primary:
+          default: false
+          type: boolean
+        name:
+          maxLength: 200
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        place_of_service:
+          $ref: '#/components/schemas/ServiceLocationPlaceOfServiceEnum'
+        place_of_service_code:
+          type: integer
+        practice:
+          description: The id of the practice that the service location belongs to.
+          format: int64
+          type: integer
+        state:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ServiceLocationStatusEnum'
+          default: active
+          readOnly: true
+        timezone:
+          oneOf:
+          - $ref: '#/components/schemas/TimezoneEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        zip:
+          default: ''
+          maxLength: 10
+          type: string
+      required:
+      - address_line1
+      - name
+      - practice
+      - state
+      type: object
+    MedicationTypeEnum:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription'
+      enum:
+      - otc
+      - prescription
+      type: string
+    PaginatedMedOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedOrder'
+          type: array
+      required:
+      - results
+      type: object
+    Thread:
+      properties:
+        dc_date:
+          format: date
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        is_permanent:
+          type: boolean
+      required:
+      - is_permanent
+      type: object
+    OrderTypeEnum:
+      description: '* `New` - New
+
+        * `Refill` - Refill
+
+        * `DoseChange` - Change'
+      enum:
+      - New
+      - Refill
+      - DoseChange
+      type: string
+    ServiceLocationPlaceOfServiceEnum:
+      enum:
+      - Ambulance - Air or Water
+      - Ambulance - Land
+      - Ambulatory Surgical Center
+      - Assisted Living Facility
+      - Birthing Center
+      - Community Mental Health Center
+      - Comprehensive Inpatient Rehabilitation Facility
+      - Comprehensive Outpatient Rehabilitation Facility
+      - Custodial Care Facility
+      - Emergency Room - Hospital
+      - End-Stage Renal Disease Treatment Facility
+      - Federally Qualified Health Center
+      - Group Home
+      - Home
+      - Homeless Shelter
+      - Hospice
+      - Independent Clinic
+      - Independent Laboratory
+      - Indian Health ServiceFree-standing Facility
+      - Indian Health ServiceProvider-based Facility
+      - Inpatient Hospital
+      - Inpatient Psychiatric Facility
+      - Intermediate Care Facility/Individuals with Intellectual Disabilities
+      - Mass Immunization Center
+      - Military Treatment Facility
+      - Mobile Unit
+      - Non-residential Substance Abuse Treatment Facility
+      - Nursing Facility
+      - Off Campus Outpatient-Hospital
+      - Office
+      - On Campus-Outpatient Hospital
+      - Other Place of Service
+      - Outreach Site/Street
+      - Pharmacy
+      - Place of Employment-Worksite
+      - Prison/Correctional Facility
+      - Programs of All-Inclusive Care for the Elderly (PACE) Center
+      - Psychiatric Facility-Partial Hospitalization
+      - Psychiatric Residential Treatment Center
+      - Public Health Clinic
+      - Residential Substance Abuse Treatment Facility
+      - Rural Health Clinic
+      - School
+      - Skilled Nursing Facility
+      - Telehealth Provided Other than in Patient’s Home
+      - Telehealth Provided in Patient’s Home
+      - Temporary Lodging
+      - Tribal 638Free-standingFacility
+      - Tribal 638Provider-basedFacility
+      - Urgent Care Facility
+      - Walk-in Retail Health Clinic
+      type: string
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
       type: string
     TimezoneEnum:
       enum:
@@ -1512,150 +1863,15 @@ components:
       - US/Pacific
       - UTC
       type: string
-    ServiceLocation:
-      properties:
-        address_line1:
-          description: The service location address.
-          type: string
-        address_line2:
-          description: The service location suite.
-          type: string
-        city:
-          default: ''
-          maxLength: 50
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        email:
-          format: email
-          maxLength: 254
-          type:
-          - string
-          - 'null'
-        fax:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_primary:
-          default: false
-          type: boolean
-        name:
-          maxLength: 200
-          type: string
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        place_of_service:
-          $ref: '#/components/schemas/ServiceLocationPlaceOfServiceEnum'
-        place_of_service_code:
-          type: integer
-        practice:
-          description: The id of the practice that the service location belongs to.
-          format: int64
-          type: integer
-        state:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ServiceLocationStatusEnum'
-          default: active
-          readOnly: true
-        timezone:
-          oneOf:
-          - $ref: '#/components/schemas/TimezoneEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        zip:
-          default: ''
-          maxLength: 10
-          type: string
-      required:
-      - address_line1
-      - name
-      - practice
-      - state
-      type: object
-    Fulfillment:
-      properties:
-        detail:
-          type:
-          - string
-          - 'null'
-        pharmacy_ncpdpid:
-          maxLength: 21
-          type:
-          - string
-          - 'null'
-        service_location:
-          $ref: '#/components/schemas/ServiceLocation'
-        state:
-          maxLength: 128
-          type: string
-        time_completed:
-          format: date-time
-          type: string
-        type:
-          $ref: '#/components/schemas/FulfillmentTypeEnum'
-      required:
-      - service_location
-      - time_completed
-      - type
-      type: object
-    PaginatedMedOrderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/MedOrder'
-          type: array
-      required:
-      - results
-      type: object
     ServiceLocationStatusEnum:
       enum:
       - active
       - inactive
       - suspended
       type: string
-    MedicationType:
-      description: '* `otc` - otc
-
-        * `prescription` - prescription
-
-        * `discontinued` - discontinued'
+    BlankEnum:
       enum:
-      - otc
-      - prescription
-      - discontinued
-      type: string
+      - ''
     Medication:
       properties:
         active_ndcs:
@@ -1740,240 +1956,17 @@ components:
 
             * `discontinued` - discontinued'
       type: object
-    MedOrder:
-      properties:
-        allow_substitutions:
-          readOnly: true
-          type:
-          - boolean
-          - 'null'
-        auth_refills:
-          description: The number of refills, excluding this order, that the patient is authorized for.
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        chart_date:
-          format: date-time
-          readOnly: true
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        days_supply:
-          maximum: 65535
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        directions:
-          description: The directions for the medication order.
-          maxLength: 1000
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: The timestamp for when this prescription was first documented. Will be the same as the creation time unless this an historical data import.
-          format: date-time
-          type: string
-        documenting_personnel:
-          description: Physician object required if is_doc_med is true when creating.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        fulfillment:
-          oneOf:
-          - $ref: '#/components/schemas/Fulfillment'
-          - type: 'null'
-          readOnly: true
-        icd10_codes:
-          items:
-            $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        is_doc_med:
-          description: If the medication order is intended to document a med instead of draft a prescription. When it is true, the object will be automatically signed as a documented medication, otherwise the object will be created as a draft prescription.
-          type: boolean
-        last_modified:
-          format: date-time
-          readOnly: true
-          type: string
-        medication:
-          allOf:
-          - $ref: '#/components/schemas/Medication'
-          description: Medication object (must provide one of id, ndc, rxnorm_cuis required).
-        medication_type:
-          allOf:
-          - $ref: '#/components/schemas/MedicationTypeEnum'
-          description: 'If this is OTC or a prescription.
+    MedicationType:
+      description: '* `otc` - otc
 
+        * `prescription` - prescription
 
-            * `otc` - otc
-
-            * `prescription` - prescription'
-        notes:
-          description: Any notes for the patient.
-          type:
-          - string
-          - 'null'
-        num_samples:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        order_type:
-          allOf:
-          - $ref: '#/components/schemas/OrderTypeEnum'
-          description: 'If the medication order is new, a refill or a change in dosage.
-
-
-            * `New` - New
-
-            * `Refill` - Refill
-
-            * `DoseChange` - Change'
-        patient:
-          description: The patient the medication order is for.
-          format: int64
-          type: integer
-        pharmacy_instructions:
-          description: Any notes for the pharmacy.
-          type:
-          - string
-          - 'null'
-        practice:
-          description: The practice the medication order is for.
-          format: int64
-          type: integer
-        prescribing_physician:
-          description: The physician who is prescribing the medication.
-          format: int64
-          type: integer
-        qty:
-          description: The quantity of the medication.
-          format: decimal
-          pattern: ^-?\d{0,18}(?:\.\d{0,9})?$
-          type:
-          - string
-          - 'null'
-        qty_units:
-          description: "The units that match the amount, e.g. capsules.\n\n* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
-          oneOf:
-          - $ref: '#/components/schemas/QtyUnitsEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-        send_rx_reminder:
-          readOnly: true
-          type: boolean
-        show_in_chart_feed:
-          type: boolean
-        signed_by:
-          format: int64
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        start_date:
-          description: The date on which the prescription started or will start.
-          format: date
-          type: string
-        thread:
-          $ref: '#/components/schemas/Thread'
-      required:
-      - auth_refills
-      - icd10_codes
-      - is_doc_med
-      - medication
-      - medication_type
-      - order_type
-      - patient
-      - practice
-      - prescribing_physician
-      - qty
-      - qty_units
-      - start_date
-      - thread
-      type: object
-    ServiceLocationPlaceOfServiceEnum:
+        * `discontinued` - discontinued'
       enum:
-      - Ambulance - Air or Water
-      - Ambulance - Land
-      - Ambulatory Surgical Center
-      - Assisted Living Facility
-      - Birthing Center
-      - Community Mental Health Center
-      - Comprehensive Inpatient Rehabilitation Facility
-      - Comprehensive Outpatient Rehabilitation Facility
-      - Custodial Care Facility
-      - Emergency Room - Hospital
-      - End-Stage Renal Disease Treatment Facility
-      - Federally Qualified Health Center
-      - Group Home
-      - Home
-      - Homeless Shelter
-      - Hospice
-      - Independent Clinic
-      - Independent Laboratory
-      - Indian Health ServiceFree-standing Facility
-      - Indian Health ServiceProvider-based Facility
-      - Inpatient Hospital
-      - Inpatient Psychiatric Facility
-      - Intermediate Care Facility/Individuals with Intellectual Disabilities
-      - Mass Immunization Center
-      - Military Treatment Facility
-      - Mobile Unit
-      - Non-residential Substance Abuse Treatment Facility
-      - Nursing Facility
-      - Off Campus Outpatient-Hospital
-      - Office
-      - On Campus-Outpatient Hospital
-      - Other Place of Service
-      - Outreach Site/Street
-      - Pharmacy
-      - Place of Employment-Worksite
-      - Prison/Correctional Facility
-      - Programs of All-Inclusive Care for the Elderly (PACE) Center
-      - Psychiatric Facility-Partial Hospitalization
-      - Psychiatric Residential Treatment Center
-      - Public Health Clinic
-      - Residential Substance Abuse Treatment Facility
-      - Rural Health Clinic
-      - School
-      - Skilled Nursing Facility
-      - Telehealth Provided Other than in Patient’s Home
-      - Telehealth Provided in Patient’s Home
-      - Temporary Lodging
-      - Tribal 638Free-standingFacility
-      - Tribal 638Provider-basedFacility
-      - Urgent Care Facility
-      - Walk-in Retail Health Clinic
+      - otc
+      - prescription
+      - discontinued
       type: string
-    PaginatedMedicationList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Medication_2'
     MedicationCreate:
       type: object
       required:
@@ -2014,22 +2007,15 @@ components:
           - Inactive
         notes:
           type: string
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for next page
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for previous page
+    PaginatedMedicationList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Medication_2'
     Medication_2:
       allOf:
       - $ref: '#/components/schemas/MedicationCreate'
@@ -2048,7 +2034,30 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -2063,13 +2072,6 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

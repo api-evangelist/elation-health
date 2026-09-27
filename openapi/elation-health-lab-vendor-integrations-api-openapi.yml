@@ -714,6 +714,15 @@ components:
       - practice
       - results_status
       type: object
+    LabVendorIntegrationStatus:
+      enum:
+      - blocked
+      - completed_testing
+      - live
+      - not_requested
+      - pending_testing
+      - waiting_on_lab
+      type: string
     PatchedLabVendorIntegration:
       description: Serializer for non-internal usage to align better with APIv2 conventions
       properties:
@@ -767,15 +776,6 @@ components:
       required:
       - results
       type: object
-    LabVendorIntegrationStatus:
-      enum:
-      - blocked
-      - completed_testing
-      - live
-      - not_requested
-      - pending_testing
-      - waiting_on_lab
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

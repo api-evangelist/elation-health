@@ -669,210 +669,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    PatchedInsuranceCompanySingleInstance:
-      properties:
-        address:
-          maxLength: 200
-          type: string
-        aliases:
-          description: A string used to create alternate terms that will come up in search results (for example "BC" for Blue Cross).
-          maxLength: 300
-          type:
-          - string
-          - 'null'
-        carrier:
-          maxLength: 200
-          type: string
-        city:
-          maxLength: 50
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        eligibility_payer_id:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        extension:
-          maxLength: 6
-          type:
-          - string
-          - 'null'
-        external_vendor_id:
-          description: The ID used by a vendor to represent the carrier in their system.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        insurance_type:
-          description: An enumerator representing the type of insurance the carrier offers.
-          oneOf:
-          - $ref: '#/components/schemas/InsuranceTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        is_credentialed:
-          description: Whether or not the practice has credentials to submit claims to the carrier.
-          type:
-          - boolean
-          - 'null'
-        is_enrolled:
-          type:
-          - boolean
-          - 'null'
-        patients:
-          items:
-            type: integer
-          readOnly: true
-          type: array
-        payer_id:
-          description: The Payer ID of the insurance carrier.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        plans:
-          items:
-            type: integer
-          readOnly: true
-          type: array
-        practice:
-          format: int64
-          type: integer
-        state:
-          maxLength: 2
-          type: string
-        suite:
-          maxLength: 40
-          type:
-          - string
-          - 'null'
-        zip:
-          maxLength: 10
-          type: string
-      type: object
-    InsuranceCompany:
-      properties:
-        address:
-          maxLength: 200
-          type: string
-        aliases:
-          description: A string used to create alternate terms that will come up in search results (for example "BC" for Blue Cross).
-          maxLength: 300
-          type:
-          - string
-          - 'null'
-        carrier:
-          maxLength: 200
-          type: string
-        city:
-          maxLength: 50
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        eligibility_payer_id:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        extension:
-          maxLength: 6
-          type:
-          - string
-          - 'null'
-        external_vendor_id:
-          description: The ID used by a vendor to represent the carrier in their system.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        insurance_type:
-          description: An enumerator representing the type of insurance the carrier offers.
-          oneOf:
-          - $ref: '#/components/schemas/InsuranceTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        is_credentialed:
-          description: Whether or not the practice has credentials to submit claims to the carrier.
-          type:
-          - boolean
-          - 'null'
-        is_enrolled:
-          type:
-          - boolean
-          - 'null'
-        payer_id:
-          description: The Payer ID of the insurance carrier.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        practice:
-          format: int64
-          type: integer
-        state:
-          maxLength: 2
-          type: string
-        suite:
-          maxLength: 40
-          type:
-          - string
-          - 'null'
-        zip:
-          maxLength: 10
-          type: string
-      required:
-      - carrier
-      - practice
-      type: object
-    InsuranceTypeEnum:
-      enum:
-      - Capitated
-      - Commercial
-      - Managed Medicaid
-      - Medicaid
-      - Medicare
-      - Medicare Advantage
-      - Medicare Supplement
-      - Self Pay
-      - Workers Compensation/Third Party Liability
-      - None
-      type: string
     InsuranceCompanySingleInstance:
       properties:
         address:
@@ -974,6 +770,106 @@ components:
       - carrier
       - practice
       type: object
+    NullEnum:
+      type: 'null'
+    PatchedInsuranceCompanySingleInstance:
+      properties:
+        address:
+          maxLength: 200
+          type: string
+        aliases:
+          description: A string used to create alternate terms that will come up in search results (for example "BC" for Blue Cross).
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+        carrier:
+          maxLength: 200
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        eligibility_payer_id:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        extension:
+          maxLength: 6
+          type:
+          - string
+          - 'null'
+        external_vendor_id:
+          description: The ID used by a vendor to represent the carrier in their system.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        insurance_type:
+          description: An enumerator representing the type of insurance the carrier offers.
+          oneOf:
+          - $ref: '#/components/schemas/InsuranceTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        is_credentialed:
+          description: Whether or not the practice has credentials to submit claims to the carrier.
+          type:
+          - boolean
+          - 'null'
+        is_enrolled:
+          type:
+          - boolean
+          - 'null'
+        patients:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        payer_id:
+          description: The Payer ID of the insurance carrier.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        plans:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        practice:
+          format: int64
+          type: integer
+        state:
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 40
+          type:
+          - string
+          - 'null'
+        zip:
+          maxLength: 10
+          type: string
+      type: object
     PaginatedInsuranceCompanyList:
       properties:
         count:
@@ -995,6 +891,110 @@ components:
           type: array
       required:
       - results
+      type: object
+    InsuranceTypeEnum:
+      enum:
+      - Capitated
+      - Commercial
+      - Managed Medicaid
+      - Medicaid
+      - Medicare
+      - Medicare Advantage
+      - Medicare Supplement
+      - Self Pay
+      - Workers Compensation/Third Party Liability
+      - None
+      type: string
+    InsuranceCompany:
+      properties:
+        address:
+          maxLength: 200
+          type: string
+        aliases:
+          description: A string used to create alternate terms that will come up in search results (for example "BC" for Blue Cross).
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+        carrier:
+          maxLength: 200
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        eligibility_payer_id:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        extension:
+          maxLength: 6
+          type:
+          - string
+          - 'null'
+        external_vendor_id:
+          description: The ID used by a vendor to represent the carrier in their system.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        insurance_type:
+          description: An enumerator representing the type of insurance the carrier offers.
+          oneOf:
+          - $ref: '#/components/schemas/InsuranceTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        is_credentialed:
+          description: Whether or not the practice has credentials to submit claims to the carrier.
+          type:
+          - boolean
+          - 'null'
+        is_enrolled:
+          type:
+          - boolean
+          - 'null'
+        payer_id:
+          description: The Payer ID of the insurance carrier.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        state:
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 40
+          type:
+          - string
+          - 'null'
+        zip:
+          maxLength: 10
+          type: string
+      required:
+      - carrier
+      - practice
       type: object
   securitySchemes:
     sec0:

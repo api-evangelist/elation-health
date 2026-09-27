@@ -392,6 +392,33 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    DelegatePermission:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delegate_user:
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        permission_type:
+          $ref: '#/components/schemas/PermissionTypeEnum'
+        physician:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+      required:
+      - delegate_user
+      - permission_type
+      - physician
+      - practice
+      type: object
     PermissionTypeEnum:
       enum:
       - bills
@@ -421,33 +448,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    DelegatePermission:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        delegate_user:
-          type: integer
-        id:
-          readOnly: true
-          type: integer
-        permission_type:
-          $ref: '#/components/schemas/PermissionTypeEnum'
-        physician:
-          format: int64
-          type: integer
-        practice:
-          format: int64
-          type: integer
-      required:
-      - delegate_user
-      - permission_type
-      - physician
-      - practice
       type: object
   securitySchemes:
     sec0:

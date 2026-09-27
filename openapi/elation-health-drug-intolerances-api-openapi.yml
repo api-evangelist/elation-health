@@ -352,106 +352,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedPatientDrugIntoleranceList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientDrugIntolerance'
-          type: array
-      required:
-      - results
-      type: object
-    BlankEnum:
-      enum:
-      - ''
-    PatientDrugIntoleranceStatusEnum:
-      description: '* `1` - Active
-
-        * `2` - Inactive'
-      enum:
-      - 1
-      - 2
-      type: integer
-    PatientDrugIntolerance:
-      properties:
-        created_date:
-          description: When the record was created in Elation's systems.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: When the record was recorded deleted in Elation's systems.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          description: The Drug Intolerance's name; e.g. what drug the patient cannot tolerate.
-          type: string
-        patient:
-          description: The id of the patient.
-          format: int64
-          type: integer
-        reaction:
-          description: The type of reaction the patient experiences when taking the drug
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        severity:
-          description: 'The severity of the patient''s reaction.
-
-
-            * `` - unknown
-
-            * `255604002` - mild
-
-            * `6736007` - moderate
-
-            * `24484000` - severe'
-          oneOf:
-          - $ref: '#/components/schemas/PatientDrugIntoleranceSeverityEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-        start_date:
-          description: The date of onset for the drug intolerance.
-          format: date
-          type:
-          - string
-          - 'null'
-        status:
-          allOf:
-          - $ref: '#/components/schemas/PatientDrugIntoleranceStatusEnum'
-          description: 'Whether the drug intolerance is active or not.
-
-
-            * `1` - Active
-
-            * `2` - Inactive'
-          maximum: 65535
-          minimum: 0
-      required:
-      - name
-      - patient
-      type: object
     PatientDrugIntoleranceSeverityEnum:
       description: '* `` - unknown
 
@@ -529,6 +429,106 @@ components:
           maximum: 65535
           minimum: 0
       type: object
+    PaginatedPatientDrugIntoleranceList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientDrugIntolerance'
+          type: array
+      required:
+      - results
+      type: object
+    PatientDrugIntolerance:
+      properties:
+        created_date:
+          description: When the record was created in Elation's systems.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the record was recorded deleted in Elation's systems.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          description: The Drug Intolerance's name; e.g. what drug the patient cannot tolerate.
+          type: string
+        patient:
+          description: The id of the patient.
+          format: int64
+          type: integer
+        reaction:
+          description: The type of reaction the patient experiences when taking the drug
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        severity:
+          description: 'The severity of the patient''s reaction.
+
+
+            * `` - unknown
+
+            * `255604002` - mild
+
+            * `6736007` - moderate
+
+            * `24484000` - severe'
+          oneOf:
+          - $ref: '#/components/schemas/PatientDrugIntoleranceSeverityEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        start_date:
+          description: The date of onset for the drug intolerance.
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/PatientDrugIntoleranceStatusEnum'
+          description: 'Whether the drug intolerance is active or not.
+
+
+            * `1` - Active
+
+            * `2` - Inactive'
+          maximum: 65535
+          minimum: 0
+      required:
+      - name
+      - patient
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+    PatientDrugIntoleranceStatusEnum:
+      description: '* `1` - Active
+
+        * `2` - Inactive'
+      enum:
+      - 1
+      - 2
+      type: integer
   securitySchemes:
     sec0:
       type: oauth2

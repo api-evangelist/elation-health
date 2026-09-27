@@ -568,7 +568,7 @@ paths:
       - '2.0'
     put:
       description: Replace an existing problem.
-      operationId: problems_update
+      operationId: putApi20ProblemsById
       parameters:
       - in: path
         name: id
@@ -598,6 +598,8 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
+      x-operation-id-source: normalized
+      x-operation-id-original: problems_update
     servers:
     - description: Sandbox Server
       url: https://sandbox.elationemr.com
@@ -605,108 +607,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    ImoCodeRelation:
-      properties:
-        icd10:
-          items:
-            type: string
-          type: array
-        icd9:
-          items:
-            type: string
-          type: array
-        snomed:
-          type: string
-      type: object
-    BlankEnum:
-      enum:
-      - ''
-    PaginatedPatientProblemList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientProblem'
-          type: array
-      required:
-      - results
-      type: object
-    VerificationStatusEnum:
-      enum:
-      - confirmed
-      - differential
-      - entered_in_error
-      - provisional
-      - refuted
-      - unconfirmed
-      type: string
-    PatchedPatientProblem:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        description:
-          maxLength: 200
-          type: string
-        dx:
-          description: The diagnoses for imo codes.
-          items:
-            $ref: '#/components/schemas/ImoCodeRelation'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        patient:
-          format: int64
-          type: integer
-        practice:
-          format: int64
-          readOnly: true
-          type: integer
-        rank:
-          type: integer
-        resolved_date:
-          description: Date the problem was resolved. Set only if `status` is `Resolved`.
-          format: date
-          type:
-          - string
-          - 'null'
-        start_date:
-          format: date
-          type: string
-        status:
-          $ref: '#/components/schemas/PatientProblemStatusEnum'
-        synopsis:
-          type: string
-        verification_status:
-          oneOf:
-          - $ref: '#/components/schemas/VerificationStatusEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-      type: object
     PatientProblem:
       properties:
         created_date:
@@ -766,12 +666,132 @@ components:
       - start_date
       - status
       type: object
+    NullEnum:
+      type: 'null'
+    VerificationStatusEnum:
+      enum:
+      - confirmed
+      - differential
+      - entered_in_error
+      - provisional
+      - refuted
+      - unconfirmed
+      type: string
+    PaginatedPatientProblemList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientProblem'
+          type: array
+      required:
+      - results
+      type: object
     PatientProblemStatusEnum:
       enum:
       - Active
       - Controlled
       - Resolved
       type: string
+    PatchedPatientProblem:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 200
+          type: string
+        dx:
+          description: The diagnoses for imo codes.
+          items:
+            $ref: '#/components/schemas/ImoCodeRelation'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        rank:
+          type: integer
+        resolved_date:
+          description: Date the problem was resolved. Set only if `status` is `Resolved`.
+          format: date
+          type:
+          - string
+          - 'null'
+        start_date:
+          format: date
+          type: string
+        status:
+          $ref: '#/components/schemas/PatientProblemStatusEnum'
+        synopsis:
+          type: string
+        verification_status:
+          oneOf:
+          - $ref: '#/components/schemas/VerificationStatusEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      type: object
+    ImoCodeRelation:
+      properties:
+        icd10:
+          items:
+            type: string
+          type: array
+        icd9:
+          items:
+            type: string
+          type: array
+        snomed:
+          type: string
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+    Problem:
+      allOf:
+      - $ref: '#/components/schemas/ProblemCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            readOnly: true
     ProblemCreate:
       type: object
       required:
@@ -820,24 +840,6 @@ components:
             type: string
         snomed:
           type: string
-    Problem:
-      allOf:
-      - $ref: '#/components/schemas/ProblemCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
-          deleted_date:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            readOnly: true
     PaginatedProblemList:
       allOf:
       - $ref: '#/components/schemas/PaginationMeta'
@@ -864,6 +866,13 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -878,13 +887,6 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

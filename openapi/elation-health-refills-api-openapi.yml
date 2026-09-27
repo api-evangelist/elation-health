@@ -128,6 +128,28 @@ components:
       - MULTIPLE_MATCHES
       - NO_MATCH
       type: string
+    PaginatedRxRefillRequestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/RxRefillRequest'
+          type: array
+      required:
+      - results
+      type: object
     RxRefillRequest:
       properties:
         id:
@@ -168,28 +190,6 @@ components:
       - prescriber
       - received_date
       - requested_pharmacy_ncpdpid
-      type: object
-    PaginatedRxRefillRequestList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/RxRefillRequest'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     oauth2:

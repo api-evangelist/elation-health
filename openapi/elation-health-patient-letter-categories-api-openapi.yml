@@ -82,6 +82,11 @@ paths:
       - '2.0'
 components:
   schemas:
+    RoleEnum:
+      enum:
+      - Primary Provider
+      - Staff
+      type: string
     LetterCategory:
       properties:
         id:
@@ -122,11 +127,6 @@ components:
       required:
       - results
       type: object
-    RoleEnum:
-      enum:
-      - Primary Provider
-      - Staff
-      type: string
   securitySchemes:
     oauth2:
       flows:

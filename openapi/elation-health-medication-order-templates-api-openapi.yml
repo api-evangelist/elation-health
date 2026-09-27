@@ -940,9 +940,7 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    MedOrderTemplate:
+    PatchedMedOrderTemplate:
       description: 'Contains only webhooks
 
         All other fields inherited'
@@ -992,27 +990,7 @@ components:
           type:
           - string
           - 'null'
-      required:
-      - medication
-      - practice
       type: object
-    BlankEnum:
-      enum:
-      - ''
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
     QtyUnitsEnum:
       description: "* `BAG` - BAG\n* `BOTTLE` - BOTTLE\n* `BOX` - BOX\n* `CAPSULE` - CAPSULE\n* `CARTRIDGE` - CARTRIDGE\n* `CONTAINER` - CONTAINER\n* `DROP` - DROP\n* `GRAM` - GRAM\n* `INHALER` - INHALER\n* `INTERNATIONAL UNITE` - INTERNATIONAL UNITE\n* `KIT` - KIT\n* `LITER` - LITER\n* `LOZENGE` - LOZENGE\n* `MILLIGRAM` - MILLIGRAM\n* `MILLILITER` - MILLILITER\n* `MILLION UNITS` - MILLION UNITS\n* `MUTUALLY DEFINED` - MUTUALLY DEFINED\n* `FLUID OUNCE` - FLUID OUNCE\n* `NOT SPECIFIED` - NOT SPECIFIED\n* `PACK` - PACK\n* `PACKET` - PACKET\n* `PINT` - PINT\n* `SUPPOSITORY` - SUPPOSITORY\n* `SYRINGE` - SYRINGE\n* `TABLESPOON` - TABLESPOON\n* `TABLET` - TABLET\n* `TEASPOON` - TEASPOON\n* `TRANSDERMAL PATCH` - TRANSDERMAL PATCH\n* `TUBE` - TUBE\n* `UNIT` - UNIT\n* `VIAL` - VIAL\n* `EACH` - EACH\n* `GUM` - GUM\n* `AMPULE` - AMPULE\n* `APPLICATOR` - APPLICATOR\n* `APPLICATORFUL` - APPLICATORFUL\n* `BAR` - BAR\n* `BEAD` - BEAD\n* `BLISTER` - BLISTER\n* `BLOCK` - BLOCK\n* `BOLUS` - BOLUS\n* `CAN` - CAN\n* `CANISTER` - CANISTER\n* `CAPLET` - CAPLET\n* `CARTON` - CARTON\n* `CASE` - CASE\n* `CASSETTE` - CASSETTE\n* `CYLINDER` - CYLINDER\n* `DISK` - DISK\n* `DOSE PACK` - DOSE PACK\n* `DUAL PACK` - DUAL PACK\n* `FILM` - FILM\n* `GALLON` - GALLON\n* `IMPLANT` - IMPLANT\n* `INHALATION` - INHALATION\n* `INHALER REFILL` - INHALER REFILL\n* `INSERT` - INSERT\n* `INTRAVENOUS BAG` - INTRAVENOUS BAG\n* `KILOGRAM` - KILOGRAM\n* `METRIC DROP` - METRIC DROP\n* `MILLIMETER` - MILLIMETER\n* `NEBULE` - NEBULE\n* `NEEDLE FREE INJECTION` - NEEDLE FREE INJECTION\n* `OCULAR SYSTEM` - OCULAR SYSTEM\n* `OUNCE` - OUNCE\n* `PACKAGE` - PACKAGE\n* `PAD` - PAD\n* `PAPER` - PAPER\n* `PATCH` - PATCH\n* `PEN NEEDLE` - PEN NEEDLE\n* `POUCH` - POUCH\n* `POUND` - POUND\n* `PRE-FILLED PEN SYRINGE` - PRE-FILLED PEN SYRINGE\n* `PUFF` - PUFF\n* `QUART` - QUART\n* `RING` - RING\n* `SACHET` - SACHET\n* `SCOOPFUL` - SCOOPFUL\n* `SPONGE` - SPONGE\n* `SPRAY` - SPRAY\n* `STICK` - STICK\n* `STRIP` - STRIP\n* `SWAB` - SWAB\n* `TABMINDER` - TABMINDER\n* `TAMPON` - TAMPON\n* `TRAY` - TRAY\n* `TROCHE` - TROCHE\n* `` - \n* `WAFER` - WAFER"
       enum:
@@ -1105,29 +1083,7 @@ components:
       - TROCHE
       - WAFER
       type: string
-    PaginatedMedOrderTemplateList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/MedOrderTemplate'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedMedOrderTemplate:
+    MedOrderTemplate:
       description: 'Contains only webhooks
 
         All other fields inherited'
@@ -1177,18 +1133,51 @@ components:
           type:
           - string
           - 'null'
+      required:
+      - medication
+      - practice
       type: object
-    MedicationType:
-      description: '* `otc` - otc
+    NullEnum:
+      type: 'null'
+    PaginatedMedOrderTemplateList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MedOrderTemplate'
+          type: array
+      required:
+      - results
+      type: object
+    MedicationDrugType:
+      description: '* `user` - user
 
-        * `prescription` - prescription
+        * `medispan` - medispan
 
-        * `discontinued` - discontinued'
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
       enum:
-      - otc
-      - prescription
-      - discontinued
+      - user
+      - medispan
+      - ss
+      - disp
       type: string
+    BlankEnum:
+      enum:
+      - ''
     Medication:
       properties:
         active_ndcs:
@@ -1273,6 +1262,17 @@ components:
 
             * `discontinued` - discontinued'
       type: object
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

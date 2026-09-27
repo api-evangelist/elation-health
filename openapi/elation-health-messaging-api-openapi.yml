@@ -121,6 +121,13 @@ paths:
           description: Message thread deleted
 components:
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -135,14 +142,37 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   schemas:
+    PaginatedMessageThreadList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/MessageThread'
+    MessageThreadCreate:
+      type: object
+      required:
+      - subject
+      properties:
+        subject:
+          type: string
+          description: Thread subject
+        members:
+          type: array
+          items:
+            type: integer
+          description: User IDs of thread members
+        patient:
+          type:
+          - integer
+          - 'null'
+          description: Associated patient ID
+        note:
+          type: string
+          description: Initial message content
     MessageThread:
       allOf:
       - $ref: '#/components/schemas/MessageThreadCreate'
@@ -165,15 +195,6 @@ components:
             - 'null'
             format: date-time
             readOnly: true
-    PaginatedMessageThreadList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/MessageThread'
     PaginationMeta:
       type: object
       properties:
@@ -190,27 +211,6 @@ components:
           - string
           - 'null'
           description: URL for previous page
-    MessageThreadCreate:
-      type: object
-      required:
-      - subject
-      properties:
-        subject:
-          type: string
-          description: Thread subject
-        members:
-          type: array
-          items:
-            type: integer
-          description: User IDs of thread members
-        patient:
-          type:
-          - integer
-          - 'null'
-          description: Associated patient ID
-        note:
-          type: string
-          description: Initial message content
   securitySchemes:
     oauth2:
       type: oauth2

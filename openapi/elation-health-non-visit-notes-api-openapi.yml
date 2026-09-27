@@ -1193,106 +1193,64 @@ components:
       required:
       - document
       type: object
-    NonVisitNoteBullet:
+    Document:
       properties:
-        author:
-          description: The author of the bullet.
+        authoring_practice:
+          format: int64
           type: integer
-        id:
-          type: integer
-        text:
-          description: The text of the bullet.
-          type: string
-        updated_date:
-          format: date-time
-          readOnly: true
-          type: string
-        version:
-          maximum: 65535
-          minimum: 0
-          type: integer
-      required:
-      - text
-      type: object
-    NonVisitNotePatientItem:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        item:
-          $ref: '#/components/schemas/PatientItem'
-      required:
-      - item
-      type: object
-    NonVisitNote:
-      properties:
-        bullets:
-          description: The bullets of the non visit note.
-          items:
-            $ref: '#/components/schemas/NonVisitNoteBullet'
-          type: array
         chart_date:
+          description: The creation date of the patient chart.
           format: date-time
           type: string
         created_date:
+          description: The creation date of the document.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
         deleted_date:
+          description: The deleted date of the document.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
         document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
           format: date-time
           type: string
-        id:
+        document_type:
           readOnly: true
-          type: integer
-        note_documents:
-          description: The documents referenced by the non visit note.
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/NonVisitNoteDocument'
-            - type: 'null'
-          type: array
-        note_items:
-          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/NonVisitNotePatientItem'
-            - type: 'null'
-          type: array
-        patient:
-          format: int64
-          type: integer
-        signed_by:
-          format: int64
           type:
           - integer
           - 'null'
-        signed_date:
+        id:
+          format: int64
+          type: integer
+        last_modified:
           format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
           type:
           - string
           - 'null'
-        tags:
-          description: The ids of the document tags you want to attach.
-          items:
-            format: int64
-            type: integer
-          type: array
-        type:
-          description: The type of the non visit note.
-          type: string
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
       required:
+      - authoring_practice
       - chart_date
       - document_date
+      - id
       - patient
-      - type
       type: object
     PaginatedNonVisitNoteList:
       properties:
@@ -1381,64 +1339,75 @@ components:
           description: The type of the non visit note.
           type: string
       type: object
-    Document:
+    NonVisitNote:
       properties:
-        authoring_practice:
-          format: int64
-          type: integer
+        bullets:
+          description: The bullets of the non visit note.
+          items:
+            $ref: '#/components/schemas/NonVisitNoteBullet'
+          type: array
         chart_date:
-          description: The creation date of the patient chart.
           format: date-time
           type: string
         created_date:
-          description: The creation date of the document.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
         deleted_date:
-          description: The deleted date of the document.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
         document_date:
-          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
           format: date-time
           type: string
-        document_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
         id:
-          format: int64
+          readOnly: true
           type: integer
-        last_modified:
-          format: date-time
-          type: string
+        note_documents:
+          description: The documents referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNoteDocument'
+            - type: 'null'
+          type: array
+        note_items:
+          description: The items in the clinical record on the left hand side of the chart referenced by the non visit note.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/NonVisitNotePatientItem'
+            - type: 'null'
+          type: array
         patient:
           format: int64
           type: integer
-        sign_date:
-          description: The date of when the document was signed (if signed).
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
           format: date-time
-          readOnly: true
           type:
           - string
           - 'null'
-        signed_by:
-          description: The id of whoever signed the document (if signed).
-          readOnly: true
-          type: integer
+        tags:
+          description: The ids of the document tags you want to attach.
+          items:
+            format: int64
+            type: integer
+          type: array
+        type:
+          description: The type of the non visit note.
+          type: string
       required:
-      - authoring_practice
       - chart_date
       - document_date
-      - id
       - patient
+      - type
       type: object
     PatientItem:
       properties:
@@ -1468,6 +1437,37 @@ components:
       - is_confidential
       - patient
       - type
+      type: object
+    NonVisitNotePatientItem:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        item:
+          $ref: '#/components/schemas/PatientItem'
+      required:
+      - item
+      type: object
+    NonVisitNoteBullet:
+      properties:
+        author:
+          description: The author of the bullet.
+          type: integer
+        id:
+          type: integer
+        text:
+          description: The text of the bullet.
+          type: string
+        updated_date:
+          format: date-time
+          readOnly: true
+          type: string
+        version:
+          maximum: 65535
+          minimum: 0
+          type: integer
+      required:
+      - text
       type: object
   securitySchemes:
     sec0:

@@ -366,18 +366,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    VisitNoteFormatEnum:
-      enum:
-      - note2
-      - oneCol.oneField
-      - oneCol.preOp
-      - oneCol.preOp2
-      - oneCol.simple
-      - twoCol.complex
-      - twoCol.complex2
-      type: string
     PatchedAppointmentType:
       properties:
         abbreviation:
@@ -440,6 +428,8 @@ components:
           - integer
           - 'null'
       type: object
+    NullEnum:
+      type: 'null'
     AppointmentType:
       properties:
         abbreviation:
@@ -528,6 +518,16 @@ components:
       required:
       - results
       type: object
+    VisitNoteFormatEnum:
+      enum:
+      - note2
+      - oneCol.oneField
+      - oneCol.preOp
+      - oneCol.preOp2
+      - oneCol.simple
+      - twoCol.complex
+      - twoCol.complex2
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

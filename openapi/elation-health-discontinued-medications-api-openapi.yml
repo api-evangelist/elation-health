@@ -488,20 +488,6 @@ components:
       required:
       - results
       type: object
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
     DiscontinueMedOrder:
       properties:
         chart_date:
@@ -593,16 +579,19 @@ components:
       required:
       - med_order
       type: object
-    MedicationType:
-      description: '* `otc` - otc
+    MedicationDrugType:
+      description: '* `user` - user
 
-        * `prescription` - prescription
+        * `medispan` - medispan
 
-        * `discontinued` - discontinued'
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
       enum:
-      - otc
-      - prescription
-      - discontinued
+      - user
+      - medispan
+      - ss
+      - disp
       type: string
     Medication:
       properties:
@@ -688,6 +677,17 @@ components:
 
             * `discontinued` - discontinued'
       type: object
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

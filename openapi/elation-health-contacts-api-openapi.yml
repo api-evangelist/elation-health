@@ -747,6 +747,158 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedContact:
+      properties:
+        accepting_insurance:
+          description: Whether the contact indicates they accept insurance.
+          type:
+          - boolean
+          - 'null'
+        accepting_new_patients:
+          description: Whether the contact indicates they are accepting new patients.
+          type:
+          - boolean
+          - 'null'
+        address:
+          description: The specific address line registered for this contact.
+          maxLength: 200
+          type: string
+        back_office_phone:
+          maxLength: 20
+          type: string
+        cell_phone:
+          description: The mobile phone registered to the contact.
+          maxLength: 20
+          type: string
+        city:
+          description: The city of the contact.
+          maxLength: 50
+          type: string
+        contact_type:
+          description: The type of contact. {physician, medical_group}
+          maxLength: 15
+          type: string
+        created_date:
+          description: The timestamp when the contact was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        credentials:
+          description: The credentials for the provider, e.g. MD or DO. Ignored if contact is a medical_group.
+          maxLength: 200
+          type: string
+        deleted_date:
+          description: The timestamp when the contact was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        direct_address:
+          maxLength: 500
+          type: string
+        email:
+          type: string
+        fax:
+          maxLength: 15
+          type: string
+        first_name:
+          description: The first name of the contact. Ignored if contact is a medical_group.
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_elation_confirmed:
+          description: Whether the contact has been verified by someone on the elation team to be available for search within the application. Will always be false for any contact created within a practice.
+          type:
+          - boolean
+          - 'null'
+        is_verified:
+          description: Whether the contact has been verified to be a available for search within the application. Will always be true for any contact created by a practice.
+          type:
+          - boolean
+          - 'null'
+        last_name:
+          description: The last name of the contact. Ignored if contact is a medical_group.
+          maxLength: 60
+          type: string
+        middle_name:
+          description: The middle name of the contact. Ignored if contact is a medical_group.
+          maxLength: 50
+          type: string
+        npi:
+          type: string
+        org_name:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        other_specialties:
+          description: The list of specialties after the primary specialty related to this contact.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/MedicalSpecialty'
+          type: array
+        phone:
+          maxLength: 20
+          type: string
+        practice:
+          description: The id of the practice that the contact belongs to.
+          format: int64
+          type: integer
+        specialty:
+          allOf:
+          - $ref: '#/components/schemas/MedicalSpecialty'
+          description: The id of the specialty of the contact.
+        specialty_categories:
+          items: {}
+          type: array
+        state:
+          description: The state of the contact.
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 20
+          type: string
+        user:
+          description: The user id of the contact.
+          readOnly: true
+          type: integer
+        zip:
+          maxLength: 10
+          type: string
+      type: object
+    MedicalSpecialty:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type: string
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - abbreviation
+      - name
+      type: object
     Contact:
       properties:
         accepting_insurance:
@@ -878,56 +1030,6 @@ components:
       - middle_name
       - practice
       type: object
-    MedicalSpecialty:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type: string
-        category:
-          $ref: '#/components/schemas/MedicalSpecialtyCategory'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      required:
-      - abbreviation
-      - name
-      type: object
-    MedicalSpecialtyCategory:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-      required:
-      - name
-      type: object
     PaginatedContactList:
       properties:
         count:
@@ -946,152 +1048,6 @@ components:
         results:
           items:
             $ref: '#/components/schemas/Contact'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedContact:
-      properties:
-        accepting_insurance:
-          description: Whether the contact indicates they accept insurance.
-          type:
-          - boolean
-          - 'null'
-        accepting_new_patients:
-          description: Whether the contact indicates they are accepting new patients.
-          type:
-          - boolean
-          - 'null'
-        address:
-          description: The specific address line registered for this contact.
-          maxLength: 200
-          type: string
-        back_office_phone:
-          maxLength: 20
-          type: string
-        cell_phone:
-          description: The mobile phone registered to the contact.
-          maxLength: 20
-          type: string
-        city:
-          description: The city of the contact.
-          maxLength: 50
-          type: string
-        contact_type:
-          description: The type of contact. {physician, medical_group}
-          maxLength: 15
-          type: string
-        created_date:
-          description: The timestamp when the contact was created.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        credentials:
-          description: The credentials for the provider, e.g. MD or DO. Ignored if contact is a medical_group.
-          maxLength: 200
-          type: string
-        deleted_date:
-          description: The timestamp when the contact was deleted.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        direct_address:
-          maxLength: 500
-          type: string
-        email:
-          type: string
-        fax:
-          maxLength: 15
-          type: string
-        first_name:
-          description: The first name of the contact. Ignored if contact is a medical_group.
-          maxLength: 50
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        is_elation_confirmed:
-          description: Whether the contact has been verified by someone on the elation team to be available for search within the application. Will always be false for any contact created within a practice.
-          type:
-          - boolean
-          - 'null'
-        is_verified:
-          description: Whether the contact has been verified to be a available for search within the application. Will always be true for any contact created by a practice.
-          type:
-          - boolean
-          - 'null'
-        last_name:
-          description: The last name of the contact. Ignored if contact is a medical_group.
-          maxLength: 60
-          type: string
-        middle_name:
-          description: The middle name of the contact. Ignored if contact is a medical_group.
-          maxLength: 50
-          type: string
-        npi:
-          type: string
-        org_name:
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        other_specialties:
-          description: The list of specialties after the primary specialty related to this contact.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/MedicalSpecialty'
-          type: array
-        phone:
-          maxLength: 20
-          type: string
-        practice:
-          description: The id of the practice that the contact belongs to.
-          format: int64
-          type: integer
-        specialty:
-          allOf:
-          - $ref: '#/components/schemas/MedicalSpecialty'
-          description: The id of the specialty of the contact.
-        specialty_categories:
-          items: {}
-          type: array
-        state:
-          description: The state of the contact.
-          maxLength: 2
-          type: string
-        suite:
-          maxLength: 20
-          type: string
-        user:
-          description: The user id of the contact.
-          readOnly: true
-          type: integer
-        zip:
-          maxLength: 10
-          type: string
-      type: object
-    PaginatedContactsSearchResultList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ContactsSearchResult'
           type: array
       required:
       - results
@@ -1149,6 +1105,50 @@ components:
           type: array
         state:
           maxLength: 20
+          type: string
+      required:
+      - name
+      type: object
+    PaginatedContactsSearchResultList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ContactsSearchResult'
+          type: array
+      required:
+      - results
+      type: object
+    MedicalSpecialtyCategory:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
           type: string
       required:
       - name

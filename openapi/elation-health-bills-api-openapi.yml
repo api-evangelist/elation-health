@@ -990,118 +990,63 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    NdcMeasureEnum:
+      description: '* `GR` - GR
+
+        * `F2` - F2
+
+        * `ME` - ME
+
+        * `ML` - ML
+
+        * `UN` - UN'
+      enum:
+      - GR
+      - F2
+      - ME
+      - ML
+      - UN
+      type: string
+    Payment:
+      properties:
+        amount:
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          type: string
+        appointment:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        bill:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        create_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delete_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        when_collected:
+          format: date-time
+          type: string
+      required:
+      - amount
+      - when_collected
+      type: object
     NullEnum:
       type: 'null'
-    BillingStatusEnum:
-      enum:
-      - Unbilled
-      - Billed
-      - UnresolvedError
-      - ResolvedError
-      type: string
-    ListCPT:
-      properties:
-        alt_dxs:
-          items:
-            type: string
-          type: array
-        cpt:
-          type: string
-        description:
-          description: Description of the billing code from the practice's billing settings. Null if the code has been deleted since the bill was created.
-          type:
-          - string
-          - 'null'
-        dxs:
-          items:
-            type: string
-          type: array
-        modifiers:
-          items:
-            type: string
-          type: array
-        ndc:
-          description: 11 digit NDC code, zero padded to 5-4-2 format.
-          type: string
-        ndc_dose:
-          description: NDC units administered.  Precision to 3 decimal places.
-          format: decimal
-          pattern: ^-?\d{0,7}(?:\.\d{0,3})?$
-          type: string
-        ndc_measure:
-          description: 'NDC unit of measure: null, "F2", "GR", "ME", "ML" or "UN"'
-          type: string
-        unit_charge:
-          description: Charge per CPT unit.
-          type: string
-        units:
-          description: Number of units billed for the CPT.
-          type: string
-      required:
-      - alt_dxs
-      - cpt
-      - description
-      - dxs
-      - modifiers
-      - ndc
-      - ndc_dose
-      - ndc_measure
-      - unit_charge
-      - units
-      type: object
-    CPT:
-      properties:
-        cpt:
-          type: string
-        dxs:
-          items:
-            $ref: '#/components/schemas/DX'
-          type: array
-        modifier_1:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        modifier_2:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        modifier_3:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        modifier_4:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        ndc:
-          maxLength: 11
-          type:
-          - string
-          - 'null'
-        ndc_dose:
-          format: decimal
-          pattern: ^-?\d{0,7}(?:\.\d{0,3})?$
-          type:
-          - string
-          - 'null'
-        ndc_measure:
-          oneOf:
-          - $ref: '#/components/schemas/NdcMeasureEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        unit_charge:
-          type: string
-        units:
-          type: string
-      required:
-      - cpt
-      - dxs
-      - unit_charge
-      - units
-      type: object
     PaginatedBillList:
       properties:
         count:
@@ -1135,7 +1080,61 @@ components:
       required:
       - icd10_code
       type: object
-    BillUpdate:
+    BillUpdatePlaceOfServiceEnum:
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      - '22'
+      - '23'
+      - '24'
+      - '25'
+      - '26'
+      - '27'
+      - '31'
+      - '32'
+      - '33'
+      - '34'
+      - '41'
+      - '42'
+      - '49'
+      - '50'
+      - '51'
+      - '52'
+      - '53'
+      - '54'
+      - '55'
+      - '56'
+      - '57'
+      - '60'
+      - '61'
+      - '62'
+      - '65'
+      - '66'
+      - '71'
+      - '72'
+      - '81'
+      - '99'
+      type: string
+    PatchedBillUpdate:
       properties:
         billing_date:
           description: The date the bill was billed. Required if marking a bill as processed.
@@ -1222,98 +1221,6 @@ components:
         visit_note:
           format: int64
           type: integer
-      type: object
-    BillUpdatePlaceOfServiceEnum:
-      enum:
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      - '11'
-      - '12'
-      - '13'
-      - '14'
-      - '15'
-      - '16'
-      - '17'
-      - '18'
-      - '19'
-      - '20'
-      - '21'
-      - '22'
-      - '23'
-      - '24'
-      - '25'
-      - '26'
-      - '27'
-      - '31'
-      - '32'
-      - '33'
-      - '34'
-      - '41'
-      - '42'
-      - '49'
-      - '50'
-      - '51'
-      - '52'
-      - '53'
-      - '54'
-      - '55'
-      - '56'
-      - '57'
-      - '60'
-      - '61'
-      - '62'
-      - '65'
-      - '66'
-      - '71'
-      - '72'
-      - '81'
-      - '99'
-      type: string
-    Payment:
-      properties:
-        amount:
-          format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
-          type: string
-        appointment:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        bill:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        create_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        delete_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        when_collected:
-          format: date-time
-          type: string
-      required:
-      - amount
-      - when_collected
       type: object
     ReferringProvider:
       properties:
@@ -2970,7 +2877,57 @@ components:
       - billing_error
       - billing_raw_error
       type: object
-    PatchedBillUpdate:
+    ListCPT:
+      properties:
+        alt_dxs:
+          items:
+            type: string
+          type: array
+        cpt:
+          type: string
+        description:
+          description: Description of the billing code from the practice's billing settings. Null if the code has been deleted since the bill was created.
+          type:
+          - string
+          - 'null'
+        dxs:
+          items:
+            type: string
+          type: array
+        modifiers:
+          items:
+            type: string
+          type: array
+        ndc:
+          description: 11 digit NDC code, zero padded to 5-4-2 format.
+          type: string
+        ndc_dose:
+          description: NDC units administered.  Precision to 3 decimal places.
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,3})?$
+          type: string
+        ndc_measure:
+          description: 'NDC unit of measure: null, "F2", "GR", "ME", "ML" or "UN"'
+          type: string
+        unit_charge:
+          description: Charge per CPT unit.
+          type: string
+        units:
+          description: Number of units billed for the CPT.
+          type: string
+      required:
+      - alt_dxs
+      - cpt
+      - description
+      - dxs
+      - modifiers
+      - ndc
+      - ndc_dose
+      - ndc_measure
+      - unit_charge
+      - units
+      type: object
+    BillUpdate:
       properties:
         billing_date:
           description: The date the bill was billed. Required if marking a bill as processed.
@@ -3058,22 +3015,65 @@ components:
           format: int64
           type: integer
       type: object
-    NdcMeasureEnum:
-      description: '* `GR` - GR
-
-        * `F2` - F2
-
-        * `ME` - ME
-
-        * `ML` - ML
-
-        * `UN` - UN'
+    CPT:
+      properties:
+        cpt:
+          type: string
+        dxs:
+          items:
+            $ref: '#/components/schemas/DX'
+          type: array
+        modifier_1:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        modifier_2:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        modifier_3:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        modifier_4:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        ndc:
+          maxLength: 11
+          type:
+          - string
+          - 'null'
+        ndc_dose:
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,3})?$
+          type:
+          - string
+          - 'null'
+        ndc_measure:
+          oneOf:
+          - $ref: '#/components/schemas/NdcMeasureEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        unit_charge:
+          type: string
+        units:
+          type: string
+      required:
+      - cpt
+      - dxs
+      - unit_charge
+      - units
+      type: object
+    BillingStatusEnum:
       enum:
-      - GR
-      - F2
-      - ME
-      - ML
-      - UN
+      - Unbilled
+      - Billed
+      - UnresolvedError
+      - ResolvedError
       type: string
   securitySchemes:
     sec0:

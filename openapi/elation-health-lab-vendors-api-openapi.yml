@@ -773,6 +773,121 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedLabVendor:
+      description: The serializer for LabVendor
+      properties:
+        bidi_connections:
+          items:
+            $ref: '#/components/schemas/BiDiLabConnection'
+          readOnly: true
+          type: array
+        compendiums:
+          items:
+            $ref: '#/components/schemas/LabOrderTestCompendium'
+          type:
+          - array
+          - 'null'
+        default_compendium:
+          oneOf:
+          - $ref: '#/components/schemas/LabOrderTestCompendium'
+          - type: 'null'
+        display_name:
+          maxLength: 100
+          type: string
+        has_order_compendium:
+          type: boolean
+        has_test_compendium:
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        is_bidi:
+          type: boolean
+        is_in_house:
+          type: boolean
+        name:
+          maxLength: 50
+          type: string
+        orders_integration_available:
+          type: boolean
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        results_integration_available:
+          type: boolean
+      type: object
+    LabVendor:
+      description: The serializer for LabVendor
+      properties:
+        bidi_connections:
+          items:
+            $ref: '#/components/schemas/BiDiLabConnection'
+          readOnly: true
+          type: array
+        compendiums:
+          items:
+            $ref: '#/components/schemas/LabOrderTestCompendium'
+          type:
+          - array
+          - 'null'
+        default_compendium:
+          oneOf:
+          - $ref: '#/components/schemas/LabOrderTestCompendium'
+          - type: 'null'
+        display_name:
+          maxLength: 100
+          type: string
+        has_order_compendium:
+          type: boolean
+        has_test_compendium:
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        is_bidi:
+          type: boolean
+        is_in_house:
+          type: boolean
+        name:
+          maxLength: 50
+          type: string
+        orders_integration_available:
+          type: boolean
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        results_integration_available:
+          type: boolean
+      required:
+      - display_name
+      - name
+      type: object
+    PaginatedLabVendorList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabVendor'
+          type: array
+      required:
+      - results
+      type: object
     LabOrderTestCompendium:
       description: The serializer for LabOrderTestCompendium
       properties:
@@ -835,121 +950,6 @@ components:
           type:
           - string
           - 'null'
-      type: object
-    LabVendor:
-      description: The serializer for LabVendor
-      properties:
-        bidi_connections:
-          items:
-            $ref: '#/components/schemas/BiDiLabConnection'
-          readOnly: true
-          type: array
-        compendiums:
-          items:
-            $ref: '#/components/schemas/LabOrderTestCompendium'
-          type:
-          - array
-          - 'null'
-        default_compendium:
-          oneOf:
-          - $ref: '#/components/schemas/LabOrderTestCompendium'
-          - type: 'null'
-        display_name:
-          maxLength: 100
-          type: string
-        has_order_compendium:
-          type: boolean
-        has_test_compendium:
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        is_bidi:
-          type: boolean
-        is_in_house:
-          type: boolean
-        name:
-          maxLength: 50
-          type: string
-        orders_integration_available:
-          type: boolean
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        results_integration_available:
-          type: boolean
-      required:
-      - display_name
-      - name
-      type: object
-    PatchedLabVendor:
-      description: The serializer for LabVendor
-      properties:
-        bidi_connections:
-          items:
-            $ref: '#/components/schemas/BiDiLabConnection'
-          readOnly: true
-          type: array
-        compendiums:
-          items:
-            $ref: '#/components/schemas/LabOrderTestCompendium'
-          type:
-          - array
-          - 'null'
-        default_compendium:
-          oneOf:
-          - $ref: '#/components/schemas/LabOrderTestCompendium'
-          - type: 'null'
-        display_name:
-          maxLength: 100
-          type: string
-        has_order_compendium:
-          type: boolean
-        has_test_compendium:
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        is_bidi:
-          type: boolean
-        is_in_house:
-          type: boolean
-        name:
-          maxLength: 50
-          type: string
-        orders_integration_available:
-          type: boolean
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        results_integration_available:
-          type: boolean
-      type: object
-    PaginatedLabVendorList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabVendor'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

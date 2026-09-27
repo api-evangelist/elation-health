@@ -787,7 +787,7 @@ paths:
       - '2.0'
     put:
       description: Replace an existing visit note.
-      operationId: visit_notes_update
+      operationId: putApi20VisitNotesById
       parameters:
       - in: path
         name: id
@@ -816,6 +816,8 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
+      x-operation-id-source: normalized
+      x-operation-id-original: visit_notes_update
     servers:
     - description: Sandbox Server
       url: https://sandbox.elationemr.com
@@ -885,6 +887,11 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    AmendmentSourceEnum:
+      enum:
+      - Patient
+      - Provider or Organization
+      type: string
     VisitNoteDocument:
       properties:
         document:
@@ -902,11 +909,152 @@ components:
       required:
       - document
       type: object
-    AmendmentRequestStatusEnum:
+    BulletWithMeta:
+      properties:
+        author:
+          description: The author of the bullet.
+          type: integer
+        category:
+          allOf:
+          - $ref: '#/components/schemas/CategoryEnum'
+          description: The category of the bullet.
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        edit:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        note_document:
+          description: A document referenced by the bullet.
+          oneOf:
+          - $ref: '#/components/schemas/VisitNoteDocument'
+          - type: 'null'
+        replaced_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        replaced_by_edit:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        sequence:
+          description: The sequence number of the bullet.
+          minimum: 0
+          type: integer
+        text:
+          description: The text of the bullet.
+          type: string
+        updated_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        version:
+          maximum: 65535
+          minimum: 0
+          type: integer
+      required:
+      - category
+      - text
+      type: object
+    TemplateEnum:
       enum:
-      - accepted
-      - denied
+      - Complete H&P (1 col)
+      - Complete H&P (2 col A/P)
+      - Complete H&P (2 col)
+      - Pre-Op
+      - SOAP
+      - Simple
       type: string
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
+    AmendmentRequest:
+      properties:
+        amendment_source:
+          $ref: '#/components/schemas/AmendmentSourceEnum'
+        request_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        request_description:
+          type: string
+        status:
+          $ref: '#/components/schemas/AmendmentRequestStatusEnum'
+        status_updated_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - amendment_source
+      - request_description
+      - status
+      type: object
     AddSignaturesToNote:
       properties:
         id:
@@ -929,55 +1077,81 @@ components:
           - string
           - 'null'
       type: object
-    VisitNoteEdit:
+    VisitNoteSignatureList:
+      items:
+        properties:
+          comments:
+            description: Any comments the signer made about the signature.
+            type: string
+          role:
+            description: The function of the signer.
+            type: string
+          signed_date:
+            description: Date-time timestamp for when this signature occurred.
+            format: date-time
+            type: string
+          user:
+            description: ID of the user whose signature this represents.
+            type: string
+          user_name:
+            description: The full name and title of the user whose signature this represents.
+            type: string
+        required:
+        - comments
+        - role
+        - signed_date
+        - user
+        - user_name
+        type: object
+      type: array
+    PatchedAddSignaturesToNote:
       properties:
-        create_user:
-          type: integer
-        created_date:
-          format: date-time
+        id:
           readOnly: true
+          type: integer
+        signatures:
+          allOf:
+          - $ref: '#/components/schemas/VisitNoteSignatureList'
+          description: Requires special co-signature permissions. If enabled, users can add co-signatures to the visit note by providing them in this field.
+        signed_by:
+          description: The user id of the provider who signed the visit note. (Requires special permission).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
+          format: date-time
           type:
           - string
           - 'null'
-        new_bmi:
-          format: double
-          type: number
-        new_note_time:
-          format: date-time
-          type: string
-        new_note_type:
-          type: string
-        new_prev_bmi:
-          format: double
-          type: number
-        new_prev_time:
-          format: date-time
-          type: string
-        new_prev_weight:
-          maxLength: 10
-          type: string
-        previous_bmi:
-          format: double
-          type: number
-        previous_note_time:
-          format: date-time
-          type: string
-        previous_note_type:
-          type: string
-        previous_prev_bmi:
-          format: double
-          type: number
-        previous_prev_time:
-          format: date-time
-          type: string
-        previous_prev_weight:
-          maxLength: 10
-          type: string
-        visit_note:
-          format: int64
+      type: object
+    AmendmentRequestStatusEnum:
+      enum:
+      - accepted
+      - denied
+      type: string
+    PaginatedVisitNoteList:
+      properties:
+        count:
+          example: 123
           type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VisitNote'
+          type: array
       required:
-      - visit_note
+      - results
       type: object
     VisitNote:
       properties:
@@ -1093,65 +1267,55 @@ components:
       - physician
       - template
       type: object
-    AmendmentSourceEnum:
-      enum:
-      - Patient
-      - Provider or Organization
-      type: string
-    BulletWithMeta:
+    VisitNoteEdit:
       properties:
-        author:
-          description: The author of the bullet.
+        create_user:
           type: integer
-        category:
-          allOf:
-          - $ref: '#/components/schemas/CategoryEnum'
-          description: The category of the bullet.
-        deleted_date:
+        created_date:
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
-        edit:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        note_document:
-          description: A document referenced by the bullet.
-          oneOf:
-          - $ref: '#/components/schemas/VisitNoteDocument'
-          - type: 'null'
-        replaced_by:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        replaced_by_edit:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        sequence:
-          description: The sequence number of the bullet.
-          minimum: 0
-          type: integer
-        text:
-          description: The text of the bullet.
-          type: string
-        updated_date:
+        new_bmi:
+          format: double
+          type: number
+        new_note_time:
           format: date-time
-          type:
-          - string
-          - 'null'
-        version:
-          maximum: 65535
-          minimum: 0
+          type: string
+        new_note_type:
+          type: string
+        new_prev_bmi:
+          format: double
+          type: number
+        new_prev_time:
+          format: date-time
+          type: string
+        new_prev_weight:
+          maxLength: 10
+          type: string
+        previous_bmi:
+          format: double
+          type: number
+        previous_note_time:
+          format: date-time
+          type: string
+        previous_note_type:
+          type: string
+        previous_prev_bmi:
+          format: double
+          type: number
+        previous_prev_time:
+          format: date-time
+          type: string
+        previous_prev_weight:
+          maxLength: 10
+          type: string
+        visit_note:
+          format: int64
           type: integer
       required:
-      - category
-      - text
+      - visit_note
       type: object
     CategoryEnum:
       enum:
@@ -1188,168 +1352,6 @@ components:
       - Test
       - Tx
       type: string
-    TemplateEnum:
-      enum:
-      - Complete H&P (1 col)
-      - Complete H&P (2 col A/P)
-      - Complete H&P (2 col)
-      - Pre-Op
-      - SOAP
-      - Simple
-      type: string
-    VisitNoteSignatureList:
-      items:
-        properties:
-          comments:
-            description: Any comments the signer made about the signature.
-            type: string
-          role:
-            description: The function of the signer.
-            type: string
-          signed_date:
-            description: Date-time timestamp for when this signature occurred.
-            format: date-time
-            type: string
-          user:
-            description: ID of the user whose signature this represents.
-            type: string
-          user_name:
-            description: The full name and title of the user whose signature this represents.
-            type: string
-        required:
-        - comments
-        - role
-        - signed_date
-        - user
-        - user_name
-        type: object
-      type: array
-    PaginatedVisitNoteList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/VisitNote'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedAddSignaturesToNote:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        signatures:
-          allOf:
-          - $ref: '#/components/schemas/VisitNoteSignatureList'
-          description: Requires special co-signature permissions. If enabled, users can add co-signatures to the visit note by providing them in this field.
-        signed_by:
-          description: The user id of the provider who signed the visit note. (Requires special permission).
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          description: The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    AmendmentRequest:
-      properties:
-        amendment_source:
-          $ref: '#/components/schemas/AmendmentSourceEnum'
-        request_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        request_description:
-          type: string
-        status:
-          $ref: '#/components/schemas/AmendmentRequestStatusEnum'
-        status_updated_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-      required:
-      - amendment_source
-      - request_description
-      - status
-      type: object
-    Document:
-      properties:
-        authoring_practice:
-          format: int64
-          type: integer
-        chart_date:
-          description: The creation date of the patient chart.
-          format: date-time
-          type: string
-        created_date:
-          description: The creation date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The deleted date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
-          format: date-time
-          type: string
-        document_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        id:
-          format: int64
-          type: integer
-        last_modified:
-          format: date-time
-          type: string
-        patient:
-          format: int64
-          type: integer
-        sign_date:
-          description: The date of when the document was signed (if signed).
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        signed_by:
-          description: The id of whoever signed the document (if signed).
-          readOnly: true
-          type: integer
-      required:
-      - authoring_practice
-      - chart_date
-      - document_date
-      - id
-      - patient
-      type: object
     VisitNoteCreate:
       type: object
       required:
@@ -1410,6 +1412,15 @@ components:
           type: array
           items:
             type: string
+    PaginatedVisitNoteList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/VisitNote_2'
     VisitNote_2:
       allOf:
       - $ref: '#/components/schemas/VisitNoteCreate'
@@ -1467,15 +1478,6 @@ components:
             type: string
             format: uri
             readOnly: true
-    PaginatedVisitNoteList_2:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/VisitNote_2'
     PaginationMeta:
       type: object
       properties:
@@ -1493,6 +1495,13 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -1507,13 +1516,6 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

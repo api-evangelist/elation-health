@@ -420,7 +420,7 @@ paths:
       - '2.0'
     patch:
       description: Update an existing allergy.
-      operationId: allergies_partial_update
+      operationId: patchApi20AllergiesById
       parameters:
       - in: path
         name: id
@@ -449,6 +449,8 @@ paths:
       x-el8-docs-versions:
       - '2.1'
       - '2.0'
+      x-operation-id-source: normalized
+      x-operation-id-original: allergies_partial_update
     put:
       description: Replace an existing allergy.
       operationId: allergies_update
@@ -547,33 +549,6 @@ components:
       - name
       - patient
       type: object
-    AllergyStatus:
-      enum:
-      - Active
-      - Inactive
-      type: string
-    PaginatedPatientAllergyList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientAllergy'
-          type: array
-      required:
-      - results
-      type: object
     PatchedPatientAllergy:
       properties:
         created_date:
@@ -623,15 +598,33 @@ components:
         status:
           $ref: '#/components/schemas/AllergyStatus'
       type: object
-    PaginatedAllergyList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Allergy'
+    AllergyStatus:
+      enum:
+      - Active
+      - Inactive
+      type: string
+    PaginatedPatientAllergyList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientAllergy'
+          type: array
+      required:
+      - results
+      type: object
     Allergy:
       allOf:
       - $ref: '#/components/schemas/AllergyCreate'
@@ -650,6 +643,15 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    PaginatedAllergyList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Allergy'
     AllergyCreate:
       type: object
       required:
@@ -700,6 +702,13 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -714,13 +723,6 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

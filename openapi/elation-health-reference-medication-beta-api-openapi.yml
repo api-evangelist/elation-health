@@ -123,16 +123,41 @@ paths:
       - '2.0'
 components:
   schemas:
-    MedicationType:
-      description: '* `otc` - otc
+    PaginatedReferenceMedicationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ReferenceMedication'
+          type: array
+      required:
+      - results
+      type: object
+    MedicationDrugType:
+      description: '* `user` - user
 
-        * `prescription` - prescription
+        * `medispan` - medispan
 
-        * `discontinued` - discontinued'
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
       enum:
-      - otc
-      - prescription
-      - discontinued
+      - user
+      - medispan
+      - ss
+      - disp
       type: string
     ReferenceMedication:
       properties:
@@ -218,42 +243,17 @@ components:
 
             * `discontinued` - discontinued'
       type: object
-    MedicationDrugType:
-      description: '* `user` - user
+    MedicationType:
+      description: '* `otc` - otc
 
-        * `medispan` - medispan
+        * `prescription` - prescription
 
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
+        * `discontinued` - discontinued'
       enum:
-      - user
-      - medispan
-      - ss
-      - disp
+      - otc
+      - prescription
+      - discontinued
       type: string
-    PaginatedReferenceMedicationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ReferenceMedication'
-          type: array
-      required:
-      - results
-      type: object
   securitySchemes:
     oauth2:
       flows:

@@ -259,6 +259,58 @@ paths:
       - OAuth2PasswordBearer: []
 components:
   schemas:
+    CaregapAPIModel:
+      title: CaregapAPIModel
+      required:
+      - definition_id
+      - patient_id
+      - practice_id
+      - created_date
+      - status
+      type: object
+      properties:
+        definition_id:
+          title: Definition Id
+          type: string
+          description: Definition id this caregap is associated with.
+        patient_id:
+          title: Patient Id
+          type: string
+          description: Patient id this caregap is associated with.
+        practice_id:
+          title: Practice Id
+          type: string
+          description: Practice id this caregap is associated with.
+        created_date:
+          title: Created Date
+          type: string
+          description: ISO timestamp for when this caregap was created.
+          format: date
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          description: Current status of the caregap
+        detail:
+          title: Detail
+          type: string
+          description: Extra detail about the caregap.
+        closed_date:
+          title: Closed Date
+          type: string
+          description: ISO timestamp for when the caregap was closed.
+          format: date
+        closed_by:
+          allOf:
+          - $ref: '#/components/schemas/ClosedByEnum'
+          description: Who or what action closed the caregap.
+    ClosedByEnum:
+      title: ClosedByEnum
+      enum:
+      - API
+      - condition-saved
+      - feedback
+      type: string
+      description: An enumeration.
     CaregapAPIPaginatedResponse:
       title: CaregapAPIPaginatedResponse
       required:
@@ -298,23 +350,13 @@ components:
         type:
           title: Error Type
           type: string
-    ClosedByEnum:
-      title: ClosedByEnum
+    StatusEnum:
+      title: StatusEnum
       enum:
-      - API
-      - condition-saved
-      - feedback
+      - open
+      - closed
       type: string
       description: An enumeration.
-    HTTPValidationError:
-      title: HTTPValidationError
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
     CaregapAPI:
       title: CaregapAPI
       required:
@@ -369,13 +411,6 @@ components:
           title: Quality Program
           type: string
           description: Quality program this caregap is associated with.
-    StatusEnum:
-      title: StatusEnum
-      enum:
-      - open
-      - closed
-      type: string
-      description: An enumeration.
     CaregapPatchAPI:
       title: CaregapPatchAPI
       required:
@@ -386,50 +421,15 @@ components:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           description: Current status of the caregap
-    CaregapAPIModel:
-      title: CaregapAPIModel
-      required:
-      - definition_id
-      - patient_id
-      - practice_id
-      - created_date
-      - status
+    HTTPValidationError:
+      title: HTTPValidationError
       type: object
       properties:
-        definition_id:
-          title: Definition Id
-          type: string
-          description: Definition id this caregap is associated with.
-        patient_id:
-          title: Patient Id
-          type: string
-          description: Patient id this caregap is associated with.
-        practice_id:
-          title: Practice Id
-          type: string
-          description: Practice id this caregap is associated with.
-        created_date:
-          title: Created Date
-          type: string
-          description: ISO timestamp for when this caregap was created.
-          format: date
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StatusEnum'
-          description: Current status of the caregap
         detail:
           title: Detail
-          type: string
-          description: Extra detail about the caregap.
-        closed_date:
-          title: Closed Date
-          type: string
-          description: ISO timestamp for when the caregap was closed.
-          format: date
-        closed_by:
-          allOf:
-          - $ref: '#/components/schemas/ClosedByEnum'
-          description: Who or what action closed the caregap.
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

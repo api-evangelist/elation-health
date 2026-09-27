@@ -376,28 +376,6 @@ components:
       - patient
       - xml_file
       type: object
-    PaginatedXmlPatientSummaryList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/XmlPatientSummary'
-          type: array
-      required:
-      - results
-      type: object
     DataFormatEnum:
       enum:
       - ccda
@@ -421,6 +399,28 @@ components:
           type: integer
         original_filename:
           type: string
+      type: object
+    PaginatedXmlPatientSummaryList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/XmlPatientSummary'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

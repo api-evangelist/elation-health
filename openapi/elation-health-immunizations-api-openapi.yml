@@ -551,30 +551,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    PaginatedPatientImmunizationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientImmunization'
-          type: array
-      required:
-      - results
-      type: object
     ImmunizationVaccine:
       properties:
         cdc_name:
@@ -597,18 +573,45 @@ components:
           readOnly: true
           type: string
       type: object
-    InfoSourceEnum:
+    NullEnum:
+      type: 'null'
+    PublicityCodeEnum:
       enum:
-      - Historical information - from birth certificate
-      - Historical information - from other provider
-      - Historical information - from other registry
-      - Historical information - from parent's recall
-      - Historical information - from parent's written record
-      - Historical information - from public agency
-      - Historical information - from school record
-      - Historical information - source unspecified
-      - New immunization record
+      - No reminder/recall
+      - Only recall to provider, no reminder
+      - Only reminder to provider, no recall
+      - Recall only - any method
+      - Recall only - no calls
+      - Recall to provider
+      - Reminder only - any method
+      - Reminder only - no calls
+      - Reminder to provider
+      - Reminder/recall - any method
+      - Reminder/recall - no calls
+      - Reminder/recall - to provider
       type: string
+    PaginatedPatientImmunizationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientImmunization'
+          type: array
+      required:
+      - results
+      type: object
     VfcEligibilityEnum:
       enum:
       - '317'
@@ -635,6 +638,18 @@ components:
       - Publicly funded vaccine stock
       - Publicly funded vaccine stock - Non-VFC
       - Publicly funded vaccine stock - VFC
+      type: string
+    InfoSourceEnum:
+      enum:
+      - Historical information - from birth certificate
+      - Historical information - from other provider
+      - Historical information - from other registry
+      - Historical information - from parent's recall
+      - Historical information - from parent's written record
+      - Historical information - from public agency
+      - Historical information - from school record
+      - Historical information - source unspecified
+      - New immunization record
       type: string
     PatientImmunization:
       properties:
@@ -793,21 +808,6 @@ components:
       - qty
       - vaccine
       type: object
-    PublicityCodeEnum:
-      enum:
-      - No reminder/recall
-      - Only recall to provider, no reminder
-      - Only reminder to provider, no recall
-      - Recall only - any method
-      - Recall only - no calls
-      - Recall to provider
-      - Reminder only - any method
-      - Reminder only - no calls
-      - Reminder to provider
-      - Reminder/recall - any method
-      - Reminder/recall - no calls
-      - Reminder/recall - to provider
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

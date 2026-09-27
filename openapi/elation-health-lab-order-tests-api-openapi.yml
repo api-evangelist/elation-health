@@ -496,29 +496,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    QuestionTypeEnum:
-      description: '* `enum` - enum
-
-        * `enum_multiselect` - enum_multiselect
-
-        * `freetext` - freetext
-
-        * `y_or_n` - y_or_n
-
-        * `numeric` - numeric
-
-        * `yyyymmdd` - yyyymmdd
-
-        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
-      enum:
-      - enum
-      - enum_multiselect
-      - freetext
-      - y_or_n
-      - numeric
-      - yyyymmdd
-      - 2_numeric_1_decimal
-      type: string
     LabOrderTest:
       properties:
         code:
@@ -589,46 +566,6 @@ components:
           type: array
       required:
       - name
-      type: object
-    LabOrderTestToLabOrderAOEQuestion:
-      properties:
-        question:
-          $ref: '#/components/schemas/LabOrderAOEQuestion'
-        required:
-          type: boolean
-        sequence:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        test:
-          format: int64
-          readOnly: true
-          type: integer
-      required:
-      - question
-      - sequence
-      type: object
-    PaginatedLabOrderTestList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabOrderTest'
-          type: array
-      required:
-      - results
       type: object
     LabOrderAOEQuestionChoice:
       properties:
@@ -704,6 +641,69 @@ components:
       - code
       - value
       type: object
+    LabOrderTestToLabOrderAOEQuestion:
+      properties:
+        question:
+          $ref: '#/components/schemas/LabOrderAOEQuestion'
+        required:
+          type: boolean
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        test:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - question
+      - sequence
+      type: object
+    PaginatedLabOrderTestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrderTest'
+          type: array
+      required:
+      - results
+      type: object
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
+      enum:
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

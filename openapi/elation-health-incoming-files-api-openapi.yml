@@ -598,59 +598,6 @@ components:
       - pending
       - processing
       type: string
-    File:
-      properties:
-        base64_content:
-          type: string
-          writeOnly: true
-        content_type:
-          maxLength: 200
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        file_size:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        file_url:
-          readOnly: true
-          type: string
-        filename:
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        incoming_file:
-          type: integer
-        practice:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      required:
-      - base64_content
-      - content_type
-      - filename
-      type: object
-    SourceEnum:
-      enum:
-      - metrofax
-      - plr
-      - refile
-      - softlinx
-      - user
-      type: string
     PaginatedIncomingFileGroupList:
       properties:
         count:
@@ -782,6 +729,59 @@ components:
       - group_name
       - practice
       type: object
+    File:
+      properties:
+        base64_content:
+          type: string
+          writeOnly: true
+        content_type:
+          maxLength: 200
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        file_url:
+          readOnly: true
+          type: string
+        filename:
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        incoming_file:
+          type: integer
+        practice:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - base64_content
+      - content_type
+      - filename
+      type: object
+    SourceEnum:
+      enum:
+      - metrofax
+      - plr
+      - refile
+      - softlinx
+      - user
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

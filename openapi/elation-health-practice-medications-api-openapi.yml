@@ -416,7 +416,43 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedMedication:
+    PaginatedMedicationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Medication'
+          type: array
+      required:
+      - results
+      type: object
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
+    Medication:
       properties:
         active_ndcs:
           items:
@@ -500,42 +536,6 @@ components:
 
             * `discontinued` - discontinued'
       type: object
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
-    PaginatedMedicationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Medication'
-          type: array
-      required:
-      - results
-      type: object
     MedicationType:
       description: '* `otc` - otc
 
@@ -547,7 +547,7 @@ components:
       - prescription
       - discontinued
       type: string
-    Medication:
+    PatchedMedication:
       properties:
         active_ndcs:
           items:

@@ -768,64 +768,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedLabVendorPatientSite:
-      description: The serializer for LabVendorPatientSite
-      properties:
-        address:
-          description: The address of the site.
-          maxLength: 200
-          type: string
-        city:
-          description: The city of the site.
-          maxLength: 50
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        fax:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 200
-          type: string
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        state:
-          maxLength: 2
-          type: string
-        suite:
-          maxLength: 40
-          type:
-          - string
-          - 'null'
-        vendor:
-          $ref: '#/components/schemas/LabVendorIdName'
-        zip:
-          maxLength: 10
-          type: string
-      type: object
     LabVendorIdName:
       description: LabVendor Serializer useful for simple, read-only reference.
       properties:
@@ -838,28 +780,6 @@ components:
         name:
           readOnly: true
           type: string
-      type: object
-    PaginatedLabVendorPatientSiteList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabVendorPatientSite'
-          type: array
-      required:
-      - results
       type: object
     LabVendorPatientSite:
       description: The serializer for LabVendorPatientSite
@@ -920,6 +840,86 @@ components:
           type: string
       required:
       - name
+      type: object
+    PatchedLabVendorPatientSite:
+      description: The serializer for LabVendorPatientSite
+      properties:
+        address:
+          description: The address of the site.
+          maxLength: 200
+          type: string
+        city:
+          description: The city of the site.
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 200
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 40
+          type:
+          - string
+          - 'null'
+        vendor:
+          $ref: '#/components/schemas/LabVendorIdName'
+        zip:
+          maxLength: 10
+          type: string
+      type: object
+    PaginatedLabVendorPatientSiteList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabVendorPatientSite'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

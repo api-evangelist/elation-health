@@ -127,6 +127,23 @@ components:
       - ttl
       - url
       type: object
+    CreateInsuranceCard:
+      properties:
+        image:
+          allOf:
+          - $ref: '#/components/schemas/ImageContent'
+          description: Base64 encoded image of the insurance card. Only JPG and PNG files are supported.
+        rank:
+          description: Primary or secondary insurances (1 or 2).
+          type: integer
+        side:
+          description: Insurance card side. Usually front (1) or back (2).
+          type: integer
+      required:
+      - image
+      - rank
+      - side
+      type: object
     InsuranceCard:
       properties:
         images:
@@ -149,23 +166,6 @@ components:
       required:
       - base64_content
       - original_filename
-      type: object
-    CreateInsuranceCard:
-      properties:
-        image:
-          allOf:
-          - $ref: '#/components/schemas/ImageContent'
-          description: Base64 encoded image of the insurance card. Only JPG and PNG files are supported.
-        rank:
-          description: Primary or secondary insurances (1 or 2).
-          type: integer
-        side:
-          description: Insurance card side. Usually front (1) or back (2).
-          type: integer
-      required:
-      - image
-      - rank
-      - side
       type: object
   securitySchemes:
     oauth2:

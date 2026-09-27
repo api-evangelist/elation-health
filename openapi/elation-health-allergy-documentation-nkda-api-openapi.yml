@@ -139,28 +139,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PaginatedPatientAllergyDocumentationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientAllergyDocumentation'
-          type: array
-      required:
-      - results
-      type: object
     PatientAllergyDocumentation:
       properties:
         created_date:
@@ -183,6 +161,28 @@ components:
           type: integer
       required:
       - patient
+      type: object
+    PaginatedPatientAllergyDocumentationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientAllergyDocumentation'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     oauth2:

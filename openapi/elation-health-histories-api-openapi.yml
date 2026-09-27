@@ -344,23 +344,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientHistoryTypeEnum:
-      enum:
-      - Cognitive Status
-      - Consultation
-      - Diet
-      - Exercise
-      - Family
-      - Functional Status
-      - Habits
-      - Health Maintenance
-      - Immunization
-      - Legal
-      - Past
-      - Past Surgical
-      - Psychological
-      - Social
-      type: string
     PatientHistory:
       properties:
         created_date:
@@ -423,6 +406,23 @@ components:
       required:
       - results
       type: object
+    PatientHistoryTypeEnum:
+      enum:
+      - Cognitive Status
+      - Consultation
+      - Diet
+      - Exercise
+      - Family
+      - Functional Status
+      - Habits
+      - Health Maintenance
+      - Immunization
+      - Legal
+      - Past
+      - Past Surgical
+      - Psychological
+      - Social
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

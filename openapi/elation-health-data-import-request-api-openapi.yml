@@ -201,62 +201,22 @@ paths:
       - elation_auth:
         - import
 components:
-  schemas:
-    ValidationErrorResponse:
-      type: object
-      additionalProperties:
-        description: Name of the field with validation errors
-        type: array
-        items:
-          type: string
-          description: Validation error string
-    DataImportRequestArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/ExistingDataImportRequestWithoutStatus'
-    BaseDataImportRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          readOnly: true
-          description: The id of the Data Import Request
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: The creation timestamp for the Data Import Request
-        notes:
-          type: string
-          description: Arbitrary notes to associate with the Data Import Request
-    JobStatus:
-      type: string
-      default: open
-      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
-      enum:
-      - open
-      - pending
-      - processing
-      - failed
-      - completed
+  requestBodies:
+    ExistingDataImportRequest:
+      description: Data Import Request object
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExistingDataImportRequest'
     CreateDataImportRequest:
-      required:
-      - physician_id
-      - practice_id
-      - sections_to_import
-      allOf:
-      - $ref: '#/components/schemas/BaseDataImportRequest'
-      - type: object
-      properties:
-        physician_id:
-          type: integer
-          format: int64
-          description: The id of the physician provider to import all child patient charts for; cannot be updated after initial create
-        practice_id:
-          type: integer
-          format: int64
-          description: The id of the practice to import all child patient charts for; cannot be updated after initial create
+      description: Data Import Request object
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDataImportRequest'
+  schemas:
     ExistingDataImportRequestWithoutStatus:
       required:
       - id
@@ -278,6 +238,53 @@ components:
           format: int64
           readOnly: true
           description: The id of the practice to import all child patient charts for; cannot be updated after initial create
+    BaseDataImportRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The id of the Data Import Request
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: The creation timestamp for the Data Import Request
+        notes:
+          type: string
+          description: Arbitrary notes to associate with the Data Import Request
+    CreateDataImportRequest:
+      required:
+      - physician_id
+      - practice_id
+      - sections_to_import
+      allOf:
+      - $ref: '#/components/schemas/BaseDataImportRequest'
+      - type: object
+      properties:
+        physician_id:
+          type: integer
+          format: int64
+          description: The id of the physician provider to import all child patient charts for; cannot be updated after initial create
+        practice_id:
+          type: integer
+          format: int64
+          description: The id of the practice to import all child patient charts for; cannot be updated after initial create
+    DataImportRequestArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExistingDataImportRequestWithoutStatus'
+    JobStatus:
+      type: string
+      default: open
+      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
+      enum:
+      - open
+      - pending
+      - processing
+      - failed
+      - completed
     ExistingDataImportRequest:
       required:
       - id
@@ -302,21 +309,14 @@ components:
                 type: integer
                 format: int32
                 description: The number of child Patient Chart Import Requests in the associated status
-  requestBodies:
-    CreateDataImportRequest:
-      description: Data Import Request object
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateDataImportRequest'
-    ExistingDataImportRequest:
-      description: Data Import Request object
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ExistingDataImportRequest'
+    ValidationErrorResponse:
+      type: object
+      additionalProperties:
+        description: Name of the field with validation errors
+        type: array
+        items:
+          type: string
+          description: Validation error string
   securitySchemes:
     elation_auth:
       type: oauth2

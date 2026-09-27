@@ -281,22 +281,30 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    AccountTypeEnum:
-      description: '* `regular` - Regular staff
-
-        * `oncall` - On call (not paid)
-
-        * `ft_non_prescribing` - Full-Time Non-Prescribing
-
-        * `pt_prescribing` - Limited Use'
-      enum:
-      - regular
-      - oncall
-      - ft_non_prescribing
-      - pt_prescribing
-      type: string
+    PhysicianQualifications:
+      properties:
+        credentials:
+          maxLength: 50
+          type: string
+        dea:
+          maxLength: 50
+          type: string
+        license:
+          maxLength: 50
+          type: string
+        license_state:
+          maxLength: 2
+          type: string
+        npi:
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+      required:
+      - credentials
+      - license
+      - license_state
+      type: object
     User:
       properties:
         account_type:
@@ -344,6 +352,35 @@ components:
       - practice
       - user_type
       type: object
+    NullEnum:
+      type: 'null'
+    UserTypeEnum:
+      enum:
+      - physician
+      - staff
+      type: string
+    PaginatedUserList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      required:
+      - results
+      type: object
     PatchedUser:
       properties:
         account_type:
@@ -384,57 +421,20 @@ components:
         user_type:
           $ref: '#/components/schemas/UserTypeEnum'
       type: object
-    PaginatedUserList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-      required:
-      - results
-      type: object
-    UserTypeEnum:
+    AccountTypeEnum:
+      description: '* `regular` - Regular staff
+
+        * `oncall` - On call (not paid)
+
+        * `ft_non_prescribing` - Full-Time Non-Prescribing
+
+        * `pt_prescribing` - Limited Use'
       enum:
-      - physician
-      - staff
+      - regular
+      - oncall
+      - ft_non_prescribing
+      - pt_prescribing
       type: string
-    PhysicianQualifications:
-      properties:
-        credentials:
-          maxLength: 50
-          type: string
-        dea:
-          maxLength: 50
-          type: string
-        license:
-          maxLength: 50
-          type: string
-        license_state:
-          maxLength: 2
-          type: string
-        npi:
-          maxLength: 10
-          type:
-          - string
-          - 'null'
-      required:
-      - credentials
-      - license
-      - license_state
-      type: object
   securitySchemes:
     sec0:
       type: oauth2

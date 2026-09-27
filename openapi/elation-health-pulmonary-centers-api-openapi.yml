@@ -235,6 +235,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedPulmonaryCenterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PulmonaryCenter'
+          type: array
+      required:
+      - results
+      type: object
     PulmonaryCenter:
       properties:
         address_line1:
@@ -294,28 +316,6 @@ components:
       - company_name
       - location_name
       - practice
-      type: object
-    PaginatedPulmonaryCenterList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PulmonaryCenter'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

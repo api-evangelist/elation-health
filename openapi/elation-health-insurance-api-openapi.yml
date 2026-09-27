@@ -120,6 +120,13 @@ paths:
           description: Insurance company deleted
 components:
   parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
     limit:
       name: limit
       in: query
@@ -134,32 +141,7 @@ components:
       schema:
         type: integer
       description: Unique resource identifier
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
   schemas:
-    InsuranceCompany:
-      allOf:
-      - $ref: '#/components/schemas/InsuranceCompanyCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
-          deleted_date:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            readOnly: true
     InsuranceCompanyCreate:
       type: object
       required:
@@ -177,22 +159,6 @@ components:
         payer_id:
           type: string
           description: Electronic payer identifier
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for next page
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for previous page
     Address:
       type: object
       properties:
@@ -219,6 +185,40 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/InsuranceCompany'
+    InsuranceCompany:
+      allOf:
+      - $ref: '#/components/schemas/InsuranceCompanyCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            readOnly: true
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
   securitySchemes:
     oauth2:
       type: oauth2

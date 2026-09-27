@@ -524,6 +524,11 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    ThreadMemberStatusEnum:
+      enum:
+      - Addressed
+      - Requiring Action
+      type: string
     ThreadMember:
       properties:
         ack_time:
@@ -555,11 +560,28 @@ components:
       required:
       - status
       type: object
-    ThreadMemberStatusEnum:
-      enum:
-      - Addressed
-      - Requiring Action
-      type: string
+    PaginatedThreadMemberList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ThreadMember'
+          type: array
+      required:
+      - results
+      type: object
     PatchedThreadMember:
       properties:
         ack_time:
@@ -588,28 +610,6 @@ components:
           type:
           - integer
           - 'null'
-      type: object
-    PaginatedThreadMemberList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ThreadMember'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

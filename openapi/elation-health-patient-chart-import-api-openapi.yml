@@ -276,17 +276,6 @@ paths:
         - import
 components:
   schemas:
-    ValidationErrorResponse:
-      type: object
-      additionalProperties:
-        description: Name of the field with validation errors
-        type: array
-        items:
-          type: string
-          description: Validation error string
-    ChartBuilderJson:
-      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
-      type: object
     PatientChartInputGetList:
       required:
       - chart_json
@@ -324,23 +313,6 @@ components:
           type: string
           format: date-time
           description: (iso8601) datetime. read-only
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-    PatientChartInputGetId:
-      allOf:
-      - $ref: '#/components/schemas/PatientChartInputGetList'
-      - type: object
-      properties:
-        chart_json:
-          $ref: '#/components/schemas/ChartBuilderJson'
     PatientChartInputPost:
       required:
       - chart_json
@@ -354,16 +326,16 @@ components:
           $ref: '#/components/schemas/ChartBuilderJson'
         status:
           $ref: '#/components/schemas/JobStatus'
-    JobStatus:
-      type: string
-      default: open
-      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
-      enum:
-      - open
-      - pending
-      - processing
-      - failed
-      - completed
+    ChartBuilderJson:
+      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
+      type: object
+    PatientChartInputGetId:
+      allOf:
+      - $ref: '#/components/schemas/PatientChartInputGetList'
+      - type: object
+      properties:
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
     PatientChartInputPut:
       required:
       - chart_json
@@ -378,6 +350,34 @@ components:
           $ref: '#/components/schemas/ChartBuilderJson'
         status:
           $ref: '#/components/schemas/JobStatus'
+    JobStatus:
+      type: string
+      default: open
+      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
+      enum:
+      - open
+      - pending
+      - processing
+      - failed
+      - completed
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    ValidationErrorResponse:
+      type: object
+      additionalProperties:
+        description: Name of the field with validation errors
+        type: array
+        items:
+          type: string
+          description: Validation error string
   securitySchemes:
     elation_auth:
       type: oauth2

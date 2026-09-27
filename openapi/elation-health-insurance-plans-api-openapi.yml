@@ -546,27 +546,38 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedInsurancePlanList:
+    PatchedInsurancePlanSingleInstance:
       properties:
-        count:
-          example: 123
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        insurance_company:
+          description: The insurance company that the plan is associated with.
+          format: int64
+          type: integer
+        name:
+          maxLength: 200
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
+        patients:
           items:
-            $ref: '#/components/schemas/InsurancePlan'
+            type: integer
+          readOnly: true
           type: array
-      required:
-      - results
+        practice:
+          format: int64
+          type: integer
       type: object
     InsurancePlan:
       properties:
@@ -599,6 +610,28 @@ components:
       - insurance_company
       - name
       - practice
+      type: object
+    PaginatedInsurancePlanList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/InsurancePlan'
+          type: array
+      required:
+      - results
       type: object
     InsurancePlanSingleInstance:
       properties:
@@ -636,39 +669,6 @@ components:
       - insurance_company
       - name
       - practice
-      type: object
-    PatchedInsurancePlanSingleInstance:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        insurance_company:
-          description: The insurance company that the plan is associated with.
-          format: int64
-          type: integer
-        name:
-          maxLength: 200
-          type: string
-        patients:
-          items:
-            type: integer
-          readOnly: true
-          type: array
-        practice:
-          format: int64
-          type: integer
       type: object
   securitySchemes:
     sec0:

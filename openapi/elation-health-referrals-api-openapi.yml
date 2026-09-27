@@ -362,65 +362,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    DocumentResolutionState:
-      properties:
-        created_date:
-          description: The datetime when this resolution state was created.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document:
-          description: Will be the same as the id of the lab order.
-          format: int64
-          readOnly: true
-          type: integer
-        id:
-          description: Internal id to represent the resolution state.
-          readOnly: true
-          type: integer
-        note:
-          description: Any note that was added to represent why an order was cancelled.
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        resolving_document:
-          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        state:
-          allOf:
-          - $ref: '#/components/schemas/StateEnum'
-          description: 'The resolution state of the order.
-
-
-            * `outstanding` - Outstanding
-
-            * `fulfilled` - Fulfilled
-
-            * `cancelled` - Cancelled'
-      required:
-      - state
-      type: object
-    AuthorizationForEnum:
-      enum:
-      - Consult (One Visit Only)
-      - Procedure / Testing Only
-      - Referral For Treatment, includes Consult Visit
-      type: string
     AttachmentTypeEnum:
       description: '* `Entity` - Entity
 
@@ -495,19 +436,257 @@ components:
       - DsBmiChart
       - DsHcChart
       type: string
-    ICD10Code:
+    MedicalSpecialty:
       properties:
-        code:
-          maxLength: 50
+        abbreviation:
+          maxLength: 20
           type: string
-        description:
-          maxLength: 500
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
           type:
           - string
           - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
       required:
-      - code
+      - abbreviation
+      - name
       type: object
+    SendToContact:
+      properties:
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          format: int64
+          type: integer
+        last_name:
+          maxLength: 60
+          type: string
+        middle_name:
+          maxLength: 50
+          title: MiddleName
+          type: string
+        npi:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        org_name:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        specialties:
+          items: {}
+          type: array
+      required:
+      - id
+      type: object
+    NullEnum:
+      type: 'null'
+    ReferralLetter:
+      properties:
+        body:
+          description: The body of the letter.
+          type: string
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    DeliveryMethodEnum:
+      enum:
+      - direct
+      - email
+      - emr
+      - fax
+      - passport
+      - printed
+      type: string
+    DocumentResolutionState:
+      properties:
+        created_date:
+          description: The datetime when this resolution state was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document:
+          description: Will be the same as the id of the lab order.
+          format: int64
+          readOnly: true
+          type: integer
+        id:
+          description: Internal id to represent the resolution state.
+          readOnly: true
+          type: integer
+        note:
+          description: Any note that was added to represent why an order was cancelled.
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        resolving_document:
+          description: If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          description: 'The resolution state of the order.
+
+
+            * `outstanding` - Outstanding
+
+            * `fulfilled` - Fulfilled
+
+            * `cancelled` - Cancelled'
+      required:
+      - state
+      type: object
+    ReferralOrder:
+      properties:
+        auth_number:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        authorization_for:
+          oneOf:
+          - $ref: '#/components/schemas/AuthorizationForEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        authorization_for_short:
+          type:
+          - string
+          - 'null'
+        consultant_name:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+        date_for_reEval:
+          format: date
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          items:
+            $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        letter:
+          deprecated: true
+          description: The letter associated with this referral order. Use referral_letter for the full nested letter object.
+          format: int64
+          readOnly: true
+          type: integer
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        referral_letter:
+          allOf:
+          - $ref: '#/components/schemas/ReferralLetter'
+          description: Nested letter object with full details.
+          readOnly: true
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        short_consultant_name:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+        sign_date:
+          description: The datetime when this referral order was signed.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The ID of the user who signed this referral order.
+          readOnly: true
+          type: integer
+        specialty:
+          $ref: '#/components/schemas/MedicalSpecialty'
+      required:
+      - auth_number
+      - consultant_name
+      - date_for_reEval
+      - patient
+      - practice
+      - short_consultant_name
+      - specialty
+      type: object
+    PaginatedLetterList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Letter'
+          type: array
+      required:
+      - results
+      type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
     PatchedLetter:
       properties:
         attachments:
@@ -638,7 +817,29 @@ components:
         with_archive:
           type: boolean
       type: object
-    ReferralOrder:
+    PaginatedReferralOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ReferralOrder'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedReferralOrder:
       properties:
         auth_number:
           maxLength: 20
@@ -707,14 +908,41 @@ components:
           type: integer
         specialty:
           $ref: '#/components/schemas/MedicalSpecialty'
+      type: object
+    MedicalSpecialtyCategory:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
       required:
-      - auth_number
-      - consultant_name
-      - date_for_reEval
-      - patient
-      - practice
-      - short_consultant_name
-      - specialty
+      - name
+      type: object
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
       type: object
     Letter:
       properties:
@@ -850,240 +1078,12 @@ components:
       - practice
       - send_to_contact
       type: object
-    PaginatedLetterList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Letter'
-          type: array
-      required:
-      - results
-      type: object
-    MedicalSpecialty:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type: string
-        category:
-          $ref: '#/components/schemas/MedicalSpecialtyCategory'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      required:
-      - abbreviation
-      - name
-      type: object
-    MedicalSpecialtyCategory:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-      required:
-      - name
-      type: object
-    SendToContact:
-      properties:
-        first_name:
-          maxLength: 50
-          type: string
-        id:
-          format: int64
-          type: integer
-        last_name:
-          maxLength: 60
-          type: string
-        middle_name:
-          maxLength: 50
-          title: MiddleName
-          type: string
-        npi:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        org_name:
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        specialties:
-          items: {}
-          type: array
-      required:
-      - id
-      type: object
-    PatchedReferralOrder:
-      properties:
-        auth_number:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        authorization_for:
-          oneOf:
-          - $ref: '#/components/schemas/AuthorizationForEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        authorization_for_short:
-          type:
-          - string
-          - 'null'
-        consultant_name:
-          maxLength: 1024
-          type:
-          - string
-          - 'null'
-        date_for_reEval:
-          format: date
-          type:
-          - string
-          - 'null'
-        icd10_codes:
-          items:
-            $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        letter:
-          deprecated: true
-          description: The letter associated with this referral order. Use referral_letter for the full nested letter object.
-          format: int64
-          readOnly: true
-          type: integer
-        patient:
-          format: int64
-          type: integer
-        practice:
-          format: int64
-          type: integer
-        referral_letter:
-          allOf:
-          - $ref: '#/components/schemas/ReferralLetter'
-          description: Nested letter object with full details.
-          readOnly: true
-        resolution:
-          $ref: '#/components/schemas/DocumentResolutionState'
-        short_consultant_name:
-          maxLength: 1024
-          type:
-          - string
-          - 'null'
-        sign_date:
-          description: The datetime when this referral order was signed.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        signed_by:
-          description: The ID of the user who signed this referral order.
-          readOnly: true
-          type: integer
-        specialty:
-          $ref: '#/components/schemas/MedicalSpecialty'
-      type: object
-    DeliveryMethodEnum:
+    AuthorizationForEnum:
       enum:
-      - direct
-      - email
-      - emr
-      - fax
-      - passport
-      - printed
+      - Consult (One Visit Only)
+      - Procedure / Testing Only
+      - Referral For Treatment, includes Consult Visit
       type: string
-    StateEnum:
-      description: '* `outstanding` - Outstanding
-
-        * `fulfilled` - Fulfilled
-
-        * `cancelled` - Cancelled'
-      enum:
-      - outstanding
-      - fulfilled
-      - cancelled
-      type: string
-    ReferralLetter:
-      properties:
-        body:
-          description: The body of the letter.
-          type: string
-        delivery_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        sign_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    PaginatedReferralOrderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ReferralOrder'
-          type: array
-      required:
-      - results
-      type: object
     LetterAttachment:
       properties:
         attachment_type:

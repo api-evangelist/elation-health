@@ -797,124 +797,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedFacilityIdentifier:
-      properties:
-        active:
-          description: Whether the facility identifier should be used. Should be true in most cases.
-          type: boolean
-        bidi_connection:
-          oneOf:
-          - $ref: '#/components/schemas/BiDiLabConnection'
-          - type: 'null'
-          readOnly: true
-        compendium:
-          description: The id of the compendium that will be used when the user selects this facility identifier.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        description:
-          description: The text that will displayed to users in the lab order dialog.
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_connection:
-          type:
-          - integer
-          - 'null'
-        lab_facility:
-          description: The id that represents the lab.
-          maxLength: 50
-          type: string
-        practice:
-          format: int64
-          type: integer
-        practice_facility:
-          description: The id that represents the practice; often an account number provided by the lab vendor.
-          maxLength: 50
-          type: string
-        practice_secondary_id:
-          type:
-          - string
-          - 'null'
-        user_facing:
-          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
-          type: boolean
-        vendor:
-          properties:
-            display_name:
-              type: string
-            id:
-              format: int64
-              type: integer
-            name:
-              type: string
-          type: object
-      type: object
-    PaginatedFacilityIdentifierList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/FacilityIdentifier'
-          type: array
-      required:
-      - results
-      type: object
-    BiDiLabConnection:
-      properties:
-        alias:
-          description: Get the alias of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        enabled:
-          description: Get the enabled status of the connection.
-          readOnly: true
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        priority:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        protocol:
-          description: Get the protocol of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-      type: object
     FacilityIdentifier:
       properties:
         active:
@@ -990,6 +872,124 @@ components:
       - practice
       - practice_facility
       - vendor
+      type: object
+    PatchedFacilityIdentifier:
+      properties:
+        active:
+          description: Whether the facility identifier should be used. Should be true in most cases.
+          type: boolean
+        bidi_connection:
+          oneOf:
+          - $ref: '#/components/schemas/BiDiLabConnection'
+          - type: 'null'
+          readOnly: true
+        compendium:
+          description: The id of the compendium that will be used when the user selects this facility identifier.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          description: The text that will displayed to users in the lab order dialog.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_connection:
+          type:
+          - integer
+          - 'null'
+        lab_facility:
+          description: The id that represents the lab.
+          maxLength: 50
+          type: string
+        practice:
+          format: int64
+          type: integer
+        practice_facility:
+          description: The id that represents the practice; often an account number provided by the lab vendor.
+          maxLength: 50
+          type: string
+        practice_secondary_id:
+          type:
+          - string
+          - 'null'
+        user_facing:
+          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+          type: boolean
+        vendor:
+          properties:
+            display_name:
+              type: string
+            id:
+              format: int64
+              type: integer
+            name:
+              type: string
+          type: object
+      type: object
+    BiDiLabConnection:
+      properties:
+        alias:
+          description: Get the alias of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        enabled:
+          description: Get the enabled status of the connection.
+          readOnly: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        priority:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        protocol:
+          description: Get the protocol of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedFacilityIdentifierList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/FacilityIdentifier'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:
