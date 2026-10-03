@@ -807,6 +807,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    BlankEnum:
+      enum:
+      - ''
+    NullEnum:
+      type: 'null'
+    FastingMethodEnum:
+      description: '* `fasting_12_hour` - Fasting - 12 hours
+
+        * `fasting_8_hours` - Fasting - 8 hours
+
+        * `fasting_2_hours` - Fasting - 2 hours
+
+        * `fasting_none` - Non-Fasting
+
+        * `fasting_random` - Fasting or non-fasting does not matter (Random)'
+      enum:
+      - fasting_12_hour
+      - fasting_8_hours
+      - fasting_2_hours
+      - fasting_none
+      - fasting_random
+      type: string
     LabOrderSet:
       properties:
         compendium_code:
@@ -848,6 +870,82 @@ components:
       - name
       - practice
       type: object
+    PaginatedLabOrderSetList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrderSet'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedLabOrderSet:
+      properties:
+        compendium_code:
+          description: "RM-9598 Guard against missing code/name. Can't repro issue from ticket\n    locally so being extra careful with the guards here."
+          readOnly: true
+          type: string
+        content:
+          $ref: '#/components/schemas/LabOrderContent'
+        created_date:
+          description: Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        name:
+          description: The name of the lab order set.
+          maxLength: 250
+          type: string
+        practice:
+          format: int64
+          type: integer
+      type: object
+    StatMethodEnum:
+      description: '* `wet_reading_phone` - STAT Wet Reading - Please Phone Report
+
+        * `wet_reading_fax` - STAT Wet Reading - Please Fax Report
+
+        * `stat_phone` - STAT - Phone
+
+        * `stat_fax` - STAT - Fax
+
+        * `stat_phone_fax` - STAT - Phone and Fax'
+      enum:
+      - wet_reading_phone
+      - wet_reading_fax
+      - stat_phone
+      - stat_fax
+      - stat_phone_fax
+      type: string
     LabOrderTestWithDiagnoses:
       properties:
         code:
@@ -924,179 +1022,29 @@ components:
       - icd10_codes
       - name
       type: object
-    PatchedLabOrderSet:
-      properties:
-        compendium_code:
-          description: "RM-9598 Guard against missing code/name. Can't repro issue from ticket\n    locally so being extra careful with the guards here."
-          readOnly: true
-          type: string
-        content:
-          $ref: '#/components/schemas/LabOrderContent'
-        created_date:
-          description: Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_vendor:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        name:
-          description: The name of the lab order set.
-          maxLength: 250
-          type: string
-        practice:
-          format: int64
-          type: integer
-      type: object
-    NullEnum:
-      type: 'null'
-    LabOrderAOEQuestionChoice:
-      properties:
-        code:
-          maxLength: 100
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        value:
-          type: string
-      required:
-      - code
-      - value
-      type: object
-    LabOrderAOEQuestion:
-      properties:
-        choices:
-          items:
-            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
-          type: array
-        code:
-          maxLength: 100
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        example_format:
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        max_length:
-          maximum: 65535
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        question_type:
-          $ref: '#/components/schemas/QuestionTypeEnum'
-        secondary_code:
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        value:
-          type: string
-      required:
-      - choices
-      - code
-      - value
-      type: object
-    BlankEnum:
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
       enum:
-      - ''
-    LabOrderTestToLabOrderAOEQuestion:
-      properties:
-        question:
-          $ref: '#/components/schemas/LabOrderAOEQuestion'
-        required:
-          type: boolean
-        sequence:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        test:
-          format: int64
-          readOnly: true
-          type: integer
-      required:
-      - question
-      - sequence
-      type: object
-    FastingMethodEnum:
-      description: '* `fasting_12_hour` - Fasting - 12 hours
-
-        * `fasting_8_hours` - Fasting - 8 hours
-
-        * `fasting_2_hours` - Fasting - 2 hours
-
-        * `fasting_none` - Non-Fasting
-
-        * `fasting_random` - Fasting or non-fasting does not matter (Random)'
-      enum:
-      - fasting_12_hour
-      - fasting_8_hours
-      - fasting_2_hours
-      - fasting_none
-      - fasting_random
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
       type: string
-    PaginatedLabOrderSetList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabOrderSet'
-          type: array
-      required:
-      - results
-      type: object
     LabOrderContent:
       properties:
         collection_datetime:
@@ -1160,46 +1108,6 @@ components:
             $ref: '#/components/schemas/LabOrderTestWithDiagnoses'
           type: array
       type: object
-    QuestionTypeEnum:
-      description: '* `enum` - enum
-
-        * `enum_multiselect` - enum_multiselect
-
-        * `freetext` - freetext
-
-        * `y_or_n` - y_or_n
-
-        * `numeric` - numeric
-
-        * `yyyymmdd` - yyyymmdd
-
-        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
-      enum:
-      - enum
-      - enum_multiselect
-      - freetext
-      - y_or_n
-      - numeric
-      - yyyymmdd
-      - 2_numeric_1_decimal
-      type: string
-    StatMethodEnum:
-      description: '* `wet_reading_phone` - STAT Wet Reading - Please Phone Report
-
-        * `wet_reading_fax` - STAT Wet Reading - Please Fax Report
-
-        * `stat_phone` - STAT - Phone
-
-        * `stat_fax` - STAT - Fax
-
-        * `stat_phone_fax` - STAT - Phone and Fax'
-      enum:
-      - wet_reading_phone
-      - wet_reading_fax
-      - stat_phone
-      - stat_fax
-      - stat_phone_fax
-      type: string
     ICD10Code:
       properties:
         code:
@@ -1212,6 +1120,98 @@ components:
           - 'null'
       required:
       - code
+      type: object
+    LabOrderAOEQuestion:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
+          type: array
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        example_format:
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        max_length:
+          maximum: 65535
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        secondary_code:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        value:
+          type: string
+      required:
+      - choices
+      - code
+      - value
+      type: object
+    LabOrderAOEQuestionChoice:
+      properties:
+        code:
+          maxLength: 100
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        value:
+          type: string
+      required:
+      - code
+      - value
+      type: object
+    LabOrderTestToLabOrderAOEQuestion:
+      properties:
+        question:
+          $ref: '#/components/schemas/LabOrderAOEQuestion'
+        required:
+          type: boolean
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        test:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - question
+      - sequence
       type: object
   securitySchemes:
     sec0:

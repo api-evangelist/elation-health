@@ -907,6 +907,59 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    ContentSerializerNoBase64Content:
+      description: The Content serializer. It serialize file data without base64_content
+      properties:
+        content_type:
+          type: string
+        original_filename:
+          type: string
+      required:
+      - content_type
+      - original_filename
+      type: object
+    HandoutType:
+      enum:
+      - Patient Resource
+      - VIS
+      type: string
+    Content:
+      description: The Content serializer. It serialize file data
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          readOnly: true
+          type: string
+        original_filename:
+          maxLength: 200
+          type: string
+      required:
+      - base64_content
+      - original_filename
+      type: object
+    PaginatedHandoutsSerializerNoBase64ContentList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/HandoutsSerializerNoBase64Content'
+          type: array
+      required:
+      - results
+      type: object
     Handout:
       description: 'Contains only webhooks
 
@@ -1004,22 +1057,6 @@ components:
           - string
           - 'null'
       type: object
-    ContentSerializerNoBase64Content:
-      description: The Content serializer. It serialize file data without base64_content
-      properties:
-        content_type:
-          type: string
-        original_filename:
-          type: string
-      required:
-      - content_type
-      - original_filename
-      type: object
-    HandoutType:
-      enum:
-      - Patient Resource
-      - VIS
-      type: string
     HandoutsSerializerNoBase64Content:
       description: Handout serializer that returns content without base64_content
       properties:
@@ -1068,43 +1105,6 @@ components:
       - name
       - practice_created
       - type
-      type: object
-    Content:
-      description: The Content serializer. It serialize file data
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          readOnly: true
-          type: string
-        original_filename:
-          maxLength: 200
-          type: string
-      required:
-      - base64_content
-      - original_filename
-      type: object
-    PaginatedHandoutsSerializerNoBase64ContentList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/HandoutsSerializerNoBase64Content'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

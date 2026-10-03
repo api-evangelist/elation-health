@@ -688,26 +688,9 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
-    Employer:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        name:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
+    BlankEnum:
+      enum:
+      - ''
     Practice:
       properties:
         address_line1:
@@ -776,6 +759,26 @@ components:
       - address_line1
       - address_line2
       - name
+      type: object
+    NullEnum:
+      type: 'null'
+    Employer:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      required:
+      - code
       type: object
     ServiceLocation:
       properties:
@@ -856,6 +859,12 @@ components:
       - practice
       - state
       type: object
+    ServiceLocationStatusEnum:
+      enum:
+      - active
+      - inactive
+      - suspended
+      type: string
     PatchedPractice:
       properties:
         address_line1:
@@ -921,66 +930,6 @@ components:
           maxLength: 10
           type: string
       type: object
-    ServiceLocationStatusEnum:
-      enum:
-      - active
-      - inactive
-      - suspended
-      type: string
-    ServiceLocationPlaceOfServiceEnum:
-      enum:
-      - Ambulance - Air or Water
-      - Ambulance - Land
-      - Ambulatory Surgical Center
-      - Assisted Living Facility
-      - Birthing Center
-      - Community Mental Health Center
-      - Comprehensive Inpatient Rehabilitation Facility
-      - Comprehensive Outpatient Rehabilitation Facility
-      - Custodial Care Facility
-      - Emergency Room - Hospital
-      - End-Stage Renal Disease Treatment Facility
-      - Federally Qualified Health Center
-      - Group Home
-      - Home
-      - Homeless Shelter
-      - Hospice
-      - Independent Clinic
-      - Independent Laboratory
-      - Indian Health ServiceFree-standing Facility
-      - Indian Health ServiceProvider-based Facility
-      - Inpatient Hospital
-      - Inpatient Psychiatric Facility
-      - Intermediate Care Facility/Individuals with Intellectual Disabilities
-      - Mass Immunization Center
-      - Military Treatment Facility
-      - Mobile Unit
-      - Non-residential Substance Abuse Treatment Facility
-      - Nursing Facility
-      - Off Campus Outpatient-Hospital
-      - Office
-      - On Campus-Outpatient Hospital
-      - Other Place of Service
-      - Outreach Site/Street
-      - Pharmacy
-      - Place of Employment-Worksite
-      - Prison/Correctional Facility
-      - Programs of All-Inclusive Care for the Elderly (PACE) Center
-      - Psychiatric Facility-Partial Hospitalization
-      - Psychiatric Residential Treatment Center
-      - Public Health Clinic
-      - Residential Substance Abuse Treatment Facility
-      - Rural Health Clinic
-      - School
-      - Skilled Nursing Facility
-      - Telehealth Provided Other than in Patient’s Home
-      - Telehealth Provided in Patient’s Home
-      - Temporary Lodging
-      - Tribal 638Free-standingFacility
-      - Tribal 638Provider-basedFacility
-      - Urgent Care Facility
-      - Walk-in Retail Health Clinic
-      type: string
     TimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -1417,9 +1366,60 @@ components:
       - US/Pacific
       - UTC
       type: string
-    BlankEnum:
+    ServiceLocationPlaceOfServiceEnum:
       enum:
-      - ''
+      - Ambulance - Air or Water
+      - Ambulance - Land
+      - Ambulatory Surgical Center
+      - Assisted Living Facility
+      - Birthing Center
+      - Community Mental Health Center
+      - Comprehensive Inpatient Rehabilitation Facility
+      - Comprehensive Outpatient Rehabilitation Facility
+      - Custodial Care Facility
+      - Emergency Room - Hospital
+      - End-Stage Renal Disease Treatment Facility
+      - Federally Qualified Health Center
+      - Group Home
+      - Home
+      - Homeless Shelter
+      - Hospice
+      - Independent Clinic
+      - Independent Laboratory
+      - Indian Health ServiceFree-standing Facility
+      - Indian Health ServiceProvider-based Facility
+      - Inpatient Hospital
+      - Inpatient Psychiatric Facility
+      - Intermediate Care Facility/Individuals with Intellectual Disabilities
+      - Mass Immunization Center
+      - Military Treatment Facility
+      - Mobile Unit
+      - Non-residential Substance Abuse Treatment Facility
+      - Nursing Facility
+      - Off Campus Outpatient-Hospital
+      - Office
+      - On Campus-Outpatient Hospital
+      - Other Place of Service
+      - Outreach Site/Street
+      - Pharmacy
+      - Place of Employment-Worksite
+      - Prison/Correctional Facility
+      - Programs of All-Inclusive Care for the Elderly (PACE) Center
+      - Psychiatric Facility-Partial Hospitalization
+      - Psychiatric Residential Treatment Center
+      - Public Health Clinic
+      - Residential Substance Abuse Treatment Facility
+      - Rural Health Clinic
+      - School
+      - Skilled Nursing Facility
+      - Telehealth Provided Other than in Patient’s Home
+      - Telehealth Provided in Patient’s Home
+      - Temporary Lodging
+      - Tribal 638Free-standingFacility
+      - Tribal 638Provider-basedFacility
+      - Urgent Care Facility
+      - Walk-in Retail Health Clinic
+      type: string
     PaginatedPracticeList:
       properties:
         count:
@@ -1479,15 +1479,6 @@ components:
         zip:
           type: string
           description: ZIP or postal code
-    PaginatedPracticeList_2:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Practice_2'
     PaginationMeta:
       type: object
       properties:
@@ -1504,7 +1495,23 @@ components:
           - string
           - 'null'
           description: URL for previous page
+    PaginatedPracticeList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Practice_2'
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -1519,13 +1526,6 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   securitySchemes:
     sec0:
       type: oauth2

@@ -112,20 +112,15 @@ paths:
       - '2.0'
 components:
   schemas:
-    InsuranceCardImage:
+    ImageContent:
       properties:
-        side:
-          description: Insurance card side. Usually front (1) or back (2).
-          type: integer
-        ttl:
-          type: integer
-        url:
-          format: uri
+        base64_content:
+          type: string
+        original_filename:
           type: string
       required:
-      - side
-      - ttl
-      - url
+      - base64_content
+      - original_filename
       type: object
     CreateInsuranceCard:
       properties:
@@ -144,6 +139,21 @@ components:
       - rank
       - side
       type: object
+    InsuranceCardImage:
+      properties:
+        side:
+          description: Insurance card side. Usually front (1) or back (2).
+          type: integer
+        ttl:
+          type: integer
+        url:
+          format: uri
+          type: string
+      required:
+      - side
+      - ttl
+      - url
+      type: object
     InsuranceCard:
       properties:
         images:
@@ -156,16 +166,6 @@ components:
       required:
       - images
       - rank
-      type: object
-    ImageContent:
-      properties:
-        base64_content:
-          type: string
-        original_filename:
-          type: string
-      required:
-      - base64_content
-      - original_filename
       type: object
   securitySchemes:
     oauth2:

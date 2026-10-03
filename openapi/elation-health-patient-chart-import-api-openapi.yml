@@ -276,6 +276,71 @@ paths:
         - import
 components:
   schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    PatientChartInputPost:
+      required:
+      - chart_json
+      - status
+      type: object
+      properties:
+        source_patient_id:
+          type: string
+          description: a patient key, normally (fname|lname|dob|gender)
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+    PatientChartInputGetId:
+      allOf:
+      - $ref: '#/components/schemas/PatientChartInputGetList'
+      - type: object
+      properties:
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+    JobStatus:
+      type: string
+      default: open
+      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
+      enum:
+      - open
+      - pending
+      - processing
+      - failed
+      - completed
+    ValidationErrorResponse:
+      type: object
+      additionalProperties:
+        description: Name of the field with validation errors
+        type: array
+        items:
+          type: string
+          description: Validation error string
+    ChartBuilderJson:
+      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
+      type: object
+    PatientChartInputPut:
+      required:
+      - chart_json
+      - status
+      type: object
+      properties:
+        patient_id:
+          type: integer
+          format: int64
+          description: read-only, Only set after import has occurred
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+        status:
+          $ref: '#/components/schemas/JobStatus'
     PatientChartInputGetList:
       required:
       - chart_json
@@ -313,71 +378,6 @@ components:
           type: string
           format: date-time
           description: (iso8601) datetime. read-only
-    PatientChartInputPost:
-      required:
-      - chart_json
-      - status
-      type: object
-      properties:
-        source_patient_id:
-          type: string
-          description: a patient key, normally (fname|lname|dob|gender)
-        chart_json:
-          $ref: '#/components/schemas/ChartBuilderJson'
-        status:
-          $ref: '#/components/schemas/JobStatus'
-    ChartBuilderJson:
-      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
-      type: object
-    PatientChartInputGetId:
-      allOf:
-      - $ref: '#/components/schemas/PatientChartInputGetList'
-      - type: object
-      properties:
-        chart_json:
-          $ref: '#/components/schemas/ChartBuilderJson'
-    PatientChartInputPut:
-      required:
-      - chart_json
-      - status
-      type: object
-      properties:
-        patient_id:
-          type: integer
-          format: int64
-          description: read-only, Only set after import has occurred
-        chart_json:
-          $ref: '#/components/schemas/ChartBuilderJson'
-        status:
-          $ref: '#/components/schemas/JobStatus'
-    JobStatus:
-      type: string
-      default: open
-      description: The current status of the patient chart import. Options are open, pending, processing, failed, completed
-      enum:
-      - open
-      - pending
-      - processing
-      - failed
-      - completed
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-    ValidationErrorResponse:
-      type: object
-      additionalProperties:
-        description: Name of the field with validation errors
-        type: array
-        items:
-          type: string
-          description: Validation error string
   securitySchemes:
     elation_auth:
       type: oauth2

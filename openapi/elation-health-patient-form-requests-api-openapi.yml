@@ -590,66 +590,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedPatientFormRequestList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientFormRequest'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedPatientFormRequest:
-      properties:
-        appointment:
-          description: The ID of an appointment to associate with this form request. When the appointment is in the past, the notification_date validation is skipped.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        forms_url:
-          format: uri
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        notification_date:
-          description: This is the date that the request will appear in the Practice's action queue. Must be in the future unless an appointment in the past is provided. Defaults to one week from today.
-          format: date
-          type: string
-        patient:
-          description: The ID of the patient that should be associated with the request.
-          format: int64
-          type: integer
-        patient_forms:
-          description: The IDs of the forms that should be associated to the request. Please note that you must create these forms before trying to create a request.
-          items:
-            type: integer
-          type: array
-        practice:
-          readOnly: true
-          type: integer
-      type: object
     PatientFormRequest:
       properties:
         appointment:
@@ -690,6 +630,66 @@ components:
       required:
       - patient
       - patient_forms
+      type: object
+    PatchedPatientFormRequest:
+      properties:
+        appointment:
+          description: The ID of an appointment to associate with this form request. When the appointment is in the past, the notification_date validation is skipped.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        forms_url:
+          format: uri
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        notification_date:
+          description: This is the date that the request will appear in the Practice's action queue. Must be in the future unless an appointment in the past is provided. Defaults to one week from today.
+          format: date
+          type: string
+        patient:
+          description: The ID of the patient that should be associated with the request.
+          format: int64
+          type: integer
+        patient_forms:
+          description: The IDs of the forms that should be associated to the request. Please note that you must create these forms before trying to create a request.
+          items:
+            type: integer
+          type: array
+        practice:
+          readOnly: true
+          type: integer
+      type: object
+    PaginatedPatientFormRequestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientFormRequest'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

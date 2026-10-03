@@ -873,6 +873,28 @@ components:
       - practice_facility
       - vendor
       type: object
+    PaginatedFacilityIdentifierList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/FacilityIdentifier'
+          type: array
+      required:
+      - results
+      type: object
     PatchedFacilityIdentifier:
       properties:
         active:
@@ -968,28 +990,6 @@ components:
           type:
           - string
           - 'null'
-      type: object
-    PaginatedFacilityIdentifierList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/FacilityIdentifier'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

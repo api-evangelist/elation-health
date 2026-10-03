@@ -589,272 +589,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    VitalTemperature:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalTemperatureUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalOxygenUnitsEnum:
-      enum:
-      - '%'
-      type: string
-    VitalHC:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        percentile:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHCUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalPain:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalBP:
-      properties:
-        diastolic:
-          type:
-          - string
-          - 'null'
-        note:
-          type:
-          - string
-          - 'null'
-        systolic:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalHRUnits:
-      enum:
-      - bpm
-      type: string
-    VitalHCUnitsEnum:
-      enum:
-      - cm
-      type: string
-    PaginatedVitalsCollectionList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/VitalsCollection'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedVitalsCollection:
-      properties:
-        bmi:
-          format: double
-          type:
-          - number
-          - 'null'
-        bmi_percentile:
-          description: The BMI percentile of the patient. Optional. Will be automatically calculated from height and weight otherwise.
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        bp:
-          description: The blood pressure of the patient. Will allow multiple items in array.
-          items:
-            $ref: '#/components/schemas/VitalBP'
-          type: array
-        chart_date:
-          format: date-time
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        custom_observations:
-          additionalProperties:
-            properties:
-              label:
-                type: string
-              note:
-                type:
-                - string
-                - 'null'
-              units:
-                type:
-                - string
-                - 'null'
-              value:
-                type: string
-            type: object
-          type: object
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        hc:
-          description: The head circumference of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalHC'
-          type: array
-        height:
-          description: The height of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalHeight'
-          type: array
-        hr:
-          description: The heart rate of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalHR'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        length_for_weight_percentile:
-          description: The length for weight percentile for the patient.
-          format: double
-          readOnly: true
-          type:
-          - number
-          - 'null'
-        non_visit_note:
-          description: The non-visit note that the vital belongs to. Will only allow unsigned non-visit notes.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        oxygen:
-          description: The oxygen saturation of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalOxygen'
-          type: array
-        pain:
-          description: The pain of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalPain'
-          type: array
-        patient:
-          format: int64
-          type: integer
-        practice:
-          format: int64
-          type: integer
-        rr:
-          description: The respiratory rate of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalRR'
-          type: array
-        signed_by:
-          format: int64
-          readOnly: true
-          type: integer
-        signed_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        temperature:
-          description: The temperature of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalTemperature'
-          type: array
-        visit_note:
-          description: The visit note that the vital belongs to. Will only allow unsigned visit notes.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        weight:
-          description: The weight of the patient. Will only allow array of one.
-          items:
-            $ref: '#/components/schemas/VitalWeight'
-          type: array
-      type: object
-    VitalHeightUnitsEnum:
-      enum:
-      - inches
-      type: string
-    VitalHeight:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHeightUnitsEnum'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalHR:
-      properties:
-        note:
-          type:
-          - string
-          - 'null'
-        units:
-          allOf:
-          - $ref: '#/components/schemas/VitalHRUnits'
-          readOnly: true
-        value:
-          type:
-          - string
-          - 'null'
-      type: object
-    VitalTemperatureUnitsEnum:
-      enum:
-      - celsius
-      - fahrenheit
-      type: string
     VitalsCollection:
       properties:
         bmi:
@@ -990,7 +724,11 @@ components:
       - patient
       - practice
       type: object
-    VitalOxygen:
+    VitalWeightUnitsEnum:
+      enum:
+      - lbs
+      type: string
+    VitalHeight:
       properties:
         note:
           type:
@@ -998,17 +736,13 @@ components:
           - 'null'
         units:
           allOf:
-          - $ref: '#/components/schemas/VitalOxygenUnitsEnum'
+          - $ref: '#/components/schemas/VitalHeightUnitsEnum'
           readOnly: true
         value:
           type:
           - string
           - 'null'
       type: object
-    VitalWeightUnitsEnum:
-      enum:
-      - lbs
-      type: string
     VitalRR:
       properties:
         note:
@@ -1024,6 +758,100 @@ components:
           - string
           - 'null'
       type: object
+    VitalTemperature:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalTemperatureUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHCUnitsEnum:
+      enum:
+      - cm
+      type: string
+    VitalOxygen:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalOxygenUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHRUnits:
+      enum:
+      - bpm
+      type: string
+    VitalBP:
+      properties:
+        diastolic:
+          type:
+          - string
+          - 'null'
+        note:
+          type:
+          - string
+          - 'null'
+        systolic:
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedVitalsCollectionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VitalsCollection'
+          type: array
+      required:
+      - results
+      type: object
+    VitalHR:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHRUnits'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalOxygenUnitsEnum:
+      enum:
+      - '%'
+      type: string
     VitalWeight:
       properties:
         note:
@@ -1038,6 +866,178 @@ components:
           type:
           - string
           - 'null'
+      type: object
+    VitalPain:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalTemperatureUnitsEnum:
+      enum:
+      - celsius
+      - fahrenheit
+      type: string
+    VitalHC:
+      properties:
+        note:
+          type:
+          - string
+          - 'null'
+        percentile:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        units:
+          allOf:
+          - $ref: '#/components/schemas/VitalHCUnitsEnum'
+          readOnly: true
+        value:
+          type:
+          - string
+          - 'null'
+      type: object
+    VitalHeightUnitsEnum:
+      enum:
+      - inches
+      type: string
+    PatchedVitalsCollection:
+      properties:
+        bmi:
+          format: double
+          type:
+          - number
+          - 'null'
+        bmi_percentile:
+          description: The BMI percentile of the patient. Optional. Will be automatically calculated from height and weight otherwise.
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        bp:
+          description: The blood pressure of the patient. Will allow multiple items in array.
+          items:
+            $ref: '#/components/schemas/VitalBP'
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        custom_observations:
+          additionalProperties:
+            properties:
+              label:
+                type: string
+              note:
+                type:
+                - string
+                - 'null'
+              units:
+                type:
+                - string
+                - 'null'
+              value:
+                type: string
+            type: object
+          type: object
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        hc:
+          description: The head circumference of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHC'
+          type: array
+        height:
+          description: The height of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHeight'
+          type: array
+        hr:
+          description: The heart rate of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalHR'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        length_for_weight_percentile:
+          description: The length for weight percentile for the patient.
+          format: double
+          readOnly: true
+          type:
+          - number
+          - 'null'
+        non_visit_note:
+          description: The non-visit note that the vital belongs to. Will only allow unsigned non-visit notes.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        oxygen:
+          description: The oxygen saturation of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalOxygen'
+          type: array
+        pain:
+          description: The pain of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalPain'
+          type: array
+        patient:
+          format: int64
+          type: integer
+        practice:
+          format: int64
+          type: integer
+        rr:
+          description: The respiratory rate of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalRR'
+          type: array
+        signed_by:
+          format: int64
+          readOnly: true
+          type: integer
+        signed_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        temperature:
+          description: The temperature of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalTemperature'
+          type: array
+        visit_note:
+          description: The visit note that the vital belongs to. Will only allow unsigned visit notes.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        weight:
+          description: The weight of the patient. Will only allow array of one.
+          items:
+            $ref: '#/components/schemas/VitalWeight'
+          type: array
       type: object
   securitySchemes:
     sec0:

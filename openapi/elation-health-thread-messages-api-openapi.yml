@@ -512,42 +512,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    ThreadMessage:
-      properties:
-        body:
-          description: The actual message body.
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        patient:
-          description: The patient id.
-          format: int64
-          readOnly: true
-          type: integer
-        practice:
-          description: The practice id.
-          format: int64
-          readOnly: true
-          type: integer
-        send_date:
-          description: The date of when the message was sent.
-          format: date-time
-          type: string
-        sender:
-          description: The id of who sent the message.
-          type: integer
-        thread:
-          description: The message thread id.
-          format: int64
-          type: integer
-        to_document:
-          $ref: '#/components/schemas/Document'
-      required:
-      - body
-      - send_date
-      - sender
-      type: object
     Document:
       properties:
         authoring_practice:
@@ -606,6 +570,42 @@ components:
       - document_date
       - id
       - patient
+      type: object
+    ThreadMessage:
+      properties:
+        body:
+          description: The actual message body.
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient id.
+          format: int64
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice id.
+          format: int64
+          readOnly: true
+          type: integer
+        send_date:
+          description: The date of when the message was sent.
+          format: date-time
+          type: string
+        sender:
+          description: The id of who sent the message.
+          type: integer
+        thread:
+          description: The message thread id.
+          format: int64
+          type: integer
+        to_document:
+          $ref: '#/components/schemas/Document'
+      required:
+      - body
+      - send_date
+      - sender
       type: object
     PaginatedThreadMessageList:
       properties:

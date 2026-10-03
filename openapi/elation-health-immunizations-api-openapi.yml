@@ -551,6 +551,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    NullEnum:
+      type: 'null'
+    VfcEligibilityEnum:
+      enum:
+      - '317'
+      - CA State General Fund Vaccines
+      - CHIP
+      - HI Adult Insured
+      - HI Adult Not Insured
+      - HI Birthing Hospital Hepatitis B
+      - Local-specific eligibility
+      - ME State Eligible - Insured - Under 19
+      - Medicare
+      - Not VFC eligible
+      - OR Locally Owned
+      - OR Special Projects
+      - State program eligibility
+      - VFC eligible - American Indian/Alaskan Native
+      - VFC eligible - Medicaid/Medicaid Managed Care
+      - VFC eligible - Under-insured
+      - VFC eligible - Uninsured
+      type: string
     ImmunizationVaccine:
       properties:
         cdc_name:
@@ -573,84 +595,6 @@ components:
           readOnly: true
           type: string
       type: object
-    NullEnum:
-      type: 'null'
-    PublicityCodeEnum:
-      enum:
-      - No reminder/recall
-      - Only recall to provider, no reminder
-      - Only reminder to provider, no recall
-      - Recall only - any method
-      - Recall only - no calls
-      - Recall to provider
-      - Reminder only - any method
-      - Reminder only - no calls
-      - Reminder to provider
-      - Reminder/recall - any method
-      - Reminder/recall - no calls
-      - Reminder/recall - to provider
-      type: string
-    PaginatedPatientImmunizationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientImmunization'
-          type: array
-      required:
-      - results
-      type: object
-    VfcEligibilityEnum:
-      enum:
-      - '317'
-      - CA State General Fund Vaccines
-      - CHIP
-      - HI Adult Insured
-      - HI Adult Not Insured
-      - HI Birthing Hospital Hepatitis B
-      - Local-specific eligibility
-      - ME State Eligible - Insured - Under 19
-      - Medicare
-      - Not VFC eligible
-      - OR Locally Owned
-      - OR Special Projects
-      - State program eligibility
-      - VFC eligible - American Indian/Alaskan Native
-      - VFC eligible - Medicaid/Medicaid Managed Care
-      - VFC eligible - Under-insured
-      - VFC eligible - Uninsured
-      type: string
-    FundingSourceEnum:
-      enum:
-      - Privately funded vaccine stock
-      - Publicly funded vaccine stock
-      - Publicly funded vaccine stock - Non-VFC
-      - Publicly funded vaccine stock - VFC
-      type: string
-    InfoSourceEnum:
-      enum:
-      - Historical information - from birth certificate
-      - Historical information - from other provider
-      - Historical information - from other registry
-      - Historical information - from parent's recall
-      - Historical information - from parent's written record
-      - Historical information - from public agency
-      - Historical information - from school record
-      - Historical information - source unspecified
-      - New immunization record
-      type: string
     PatientImmunization:
       properties:
         administered_date:
@@ -808,6 +752,62 @@ components:
       - qty
       - vaccine
       type: object
+    FundingSourceEnum:
+      enum:
+      - Privately funded vaccine stock
+      - Publicly funded vaccine stock
+      - Publicly funded vaccine stock - Non-VFC
+      - Publicly funded vaccine stock - VFC
+      type: string
+    PaginatedPatientImmunizationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientImmunization'
+          type: array
+      required:
+      - results
+      type: object
+    InfoSourceEnum:
+      enum:
+      - Historical information - from birth certificate
+      - Historical information - from other provider
+      - Historical information - from other registry
+      - Historical information - from parent's recall
+      - Historical information - from parent's written record
+      - Historical information - from public agency
+      - Historical information - from school record
+      - Historical information - source unspecified
+      - New immunization record
+      type: string
+    PublicityCodeEnum:
+      enum:
+      - No reminder/recall
+      - Only recall to provider, no reminder
+      - Only reminder to provider, no recall
+      - Recall only - any method
+      - Recall only - no calls
+      - Recall to provider
+      - Reminder only - any method
+      - Reminder only - no calls
+      - Reminder to provider
+      - Reminder/recall - any method
+      - Reminder/recall - no calls
+      - Reminder/recall - to provider
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

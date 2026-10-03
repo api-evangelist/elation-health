@@ -220,17 +220,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    AncillaryCompany:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 200
-          type: string
-      required:
-      - name
-      type: object
     PaginatedAncillaryCompanyList:
       properties:
         count:
@@ -252,6 +241,17 @@ components:
           type: array
       required:
       - results
+      type: object
+    AncillaryCompany:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 200
+          type: string
+      required:
+      - name
       type: object
   securitySchemes:
     sec0:

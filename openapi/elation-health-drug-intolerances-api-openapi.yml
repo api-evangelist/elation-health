@@ -352,19 +352,9 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientDrugIntoleranceSeverityEnum:
-      description: '* `` - unknown
-
-        * `255604002` - mild
-
-        * `6736007` - moderate
-
-        * `24484000` - severe'
+    BlankEnum:
       enum:
-      - '255604002'
-      - '6736007'
-      - '24484000'
-      type: string
+      - ''
     PatchedPatientDrugIntolerance:
       properties:
         created_date:
@@ -451,6 +441,14 @@ components:
       required:
       - results
       type: object
+    PatientDrugIntoleranceStatusEnum:
+      description: '* `1` - Active
+
+        * `2` - Inactive'
+      enum:
+      - 1
+      - 2
+      type: integer
     PatientDrugIntolerance:
       properties:
         created_date:
@@ -518,17 +516,19 @@ components:
       - name
       - patient
       type: object
-    BlankEnum:
-      enum:
-      - ''
-    PatientDrugIntoleranceStatusEnum:
-      description: '* `1` - Active
+    PatientDrugIntoleranceSeverityEnum:
+      description: '* `` - unknown
 
-        * `2` - Inactive'
+        * `255604002` - mild
+
+        * `6736007` - moderate
+
+        * `24484000` - severe'
       enum:
-      - 1
-      - 2
-      type: integer
+      - '255604002'
+      - '6736007'
+      - '24484000'
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

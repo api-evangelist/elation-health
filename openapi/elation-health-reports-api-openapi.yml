@@ -1047,61 +1047,18 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    LabResultsGrid:
+    LabTestCategory:
       properties:
-        accession_number:
+        description:
+          maxLength: 200
           type: string
-        collected_date:
-          description: The datetime the specimens for this grid of data was collected from the patient.
-          format: date-time
-          type: string
-        note:
-          type:
-          - string
-          - 'null'
-        resulted_date:
-          description: The datetime this grid of data was calculated and resulted by the lab.
-          format: date-time
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabResult'
-          type: array
-        status:
-          $ref: '#/components/schemas/LabResultStatus'
-      required:
-      - accession_number
-      - collected_date
-      - note
-      - resulted_date
-      - results
-      - status
-      type: object
-    LabTest:
-      properties:
-        code:
+        value:
           maxLength: 50
           type: string
-        loinc:
-          type:
-          - string
-          - 'null'
-        name:
-          maxLength: 255
-          type: string
       required:
-      - code
-      - loinc
-      - name
+      - description
+      - value
       type: object
-    ValueTypeEnum:
-      enum:
-      - Coded Entry
-      - Encapsulated Data
-      - Numeric
-      - String Data
-      - Text
-      type: string
     UpdateReport:
       properties:
         id:
@@ -1125,134 +1082,6 @@ components:
       type: object
     NullEnum:
       type: 'null'
-    LabResultStatus:
-      enum:
-      - AMENDED
-      - CORRECTED
-      - DELETED
-      - ERROR
-      - FINAL
-      - PARTIAL
-      - PENDING
-      - PRELIMINARY
-      - RESULT CANCELED DUE TO NON-PERFORMANCE
-      - RESULTS ENTERED -- NOT VERIFIED
-      - RESULTS STATUS CHANGE TO FINAL. RESULTS DID NOT CHANGE ( DONT TRANSMIT TEST).
-      type: string
-    LabTestCategory:
-      properties:
-        description:
-          maxLength: 200
-          type: string
-        value:
-          maxLength: 50
-          type: string
-      required:
-      - description
-      - value
-      type: object
-    RoutedDocumentDelegate:
-      description: 'Nested serializer for RoutedDocumentDelegate.
-
-
-        Returns delegation information for users and groups assigned to review a report.
-
-        Either user or group will be populated, but not both.'
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        group:
-          description: ID of the delegated group. Null if this is a user delegation.
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        user:
-          description: ID of the delegated user. Null if this is a group delegation.
-          type:
-          - integer
-          - 'null'
-      type: object
-    ReportTypeEnum:
-      enum:
-      - Allergist
-      - Audiology
-      - Billing
-      - Business
-      - Cardiac
-      - CarePlan
-      - Consent
-      - Consultation
-      - Correspondence
-      - Cosmetic
-      - DME
-      - Dermatology
-      - Diabetes
-      - Directives
-      - EKG
-      - ENT
-      - Endocrinology
-      - Exams
-      - EyeVision
-      - Forms
-      - GI
-      - History
-      - Home
-      - Hospice
-      - Hospital
-      - Imaging
-      - Incoming
-      - Injection
-      - Insurance
-      - Intake
-      - Lab
-      - Legal
-      - Misc
-      - Neuro
-      - Nursing
-      - OBGYN
-      - OT
-      - OldRecord
-      - Oncology
-      - Ophth
-      - Ortho
-      - Outgoing
-      - PT
-      - PaperRx
-      - Pathology
-      - PatientForm
-      - Pediatric
-      - Pharmacy
-      - Preop
-      - PriorAuth
-      - Procedures
-      - Psych
-      - Pulmonary
-      - Quality
-      - Radiology
-      - SNF
-      - Screening
-      - Sleep
-      - Surgery
-      - Testing
-      - Therapy
-      - Ultrasound
-      - UrgentCare
-      - Urology
-      - Women
-      type: string
     AbnormalFlagEnum:
       enum:
       - Abnormal
@@ -1282,118 +1111,6 @@ components:
       - Very High
       - Very susceptible. Indicates for microbiology susceptibilities only.
       - Worse-use when direction not relevant
-      type: string
-    S3RetrievingDocumentFile:
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          type: string
-        document:
-          description: URL to retrieve the document
-          format: uri
-          type: string
-        external_content: {}
-        id:
-          readOnly: true
-          type: integer
-        original_filename:
-          type: string
-      type: object
-    PatchedUpdateReport:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        is_urgent:
-          default: false
-          type: boolean
-        signed_by:
-          description: Signer to apply.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          description: Signature timestamp to apply.
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    ReportImage:
-      properties:
-        document:
-          format: uri
-          type: string
-        id:
-          readOnly: true
-          type: integer
-      required:
-      - document
-      type: object
-    LabResult:
-      properties:
-        abnormal_flag:
-          $ref: '#/components/schemas/AbnormalFlagEnum'
-        is_abnormal:
-          type: boolean
-        note:
-          type:
-          - string
-          - 'null'
-        reference_max:
-          type:
-          - string
-          - 'null'
-        reference_min:
-          type:
-          - string
-          - 'null'
-        status:
-          $ref: '#/components/schemas/LabResultStatus'
-        test:
-          $ref: '#/components/schemas/LabTest'
-        test_category:
-          $ref: '#/components/schemas/LabTestCategory'
-        text:
-          type:
-          - string
-          - 'null'
-        units:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        value:
-          maxLength: 500
-          type: string
-        value_type:
-          oneOf:
-          - $ref: '#/components/schemas/ValueTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-      required:
-      - abnormal_flag
-      - is_abnormal
-      - note
-      - reference_max
-      - reference_min
-      - status
-      - test
-      - test_category
-      - text
-      - value
-      type: object
-    OrderStatusEnum:
-      enum:
-      - CANCELED
-      - COMPLETED
-      - DISCONTINUED
-      - ERROR, ORDER NOT FOUND
-      - IN PROCESS
-      - ON HOLD
-      - REPLACED
-      - SCHEDULED
       type: string
     Report:
       properties:
@@ -1517,6 +1234,178 @@ components:
       - practice
       - report_type
       type: object
+    LabResultsGrid:
+      properties:
+        accession_number:
+          type: string
+        collected_date:
+          description: The datetime the specimens for this grid of data was collected from the patient.
+          format: date-time
+          type: string
+        note:
+          type:
+          - string
+          - 'null'
+        resulted_date:
+          description: The datetime this grid of data was calculated and resulted by the lab.
+          format: date-time
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabResult'
+          type: array
+        status:
+          $ref: '#/components/schemas/LabResultStatus'
+      required:
+      - accession_number
+      - collected_date
+      - note
+      - resulted_date
+      - results
+      - status
+      type: object
+    ReportImage:
+      properties:
+        document:
+          format: uri
+          type: string
+        id:
+          readOnly: true
+          type: integer
+      required:
+      - document
+      type: object
+    S3RetrievingDocumentFile:
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
+    LabResult:
+      properties:
+        abnormal_flag:
+          $ref: '#/components/schemas/AbnormalFlagEnum'
+        is_abnormal:
+          type: boolean
+        note:
+          type:
+          - string
+          - 'null'
+        reference_max:
+          type:
+          - string
+          - 'null'
+        reference_min:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/LabResultStatus'
+        test:
+          $ref: '#/components/schemas/LabTest'
+        test_category:
+          $ref: '#/components/schemas/LabTestCategory'
+        text:
+          type:
+          - string
+          - 'null'
+        units:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        value:
+          maxLength: 500
+          type: string
+        value_type:
+          oneOf:
+          - $ref: '#/components/schemas/ValueTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      required:
+      - abnormal_flag
+      - is_abnormal
+      - note
+      - reference_max
+      - reference_min
+      - status
+      - test
+      - test_category
+      - text
+      - value
+      type: object
+    RoutedDocumentDelegate:
+      description: 'Nested serializer for RoutedDocumentDelegate.
+
+
+        Returns delegation information for users and groups assigned to review a report.
+
+        Either user or group will be populated, but not both.'
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        group:
+          description: ID of the delegated group. Null if this is a user delegation.
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        user:
+          description: ID of the delegated user. Null if this is a group delegation.
+          type:
+          - integer
+          - 'null'
+      type: object
+    OrderStatusEnum:
+      enum:
+      - CANCELED
+      - COMPLETED
+      - DISCONTINUED
+      - ERROR, ORDER NOT FOUND
+      - IN PROCESS
+      - ON HOLD
+      - REPLACED
+      - SCHEDULED
+      type: string
+    LabTest:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        loinc:
+          type:
+          - string
+          - 'null'
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - code
+      - loinc
+      - name
+      type: object
     PaginatedReportList:
       properties:
         count:
@@ -1538,6 +1427,117 @@ components:
           type: array
       required:
       - results
+      type: object
+    ValueTypeEnum:
+      enum:
+      - Coded Entry
+      - Encapsulated Data
+      - Numeric
+      - String Data
+      - Text
+      type: string
+    ReportTypeEnum:
+      enum:
+      - Allergist
+      - Audiology
+      - Billing
+      - Business
+      - Cardiac
+      - CarePlan
+      - Consent
+      - Consultation
+      - Correspondence
+      - Cosmetic
+      - DME
+      - Dermatology
+      - Diabetes
+      - Directives
+      - EKG
+      - ENT
+      - Endocrinology
+      - Exams
+      - EyeVision
+      - Forms
+      - GI
+      - History
+      - Home
+      - Hospice
+      - Hospital
+      - Imaging
+      - Incoming
+      - Injection
+      - Insurance
+      - Intake
+      - Lab
+      - Legal
+      - Misc
+      - Neuro
+      - Nursing
+      - OBGYN
+      - OT
+      - OldRecord
+      - Oncology
+      - Ophth
+      - Ortho
+      - Outgoing
+      - PT
+      - PaperRx
+      - Pathology
+      - PatientForm
+      - Pediatric
+      - Pharmacy
+      - Preop
+      - PriorAuth
+      - Procedures
+      - Psych
+      - Pulmonary
+      - Quality
+      - Radiology
+      - SNF
+      - Screening
+      - Sleep
+      - Surgery
+      - Testing
+      - Therapy
+      - Ultrasound
+      - UrgentCare
+      - Urology
+      - Women
+      type: string
+    LabResultStatus:
+      enum:
+      - AMENDED
+      - CORRECTED
+      - DELETED
+      - ERROR
+      - FINAL
+      - PARTIAL
+      - PENDING
+      - PRELIMINARY
+      - RESULT CANCELED DUE TO NON-PERFORMANCE
+      - RESULTS ENTERED -- NOT VERIFIED
+      - RESULTS STATUS CHANGE TO FINAL. RESULTS DID NOT CHANGE ( DONT TRANSMIT TEST).
+      type: string
+    PatchedUpdateReport:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        is_urgent:
+          default: false
+          type: boolean
+        signed_by:
+          description: Signer to apply.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: Signature timestamp to apply.
+          format: date-time
+          type:
+          - string
+          - 'null'
       type: object
   securitySchemes:
     sec0:

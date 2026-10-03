@@ -785,71 +785,6 @@ components:
       required:
       - state
       type: object
-    PaginatedPulmonaryOrderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PulmonaryOrder'
-          type: array
-      required:
-      - results
-      type: object
-    StateEnum:
-      description: '* `outstanding` - Outstanding
-
-        * `fulfilled` - Fulfilled
-
-        * `cancelled` - Cancelled'
-      enum:
-      - outstanding
-      - fulfilled
-      - cancelled
-      type: string
-    PulmonaryOrderTest:
-      properties:
-        code:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 255
-          type: string
-        practice:
-          format: int64
-          type: integer
-      required:
-      - name
-      - practice
-      type: object
     PatchedPulmonaryOrder:
       properties:
         allergies:
@@ -946,6 +881,17 @@ components:
             - $ref: '#/components/schemas/PulmonaryOrderTest'
           type: array
       type: object
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
     ICD10Code:
       properties:
         code:
@@ -958,6 +904,28 @@ components:
           - 'null'
       required:
       - code
+      type: object
+    PaginatedPulmonaryOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PulmonaryOrder'
+          type: array
+      required:
+      - results
       type: object
     PulmonaryOrder:
       properties:
@@ -1063,6 +1031,38 @@ components:
       - patient
       - practice
       - prescribing_user
+      type: object
+    PulmonaryOrderTest:
+      properties:
+        code:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 255
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - name
+      - practice
       type: object
   securitySchemes:
     sec0:

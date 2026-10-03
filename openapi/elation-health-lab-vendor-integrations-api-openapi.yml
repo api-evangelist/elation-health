@@ -678,42 +678,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    LabVendorIntegration:
-      description: Serializer for non-internal usage to align better with APIv2 conventions
-      properties:
-        allow_print:
-          type: boolean
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_vendor:
-          format: int64
-          type: integer
-        orders_status:
-          $ref: '#/components/schemas/LabVendorIntegrationStatus'
-        practice:
-          format: int64
-          type: integer
-        results_status:
-          $ref: '#/components/schemas/LabVendorIntegrationStatus'
-      required:
-      - lab_vendor
-      - orders_status
-      - practice
-      - results_status
-      type: object
     LabVendorIntegrationStatus:
       enum:
       - blocked
@@ -753,6 +717,42 @@ components:
           type: integer
         results_status:
           $ref: '#/components/schemas/LabVendorIntegrationStatus'
+      type: object
+    LabVendorIntegration:
+      description: Serializer for non-internal usage to align better with APIv2 conventions
+      properties:
+        allow_print:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        orders_status:
+          $ref: '#/components/schemas/LabVendorIntegrationStatus'
+        practice:
+          format: int64
+          type: integer
+        results_status:
+          $ref: '#/components/schemas/LabVendorIntegrationStatus'
+      required:
+      - lab_vendor
+      - orders_status
+      - practice
+      - results_status
       type: object
     PaginatedLabVendorIntegrationList:
       properties:

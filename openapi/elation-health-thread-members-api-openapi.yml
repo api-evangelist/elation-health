@@ -529,37 +529,6 @@ components:
       - Addressed
       - Requiring Action
       type: string
-    ThreadMember:
-      properties:
-        ack_time:
-          description: The time at which the member acknowledged the message thread.
-          format: date-time
-          type: string
-        group:
-          description: The id of the group referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ThreadMemberStatusEnum'
-          description: Whether this member has acknowledged the message thread.
-        thread:
-          description: The id of the thread this thread member is a member of.
-          format: int64
-          type: integer
-        user:
-          description: The id of the user referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
-          type:
-          - integer
-          - 'null'
-      required:
-      - status
-      type: object
     PaginatedThreadMemberList:
       properties:
         count:
@@ -610,6 +579,37 @@ components:
           type:
           - integer
           - 'null'
+      type: object
+    ThreadMember:
+      properties:
+        ack_time:
+          description: The time at which the member acknowledged the message thread.
+          format: date-time
+          type: string
+        group:
+          description: The id of the group referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ThreadMemberStatusEnum'
+          description: Whether this member has acknowledged the message thread.
+        thread:
+          description: The id of the thread this thread member is a member of.
+          format: int64
+          type: integer
+        user:
+          description: The id of the user referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
+          type:
+          - integer
+          - 'null'
+      required:
+      - status
       type: object
   securitySchemes:
     sec0:

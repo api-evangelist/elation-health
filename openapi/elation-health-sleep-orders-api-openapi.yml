@@ -723,6 +723,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedSleepOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/SleepOrder'
+          type: array
+      required:
+      - results
+      type: object
     DocumentResolutionState:
       properties:
         created_date:
@@ -773,140 +795,6 @@ components:
             * `cancelled` - Cancelled'
       required:
       - state
-      type: object
-    SleepOrderTest:
-      properties:
-        code:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 255
-          type: string
-        practice:
-          format: int64
-          type: integer
-      required:
-      - name
-      - practice
-      type: object
-    StateEnum:
-      description: '* `outstanding` - Outstanding
-
-        * `fulfilled` - Fulfilled
-
-        * `cancelled` - Cancelled'
-      enum:
-      - outstanding
-      - fulfilled
-      - cancelled
-      type: string
-    PatchedSleepOrder:
-      properties:
-        ancillary_company:
-          format: int64
-          type: integer
-        ccs:
-          description: Array of Physician IDs to copy for the order.
-          items:
-            format: int64
-            type: integer
-          type: array
-        chart_date:
-          format: date-time
-          type: string
-        clinical_reason:
-          description: The clinical reason for the order.
-          type: string
-        confidential:
-          type: boolean
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        follow_up_method:
-          description: How to notify the patient of the results.
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        icd10_codes:
-          description: Array of ICD-10 diagnosis codes associated with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        patient:
-          description: The patient the order is associated with. Patient must belong to the specified practice.
-          format: int64
-          type: integer
-        practice:
-          description: The practice the order is associated with.
-          format: int64
-          type: integer
-        prescribing_user:
-          description: The user associated with the order. User ID must tie to a physician in the practice.
-          type: integer
-        resolution:
-          $ref: '#/components/schemas/DocumentResolutionState'
-        signed_by:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        sleep_center:
-          description: The sleep center the order is associated with.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        test_date:
-          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
-          format: date
-          type:
-          - string
-          - 'null'
-        tests:
-          description: An array of sleep tests associated with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/SleepOrderTest'
-          type: array
       type: object
     SleepOrder:
       properties:
@@ -1008,27 +896,139 @@ components:
       - prescribing_user
       - tests
       type: object
-    PaginatedSleepOrderList:
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    SleepOrderTest:
       properties:
-        count:
-          example: 123
+        code:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        name:
+          maxLength: 255
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/SleepOrder'
-          type: array
+        practice:
+          format: int64
+          type: integer
       required:
-      - results
+      - name
+      - practice
+      type: object
+    PatchedSleepOrder:
+      properties:
+        ancillary_company:
+          format: int64
+          type: integer
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        sleep_center:
+          description: The sleep center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of sleep tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SleepOrderTest'
+          type: array
       type: object
     ICD10Code:
       properties:

@@ -747,6 +747,113 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedContactsSearchResultList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ContactsSearchResult'
+          type: array
+      required:
+      - results
+      type: object
+    ContactsSearchResult:
+      description: Serializer used to work with contacts found via elasticsearch
+      properties:
+        accepting_insurance:
+          type:
+          - boolean
+          - 'null'
+        accepting_new_patients:
+          type:
+          - boolean
+          - 'null'
+        address_line:
+          maxLength: 100
+          type: string
+        city:
+          maxLength: 30
+          type: string
+        contact_type:
+          maxLength: 15
+          type: string
+        direct_address:
+          maxLength: 500
+          type: string
+        fax:
+          maxLength: 15
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_elation_confirmed:
+          type:
+          - boolean
+          - 'null'
+        is_verified:
+          type:
+          - boolean
+          - 'null'
+        name:
+          maxLength: 200
+          type: string
+        npi:
+          type: string
+        phone:
+          maxLength: 25
+          type: string
+        specialties:
+          items: {}
+          type: array
+        specialty_categories:
+          items: {}
+          type: array
+        state:
+          maxLength: 20
+          type: string
+      required:
+      - name
+      type: object
+    MedicalSpecialty:
+      properties:
+        abbreviation:
+          maxLength: 20
+          type: string
+        category:
+          $ref: '#/components/schemas/MedicalSpecialtyCategory'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 100
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - abbreviation
+      - name
+      type: object
     PatchedContact:
       properties:
         accepting_insurance:
@@ -870,34 +977,6 @@ components:
         zip:
           maxLength: 10
           type: string
-      type: object
-    MedicalSpecialty:
-      properties:
-        abbreviation:
-          maxLength: 20
-          type: string
-        category:
-          $ref: '#/components/schemas/MedicalSpecialtyCategory'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 100
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      required:
-      - abbreviation
-      - name
       type: object
     Contact:
       properties:
@@ -1048,85 +1127,6 @@ components:
         results:
           items:
             $ref: '#/components/schemas/Contact'
-          type: array
-      required:
-      - results
-      type: object
-    ContactsSearchResult:
-      description: Serializer used to work with contacts found via elasticsearch
-      properties:
-        accepting_insurance:
-          type:
-          - boolean
-          - 'null'
-        accepting_new_patients:
-          type:
-          - boolean
-          - 'null'
-        address_line:
-          maxLength: 100
-          type: string
-        city:
-          maxLength: 30
-          type: string
-        contact_type:
-          maxLength: 15
-          type: string
-        direct_address:
-          maxLength: 500
-          type: string
-        fax:
-          maxLength: 15
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        is_elation_confirmed:
-          type:
-          - boolean
-          - 'null'
-        is_verified:
-          type:
-          - boolean
-          - 'null'
-        name:
-          maxLength: 200
-          type: string
-        npi:
-          type: string
-        phone:
-          maxLength: 25
-          type: string
-        specialties:
-          items: {}
-          type: array
-        specialty_categories:
-          items: {}
-          type: array
-        state:
-          maxLength: 20
-          type: string
-      required:
-      - name
-      type: object
-    PaginatedContactsSearchResultList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ContactsSearchResult'
           type: array
       required:
       - results

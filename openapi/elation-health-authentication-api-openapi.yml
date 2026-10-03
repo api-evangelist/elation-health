@@ -66,6 +66,15 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable error description
+        error:
+          type: string
+          description: Machine-readable error code
     TokenResponse:
       type: object
       properties:
@@ -85,15 +94,6 @@ components:
         scope:
           type: string
           description: Granted permission scopes
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Human-readable error description
-        error:
-          type: string
-          description: Machine-readable error code
   securitySchemes:
     oauth2:
       type: oauth2

@@ -280,113 +280,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PatientProviderTeamMember:
-      properties:
-        activity_summary_last_refreshed:
-          description: The last known time when this team member's activity was synced.
-          format: date-time
-          readOnly: true
-          type: string
-        earliest_activity:
-          description: Displays the earliest known interaction between the team member and the patient.
-          format: date-time
-          readOnly: true
-          type: string
-        group:
-          allOf:
-          - $ref: '#/components/schemas/GroupEnum'
-          default: main
-          description: 'Can either be `main` or `other`. By default members are placed in the `main` group. Only members in the `main` group will be displayed on the Patient chart in the web application.
-
-
-            * `main` - main
-
-            * `other` - other'
-        latest_activity:
-          description: Displays the latest known interaction between the team member and the patient.
-          format: date-time
-          readOnly: true
-          type: string
-        patient_id:
-          description: The id of the Patient that this team is associated with.
-          readOnly: true
-          type: integer
-        patient_provider_team_id:
-          description: Patient Provider team ID
-          type: integer
-        patient_provider_team_member_id:
-          readOnly: true
-          type: integer
-        physician_id:
-          description: The Physician that this team member represents.
-          type: integer
-        rank:
-          description: Used for displaying a sorted patient provider team in the patient chart. Rank is sequential and begins at 1.
-          minimum: 1
-          readOnly: true
-          type: integer
-        treatment_reason:
-          description: The reason why this physician is in this team
-          type:
-          - string
-          - 'null'
-      required:
-      - patient_provider_team_id
-      - physician_id
-      type: object
-    PatientProviderTeamMemberUpdate:
-      properties:
-        activity_summary_last_refreshed:
-          description: The last known time when this team member's activity was synced.
-          format: date-time
-          readOnly: true
-          type: string
-        earliest_activity:
-          description: Displays the earliest known interaction between the team member and the patient.
-          format: date-time
-          readOnly: true
-          type: string
-        group:
-          allOf:
-          - $ref: '#/components/schemas/GroupEnum'
-          default: main
-          description: 'Can either be `main` or `other`. By default members are placed in the `main` group. Only members in the `main` group will be displayed on the Patient chart in the web application.
-
-
-            * `main` - main
-
-            * `other` - other'
-        latest_activity:
-          description: Displays the latest known interaction between the team member and the patient.
-          format: date-time
-          readOnly: true
-          type: string
-        patient_id:
-          description: The id of the Patient that this team is associated with.
-          readOnly: true
-          type: integer
-        patient_provider_team_id:
-          description: Patient Provider team ID
-          readOnly: true
-          type: integer
-        patient_provider_team_member_id:
-          readOnly: true
-          type: integer
-        physician_id:
-          description: The Physician that this team member represents.
-          readOnly: true
-          type: integer
-        rank:
-          description: Used for displaying a sorted patient provider team in the patient chart. Rank is sequential and begins at 1.
-          minimum: 1
-          readOnly: true
-          type: integer
-        treatment_reason:
-          description: The reason why this physician is in this team
-          type:
-          - string
-          - 'null'
-      type: object
     PaginatedPatientProviderTeamList:
       properties:
         count:
@@ -409,14 +302,23 @@ components:
       required:
       - results
       type: object
-    GroupEnum:
-      description: '* `main` - main
-
-        * `other` - other'
-      enum:
-      - main
-      - other
-      type: string
+    PatientProviderTeam:
+      properties:
+        patient_id:
+          description: The id of the Patient object that this team is associated with.
+          readOnly: true
+          type: integer
+        patient_provider_team_id:
+          type: integer
+        team_members:
+          description: The list of providers that are providing care to the above patient.
+          items:
+            $ref: '#/components/schemas/PatientProviderTeamMember'
+          readOnly: true
+          type: array
+      required:
+      - patient_provider_team_id
+      type: object
     PatchedPatientProviderTeamMemberUpdate:
       properties:
         activity_summary_last_refreshed:
@@ -470,22 +372,120 @@ components:
           - string
           - 'null'
       type: object
-    PatientProviderTeam:
+    GroupEnum:
+      description: '* `main` - main
+
+        * `other` - other'
+      enum:
+      - main
+      - other
+      type: string
+    PatientProviderTeamMemberUpdate:
       properties:
+        activity_summary_last_refreshed:
+          description: The last known time when this team member's activity was synced.
+          format: date-time
+          readOnly: true
+          type: string
+        earliest_activity:
+          description: Displays the earliest known interaction between the team member and the patient.
+          format: date-time
+          readOnly: true
+          type: string
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupEnum'
+          default: main
+          description: 'Can either be `main` or `other`. By default members are placed in the `main` group. Only members in the `main` group will be displayed on the Patient chart in the web application.
+
+
+            * `main` - main
+
+            * `other` - other'
+        latest_activity:
+          description: Displays the latest known interaction between the team member and the patient.
+          format: date-time
+          readOnly: true
+          type: string
         patient_id:
-          description: The id of the Patient object that this team is associated with.
+          description: The id of the Patient that this team is associated with.
           readOnly: true
           type: integer
         patient_provider_team_id:
-          type: integer
-        team_members:
-          description: The list of providers that are providing care to the above patient.
-          items:
-            $ref: '#/components/schemas/PatientProviderTeamMember'
+          description: Patient Provider team ID
           readOnly: true
-          type: array
+          type: integer
+        patient_provider_team_member_id:
+          readOnly: true
+          type: integer
+        physician_id:
+          description: The Physician that this team member represents.
+          readOnly: true
+          type: integer
+        rank:
+          description: Used for displaying a sorted patient provider team in the patient chart. Rank is sequential and begins at 1.
+          minimum: 1
+          readOnly: true
+          type: integer
+        treatment_reason:
+          description: The reason why this physician is in this team
+          type:
+          - string
+          - 'null'
+      type: object
+    PatientProviderTeamMember:
+      properties:
+        activity_summary_last_refreshed:
+          description: The last known time when this team member's activity was synced.
+          format: date-time
+          readOnly: true
+          type: string
+        earliest_activity:
+          description: Displays the earliest known interaction between the team member and the patient.
+          format: date-time
+          readOnly: true
+          type: string
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupEnum'
+          default: main
+          description: 'Can either be `main` or `other`. By default members are placed in the `main` group. Only members in the `main` group will be displayed on the Patient chart in the web application.
+
+
+            * `main` - main
+
+            * `other` - other'
+        latest_activity:
+          description: Displays the latest known interaction between the team member and the patient.
+          format: date-time
+          readOnly: true
+          type: string
+        patient_id:
+          description: The id of the Patient that this team is associated with.
+          readOnly: true
+          type: integer
+        patient_provider_team_id:
+          description: Patient Provider team ID
+          type: integer
+        patient_provider_team_member_id:
+          readOnly: true
+          type: integer
+        physician_id:
+          description: The Physician that this team member represents.
+          type: integer
+        rank:
+          description: Used for displaying a sorted patient provider team in the patient chart. Rank is sequential and begins at 1.
+          minimum: 1
+          readOnly: true
+          type: integer
+        treatment_reason:
+          description: The reason why this physician is in this team
+          type:
+          - string
+          - 'null'
       required:
       - patient_provider_team_id
+      - physician_id
       type: object
   securitySchemes:
     oauth2:

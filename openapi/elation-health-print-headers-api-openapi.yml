@@ -225,6 +225,28 @@ components:
       required:
       - name
       type: object
+    PaginatedPracticePrintHeaderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PracticePrintHeader'
+          type: array
+      required:
+      - results
+      type: object
     UploadedPhoto:
       description: 'Serializer for UploadedPhoto model.
 
@@ -252,28 +274,6 @@ components:
         width:
           readOnly: true
           type: integer
-      type: object
-    PaginatedPracticePrintHeaderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PracticePrintHeader'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

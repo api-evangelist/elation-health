@@ -435,6 +435,40 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedStaffGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_elation_group:
+          description: Whether the staff group is an Elation group.
+          type: boolean
+        name:
+          description: The name of the staff group.
+          maxLength: 50
+          type: string
+        practice:
+          description: The id of the practice that the staff group belongs to.
+          format: int64
+          type: integer
+        users:
+          description: A list of user ids inside the group.
+          items:
+            type: integer
+          type: array
+      type: object
     StaffGroup:
       properties:
         created_date:
@@ -472,40 +506,6 @@ components:
       - name
       - practice
       - users
-      type: object
-    PatchedStaffGroup:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_elation_group:
-          description: Whether the staff group is an Elation group.
-          type: boolean
-        name:
-          description: The name of the staff group.
-          maxLength: 50
-          type: string
-        practice:
-          description: The id of the practice that the staff group belongs to.
-          format: int64
-          type: integer
-        users:
-          description: A list of user ids inside the group.
-          items:
-            type: integer
-          type: array
       type: object
     PaginatedStaffGroupList:
       properties:

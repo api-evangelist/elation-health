@@ -252,88 +252,13 @@ paths:
       - '2.0'
 components:
   schemas:
-    PriorAuthQualifierEnum:
-      description: '* `94` - Pharmacy or Prescriber File ID
+    RequestingPhysicianActionEnum:
+      description: '* `ReqAct` - Requiring Action
 
-        * `0B` - State License Number
-
-        * `1C` - Medicare Number
-
-        * `1D` - Medicaid Number
-
-        * `1E` - Dentist License Number
-
-        * `1G` - UPIN
-
-        * `1J` - Facility ID Number
-
-        * `1M` - PPO Number
-
-        * `2U` - Payer Identification Number
-
-        * `ADI` - Processor Identification Number
-
-        * `BO` - BIN Location Number
-
-        * `C1` - Commercial
-
-        * `EA` - Medical Record Identification Number
-
-        * `EJ` - Patient Account Number
-
-        * `D3` - NCPDP Provider ID Number
-
-        * `DH` - DEA Number
-
-        * `G1` - Prior Authorization
-
-        * `GI` - Secondary Provider Number
-
-        * `HI` - HIN
-
-        * `HPI` - National Provider ID
-
-        * `IP` - Individual Policy Number
-
-        * `NC` - Secondary Coverage Company Number
-
-        * `NF` - National Association of Insurance Commissioner Code
-
-        * `PD` - Promotion Number
-
-        * `SY` - Social Security Number
-
-        * `WI` - Waiver
-
-        * `ZZ` - Mutually Defined'
+        * `Addressed` - Addressed'
       enum:
-      - '94'
-      - 0B
-      - 1C
-      - 1D
-      - 1E
-      - 1G
-      - 1J
-      - 1M
-      - 2U
-      - ADI
-      - BO
-      - C1
-      - EA
-      - EJ
-      - D3
-      - DH
-      - G1
-      - GI
-      - HI
-      - HPI
-      - IP
-      - NC
-      - NF
-      - PD
-      - SY
-      - WI
-      - ZZ
+      - ReqAct
+      - Addressed
       type: string
     PaginatedMedicationHistoryDownloadFillList:
       properties:
@@ -353,28 +278,6 @@ components:
         results:
           items:
             $ref: '#/components/schemas/MedicationHistoryDownloadFill'
-          type: array
-      required:
-      - results
-      type: object
-    PaginatedPrescriptionFillList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PrescriptionFill'
           type: array
       required:
       - results
@@ -483,13 +386,88 @@ components:
       - substitutions
       - written_date
       type: object
-    RequestingPhysicianActionEnum:
-      description: '* `ReqAct` - Requiring Action
+    PriorAuthQualifierEnum:
+      description: '* `94` - Pharmacy or Prescriber File ID
 
-        * `Addressed` - Addressed'
+        * `0B` - State License Number
+
+        * `1C` - Medicare Number
+
+        * `1D` - Medicaid Number
+
+        * `1E` - Dentist License Number
+
+        * `1G` - UPIN
+
+        * `1J` - Facility ID Number
+
+        * `1M` - PPO Number
+
+        * `2U` - Payer Identification Number
+
+        * `ADI` - Processor Identification Number
+
+        * `BO` - BIN Location Number
+
+        * `C1` - Commercial
+
+        * `EA` - Medical Record Identification Number
+
+        * `EJ` - Patient Account Number
+
+        * `D3` - NCPDP Provider ID Number
+
+        * `DH` - DEA Number
+
+        * `G1` - Prior Authorization
+
+        * `GI` - Secondary Provider Number
+
+        * `HI` - HIN
+
+        * `HPI` - National Provider ID
+
+        * `IP` - Individual Policy Number
+
+        * `NC` - Secondary Coverage Company Number
+
+        * `NF` - National Association of Insurance Commissioner Code
+
+        * `PD` - Promotion Number
+
+        * `SY` - Social Security Number
+
+        * `WI` - Waiver
+
+        * `ZZ` - Mutually Defined'
       enum:
-      - ReqAct
-      - Addressed
+      - '94'
+      - 0B
+      - 1C
+      - 1D
+      - 1E
+      - 1G
+      - 1J
+      - 1M
+      - 2U
+      - ADI
+      - BO
+      - C1
+      - EA
+      - EJ
+      - D3
+      - DH
+      - G1
+      - GI
+      - HI
+      - HPI
+      - IP
+      - NC
+      - NF
+      - PD
+      - SY
+      - WI
+      - ZZ
       type: string
     FillStatusEnum:
       description: '* `AH` - Dispensed
@@ -541,6 +519,28 @@ components:
       - patient
       - pharmacy_ncpdpid
       - practice
+      type: object
+    PaginatedPrescriptionFillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PrescriptionFill'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     oauth2:

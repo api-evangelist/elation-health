@@ -669,7 +669,9 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    InsuranceCompanySingleInstance:
+    NullEnum:
+      type: 'null'
+    InsuranceCompany:
       properties:
         address:
           maxLength: 200
@@ -731,11 +733,6 @@ components:
           type:
           - boolean
           - 'null'
-        patients:
-          items:
-            type: integer
-          readOnly: true
-          type: array
         payer_id:
           description: The Payer ID of the insurance carrier.
           maxLength: 200
@@ -747,11 +744,6 @@ components:
           type:
           - string
           - 'null'
-        plans:
-          items:
-            type: integer
-          readOnly: true
-          type: array
         practice:
           format: int64
           type: integer
@@ -770,8 +762,19 @@ components:
       - carrier
       - practice
       type: object
-    NullEnum:
-      type: 'null'
+    InsuranceTypeEnum:
+      enum:
+      - Capitated
+      - Commercial
+      - Managed Medicaid
+      - Medicaid
+      - Medicare
+      - Medicare Advantage
+      - Medicare Supplement
+      - Self Pay
+      - Workers Compensation/Third Party Liability
+      - None
+      type: string
     PatchedInsuranceCompanySingleInstance:
       properties:
         address:
@@ -892,20 +895,7 @@ components:
       required:
       - results
       type: object
-    InsuranceTypeEnum:
-      enum:
-      - Capitated
-      - Commercial
-      - Managed Medicaid
-      - Medicaid
-      - Medicare
-      - Medicare Advantage
-      - Medicare Supplement
-      - Self Pay
-      - Workers Compensation/Third Party Liability
-      - None
-      type: string
-    InsuranceCompany:
+    InsuranceCompanySingleInstance:
       properties:
         address:
           maxLength: 200
@@ -967,6 +957,11 @@ components:
           type:
           - boolean
           - 'null'
+        patients:
+          items:
+            type: integer
+          readOnly: true
+          type: array
         payer_id:
           description: The Payer ID of the insurance carrier.
           maxLength: 200
@@ -978,6 +973,11 @@ components:
           type:
           - string
           - 'null'
+        plans:
+          items:
+            type: integer
+          readOnly: true
+          type: array
         practice:
           format: int64
           type: integer

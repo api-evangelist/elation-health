@@ -507,14 +507,14 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    Image:
+    File:
       properties:
         base64_content:
           type: string
           writeOnly: true
         content_type:
+          maxLength: 200
           type: string
-          writeOnly: true
         created_date:
           format: date-time
           readOnly: true
@@ -532,94 +532,34 @@ components:
           type:
           - integer
           - 'null'
-        height:
+        file_url:
           readOnly: true
-          type:
-          - integer
-          - 'null'
+          type: string
+        filename:
+          type: string
         id:
           readOnly: true
           type: integer
-        image_url:
-          readOnly: true
-          type: string
         incoming_file:
-          type: integer
-        original_extension:
-          maxLength: 10
-          type: string
-        original_height:
-          type: integer
-        original_padded:
-          type: integer
-        original_rotation:
-          type: integer
-        original_width:
           type: integer
         practice:
           format: int64
           type:
           - integer
           - 'null'
-        quality_score:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        quality_score_by:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        received_date:
-          format: date-time
-          type: string
-        rotation:
-          readOnly: true
-          type: integer
-        sequence:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        width:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
       required:
       - base64_content
       - content_type
+      - filename
       type: object
-    ProcessStateEnum:
+    SourceEnum:
       enum:
-      - complete
-      - error
-      - pending
-      - processing
+      - metrofax
+      - plr
+      - refile
+      - softlinx
+      - user
       type: string
-    PaginatedIncomingFileGroupList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/IncomingFileGroup'
-          type: array
-      required:
-      - results
-      type: object
     IncomingFileGroup:
       properties:
         created_date:
@@ -729,14 +669,21 @@ components:
       - group_name
       - practice
       type: object
-    File:
+    ProcessStateEnum:
+      enum:
+      - complete
+      - error
+      - pending
+      - processing
+      type: string
+    Image:
       properties:
         base64_content:
           type: string
           writeOnly: true
         content_type:
-          maxLength: 200
           type: string
+          writeOnly: true
         created_date:
           format: date-time
           readOnly: true
@@ -754,34 +701,87 @@ components:
           type:
           - integer
           - 'null'
-        file_url:
+        height:
           readOnly: true
-          type: string
-        filename:
-          type: string
+          type:
+          - integer
+          - 'null'
         id:
           readOnly: true
           type: integer
+        image_url:
+          readOnly: true
+          type: string
         incoming_file:
+          type: integer
+        original_extension:
+          maxLength: 10
+          type: string
+        original_height:
+          type: integer
+        original_padded:
+          type: integer
+        original_rotation:
+          type: integer
+        original_width:
           type: integer
         practice:
           format: int64
           type:
           - integer
           - 'null'
+        quality_score:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        quality_score_by:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        received_date:
+          format: date-time
+          type: string
+        rotation:
+          readOnly: true
+          type: integer
+        sequence:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        width:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
       required:
       - base64_content
       - content_type
-      - filename
       type: object
-    SourceEnum:
-      enum:
-      - metrofax
-      - plr
-      - refile
-      - softlinx
-      - user
-      type: string
+    PaginatedIncomingFileGroupList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/IncomingFileGroup'
+          type: array
+      required:
+      - results
+      type: object
   securitySchemes:
     sec0:
       type: oauth2

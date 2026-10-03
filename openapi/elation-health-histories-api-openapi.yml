@@ -344,6 +344,45 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatientHistoryTypeEnum:
+      enum:
+      - Cognitive Status
+      - Consultation
+      - Diet
+      - Exercise
+      - Family
+      - Functional Status
+      - Habits
+      - Health Maintenance
+      - Immunization
+      - Legal
+      - Past
+      - Past Surgical
+      - Psychological
+      - Social
+      type: string
+    PaginatedPatientHistoryList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientHistory'
+          type: array
+      required:
+      - results
+      type: object
     PatientHistory:
       properties:
         created_date:
@@ -384,45 +423,6 @@ components:
       - text
       - type
       type: object
-    PaginatedPatientHistoryList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientHistory'
-          type: array
-      required:
-      - results
-      type: object
-    PatientHistoryTypeEnum:
-      enum:
-      - Cognitive Status
-      - Consultation
-      - Diet
-      - Exercise
-      - Family
-      - Functional Status
-      - Habits
-      - Health Maintenance
-      - Immunization
-      - Legal
-      - Past
-      - Past Surgical
-      - Psychological
-      - Social
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

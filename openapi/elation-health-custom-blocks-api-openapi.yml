@@ -54,6 +54,76 @@ paths:
       - Custom Blocks
 components:
   schemas:
+    DynamicFormNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          $ref: '#/components/schemas/DynamicFormAttrs'
+        type:
+          const: dynamicForm
+          default: dynamicForm
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: DynamicFormNode
+      type: object
+    PaginatedResponse_CustomBlockResponse_:
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+        offset:
+          title: Offset
+          type: integer
+        previous:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Previous
+        results:
+          items:
+            $ref: '#/components/schemas/CustomBlockResponse'
+          title: Results
+          type: array
+      required:
+      - results
+      - count
+      - offset
+      - limit
+      title: PaginatedResponse[CustomBlockResponse]
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    AiGenerationInfo:
+      properties:
+        is_finalized:
+          default: true
+          title: Is Finalized
+          type: boolean
+        transcript_source_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: ''
+          title: Transcript Source Text
+      title: AiGenerationInfo
+      type: object
     DynamicFormAttrs:
       properties:
         ai_generation_info:
@@ -105,20 +175,6 @@ components:
       - uiSchema
       - label
       title: DynamicFormAttrs
-      type: object
-    AiGenerationInfo:
-      properties:
-        is_finalized:
-          default: true
-          title: Is Finalized
-          type: boolean
-        transcript_source_text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: ''
-          title: Transcript Source Text
-      title: AiGenerationInfo
       type: object
     CustomBlockResponse:
       examples:
@@ -206,20 +262,6 @@ components:
       - is_system_template
       title: CustomBlockResponse
       type: object
-    DynamicFormNode-Output:
-      additionalProperties: true
-      properties:
-        attrs:
-          $ref: '#/components/schemas/DynamicFormAttrs'
-        type:
-          const: dynamicForm
-          default: dynamicForm
-          title: Type
-          type: string
-      required:
-      - attrs
-      title: DynamicFormNode
-      type: object
     ValidationError:
       properties:
         ctx:
@@ -245,48 +287,6 @@ components:
       - msg
       - type
       title: ValidationError
-      type: object
-    PaginatedResponse_CustomBlockResponse_:
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        next:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next
-        offset:
-          title: Offset
-          type: integer
-        previous:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Previous
-        results:
-          items:
-            $ref: '#/components/schemas/CustomBlockResponse'
-          title: Results
-          type: array
-      required:
-      - results
-      - count
-      - offset
-      - limit
-      title: PaginatedResponse[CustomBlockResponse]
-      type: object
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          title: Detail
-          type: array
-      title: HTTPValidationError
       type: object
   securitySchemes:
     RequireAuthentication:

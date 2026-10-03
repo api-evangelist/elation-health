@@ -607,6 +607,26 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    BlankEnum:
+      enum:
+      - ''
+    PatientProblemStatusEnum:
+      enum:
+      - Active
+      - Controlled
+      - Resolved
+      type: string
+    NullEnum:
+      type: 'null'
+    VerificationStatusEnum:
+      enum:
+      - confirmed
+      - differential
+      - entered_in_error
+      - provisional
+      - refuted
+      - unconfirmed
+      type: string
     PatientProblem:
       properties:
         created_date:
@@ -666,17 +686,19 @@ components:
       - start_date
       - status
       type: object
-    NullEnum:
-      type: 'null'
-    VerificationStatusEnum:
-      enum:
-      - confirmed
-      - differential
-      - entered_in_error
-      - provisional
-      - refuted
-      - unconfirmed
-      type: string
+    ImoCodeRelation:
+      properties:
+        icd10:
+          items:
+            type: string
+          type: array
+        icd9:
+          items:
+            type: string
+          type: array
+        snomed:
+          type: string
+      type: object
     PaginatedPatientProblemList:
       properties:
         count:
@@ -699,12 +721,6 @@ components:
       required:
       - results
       type: object
-    PatientProblemStatusEnum:
-      enum:
-      - Active
-      - Controlled
-      - Resolved
-      type: string
     PatchedPatientProblem:
       properties:
         created_date:
@@ -758,22 +774,6 @@ components:
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
       type: object
-    ImoCodeRelation:
-      properties:
-        icd10:
-          items:
-            type: string
-          type: array
-        icd9:
-          items:
-            type: string
-          type: array
-        snomed:
-          type: string
-      type: object
-    BlankEnum:
-      enum:
-      - ''
     Problem:
       allOf:
       - $ref: '#/components/schemas/ProblemCreate'
@@ -792,6 +792,15 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    PaginatedProblemList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Problem'
     ProblemCreate:
       type: object
       required:
@@ -827,28 +836,6 @@ components:
           description: Patient ID
         dx:
           $ref: '#/components/schemas/Diagnosis'
-    Diagnosis:
-      type: object
-      properties:
-        icd9:
-          type: array
-          items:
-            type: string
-        icd10:
-          type: array
-          items:
-            type: string
-        snomed:
-          type: string
-    PaginatedProblemList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Problem'
     PaginationMeta:
       type: object
       properties:
@@ -865,7 +852,27 @@ components:
           - string
           - 'null'
           description: URL for previous page
+    Diagnosis:
+      type: object
+      properties:
+        icd9:
+          type: array
+          items:
+            type: string
+        icd10:
+          type: array
+          items:
+            type: string
+        snomed:
+          type: string
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -880,13 +887,6 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   securitySchemes:
     sec0:
       type: oauth2

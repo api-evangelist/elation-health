@@ -396,6 +396,39 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedVisitNoteType:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_mu_office_visit:
+          type: boolean
+        name:
+          maxLength: 50
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        rank:
+          readOnly: true
+          type: integer
+        snomed_code:
+          $ref: '#/components/schemas/SnomedCode'
+      type: object
     VisitNoteType:
       properties:
         created_date:
@@ -443,39 +476,6 @@ components:
           - 'null'
       required:
       - code
-      type: object
-    PatchedVisitNoteType:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_mu_office_visit:
-          type: boolean
-        name:
-          maxLength: 50
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        rank:
-          readOnly: true
-          type: integer
-        snomed_code:
-          $ref: '#/components/schemas/SnomedCode'
       type: object
     PaginatedVisitNoteTypeList:
       properties:

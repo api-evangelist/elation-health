@@ -92,6 +92,150 @@ paths:
       - '2.0'
 components:
   schemas:
+    BlankEnum:
+      enum:
+      - ''
+    PaginatedInjectionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Injection'
+          type: array
+      required:
+      - results
+      type: object
+    NullEnum:
+      type: 'null'
+    DiagnosisCode:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        system:
+          type: string
+      required:
+      - code
+      - system
+      type: object
+    DoseUnitEnum:
+      description: '* `dL` - Deciliter
+
+        * `g` - Gram
+
+        * `kg` - Kilogram
+
+        * `kL` - Kiloliter
+
+        * `L` - Liter
+
+        * `mCi` - Millicurie
+
+        * `mg` - Milligram
+
+        * `mL` - Milliliter
+
+        * `ug` - Microgram
+
+        * `uL` - Microliter
+
+        * `tab` - Tablet'
+      enum:
+      - dL
+      - g
+      - kg
+      - kL
+      - L
+      - mCi
+      - mg
+      - mL
+      - ug
+      - uL
+      - tab
+      type: string
+    SiteEnum:
+      description: '* `Abdomen` - Abdomen
+
+        * `R Anterolateral Thigh` - R Anterolateral Thigh
+
+        * `L Anterolateral Thigh` - L Anterolateral Thigh
+
+        * `R Posterior Upper Arm` - R Posterior Upper Arm
+
+        * `L Posterior Upper Arm` - L Posterior Upper Arm
+
+        * `R Upper Arm` - R Upper Arm
+
+        * `L Upper Arm` - L Upper Arm
+
+        * `R Deltoid` - R Deltoid
+
+        * `L Deltoid` - L Deltoid
+
+        * `R Gluteus Maximus` - R Gluteus Maximus
+
+        * `L Gluteus Maximus` - L Gluteus Maximus
+
+        * `R Gluteus Medius` - R Gluteus Medius
+
+        * `L Gluteus Medius` - L Gluteus Medius
+
+        * `R Thigh` - R Thigh
+
+        * `L Thigh` - L Thigh
+
+        * `Back` - Back
+
+        * `R Forearm` - R Forearm
+
+        * `L Forearm` - L Forearm
+
+        * `R Antecubital Fossa` - R Antecubital Fossa
+
+        * `L Antecubital Fossa` - L Antecubital Fossa
+
+        * `R Hand` - R Hand
+
+        * `L Hand` - L Hand
+
+        * `Other` - Other'
+      enum:
+      - Abdomen
+      - R Anterolateral Thigh
+      - L Anterolateral Thigh
+      - R Posterior Upper Arm
+      - L Posterior Upper Arm
+      - R Upper Arm
+      - L Upper Arm
+      - R Deltoid
+      - L Deltoid
+      - R Gluteus Maximus
+      - L Gluteus Maximus
+      - R Gluteus Medius
+      - L Gluteus Medius
+      - R Thigh
+      - L Thigh
+      - Back
+      - R Forearm
+      - L Forearm
+      - R Antecubital Fossa
+      - L Antecubital Fossa
+      - R Hand
+      - L Hand
+      - Other
+      type: string
     Injection:
       properties:
         contraindication:
@@ -214,73 +358,6 @@ components:
       - given_date
       - ndc
       type: object
-    DiagnosisCode:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        system:
-          type: string
-      required:
-      - code
-      - system
-      type: object
-    NullEnum:
-      type: 'null'
-    Actor:
-      properties:
-        name:
-          type: string
-        type:
-          readOnly: true
-          type: string
-        user_id:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-      required:
-      - name
-      type: object
-    MethodEnum:
-      description: '* `Intravenous` - Intravenous
-
-        * `Intramuscular` - Intramuscular
-
-        * `Subcutaneous` - Subcutaneous
-
-        * `Intradermal` - Intradermal
-
-        * `Other` - Other'
-      enum:
-      - Intravenous
-      - Intramuscular
-      - Subcutaneous
-      - Intradermal
-      - Other
-      type: string
-    PaginatedInjectionList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Injection'
-          type: array
-      required:
-      - results
-      type: object
     ProcedureCodes:
       properties:
         code:
@@ -314,115 +391,38 @@ components:
       - code
       - dxs
       type: object
-    DoseUnitEnum:
-      description: '* `dL` - Deciliter
+    Actor:
+      properties:
+        name:
+          type: string
+        type:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - name
+      type: object
+    MethodEnum:
+      description: '* `Intravenous` - Intravenous
 
-        * `g` - Gram
+        * `Intramuscular` - Intramuscular
 
-        * `kg` - Kilogram
+        * `Subcutaneous` - Subcutaneous
 
-        * `kL` - Kiloliter
-
-        * `L` - Liter
-
-        * `mCi` - Millicurie
-
-        * `mg` - Milligram
-
-        * `mL` - Milliliter
-
-        * `ug` - Microgram
-
-        * `uL` - Microliter
-
-        * `tab` - Tablet'
-      enum:
-      - dL
-      - g
-      - kg
-      - kL
-      - L
-      - mCi
-      - mg
-      - mL
-      - ug
-      - uL
-      - tab
-      type: string
-    SiteEnum:
-      description: '* `Abdomen` - Abdomen
-
-        * `R Anterolateral Thigh` - R Anterolateral Thigh
-
-        * `L Anterolateral Thigh` - L Anterolateral Thigh
-
-        * `R Posterior Upper Arm` - R Posterior Upper Arm
-
-        * `L Posterior Upper Arm` - L Posterior Upper Arm
-
-        * `R Upper Arm` - R Upper Arm
-
-        * `L Upper Arm` - L Upper Arm
-
-        * `R Deltoid` - R Deltoid
-
-        * `L Deltoid` - L Deltoid
-
-        * `R Gluteus Maximus` - R Gluteus Maximus
-
-        * `L Gluteus Maximus` - L Gluteus Maximus
-
-        * `R Gluteus Medius` - R Gluteus Medius
-
-        * `L Gluteus Medius` - L Gluteus Medius
-
-        * `R Thigh` - R Thigh
-
-        * `L Thigh` - L Thigh
-
-        * `Back` - Back
-
-        * `R Forearm` - R Forearm
-
-        * `L Forearm` - L Forearm
-
-        * `R Antecubital Fossa` - R Antecubital Fossa
-
-        * `L Antecubital Fossa` - L Antecubital Fossa
-
-        * `R Hand` - R Hand
-
-        * `L Hand` - L Hand
+        * `Intradermal` - Intradermal
 
         * `Other` - Other'
       enum:
-      - Abdomen
-      - R Anterolateral Thigh
-      - L Anterolateral Thigh
-      - R Posterior Upper Arm
-      - L Posterior Upper Arm
-      - R Upper Arm
-      - L Upper Arm
-      - R Deltoid
-      - L Deltoid
-      - R Gluteus Maximus
-      - L Gluteus Maximus
-      - R Gluteus Medius
-      - L Gluteus Medius
-      - R Thigh
-      - L Thigh
-      - Back
-      - R Forearm
-      - L Forearm
-      - R Antecubital Fossa
-      - L Antecubital Fossa
-      - R Hand
-      - L Hand
+      - Intravenous
+      - Intramuscular
+      - Subcutaneous
+      - Intradermal
       - Other
       type: string
-    BlankEnum:
-      enum:
-      - ''
   securitySchemes:
     oauth2:
       flows:

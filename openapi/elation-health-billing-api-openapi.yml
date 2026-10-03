@@ -120,6 +120,13 @@ paths:
           description: Billing code deleted
 components:
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -134,35 +141,7 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   schemas:
-    BillingCode:
-      allOf:
-      - $ref: '#/components/schemas/BillingCodeCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
-    PaginatedBillingCodeList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/BillingCode'
     BillingCodeCreate:
       type: object
       required:
@@ -198,6 +177,27 @@ components:
           - string
           - 'null'
           description: URL for previous page
+    BillingCode:
+      allOf:
+      - $ref: '#/components/schemas/BillingCodeCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+    PaginatedBillingCodeList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BillingCode'
   securitySchemes:
     oauth2:
       type: oauth2

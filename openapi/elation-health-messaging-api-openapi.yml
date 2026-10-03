@@ -120,28 +120,6 @@ paths:
         '204':
           description: Message thread deleted
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 25
-      description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   schemas:
     PaginatedMessageThreadList:
       allOf:
@@ -152,27 +130,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/MessageThread'
-    MessageThreadCreate:
-      type: object
-      required:
-      - subject
-      properties:
-        subject:
-          type: string
-          description: Thread subject
-        members:
-          type: array
-          items:
-            type: integer
-          description: User IDs of thread members
-        patient:
-          type:
-          - integer
-          - 'null'
-          description: Associated patient ID
-        note:
-          type: string
-          description: Initial message content
     MessageThread:
       allOf:
       - $ref: '#/components/schemas/MessageThreadCreate'
@@ -195,6 +152,27 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    MessageThreadCreate:
+      type: object
+      required:
+      - subject
+      properties:
+        subject:
+          type: string
+          description: Thread subject
+        members:
+          type: array
+          items:
+            type: integer
+          description: User IDs of thread members
+        patient:
+          type:
+          - integer
+          - 'null'
+          description: Associated patient ID
+        note:
+          type: string
+          description: Initial message content
     PaginationMeta:
       type: object
       properties:
@@ -211,6 +189,28 @@ components:
           - string
           - 'null'
           description: URL for previous page
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
   securitySchemes:
     oauth2:
       type: oauth2

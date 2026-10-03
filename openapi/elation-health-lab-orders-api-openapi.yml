@@ -2264,6 +2264,146 @@ paths:
       description: Sandbox
 components:
   schemas:
+    NullEnum:
+      type: 'null'
+    FastingMethodEnum:
+      description: '* `fasting_12_hour` - Fasting - 12 hours
+
+        * `fasting_8_hours` - Fasting - 8 hours
+
+        * `fasting_2_hours` - Fasting - 2 hours
+
+        * `fasting_none` - Non-Fasting
+
+        * `fasting_random` - Fasting or non-fasting does not matter (Random)'
+      enum:
+      - fasting_12_hour
+      - fasting_8_hours
+      - fasting_2_hours
+      - fasting_none
+      - fasting_random
+      type: string
+    FacilityIdentifier:
+      properties:
+        active:
+          description: Whether the facility identifier should be used. Should be true in most cases.
+          type: boolean
+        bidi_connection:
+          oneOf:
+          - $ref: '#/components/schemas/BiDiLabConnection'
+          - type: 'null'
+          readOnly: true
+        compendium:
+          description: The id of the compendium that will be used when the user selects this facility identifier.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          description: The text that will displayed to users in the lab order dialog.
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_connection:
+          type:
+          - integer
+          - 'null'
+        lab_facility:
+          description: The id that represents the lab.
+          maxLength: 50
+          type: string
+        practice:
+          format: int64
+          type: integer
+        practice_facility:
+          description: The id that represents the practice; often an account number provided by the lab vendor.
+          maxLength: 50
+          type: string
+        practice_secondary_id:
+          type:
+          - string
+          - 'null'
+        user_facing:
+          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
+          type: boolean
+        vendor:
+          properties:
+            display_name:
+              type: string
+            id:
+              format: int64
+              type: integer
+            name:
+              type: string
+          type: object
+      required:
+      - active
+      - lab_facility
+      - practice
+      - practice_facility
+      - vendor
+      type: object
+    LabVendorIdName:
+      description: LabVendor Serializer useful for simple, read-only reference.
+      properties:
+        display_name:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        name:
+          readOnly: true
+          type: string
+      type: object
+    LabOrderSubmission:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        lab_order:
+          format: int64
+          readOnly: true
+          type: integer
+        state:
+          description: The state of the electronic order submission.
+          maxLength: 20
+          type: string
+        state_metadata:
+          description: Useful error information collected as part of the submission. Including ERRORs or ACKs.
+          maxLength: 1500
+          type:
+          - string
+          - 'null'
+        time_acknowledged:
+          description: The time at which a user acknowledged any error shown to them about the electronic submission.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        time_submitted:
+          description: The time the electronic order was submitted to the lab vendor.
+          format: date-time
+          type: string
+      required:
+      - time_submitted
+      type: object
     LabOrderTestWithDiagnoses:
       properties:
         code:
@@ -2340,66 +2480,6 @@ components:
       - icd10_codes
       - name
       type: object
-    LabVendorPatientSite:
-      description: The serializer for LabVendorPatientSite
-      properties:
-        address:
-          description: The address of the site.
-          maxLength: 200
-          type: string
-        city:
-          description: The city of the site.
-          maxLength: 50
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        fax:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 200
-          type: string
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        state:
-          maxLength: 2
-          type: string
-        suite:
-          maxLength: 40
-          type:
-          - string
-          - 'null'
-        vendor:
-          $ref: '#/components/schemas/LabVendorIdName'
-        zip:
-          maxLength: 10
-          type: string
-      required:
-      - name
-      type: object
     PaginatedLabOrderList:
       properties:
         count:
@@ -2422,171 +2502,86 @@ components:
       required:
       - results
       type: object
-    LabOrderTestToLabOrderAOEQuestion:
+    LabOrderContent:
       properties:
-        question:
-          $ref: '#/components/schemas/LabOrderAOEQuestion'
-        required:
-          type: boolean
-        sequence:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        test:
-          format: int64
-          readOnly: true
-          type: integer
-      required:
-      - question
-      - sequence
-      type: object
-    LabOrderSubmission:
-      properties:
+        collection_datetime:
+          description: If lab specimen collection is done onsite, this is the time at which the collection was taken.
+          format: date-time
+          type:
+          - string
+          - 'null'
+        fasting_method:
+          description: 'Instructions for patient and lab on how long they should fast before specimen collection.
+
+
+            * `fasting_12_hour` - Fasting - 12 hours
+
+            * `fasting_8_hours` - Fasting - 8 hours
+
+            * `fasting_2_hours` - Fasting - 2 hours
+
+            * `fasting_none` - Non-Fasting
+
+            * `fasting_random` - Fasting or non-fasting does not matter (Random)'
+          oneOf:
+          - $ref: '#/components/schemas/FastingMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        icd10_codes:
+          description: ICD10 diagnosis codes provided along with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
         id:
           readOnly: true
           type: integer
-        lab_order:
-          format: int64
-          readOnly: true
-          type: integer
-        state:
-          description: The state of the electronic order submission.
-          maxLength: 20
+        patient_instructions:
+          description: Notes for patient.
           type: string
-        state_metadata:
-          description: Useful error information collected as part of the submission. Including ERRORs or ACKs.
-          maxLength: 1500
+        standing_order_end_date:
+          description: Date at which standing order should be canceled.
+          format: date
           type:
           - string
           - 'null'
-        time_acknowledged:
-          description: The time at which a user acknowledged any error shown to them about the electronic submission.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        time_submitted:
-          description: The time the electronic order was submitted to the lab vendor.
-          format: date-time
-          type: string
-      required:
-      - time_submitted
-      type: object
-    QuestionTypeEnum:
-      description: '* `enum` - enum
-
-        * `enum_multiselect` - enum_multiselect
-
-        * `freetext` - freetext
-
-        * `y_or_n` - y_or_n
-
-        * `numeric` - numeric
-
-        * `yyyymmdd` - yyyymmdd
-
-        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
-      enum:
-      - enum
-      - enum_multiselect
-      - freetext
-      - y_or_n
-      - numeric
-      - yyyymmdd
-      - 2_numeric_1_decimal
-      type: string
-    StatMethodEnum:
-      description: '* `wet_reading_phone` - STAT Wet Reading - Please Phone Report
-
-        * `wet_reading_fax` - STAT Wet Reading - Please Fax Report
-
-        * `stat_phone` - STAT - Phone
-
-        * `stat_fax` - STAT - Fax
-
-        * `stat_phone_fax` - STAT - Phone and Fax'
-      enum:
-      - wet_reading_phone
-      - wet_reading_fax
-      - stat_phone
-      - stat_fax
-      - stat_phone_fax
-      type: string
-    ICD10Code:
-      properties:
-        code:
+        standing_order_frequency:
+          description: Number of times order should be performed on a standing basis.
           maxLength: 50
-          type: string
-        description:
-          maxLength: 500
           type:
           - string
           - 'null'
-      required:
-      - code
-      type: object
-    BiDiLabConnection:
-      properties:
-        alias:
-          description: Get the alias of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        enabled:
-          description: Get the enabled status of the connection.
-          readOnly: true
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        priority:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        protocol:
-          description: Get the protocol of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-      type: object
-    BodySite:
-      properties:
-        code:
-          description: The HL7 code representing the body site from which a specimen was collected.
-          maxLength: 16
+        stat_method:
+          oneOf:
+          - $ref: '#/components/schemas/StatMethodEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        test_center_notes:
+          description: Notes for Lab.
           type: string
-        deleted_date:
-          description: Represents if the body site was removed from the specimen.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        text:
-          description: A textual description of the body site from which the specimen was collected.
-          maxLength: 64
-          type: string
-      required:
-      - code
-      - text
+        tests:
+          description: The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.
+          items:
+            $ref: '#/components/schemas/LabOrderTestWithDiagnoses'
+          type: array
       type: object
-    LabVendorIdName:
-      description: LabVendor Serializer useful for simple, read-only reference.
-      properties:
-        display_name:
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        name:
-          readOnly: true
-          type: string
-      type: object
-    NullEnum:
-      type: 'null'
+    BillTypeEnum:
+      description: '* `thirdparty` - Third Party (e.g. Insurance)
+
+        * `patient` - Patient
+
+        * `client` - Client
+
+        * `workerscomp` - Worker''s Comp
+
+        * `specialbilling` - Special Billing'
+      enum:
+      - thirdparty
+      - patient
+      - client
+      - workerscomp
+      - specialbilling
+      type: string
     LabOrderAOEQuestionChoice:
       properties:
         code:
@@ -2613,53 +2608,60 @@ components:
       - code
       - value
       type: object
-    LabOrderAOEQuestion:
+    LabOrderTestToLabOrderAOEQuestion:
       properties:
-        choices:
-          items:
-            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
-          type: array
-        code:
-          maxLength: 100
-          type: string
+        question:
+          $ref: '#/components/schemas/LabOrderAOEQuestion'
+        required:
+          type: boolean
+        sequence:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        test:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - question
+      - sequence
+      type: object
+    LabOrderAOEAnswer:
+      properties:
         created_date:
+          description: When the answer was created.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
         deleted_date:
+          description: When the answer was deleted.
           format: date-time
           readOnly: true
-          type:
-          - string
-          - 'null'
-        example_format:
           type:
           - string
           - 'null'
         id:
           readOnly: true
           type: integer
-        max_length:
-          maximum: 65535
-          minimum: 0
+        question:
+          description: The id of the AOE question for which this answer pertains.
+          format: int64
+          type: integer
+        test:
+          description: The id of the test for which this answer pertains.
+          format: int64
           type:
           - integer
           - 'null'
-        question_type:
-          $ref: '#/components/schemas/QuestionTypeEnum'
-        secondary_code:
-          maxLength: 100
+        value:
+          description: The value entered by freetext or chosen by the ordering physician.
           type:
           - string
           - 'null'
-        value:
-          type: string
       required:
-      - choices
-      - code
-      - value
+      - question
       type: object
     PatchedLabOrder:
       properties:
@@ -2815,81 +2817,37 @@ components:
           - integer
           - 'null'
       type: object
-    FacilityIdentifier:
+    StateEnum:
+      description: '* `outstanding` - Outstanding
+
+        * `fulfilled` - Fulfilled
+
+        * `cancelled` - Cancelled'
+      enum:
+      - outstanding
+      - fulfilled
+      - cancelled
+      type: string
+    BodySite:
       properties:
-        active:
-          description: Whether the facility identifier should be used. Should be true in most cases.
-          type: boolean
-        bidi_connection:
-          oneOf:
-          - $ref: '#/components/schemas/BiDiLabConnection'
-          - type: 'null'
-          readOnly: true
-        compendium:
-          description: The id of the compendium that will be used when the user selects this facility identifier.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
+        code:
+          description: The HL7 code representing the body site from which a specimen was collected.
+          maxLength: 16
+          type: string
         deleted_date:
+          description: Represents if the body site was removed from the specimen.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
-        description:
-          description: The text that will displayed to users in the lab order dialog.
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_connection:
-          type:
-          - integer
-          - 'null'
-        lab_facility:
-          description: The id that represents the lab.
-          maxLength: 50
+        text:
+          description: A textual description of the body site from which the specimen was collected.
+          maxLength: 64
           type: string
-        practice:
-          format: int64
-          type: integer
-        practice_facility:
-          description: The id that represents the practice; often an account number provided by the lab vendor.
-          maxLength: 50
-          type: string
-        practice_secondary_id:
-          type:
-          - string
-          - 'null'
-        user_facing:
-          description: Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.
-          type: boolean
-        vendor:
-          properties:
-            display_name:
-              type: string
-            id:
-              format: int64
-              type: integer
-            name:
-              type: string
-          type: object
       required:
-      - active
-      - lab_facility
-      - practice
-      - practice_facility
-      - vendor
+      - code
+      - text
       type: object
     LabOrderSpecimen:
       properties:
@@ -2929,6 +2887,147 @@ components:
       - modifiers
       - test
       type: object
+    LabVendorPatientSite:
+      description: The serializer for LabVendorPatientSite
+      properties:
+        address:
+          description: The address of the site.
+          maxLength: 200
+          type: string
+        city:
+          description: The city of the site.
+          maxLength: 50
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 200
+          type: string
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        state:
+          maxLength: 2
+          type: string
+        suite:
+          maxLength: 40
+          type:
+          - string
+          - 'null'
+        vendor:
+          $ref: '#/components/schemas/LabVendorIdName'
+        zip:
+          maxLength: 10
+          type: string
+      required:
+      - name
+      type: object
+    LabOrderSpecimenModifier:
+      properties:
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        modifier:
+          $ref: '#/components/schemas/BodySiteCodeModifier'
+        sequence:
+          description: The cardinal position in which the modifiers should be listed.
+          maximum: 65535
+          minimum: 0
+          type: integer
+        specimen:
+          format: int64
+          type: integer
+      required:
+      - modifier
+      - sequence
+      - specimen
+      type: object
+    QuestionTypeEnum:
+      description: '* `enum` - enum
+
+        * `enum_multiselect` - enum_multiselect
+
+        * `freetext` - freetext
+
+        * `y_or_n` - y_or_n
+
+        * `numeric` - numeric
+
+        * `yyyymmdd` - yyyymmdd
+
+        * `2_numeric_1_decimal` - 2_numeric_1_decimal'
+      enum:
+      - enum
+      - enum_multiselect
+      - freetext
+      - y_or_n
+      - numeric
+      - yyyymmdd
+      - 2_numeric_1_decimal
+      type: string
+    PracticeSpecialInsuranceCodeName:
+      properties:
+        code:
+          maxLength: 5
+          type: string
+        name:
+          maxLength: 64
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    BodySiteCodeModifier:
+      properties:
+        code:
+          description: The HL7 code representing the modifier on the body site from which a specimen was collected.
+          maxLength: 3
+          type: string
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        text:
+          description: A textual description of the modifier of the body site from which the specimen was collected.
+          maxLength: 64
+          type: string
+      required:
+      - code
+      - text
+      type: object
+    BlankEnum:
+      enum:
+      - ''
     DocumentResolutionState:
       properties:
         created_date:
@@ -2980,37 +3079,6 @@ components:
       required:
       - state
       type: object
-    BodySiteCodeModifier:
-      properties:
-        code:
-          description: The HL7 code representing the modifier on the body site from which a specimen was collected.
-          maxLength: 3
-          type: string
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        text:
-          description: A textual description of the modifier of the body site from which the specimen was collected.
-          maxLength: 64
-          type: string
-      required:
-      - code
-      - text
-      type: object
-    StateEnum:
-      description: '* `outstanding` - Outstanding
-
-        * `fulfilled` - Fulfilled
-
-        * `cancelled` - Cancelled'
-      enum:
-      - outstanding
-      - fulfilled
-      - cancelled
-      type: string
     LabOrder:
       properties:
         answers:
@@ -3170,178 +3238,128 @@ components:
       - patient
       - practice
       type: object
-    LabOrderContent:
+    StatMethodEnum:
+      description: '* `wet_reading_phone` - STAT Wet Reading - Please Phone Report
+
+        * `wet_reading_fax` - STAT Wet Reading - Please Fax Report
+
+        * `stat_phone` - STAT - Phone
+
+        * `stat_fax` - STAT - Fax
+
+        * `stat_phone_fax` - STAT - Phone and Fax'
+      enum:
+      - wet_reading_phone
+      - wet_reading_fax
+      - stat_phone
+      - stat_fax
+      - stat_phone_fax
+      type: string
+    ICD10Code:
       properties:
-        collection_datetime:
-          description: If lab specimen collection is done onsite, this is the time at which the collection was taken.
-          format: date-time
-          type:
-          - string
-          - 'null'
-        fasting_method:
-          description: 'Instructions for patient and lab on how long they should fast before specimen collection.
-
-
-            * `fasting_12_hour` - Fasting - 12 hours
-
-            * `fasting_8_hours` - Fasting - 8 hours
-
-            * `fasting_2_hours` - Fasting - 2 hours
-
-            * `fasting_none` - Non-Fasting
-
-            * `fasting_random` - Fasting or non-fasting does not matter (Random)'
-          oneOf:
-          - $ref: '#/components/schemas/FastingMethodEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        icd10_codes:
-          description: ICD10 diagnosis codes provided along with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        patient_instructions:
-          description: Notes for patient.
-          type: string
-        standing_order_end_date:
-          description: Date at which standing order should be canceled.
-          format: date
-          type:
-          - string
-          - 'null'
-        standing_order_frequency:
-          description: Number of times order should be performed on a standing basis.
+        code:
           maxLength: 50
+          type: string
+        description:
+          maxLength: 500
           type:
           - string
           - 'null'
-        stat_method:
-          oneOf:
-          - $ref: '#/components/schemas/StatMethodEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        test_center_notes:
-          description: Notes for Lab.
-          type: string
-        tests:
-          description: The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.
-          items:
-            $ref: '#/components/schemas/LabOrderTestWithDiagnoses'
-          type: array
+      required:
+      - code
       type: object
-    LabOrderAOEAnswer:
+    LabOrderAOEQuestion:
       properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/LabOrderAOEQuestionChoice'
+          type: array
+        code:
+          maxLength: 100
+          type: string
         created_date:
-          description: When the answer was created.
           format: date-time
           readOnly: true
           type:
           - string
           - 'null'
         deleted_date:
-          description: When the answer was deleted.
           format: date-time
           readOnly: true
+          type:
+          - string
+          - 'null'
+        example_format:
           type:
           - string
           - 'null'
         id:
           readOnly: true
           type: integer
-        question:
-          description: The id of the AOE question for which this answer pertains.
-          format: int64
-          type: integer
-        test:
-          description: The id of the test for which this answer pertains.
-          format: int64
+        max_length:
+          maximum: 65535
+          minimum: 0
           type:
           - integer
           - 'null'
-        value:
-          description: The value entered by freetext or chosen by the ordering physician.
+        question_type:
+          $ref: '#/components/schemas/QuestionTypeEnum'
+        secondary_code:
+          maxLength: 100
           type:
           - string
           - 'null'
+        value:
+          type: string
       required:
-      - question
+      - choices
+      - code
+      - value
       type: object
-    BlankEnum:
-      enum:
-      - ''
-    LabOrderSpecimenModifier:
+    BiDiLabConnection:
       properties:
-        deleted_date:
-          format: date-time
+        alias:
+          description: Get the alias of the connection.
           readOnly: true
           type:
           - string
           - 'null'
-        modifier:
-          $ref: '#/components/schemas/BodySiteCodeModifier'
-        sequence:
-          description: The cardinal position in which the modifiers should be listed.
+        enabled:
+          description: Get the enabled status of the connection.
+          readOnly: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        priority:
           maximum: 65535
           minimum: 0
           type: integer
-        specimen:
-          format: int64
-          type: integer
-      required:
-      - modifier
-      - sequence
-      - specimen
+        protocol:
+          description: Get the protocol of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
       type: object
-    FastingMethodEnum:
-      description: '* `fasting_12_hour` - Fasting - 12 hours
-
-        * `fasting_8_hours` - Fasting - 8 hours
-
-        * `fasting_2_hours` - Fasting - 2 hours
-
-        * `fasting_none` - Non-Fasting
-
-        * `fasting_random` - Fasting or non-fasting does not matter (Random)'
-      enum:
-      - fasting_12_hour
-      - fasting_8_hours
-      - fasting_2_hours
-      - fasting_none
-      - fasting_random
-      type: string
-    BillTypeEnum:
-      description: '* `thirdparty` - Third Party (e.g. Insurance)
-
-        * `patient` - Patient
-
-        * `client` - Client
-
-        * `workerscomp` - Worker''s Comp
-
-        * `specialbilling` - Special Billing'
-      enum:
-      - thirdparty
-      - patient
-      - client
-      - workerscomp
-      - specialbilling
-      type: string
-    PracticeSpecialInsuranceCodeName:
-      properties:
-        code:
-          maxLength: 5
-          type: string
-        name:
-          maxLength: 64
-          type: string
-      required:
-      - code
-      - name
-      type: object
+    LabOrder_2:
+      allOf:
+      - $ref: '#/components/schemas/LabOrderCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            readOnly: true
     LabOrderCreate:
       type: object
       required:
@@ -3393,24 +3411,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/LabOrder_2'
-    LabOrder_2:
-      allOf:
-      - $ref: '#/components/schemas/LabOrderCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
-          deleted_date:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            readOnly: true
     PaginationMeta:
       type: object
       properties:
@@ -3428,6 +3428,13 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -3442,13 +3449,6 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   securitySchemes:
     sec0:
       type: oauth2

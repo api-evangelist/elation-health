@@ -792,6 +792,28 @@ components:
       - start_time
       - weekday
       type: object
+    PaginatedPhysicianList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Physician'
+          type: array
+      required:
+      - results
+      type: object
     PatchedPhysician:
       properties:
         credentials:
@@ -913,28 +935,15 @@ components:
       - license_state
       - npi
       type: object
-    PaginatedPhysicianList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Physician'
-          type: array
-      required:
-      - results
-      type: object
+    PaginatedPhysicianList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Physician_2'
     Physician_2:
       type: object
       properties:
@@ -961,15 +970,6 @@ components:
           format: email
         is_active:
           type: boolean
-    PaginatedPhysicianList_2:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Physician_2'
     PaginationMeta:
       type: object
       properties:
@@ -987,6 +987,13 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -1001,13 +1008,6 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   securitySchemes:
     sec0:
       type: oauth2

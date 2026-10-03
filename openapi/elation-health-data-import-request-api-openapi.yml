@@ -201,43 +201,7 @@ paths:
       - elation_auth:
         - import
 components:
-  requestBodies:
-    ExistingDataImportRequest:
-      description: Data Import Request object
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ExistingDataImportRequest'
-    CreateDataImportRequest:
-      description: Data Import Request object
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateDataImportRequest'
   schemas:
-    ExistingDataImportRequestWithoutStatus:
-      required:
-      - id
-      - created_at
-      - physician_id
-      - practice_id
-      - sections_to_import
-      allOf:
-      - $ref: '#/components/schemas/BaseDataImportRequest'
-      - type: object
-      properties:
-        physician_id:
-          type: integer
-          format: int64
-          readOnly: true
-          description: The id of the physician provider to import all child patient charts for; cannot be updated after initial create
-        practice_id:
-          type: integer
-          format: int64
-          readOnly: true
-          description: The id of the practice to import all child patient charts for; cannot be updated after initial create
     BaseDataImportRequest:
       type: object
       properties:
@@ -285,6 +249,35 @@ components:
       - processing
       - failed
       - completed
+    ValidationErrorResponse:
+      type: object
+      additionalProperties:
+        description: Name of the field with validation errors
+        type: array
+        items:
+          type: string
+          description: Validation error string
+    ExistingDataImportRequestWithoutStatus:
+      required:
+      - id
+      - created_at
+      - physician_id
+      - practice_id
+      - sections_to_import
+      allOf:
+      - $ref: '#/components/schemas/BaseDataImportRequest'
+      - type: object
+      properties:
+        physician_id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The id of the physician provider to import all child patient charts for; cannot be updated after initial create
+        practice_id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The id of the practice to import all child patient charts for; cannot be updated after initial create
     ExistingDataImportRequest:
       required:
       - id
@@ -309,14 +302,21 @@ components:
                 type: integer
                 format: int32
                 description: The number of child Patient Chart Import Requests in the associated status
-    ValidationErrorResponse:
-      type: object
-      additionalProperties:
-        description: Name of the field with validation errors
-        type: array
-        items:
-          type: string
-          description: Validation error string
+  requestBodies:
+    ExistingDataImportRequest:
+      description: Data Import Request object
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExistingDataImportRequest'
+    CreateDataImportRequest:
+      description: Data Import Request object
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDataImportRequest'
   securitySchemes:
     elation_auth:
       type: oauth2

@@ -281,29 +281,69 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PhysicianQualifications:
+    PaginatedUserList:
       properties:
-        credentials:
-          maxLength: 50
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
           type: string
-        dea:
-          maxLength: 50
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
           type: string
-        license:
-          maxLength: 50
-          type: string
-        license_state:
-          maxLength: 2
-          type: string
-        npi:
-          maxLength: 10
-          type:
-          - string
-          - 'null'
+        results:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
       required:
-      - credentials
-      - license
-      - license_state
+      - results
+      type: object
+    NullEnum:
+      type: 'null'
+    PatchedUser:
+      properties:
+        account_type:
+          oneOf:
+          - $ref: '#/components/schemas/AccountTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        credentialed:
+          default: false
+          type: boolean
+        email:
+          maxLength: 255
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        has_chart_access:
+          default: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          type: boolean
+        is_practice_admin:
+          default: false
+          type: boolean
+        is_read_only:
+          default: false
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        physician_qualifications:
+          $ref: '#/components/schemas/PhysicianQualifications'
+        practice:
+          format: int64
+          type: integer
+        user_type:
+          $ref: '#/components/schemas/UserTypeEnum'
       type: object
     User:
       properties:
@@ -352,74 +392,29 @@ components:
       - practice
       - user_type
       type: object
-    NullEnum:
-      type: 'null'
-    UserTypeEnum:
-      enum:
-      - physician
-      - staff
-      type: string
-    PaginatedUserList:
+    PhysicianQualifications:
       properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedUser:
-      properties:
-        account_type:
-          oneOf:
-          - $ref: '#/components/schemas/AccountTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        credentialed:
-          default: false
-          type: boolean
-        email:
-          maxLength: 255
-          type: string
-        first_name:
+        credentials:
           maxLength: 50
           type: string
-        has_chart_access:
-          default: true
-          type: boolean
-        id:
-          readOnly: true
-          type: integer
-        is_active:
-          type: boolean
-        is_practice_admin:
-          default: false
-          type: boolean
-        is_read_only:
-          default: false
-          type: boolean
-        last_name:
-          maxLength: 60
+        dea:
+          maxLength: 50
           type: string
-        physician_qualifications:
-          $ref: '#/components/schemas/PhysicianQualifications'
-        practice:
-          format: int64
-          type: integer
-        user_type:
-          $ref: '#/components/schemas/UserTypeEnum'
+        license:
+          maxLength: 50
+          type: string
+        license_state:
+          maxLength: 2
+          type: string
+        npi:
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+      required:
+      - credentials
+      - license
+      - license_state
       type: object
     AccountTypeEnum:
       description: '* `regular` - Regular staff
@@ -434,6 +429,11 @@ components:
       - oncall
       - ft_non_prescribing
       - pt_prescribing
+      type: string
+    UserTypeEnum:
+      enum:
+      - physician
+      - staff
       type: string
   securitySchemes:
     sec0:

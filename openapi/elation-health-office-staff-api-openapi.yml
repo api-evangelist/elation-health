@@ -324,6 +324,35 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PracticeToStaffSexEnum:
+      enum:
+      - Female
+      - Intersex/Other
+      - Male
+      - None selected
+      type: string
+    PaginatedPracticeToStaffList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PracticeToStaff'
+          type: array
+      required:
+      - results
+      type: object
     PracticeToStaff:
       properties:
         created_date:
@@ -381,35 +410,6 @@ components:
       required:
       - last_name
       type: object
-    PaginatedPracticeToStaffList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PracticeToStaff'
-          type: array
-      required:
-      - results
-      type: object
-    PracticeToStaffSexEnum:
-      enum:
-      - Female
-      - Intersex/Other
-      - Male
-      - None selected
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

@@ -689,40 +689,6 @@ components:
       required:
       - results
       type: object
-    PatchedLabOrderTestCompendium:
-      description: The serializer for LabOrderTestCompendium
-      properties:
-        code:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_vendor:
-          format: int64
-          type: integer
-        last_updated:
-          format: date-time
-          readOnly: true
-          type: string
-        name:
-          maxLength: 200
-          type: string
-      type: object
     LabOrderTestCompendium:
       description: The serializer for LabOrderTestCompendium
       properties:
@@ -759,6 +725,40 @@ components:
       required:
       - lab_vendor
       - name
+      type: object
+    PatchedLabOrderTestCompendium:
+      description: The serializer for LabOrderTestCompendium
+      properties:
+        code:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          maxLength: 200
+          type: string
       type: object
   securitySchemes:
     sec0:

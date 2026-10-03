@@ -106,6 +106,52 @@ paths:
       - '2.0'
 components:
   schemas:
+    ErrorCodeEnum:
+      enum:
+      - Communication problem - try again later
+      - Receiver System Error
+      - Receiver unable to process
+      - Transaction rejected
+      type: string
+    NullEnum:
+      type: 'null'
+    PaginatedRxHistoryDownloadList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/RxHistoryDownload'
+          type: array
+      required:
+      - results
+      type: object
+    ErrorDescriptionCodeEnum:
+      enum:
+      - Internal processing error has occurred.
+      - Invalid password for receiver
+      - Invalid password for sender.
+      - No password on file for receiver.
+      - No password on file for sender.
+      - Receiver ID not on file.
+      - Request timed out before response could be received.
+      - Required segment UIB is missing.
+      - Required segment UIH is missing.
+      - Required segment UIT is missing.
+      - Required segment UIZ is missing.
+      - Sender ID not on file.
+      type: string
     RxHistoryDownload:
       properties:
         created_date:
@@ -190,52 +236,6 @@ components:
       - patient
       - practice
       type: object
-    NullEnum:
-      type: 'null'
-    PaginatedRxHistoryDownloadList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/RxHistoryDownload'
-          type: array
-      required:
-      - results
-      type: object
-    ErrorDescriptionCodeEnum:
-      enum:
-      - Internal processing error has occurred.
-      - Invalid password for receiver
-      - Invalid password for sender.
-      - No password on file for receiver.
-      - No password on file for sender.
-      - Receiver ID not on file.
-      - Request timed out before response could be received.
-      - Required segment UIB is missing.
-      - Required segment UIH is missing.
-      - Required segment UIT is missing.
-      - Required segment UIZ is missing.
-      - Sender ID not on file.
-      type: string
-    ErrorCodeEnum:
-      enum:
-      - Communication problem - try again later
-      - Receiver System Error
-      - Receiver unable to process
-      - Transaction rejected
-      type: string
   securitySchemes:
     oauth2:
       flows:

@@ -120,6 +120,13 @@ paths:
           description: Insurance company deleted
 components:
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -134,31 +141,7 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   schemas:
-    InsuranceCompanyCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Insurance company name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-        fax:
-          type: string
-        payer_id:
-          type: string
-          description: Electronic payer identifier
     Address:
       type: object
       properties:
@@ -176,15 +159,6 @@ components:
         zip:
           type: string
           description: ZIP or postal code
-    PaginatedInsuranceCompanyList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/InsuranceCompany'
     InsuranceCompany:
       allOf:
       - $ref: '#/components/schemas/InsuranceCompanyCreate'
@@ -203,6 +177,32 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    InsuranceCompanyCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Insurance company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        fax:
+          type: string
+        payer_id:
+          type: string
+          description: Electronic payer identifier
+    PaginatedInsuranceCompanyList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/InsuranceCompany'
     PaginationMeta:
       type: object
       properties:

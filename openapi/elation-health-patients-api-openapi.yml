@@ -1478,154 +1478,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    Employer:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        name:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
-    PaginatedPatientList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Patient'
-          type: array
-      required:
-      - results
-      type: object
-    RaceEnum:
-      enum:
-      - American Indian or Alaska Native
-      - Asian
-      - Black or African American
-      - Declined to specify
-      - Native Hawaiian or Other Pacific Islander
-      - No race specified
-      - White
-      type: string
-    StatusStatusEnum:
-      description: '* `active` - Active
-
-        * `inactive` - Inactive
-
-        * `prospect` - Prospect
-
-        * `deceased` - Deceased'
-      enum:
-      - active
-      - inactive
-      - prospect
-      - deceased
-      type: string
-    PatientPreference:
-      properties:
-        preferred_pharmacy_1:
-          type:
-          - string
-          - 'null'
-        preferred_pharmacy_2:
-          type:
-          - string
-          - 'null'
-      type: object
-    Guarantor:
-      properties:
-        address:
-          maxLength: 200
-          type: string
-        city:
-          maxLength: 50
-          type: string
-        email:
-          format: email
-          maxLength: 254
-          type:
-          - string
-          - 'null'
-        first_name:
-          maxLength: 105
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        last_name:
-          maxLength: 105
-          type:
-          - string
-          - 'null'
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        relationship:
-          oneOf:
-          - $ref: '#/components/schemas/InsurerRelationshipType'
-          - $ref: '#/components/schemas/NullEnum'
-        state:
-          maxLength: 2
-          type: string
-        zip:
-          maxLength: 10
-          type: string
-      type: object
-    Email:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        email:
-          format: email
-          maxLength: 254
-          type:
-          - string
-          - 'null'
-      type: object
-    EthnicityEnum:
-      enum:
-      - Declined to specify
-      - Hispanic or Latino
-      - No ethnicity specified
-      - Not Hispanic or Latino
-      type: string
-    NullEnum:
-      type: 'null'
     SexualOrientationEnum:
       enum:
       - asexual
@@ -1638,54 +1490,40 @@ components:
       - straight
       - unknown
       type: string
-    RankEnum:
+    PronounsEnum:
       enum:
-      - primary
-      - secondary
-      - tertiary
-      type: string
-    LegalGenderMarkerDisplayEnum:
-      enum:
-      - F
-      - M
-      - None Selected
-      - X
+      - he_him_his
+      - not_listed
+      - she_her_hers
+      - they_them_theirs
       - None
       type: string
-    GenderIdentityEnum:
-      enum:
-      - man
-      - nonbinary
-      - option_not_listed
-      - prefer_not_to_say
-      - transgender_man
-      - transgender_woman
-      - two_spirit
-      - unknown
-      - woman
-      type: string
-    Status:
+    NullEnum:
+      type: 'null'
+    Consent:
+      description: This is the serializer for PatientConsent. It's all read-only
       properties:
-        deceased_date:
-          format: date
-          type:
-          - string
-          - 'null'
-        inactive_reason:
-          oneOf:
-          - $ref: '#/components/schemas/InactiveReasonEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        last_status_change:
+        application:
+          readOnly: true
+          type: string
+        consented:
+          readOnly: true
+          type: boolean
+        is_active:
+          readOnly: true
+          type: boolean
+        last_modified_date:
           format: date-time
           readOnly: true
           type: string
-        notes:
-          type:
-          - string
-          - 'null'
-        status:
-          $ref: '#/components/schemas/StatusStatusEnum'
       type: object
+    EthnicityEnum:
+      enum:
+      - Declined to specify
+      - Hispanic or Latino
+      - No ethnicity specified
+      - Not Hispanic or Latino
+      type: string
     Patient:
       properties:
         actual_name:
@@ -1918,21 +1756,6 @@ components:
       - primary_physician
       - sex
       type: object
-    PreferredContactEnum:
-      enum:
-      - email
-      - passport
-      - phone
-      - sms
-      type: string
-    PronounsEnum:
-      enum:
-      - he_him_his
-      - not_listed
-      - she_her_hers
-      - they_them_theirs
-      - None
-      type: string
     PhoneTypeEnum:
       enum:
       - Fax
@@ -1943,38 +1766,57 @@ components:
       - Other
       - Work
       type: string
-    PronounsDisplayEnum:
-      enum:
-      - He/Him/His
-      - Option not listed
-      - She/Her/Hers
-      - They/Them/Theirs
-      - None
-      type: string
-    PatientSexEnum:
-      enum:
-      - Female
-      - Male
-      - Other
-      - Unknown
-      type: string
-    InactiveReasonEnum:
-      description: '* `left_good_terms` - Patient Left on Good Terms
-
-        * `left_bad_terms` - Patient Left on Bad Terms
-
-        * `practice_ended` - Practice Ended Relationship
-
-        * `other` - Other
-
-        * `unknown` - Unknown'
-      enum:
-      - left_good_terms
-      - left_bad_terms
-      - practice_ended
-      - other
-      - unknown
-      type: string
+    EmergencyContact:
+      properties:
+        address_line1:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        address_line2:
+          maxLength: 35
+          type:
+          - string
+          - 'null'
+        city:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        first_name:
+          maxLength: 70
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        last_name:
+          maxLength: 70
+          type:
+          - string
+          - 'null'
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        relationship:
+          maxLength: 30
+          type:
+          - string
+          - 'null'
+        state:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+        zip:
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+      type: object
     PaymentProgramEnum:
       enum:
       - Commercial - HMSA
@@ -1985,6 +1827,359 @@ components:
       - Medicare Part B
       - Worker's Compensation
       type: string
+    PreferredContactEnum:
+      enum:
+      - email
+      - passport
+      - phone
+      - sms
+      type: string
+    PatchedPatient:
+      properties:
+        actual_name:
+          maxLength: 150
+          type:
+          - string
+          - 'null'
+        address:
+          oneOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        caregiver_practice:
+          format: int64
+          type: integer
+        consents:
+          items:
+            $ref: '#/components/schemas/Consent'
+          type: array
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_insurances:
+          items:
+            $ref: '#/components/schemas/Insurance'
+          readOnly: true
+          type: array
+        dob:
+          format: date
+          type: string
+        emails:
+          items:
+            $ref: '#/components/schemas/Email'
+          type:
+          - array
+          - 'null'
+        emergency_contact:
+          oneOf:
+          - $ref: '#/components/schemas/EmergencyContact'
+          - type: 'null'
+        employer:
+          oneOf:
+          - $ref: '#/components/schemas/Employer'
+          - type: 'null'
+        ethnicity:
+          $ref: '#/components/schemas/EthnicityEnum'
+        first_name:
+          maxLength: 70
+          type: string
+        gender_identity:
+          $ref: '#/components/schemas/GenderIdentityEnum'
+        guarantor:
+          oneOf:
+          - $ref: '#/components/schemas/Guarantor'
+          - type: 'null'
+        id:
+          readOnly: true
+          type: integer
+        insurances:
+          items:
+            $ref: '#/components/schemas/Insurance'
+          type: array
+        last_modified:
+          format: date-time
+          type: string
+        last_name:
+          maxLength: 70
+          type: string
+        legal_gender_marker:
+          oneOf:
+          - $ref: '#/components/schemas/LegalGenderMarkerEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        legal_gender_marker_display:
+          oneOf:
+          - $ref: '#/components/schemas/LegalGenderMarkerDisplayEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        master_patient:
+          format: int64
+          readOnly: true
+          type: integer
+        merged_into_chart:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        middle_name:
+          maxLength: 50
+          type: string
+        mothers_maiden_name:
+          maxLength: 70
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        occupation:
+          maxLength: 100
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        patient_status:
+          oneOf:
+          - $ref: '#/components/schemas/Status'
+          - type: 'null'
+        phones:
+          items:
+            $ref: '#/components/schemas/Phone'
+          type: array
+        preference:
+          oneOf:
+          - $ref: '#/components/schemas/PatientPreference'
+          - type: 'null'
+        preferred_contact:
+          oneOf:
+          - $ref: '#/components/schemas/PreferredContactEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        preferred_language:
+          type:
+          - string
+          - 'null'
+        preferred_service_location:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        previous_address:
+          oneOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        previous_first_name:
+          maxLength: 70
+          type:
+          - string
+          - 'null'
+        previous_last_name:
+          maxLength: 70
+          type:
+          - string
+          - 'null'
+        previous_name:
+          oneOf:
+          - $ref: '#/components/schemas/PatientPreviousName'
+          - type: 'null'
+        primary_care_provider:
+          description: A read-only field that provides the internal Elation id of the collaborator record that is created within your practice to represent your practice's connection with the patient's primary care provider.
+          format: int64
+          readOnly: true
+          type: integer
+        primary_care_provider_npi:
+          description: Represents the patient's primary care provider. This person may be in a different practice.
+          maxLength: 10
+          type:
+          - string
+          - 'null'
+        primary_physician:
+          description: Represents the physician providing care to the patient within your practice. This is a required field. This value must match the id of one of the physicians retrieved via the /physicians/ endpoint.
+          format: int64
+          type: integer
+        pronouns:
+          oneOf:
+          - $ref: '#/components/schemas/PronounsEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        pronouns_display:
+          oneOf:
+          - $ref: '#/components/schemas/PronounsDisplayEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        race:
+          $ref: '#/components/schemas/RaceEnum'
+        sex:
+          allOf:
+          - $ref: '#/components/schemas/PatientSexEnum'
+          default: Unknown
+        sexual_orientation:
+          $ref: '#/components/schemas/SexualOrientationEnum'
+        sms_opt_in_status:
+          type:
+          - boolean
+          - 'null'
+        ssn:
+          maxLength: 37
+          type:
+          - string
+          - 'null'
+        suffix:
+          maxLength: 20
+          type: string
+        tags:
+          items: {}
+          type:
+          - array
+          - 'null'
+        timezone:
+          oneOf:
+          - $ref: '#/components/schemas/TimezoneEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        verified:
+          default: true
+          type: boolean
+        vip:
+          type:
+          - boolean
+          - 'null'
+      type: object
+    Employer:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    Guarantor:
+      properties:
+        address:
+          maxLength: 200
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        email:
+          format: email
+          maxLength: 254
+          type:
+          - string
+          - 'null'
+        first_name:
+          maxLength: 105
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        last_name:
+          maxLength: 105
+          type:
+          - string
+          - 'null'
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        relationship:
+          oneOf:
+          - $ref: '#/components/schemas/InsurerRelationshipType'
+          - $ref: '#/components/schemas/NullEnum'
+        state:
+          maxLength: 2
+          type: string
+        zip:
+          maxLength: 10
+          type: string
+      type: object
+    PronounsDisplayEnum:
+      enum:
+      - He/Him/His
+      - Option not listed
+      - She/Her/Hers
+      - They/Them/Theirs
+      - None
+      type: string
+    GenderIdentityEnum:
+      enum:
+      - man
+      - nonbinary
+      - option_not_listed
+      - prefer_not_to_say
+      - transgender_man
+      - transgender_woman
+      - two_spirit
+      - unknown
+      - woman
+      type: string
+    PatientSexEnum:
+      enum:
+      - Female
+      - Male
+      - Other
+      - Unknown
+      type: string
+    Status:
+      properties:
+        deceased_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        inactive_reason:
+          oneOf:
+          - $ref: '#/components/schemas/InactiveReasonEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        last_status_change:
+          format: date-time
+          readOnly: true
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/StatusStatusEnum'
+      type: object
+    PatientPreference:
+      properties:
+        preferred_pharmacy_1:
+          type:
+          - string
+          - 'null'
+        preferred_pharmacy_2:
+          type:
+          - string
+          - 'null'
+      type: object
     Insurance:
       properties:
         address:
@@ -2151,6 +2346,70 @@ components:
       required:
       - rank
       type: object
+    Address:
+      properties:
+        address_line1:
+          maxLength: 200
+          type: string
+        address_line2:
+          maxLength: 35
+          type:
+          - string
+          - 'null'
+        city:
+          maxLength: 50
+          type: string
+        state:
+          maxLength: 2
+          type: string
+        zip:
+          maxLength: 10
+          type: string
+      type: object
+    LegalGenderMarkerDisplayEnum:
+      enum:
+      - F
+      - M
+      - None Selected
+      - X
+      - None
+      type: string
+    PaginatedPatientList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Patient'
+          type: array
+      required:
+      - results
+      type: object
+    StatusStatusEnum:
+      description: '* `active` - Active
+
+        * `inactive` - Inactive
+
+        * `prospect` - Prospect
+
+        * `deceased` - Deceased'
+      enum:
+      - active
+      - inactive
+      - prospect
+      - deceased
+      type: string
     TimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -2587,110 +2846,12 @@ components:
       - US/Pacific
       - UTC
       type: string
-    Phone:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        phone:
-          type: string
-        phone_type:
-          $ref: '#/components/schemas/PhoneTypeEnum'
-      required:
-      - phone
-      - phone_type
-      type: object
     InsurerRelationshipType:
       enum:
       - Child
       - Other
       - Spouse
       type: string
-    Consent:
-      description: This is the serializer for PatientConsent. It's all read-only
-      properties:
-        application:
-          readOnly: true
-          type: string
-        consented:
-          readOnly: true
-          type: boolean
-        is_active:
-          readOnly: true
-          type: boolean
-        last_modified_date:
-          format: date-time
-          readOnly: true
-          type: string
-      type: object
-    LegalGenderMarkerEnum:
-      enum:
-      - F
-      - M
-      - U
-      - X
-      - None
-      type: string
-    EmergencyContact:
-      properties:
-        address_line1:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        address_line2:
-          maxLength: 35
-          type:
-          - string
-          - 'null'
-        city:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        first_name:
-          maxLength: 70
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        last_name:
-          maxLength: 70
-          type:
-          - string
-          - 'null'
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        relationship:
-          maxLength: 30
-          type:
-          - string
-          - 'null'
-        state:
-          maxLength: 2
-          type:
-          - string
-          - 'null'
-        zip:
-          maxLength: 10
-          type:
-          - string
-          - 'null'
-      type: object
     PatientPreviousName:
       properties:
         first_name:
@@ -2714,44 +2875,8 @@ components:
           - string
           - 'null'
       type: object
-    Address:
+    Phone:
       properties:
-        address_line1:
-          maxLength: 200
-          type: string
-        address_line2:
-          maxLength: 35
-          type:
-          - string
-          - 'null'
-        city:
-          maxLength: 50
-          type: string
-        state:
-          maxLength: 2
-          type: string
-        zip:
-          maxLength: 10
-          type: string
-      type: object
-    PatchedPatient:
-      properties:
-        actual_name:
-          maxLength: 150
-          type:
-          - string
-          - 'null'
-        address:
-          oneOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-        caregiver_practice:
-          format: int64
-          type: integer
-        consents:
-          items:
-            $ref: '#/components/schemas/Consent'
-          type: array
         created_date:
           format: date-time
           readOnly: true
@@ -2764,207 +2889,131 @@ components:
           type:
           - string
           - 'null'
-        deleted_insurances:
-          items:
-            $ref: '#/components/schemas/Insurance'
-          readOnly: true
-          type: array
-        dob:
-          format: date
+        phone:
           type: string
-        emails:
-          items:
-            $ref: '#/components/schemas/Email'
-          type:
-          - array
-          - 'null'
-        emergency_contact:
-          oneOf:
-          - $ref: '#/components/schemas/EmergencyContact'
-          - type: 'null'
-        employer:
-          oneOf:
-          - $ref: '#/components/schemas/Employer'
-          - type: 'null'
-        ethnicity:
-          $ref: '#/components/schemas/EthnicityEnum'
-        first_name:
-          maxLength: 70
-          type: string
-        gender_identity:
-          $ref: '#/components/schemas/GenderIdentityEnum'
-        guarantor:
-          oneOf:
-          - $ref: '#/components/schemas/Guarantor'
-          - type: 'null'
-        id:
-          readOnly: true
-          type: integer
-        insurances:
-          items:
-            $ref: '#/components/schemas/Insurance'
-          type: array
-        last_modified:
+        phone_type:
+          $ref: '#/components/schemas/PhoneTypeEnum'
+      required:
+      - phone
+      - phone_type
+      type: object
+    LegalGenderMarkerEnum:
+      enum:
+      - F
+      - M
+      - U
+      - X
+      - None
+      type: string
+    InactiveReasonEnum:
+      description: '* `left_good_terms` - Patient Left on Good Terms
+
+        * `left_bad_terms` - Patient Left on Bad Terms
+
+        * `practice_ended` - Practice Ended Relationship
+
+        * `other` - Other
+
+        * `unknown` - Unknown'
+      enum:
+      - left_good_terms
+      - left_bad_terms
+      - practice_ended
+      - other
+      - unknown
+      type: string
+    Email:
+      properties:
+        created_date:
           format: date-time
-          type: string
-        last_name:
-          maxLength: 70
-          type: string
-        legal_gender_marker:
-          oneOf:
-          - $ref: '#/components/schemas/LegalGenderMarkerEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        legal_gender_marker_display:
-          oneOf:
-          - $ref: '#/components/schemas/LegalGenderMarkerDisplayEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        master_patient:
-          format: int64
-          readOnly: true
-          type: integer
-        merged_into_chart:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        metadata:
-          properties:
-            data:
-              type: object
-            object_id:
-              type: string
-            object_web_link:
-              type: string
-          type:
-          - object
-          - 'null'
-        middle_name:
-          maxLength: 50
-          type: string
-        mothers_maiden_name:
-          maxLength: 70
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        occupation:
-          maxLength: 100
           readOnly: true
           type:
           - string
           - 'null'
-        patient_status:
-          oneOf:
-          - $ref: '#/components/schemas/Status'
-          - type: 'null'
-        phones:
-          items:
-            $ref: '#/components/schemas/Phone'
-          type: array
-        preference:
-          oneOf:
-          - $ref: '#/components/schemas/PatientPreference'
-          - type: 'null'
-        preferred_contact:
-          oneOf:
-          - $ref: '#/components/schemas/PreferredContactEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        preferred_language:
-          type:
-          - string
-          - 'null'
-        preferred_service_location:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        previous_address:
-          oneOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-        previous_first_name:
-          maxLength: 70
-          type:
-          - string
-          - 'null'
-        previous_last_name:
-          maxLength: 70
-          type:
-          - string
-          - 'null'
-        previous_name:
-          oneOf:
-          - $ref: '#/components/schemas/PatientPreviousName'
-          - type: 'null'
-        primary_care_provider:
-          description: A read-only field that provides the internal Elation id of the collaborator record that is created within your practice to represent your practice's connection with the patient's primary care provider.
-          format: int64
+        deleted_date:
+          format: date-time
           readOnly: true
-          type: integer
-        primary_care_provider_npi:
-          description: Represents the patient's primary care provider. This person may be in a different practice.
-          maxLength: 10
           type:
           - string
           - 'null'
-        primary_physician:
-          description: Represents the physician providing care to the patient within your practice. This is a required field. This value must match the id of one of the physicians retrieved via the /physicians/ endpoint.
-          format: int64
-          type: integer
-        pronouns:
-          oneOf:
-          - $ref: '#/components/schemas/PronounsEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        pronouns_display:
-          oneOf:
-          - $ref: '#/components/schemas/PronounsDisplayEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        race:
-          $ref: '#/components/schemas/RaceEnum'
-        sex:
-          allOf:
-          - $ref: '#/components/schemas/PatientSexEnum'
-          default: Unknown
-        sexual_orientation:
-          $ref: '#/components/schemas/SexualOrientationEnum'
-        sms_opt_in_status:
-          type:
-          - boolean
-          - 'null'
-        ssn:
-          maxLength: 37
+        email:
+          format: email
+          maxLength: 254
           type:
           - string
-          - 'null'
-        suffix:
-          maxLength: 20
-          type: string
-        tags:
-          items: {}
-          type:
-          - array
-          - 'null'
-        timezone:
-          oneOf:
-          - $ref: '#/components/schemas/TimezoneEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        verified:
-          default: true
-          type: boolean
-        vip:
-          type:
-          - boolean
           - 'null'
       type: object
-    Email_2:
+    RaceEnum:
+      enum:
+      - American Indian or Alaska Native
+      - Asian
+      - Black or African American
+      - Declined to specify
+      - Native Hawaiian or Other Pacific Islander
+      - No race specified
+      - White
+      type: string
+    RankEnum:
+      enum:
+      - primary
+      - secondary
+      - tertiary
+      type: string
+    Phone_2:
       type: object
       properties:
-        email:
+        phone:
           type: string
-          format: email
+          description: Phone number
+        phone_type:
+          type: string
+          enum:
+          - Home
+          - Work
+          - Cell
+          - Fax
+    Patient_2:
+      allOf:
+      - $ref: '#/components/schemas/PatientCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            readOnly: true
+            description: Unique patient identifier
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            readOnly: true
+          merged_into_chart:
+            type:
+            - integer
+            - 'null'
+            format: int64
+            readOnly: true
+          sms_opt_in_status:
+            type: boolean
+            readOnly: true
+          verified:
+            type: boolean
+          primary_care_provider:
+            type: integer
+            readOnly: true
+          primary_care_provider_npi:
+            type: string
+            maxLength: 10
+          consents:
+            type: array
+            readOnly: true
+            items:
+              type: object
     PatientCreate:
       type: object
       required:
@@ -3097,6 +3146,46 @@ components:
         metadata:
           type: object
           description: Custom metadata
+    Email_2:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+    Address_2:
+      type: object
+      properties:
+        address_line1:
+          type: string
+          description: Primary street address
+        address_line2:
+          type: string
+          description: Secondary address line
+        city:
+          type: string
+        state:
+          type: string
+          description: Two-letter state code
+        zip:
+          type: string
+          description: ZIP or postal code
+    PatientStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Prospect
+          - Deceased
+        reason:
+          type: string
+          description: Reason for status
+        deleted_date:
+          type: string
+          format: date-time
+          readOnly: true
     PatientPatch:
       type: object
       properties:
@@ -3135,82 +3224,6 @@ components:
           $ref: '#/components/schemas/PatientStatus'
         metadata:
           type: object
-    Address_2:
-      type: object
-      properties:
-        address_line1:
-          type: string
-          description: Primary street address
-        address_line2:
-          type: string
-          description: Secondary address line
-        city:
-          type: string
-        state:
-          type: string
-          description: Two-letter state code
-        zip:
-          type: string
-          description: ZIP or postal code
-    Patient_2:
-      allOf:
-      - $ref: '#/components/schemas/PatientCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            format: int64
-            readOnly: true
-            description: Unique patient identifier
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
-          deleted_date:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            readOnly: true
-          merged_into_chart:
-            type:
-            - integer
-            - 'null'
-            format: int64
-            readOnly: true
-          sms_opt_in_status:
-            type: boolean
-            readOnly: true
-          verified:
-            type: boolean
-          primary_care_provider:
-            type: integer
-            readOnly: true
-          primary_care_provider_npi:
-            type: string
-            maxLength: 10
-          consents:
-            type: array
-            readOnly: true
-            items:
-              type: object
-    PatientStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - Active
-          - Inactive
-          - Prospect
-          - Deceased
-        reason:
-          type: string
-          description: Reason for status
-        deleted_date:
-          type: string
-          format: date-time
-          readOnly: true
     PaginatedPatientList_2:
       allOf:
       - $ref: '#/components/schemas/PaginationMeta'
@@ -3220,28 +3233,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Patient_2'
-    Phone_2:
-      type: object
-      properties:
-        phone:
-          type: string
-          description: Phone number
-        phone_type:
-          type: string
-          enum:
-          - Home
-          - Work
-          - Cell
-          - Fax
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Human-readable error description
-        error:
-          type: string
-          description: Machine-readable error code
     PaginationMeta:
       type: object
       properties:
@@ -3258,7 +3249,23 @@ components:
           - string
           - 'null'
           description: URL for previous page
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable error description
+        error:
+          type: string
+          description: Machine-readable error code
   parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -3273,13 +3280,6 @@ components:
         type: integer
         default: 25
       description: Number of results to return
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
   securitySchemes:
     sec0:
       type: oauth2

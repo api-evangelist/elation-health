@@ -123,28 +123,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PaginatedReferenceMedicationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ReferenceMedication'
-          type: array
-      required:
-      - results
-      type: object
     MedicationDrugType:
       description: '* `user` - user
 
@@ -158,6 +136,17 @@ components:
       - medispan
       - ss
       - disp
+      type: string
+    MedicationType:
+      description: '* `otc` - otc
+
+        * `prescription` - prescription
+
+        * `discontinued` - discontinued'
+      enum:
+      - otc
+      - prescription
+      - discontinued
       type: string
     ReferenceMedication:
       properties:
@@ -243,17 +232,28 @@ components:
 
             * `discontinued` - discontinued'
       type: object
-    MedicationType:
-      description: '* `otc` - otc
-
-        * `prescription` - prescription
-
-        * `discontinued` - discontinued'
-      enum:
-      - otc
-      - prescription
-      - discontinued
-      type: string
+    PaginatedReferenceMedicationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ReferenceMedication'
+          type: array
+      required:
+      - results
+      type: object
   securitySchemes:
     oauth2:
       flows:
