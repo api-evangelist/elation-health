@@ -324,13 +324,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PracticeToStaffSexEnum:
-      enum:
-      - Female
-      - Intersex/Other
-      - Male
-      - None selected
-      type: string
     PaginatedPracticeToStaffList:
       properties:
         count:
@@ -353,6 +346,13 @@ components:
       required:
       - results
       type: object
+    PracticeToStaffSexEnum:
+      enum:
+      - Female
+      - Intersex/Other
+      - Male
+      - None selected
+      type: string
     PracticeToStaff:
       properties:
         created_date:

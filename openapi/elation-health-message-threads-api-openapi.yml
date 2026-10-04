@@ -798,32 +798,108 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    ThreadMember:
+      properties:
+        ack_time:
+          description: The time at which the member acknowledged the message thread.
+          format: date-time
+          type: string
+        group:
+          description: The id of the group referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ThreadMemberStatusEnum'
+          description: Whether this member has acknowledged the message thread.
+        thread:
+          description: The id of the thread this thread member is a member of.
+          format: int64
+          type: integer
+        user:
+          description: The id of the user referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
+          type:
+          - integer
+          - 'null'
+      required:
+      - status
+      type: object
     ThreadMemberStatusEnum:
       enum:
       - Addressed
       - Requiring Action
       type: string
-    PaginatedMessageThreadList:
+    PatchedMessageThread:
       properties:
-        count:
-          example: 123
+        chart_date:
+          description: When the message thread's patient chart was created.
+          format: date-time
+          type: string
+        created_date:
+          description: When the message thread was created.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: When the message thread was deleted.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: When the message thread's document was created.
+          format: date-time
+          type: string
+        id:
+          readOnly: true
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
+        is_urgent:
+          default: false
+          description: Whether the message is currently urgent.
+          type: boolean
+        members:
+          description: List of Thread Members, when creating only need to specify the id of the thread member and their status.
           items:
-            $ref: '#/components/schemas/MessageThread'
+            $ref: '#/components/schemas/ThreadMember'
           type: array
-      required:
-      - results
+        messages:
+          description: List of Thread Messages, when creating only need to provide the body, send_date and sender.
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          type: array
+        patient:
+          description: The patient chart for which the thread is about.
+          format: int64
+          type: integer
+        practice:
+          description: The id of the practice that owns the patient chart.
+          format: int64
+          type: integer
+        signed_by:
+          description: The user who signed the thread
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          description: The date and time when the thread was signed
+          format: date-time
+          type:
+          - string
+          - 'null'
       type: object
     ThreadMessage:
       properties:
@@ -992,103 +1068,27 @@ components:
       - id
       - patient
       type: object
-    PatchedMessageThread:
+    PaginatedMessageThreadList:
       properties:
-        chart_date:
-          description: When the message thread's patient chart was created.
-          format: date-time
-          type: string
-        created_date:
-          description: When the message thread was created.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: When the message thread was deleted.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        delivery_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: When the message thread's document was created.
-          format: date-time
-          type: string
-        id:
-          readOnly: true
+        count:
+          example: 123
           type: integer
-        is_urgent:
-          default: false
-          description: Whether the message is currently urgent.
-          type: boolean
-        members:
-          description: List of Thread Members, when creating only need to specify the id of the thread member and their status.
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
           items:
-            $ref: '#/components/schemas/ThreadMember'
+            $ref: '#/components/schemas/MessageThread'
           type: array
-        messages:
-          description: List of Thread Messages, when creating only need to provide the body, send_date and sender.
-          items:
-            $ref: '#/components/schemas/ThreadMessage'
-          type: array
-        patient:
-          description: The patient chart for which the thread is about.
-          format: int64
-          type: integer
-        practice:
-          description: The id of the practice that owns the patient chart.
-          format: int64
-          type: integer
-        signed_by:
-          description: The user who signed the thread
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          description: The date and time when the thread was signed
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    ThreadMember:
-      properties:
-        ack_time:
-          description: The time at which the member acknowledged the message thread.
-          format: date-time
-          type: string
-        group:
-          description: The id of the group referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ThreadMemberStatusEnum'
-          description: Whether this member has acknowledged the message thread.
-        thread:
-          description: The id of the thread this thread member is a member of.
-          format: int64
-          type: integer
-        user:
-          description: The id of the user referenced by this thread member. Should only ever be one of either a user or group set for the thread member.
-          type:
-          - integer
-          - 'null'
       required:
-      - status
+      - results
       type: object
   securitySchemes:
     sec0:

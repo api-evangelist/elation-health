@@ -100,14 +100,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    Language:
-      properties:
-        name:
-          maxLength: 100
-          type: string
-      required:
-      - name
-      type: object
     PaginatedLanguageList:
       properties:
         count:
@@ -129,6 +121,14 @@ components:
           type: array
       required:
       - results
+      type: object
+    Language:
+      properties:
+        name:
+          maxLength: 100
+          type: string
+      required:
+      - name
       type: object
   securitySchemes:
     sec0:

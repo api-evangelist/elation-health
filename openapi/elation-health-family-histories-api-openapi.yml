@@ -349,20 +349,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientFamilyHistoryRelationshipEnum:
-      enum:
-      - Aunt
-      - Brother
-      - Daughter
-      - Father
-      - Grandfather
-      - Grandmother
-      - Mother
-      - Other
-      - Sister
-      - Son
-      - Uncle
-      type: string
     PatientFamilyHistory:
       properties:
         created_date:
@@ -409,6 +395,20 @@ components:
       - patient
       - relationship
       type: object
+    PatientFamilyHistoryRelationshipEnum:
+      enum:
+      - Aunt
+      - Brother
+      - Daughter
+      - Father
+      - Grandfather
+      - Grandmother
+      - Mother
+      - Other
+      - Sister
+      - Son
+      - Uncle
+      type: string
     PaginatedPatientFamilyHistoryList:
       properties:
         count:

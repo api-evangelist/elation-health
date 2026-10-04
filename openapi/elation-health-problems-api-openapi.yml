@@ -607,26 +607,25 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    BlankEnum:
-      enum:
-      - ''
     PatientProblemStatusEnum:
       enum:
       - Active
       - Controlled
       - Resolved
       type: string
-    NullEnum:
-      type: 'null'
-    VerificationStatusEnum:
-      enum:
-      - confirmed
-      - differential
-      - entered_in_error
-      - provisional
-      - refuted
-      - unconfirmed
-      type: string
+    ImoCodeRelation:
+      properties:
+        icd10:
+          items:
+            type: string
+          type: array
+        icd9:
+          items:
+            type: string
+          type: array
+        snomed:
+          type: string
+      type: object
     PatientProblem:
       properties:
         created_date:
@@ -686,19 +685,20 @@ components:
       - start_date
       - status
       type: object
-    ImoCodeRelation:
-      properties:
-        icd10:
-          items:
-            type: string
-          type: array
-        icd9:
-          items:
-            type: string
-          type: array
-        snomed:
-          type: string
-      type: object
+    BlankEnum:
+      enum:
+      - ''
+    VerificationStatusEnum:
+      enum:
+      - confirmed
+      - differential
+      - entered_in_error
+      - provisional
+      - refuted
+      - unconfirmed
+      type: string
+    NullEnum:
+      type: 'null'
     PaginatedPatientProblemList:
       properties:
         count:
@@ -774,33 +774,19 @@ components:
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
       type: object
-    Problem:
-      allOf:
-      - $ref: '#/components/schemas/ProblemCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
+    Diagnosis:
+      type: object
+      properties:
+        icd9:
+          type: array
+          items:
             type: string
-            format: date-time
-            readOnly: true
-          deleted_date:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            readOnly: true
-    PaginatedProblemList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Problem'
+        icd10:
+          type: array
+          items:
+            type: string
+        snomed:
+          type: string
     ProblemCreate:
       type: object
       required:
@@ -836,6 +822,33 @@ components:
           description: Patient ID
         dx:
           $ref: '#/components/schemas/Diagnosis'
+    PaginatedProblemList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Problem'
+    Problem:
+      allOf:
+      - $ref: '#/components/schemas/ProblemCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
+          deleted_date:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            readOnly: true
     PaginationMeta:
       type: object
       properties:
@@ -852,27 +865,7 @@ components:
           - string
           - 'null'
           description: URL for previous page
-    Diagnosis:
-      type: object
-      properties:
-        icd9:
-          type: array
-          items:
-            type: string
-        icd10:
-          type: array
-          items:
-            type: string
-        snomed:
-          type: string
   parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -880,6 +873,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     limit:
       name: limit
       in: query

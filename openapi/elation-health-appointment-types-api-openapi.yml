@@ -366,68 +366,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedAppointmentType:
-      properties:
-        abbreviation:
-          type: string
-        color:
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        default_duration:
-          type: integer
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        description:
-          type: string
-        elation_note_template_ids:
-          items:
-            type: integer
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        is_telehealth:
-          type: boolean
-        name:
-          type: string
-        patient_bookable:
-          type: boolean
-        patient_form_hours_prior:
-          type: integer
-        patient_forms:
-          items:
-            type: integer
-          type: array
-        practice:
-          format: int64
-          type: integer
-        sequence:
-          readOnly: true
-          type: integer
-        visit_note_format:
-          oneOf:
-          - $ref: '#/components/schemas/VisitNoteFormatEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        visit_note_templates:
-          items:
-            format: int64
-            type: integer
-          type: array
-        visit_note_type:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      type: object
     AppointmentType:
       properties:
         abbreviation:
@@ -494,18 +432,6 @@ components:
       - name
       - practice
       type: object
-    NullEnum:
-      type: 'null'
-    VisitNoteFormatEnum:
-      enum:
-      - note2
-      - oneCol.oneField
-      - oneCol.preOp
-      - oneCol.preOp2
-      - oneCol.simple
-      - twoCol.complex
-      - twoCol.complex2
-      type: string
     PaginatedAppointmentTypeList:
       properties:
         count:
@@ -528,6 +454,80 @@ components:
       required:
       - results
       type: object
+    PatchedAppointmentType:
+      properties:
+        abbreviation:
+          type: string
+        color:
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        default_duration:
+          type: integer
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          type: string
+        elation_note_template_ids:
+          items:
+            type: integer
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        is_telehealth:
+          type: boolean
+        name:
+          type: string
+        patient_bookable:
+          type: boolean
+        patient_form_hours_prior:
+          type: integer
+        patient_forms:
+          items:
+            type: integer
+          type: array
+        practice:
+          format: int64
+          type: integer
+        sequence:
+          readOnly: true
+          type: integer
+        visit_note_format:
+          oneOf:
+          - $ref: '#/components/schemas/VisitNoteFormatEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        visit_note_templates:
+          items:
+            format: int64
+            type: integer
+          type: array
+        visit_note_type:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
+    VisitNoteFormatEnum:
+      enum:
+      - note2
+      - oneCol.oneField
+      - oneCol.preOp
+      - oneCol.preOp2
+      - oneCol.simple
+      - twoCol.complex
+      - twoCol.complex2
+      type: string
+    NullEnum:
+      type: 'null'
   securitySchemes:
     sec0:
       type: oauth2

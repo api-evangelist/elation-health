@@ -464,19 +464,6 @@ components:
       required:
       - name
       type: object
-    SnomedCode:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
     PaginatedVisitNoteTypeList:
       properties:
         count:
@@ -498,6 +485,19 @@ components:
           type: array
       required:
       - results
+      type: object
+    SnomedCode:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
       type: object
   securitySchemes:
     sec0:

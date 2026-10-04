@@ -773,6 +773,43 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    LabOrderTestCompendium:
+      description: The serializer for LabOrderTestCompendium
+      properties:
+        code:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        lab_vendor:
+          format: int64
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          maxLength: 200
+          type: string
+      required:
+      - lab_vendor
+      - name
+      type: object
     LabVendor:
       description: The serializer for LabVendor
       properties:
@@ -866,65 +903,6 @@ components:
         results_integration_available:
           type: boolean
       type: object
-    LabOrderTestCompendium:
-      description: The serializer for LabOrderTestCompendium
-      properties:
-        code:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        lab_vendor:
-          format: int64
-          type: integer
-        last_updated:
-          format: date-time
-          readOnly: true
-          type: string
-        name:
-          maxLength: 200
-          type: string
-      required:
-      - lab_vendor
-      - name
-      type: object
-    PaginatedLabVendorList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabVendor'
-          type: array
-      required:
-      - results
-      type: object
     BiDiLabConnection:
       properties:
         alias:
@@ -950,6 +928,28 @@ components:
           type:
           - string
           - 'null'
+      type: object
+    PaginatedLabVendorList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabVendor'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

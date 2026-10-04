@@ -490,40 +490,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedPatientAllergyList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientAllergy'
-          type: array
-      required:
-      - results
-      type: object
-    PatientAllergySeverityEnum:
-      enum:
-      - mild
-      - moderate
-      - severe
-      - unknown
-      type: string
-    AllergyStatus:
-      enum:
-      - Active
-      - Inactive
-      type: string
     PatchedPatientAllergy:
       properties:
         created_date:
@@ -572,6 +538,40 @@ components:
           - 'null'
         status:
           $ref: '#/components/schemas/AllergyStatus'
+      type: object
+    PatientAllergySeverityEnum:
+      enum:
+      - mild
+      - moderate
+      - severe
+      - unknown
+      type: string
+    AllergyStatus:
+      enum:
+      - Active
+      - Inactive
+      type: string
+    PaginatedPatientAllergyList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientAllergy'
+          type: array
+      required:
+      - results
       type: object
     PatientAllergy:
       properties:
@@ -625,6 +625,15 @@ components:
       - name
       - patient
       type: object
+    PaginatedAllergyList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Allergy'
     Allergy:
       allOf:
       - $ref: '#/components/schemas/AllergyCreate'
@@ -643,6 +652,22 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
     AllergyCreate:
       type: object
       required:
@@ -676,39 +701,7 @@ components:
           format: date
         notes:
           type: string
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for next page
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for previous page
-    PaginatedAllergyList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Allergy'
   parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -716,6 +709,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     limit:
       name: limit
       in: query

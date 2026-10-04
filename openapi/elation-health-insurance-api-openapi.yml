@@ -120,13 +120,6 @@ paths:
           description: Insurance company deleted
 components:
   parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -134,6 +127,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -142,23 +142,23 @@ components:
         default: 25
       description: Number of results to return
   schemas:
-    Address:
+    InsuranceCompanyCreate:
       type: object
+      required:
+      - name
       properties:
-        address_line1:
+        name:
           type: string
-          description: Primary street address
-        address_line2:
+          description: Insurance company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
           type: string
-          description: Secondary address line
-        city:
+        fax:
           type: string
-        state:
+        payer_id:
           type: string
-          description: Two-letter state code
-        zip:
-          type: string
-          description: ZIP or postal code
+          description: Electronic payer identifier
     InsuranceCompany:
       allOf:
       - $ref: '#/components/schemas/InsuranceCompanyCreate'
@@ -177,32 +177,23 @@ components:
             - 'null'
             format: date-time
             readOnly: true
-    InsuranceCompanyCreate:
+    Address:
       type: object
-      required:
-      - name
       properties:
-        name:
+        address_line1:
           type: string
-          description: Insurance company name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
+          description: Primary street address
+        address_line2:
           type: string
-        fax:
+          description: Secondary address line
+        city:
           type: string
-        payer_id:
+        state:
           type: string
-          description: Electronic payer identifier
-    PaginatedInsuranceCompanyList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/InsuranceCompany'
+          description: Two-letter state code
+        zip:
+          type: string
+          description: ZIP or postal code
     PaginationMeta:
       type: object
       properties:
@@ -219,6 +210,15 @@ components:
           - string
           - 'null'
           description: URL for previous page
+    PaginatedInsuranceCompanyList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/InsuranceCompany'
   securitySchemes:
     oauth2:
       type: oauth2

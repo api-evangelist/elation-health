@@ -1222,108 +1222,6 @@ components:
       required:
       - text
       type: object
-    Document:
-      properties:
-        authoring_practice:
-          format: int64
-          type: integer
-        chart_date:
-          description: The creation date of the patient chart.
-          format: date-time
-          type: string
-        created_date:
-          description: The creation date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The deleted date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
-          format: date-time
-          type: string
-        document_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        id:
-          format: int64
-          type: integer
-        last_modified:
-          format: date-time
-          type: string
-        patient:
-          format: int64
-          type: integer
-        sign_date:
-          description: The date of when the document was signed (if signed).
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        signed_by:
-          description: The id of whoever signed the document (if signed).
-          readOnly: true
-          type: integer
-      required:
-      - authoring_practice
-      - chart_date
-      - document_date
-      - id
-      - patient
-      type: object
-    NonVisitNoteDocument:
-      properties:
-        document:
-          $ref: '#/components/schemas/Document'
-        id:
-          readOnly: true
-          type: integer
-        summary:
-          type:
-          - string
-          - 'null'
-      required:
-      - document
-      type: object
-    PatientItem:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_confidential:
-          type: boolean
-        patient:
-          format: int64
-          type: integer
-        type:
-          type: string
-      required:
-      - is_confidential
-      - patient
-      - type
-      type: object
     NonVisitNote:
       properties:
         bullets:
@@ -1394,6 +1292,118 @@ components:
       - patient
       - type
       type: object
+    PatientItem:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_confidential:
+          type: boolean
+        patient:
+          format: int64
+          type: integer
+        type:
+          type: string
+      required:
+      - is_confidential
+      - patient
+      - type
+      type: object
+    NonVisitNotePatientItem:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        item:
+          $ref: '#/components/schemas/PatientItem'
+      required:
+      - item
+      type: object
+    NonVisitNoteDocument:
+      properties:
+        document:
+          $ref: '#/components/schemas/Document'
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          type:
+          - string
+          - 'null'
+      required:
+      - document
+      type: object
+    Document:
+      properties:
+        authoring_practice:
+          format: int64
+          type: integer
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
+          type: string
+        created_date:
+          description: The creation date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
+          type: string
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
+          type: integer
+      required:
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
     PatchedNonVisitNote:
       properties:
         bullets:
@@ -1458,16 +1468,6 @@ components:
         type:
           description: The type of the non visit note.
           type: string
-      type: object
-    NonVisitNotePatientItem:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        item:
-          $ref: '#/components/schemas/PatientItem'
-      required:
-      - item
       type: object
   securitySchemes:
     sec0:

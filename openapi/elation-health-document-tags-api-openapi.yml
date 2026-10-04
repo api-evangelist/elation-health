@@ -508,8 +508,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    NullEnum:
-      type: 'null'
     CodeTypeEnum:
       enum:
       - CPT
@@ -545,67 +543,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    CodedDocumentTag:
-      properties:
-        code:
-          description: The code of the tag.
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        code_type:
-          description: The type of the tag's code.
-          oneOf:
-          - $ref: '#/components/schemas/CodeTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        concept_name:
-          description: The name of the tag's concept.
-          oneOf:
-          - $ref: '#/components/schemas/ConceptNameEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        context:
-          description: The context of the tag. Choices = rejected, ordered or reviewed.
-          maxLength: 15
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        description:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        practice_created:
-          description: The id of the tag's practice.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        snomed_result_code:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        value:
-          maxLength: 100
-          type: string
-      required:
-      - value
       type: object
     ConceptNameEnum:
       enum:
@@ -690,6 +627,69 @@ components:
         value:
           maxLength: 100
           type: string
+      type: object
+    NullEnum:
+      type: 'null'
+    CodedDocumentTag:
+      properties:
+        code:
+          description: The code of the tag.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        code_type:
+          description: The type of the tag's code.
+          oneOf:
+          - $ref: '#/components/schemas/CodeTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        concept_name:
+          description: The name of the tag's concept.
+          oneOf:
+          - $ref: '#/components/schemas/ConceptNameEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        context:
+          description: The context of the tag. Choices = rejected, ordered or reviewed.
+          maxLength: 15
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        practice_created:
+          description: The id of the tag's practice.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        snomed_result_code:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        value:
+          maxLength: 100
+          type: string
+      required:
+      - value
       type: object
   securitySchemes:
     sec0:

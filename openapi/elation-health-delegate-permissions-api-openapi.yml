@@ -392,6 +392,14 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PermissionTypeEnum:
+      enum:
+      - bills
+      - messages
+      - orders
+      - referrals
+      - rxs
+      type: string
     PaginatedDelegatePermissionList:
       properties:
         count:
@@ -441,14 +449,6 @@ components:
       - physician
       - practice
       type: object
-    PermissionTypeEnum:
-      enum:
-      - bills
-      - messages
-      - orders
-      - referrals
-      - rxs
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

@@ -163,6 +163,12 @@ paths:
       - '2.0'
 components:
   schemas:
+    VaccineCreationType:
+      enum:
+      - elation
+      - medispan
+      - user
+      type: string
     Vaccine:
       properties:
         cdc_type:
@@ -220,12 +226,6 @@ components:
           - integer
           - 'null'
       type: object
-    VaccineCreationType:
-      enum:
-      - elation
-      - medispan
-      - user
-      type: string
     PaginatedVaccineList:
       properties:
         count:

@@ -120,13 +120,6 @@ paths:
           description: Billing code deleted
 components:
   parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -134,6 +127,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -161,6 +161,18 @@ components:
         code_type:
           type: string
           description: Type of billing code (CPT, ICD10, etc.)
+    BillingCode:
+      allOf:
+      - $ref: '#/components/schemas/BillingCodeCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
     PaginationMeta:
       type: object
       properties:
@@ -177,18 +189,6 @@ components:
           - string
           - 'null'
           description: URL for previous page
-    BillingCode:
-      allOf:
-      - $ref: '#/components/schemas/BillingCodeCreate'
-      - type: object
-        properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
     PaginatedBillingCodeList:
       allOf:
       - $ref: '#/components/schemas/PaginationMeta'

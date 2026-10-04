@@ -732,6 +732,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedImagingOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ImagingOrder'
+          type: array
+      required:
+      - results
+      type: object
     PatchedImagingOrder:
       properties:
         ancillary_company:
@@ -828,28 +850,6 @@ components:
             allOf:
             - $ref: '#/components/schemas/ImagingOrderTest'
           type: array
-      type: object
-    PaginatedImagingOrderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ImagingOrder'
-          type: array
-      required:
-      - results
       type: object
     ImagingOrder:
       properties:

@@ -123,20 +123,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
     MedicationType:
       description: '* `otc` - otc
 
@@ -232,6 +218,20 @@ components:
 
             * `discontinued` - discontinued'
       type: object
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
     PaginatedReferenceMedicationList:
       properties:
         count:

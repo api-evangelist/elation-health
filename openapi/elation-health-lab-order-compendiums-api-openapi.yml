@@ -667,27 +667,39 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedLabOrderTestCompendiumList:
+    PatchedLabOrderTestCompendium:
+      description: The serializer for LabOrderTestCompendium
       properties:
-        count:
-          example: 123
+        code:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        lab_vendor:
+          format: int64
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
+        name:
+          maxLength: 200
           type: string
-        results:
-          items:
-            $ref: '#/components/schemas/LabOrderTestCompendium'
-          type: array
-      required:
-      - results
       type: object
     LabOrderTestCompendium:
       description: The serializer for LabOrderTestCompendium
@@ -726,39 +738,27 @@ components:
       - lab_vendor
       - name
       type: object
-    PatchedLabOrderTestCompendium:
-      description: The serializer for LabOrderTestCompendium
+    PaginatedLabOrderTestCompendiumList:
       properties:
-        code:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
+        count:
+          example: 123
           type: integer
-        lab_vendor:
-          format: int64
-          type: integer
-        last_updated:
-          format: date-time
-          readOnly: true
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
           type: string
-        name:
-          maxLength: 200
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
           type: string
+        results:
+          items:
+            $ref: '#/components/schemas/LabOrderTestCompendium'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

@@ -1114,33 +1114,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    BlankEnum:
-      enum:
-      - ''
-    NullEnum:
-      type: 'null'
-    PaginatedServiceLocationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ServiceLocation'
-          type: array
-      required:
-      - results
-      type: object
     ServiceLocation:
       properties:
         address_line1:
@@ -1220,12 +1193,6 @@ components:
       - practice
       - state
       type: object
-    ServiceLocationStatusEnum:
-      enum:
-      - active
-      - inactive
-      - suspended
-      type: string
     TimezoneEnum:
       enum:
       - Africa/Abidjan
@@ -1735,6 +1702,28 @@ components:
           maxLength: 10
           type: string
       type: object
+    PaginatedServiceLocationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ServiceLocation'
+          type: array
+      required:
+      - results
+      type: object
     ServiceLocationPlaceOfServiceEnum:
       enum:
       - Ambulance - Air or Water
@@ -1788,6 +1777,17 @@ components:
       - Tribal 638Provider-basedFacility
       - Urgent Care Facility
       - Walk-in Retail Health Clinic
+      type: string
+    BlankEnum:
+      enum:
+      - ''
+    NullEnum:
+      type: 'null'
+    ServiceLocationStatusEnum:
+      enum:
+      - active
+      - inactive
+      - suspended
       type: string
   securitySchemes:
     sec0:

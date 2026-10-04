@@ -338,6 +338,102 @@ paths:
       - '2.0'
 components:
   schemas:
+    PatchedPatientLetter:
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/LetterAttachment'
+          type: array
+        body:
+          type: string
+        category:
+          format: int64
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        delivery_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        files:
+          description: 'Files attached to this letter. Binary upload: set content_type=''application/octet-stream'' and provide ''base64_content'' (and optional ''original_filename''). When any file uses base64, all files in the same request must use base64. On GET, returns file references.'
+          items:
+            $ref: '#/components/schemas/S3RetrievingDocumentFile'
+          type:
+          - array
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_patient_initiated:
+          type:
+          - boolean
+          - 'null'
+        is_processed:
+          readOnly: true
+          type: boolean
+        letter_type:
+          readOnly: true
+          type: string
+        patient:
+          format: int64
+          type: integer
+        patient_read_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        send_out:
+          type: boolean
+        send_to_patient:
+          readOnly: true
+          type: boolean
+        sign_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The user who signed the letter.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        subject:
+          maxLength: 200
+          type: string
+        tags:
+          description: A list of Document Tags associated with the letter.
+          items:
+            format: int64
+            type: integer
+          type: array
+        viewed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
     PatientLetter:
       properties:
         attachments:
@@ -437,6 +533,81 @@ components:
       - patient
       - practice
       type: object
+    S3RetrievingDocumentFile:
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
+    PaginatedCommentList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Comment'
+          type: array
+      required:
+      - results
+      type: object
+    LetterAttachment:
+      properties:
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentTypeEnum'
+        entity_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        entity_description:
+          type:
+          - string
+          - 'null'
+        entity_id:
+          format: int64
+          type: integer
+        entity_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        handout:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        summary:
+          type:
+          - string
+          - 'null'
+      required:
+      - attachment_type
+      type: object
     AttachmentTypeEnum:
       description: '* `Entity` - Entity
 
@@ -511,23 +682,6 @@ components:
       - DsBmiChart
       - DsHcChart
       type: string
-    S3RetrievingDocumentFile:
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          type: string
-        document:
-          description: URL to retrieve the document
-          format: uri
-          type: string
-        external_content: {}
-        id:
-          readOnly: true
-          type: integer
-        original_filename:
-          type: string
-      type: object
     PaginatedPatientLetterList:
       properties:
         count:
@@ -546,124 +700,6 @@ components:
         results:
           items:
             $ref: '#/components/schemas/PatientLetter'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedPatientLetter:
-      properties:
-        attachments:
-          items:
-            $ref: '#/components/schemas/LetterAttachment'
-          type: array
-        body:
-          type: string
-        category:
-          format: int64
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        delivery_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        files:
-          description: 'Files attached to this letter. Binary upload: set content_type=''application/octet-stream'' and provide ''base64_content'' (and optional ''original_filename''). When any file uses base64, all files in the same request must use base64. On GET, returns file references.'
-          items:
-            $ref: '#/components/schemas/S3RetrievingDocumentFile'
-          type:
-          - array
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_patient_initiated:
-          type:
-          - boolean
-          - 'null'
-        is_processed:
-          readOnly: true
-          type: boolean
-        letter_type:
-          readOnly: true
-          type: string
-        patient:
-          format: int64
-          type: integer
-        patient_read_time:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        practice:
-          format: int64
-          type: integer
-        send_out:
-          type: boolean
-        send_to_patient:
-          readOnly: true
-          type: boolean
-        sign_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        signed_by:
-          description: The user who signed the letter.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        subject:
-          maxLength: 200
-          type: string
-        tags:
-          description: A list of Document Tags associated with the letter.
-          items:
-            format: int64
-            type: integer
-          type: array
-        viewed_at:
-          format: date-time
-          type:
-          - string
-          - 'null'
-      type: object
-    PaginatedCommentList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Comment'
           type: array
       required:
       - results
@@ -697,42 +733,6 @@ components:
           type: integer
       required:
       - author
-      type: object
-    LetterAttachment:
-      properties:
-        attachment_type:
-          $ref: '#/components/schemas/AttachmentTypeEnum'
-        entity_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        entity_description:
-          type:
-          - string
-          - 'null'
-        entity_id:
-          format: int64
-          type: integer
-        entity_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        handout:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        summary:
-          type:
-          - string
-          - 'null'
-      required:
-      - attachment_type
       type: object
   securitySchemes:
     oauth2:

@@ -471,6 +471,37 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedCPTCode:
+      properties:
+        charge:
+          description: The amount of money that will be charged for the code.
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          type:
+          - string
+          - 'null'
+        code:
+          description: The code that a user and integrators will see.
+          maxLength: 10
+          type: string
+        description:
+          description: The description of the code that users will see.
+          maxLength: 200
+          type: string
+        id:
+          description: The internal elation id of the billing code.
+          readOnly: true
+          type: integer
+        practice:
+          description: The practice who created the billing code.
+          format: int64
+          type: integer
+        sequence:
+          description: The position in the list of billing codes.
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+      type: object
     CPTCode:
       properties:
         charge:
@@ -527,37 +558,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    PatchedCPTCode:
-      properties:
-        charge:
-          description: The amount of money that will be charged for the code.
-          format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
-          type:
-          - string
-          - 'null'
-        code:
-          description: The code that a user and integrators will see.
-          maxLength: 10
-          type: string
-        description:
-          description: The description of the code that users will see.
-          maxLength: 200
-          type: string
-        id:
-          description: The internal elation id of the billing code.
-          readOnly: true
-          type: integer
-        practice:
-          description: The practice who created the billing code.
-          format: int64
-          type: integer
-        sequence:
-          description: The position in the list of billing codes.
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
       type: object
   securitySchemes:
     sec0:

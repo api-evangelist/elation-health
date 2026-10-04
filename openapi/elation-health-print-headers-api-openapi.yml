@@ -178,6 +178,34 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    UploadedPhoto:
+      description: 'Serializer for UploadedPhoto model.
+
+        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
+      properties:
+        content_type:
+          readOnly: true
+          type: string
+        file_size:
+          readOnly: true
+          type: integer
+        height:
+          readOnly: true
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
+          type: string
+        original_filename:
+          readOnly: true
+          type: string
+        width:
+          readOnly: true
+          type: integer
+      type: object
     PracticePrintHeader:
       properties:
         content_type:
@@ -246,34 +274,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    UploadedPhoto:
-      description: 'Serializer for UploadedPhoto model.
-
-        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
-      properties:
-        content_type:
-          readOnly: true
-          type: string
-        file_size:
-          readOnly: true
-          type: integer
-        height:
-          readOnly: true
-          type: integer
-        id:
-          readOnly: true
-          type: integer
-        last_updated:
-          format: date-time
-          readOnly: true
-          type: string
-        original_filename:
-          readOnly: true
-          type: string
-        width:
-          readOnly: true
-          type: integer
       type: object
   securitySchemes:
     sec0:

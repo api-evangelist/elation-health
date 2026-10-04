@@ -797,6 +797,32 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    BiDiLabConnection:
+      properties:
+        alias:
+          description: Get the alias of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        enabled:
+          description: Get the enabled status of the connection.
+          readOnly: true
+          type: boolean
+        id:
+          readOnly: true
+          type: integer
+        priority:
+          maximum: 65535
+          minimum: 0
+          type: integer
+        protocol:
+          description: Get the protocol of the connection.
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      type: object
     FacilityIdentifier:
       properties:
         active:
@@ -873,28 +899,6 @@ components:
       - practice_facility
       - vendor
       type: object
-    PaginatedFacilityIdentifierList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/FacilityIdentifier'
-          type: array
-      required:
-      - results
-      type: object
     PatchedFacilityIdentifier:
       properties:
         active:
@@ -965,31 +969,27 @@ components:
               type: string
           type: object
       type: object
-    BiDiLabConnection:
+    PaginatedFacilityIdentifierList:
       properties:
-        alias:
-          description: Get the alias of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        enabled:
-          description: Get the enabled status of the connection.
-          readOnly: true
-          type: boolean
-        id:
-          readOnly: true
+        count:
+          example: 123
           type: integer
-        priority:
-          maximum: 65535
-          minimum: 0
-          type: integer
-        protocol:
-          description: Get the protocol of the connection.
-          readOnly: true
-          type:
-          - string
-          - 'null'
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/FacilityIdentifier'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

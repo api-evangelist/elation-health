@@ -688,80 +688,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    BlankEnum:
-      enum:
-      - ''
-    Practice:
+    PaginatedPracticeList:
       properties:
-        address_line1:
-          maxLength: 200
-          type: string
-        address_line2:
-          maxLength: 200
-          type: string
-        city:
-          maxLength: 50
-          type: string
-        elation_root_oid:
-          readOnly: true
-          type: string
-        employers:
-          items:
-            $ref: '#/components/schemas/Employer'
-          readOnly: true
-          type:
-          - array
-          - 'null'
-        id:
-          readOnly: true
+        count:
+          example: 123
           type: integer
-        metadata:
-          properties:
-            data:
-              type: object
-            object_id:
-              type: string
-            object_web_link:
-              type: string
-          type:
-          - object
-          - 'null'
-        name:
-          maxLength: 200
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
           type: string
-        physicians:
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
           items:
-            format: int64
-            type: integer
-          readOnly: true
+            $ref: '#/components/schemas/Practice'
           type: array
-        service_locations:
-          items:
-            $ref: '#/components/schemas/ServiceLocation'
-          readOnly: true
-          type:
-          - array
-          - 'null'
-        state:
-          maxLength: 2
-          type: string
-        status:
-          default: active
-          readOnly: true
-          type: string
-        timezone:
-          readOnly: true
-          type: string
-        zip:
-          maxLength: 10
-          type: string
       required:
-      - address_line1
-      - address_line2
-      - name
+      - results
       type: object
-    NullEnum:
-      type: 'null'
     Employer:
       properties:
         code:
@@ -858,77 +806,6 @@ components:
       - name
       - practice
       - state
-      type: object
-    ServiceLocationStatusEnum:
-      enum:
-      - active
-      - inactive
-      - suspended
-      type: string
-    PatchedPractice:
-      properties:
-        address_line1:
-          maxLength: 200
-          type: string
-        address_line2:
-          maxLength: 200
-          type: string
-        city:
-          maxLength: 50
-          type: string
-        elation_root_oid:
-          readOnly: true
-          type: string
-        employers:
-          items:
-            $ref: '#/components/schemas/Employer'
-          readOnly: true
-          type:
-          - array
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        metadata:
-          properties:
-            data:
-              type: object
-            object_id:
-              type: string
-            object_web_link:
-              type: string
-          type:
-          - object
-          - 'null'
-        name:
-          maxLength: 200
-          type: string
-        physicians:
-          items:
-            format: int64
-            type: integer
-          readOnly: true
-          type: array
-        service_locations:
-          items:
-            $ref: '#/components/schemas/ServiceLocation'
-          readOnly: true
-          type:
-          - array
-          - 'null'
-        state:
-          maxLength: 2
-          type: string
-        status:
-          default: active
-          readOnly: true
-          type: string
-        timezone:
-          readOnly: true
-          type: string
-        zip:
-          maxLength: 10
-          type: string
       type: object
     TimezoneEnum:
       enum:
@@ -1420,28 +1297,160 @@ components:
       - Urgent Care Facility
       - Walk-in Retail Health Clinic
       type: string
-    PaginatedPracticeList:
+    Practice:
       properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        address_line1:
+          maxLength: 200
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
+        address_line2:
+          maxLength: 200
           type: string
-        results:
+        city:
+          maxLength: 50
+          type: string
+        elation_root_oid:
+          readOnly: true
+          type: string
+        employers:
           items:
-            $ref: '#/components/schemas/Practice'
+            $ref: '#/components/schemas/Employer'
+          readOnly: true
+          type:
+          - array
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        name:
+          maxLength: 200
+          type: string
+        physicians:
+          items:
+            format: int64
+            type: integer
+          readOnly: true
           type: array
+        service_locations:
+          items:
+            $ref: '#/components/schemas/ServiceLocation'
+          readOnly: true
+          type:
+          - array
+          - 'null'
+        state:
+          maxLength: 2
+          type: string
+        status:
+          default: active
+          readOnly: true
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        zip:
+          maxLength: 10
+          type: string
       required:
-      - results
+      - address_line1
+      - address_line2
+      - name
       type: object
+    BlankEnum:
+      enum:
+      - ''
+    PatchedPractice:
+      properties:
+        address_line1:
+          maxLength: 200
+          type: string
+        address_line2:
+          maxLength: 200
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        elation_root_oid:
+          readOnly: true
+          type: string
+        employers:
+          items:
+            $ref: '#/components/schemas/Employer'
+          readOnly: true
+          type:
+          - array
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        name:
+          maxLength: 200
+          type: string
+        physicians:
+          items:
+            format: int64
+            type: integer
+          readOnly: true
+          type: array
+        service_locations:
+          items:
+            $ref: '#/components/schemas/ServiceLocation'
+          readOnly: true
+          type:
+          - array
+          - 'null'
+        state:
+          maxLength: 2
+          type: string
+        status:
+          default: active
+          readOnly: true
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        zip:
+          maxLength: 10
+          type: string
+      type: object
+    NullEnum:
+      type: 'null'
+    ServiceLocationStatusEnum:
+      enum:
+      - active
+      - inactive
+      - suspended
+      type: string
+    PaginatedPracticeList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Practice_2'
     Practice_2:
       type: object
       properties:
@@ -1495,23 +1504,7 @@ components:
           - string
           - 'null'
           description: URL for previous page
-    PaginatedPracticeList_2:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Practice_2'
   parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -1519,6 +1512,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     limit:
       name: limit
       in: query

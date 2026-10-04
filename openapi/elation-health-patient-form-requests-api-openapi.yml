@@ -590,6 +590,28 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedPatientFormRequestList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientFormRequest'
+          type: array
+      required:
+      - results
+      type: object
     PatientFormRequest:
       properties:
         appointment:
@@ -668,28 +690,6 @@ components:
         practice:
           readOnly: true
           type: integer
-      type: object
-    PaginatedPatientFormRequestList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientFormRequest'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

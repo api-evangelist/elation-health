@@ -416,7 +416,7 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedMedication:
+    Medication:
       properties:
         active_ndcs:
           items:
@@ -533,7 +533,21 @@ components:
       - prescription
       - discontinued
       type: string
-    Medication:
+    MedicationDrugType:
+      description: '* `user` - user
+
+        * `medispan` - medispan
+
+        * `ss` - surescripts
+
+        * `disp` - dispensary'
+      enum:
+      - user
+      - medispan
+      - ss
+      - disp
+      type: string
+    PatchedMedication:
       properties:
         active_ndcs:
           items:
@@ -617,20 +631,6 @@ components:
 
             * `discontinued` - discontinued'
       type: object
-    MedicationDrugType:
-      description: '* `user` - user
-
-        * `medispan` - medispan
-
-        * `ss` - surescripts
-
-        * `disp` - dispensary'
-      enum:
-      - user
-      - medispan
-      - ss
-      - disp
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

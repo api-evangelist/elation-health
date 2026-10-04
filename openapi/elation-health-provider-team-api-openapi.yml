@@ -280,46 +280,7 @@ paths:
       - '2.0'
 components:
   schemas:
-    PaginatedPatientProviderTeamList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientProviderTeam'
-          type: array
-      required:
-      - results
-      type: object
-    PatientProviderTeam:
-      properties:
-        patient_id:
-          description: The id of the Patient object that this team is associated with.
-          readOnly: true
-          type: integer
-        patient_provider_team_id:
-          type: integer
-        team_members:
-          description: The list of providers that are providing care to the above patient.
-          items:
-            $ref: '#/components/schemas/PatientProviderTeamMember'
-          readOnly: true
-          type: array
-      required:
-      - patient_provider_team_id
-      type: object
-    PatchedPatientProviderTeamMemberUpdate:
+    PatientProviderTeamMemberUpdate:
       properties:
         activity_summary_last_refreshed:
           description: The last known time when this team member's activity was synced.
@@ -372,15 +333,46 @@ components:
           - string
           - 'null'
       type: object
-    GroupEnum:
-      description: '* `main` - main
-
-        * `other` - other'
-      enum:
-      - main
-      - other
-      type: string
-    PatientProviderTeamMemberUpdate:
+    PatientProviderTeam:
+      properties:
+        patient_id:
+          description: The id of the Patient object that this team is associated with.
+          readOnly: true
+          type: integer
+        patient_provider_team_id:
+          type: integer
+        team_members:
+          description: The list of providers that are providing care to the above patient.
+          items:
+            $ref: '#/components/schemas/PatientProviderTeamMember'
+          readOnly: true
+          type: array
+      required:
+      - patient_provider_team_id
+      type: object
+    PaginatedPatientProviderTeamList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientProviderTeam'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedPatientProviderTeamMemberUpdate:
       properties:
         activity_summary_last_refreshed:
           description: The last known time when this team member's activity was synced.
@@ -487,6 +479,14 @@ components:
       - patient_provider_team_id
       - physician_id
       type: object
+    GroupEnum:
+      description: '* `main` - main
+
+        * `other` - other'
+      enum:
+      - main
+      - other
+      type: string
   securitySchemes:
     oauth2:
       flows:

@@ -728,149 +728,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    ProviderAvailabilityBlock:
-      properties:
-        end_time:
-          format: time
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        provider_id:
-          format: int64
-          type: integer
-        service_location_id:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        start_time:
-          format: time
-          type: string
-        timezone:
-          readOnly: true
-          type: string
-        use_service_location_timezone:
-          type: boolean
-        weekday:
-          type: integer
-      required:
-      - end_time
-      - provider_id
-      - start_time
-      - weekday
-      type: object
-    ProviderAvailabilityBlockSerializerPracticeTimeZone:
-      properties:
-        end_time:
-          format: time
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        provider_id:
-          format: int64
-          type: integer
-        service_location_id:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        start_time:
-          format: time
-          type: string
-        timezone:
-          readOnly: true
-          type: string
-        use_service_location_timezone:
-          type: boolean
-        weekday:
-          type: integer
-      required:
-      - end_time
-      - provider_id
-      - start_time
-      - weekday
-      type: object
-    PaginatedPhysicianList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Physician'
-          type: array
-      required:
-      - results
-      type: object
-    PatchedPhysician:
-      properties:
-        credentials:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-        email:
-          format: email
-          type: string
-        fax:
-          description: The physician's fax number.
-          readOnly: true
-          type: string
-        first_name:
-          maxLength: 50
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        is_active:
-          description: Whether or not the physician is still active at the practice.
-          readOnly: true
-          type: boolean
-        last_name:
-          maxLength: 60
-          type: string
-        license:
-          type: string
-        license_state:
-          type: string
-        metadata:
-          properties:
-            data:
-              type: object
-            object_id:
-              type: string
-            object_web_link:
-              type: string
-          type:
-          - object
-          - 'null'
-        npi:
-          type: string
-        practice:
-          format: int64
-          readOnly: true
-          type: integer
-        specialty:
-          readOnly: true
-          type: string
-        user_id:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-      type: object
     Physician:
       properties:
         credentials:
@@ -935,15 +792,149 @@ components:
       - license_state
       - npi
       type: object
-    PaginatedPhysicianList_2:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Physician_2'
+    PaginatedPhysicianList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Physician'
+          type: array
+      required:
+      - results
+      type: object
+    ProviderAvailabilityBlockSerializerPracticeTimeZone:
+      properties:
+        end_time:
+          format: time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        provider_id:
+          format: int64
+          type: integer
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        start_time:
+          format: time
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        use_service_location_timezone:
+          type: boolean
+        weekday:
+          type: integer
+      required:
+      - end_time
+      - provider_id
+      - start_time
+      - weekday
+      type: object
+    ProviderAvailabilityBlock:
+      properties:
+        end_time:
+          format: time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        provider_id:
+          format: int64
+          type: integer
+        service_location_id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        start_time:
+          format: time
+          type: string
+        timezone:
+          readOnly: true
+          type: string
+        use_service_location_timezone:
+          type: boolean
+        weekday:
+          type: integer
+      required:
+      - end_time
+      - provider_id
+      - start_time
+      - weekday
+      type: object
+    PatchedPhysician:
+      properties:
+        credentials:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+        email:
+          format: email
+          type: string
+        fax:
+          description: The physician's fax number.
+          readOnly: true
+          type: string
+        first_name:
+          maxLength: 50
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        is_active:
+          description: Whether or not the physician is still active at the practice.
+          readOnly: true
+          type: boolean
+        last_name:
+          maxLength: 60
+          type: string
+        license:
+          type: string
+        license_state:
+          type: string
+        metadata:
+          properties:
+            data:
+              type: object
+            object_id:
+              type: string
+            object_web_link:
+              type: string
+          type:
+          - object
+          - 'null'
+        npi:
+          type: string
+        practice:
+          format: int64
+          readOnly: true
+          type: integer
+        specialty:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      type: object
     Physician_2:
       type: object
       properties:
@@ -970,6 +961,15 @@ components:
           format: email
         is_active:
           type: boolean
+    PaginatedPhysicianList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Physician_2'
     PaginationMeta:
       type: object
       properties:
@@ -987,13 +987,6 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     offset:
       name: offset
       in: query
@@ -1001,6 +994,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
     limit:
       name: limit
       in: query

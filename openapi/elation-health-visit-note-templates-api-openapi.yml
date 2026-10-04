@@ -393,6 +393,34 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatchedVisitNoteTemplate:
+      properties:
+        content:
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 50
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      type: object
     PaginatedVisitNoteTemplateList:
       properties:
         count:
@@ -445,34 +473,6 @@ components:
       required:
       - content
       - name
-      type: object
-    PatchedVisitNoteTemplate:
-      properties:
-        content:
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 50
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
       type: object
   securitySchemes:
     sec0:

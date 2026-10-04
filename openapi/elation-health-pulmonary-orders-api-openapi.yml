@@ -734,6 +734,133 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PaginatedPulmonaryOrderList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PulmonaryOrder'
+          type: array
+      required:
+      - results
+      type: object
+    PulmonaryOrder:
+      properties:
+        allergies:
+          description: Any allergies the patient has.
+          type:
+          - string
+          - 'null'
+        ancillary_company:
+          format: int64
+          type: integer
+        ccs:
+          description: Array of Physician IDs to copy for the order.
+          items:
+            format: int64
+            type: integer
+          type: array
+        chart_date:
+          format: date-time
+          type: string
+        clinical_reason:
+          description: The clinical reason for the order.
+          type: string
+        confidential:
+          type: boolean
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          format: date-time
+          type: string
+        follow_up_method:
+          description: How to notify the patient of the results.
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+        icd10_codes:
+          description: Array of ICD-10 diagnosis codes associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ICD10Code'
+          type: array
+        id:
+          readOnly: true
+          type: integer
+        patient:
+          description: The patient the order is associated with. Patient must belong to the specified practice.
+          format: int64
+          type: integer
+        practice:
+          description: The practice the order is associated with.
+          format: int64
+          type: integer
+        prescribing_user:
+          description: The user associated with the order. User ID must tie to a physician in the practice.
+          type: integer
+        pulmonary_center:
+          description: The pulmonary center the order is associated with.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        resolution:
+          $ref: '#/components/schemas/DocumentResolutionState'
+        signed_by:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        signed_date:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        test_date:
+          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
+          format: date
+          type:
+          - string
+          - 'null'
+        tests:
+          description: An array of pulmonary tests associated with the order.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/PulmonaryOrderTest'
+          type: array
+      required:
+      - allergies
+      - ancillary_company
+      - chart_date
+      - clinical_reason
+      - document_date
+      - patient
+      - practice
+      - prescribing_user
+      type: object
     DocumentResolutionState:
       properties:
         created_date:
@@ -892,146 +1019,6 @@ components:
       - fulfilled
       - cancelled
       type: string
-    ICD10Code:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
-    PaginatedPulmonaryOrderList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PulmonaryOrder'
-          type: array
-      required:
-      - results
-      type: object
-    PulmonaryOrder:
-      properties:
-        allergies:
-          description: Any allergies the patient has.
-          type:
-          - string
-          - 'null'
-        ancillary_company:
-          format: int64
-          type: integer
-        ccs:
-          description: Array of Physician IDs to copy for the order.
-          items:
-            format: int64
-            type: integer
-          type: array
-        chart_date:
-          format: date-time
-          type: string
-        clinical_reason:
-          description: The clinical reason for the order.
-          type: string
-        confidential:
-          type: boolean
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          format: date-time
-          type: string
-        follow_up_method:
-          description: How to notify the patient of the results.
-          maxLength: 100
-          type:
-          - string
-          - 'null'
-        icd10_codes:
-          description: Array of ICD-10 diagnosis codes associated with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ICD10Code'
-          type: array
-        id:
-          readOnly: true
-          type: integer
-        patient:
-          description: The patient the order is associated with. Patient must belong to the specified practice.
-          format: int64
-          type: integer
-        practice:
-          description: The practice the order is associated with.
-          format: int64
-          type: integer
-        prescribing_user:
-          description: The user associated with the order. User ID must tie to a physician in the practice.
-          type: integer
-        pulmonary_center:
-          description: The pulmonary center the order is associated with.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        resolution:
-          $ref: '#/components/schemas/DocumentResolutionState'
-        signed_by:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        signed_date:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        test_date:
-          description: The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.
-          format: date
-          type:
-          - string
-          - 'null'
-        tests:
-          description: An array of pulmonary tests associated with the order.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/PulmonaryOrderTest'
-          type: array
-      required:
-      - allergies
-      - ancillary_company
-      - chart_date
-      - clinical_reason
-      - document_date
-      - patient
-      - practice
-      - prescribing_user
-      type: object
     PulmonaryOrderTest:
       properties:
         code:
@@ -1063,6 +1050,19 @@ components:
       required:
       - name
       - practice
+      type: object
+    ICD10Code:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+      required:
+      - code
       type: object
   securitySchemes:
     sec0:

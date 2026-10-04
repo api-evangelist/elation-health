@@ -494,63 +494,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    Subscription:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type: string
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        properties:
-          description: Properties specific to this subscription.
-          oneOf:
-          - {}
-          - type: 'null'
-        resource:
-          description: The resource name.
-          maxLength: 50
-          type: string
-        signing_pub_key:
-          readOnly: true
-          type: string
-        target:
-          description: Target URL where we would send the POST request on new events.
-          format: uri
-          type: string
-      required:
-      - resource
-      - target
-      type: object
-    PaginatedPublishedEventList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PublishedEvent'
-          type: array
-      required:
-      - results
-      type: object
     PatchedPublishedEvent:
       properties:
         error_content:
@@ -584,28 +527,6 @@ components:
         target:
           readOnly: true
           type: string
-      type: object
-    PaginatedSubscriptionList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Subscription'
-          type: array
-      required:
-      - results
       type: object
     PublishedEvent:
       properties:
@@ -642,6 +563,85 @@ components:
           type: string
       required:
       - processed_date
+      type: object
+    PaginatedPublishedEventList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PublishedEvent'
+          type: array
+      required:
+      - results
+      type: object
+    Subscription:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        properties:
+          description: Properties specific to this subscription.
+          oneOf:
+          - {}
+          - type: 'null'
+        resource:
+          description: The resource name.
+          maxLength: 50
+          type: string
+        signing_pub_key:
+          readOnly: true
+          type: string
+        target:
+          description: Target URL where we would send the POST request on new events.
+          format: uri
+          type: string
+      required:
+      - resource
+      - target
+      type: object
+    PaginatedSubscriptionList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Subscription'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     oauth2:
