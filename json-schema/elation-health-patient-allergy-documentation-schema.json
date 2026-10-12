@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-allergy-documentation-schema.json",
+  "title": "PatientAllergyDocumentation",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-allergy-documentation-nkda-api-openapi.yml#/components/schemas/PatientAllergyDocumentation",
+  "properties": {
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "patient": {
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "patient"
+  ],
+  "type": "object"
+}

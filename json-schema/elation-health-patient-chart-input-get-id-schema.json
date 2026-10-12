@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-chart-input-get-id-schema.json",
+  "title": "PatientChartInputGetId",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-patient-chart-import-api-openapi.yml#/components/schemas/PatientChartInputGetId",
+  "allOf": [
+    {
+      "$ref": "#/$defs/PatientChartInputGetList"
+    },
+    {
+      "type": "object"
+    }
+  ],
+  "properties": {
+    "chart_json": {
+      "$ref": "#/$defs/ChartBuilderJson"
+    }
+  },
+  "$defs": {
+    "ChartBuilderJson": {
+      "description": "contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.",
+      "type": "object"
+    },
+    "JobStatus": {
+      "type": "string",
+      "default": "open",
+      "description": "The current status of the patient chart import. Options are open, pending, processing, failed, completed",
+      "enum": [
+        "open",
+        "pending",
+        "processing",
+        "failed",
+        "completed"
+      ]
+    },
+    "PatientChartInputGetList": {
+      "required": [
+        "chart_json",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "read-only"
+        },
+        "patient_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "read-only, Only set after import has occurred"
+        },
+        "data_import_request_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "read-only after initial creation"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "date-time",
+          "description": "unix UTC timestamp"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "format": "json",
+            "description": "List of field/message tuples describing the issues with the latest attempt to import the associated chart_json"
+          }
+        },
+        "section_status": {
+          "type": "object",
+          "description": "TBD.  Some object that indicates which sections of the chart were successfully imported and which failed."
+        },
+        "status": {
+          "$ref": "#/$defs/JobStatus"
+        },
+        "started_processing_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "(iso8601) datetime. read-only"
+        }
+      }
+    }
+  }
+}

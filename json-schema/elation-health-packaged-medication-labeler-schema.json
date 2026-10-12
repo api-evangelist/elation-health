@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-packaged-medication-labeler-schema.json",
+  "title": "PackagedMedicationLabeler",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-packaged-medication-labeler-beta-api-openapi.yml#/components/schemas/PackagedMedicationLabeler",
+  "properties": {
+    "id": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "medispanid": {
+      "maxLength": 32,
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 255,
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "medispanid",
+    "name"
+  ],
+  "type": "object"
+}

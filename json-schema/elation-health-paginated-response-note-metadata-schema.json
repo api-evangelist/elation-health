@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-response-note-metadata-schema.json",
+  "title": "PaginatedResponse[NoteMetadata]",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-notes-v1-api-openapi.yml#/components/schemas/PaginatedResponse_NoteMetadata_",
+  "properties": {
+    "count": {
+      "title": "Count",
+      "type": "integer"
+    },
+    "limit": {
+      "title": "Limit",
+      "type": "integer"
+    },
+    "next": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next"
+    },
+    "offset": {
+      "title": "Offset",
+      "type": "integer"
+    },
+    "previous": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Previous"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/NoteMetadata"
+      },
+      "title": "Results",
+      "type": "array"
+    }
+  },
+  "required": [
+    "results",
+    "count",
+    "offset",
+    "limit"
+  ],
+  "type": "object",
+  "$defs": {
+    "CODE_TYPE": {
+      "enum": [
+        "CPT",
+        "SNOMED",
+        "HL7",
+        "ICD9",
+        "LOINC",
+        "CVX",
+        "RXNORM",
+        "ICD10",
+        "CPTII",
+        "HCPCS",
+        "EL8"
+      ],
+      "title": "CODE_TYPE",
+      "type": "string"
+    },
+    "Doctag": {
+      "description": "A doctag is an identifier that can be applied to a document.\nThis implementation of doctag mirrors VN1's coded document tag",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Code"
+        },
+        "code_type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CODE_TYPE"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "concept_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Concept Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "is_cpc_plus": {
+          "title": "Is Cpc Plus",
+          "type": "boolean"
+        },
+        "is_mips": {
+          "title": "Is Mips",
+          "type": "boolean"
+        },
+        "practice": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Practice"
+        },
+        "shared": {
+          "title": "Shared",
+          "type": "boolean"
+        },
+        "snomed_result_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Snomed Result Code"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "id",
+        "shared",
+        "is_mips",
+        "is_cpc_plus"
+      ],
+      "title": "Doctag",
+      "type": "object"
+    },
+    "NoteMetadata": {
+      "description": "A lightweight version of `Note` that omits certain fields for performance reasons,\nspecifically for use with endpoints that return notes in bulk.",
+      "properties": {
+        "bill": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "ID of the bill associated to the note",
+          "title": "Bill"
+        },
+        "category": {
+          "description": "Practice-created identifiers for note category.\nA category is a Visit Note Type object.\nSee https://docs.elationhealth.com/reference/visit_note_types_list for API to list all available categories.",
+          "title": "Category",
+          "type": "integer"
+        },
+        "confidential": {
+          "default": false,
+          "description": "Whether the note is marked as confidential.",
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "doctags": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Doctag"
+          },
+          "title": "Doctags",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "is_draft": {
+          "title": "Is Draft",
+          "type": "boolean"
+        },
+        "metadata": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "description": "An optional field to store any necessary metadata related to the note.",
+          "title": "Metadata"
+        },
+        "note_v1_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Note V1 Id"
+        },
+        "patient": {
+          "description": "The ID of the patient for whom the note was created.",
+          "title": "Patient",
+          "type": "integer"
+        },
+        "practice": {
+          "description": "Authoring practice ID.",
+          "title": "Practice",
+          "type": "integer"
+        },
+        "provider": {
+          "description": "The ID of the assigned provider.",
+          "title": "Provider",
+          "type": "integer"
+        },
+        "serviced_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Serviced At"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "practice",
+        "patient",
+        "category",
+        "serviced_at",
+        "is_draft"
+      ],
+      "title": "NoteMetadata",
+      "type": "object"
+    }
+  }
+}

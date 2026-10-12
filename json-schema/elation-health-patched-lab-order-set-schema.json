@@ -1,0 +1,438 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patched-lab-order-set-schema.json",
+  "title": "PatchedLabOrderSet",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-order-sets-api-openapi.yml#/components/schemas/PatchedLabOrderSet",
+  "properties": {
+    "compendium_code": {
+      "description": "RM-9598 Guard against missing code/name. Can't repro issue from ticket\n    locally so being extra careful with the guards here.",
+      "readOnly": true,
+      "type": "string"
+    },
+    "content": {
+      "$ref": "#/$defs/LabOrderContent"
+    },
+    "created_date": {
+      "description": "Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "lab_vendor": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "name": {
+      "description": "The name of the lab order set.",
+      "maxLength": 250,
+      "type": "string"
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "BlankEnum": {
+      "enum": [
+        ""
+      ]
+    },
+    "FastingMethodEnum": {
+      "description": "* `fasting_12_hour` - Fasting - 12 hours\n* `fasting_8_hours` - Fasting - 8 hours\n* `fasting_2_hours` - Fasting - 2 hours\n* `fasting_none` - Non-Fasting\n* `fasting_random` - Fasting or non-fasting does not matter (Random)",
+      "enum": [
+        "fasting_12_hour",
+        "fasting_8_hours",
+        "fasting_2_hours",
+        "fasting_none",
+        "fasting_random"
+      ],
+      "type": "string"
+    },
+    "ICD10Code": {
+      "properties": {
+        "code": {
+          "maxLength": 50,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 500,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "type": "object"
+    },
+    "LabOrderAOEQuestion": {
+      "properties": {
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/LabOrderAOEQuestionChoice"
+          },
+          "type": "array"
+        },
+        "code": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "example_format": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "max_length": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "question_type": {
+          "$ref": "#/$defs/QuestionTypeEnum"
+        },
+        "secondary_code": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "choices",
+        "code",
+        "value"
+      ],
+      "type": "object"
+    },
+    "LabOrderAOEQuestionChoice": {
+      "properties": {
+        "code": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "value"
+      ],
+      "type": "object"
+    },
+    "LabOrderContent": {
+      "properties": {
+        "collection_datetime": {
+          "description": "If lab specimen collection is done onsite, this is the time at which the collection was taken.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fasting_method": {
+          "description": "Instructions for patient and lab on how long they should fast before specimen collection.\n\n* `fasting_12_hour` - Fasting - 12 hours\n* `fasting_8_hours` - Fasting - 8 hours\n* `fasting_2_hours` - Fasting - 2 hours\n* `fasting_none` - Non-Fasting\n* `fasting_random` - Fasting or non-fasting does not matter (Random)",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FastingMethodEnum"
+            },
+            {
+              "$ref": "#/$defs/BlankEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "icd10_codes": {
+          "description": "ICD10 diagnosis codes provided along with the order.",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/ICD10Code"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "patient_instructions": {
+          "description": "Notes for patient.",
+          "type": "string"
+        },
+        "standing_order_end_date": {
+          "description": "Date at which standing order should be canceled.",
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "standing_order_frequency": {
+          "description": "Number of times order should be performed on a standing basis.",
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stat_method": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StatMethodEnum"
+            },
+            {
+              "$ref": "#/$defs/BlankEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "test_center_notes": {
+          "description": "Notes for Lab.",
+          "type": "string"
+        },
+        "tests": {
+          "description": "The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.",
+          "items": {
+            "$ref": "#/$defs/LabOrderTestWithDiagnoses"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "LabOrderTestToLabOrderAOEQuestion": {
+      "properties": {
+        "question": {
+          "$ref": "#/$defs/LabOrderAOEQuestion"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "test": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "question",
+        "sequence"
+      ],
+      "type": "object"
+    },
+    "LabOrderTestWithDiagnoses": {
+      "properties": {
+        "code": {
+          "description": "Any code associated with the test, usually provided by the lab vendor's compendium.",
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "compendium": {
+          "description": "The id of the compendium provided the lab vendor that provides the lab order test. All tests in the same order **MUST** share the same compendium.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "cpts": {
+          "description": "A list of CPT codes associated with the lab order test.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "created_date": {
+          "description": "Time at which Elation created this Lab Order Test.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "Time at which this Lab Order Test was deleted. Can happen when a lab order compendium update deprecates a test.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "icd10_codes": {
+          "items": {
+            "$ref": "#/$defs/ICD10Code"
+          },
+          "type": "array"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "lab_vendor": {
+          "description": "The id of the lab vendor who provides the lab order test.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "The name of the Lab Order Test.",
+          "maxLength": 255,
+          "type": "string"
+        },
+        "practice_created": {
+          "description": "The id of the practice that created the test if practice created.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "procedure_class": {
+          "description": "Code provided by specific compendiums that indicate the \"class\" of test, e.g. histology vs cytology. Some lab vendors require that tests with specific procedure classes need to ordered separately.",
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "questions": {
+          "description": "A list of Ask on Entry (AOE) Questions that need to be answered by the orderer when creating the order.",
+          "items": {
+            "$ref": "#/$defs/LabOrderTestToLabOrderAOEQuestion"
+          },
+          "type": "array"
+        },
+        "synonyms": {
+          "description": "A list of synonyms that are useful when searching for a specific test.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "icd10_codes",
+        "name"
+      ],
+      "type": "object"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "QuestionTypeEnum": {
+      "description": "* `enum` - enum\n* `enum_multiselect` - enum_multiselect\n* `freetext` - freetext\n* `y_or_n` - y_or_n\n* `numeric` - numeric\n* `yyyymmdd` - yyyymmdd\n* `2_numeric_1_decimal` - 2_numeric_1_decimal",
+      "enum": [
+        "enum",
+        "enum_multiselect",
+        "freetext",
+        "y_or_n",
+        "numeric",
+        "yyyymmdd",
+        "2_numeric_1_decimal"
+      ],
+      "type": "string"
+    },
+    "StatMethodEnum": {
+      "description": "* `wet_reading_phone` - STAT Wet Reading - Please Phone Report\n* `wet_reading_fax` - STAT Wet Reading - Please Fax Report\n* `stat_phone` - STAT - Phone\n* `stat_fax` - STAT - Fax\n* `stat_phone_fax` - STAT - Phone and Fax",
+      "enum": [
+        "wet_reading_phone",
+        "wet_reading_fax",
+        "stat_phone",
+        "stat_fax",
+        "stat_phone_fax"
+      ],
+      "type": "string"
+    }
+  }
+}

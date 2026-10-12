@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-medication-history-download-fill-list-schema.json",
+  "title": "PaginatedMedicationHistoryDownloadFillList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-fills-api-openapi.yml#/components/schemas/PaginatedMedicationHistoryDownloadFillList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/MedicationHistoryDownloadFill"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "MedicationHistoryDownloadFill": {
+      "properties": {
+        "create_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "days_supply": {
+          "type": "string"
+        },
+        "diagnoses": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "directions": {
+          "type": "string"
+        },
+        "history_download": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "last_fill_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "medication": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "medication_description": {
+          "type": "string"
+        },
+        "medication_order": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        },
+        "patient": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "pharmacy_ncpdpid": {
+          "type": "string"
+        },
+        "practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "prescriber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "prescribing_physician": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "prior_auth": {
+          "type": "string"
+        },
+        "prior_auth_qualifier": {
+          "$ref": "#/$defs/PriorAuthQualifierEnum"
+        },
+        "quantity": {
+          "type": "string"
+        },
+        "quantity_note": {
+          "type": "string"
+        },
+        "quantity_unit": {
+          "type": "string"
+        },
+        "refills": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "requesting_physician": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "requesting_physician_action": {
+          "$ref": "#/$defs/RequestingPhysicianActionEnum"
+        },
+        "substitutions": {
+          "type": "string"
+        },
+        "written_date": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "days_supply",
+        "diagnoses",
+        "directions",
+        "history_download",
+        "is_active",
+        "last_fill_date",
+        "medication",
+        "medication_description",
+        "medication_order",
+        "note",
+        "patient",
+        "pharmacy_ncpdpid",
+        "practice",
+        "prescriber",
+        "prescribing_physician",
+        "prior_auth",
+        "prior_auth_qualifier",
+        "quantity",
+        "quantity_note",
+        "quantity_unit",
+        "refills",
+        "requesting_physician",
+        "requesting_physician_action",
+        "substitutions",
+        "written_date"
+      ],
+      "type": "object"
+    },
+    "PriorAuthQualifierEnum": {
+      "description": "* `94` - Pharmacy or Prescriber File ID\n* `0B` - State License Number\n* `1C` - Medicare Number\n* `1D` - Medicaid Number\n* `1E` - Dentist License Number\n* `1G` - UPIN\n* `1J` - Facility ID Number\n* `1M` - PPO Number\n* `2U` - Payer Identification Number\n* `ADI` - Processor Identification Number\n* `BO` - BIN Location Number\n* `C1` - Commercial\n* `EA` - Medical Record Identification Number\n* `EJ` - Patient Account Number\n* `D3` - NCPDP Provider ID Number\n* `DH` - DEA Number\n* `G1` - Prior Authorization\n* `GI` - Secondary Provider Number\n* `HI` - HIN\n* `HPI` - National Provider ID\n* `IP` - Individual Policy Number\n* `NC` - Secondary Coverage Company Number\n* `NF` - National Association of Insurance Commissioner Code\n* `PD` - Promotion Number\n* `SY` - Social Security Number\n* `WI` - Waiver\n* `ZZ` - Mutually Defined",
+      "enum": [
+        "94",
+        "0B",
+        "1C",
+        "1D",
+        "1E",
+        "1G",
+        "1J",
+        "1M",
+        "2U",
+        "ADI",
+        "BO",
+        "C1",
+        "EA",
+        "EJ",
+        "D3",
+        "DH",
+        "G1",
+        "GI",
+        "HI",
+        "HPI",
+        "IP",
+        "NC",
+        "NF",
+        "PD",
+        "SY",
+        "WI",
+        "ZZ"
+      ],
+      "type": "string"
+    },
+    "RequestingPhysicianActionEnum": {
+      "description": "* `ReqAct` - Requiring Action\n* `Addressed` - Addressed",
+      "enum": [
+        "ReqAct",
+        "Addressed"
+      ],
+      "type": "string"
+    }
+  }
+}

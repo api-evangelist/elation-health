@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-existing-data-import-request-schema.json",
+  "title": "ExistingDataImportRequest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-data-import-request-api-openapi.yml#/components/schemas/ExistingDataImportRequest",
+  "required": [
+    "id",
+    "created_at",
+    "physician_id",
+    "practice_id",
+    "sections_to_import",
+    "status"
+  ],
+  "allOf": [
+    {
+      "$ref": "#/$defs/ExistingDataImportRequestWithoutStatus"
+    },
+    {
+      "type": "object"
+    }
+  ],
+  "properties": {
+    "status": {
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "importStatus": {
+            "$ref": "#/$defs/JobStatus"
+          },
+          "numPatientImports": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of child Patient Chart Import Requests in the associated status"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "BaseDataImportRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The id of the Data Import Request"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The creation timestamp for the Data Import Request"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Arbitrary notes to associate with the Data Import Request"
+        }
+      }
+    },
+    "ExistingDataImportRequestWithoutStatus": {
+      "required": [
+        "id",
+        "created_at",
+        "physician_id",
+        "practice_id",
+        "sections_to_import"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/BaseDataImportRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "physician_id": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The id of the physician provider to import all child patient charts for; cannot be updated after initial create"
+        },
+        "practice_id": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The id of the practice to import all child patient charts for; cannot be updated after initial create"
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "default": "open",
+      "description": "The current status of the patient chart import. Options are open, pending, processing, failed, completed",
+      "enum": [
+        "open",
+        "pending",
+        "processing",
+        "failed",
+        "completed"
+      ]
+    }
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-note-update-schema.json",
+  "title": "NoteUpdate",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-notes-api-openapi.yml#/components/schemas/NoteUpdate",
+  "properties": {
+    "bill": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Bill"
+    },
+    "category": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Category"
+    },
+    "close_snapshot": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Close Snapshot"
+    },
+    "confidential": {
+      "default": false,
+      "title": "Confidential",
+      "type": "boolean"
+    },
+    "content": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DocumentNode-Input"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "exam_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Exam Reason"
+    },
+    "metadata": {
+      "anyOf": [
+        {},
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Metadata"
+    },
+    "provider": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Provider"
+    },
+    "serviced_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Serviced At"
+    },
+    "snapshot_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Snapshot Id"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "AiGenerationInfo": {
+      "properties": {
+        "is_finalized": {
+          "default": true,
+          "title": "Is Finalized",
+          "type": "boolean"
+        },
+        "transcript_source_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "",
+          "title": "Transcript Source Text"
+        }
+      },
+      "title": "AiGenerationInfo",
+      "type": "object"
+    },
+    "AnyNodeContent": {
+      "additionalProperties": true,
+      "description": "Placeholder for node content, eliminating cycles in OpenAPI schema generation.\nThis should be replaced with any node content type when calling the API",
+      "properties": {},
+      "title": "AnyNodeContent",
+      "type": "object"
+    },
+    "ColumnLayoutNode-Input": {
+      "additionalProperties": true,
+      "properties": {
+        "attrs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/el8_note_models__note__content__base_node__Node__NodeAttrs"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AnyNodeContent"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "columnLayout",
+          "default": "columnLayout",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ColumnLayoutNode",
+      "type": "object"
+    },
+    "DocumentNode-Input": {
+      "additionalProperties": true,
+      "properties": {
+        "attrs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/el8_note_models__note__content__base_node__Node__NodeAttrs"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/DocumentNodeChild-Input"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "document",
+          "default": "document",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "DocumentNode",
+      "type": "object"
+    },
+    "DocumentNodeChild-Input": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/TwoColumnLayoutNode-Input"
+        },
+        {
+          "$ref": "#/$defs/ColumnLayoutNode-Input"
+        }
+      ]
+    },
+    "TwoColumnLayoutNode-Input": {
+      "additionalProperties": true,
+      "properties": {
+        "attrs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/el8_note_models__note__content__base_node__Node__NodeAttrs"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/ColumnLayoutNode-Input"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "twoColumnLayout",
+          "default": "twoColumnLayout",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "TwoColumnLayoutNode",
+      "type": "object"
+    },
+    "el8_note_models__note__content__base_node__Node__NodeAttrs": {
+      "properties": {
+        "ai_generation_info": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AiGenerationInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "creation_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ai",
+                "template"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Creation Type"
+        },
+        "is_new": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is New"
+        },
+        "ref_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ref Id"
+        }
+      },
+      "title": "NodeAttrs",
+      "type": "object"
+    }
+  }
+}

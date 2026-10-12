@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-lab-vendor-patient-site-schema.json",
+  "title": "LabVendorPatientSite",
+  "description": "The serializer for LabVendorPatientSite",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-vendor-patient-sites-api-openapi.yml#/components/schemas/LabVendorPatientSite",
+  "properties": {
+    "address": {
+      "description": "The address of the site.",
+      "maxLength": 200,
+      "type": "string"
+    },
+    "city": {
+      "description": "The city of the site.",
+      "maxLength": 50,
+      "type": "string"
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fax": {
+      "maxLength": 20,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 200,
+      "type": "string"
+    },
+    "phone": {
+      "maxLength": 20,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "practice_created": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "state": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "suite": {
+      "maxLength": 40,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "vendor": {
+      "$ref": "#/$defs/LabVendorIdName"
+    },
+    "zip": {
+      "maxLength": 10,
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "$defs": {
+    "LabVendorIdName": {
+      "description": "LabVendor Serializer useful for simple, read-only reference.",
+      "properties": {
+        "display_name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patched-message-thread-schema.json",
+  "title": "PatchedMessageThread",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-message-threads-api-openapi.yml#/components/schemas/PatchedMessageThread",
+  "properties": {
+    "chart_date": {
+      "description": "When the message thread's patient chart was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "created_date": {
+      "description": "When the message thread was created.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "description": "When the message thread was deleted.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "delivery_date": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "document_date": {
+      "description": "When the message thread's document was created.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "is_urgent": {
+      "default": false,
+      "description": "Whether the message is currently urgent.",
+      "type": "boolean"
+    },
+    "members": {
+      "description": "List of Thread Members, when creating only need to specify the id of the thread member and their status.",
+      "items": {
+        "$ref": "#/$defs/ThreadMember"
+      },
+      "type": "array"
+    },
+    "messages": {
+      "description": "List of Thread Messages, when creating only need to provide the body, send_date and sender.",
+      "items": {
+        "$ref": "#/$defs/ThreadMessage"
+      },
+      "type": "array"
+    },
+    "patient": {
+      "description": "The patient chart for which the thread is about.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "practice": {
+      "description": "The id of the practice that owns the patient chart.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "signed_by": {
+      "description": "The user who signed the thread",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "signed_date": {
+      "description": "The date and time when the thread was signed",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "Document": {
+      "properties": {
+        "authoring_practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "chart_date": {
+          "description": "The creation date of the patient chart.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "created_date": {
+          "description": "The creation date of the document.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "The deleted date of the document.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_date": {
+          "description": "The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "document_type": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "last_modified": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "patient": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sign_date": {
+          "description": "The date of when the document was signed (if signed).",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_by": {
+          "description": "The id of whoever signed the document (if signed).",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "authoring_practice",
+        "chart_date",
+        "document_date",
+        "id",
+        "patient"
+      ],
+      "type": "object"
+    },
+    "ThreadMember": {
+      "properties": {
+        "ack_time": {
+          "description": "The time at which the member acknowledged the message thread.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "group": {
+          "description": "The id of the group referenced by this thread member. Should only ever be one of either a user or group set for the thread member.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "status": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ThreadMemberStatusEnum"
+            }
+          ],
+          "description": "Whether this member has acknowledged the message thread."
+        },
+        "thread": {
+          "description": "The id of the thread this thread member is a member of.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "user": {
+          "description": "The id of the user referenced by this thread member. Should only ever be one of either a user or group set for the thread member.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "ThreadMemberStatusEnum": {
+      "enum": [
+        "Addressed",
+        "Requiring Action"
+      ],
+      "type": "string"
+    },
+    "ThreadMessage": {
+      "properties": {
+        "body": {
+          "description": "The actual message body.",
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "patient": {
+          "description": "The patient id.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "practice": {
+          "description": "The practice id.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "send_date": {
+          "description": "The date of when the message was sent.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "sender": {
+          "description": "The id of who sent the message.",
+          "type": "integer"
+        },
+        "thread": {
+          "description": "The message thread id.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "to_document": {
+          "$ref": "#/$defs/Document"
+        }
+      },
+      "required": [
+        "body",
+        "send_date",
+        "sender"
+      ],
+      "type": "object"
+    }
+  }
+}

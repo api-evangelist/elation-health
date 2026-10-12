@@ -1,5 +1,5 @@
 ---
-name: Create and track a lab order
+name: elation-health-order-labs
 description: Create a laboratory order for a patient and retrieve its status and printable form.
 api: openapi/elation-orders-api.json
 operations: [lab_orders_create, getLabOrdersById, lab_orders_list, lab_orders_printable_retrieve]

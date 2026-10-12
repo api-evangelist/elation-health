@@ -1,5 +1,5 @@
 ---
-name: Schedule a patient appointment
+name: elation-health-schedule-appointment
 description: Look up appointment types and book, retrieve, and update an appointment for a patient.
 api: openapi/elation-scheduling-api.json
 operations: [appointment_types_list, appointments_create, appointments_retrieve, appointments_list, appointments_partial_update]

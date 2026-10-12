@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-insurance-card-schema.json",
+  "title": "InsuranceCard",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-insurance-card-api-openapi.yml#/components/schemas/InsuranceCard",
+  "properties": {
+    "images": {
+      "items": {
+        "$ref": "#/$defs/InsuranceCardImage"
+      },
+      "type": "array"
+    },
+    "rank": {
+      "description": "Primary or secondary insurances (1 or 2).",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "images",
+    "rank"
+  ],
+  "type": "object",
+  "$defs": {
+    "InsuranceCardImage": {
+      "properties": {
+        "side": {
+          "description": "Insurance card side. Usually front (1) or back (2).",
+          "type": "integer"
+        },
+        "ttl": {
+          "type": "integer"
+        },
+        "url": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "side",
+        "ttl",
+        "url"
+      ],
+      "type": "object"
+    }
+  }
+}

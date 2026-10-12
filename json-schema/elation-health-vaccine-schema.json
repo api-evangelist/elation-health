@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-vaccine-schema.json",
+  "title": "Vaccine",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-vaccine-api-openapi.yml#/components/schemas/Vaccine",
+  "properties": {
+    "cdc_type": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "creation_type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/VaccineCreationType"
+        }
+      ],
+      "readOnly": true
+    },
+    "cvx": {
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "is_user_created": {
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "name": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "ndc": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ndc_values": {
+      "items": {
+        "type": "string"
+      },
+      "readOnly": true,
+      "type": "array"
+    },
+    "practice": {
+      "format": "int64",
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "VaccineCreationType": {
+      "enum": [
+        "elation",
+        "medispan",
+        "user"
+      ],
+      "type": "string"
+    }
+  }
+}

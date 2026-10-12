@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-delegate-permission-schema.json",
+  "title": "DelegatePermission",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-delegate-permissions-api-openapi.yml#/components/schemas/DelegatePermission",
+  "properties": {
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "delegate_user": {
+      "type": "integer"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "permission_type": {
+      "$ref": "#/$defs/PermissionTypeEnum"
+    },
+    "physician": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "delegate_user",
+    "permission_type",
+    "physician",
+    "practice"
+  ],
+  "type": "object",
+  "$defs": {
+    "PermissionTypeEnum": {
+      "enum": [
+        "bills",
+        "messages",
+        "orders",
+        "referrals",
+        "rxs"
+      ],
+      "type": "string"
+    }
+  }
+}

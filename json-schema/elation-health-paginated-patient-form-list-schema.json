@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-patient-form-list-schema.json",
+  "title": "PaginatedPatientFormList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-patient-forms-api-openapi.yml#/components/schemas/PaginatedPatientFormList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/PatientForm"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "PatientForm": {
+      "properties": {
+        "appointment_types": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "created_by": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "created_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "deleted_by": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "form_name": {
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "last_modified_by": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "last_modified_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sequence": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "topics": {}
+      },
+      "required": [
+        "created_date",
+        "deleted_date",
+        "form_name",
+        "last_modified_date",
+        "practice",
+        "sequence",
+        "topics"
+      ],
+      "type": "object"
+    }
+  }
+}

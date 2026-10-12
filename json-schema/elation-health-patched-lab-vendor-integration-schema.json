@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patched-lab-vendor-integration-schema.json",
+  "title": "PatchedLabVendorIntegration",
+  "description": "Serializer for non-internal usage to align better with APIv2 conventions",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-vendor-integrations-api-openapi.yml#/components/schemas/PatchedLabVendorIntegration",
+  "properties": {
+    "allow_print": {
+      "type": "boolean"
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "lab_vendor": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "orders_status": {
+      "$ref": "#/$defs/LabVendorIntegrationStatus"
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "results_status": {
+      "$ref": "#/$defs/LabVendorIntegrationStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "LabVendorIntegrationStatus": {
+      "enum": [
+        "blocked",
+        "completed_testing",
+        "live",
+        "not_requested",
+        "pending_testing",
+        "waiting_on_lab"
+      ],
+      "type": "string"
+    }
+  }
+}

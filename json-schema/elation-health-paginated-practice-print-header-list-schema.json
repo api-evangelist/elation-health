@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-practice-print-header-list-schema.json",
+  "title": "PaginatedPracticePrintHeaderList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-print-headers-api-openapi.yml#/components/schemas/PaginatedPracticePrintHeaderList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/PracticePrintHeader"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "PracticePrintHeader": {
+      "properties": {
+        "content_type": {
+          "description": "The type of print header; whether its pure text or is an image. {0, 1} 0=text 1=image.",
+          "maxLength": 5,
+          "type": "string"
+        },
+        "created_date": {
+          "description": "The timestamp when the print header was created.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "The timestamp when the print header was deleted.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "header": {
+          "description": "The text header. Will be null if not a text print header.",
+          "maxLength": 500,
+          "type": "string"
+        },
+        "header_image": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/UploadedPhoto"
+            }
+          ],
+          "description": "The header image. Will be null if not an image header."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "image_placement": {
+          "description": "Specifies where the image header is placed. {0, 1, 2, 3} 0=left 1=right 2=center 3=fit to width.",
+          "maxLength": 12,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the print header displayed in the app.",
+          "maxLength": 200,
+          "type": "string"
+        },
+        "practice": {
+          "description": "The practice that owns this print header.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "UploadedPhoto": {
+      "description": "Serializer for UploadedPhoto model.\nUsed for print header images and other cases where we need to serialize an UploadedPhoto directly.",
+      "properties": {
+        "content_type": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "file_size": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "height": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "last_updated": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "original_filename": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "width": {
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

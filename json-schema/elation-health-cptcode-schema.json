@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-cptcode-schema.json",
+  "title": "CPTCode",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-billing-codes-api-openapi.yml#/components/schemas/CPTCode",
+  "properties": {
+    "charge": {
+      "description": "The amount of money that will be charged for the code.",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "code": {
+      "description": "The code that a user and integrators will see.",
+      "maxLength": 10,
+      "type": "string"
+    },
+    "description": {
+      "description": "The description of the code that users will see.",
+      "maxLength": 200,
+      "type": "string"
+    },
+    "id": {
+      "description": "The internal elation id of the billing code.",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "practice": {
+      "description": "The practice who created the billing code.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "sequence": {
+      "description": "The position in the list of billing codes.",
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "code",
+    "description",
+    "practice"
+  ],
+  "type": "object"
+}

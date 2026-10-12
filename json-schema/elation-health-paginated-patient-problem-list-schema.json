@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-patient-problem-list-schema.json",
+  "title": "PaginatedPatientProblemList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-problems-api-openapi.yml#/components/schemas/PaginatedPatientProblemList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/PatientProblem"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "BlankEnum": {
+      "enum": [
+        ""
+      ]
+    },
+    "ImoCodeRelation": {
+      "properties": {
+        "icd10": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "icd9": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "snomed": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "PatientProblem": {
+      "properties": {
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "dx": {
+          "description": "The diagnoses for imo codes.",
+          "items": {
+            "$ref": "#/$defs/ImoCodeRelation"
+          },
+          "type": "array"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "patient": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "practice": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "rank": {
+          "type": "integer"
+        },
+        "resolved_date": {
+          "description": "Date the problem was resolved. Set only if `status` is `Resolved`.",
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "start_date": {
+          "format": "date",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/PatientProblemStatusEnum"
+        },
+        "synopsis": {
+          "type": "string"
+        },
+        "verification_status": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/VerificationStatusEnum"
+            },
+            {
+              "$ref": "#/$defs/BlankEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        }
+      },
+      "required": [
+        "description",
+        "dx",
+        "patient",
+        "start_date",
+        "status"
+      ],
+      "type": "object"
+    },
+    "PatientProblemStatusEnum": {
+      "enum": [
+        "Active",
+        "Controlled",
+        "Resolved"
+      ],
+      "type": "string"
+    },
+    "VerificationStatusEnum": {
+      "enum": [
+        "confirmed",
+        "differential",
+        "entered_in_error",
+        "provisional",
+        "refuted",
+        "unconfirmed"
+      ],
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-lab-order-test-schema.json",
+  "title": "LabOrderTest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-order-tests-api-openapi.yml#/components/schemas/LabOrderTest",
+  "properties": {
+    "code": {
+      "description": "Any code associated with the test, usually provided by the lab vendor's compendium.",
+      "maxLength": 50,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "compendium": {
+      "description": "The id of the compendium provided the lab vendor that provides the lab order test. All tests in the same order **MUST** share the same compendium.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "cpts": {
+      "description": "A list of CPT codes associated with the lab order test.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "created_date": {
+      "description": "Time at which Elation created this Lab Order Test.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "description": "Time at which this Lab Order Test was deleted. Can happen when a lab order compendium update deprecates a test.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "lab_vendor": {
+      "description": "The id of the lab vendor who provides the lab order test.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "name": {
+      "description": "The name of the Lab Order Test.",
+      "maxLength": 255,
+      "type": "string"
+    },
+    "practice_created": {
+      "description": "The id of the practice that created the test if practice created.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "procedure_class": {
+      "description": "Code provided by specific compendiums that indicate the \"class\" of test, e.g. histology vs cytology. Some lab vendors require that tests with specific procedure classes need to ordered separately.",
+      "maxLength": 50,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "questions": {
+      "description": "A list of Ask on Entry (AOE) Questions that need to be answered by the orderer when creating the order.",
+      "items": {
+        "$ref": "#/$defs/LabOrderTestToLabOrderAOEQuestion"
+      },
+      "type": "array"
+    },
+    "synonyms": {
+      "description": "A list of synonyms that are useful when searching for a specific test.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "$defs": {
+    "LabOrderAOEQuestion": {
+      "properties": {
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/LabOrderAOEQuestionChoice"
+          },
+          "type": "array"
+        },
+        "code": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "example_format": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "max_length": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "question_type": {
+          "$ref": "#/$defs/QuestionTypeEnum"
+        },
+        "secondary_code": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "choices",
+        "code",
+        "value"
+      ],
+      "type": "object"
+    },
+    "LabOrderAOEQuestionChoice": {
+      "properties": {
+        "code": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "value"
+      ],
+      "type": "object"
+    },
+    "LabOrderTestToLabOrderAOEQuestion": {
+      "properties": {
+        "question": {
+          "$ref": "#/$defs/LabOrderAOEQuestion"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "test": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "question",
+        "sequence"
+      ],
+      "type": "object"
+    },
+    "QuestionTypeEnum": {
+      "description": "* `enum` - enum\n* `enum_multiselect` - enum_multiselect\n* `freetext` - freetext\n* `y_or_n` - y_or_n\n* `numeric` - numeric\n* `yyyymmdd` - yyyymmdd\n* `2_numeric_1_decimal` - 2_numeric_1_decimal",
+      "enum": [
+        "enum",
+        "enum_multiselect",
+        "freetext",
+        "y_or_n",
+        "numeric",
+        "yyyymmdd",
+        "2_numeric_1_decimal"
+      ],
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-message-thread-create-schema.json",
+  "title": "MessageThreadCreate",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-messaging-api-openapi.yml#/components/schemas/MessageThreadCreate",
+  "type": "object",
+  "required": [
+    "subject"
+  ],
+  "properties": {
+    "subject": {
+      "type": "string",
+      "description": "Thread subject"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "User IDs of thread members"
+    },
+    "patient": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Associated patient ID"
+    },
+    "note": {
+      "type": "string",
+      "description": "Initial message content"
+    }
+  }
+}

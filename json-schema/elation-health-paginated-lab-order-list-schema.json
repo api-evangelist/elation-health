@@ -1,0 +1,1215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-lab-order-list-schema.json",
+  "title": "PaginatedLabOrderList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-orders-api-openapi.yml#/components/schemas/PaginatedLabOrderList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/LabOrder"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "BiDiLabConnection": {
+      "properties": {
+        "alias": {
+          "description": "Get the alias of the connection.",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enabled": {
+          "description": "Get the enabled status of the connection.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "priority": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "protocol": {
+          "description": "Get the protocol of the connection.",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "BillTypeEnum": {
+      "description": "* `thirdparty` - Third Party (e.g. Insurance)\n* `patient` - Patient\n* `client` - Client\n* `workerscomp` - Worker's Comp\n* `specialbilling` - Special Billing",
+      "enum": [
+        "thirdparty",
+        "patient",
+        "client",
+        "workerscomp",
+        "specialbilling"
+      ],
+      "type": "string"
+    },
+    "BlankEnum": {
+      "enum": [
+        ""
+      ]
+    },
+    "BodySite": {
+      "properties": {
+        "code": {
+          "description": "The HL7 code representing the body site from which a specimen was collected.",
+          "maxLength": 16,
+          "type": "string"
+        },
+        "deleted_date": {
+          "description": "Represents if the body site was removed from the specimen.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "description": "A textual description of the body site from which the specimen was collected.",
+          "maxLength": 64,
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "text"
+      ],
+      "type": "object"
+    },
+    "BodySiteCodeModifier": {
+      "properties": {
+        "code": {
+          "description": "The HL7 code representing the modifier on the body site from which a specimen was collected.",
+          "maxLength": 3,
+          "type": "string"
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "description": "A textual description of the modifier of the body site from which the specimen was collected.",
+          "maxLength": 64,
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "text"
+      ],
+      "type": "object"
+    },
+    "DocumentResolutionState": {
+      "properties": {
+        "created_date": {
+          "description": "The datetime when this resolution state was created.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "The datetime when this resolution was deleted. Should never be null because we're providing the most updated resolution.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document": {
+          "description": "Will be the same as the id of the lab order.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "id": {
+          "description": "Internal id to represent the resolution state.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "note": {
+          "description": "Any note that was added to represent why an order was cancelled.",
+          "maxLength": 200,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolving_document": {
+          "description": "If the order is fulfilled will indicate the document referenced. For lab orders will usually be a report. Must be an integer ID or null.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "state": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/StateEnum"
+            }
+          ],
+          "description": "The resolution state of the order.\n\n* `outstanding` - Outstanding\n* `fulfilled` - Fulfilled\n* `cancelled` - Cancelled"
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "type": "object"
+    },
+    "FacilityIdentifier": {
+      "properties": {
+        "active": {
+          "description": "Whether the facility identifier should be used. Should be true in most cases.",
+          "type": "boolean"
+        },
+        "bidi_connection": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BiDiLabConnection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "readOnly": true
+        },
+        "compendium": {
+          "description": "The id of the compendium that will be used when the user selects this facility identifier.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "description": "The text that will displayed to users in the lab order dialog.",
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "lab_connection": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "lab_facility": {
+          "description": "The id that represents the lab.",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "practice_facility": {
+          "description": "The id that represents the practice; often an account number provided by the lab vendor.",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "practice_secondary_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "user_facing": {
+          "description": "Whether this facility identifier will be visible in the lab order dialog. Should be true for most cases.",
+          "type": "boolean"
+        },
+        "vendor": {
+          "properties": {
+            "display_name": {
+              "type": "string"
+            },
+            "id": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "active",
+        "lab_facility",
+        "practice",
+        "practice_facility",
+        "vendor"
+      ],
+      "type": "object"
+    },
+    "FastingMethodEnum": {
+      "description": "* `fasting_12_hour` - Fasting - 12 hours\n* `fasting_8_hours` - Fasting - 8 hours\n* `fasting_2_hours` - Fasting - 2 hours\n* `fasting_none` - Non-Fasting\n* `fasting_random` - Fasting or non-fasting does not matter (Random)",
+      "enum": [
+        "fasting_12_hour",
+        "fasting_8_hours",
+        "fasting_2_hours",
+        "fasting_none",
+        "fasting_random"
+      ],
+      "type": "string"
+    },
+    "ICD10Code": {
+      "properties": {
+        "code": {
+          "maxLength": 50,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 500,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "type": "object"
+    },
+    "LabOrder": {
+      "properties": {
+        "answers": {
+          "description": "List of the answers provided for the Ask on Entry (AOE) questions if required by any lab order tests.",
+          "items": {
+            "$ref": "#/$defs/LabOrderAOEAnswer"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "bill_type": {
+          "description": "Who is financially responsible for the order.\n\n* `thirdparty` - Third Party (e.g. Insurance)\n* `patient` - Patient\n* `client` - Client\n* `workerscomp` - Worker's Comp\n* `specialbilling` - Special Billing",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BillTypeEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "ccs": {
+          "description": "List of physician ids who should be cc'd on any reports.",
+          "items": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": "array"
+        },
+        "chart_date": {
+          "description": "Date at which this order was first seen in the patient's chart.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "confidential": {
+          "default": false,
+          "description": "Whether the provider has marked the order as confidential. Should not be shared with a patient.",
+          "type": "boolean"
+        },
+        "content": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/LabOrderContent"
+            }
+          ],
+          "description": "Represents the content of the lab order report."
+        },
+        "created_date": {
+          "description": "Time at which elation created this order. Can be different from chart_date when the order was imported into a chart from a different source and document_date when documenting an order that happened at some other time.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_date": {
+          "description": "Time at which this order was created in whichever system created it. Could be historical or same as the create_date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "facility": {
+          "description": "An identifier that represents the facility placing the order. Usually assigned by the lab vendor.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FacilityIdentifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "follow_up_method": {
+          "description": "Freetext field communicating how the patient should receive their results.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "ordering_physician": {
+          "description": "The id of the physician who created the order.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "patient": {
+          "description": "The id of the patient.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "practice": {
+          "description": "The id of the practice.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "printable_view": {
+          "format": "uri",
+          "type": "string"
+        },
+        "requisition": {
+          "description": "The requisition id of the order. Can be different from the order id if and when the order was created outside of Elation.",
+          "type": "integer"
+        },
+        "resolution": {
+          "description": "The current state of the order's resolution.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DocumentResolutionState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "signed_by": {
+          "description": "The id of the physician who signed off on the order.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "signed_date": {
+          "description": "The time when the order was signed.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "site": {
+          "description": "The location where the patient will have the lab performed. Sites are specific to their lab vendor.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/LabVendorPatientSite"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "special_insurance": {
+          "description": "Used primarily to support specific electronic lab order integrations.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PracticeSpecialInsuranceCodeName"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "specimens": {
+          "description": "Record of any specimens collected when creating the order.",
+          "items": {
+            "$ref": "#/$defs/LabOrderSpecimen"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "submissions": {
+          "description": "Record of the attempts to submit.",
+          "items": {
+            "$ref": "#/$defs/LabOrderSubmission"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "tags": {
+          "description": "Any tags associated with the lab order.",
+          "items": {
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": "array"
+        },
+        "test_date": {
+          "description": "The date on which the tests should be performed, or were performed. Can be different than document_date, create_date.",
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "vendor": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "document_date",
+        "ordering_physician",
+        "patient",
+        "practice"
+      ],
+      "type": "object"
+    },
+    "LabOrderAOEAnswer": {
+      "properties": {
+        "created_date": {
+          "description": "When the answer was created.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "When the answer was deleted.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "question": {
+          "description": "The id of the AOE question for which this answer pertains.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "test": {
+          "description": "The id of the test for which this answer pertains.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "value": {
+          "description": "The value entered by freetext or chosen by the ordering physician.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "question"
+      ],
+      "type": "object"
+    },
+    "LabOrderAOEQuestion": {
+      "properties": {
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/LabOrderAOEQuestionChoice"
+          },
+          "type": "array"
+        },
+        "code": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "example_format": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "max_length": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "question_type": {
+          "$ref": "#/$defs/QuestionTypeEnum"
+        },
+        "secondary_code": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "choices",
+        "code",
+        "value"
+      ],
+      "type": "object"
+    },
+    "LabOrderAOEQuestionChoice": {
+      "properties": {
+        "code": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "value"
+      ],
+      "type": "object"
+    },
+    "LabOrderContent": {
+      "properties": {
+        "collection_datetime": {
+          "description": "If lab specimen collection is done onsite, this is the time at which the collection was taken.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fasting_method": {
+          "description": "Instructions for patient and lab on how long they should fast before specimen collection.\n\n* `fasting_12_hour` - Fasting - 12 hours\n* `fasting_8_hours` - Fasting - 8 hours\n* `fasting_2_hours` - Fasting - 2 hours\n* `fasting_none` - Non-Fasting\n* `fasting_random` - Fasting or non-fasting does not matter (Random)",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FastingMethodEnum"
+            },
+            {
+              "$ref": "#/$defs/BlankEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "icd10_codes": {
+          "description": "ICD10 diagnosis codes provided along with the order.",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/ICD10Code"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "patient_instructions": {
+          "description": "Notes for patient.",
+          "type": "string"
+        },
+        "standing_order_end_date": {
+          "description": "Date at which standing order should be canceled.",
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "standing_order_frequency": {
+          "description": "Number of times order should be performed on a standing basis.",
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stat_method": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StatMethodEnum"
+            },
+            {
+              "$ref": "#/$defs/BlankEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "test_center_notes": {
+          "description": "Notes for Lab.",
+          "type": "string"
+        },
+        "tests": {
+          "description": "The list of tests that should be performed by the lab. Must all be either from the same compendium or no compendium.",
+          "items": {
+            "$ref": "#/$defs/LabOrderTestWithDiagnoses"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "LabOrderSpecimen": {
+      "properties": {
+        "body_site": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/BodySite"
+            }
+          ],
+          "description": "Information about the body site where the specimen was collected."
+        },
+        "container_id": {
+          "description": "An identifier representing the container used to store the specimen.",
+          "maxLength": 2,
+          "type": "string"
+        },
+        "description": {
+          "description": "A freetext description of the specimen.",
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "lab_order": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "modifiers": {
+          "description": "Coded Modifiers indicating more information about the body site from which the specimen was collected.",
+          "items": {
+            "$ref": "#/$defs/LabOrderSpecimenModifier"
+          },
+          "type": "array"
+        },
+        "test": {
+          "description": "The lab order test for which the specimen as collected.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "body_site",
+        "container_id",
+        "modifiers",
+        "test"
+      ],
+      "type": "object"
+    },
+    "LabOrderSpecimenModifier": {
+      "properties": {
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "modifier": {
+          "$ref": "#/$defs/BodySiteCodeModifier"
+        },
+        "sequence": {
+          "description": "The cardinal position in which the modifiers should be listed.",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "specimen": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "modifier",
+        "sequence",
+        "specimen"
+      ],
+      "type": "object"
+    },
+    "LabOrderSubmission": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "lab_order": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "state": {
+          "description": "The state of the electronic order submission.",
+          "maxLength": 20,
+          "type": "string"
+        },
+        "state_metadata": {
+          "description": "Useful error information collected as part of the submission. Including ERRORs or ACKs.",
+          "maxLength": 1500,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "time_acknowledged": {
+          "description": "The time at which a user acknowledged any error shown to them about the electronic submission.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "time_submitted": {
+          "description": "The time the electronic order was submitted to the lab vendor.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "time_submitted"
+      ],
+      "type": "object"
+    },
+    "LabOrderTestToLabOrderAOEQuestion": {
+      "properties": {
+        "question": {
+          "$ref": "#/$defs/LabOrderAOEQuestion"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "test": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "question",
+        "sequence"
+      ],
+      "type": "object"
+    },
+    "LabOrderTestWithDiagnoses": {
+      "properties": {
+        "code": {
+          "description": "Any code associated with the test, usually provided by the lab vendor's compendium.",
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "compendium": {
+          "description": "The id of the compendium provided the lab vendor that provides the lab order test. All tests in the same order **MUST** share the same compendium.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "cpts": {
+          "description": "A list of CPT codes associated with the lab order test.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "created_date": {
+          "description": "Time at which Elation created this Lab Order Test.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "Time at which this Lab Order Test was deleted. Can happen when a lab order compendium update deprecates a test.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "icd10_codes": {
+          "items": {
+            "$ref": "#/$defs/ICD10Code"
+          },
+          "type": "array"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "lab_vendor": {
+          "description": "The id of the lab vendor who provides the lab order test.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "The name of the Lab Order Test.",
+          "maxLength": 255,
+          "type": "string"
+        },
+        "practice_created": {
+          "description": "The id of the practice that created the test if practice created.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "procedure_class": {
+          "description": "Code provided by specific compendiums that indicate the \"class\" of test, e.g. histology vs cytology. Some lab vendors require that tests with specific procedure classes need to ordered separately.",
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "questions": {
+          "description": "A list of Ask on Entry (AOE) Questions that need to be answered by the orderer when creating the order.",
+          "items": {
+            "$ref": "#/$defs/LabOrderTestToLabOrderAOEQuestion"
+          },
+          "type": "array"
+        },
+        "synonyms": {
+          "description": "A list of synonyms that are useful when searching for a specific test.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "icd10_codes",
+        "name"
+      ],
+      "type": "object"
+    },
+    "LabVendorIdName": {
+      "description": "LabVendor Serializer useful for simple, read-only reference.",
+      "properties": {
+        "display_name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LabVendorPatientSite": {
+      "description": "The serializer for LabVendorPatientSite",
+      "properties": {
+        "address": {
+          "description": "The address of the site.",
+          "maxLength": 200,
+          "type": "string"
+        },
+        "city": {
+          "description": "The city of the site.",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fax": {
+          "maxLength": 20,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "phone": {
+          "maxLength": 20,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "practice_created": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "state": {
+          "maxLength": 2,
+          "type": "string"
+        },
+        "suite": {
+          "maxLength": 40,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "vendor": {
+          "$ref": "#/$defs/LabVendorIdName"
+        },
+        "zip": {
+          "maxLength": 10,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "PracticeSpecialInsuranceCodeName": {
+      "properties": {
+        "code": {
+          "maxLength": 5,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 64,
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "name"
+      ],
+      "type": "object"
+    },
+    "QuestionTypeEnum": {
+      "description": "* `enum` - enum\n* `enum_multiselect` - enum_multiselect\n* `freetext` - freetext\n* `y_or_n` - y_or_n\n* `numeric` - numeric\n* `yyyymmdd` - yyyymmdd\n* `2_numeric_1_decimal` - 2_numeric_1_decimal",
+      "enum": [
+        "enum",
+        "enum_multiselect",
+        "freetext",
+        "y_or_n",
+        "numeric",
+        "yyyymmdd",
+        "2_numeric_1_decimal"
+      ],
+      "type": "string"
+    },
+    "StatMethodEnum": {
+      "description": "* `wet_reading_phone` - STAT Wet Reading - Please Phone Report\n* `wet_reading_fax` - STAT Wet Reading - Please Fax Report\n* `stat_phone` - STAT - Phone\n* `stat_fax` - STAT - Fax\n* `stat_phone_fax` - STAT - Phone and Fax",
+      "enum": [
+        "wet_reading_phone",
+        "wet_reading_fax",
+        "stat_phone",
+        "stat_fax",
+        "stat_phone_fax"
+      ],
+      "type": "string"
+    },
+    "StateEnum": {
+      "description": "* `outstanding` - Outstanding\n* `fulfilled` - Fulfilled\n* `cancelled` - Cancelled",
+      "enum": [
+        "outstanding",
+        "fulfilled",
+        "cancelled"
+      ],
+      "type": "string"
+    }
+  }
+}

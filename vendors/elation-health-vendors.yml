@@ -1,0 +1,91 @@
+generated: '2026-10-12'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: cloudflare
+  name: Cloudflare
+  area: cdn
+  host: www.elationhealth.com
+  evidence: header:cf-ray
+  signal: header
+  confidence: high
+  kin_score:
+  - https_enforced
+  - hsts
+- vendor: cloudfront
+  name: Amazon CloudFront
+  area: cdn
+  host: www.elationhealth.com
+  evidence: cname:cloudfront.net
+  signal: cname
+  confidence: high
+  kin_score: []
+- vendor: vercel
+  name: Vercel
+  area: hosting
+  host: help.elationhealth.com
+  evidence: header:x-vercel-id
+  signal: header
+  confidence: high
+  kin_score: []
+- vendor: wpengine
+  name: WP Engine
+  area: hosting
+  host: www.elationhealth.com
+  evidence: header:x-powered-by:wp engine
+  signal: header
+  confidence: high
+  kin_score: []
+- vendor: statuspage
+  name: Atlassian Statuspage
+  area: status-page
+  host: elationhealth.statuspage.io
+  evidence: https://elationhealth.statuspage.io/
+  signal: url:statuspage.io
+  confidence: high
+  kin_score:
+  - status_page
+reliance:
+  areas_vendor_served:
+  - cdn
+  - hosting
+  - status-page
+  vendor_count: 5
+  areas_observed: 12
+  share_of_observable_areas: 0.25
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: not probed'
+- www.elationhealth.com (Website)
+- docs.elationhealth.com (DeveloperPortal)
+- docs.elationhealth.com (Documentation)
+- docs.elationhealth.com (APIReference)
+- docs.elationhealth.com (GettingStarted)
+- www.elationhealth.com (SignUp)
+- www.elationhealth.com (Support)
+- elationhealth.statuspage.io (StatusPage)
+- help.elationhealth.com (DeveloperPortal)
+- help.elationhealth.com (Documentation)
+- help.elationhealth.com (APIReference)
+- help.elationhealth.com (GettingStarted)
+- help.elationhealth.com (HelpCenter)
+- help.elationhealth.com (Support)
+- app.elationemr.com (baseURL)
+- fhir.elationemr.com (baseURL)
+- api.app.elationemr.com (baseURL)
+- help.elationhealth.com (mcp)

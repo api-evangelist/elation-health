@@ -1,22 +1,18 @@
 generated: '2026-08-14'
 method: searched
-source: >-
-  https://help.elationhealth.com/articles/rest/overview/oauth,
-  https://help.elationhealth.com/articles/rest/overview/scopes,
-  https://help.elationhealth.com/articles/rest/overview/pagination,
-  https://help.elationhealth.com/articles/rest/overview/dates,
-  https://help.elationhealth.com/articles/rest/overview/metadata,
-  https://help.elationhealth.com/articles/rest/overview/errors,
-  https://help.elationhealth.com/articles/rest/overview/webhooks,
-  openapi/elation-health-api-full-openapi.yaml, openapi/*.json
-source_note: >-
-  Re-verified 2026-08-14 against the new documentation host. The legacy ReadMe
-  URLs (docs.elationhealth.com/reference/*) still resolve but are frozen as of
-  2026-08-07 — see lifecycle/elation-health-lifecycle.yml.
+source: https://help.elationhealth.com/articles/rest/overview/oauth, https://help.elationhealth.com/articles/rest/overview/scopes,
+  https://help.elationhealth.com/articles/rest/overview/pagination, https://help.elationhealth.com/articles/rest/overview/dates,
+  https://help.elationhealth.com/articles/rest/overview/metadata, https://help.elationhealth.com/articles/rest/overview/errors,
+  https://help.elationhealth.com/articles/rest/overview/webhooks, openapi/elation-health-api-full-openapi.yaml,
+  openapi/*.json
+source_note: Re-verified 2026-08-14 against the new documentation host. The legacy ReadMe URLs (docs.elationhealth.com/reference/*)
+  still resolve but are frozen as of 2026-08-07 — see lifecycle/elation-health-lifecycle.yml.
 authentication:
   style: oauth2-bearer
   token_endpoint: /api/2.0/oauth2/token/
-  grants: [client_credentials, password]
+  grants:
+  - client_credentials
+  - password
   impersonation:
     header: X-On-Behalf-Of
     scope: act_as_user
@@ -24,18 +20,27 @@ authentication:
   see: authentication/elation-health-authentication.yml
 idempotency:
   supported: false
-  note: >-
-    No idempotency-key header or parameter is documented or present in the
-    OpenAPI. No Idempotency pointer is emitted (would be fabrication).
+  note: No idempotency-key header or parameter is documented or present in the OpenAPI. No Idempotency pointer is
+    emitted (would be fabrication).
+  coverage: none
 pagination:
   default_style: cursor
   cursor:
     param: cursor
-    response_fields: [next, previous, results]
+    response_fields:
+    - next
+    - previous
+    - results
     note: Omitting/empty cursor starts at the beginning, ordered by ascending id.
   offset:
-    param: [limit, offset]
-    response_fields: [count, next, previous, results]
+    param:
+    - limit
+    - offset
+    response_fields:
+    - count
+    - next
+    - previous
+    - results
     note: Activated when an offset parameter is supplied.
   max_page_size: 100
   recommendation: Use cursor-based pagination for best performance and reliability.
@@ -54,21 +59,17 @@ rate_limiting:
   signaled: true
   status_code: 429
   headers: []
-  note: >-
-    Documented ("Our API limits the rate at which you can perform certain
-    actions") but specific thresholds are not published and NO rate-limit
-    response headers exist — re-checked 2026-08-14 across the REST overview,
-    errors and api-overview pages: no X-RateLimit-*, no RateLimit-*, no
-    Retry-After. A 429 status is the only runtime signal available to an agent.
+  note: 'Documented ("Our API limits the rate at which you can perform certain actions") but specific thresholds
+    are not published and NO rate-limit response headers exist — re-checked 2026-08-14 across the REST overview,
+    errors and api-overview pages: no X-RateLimit-*, no RateLimit-*, no Retry-After. A 429 status is the only runtime
+    signal available to an agent.'
   see: rate-limits/elation-health-rate-limits.yml
 authorization:
   scope_model: system/<resource>.<permission>
   default_scope: apiv2
   availability: closed-beta
-  note: >-
-    Granular token scopes are in closed beta for select customers; a token with
-    no scope parameter receives the apiv2 global scope, i.e. full access to
-    every API resource. Scopes cannot be combined with apiv2.
+  note: Granular token scopes are in closed beta for select customers; a token with no scope parameter receives
+    the apiv2 global scope, i.e. full access to every API resource. Scopes cannot be combined with apiv2.
   see: scopes/elation-health-scopes.yml
 versioning:
   scheme: uri-path
@@ -80,5 +81,12 @@ webhooks:
     algorithm: Ed25519
     header: El8-Ed25519-Signature
     key_field: signing_pub_key
-  payload_fields: [data, action, event_id, event_uuid, application_id, resource, resource_url]
+  payload_fields:
+  - data
+  - action
+  - event_id
+  - event_uuid
+  - application_id
+  - resource
+  - resource_url
   see: asyncapi/elation-health-events-webhooks.yml

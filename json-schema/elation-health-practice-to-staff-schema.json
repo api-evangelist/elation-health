@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-practice-to-staff-schema.json",
+  "title": "PracticeToStaff",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-office-staff-api-openapi.yml#/components/schemas/PracticeToStaff",
+  "properties": {
+    "created_date": {
+      "description": "When staff was added to the system.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dob": {
+      "format": "date",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "email": {
+      "description": "Get office email using fallbacks",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "first_name": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "last_name": {
+      "maxLength": 60,
+      "type": "string"
+    },
+    "middle_name": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "phone": {
+      "maxLength": 20,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "practice": {
+      "format": "int64",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "prefix": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "sex": {
+      "$ref": "#/$defs/PracticeToStaffSexEnum"
+    },
+    "suffix": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "user_id": {
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "last_name"
+  ],
+  "type": "object",
+  "$defs": {
+    "PracticeToStaffSexEnum": {
+      "enum": [
+        "Female",
+        "Intersex/Other",
+        "Male",
+        "None selected"
+      ],
+      "type": "string"
+    }
+  }
+}

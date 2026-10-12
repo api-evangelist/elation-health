@@ -1,5 +1,5 @@
 ---
-name: Check patient insurance eligibility
+name: elation-health-check-insurance-eligibility
 description: Run an insurance eligibility check for a patient policy and retrieve the full eligibility report.
 api: openapi/elation-premium-patient-insurance-api.json
 operations: [patient_insurances_eligibility_create, patient_insurances_eligibility_retrieve, patient_insurances_eligibility_full_report_retrieve]

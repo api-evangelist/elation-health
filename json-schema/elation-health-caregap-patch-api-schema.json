@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-caregap-patch-api-schema.json",
+  "title": "CaregapPatchAPI",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-caregaps-api-openapi.yml#/components/schemas/CaregapPatchAPI",
+  "required": [
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/StatusEnum"
+        }
+      ],
+      "description": "Current status of the caregap"
+    }
+  },
+  "$defs": {
+    "StatusEnum": {
+      "title": "StatusEnum",
+      "enum": [
+        "open",
+        "closed"
+      ],
+      "type": "string",
+      "description": "An enumeration."
+    }
+  }
+}

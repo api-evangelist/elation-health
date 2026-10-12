@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-physician-schema.json",
+  "title": "Physician",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-physicians-api-openapi.yml#/components/schemas/Physician",
+  "properties": {
+    "credentials": {
+      "maxLength": 20,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "email": {
+      "format": "email",
+      "type": "string"
+    },
+    "fax": {
+      "description": "The physician's fax number.",
+      "readOnly": true,
+      "type": "string"
+    },
+    "first_name": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "is_active": {
+      "description": "Whether or not the physician is still active at the practice.",
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "last_name": {
+      "maxLength": 60,
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "license_state": {
+      "type": "string"
+    },
+    "metadata": {
+      "properties": {
+        "data": {
+          "type": "object"
+        },
+        "object_id": {
+          "type": "string"
+        },
+        "object_web_link": {
+          "type": "string"
+        }
+      },
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "npi": {
+      "type": "string"
+    },
+    "practice": {
+      "format": "int64",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "specialty": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "user_id": {
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "email",
+    "first_name",
+    "last_name",
+    "license",
+    "license_state",
+    "npi"
+  ],
+  "type": "object"
+}

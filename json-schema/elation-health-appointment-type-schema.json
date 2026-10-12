@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-appointment-type-schema.json",
+  "title": "AppointmentType",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-appointment-types-api-openapi.yml#/components/schemas/AppointmentType",
+  "properties": {
+    "abbreviation": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "default_duration": {
+      "type": "integer"
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "elation_note_template_ids": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "is_telehealth": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string"
+    },
+    "patient_bookable": {
+      "type": "boolean"
+    },
+    "patient_form_hours_prior": {
+      "type": "integer"
+    },
+    "patient_forms": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "sequence": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "visit_note_format": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/VisitNoteFormatEnum"
+        },
+        {
+          "$ref": "#/$defs/NullEnum"
+        }
+      ]
+    },
+    "visit_note_templates": {
+      "items": {
+        "format": "int64",
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "visit_note_type": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "default_duration",
+    "name",
+    "practice"
+  ],
+  "type": "object",
+  "$defs": {
+    "NullEnum": {
+      "type": "null"
+    },
+    "VisitNoteFormatEnum": {
+      "enum": [
+        "note2",
+        "oneCol.oneField",
+        "oneCol.preOp",
+        "oneCol.preOp2",
+        "oneCol.simple",
+        "twoCol.complex",
+        "twoCol.complex2"
+      ],
+      "type": "string"
+    }
+  }
+}

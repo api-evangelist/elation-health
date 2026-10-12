@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-rx-history-download-list-schema.json",
+  "title": "PaginatedRxHistoryDownloadList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-historical-medication-download-requests-api-openapi.yml#/components/schemas/PaginatedRxHistoryDownloadList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/RxHistoryDownload"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "ErrorCodeEnum": {
+      "enum": [
+        "Communication problem - try again later",
+        "Receiver System Error",
+        "Receiver unable to process",
+        "Transaction rejected"
+      ],
+      "type": "string"
+    },
+    "ErrorDescriptionCodeEnum": {
+      "enum": [
+        "Internal processing error has occurred.",
+        "Invalid password for receiver",
+        "Invalid password for sender.",
+        "No password on file for receiver.",
+        "No password on file for sender.",
+        "Receiver ID not on file.",
+        "Request timed out before response could be received.",
+        "Required segment UIB is missing.",
+        "Required segment UIH is missing.",
+        "Required segment UIT is missing.",
+        "Required segment UIZ is missing.",
+        "Sender ID not on file."
+      ],
+      "type": "string"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "RxHistoryDownload": {
+      "properties": {
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eligibility": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "error_code": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ErrorCodeEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "error_description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "error_description_code": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ErrorDescriptionCodeEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "from_date": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "num_items": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "patient": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "pbm_member_id": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pbm_name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "pbm_surescripts_participant_id": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "signed_by": {
+          "format": "int64",
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "signed_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "until_date": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "patient",
+        "practice"
+      ],
+      "type": "object"
+    }
+  }
+}

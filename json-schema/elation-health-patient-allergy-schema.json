@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-allergy-schema.json",
+  "title": "PatientAllergy",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-allergies-api-openapi.yml#/components/schemas/PatientAllergy",
+  "properties": {
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "medispandnid": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "medispanid": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "name": {
+      "description": "The name of the allergy drug.",
+      "type": "string"
+    },
+    "patient": {
+      "description": "The id of the patient.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "reaction": {
+      "description": "The reaction to the drug.",
+      "maxLength": 200,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "severity": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PatientAllergySeverityEnum"
+        }
+      ],
+      "description": "How severe the reaction is."
+    },
+    "start_date": {
+      "description": "The date the allergy started.",
+      "format": "date",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "$ref": "#/$defs/AllergyStatus"
+    }
+  },
+  "required": [
+    "name",
+    "patient"
+  ],
+  "type": "object",
+  "$defs": {
+    "AllergyStatus": {
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "type": "string"
+    },
+    "PatientAllergySeverityEnum": {
+      "enum": [
+        "mild",
+        "moderate",
+        "severe",
+        "unknown"
+      ],
+      "type": "string"
+    }
+  }
+}

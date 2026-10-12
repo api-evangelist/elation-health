@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-handouts-serializer-no-base64-content-list-schema.json",
+  "title": "PaginatedHandoutsSerializerNoBase64ContentList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-handouts-api-openapi.yml#/components/schemas/PaginatedHandoutsSerializerNoBase64ContentList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/HandoutsSerializerNoBase64Content"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "ContentSerializerNoBase64Content": {
+      "description": "The Content serializer. It serialize file data without base64_content",
+      "properties": {
+        "content_type": {
+          "type": "string"
+        },
+        "original_filename": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content_type",
+        "original_filename"
+      ],
+      "type": "object"
+    },
+    "HandoutType": {
+      "enum": [
+        "Patient Resource",
+        "VIS"
+      ],
+      "type": "string"
+    },
+    "HandoutsSerializerNoBase64Content": {
+      "description": "Handout serializer that returns content without base64_content",
+      "properties": {
+        "content": {
+          "$ref": "#/$defs/ContentSerializerNoBase64Content"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "name": {
+          "description": "The name of the handout.",
+          "maxLength": 255,
+          "type": "string"
+        },
+        "practice_created": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "received_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "$ref": "#/$defs/HandoutType"
+        },
+        "vis_barcode": {
+          "description": "Should only be set if the type == VIS.",
+          "maxLength": 30,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "content",
+        "name",
+        "practice_created",
+        "type"
+      ],
+      "type": "object"
+    }
+  }
+}

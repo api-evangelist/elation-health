@@ -1,5 +1,5 @@
 ---
-name: Register and read a patient
+name: elation-health-register-and-read-patient
 description: Create a new patient record in Elation and read it back, including demographics and clinical profile.
 api: openapi/elation-patient-profile-api.json
 operations: [patients_create, getApi20PatientsById, patients_list, patients_partial_update]

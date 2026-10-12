@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-elation-note-create-schema.json",
+  "title": "ElationNoteCreate",
+  "description": "Request body for creating a sections-based note.\n\nThe layout is selected by `layout_name` (e.g. \"simple_note\").\nNo `content` field — the initial content_map is always empty on creation.",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-notes-v2-api-openapi.yml#/components/schemas/ElationNoteCreate",
+  "properties": {
+    "bill": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The ID of the bill associated with the note.",
+      "title": "Bill"
+    },
+    "category": {
+      "description": "Practice-created identifier for note category (Visit Note Type).",
+      "title": "Category",
+      "type": "integer"
+    },
+    "confidential": {
+      "default": false,
+      "title": "Confidential",
+      "type": "boolean"
+    },
+    "exam_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Exam Reason"
+    },
+    "layout_name": {
+      "description": "Name of the pre-defined layout, e.g. 'simple_note'.",
+      "title": "Layout Name",
+      "type": "string"
+    },
+    "metadata": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Metadata"
+    },
+    "patient": {
+      "description": "The ID of the patient for whom the note was created.",
+      "title": "Patient",
+      "type": "integer"
+    },
+    "practice": {
+      "description": "Authoring practice ID.",
+      "title": "Practice",
+      "type": "integer"
+    },
+    "provider": {
+      "description": "The ID of the assigned provider.",
+      "title": "Provider",
+      "type": "integer"
+    },
+    "serviced_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Serviced At"
+    }
+  },
+  "required": [
+    "provider",
+    "category",
+    "layout_name",
+    "practice",
+    "patient"
+  ],
+  "type": "object"
+}

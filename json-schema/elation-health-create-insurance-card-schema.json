@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-create-insurance-card-schema.json",
+  "title": "CreateInsuranceCard",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-insurance-card-api-openapi.yml#/components/schemas/CreateInsuranceCard",
+  "properties": {
+    "image": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ImageContent"
+        }
+      ],
+      "description": "Base64 encoded image of the insurance card. Only JPG and PNG files are supported."
+    },
+    "rank": {
+      "description": "Primary or secondary insurances (1 or 2).",
+      "type": "integer"
+    },
+    "side": {
+      "description": "Insurance card side. Usually front (1) or back (2).",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "image",
+    "rank",
+    "side"
+  ],
+  "type": "object",
+  "$defs": {
+    "ImageContent": {
+      "properties": {
+        "base64_content": {
+          "type": "string"
+        },
+        "original_filename": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "base64_content",
+        "original_filename"
+      ],
+      "type": "object"
+    }
+  }
+}

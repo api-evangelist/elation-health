@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-user-list-schema.json",
+  "title": "PaginatedUserList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-users-api-openapi.yml#/components/schemas/PaginatedUserList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/User"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "AccountTypeEnum": {
+      "description": "* `regular` - Regular staff\n* `oncall` - On call (not paid)\n* `ft_non_prescribing` - Full-Time Non-Prescribing\n* `pt_prescribing` - Limited Use",
+      "enum": [
+        "regular",
+        "oncall",
+        "ft_non_prescribing",
+        "pt_prescribing"
+      ],
+      "type": "string"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "PhysicianQualifications": {
+      "properties": {
+        "credentials": {
+          "maxLength": 50,
+          "type": "string"
+        },
+        "dea": {
+          "maxLength": 50,
+          "type": "string"
+        },
+        "license": {
+          "maxLength": 50,
+          "type": "string"
+        },
+        "license_state": {
+          "maxLength": 2,
+          "type": "string"
+        },
+        "npi": {
+          "maxLength": 10,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "credentials",
+        "license",
+        "license_state"
+      ],
+      "type": "object"
+    },
+    "User": {
+      "properties": {
+        "account_type": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AccountTypeEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "credentialed": {
+          "default": false,
+          "type": "boolean"
+        },
+        "email": {
+          "maxLength": 255,
+          "type": "string"
+        },
+        "first_name": {
+          "maxLength": 50,
+          "type": "string"
+        },
+        "has_chart_access": {
+          "default": true,
+          "type": "boolean"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "is_practice_admin": {
+          "default": false,
+          "type": "boolean"
+        },
+        "is_read_only": {
+          "default": false,
+          "type": "boolean"
+        },
+        "last_name": {
+          "maxLength": 60,
+          "type": "string"
+        },
+        "physician_qualifications": {
+          "$ref": "#/$defs/PhysicianQualifications"
+        },
+        "practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "user_type": {
+          "$ref": "#/$defs/UserTypeEnum"
+        }
+      },
+      "required": [
+        "email",
+        "first_name",
+        "is_active",
+        "last_name",
+        "practice",
+        "user_type"
+      ],
+      "type": "object"
+    },
+    "UserTypeEnum": {
+      "enum": [
+        "physician",
+        "staff"
+      ],
+      "type": "string"
+    }
+  }
+}

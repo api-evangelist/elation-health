@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-history-schema.json",
+  "title": "PatientHistory",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-histories-api-openapi.yml#/components/schemas/PatientHistory",
+  "properties": {
+    "created_date": {
+      "description": "The date the history was created.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "description": "The date the history was deleted.",
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "patient": {
+      "description": "The id of the patient.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "rank": {
+      "description": "The rank (or sequence) of the history.",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "text": {
+      "description": "The value (or text) of the history.",
+      "type": "string"
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PatientHistoryTypeEnum"
+        }
+      ],
+      "description": "The type of the history."
+    }
+  },
+  "required": [
+    "patient",
+    "text",
+    "type"
+  ],
+  "type": "object",
+  "$defs": {
+    "PatientHistoryTypeEnum": {
+      "enum": [
+        "Cognitive Status",
+        "Consultation",
+        "Diet",
+        "Exercise",
+        "Family",
+        "Functional Status",
+        "Habits",
+        "Health Maintenance",
+        "Immunization",
+        "Legal",
+        "Past",
+        "Past Surgical",
+        "Psychological",
+        "Social"
+      ],
+      "type": "string"
+    }
+  }
+}

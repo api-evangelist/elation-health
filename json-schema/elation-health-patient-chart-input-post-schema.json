@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-chart-input-post-schema.json",
+  "title": "PatientChartInputPost",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-patient-chart-import-api-openapi.yml#/components/schemas/PatientChartInputPost",
+  "required": [
+    "chart_json",
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "source_patient_id": {
+      "type": "string",
+      "description": "a patient key, normally (fname|lname|dob|gender)"
+    },
+    "chart_json": {
+      "$ref": "#/$defs/ChartBuilderJson"
+    },
+    "status": {
+      "$ref": "#/$defs/JobStatus"
+    }
+  },
+  "$defs": {
+    "ChartBuilderJson": {
+      "description": "contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.",
+      "type": "object"
+    },
+    "JobStatus": {
+      "type": "string",
+      "default": "open",
+      "description": "The current status of the patient chart import. Options are open, pending, processing, failed, completed",
+      "enum": [
+        "open",
+        "pending",
+        "processing",
+        "failed",
+        "completed"
+      ]
+    }
+  }
+}

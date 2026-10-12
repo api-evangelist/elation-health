@@ -2,18 +2,16 @@ aid: elation-health
 url: https://raw.githubusercontent.com/api-evangelist/elation-health/refs/heads/main/apis.yml
 name: Elation Health
 kind: company
-description: Elation Health is a United States clinical-first electronic health record (EHR/EMR) and healthcare
-  technology company, founded in 2010 and headquartered in San Francisco, California, serving independent primary
-  care practices, value-based care organizations, digital health startups, and health-tech partners. Beyond its
-  provider-facing EHR, Elation ships a broad, well-documented public REST API (v2.0) that lets partners read and
-  write clinical and administrative data - patient profiles and demographics, allergies and problems, visit notes,
-  clinical and lab/imaging orders, patient documents, scheduling, billing, insurance and eligibility, messaging,
-  practice and user management, care gaps, and data import - authenticated with OAuth2. The API is documented on
-  a ReadMe developer portal backed by machine-readable OpenAPI definitions, augmented with event subscription webhooks
-  and a Model Context Protocol (MCP) server for agentic access. Elation also operates login-gated HL7 FHIR R4 and
-  SMART-on-FHIR interoperability endpoints for ONC/CMS 21st Century Cures Act information-blocking compliance, exposed
-  to registered applications rather than anonymously. Positioned as an independent challenger to the US EHR duopoly,
-  Elation targets the primary-care and value-based-care segment of the largest, most commercial healthcare-API market.
+description: Elation Health is a United States clinical-first electronic health record (EHR/EMR) and healthcare technology company, founded in
+  2010 and headquartered in San Francisco, California, serving independent primary care practices, value-based care organizations, digital health
+  startups, and health-tech partners. Beyond its provider-facing EHR, Elation ships a broad, well-documented public REST API (v2.0) that lets
+  partners read and write clinical and administrative data - patient profiles and demographics, allergies and problems, visit notes, clinical
+  and lab/imaging orders, patient documents, scheduling, billing, insurance and eligibility, messaging, practice and user management, care gaps,
+  and data import - authenticated with OAuth2. The API is documented on a ReadMe developer portal backed by machine-readable OpenAPI definitions,
+  augmented with event subscription webhooks and a Model Context Protocol (MCP) server for agentic access. Elation also operates login-gated HL7
+  FHIR R4 and SMART-on-FHIR interoperability endpoints for ONC/CMS 21st Century Cures Act information-blocking compliance, exposed to registered
+  applications rather than anonymously. Positioned as an independent challenger to the US EHR duopoly, Elation targets the primary-care and value-based-care
+  segment of the largest, most commercial healthcare-API market.
 deliveryModel:
   model: saas
   open_source: false
@@ -63,6 +61,189 @@ tags:
 created: '2026-07-24'
 modified: '2026-08-14'
 specificationVersion: '0.23'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+common:
+- type: Spectral
+  url: rules/elation-health-rules.yml
+- type: Spectral
+  url: rules/elation-health-jsonschema-spectral-rules.yml
+- type: Deprecation
+  url: https://help.elationhealth.com/articles/rest/changelog/changelog
+- type: Hosts
+  url: hosts/elation-health-hosts.yml
+- type: IntegrationEdges
+  url: integrations/elation-health-integration-edges.yml
+- type: Vendors
+  url: vendors/elation-health-vendors.yml
+- type: Leadership
+  url: https://www.elationhealth.com/about-us/team/
+- type: CapabilityMap
+  url: capabilities/elation-health-capability-edges.yml
+  name: Elation Health Business Capability Map
+- type: Overlay
+  url: overlays/elation-health-api-authentication-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-patient-profile-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-visit-notes-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-patient-document-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-orders-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-scheduling-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-billing-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-insurance-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-premium-patient-insurance-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-practice-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-user-management-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-messaging-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-event-subscription-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-reference-data-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-care-gaps-api-1-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-elation-import-api-overlay.yaml
+- type: Overlay
+  url: overlays/elation-health-api-full-overlay.yaml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/elation-health/overview
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/elation-health-sandbox.yml
+- type: DataModel
+  url: data-model/elation-health-data-model.yml
+- type: ChangeLog
+  url: changelog/elation-health-changelog.yml
+- type: Conventions
+  url: conventions/elation-health-conventions.yml
+- type: Lifecycle
+  url: lifecycle/elation-health-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/elation-health-problem-types.yml
+- type: Compliance
+  url: https://www.elationhealth.com/solutions/ehr/
+- type: Conformance
+  url: conformance/elation-health-conformance.yml
+- type: ToolCrosswalk
+  url: mcp/elation-health-tool-crosswalk.yml
+- type: MCPServer
+  url: mcp/elation-health-mcp.yml
+- type: WellKnown
+  url: well-known/elation-health-well-known.yml
+- type: LLMsTxt
+  url: llms/elation-health-llms.txt
+- type: DomainSecurity
+  url: security/elation-health-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/elation-health-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/elation-health-scopes.yml
+- type: Authentication
+  url: authentication/elation-health-authentication.yml
+- type: Website
+  url: https://www.elationhealth.com/
+- type: DeveloperPortal
+  url: https://docs.elationhealth.com/
+- type: Documentation
+  url: https://docs.elationhealth.com/docs/api-overview
+- type: APIReference
+  url: https://docs.elationhealth.com/reference
+- type: GettingStarted
+  url: https://docs.elationhealth.com/docs/getting-started-2
+- type: Authentication
+  url: https://docs.elationhealth.com/docs/oauth
+- type: Webhooks
+  url: https://docs.elationhealth.com/docs/webhooks
+- type: ModelContextProtocol
+  url: https://docs.elationhealth.com/docs/mcp
+- type: GitHubOrganization
+  url: https://github.com/elationemr
+- type: LinkedIn
+  url: https://www.linkedin.com/company/elationhealth/
+- type: Pricing
+  url: https://www.elationhealth.com/pricing/
+- type: SignUp
+  url: https://www.elationhealth.com/contact-us/sandbox/
+- type: Support
+  url: https://www.elationhealth.com/contact-us/
+- type: StatusPage
+  url: https://elationhealth.statuspage.io/
+- type: TermsOfService
+  url: https://www.elationhealth.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.elationhealth.com/privacy-policy/
+- type: Documentation
+  url: https://docs.elationhealth.com/reference/api-overview
+- type: GitHubOrg
+  url: https://github.com/elationemr
+- type: LinkedIn
+  url: https://www.linkedin.com/company/elationhealth
+- type: Blog
+  url: https://www.elationhealth.com/resources/blogs
+- type: Pricing
+  url: https://www.elationhealth.com/contact-us/pricing/
+- type: StatusPage
+  url: https://elationhealth.statuspage.io
+- type: X
+  url: https://x.com/elationhealth
+- type: Plans
+  url: plans/elation-health-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/elation-health-rate-limits.yml
+- type: FinOps
+  url: finops/elation-health-finops.yml
+- type: AgentCard
+  url: a2a/elation-health-a2a.yml
+- type: Examples
+  url: examples/elation-health-patient-example.json
+- type: Examples
+  url: examples/elation-health-appointment-example.json
+- type: Vocabulary
+  url: vocabulary/elation-health-vocabulary.yml
+- type: Rules
+  url: rules/elation-health-jsonschema-spectral-rules.yml
+- type: JSONSchema
+  url: json-schema/elation-health-patient-schema.json
+- type: JSONLD
+  url: json-ld/elation-health-context.jsonld
+- type: AgentSkill
+  url: skills/elation-health-provider-published-skill.md
+- type: DeveloperPortal
+  url: https://help.elationhealth.com/api-reference
+- type: Documentation
+  url: https://help.elationhealth.com/articles/rest/overview/api-overview
+- type: APIReference
+  url: https://help.elationhealth.com/api-reference
+- type: GettingStarted
+  url: https://help.elationhealth.com/articles/rest/overview/getting-started
+- type: Authentication
+  url: https://help.elationhealth.com/articles/rest/overview/oauth
+- type: OAuthScopes
+  url: https://help.elationhealth.com/articles/rest/overview/scopes
+- type: Webhooks
+  url: https://help.elationhealth.com/articles/rest/overview/webhooks
+- type: ModelContextProtocol
+  url: https://help.elationhealth.com/articles/rest/overview/mcp-server
+- type: ChangeLog
+  url: https://help.elationhealth.com/articles/rest/changelog/changelog
+- type: HelpCenter
+  url: https://help.elationhealth.com/
+- type: Support
+  url: https://help.elationhealth.com/articles/rest/overview/getting-help
+- type: Compliance
+  url: https://help.elationhealth.com/compliance-quality
 apis:
 - aid: elation-health-health:elation-allergies-api
   name: Elation Health Allergies API
@@ -80,6 +261,16 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-allergy-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-allergy-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-allergy-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-allergy-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-allergy-schema.json
 - aid: elation-health-health:elation-appointments-api
   name: Elation Health Appointments API
   description: Scheduling and appointment management
@@ -96,6 +287,12 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-appointment-list-schema.json
 - aid: elation-health-health:elation-authentication-api
   name: Elation Health Authentication API
   description: OAuth2 token management
@@ -112,6 +309,8 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-token-response-schema.json
 - aid: elation-health-health:elation-billing-api
   name: Elation Health Billing API
   description: Billing codes and bill management
@@ -128,6 +327,12 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-billing-code-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-billing-code-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-billing-code-list-schema.json
 - aid: elation-health-health:elation-insurance-api
   name: Elation Health Insurance API
   description: Insurance company, plan, and policy management
@@ -144,6 +349,12 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-company-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-company-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-insurance-company-list-schema.json
 - aid: elation-health-health:elation-lab-orders-api
   name: Elation Health Lab Orders API
   description: Laboratory order management
@@ -160,6 +371,16 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-order-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-order-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-order-2-schema.json
 - aid: elation-health-health:elation-medications-api
   name: Elation Health Medications API
   description: Medication and prescription management
@@ -178,6 +399,10 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-med-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-med-order-list-schema.json
 - aid: elation-health-health:elation-messaging-api
   name: Elation Health Messaging API
   description: Secure direct messaging
@@ -194,6 +419,12 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-message-thread-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-message-thread-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-message-thread-list-schema.json
 - aid: elation-health-health:elation-patients-api
   name: Elation Health Patients API
   description: Patient profile management
@@ -210,6 +441,16 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-2-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-list-schema.json
 - aid: elation-health-health:elation-physicians-api
   name: Elation Health Physicians API
   description: Provider and staff management
@@ -226,6 +467,16 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-physician-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-physician-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-provider-availability-block-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-provider-availability-block-serializer-practice-time-zone-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-physician-list-schema.json
 - aid: elation-health-health:elation-practices-api
   name: Elation Health Practices API
   description: Practice administration
@@ -242,6 +493,12 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-practice-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-practice-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-practice-list-schema.json
 - aid: elation-health-health:elation-problems-api
   name: Elation Health Problems API
   description: Patient problem list management
@@ -258,6 +515,16 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-problem-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-problem-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-problem-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-problem-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-problem-schema.json
 - aid: elation-health-health:elation-visit-notes-api
   name: Elation Health Visit Notes API
   description: Clinical encounter documentation
@@ -274,14 +541,24 @@ apis:
     url: https://docs.elationhealth.com/reference/oauth
   - type: Sandbox
     url: https://www.elationhealth.com/contact-us/sandbox/
+  - type: JSONSchema
+    url: json-schema/elation-health-visit-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-visit-note-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-visit-note-2-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-add-signatures-to-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-add-signatures-to-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-visit-note-list-schema.json
 - aid: elation-health:fhir-api
   name: Elation FHIR R4 API
-  description: >-
-    HL7 FHIR R4 (v4.0.1) API with US Core v5.0.1 and SMART on FHIR 1.0.0 support, used for standards-based
-    interoperability and ONC / CMS 21st Century Cures Act certified health IT use cases. Exposed to registered
-    applications only: an anonymous probe of /fhir/r4/metadata and /fhir/r4/.well-known/smart-configuration
-    on 2026-08-14 returned HTTP 401 {"detail":"Invalid authentication token"}, so the FHIR CapabilityStatement
-    and SMART discovery document are gated and no machine-readable contract could be harvested.
+  description: 'HL7 FHIR R4 (v4.0.1) API with US Core v5.0.1 and SMART on FHIR 1.0.0 support, used for standards-based interoperability and ONC
+    / CMS 21st Century Cures Act certified health IT use cases. Exposed to registered applications only: an anonymous probe of /fhir/r4/metadata
+    and /fhir/r4/.well-known/smart-configuration on 2026-08-14 returned HTTP 401 {"detail":"Invalid authentication token"}, so the FHIR CapabilityStatement
+    and SMART discovery document are gated and no machine-readable contract could be harvested.'
   humanURL: https://help.elationhealth.com/articles/fhir/getting-started-with-standardized-api
   baseURL: https://fhir.elationemr.com/fhir/r4
   tags:
@@ -299,8 +576,7 @@ apis:
     url: https://sandbox-fhir.elationemr.com/fhir/r4
 - aid: elation-health:elation-health-allergy-documentation-api
   name: Elation Health Allergy Documentation API
-  description: >-
-    The Allergy Documentation API from Elation Health — 2 operation(s) for allergy documentation.
+  description: The Allergy Documentation API from Elation Health — 2 operation(s) for allergy documentation.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -340,9 +616,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-allergy-documentation-nkda-api
   name: Elation Health Allergy Documentation (NKDA) API
-  description: >-
-    The Allergy Documentation (NKDA) API from Elation Health — 2 operation(s) for allergy documentation
-    (nkda).
+  description: The Allergy Documentation (NKDA) API from Elation Health — 2 operation(s) for allergy documentation (nkda).
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -380,10 +654,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-allergy-documentation-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-allergy-documentation-schema.json
 - aid: elation-health:elation-health-ancillary-companies-api
   name: Elation Health Ancillary Companies API
-  description: >-
-    The Ancillary Companies API from Elation Health — 4 operation(s) for ancillary companies.
+  description: The Ancillary Companies API from Elation Health — 4 operation(s) for ancillary companies.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -421,6 +698,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-ancillary-company-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-ancillary-company-schema.json
 - aid: elation-health:elation-health-api-settings-api
   name: Elation Health API Settings API
   description: The API Settings API from Elation Health — 1 operation(s) for api settings.
@@ -581,6 +862,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-appointment-type-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-appointment-type-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-appointment-type-list-schema.json
 - aid: elation-health:elation-health-billing-codes-api
   name: Elation Health Billing Codes API
   description: The Billing Codes API from Elation Health — 6 operation(s) for billing codes.
@@ -621,6 +908,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-cptcode-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-cptcode-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-cptcode-list-schema.json
 - aid: elation-health:elation-health-bills-api
   name: Elation Health Bills API
   description: The Bills API from Elation Health — 6 operation(s) for bills.
@@ -661,6 +954,8 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-bill-schema.json
 - aid: elation-health:elation-health-broadcast-messages-api
   name: Elation Health Broadcast Messages API
   description: The Broadcast Messages API from Elation Health — 2 operation(s) for broadcast messages.
@@ -741,10 +1036,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-cardiac-center-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-cardiac-center-list-schema.json
 - aid: elation-health:elation-health-cardiac-order-tests-api
   name: Elation Health Cardiac Order Tests API
-  description: >-
-    The Cardiac Order Tests API from Elation Health — 4 operation(s) for cardiac order tests.
+  description: The Cardiac Order Tests API from Elation Health — 4 operation(s) for cardiac order tests.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -782,6 +1080,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-cardiac-order-test-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-cardiac-order-test-schema.json
 - aid: elation-health:elation-health-cardiac-orders-api
   name: Elation Health Cardiac Orders API
   description: The Cardiac Orders API from Elation Health — 4 operation(s) for cardiac orders.
@@ -822,6 +1124,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-cardiac-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-cardiac-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-cardiac-order-list-schema.json
 - aid: elation-health:elation-health-caregaps-api
   name: Elation Health Caregaps API
   description: The Caregaps API from Elation Health — 2 operation(s) for caregaps.
@@ -864,6 +1172,14 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-caregap-api-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-caregap-apimodel-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-caregap-apipaginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-caregap-patch-api-schema.json
 - aid: elation-health:elation-health-ccda-api
   name: Elation Health Ccda API
   description: The Ccda API from Elation Health — 4 operation(s) for ccda.
@@ -906,6 +1222,8 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-ccda-schema.json
 - aid: elation-health:elation-health-clinical-documents-api
   name: Elation Health Clinical Documents API
   description: The Clinical Documents API from Elation Health — 4 operation(s) for clinical documents.
@@ -946,10 +1264,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-xml-patient-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-xml-patient-summary-list-schema.json
 - aid: elation-health:elation-health-clinical-questionnaires-api
   name: Elation Health Clinical Questionnaires API
-  description: >-
-    The Clinical Questionnaires API from Elation Health — 2 operation(s) for clinical questionnaires.
+  description: The Clinical Questionnaires API from Elation Health — 2 operation(s) for clinical questionnaires.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1027,6 +1348,14 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-contacts-search-result-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-contact-list-schema.json
 - aid: elation-health:elation-health-custom-blocks-api
   name: Elation Health Custom Blocks API
   description: The Custom Blocks API from Elation Health — 1 operation(s) for custom blocks.
@@ -1067,6 +1396,8 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-response-custom-block-response-schema.json
 - aid: elation-health:elation-health-data-import-request-api
   name: Elation Health Data Import Request API
   description: The parent resource for tracking batches of individual patient chart imports.
@@ -1107,6 +1438,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-existing-data-import-request-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-data-import-request-array-schema.json
 - aid: elation-health:elation-health-definitions-api
   name: Elation Health Definitions API
   description: The Definitions API from Elation Health — 2 operation(s) for definitions.
@@ -1147,10 +1482,17 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-definition-api-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-definition-apimodel-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-definition-apipaginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-body-definitions-get-page-caregaps-api-quality-program-definition-get-schema.json
 - aid: elation-health:elation-health-delegate-permissions-api
   name: Elation Health Delegate Permissions API
-  description: >-
-    The Delegate Permissions API from Elation Health — 4 operation(s) for delegate permissions.
+  description: The Delegate Permissions API from Elation Health — 4 operation(s) for delegate permissions.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1188,10 +1530,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-delegate-permission-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-delegate-permission-schema.json
 - aid: elation-health:elation-health-discontinued-medication-api
   name: Elation Health Discontinued Medication API
-  description: >-
-    The Discontinued Medication API from Elation Health — 1 operation(s) for discontinued medication.
+  description: The Discontinued Medication API from Elation Health — 1 operation(s) for discontinued medication.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1231,8 +1576,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-discontinued-medications-api
   name: Elation Health Discontinued Medications API
-  description: >-
-    The Discontinued Medications API from Elation Health — 4 operation(s) for discontinued medications.
+  description: The Discontinued Medications API from Elation Health — 4 operation(s) for discontinued medications.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1270,6 +1614,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-discontinue-med-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-discontinue-med-order-list-schema.json
 - aid: elation-health:elation-health-document-tags-api
   name: Elation Health Document Tags API
   description: The Document Tags API from Elation Health — 4 operation(s) for document tags.
@@ -1310,6 +1658,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-coded-document-tag-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-coded-document-tag-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-coded-document-tag-list-schema.json
 - aid: elation-health:elation-health-drug-intolerances-api
   name: Elation Health Drug Intolerances API
   description: The Drug Intolerances API from Elation Health — 4 operation(s) for drug intolerances.
@@ -1350,10 +1704,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-drug-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-drug-intolerance-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-drug-intolerance-list-schema.json
 - aid: elation-health:elation-health-event-subscriptions-api
   name: Elation Health Event Subscriptions API
-  description: >-
-    The Event Subscriptions API from Elation Health — 8 operation(s) for event subscriptions.
+  description: The Event Subscriptions API from Elation Health — 8 operation(s) for event subscriptions.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1391,6 +1750,16 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-published-event-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-published-event-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-published-event-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-subscription-list-schema.json
 - aid: elation-health:elation-health-family-histories-api
   name: Elation Health Family Histories API
   description: The Family Histories API from Elation Health — 4 operation(s) for family histories.
@@ -1431,6 +1800,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-family-history-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-family-history-list-schema.json
 - aid: elation-health:elation-health-fax-lines-api
   name: Elation Health Fax Lines API
   description: The Fax Lines API from Elation Health — 2 operation(s) for fax lines.
@@ -1511,6 +1884,14 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-medication-history-download-fill-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-prescription-fill-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-medication-history-download-fill-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-prescription-fill-list-schema.json
 - aid: elation-health:elation-health-handouts-api
   name: Elation Health Handouts API
   description: The Handouts API from Elation Health — 5 operation(s) for handouts.
@@ -1551,11 +1932,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-handout-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-handout-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-handouts-serializer-no-base64-content-list-schema.json
 - aid: elation-health:elation-health-historical-medication-download-requests-api
   name: Elation Health Historical Medication Download Requests API
-  description: >-
-    The Historical Medication Download Requests API from Elation Health — 2 operation(s) for historical
-    medication download requests.
+  description: The Historical Medication Download Requests API from Elation Health — 2 operation(s) for historical medication download requests.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1593,6 +1978,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-rx-history-download-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-rx-history-download-list-schema.json
 - aid: elation-health:elation-health-histories-api
   name: Elation Health Histories API
   description: The Histories API from Elation Health — 4 operation(s) for histories.
@@ -1633,6 +2022,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-history-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-history-list-schema.json
 - aid: elation-health:elation-health-imaging-centers-api
   name: Elation Health Imaging Centers API
   description: The Imaging Centers API from Elation Health — 4 operation(s) for imaging centers.
@@ -1673,10 +2066,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-imaging-center-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-imaging-center-list-schema.json
 - aid: elation-health:elation-health-imaging-order-tests-api
   name: Elation Health Imaging Order Tests API
-  description: >-
-    The Imaging Order Tests API from Elation Health — 4 operation(s) for imaging order tests.
+  description: The Imaging Order Tests API from Elation Health — 4 operation(s) for imaging order tests.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1714,6 +2110,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-imaging-order-test-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-imaging-order-test-schema.json
 - aid: elation-health:elation-health-imaging-orders-api
   name: Elation Health Imaging Orders API
   description: The Imaging Orders API from Elation Health — 4 operation(s) for imaging orders.
@@ -1754,6 +2154,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-imaging-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-imaging-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-imaging-order-list-schema.json
 - aid: elation-health:elation-health-immunizations-api
   name: Elation Health Immunizations API
   description: The Immunizations API from Elation Health — 4 operation(s) for immunizations.
@@ -1794,6 +2200,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-immunization-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-immunization-list-schema.json
 - aid: elation-health:elation-health-incoming-files-api
   name: Elation Health Incoming Files API
   description: The Incoming Files API from Elation Health — 8 operation(s) for incoming files.
@@ -1834,6 +2244,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-incoming-file-group-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-incoming-file-group-list-schema.json
 - aid: elation-health:elation-health-injections-api
   name: Elation Health Injections API
   description: The Injections API from Elation Health — 2 operation(s) for injections.
@@ -1914,6 +2328,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-injection-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-injection-list-schema.json
 - aid: elation-health:elation-health-insurance-card-api
   name: Elation Health Insurance Card API
   description: The Insurance Card API from Elation Health — 1 operation(s) for insurance card.
@@ -1954,10 +2372,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-create-insurance-card-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-card-schema.json
 - aid: elation-health:elation-health-insurance-companies-api
   name: Elation Health Insurance Companies API
-  description: >-
-    The Insurance Companies API from Elation Health — 5 operation(s) for insurance companies.
+  description: The Insurance Companies API from Elation Health — 5 operation(s) for insurance companies.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -1995,10 +2416,17 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-company-single-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-insurance-company-single-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-company-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-insurance-company-list-schema.json
 - aid: elation-health:elation-health-insurance-eligibility-api
   name: Elation Health Insurance Eligibility API
-  description: >-
-    The Insurance Eligibility API from Elation Health — 2 operation(s) for insurance eligibility.
+  description: The Insurance Eligibility API from Elation Health — 2 operation(s) for insurance eligibility.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2036,11 +2464,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-eligibility-full-report-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-eligibility-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-create-insurance-eligibility-schema.json
 - aid: elation-health:elation-health-insurance-eligibility-usage-api
   name: Elation Health Insurance Eligibility Usage API
-  description: >-
-    The Insurance Eligibility Usage API from Elation Health — 1 operation(s) for insurance eligibility
-    usage.
+  description: The Insurance Eligibility Usage API from Elation Health — 1 operation(s) for insurance eligibility usage.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2078,6 +2510,8 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-eligibility-usage-schema.json
 - aid: elation-health:elation-health-insurance-plans-api
   name: Elation Health Insurance Plans API
   description: The Insurance Plans API from Elation Health — 5 operation(s) for insurance plans.
@@ -2118,10 +2552,17 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-plan-single-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-insurance-plan-single-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-insurance-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-insurance-plan-list-schema.json
 - aid: elation-health:elation-health-lab-facility-identifiers-api
   name: Elation Health Lab Facility Identifiers API
-  description: >-
-    The Lab Facility Identifiers API from Elation Health — 6 operation(s) for lab facility identifiers.
+  description: The Lab Facility Identifiers API from Elation Health — 6 operation(s) for lab facility identifiers.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2159,10 +2600,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-facility-identifier-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-facility-identifier-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-facility-identifier-list-schema.json
 - aid: elation-health:elation-health-lab-order-compendiums-api
   name: Elation Health Lab Order Compendiums API
-  description: >-
-    The Lab Order Compendiums API from Elation Health — 4 operation(s) for lab order compendiums.
+  description: The Lab Order Compendiums API from Elation Health — 4 operation(s) for lab order compendiums.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2200,6 +2646,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-order-test-compendium-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-lab-order-test-compendium-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-order-test-compendium-list-schema.json
 - aid: elation-health:elation-health-lab-order-sets-api
   name: Elation Health Lab Order Sets API
   description: The Lab Order Sets API from Elation Health — 4 operation(s) for lab order sets.
@@ -2240,6 +2692,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-order-set-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-lab-order-set-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-order-set-list-schema.json
 - aid: elation-health:elation-health-lab-order-tests-api
   name: Elation Health Lab Order Tests API
   description: The Lab Order Tests API from Elation Health — 4 operation(s) for lab order tests.
@@ -2280,10 +2738,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-order-test-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-order-test-list-schema.json
 - aid: elation-health:elation-health-lab-vendor-integrations-api
   name: Elation Health Lab Vendor Integrations API
-  description: >-
-    The Lab Vendor Integrations API from Elation Health — 4 operation(s) for lab vendor integrations.
+  description: The Lab Vendor Integrations API from Elation Health — 4 operation(s) for lab vendor integrations.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2321,10 +2782,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-vendor-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-lab-vendor-integration-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-vendor-integration-list-schema.json
 - aid: elation-health:elation-health-lab-vendor-patient-sites-api
   name: Elation Health Lab Vendor Patient Sites API
-  description: >-
-    The Lab Vendor Patient Sites API from Elation Health — 4 operation(s) for lab vendor patient sites.
+  description: The Lab Vendor Patient Sites API from Elation Health — 4 operation(s) for lab vendor patient sites.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2362,6 +2828,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-vendor-patient-site-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-lab-vendor-patient-site-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-vendor-patient-site-list-schema.json
 - aid: elation-health:elation-health-lab-vendors-api
   name: Elation Health Lab Vendors API
   description: The Lab Vendors API from Elation Health — 4 operation(s) for lab vendors.
@@ -2402,6 +2874,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-lab-vendor-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-lab-vendor-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-lab-vendor-list-schema.json
 - aid: elation-health:elation-health-languages-api
   name: Elation Health Languages API
   description: The Languages API from Elation Health — 2 operation(s) for languages.
@@ -2444,6 +2922,8 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-language-list-schema.json
 - aid: elation-health:elation-health-letters-api
   name: Elation Health Letters API
   description: The Letters API from Elation Health — 3 operation(s) for letters.
@@ -2486,9 +2966,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-medication-history-download-fills-api
   name: Elation Health Medication History Download Fills API
-  description: >-
-    The Medication History Download Fills API from Elation Health — 2 operation(s) for medication history
-    download fills.
+  description: The Medication History Download Fills API from Elation Health — 2 operation(s) for medication history download fills.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2528,8 +3006,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-medication-history-downloads-api
   name: Elation Health Medication History Downloads API
-  description: >-
-    The Medication History Downloads API from Elation Health — 2 operation(s) for medication history downloads.
+  description: The Medication History Downloads API from Elation Health — 2 operation(s) for medication history downloads.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2569,8 +3046,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-medication-order-templates-api
   name: Elation Health Medication Order Templates API
-  description: >-
-    The Medication Order Templates API from Elation Health — 4 operation(s) for medication order templates.
+  description: The Medication Order Templates API from Elation Health — 4 operation(s) for medication order templates.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2608,6 +3084,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-med-order-template-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-med-order-template-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-med-order-template-list-schema.json
 - aid: elation-health:elation-health-medication-refills-api
   name: Elation Health Medication Refills API
   description: The Medication Refills API from Elation Health — 2 operation(s) for medication refills.
@@ -2690,11 +3172,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-message-thread-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-message-thread-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-message-thread-list-schema.json
 - aid: elation-health:elation-health-methods-put-and-patch-not-allowed-api
   name: Elation Health Methods Put And Patch Not Allowed. API
-  description: >-
-    The Methods Put And Patch Not Allowed. API from Elation Health — 1 operation(s) for methods put and
-    patch not allowed..
+  description: The Methods Put And Patch Not Allowed. API from Elation Health — 1 operation(s) for methods put and patch not allowed..
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2772,6 +3258,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-non-visit-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-non-visit-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-non-visit-note-list-schema.json
 - aid: elation-health:elation-health-notes-api
   name: Elation Health Notes API
   description: The Notes API from Elation Health — 3 operation(s) for notes.
@@ -2812,6 +3304,18 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-note-amendment-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-note-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-amendment-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-note-update-schema.json
 - aid: elation-health:elation-health-notes-v1-api
   name: Elation Health Notes v1 API
   description: The Notes v1 API from Elation Health — 2 operation(s) for notes v1.
@@ -2852,6 +3356,14 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-note-create-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-note-update-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-response-note-metadata-schema.json
 - aid: elation-health:elation-health-notes-v2-api
   name: Elation Health Notes v2 API
   description: The Notes v2 API from Elation Health — 7 operation(s) for notes v2.
@@ -2892,6 +3404,16 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-update-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-amendment-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-amendment-update-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-elation-note-create-schema.json
 - aid: elation-health:elation-health-office-staff-api
   name: Elation Health Office Staff API
   description: The Office Staff API from Elation Health — 4 operation(s) for office staff.
@@ -2932,10 +3454,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-practice-to-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-practice-to-staff-list-schema.json
 - aid: elation-health:elation-health-outstanding-balance-api
   name: Elation Health Outstanding Balance API
-  description: >-
-    The Outstanding Balance API from Elation Health — 1 operation(s) for outstanding balance.
+  description: The Outstanding Balance API from Elation Health — 1 operation(s) for outstanding balance.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -2973,10 +3498,11 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-outstanding-balance-schema.json
 - aid: elation-health:elation-health-packaged-medication-beta-api
   name: Elation Health Packaged Medication (Beta) API
-  description: >-
-    The Packaged Medication (Beta) API from Elation Health — 2 operation(s) for packaged medication (beta).
+  description: The Packaged Medication (Beta) API from Elation Health — 2 operation(s) for packaged medication (beta).
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3014,11 +3540,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-packaged-medication-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-packaged-medication-list-schema.json
 - aid: elation-health:elation-health-packaged-medication-labeler-beta-api
   name: Elation Health Packaged Medication Labeler (Beta) API
-  description: >-
-    The Packaged Medication Labeler (Beta) API from Elation Health — 2 operation(s) for packaged medication
-    labeler (beta).
+  description: The Packaged Medication Labeler (Beta) API from Elation Health — 2 operation(s) for packaged medication labeler (beta).
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3056,11 +3584,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-packaged-medication-labeler-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-packaged-medication-labeler-schema.json
 - aid: elation-health:elation-health-packaged-medication-labelers-api
   name: Elation Health Packaged Medication Labelers API
-  description: >-
-    The Packaged Medication Labelers API from Elation Health — 2 operation(s) for packaged medication
-    labelers.
+  description: The Packaged Medication Labelers API from Elation Health — 2 operation(s) for packaged medication labelers.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3100,8 +3630,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-packaged-medications-api
   name: Elation Health Packaged Medications API
-  description: >-
-    The Packaged Medications API from Elation Health — 2 operation(s) for packaged medications.
+  description: The Packaged Medications API from Elation Health — 2 operation(s) for packaged medications.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3141,8 +3670,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-patient-chart-import-api
   name: Elation Health patient chart import API
-  description: >-
-    The patient chart import API from Elation Health — 3 operation(s) for patient chart import.
+  description: The patient chart import API from Elation Health — 3 operation(s) for patient chart import.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3180,10 +3708,21 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-chart-input-get-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-chart-input-put-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-chart-input-post-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-job-status-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-chart-input-get-id-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-api-response-schema.json
 - aid: elation-health:elation-health-patient-form-requests-api
   name: Elation Health Patient Form Requests API
-  description: >-
-    The Patient Form Requests API from Elation Health — 4 operation(s) for patient form requests.
+  description: The Patient Form Requests API from Elation Health — 4 operation(s) for patient form requests.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3221,10 +3760,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-form-request-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-form-request-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-form-request-list-schema.json
 - aid: elation-health:elation-health-patient-form-submissions-api
   name: Elation Health Patient Form Submissions API
-  description: >-
-    The Patient Form Submissions API from Elation Health — 2 operation(s) for patient form submissions.
+  description: The Patient Form Submissions API from Elation Health — 2 operation(s) for patient form submissions.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3262,6 +3806,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-form-submission-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-form-submission-list-schema.json
 - aid: elation-health:elation-health-patient-forms-api
   name: Elation Health Patient Forms API
   description: The Patient Forms API from Elation Health — 4 operation(s) for patient forms.
@@ -3302,6 +3850,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-form-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-form-list-schema.json
 - aid: elation-health:elation-health-patient-insurances-api
   name: Elation Health Patient Insurances API
   description: The Patient Insurances API from Elation Health — 2 operation(s) for patient insurances.
@@ -3344,8 +3896,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-patient-letter-categories-api
   name: Elation Health Patient Letter Categories API
-  description: >-
-    The Patient Letter Categories API from Elation Health — 2 operation(s) for patient letter categories.
+  description: The Patient Letter Categories API from Elation Health — 2 operation(s) for patient letter categories.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3383,10 +3934,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-letter-category-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-letter-category-schema.json
 - aid: elation-health:elation-health-patient-letters-beta-api
   name: Elation Health Patient Letters (BETA) API
-  description: >-
-    The Patient Letters (BETA) API from Elation Health — 4 operation(s) for patient letters (beta).
+  description: The Patient Letters (BETA) API from Elation Health — 4 operation(s) for patient letters (beta).
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3424,10 +3978,19 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-letter-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-letter-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-comment-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-letter-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-comment-list-schema.json
 - aid: elation-health:elation-health-patient-profile-photo-api
   name: Elation Health Patient Profile Photo API
-  description: >-
-    The Patient Profile Photo API from Elation Health — 2 operation(s) for patient profile photo.
+  description: The Patient Profile Photo API from Elation Health — 2 operation(s) for patient profile photo.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3465,11 +4028,11 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-photo-schema.json
 - aid: elation-health:elation-health-patient-provider-team-members-api
   name: Elation Health Patient Provider Team Members API
-  description: >-
-    The Patient Provider Team Members API from Elation Health — 2 operation(s) for patient provider team
-    members.
+  description: The Patient Provider Team Members API from Elation Health — 2 operation(s) for patient provider team members.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3509,8 +4072,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-patient-provider-teams-api
   name: Elation Health Patient Provider Teams API
-  description: >-
-    The Patient Provider Teams API from Elation Health — 2 operation(s) for patient provider teams.
+  description: The Patient Provider Teams API from Elation Health — 2 operation(s) for patient provider teams.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3588,10 +4150,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-pharmacy-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-pharmacy-list-schema.json
 - aid: elation-health:elation-health-practice-medications-api
   name: Elation Health Practice Medications API
-  description: >-
-    The Practice Medications API from Elation Health — 4 operation(s) for practice medications.
+  description: The Practice Medications API from Elation Health — 4 operation(s) for practice medications.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3629,6 +4194,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-medication-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-medication-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-medication-list-schema.json
 - aid: elation-health:elation-health-prescription-fills-api
   name: Elation Health Prescription Fills API
   description: The Prescription Fills API from Elation Health — 2 operation(s) for prescription fills.
@@ -3709,6 +4280,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-practice-print-header-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-practice-print-header-list-schema.json
 - aid: elation-health:elation-health-provider-team-api
   name: Elation Health Provider Team API
   description: The Provider Team API from Elation Health — 6 operation(s) for provider team.
@@ -3749,6 +4324,16 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-provider-team-member-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-patient-provider-team-member-update-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-provider-team-member-update-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patient-provider-team-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-patient-provider-team-list-schema.json
 - aid: elation-health:elation-health-pulmonary-centers-api
   name: Elation Health Pulmonary Centers API
   description: The Pulmonary Centers API from Elation Health — 4 operation(s) for pulmonary centers.
@@ -3789,10 +4374,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-pulmonary-center-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-pulmonary-center-list-schema.json
 - aid: elation-health:elation-health-pulmonary-order-tests-api
   name: Elation Health Pulmonary Order Tests API
-  description: >-
-    The Pulmonary Order Tests API from Elation Health — 4 operation(s) for pulmonary order tests.
+  description: The Pulmonary Order Tests API from Elation Health — 4 operation(s) for pulmonary order tests.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3830,6 +4418,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-pulmonary-order-test-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-pulmonary-order-test-schema.json
 - aid: elation-health:elation-health-pulmonary-orders-api
   name: Elation Health Pulmonary Orders API
   description: The Pulmonary Orders API from Elation Health — 4 operation(s) for pulmonary orders.
@@ -3870,10 +4462,15 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-pulmonary-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-pulmonary-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-pulmonary-order-list-schema.json
 - aid: elation-health:elation-health-recurring-event-groups-api
   name: Elation Health Recurring Event Groups API
-  description: >-
-    The Recurring Event Groups API from Elation Health — 5 operation(s) for recurring event groups.
+  description: The Recurring Event Groups API from Elation Health — 5 operation(s) for recurring event groups.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3911,11 +4508,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-recurring-event-group-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-recurring-event-group-list-schema.json
 - aid: elation-health:elation-health-reference-medication-beta-api
   name: Elation Health Reference Medication (Beta) API
-  description: >-
-    The Reference Medication (Beta) API from Elation Health — 2 operation(s) for reference medication
-    (beta).
+  description: The Reference Medication (Beta) API from Elation Health — 2 operation(s) for reference medication (beta).
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -3953,10 +4552,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-reference-medication-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-reference-medication-list-schema.json
 - aid: elation-health:elation-health-reference-medications-api
   name: Elation Health Reference Medications API
-  description: >-
-    The Reference Medications API from Elation Health — 2 operation(s) for reference medications.
+  description: The Reference Medications API from Elation Health — 2 operation(s) for reference medications.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -4074,6 +4676,18 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-letter-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-letter-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-referral-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-referral-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-referral-order-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-letter-list-schema.json
 - aid: elation-health:elation-health-refills-api
   name: Elation Health Refills API
   description: The Refills API from Elation Health — 2 operation(s) for refills.
@@ -4114,10 +4728,13 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-rx-refill-request-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-rx-refill-request-list-schema.json
 - aid: elation-health:elation-health-report-internal-notes-api
   name: Elation Health Report Internal Notes API
-  description: >-
-    The Report Internal Notes API from Elation Health — 2 operation(s) for report internal notes.
+  description: The Report Internal Notes API from Elation Health — 2 operation(s) for report internal notes.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -4155,6 +4772,8 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-internal-practice-note-serializer-proxy-schema.json
 - aid: elation-health:elation-health-report-types-api
   name: Elation Health Report Types API
   description: The Report Types API from Elation Health — 4 operation(s) for report types.
@@ -4195,6 +4814,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-report-type-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-report-type-list-schema.json
 - aid: elation-health:elation-health-reports-api
   name: Elation Health Reports API
   description: The Reports API from Elation Health — 9 operation(s) for reports.
@@ -4235,6 +4858,16 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-report-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-routed-document-delegate-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-report-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-update-report-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-update-report-schema.json
 - aid: elation-health:elation-health-reports-ext-api
   name: Elation Health Reports Ext API
   description: The Reports Ext API from Elation Health — 1 operation(s) for reports ext.
@@ -4315,6 +4948,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-service-location-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-service-location-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-service-location-list-schema.json
 - aid: elation-health:elation-health-sleep-centers-api
   name: Elation Health Sleep Centers API
   description: The Sleep Centers API from Elation Health — 4 operation(s) for sleep centers.
@@ -4355,6 +4994,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-sleep-center-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-sleep-center-list-schema.json
 - aid: elation-health:elation-health-sleep-order-tests-api
   name: Elation Health Sleep Order Tests API
   description: The Sleep Order Tests API from Elation Health — 4 operation(s) for sleep order tests.
@@ -4395,6 +5038,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-sleep-order-test-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-sleep-order-test-schema.json
 - aid: elation-health:elation-health-sleep-orders-api
   name: Elation Health Sleep Orders API
   description: The Sleep Orders API from Elation Health — 4 operation(s) for sleep orders.
@@ -4435,6 +5082,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-sleep-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-sleep-order-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-sleep-order-list-schema.json
 - aid: elation-health:elation-health-staff-group-api
   name: Elation Health Staff Group API
   description: The Staff Group API from Elation Health — 1 operation(s) for staff group.
@@ -4515,6 +5168,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-staff-group-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-staff-group-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-staff-group-list-schema.json
 - aid: elation-health:elation-health-thread-members-api
   name: Elation Health Thread Members API
   description: The Thread Members API from Elation Health — 5 operation(s) for thread members.
@@ -4555,6 +5214,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-thread-member-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-thread-member-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-thread-member-list-schema.json
 - aid: elation-health:elation-health-thread-messages-api
   name: Elation Health Thread Messages API
   description: The Thread Messages API from Elation Health — 5 operation(s) for thread messages.
@@ -4595,6 +5260,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-thread-message-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-thread-message-list-schema.json
 - aid: elation-health:elation-health-users-api
   name: Elation Health Users API
   description: The Users API from Elation Health — 4 operation(s) for users.
@@ -4637,6 +5306,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-user-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-user-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-user-list-schema.json
 - aid: elation-health:elation-health-vaccine-api
   name: Elation Health Vaccine API
   description: The Vaccine API from Elation Health — 2 operation(s) for vaccine.
@@ -4679,6 +5354,10 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-vaccine-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-vaccine-list-schema.json
 - aid: elation-health:elation-health-vaccines-api
   name: Elation Health Vaccines API
   description: The Vaccines API from Elation Health — 1 operation(s) for vaccines.
@@ -4721,8 +5400,7 @@ apis:
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
 - aid: elation-health:elation-health-visit-note-templates-api
   name: Elation Health Visit Note Templates API
-  description: >-
-    The Visit Note Templates API from Elation Health — 4 operation(s) for visit note templates.
+  description: The Visit Note Templates API from Elation Health — 4 operation(s) for visit note templates.
   humanURL: https://docs.elationhealth.com/reference/get-token
   baseURL: https://api.app.elationemr.com/api/2.0
   tags:
@@ -4760,6 +5438,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-visit-note-template-list-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-visit-note-template-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-visit-note-template-schema.json
 - aid: elation-health:elation-health-visit-note-types-api
   name: Elation Health Visit Note Types API
   description: The Visit Note Types API from Elation Health — 5 operation(s) for visit note types.
@@ -4800,6 +5484,12 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
+  - type: JSONSchema
+    url: json-schema/elation-health-visit-note-type-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-visit-note-type-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-visit-note-type-list-schema.json
 - aid: elation-health:elation-health-vitals-api
   name: Elation Health Vitals API
   description: The Vitals API from Elation Health — 5 operation(s) for vitals.
@@ -4840,188 +5530,21 @@ apis:
     url: https://help.elationhealth.com/articles/rest/overview/scopes
   - type: ChangeLog
     url: https://help.elationhealth.com/articles/rest/changelog/changelog
-common:
-- type: CapabilityMap
-  url: capabilities/elation-health-capability-edges.yml
-  name: Elation Health Business Capability Map
-- type: Overlay
-  url: overlays/elation-health-api-authentication-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-patient-profile-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-visit-notes-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-patient-document-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-orders-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-scheduling-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-billing-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-insurance-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-premium-patient-insurance-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-practice-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-user-management-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-messaging-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-event-subscription-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-reference-data-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-care-gaps-api-1-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-elation-import-api-overlay.yaml
-- type: Overlay
-  url: overlays/elation-health-api-full-overlay.yaml
-- type: PostmanWorkspace
-  url: https://www.postman.com/kinlaneapi/elation-health/overview
-- type: AgentSkill
-  url: skills/_index.yml
-- type: Sandbox
-  url: sandbox/elation-health-sandbox.yml
-- type: DataModel
-  url: data-model/elation-health-data-model.yml
-- type: ChangeLog
-  url: changelog/elation-health-changelog.yml
-- type: Conventions
-  url: conventions/elation-health-conventions.yml
-- type: Lifecycle
-  url: lifecycle/elation-health-lifecycle.yml
-- type: ErrorCatalog
-  url: errors/elation-health-problem-types.yml
-- type: Compliance
-  url: https://www.elationhealth.com/solutions/ehr/
-- type: Conformance
-  url: conformance/elation-health-conformance.yml
-- type: ToolCrosswalk
-  url: mcp/elation-health-tool-crosswalk.yml
-- type: MCPServer
-  url: mcp/elation-health-mcp.yml
-- type: WellKnown
-  url: well-known/elation-health-well-known.yml
-- type: Packages
-  url: packages/elation-health-packages.yml
-- type: LLMsTxt
-  url: llms/elation-health-llms.txt
-- type: DomainSecurity
-  url: security/elation-health-domain-security.yml
-- type: AgenticAccess
-  url: agentic-access/elation-health-agentic-access.yml
-- type: OAuthScopes
-  url: scopes/elation-health-scopes.yml
-- type: Authentication
-  url: authentication/elation-health-authentication.yml
-- type: Website
-  url: https://www.elationhealth.com/
-- type: DeveloperPortal
-  url: https://docs.elationhealth.com/
-- type: Documentation
-  url: https://docs.elationhealth.com/docs/api-overview
-- type: APIReference
-  url: https://docs.elationhealth.com/reference
-- type: GettingStarted
-  url: https://docs.elationhealth.com/docs/getting-started-2
-- type: Authentication
-  url: https://docs.elationhealth.com/docs/oauth
-- type: Webhooks
-  url: https://docs.elationhealth.com/docs/webhooks
-- type: ModelContextProtocol
-  url: https://docs.elationhealth.com/docs/mcp
-- type: GitHubOrganization
-  url: https://github.com/elationemr
-- type: LinkedIn
-  url: https://www.linkedin.com/company/elationhealth/
-- type: Blog
-  url: https://www.elationhealth.com/blog/
-- type: Pricing
-  url: https://www.elationhealth.com/pricing/
-- type: SignUp
-  url: https://www.elationhealth.com/contact-us/sandbox/
-- type: Support
-  url: https://www.elationhealth.com/contact-us/
-- type: StatusPage
-  url: https://elationhealth.statuspage.io/
-- type: TermsOfService
-  url: https://www.elationhealth.com/terms-of-use/
-- type: PrivacyPolicy
-  url: https://www.elationhealth.com/privacy-policy/
-- type: Documentation
-  url: https://docs.elationhealth.com/reference/api-overview
-- type: GitHubOrg
-  url: https://github.com/elationemr
-- type: LinkedIn
-  url: https://www.linkedin.com/company/elationhealth
-- type: Blog
-  url: https://www.elationhealth.com/resources/blogs
-- type: Pricing
-  url: https://www.elationhealth.com/contact-us/pricing/
-- type: StatusPage
-  url: https://elationhealth.statuspage.io
-- type: X
-  url: https://x.com/elationhealth
-- type: Plans
-  url: plans/elation-health-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/elation-health-rate-limits.yml
-- type: FinOps
-  url: finops/elation-health-finops.yml
-- type: AgentCard
-  url: a2a/elation-health-a2a.yml
-- type: Examples
-  url: examples/elation-health-patient-example.json
-- type: Examples
-  url: examples/elation-health-appointment-example.json
-- type: Vocabulary
-  url: vocabulary/elation-health-vocabulary.yml
-- type: Rules
-  url: rules/elation-health-jsonschema-spectral-rules.yml
-- type: JSONSchema
-  url: json-schema/elation-health-patient-schema.json
-- type: JSONLD
-  url: json-ld/elation-health-context.jsonld
-- type: AgentSkill
-  url: skills/elation-health-provider-published-skill.md
-- type: DeveloperPortal
-  url: https://help.elationhealth.com/api-reference
-- type: Documentation
-  url: https://help.elationhealth.com/articles/rest/overview/api-overview
-- type: APIReference
-  url: https://help.elationhealth.com/api-reference
-- type: GettingStarted
-  url: https://help.elationhealth.com/articles/rest/overview/getting-started
-- type: Authentication
-  url: https://help.elationhealth.com/articles/rest/overview/oauth
-- type: OAuthScopes
-  url: https://help.elationhealth.com/articles/rest/overview/scopes
-- type: Webhooks
-  url: https://help.elationhealth.com/articles/rest/overview/webhooks
-- type: ModelContextProtocol
-  url: https://help.elationhealth.com/articles/rest/overview/mcp-server
-- type: ChangeLog
-  url: https://help.elationhealth.com/articles/rest/changelog/changelog
-- type: HelpCenter
-  url: https://help.elationhealth.com/
-- type: Support
-  url: https://help.elationhealth.com/articles/rest/overview/getting-help
-- type: Compliance
-  url: https://help.elationhealth.com/compliance-quality
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - type: JSONSchema
+    url: json-schema/elation-health-vitals-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-patched-vitals-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/elation-health-paginated-vitals-collection-list-schema.json
 x-enrichment:
-  date: '2026-08-14'
+  date: '2026-10-12'
   status: enriched
-  artifacts_added: 9
-  pass: local-v1
+  artifacts_added: 1
+  pass: local-v5
 x-a2a:
   verified: true
   probed: '2026-09-26'
-  url: "https://help.elationhealth.com/.well-known/agent-card.json"
-  grade: "conformant"
-  protocol_version: "0.3"
+  url: https://help.elationhealth.com/.well-known/agent-card.json
+  grade: conformant
+  protocol_version: '0.3'
   control: 404

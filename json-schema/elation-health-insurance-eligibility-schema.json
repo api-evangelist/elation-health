@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-insurance-eligibility-schema.json",
+  "title": "InsuranceEligibility",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-insurance-eligibility-api-openapi.yml#/components/schemas/InsuranceEligibility",
+  "properties": {
+    "eligibility_check_timestamp": {
+      "description": "Eligibility check timestamp in ISO format.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "eligibility_details": {
+      "$ref": "#/$defs/EligibilityDetails"
+    },
+    "eligibility_status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/EligibilityStatusEnum"
+        }
+      ],
+      "description": "Status of eligibility check.\n\n* `active` - active\n* `inactive` - inactive\n* `error` - error"
+    },
+    "patient_id": {
+      "description": "Patient's id in Elation system.",
+      "type": "integer"
+    },
+    "patient_insurance_id": {
+      "description": "Patient's insurance id in Elation system.",
+      "type": "integer"
+    },
+    "practice_id": {
+      "description": "Practice's id in Elation system.",
+      "type": "integer"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "EligibilityDetails": {
+      "properties": {
+        "coinsurance": {
+          "description": "Coinsurance percentage value as a decimal (e.g. 0.25).",
+          "format": "decimal",
+          "pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+          "type": "string"
+        },
+        "coinsurance_ambiguous": {
+          "type": "boolean"
+        },
+        "copay": {
+          "description": "copayment amount in dollars.",
+          "format": "double",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "copay_ambiguous": {
+          "description": "If true, the given copay value may not be accurate and the full eligibility report will need to be referenced for better details.",
+          "type": "boolean"
+        },
+        "deductible": {
+          "description": "Deductible amount in dollars.",
+          "format": "decimal",
+          "pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+          "type": "string"
+        },
+        "deductible_ambiguous": {
+          "type": "boolean"
+        },
+        "deductible_remaining": {
+          "description": "Remaining deductible amount in dollars.",
+          "format": "decimal",
+          "pattern": "^-?\\d{0,8}(?:\\.\\d{0,2})?$",
+          "type": "string"
+        },
+        "deductible_remaining_ambiguous": {
+          "type": "boolean"
+        },
+        "errors": {
+          "description": "Error messages showing reason for failed eligibility check.",
+          "items": {
+            "additionalProperties": {},
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EligibilityStatusEnum": {
+      "description": "* `active` - active\n* `inactive` - inactive\n* `error` - error",
+      "enum": [
+        "active",
+        "inactive",
+        "error"
+      ],
+      "type": "string"
+    }
+  }
+}

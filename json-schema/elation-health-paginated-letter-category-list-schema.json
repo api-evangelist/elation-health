@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-letter-category-list-schema.json",
+  "title": "PaginatedLetterCategoryList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-patient-letter-categories-api-openapi.yml#/components/schemas/PaginatedLetterCategoryList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/LetterCategory"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "LetterCategory": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "key": {
+          "maxLength": 25,
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/RoleEnum"
+        },
+        "text": {
+          "maxLength": 100,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "key",
+        "text"
+      ],
+      "type": "object"
+    },
+    "RoleEnum": {
+      "enum": [
+        "Primary Provider",
+        "Staff"
+      ],
+      "type": "string"
+    }
+  }
+}

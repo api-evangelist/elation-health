@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-outstanding-balance-schema.json",
+  "title": "PatientOutstandingBalance",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-outstanding-balance-api-openapi.yml#/components/schemas/PatientOutstandingBalance",
+  "properties": {
+    "balance": {
+      "description": "The outstanding balance in cents.",
+      "format": "decimal",
+      "pattern": "^-?\\d{0,10}(?:\\.\\d{0,2})?$",
+      "type": "string"
+    },
+    "patient_id": {
+      "format": "int64",
+      "readOnly": true,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "balance"
+  ],
+  "type": "object"
+}

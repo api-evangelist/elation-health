@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patched-lab-order-test-compendium-schema.json",
+  "title": "PatchedLabOrderTestCompendium",
+  "description": "The serializer for LabOrderTestCompendium",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-order-compendiums-api-openapi.yml#/components/schemas/PatchedLabOrderTestCompendium",
+  "properties": {
+    "code": {
+      "maxLength": 200,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "lab_vendor": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "last_updated": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 200,
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

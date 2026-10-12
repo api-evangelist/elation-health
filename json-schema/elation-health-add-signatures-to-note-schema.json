@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-add-signatures-to-note-schema.json",
+  "title": "AddSignaturesToNote",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-visit-notes-api-openapi.yml#/components/schemas/AddSignaturesToNote",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "signatures": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/VisitNoteSignatureList"
+        }
+      ],
+      "description": "Requires special co-signature permissions. If enabled, users can add co-signatures to the visit note by providing them in this field."
+    },
+    "signed_by": {
+      "description": "The user id of the provider who signed the visit note. (Requires special permission).",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "signed_date": {
+      "description": "The time at which the visit note was signed. Cannot be in the future. (Requires Special Permission).",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "VisitNoteSignatureList": {
+      "items": {
+        "properties": {
+          "comments": {
+            "description": "Any comments the signer made about the signature.",
+            "type": "string"
+          },
+          "role": {
+            "description": "The function of the signer.",
+            "type": "string"
+          },
+          "signed_date": {
+            "description": "Date-time timestamp for when this signature occurred.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "user": {
+            "description": "ID of the user whose signature this represents.",
+            "type": "string"
+          },
+          "user_name": {
+            "description": "The full name and title of the user whose signature this represents.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "comments",
+          "role",
+          "signed_date",
+          "user",
+          "user_name"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  }
+}

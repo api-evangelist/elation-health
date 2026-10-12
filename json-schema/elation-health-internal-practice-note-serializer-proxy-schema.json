@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-internal-practice-note-serializer-proxy-schema.json",
+  "title": "InternalPracticeNoteSerializerProxy",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-report-internal-notes-api-openapi.yml#/components/schemas/InternalPracticeNoteSerializerProxy",
+  "properties": {
+    "document": {
+      "description": "The report (document) ID this note belongs to",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "id": {
+      "description": "The id of the internal note.",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "text": {
+      "description": "The internal note text content",
+      "maxLength": 256,
+      "type": "string"
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "type": "object"
+}

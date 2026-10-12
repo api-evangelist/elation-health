@@ -1,5 +1,5 @@
 ---
-name: Elationhealth
+name: elation-health-provider-published-skill
 description: Use when building integrations with Elation's REST or FHIR APIs, managing clinical workflows (patient charts, visit notes, prescriptions, labs), configuring practice operations (billing, scheduling, insurance), or troubleshooting EHR functionality. Agents should reach for this skill when working with healthcare data exchange, appointment management, patient documentation, medication ordering, or compliance reporting.
 metadata:
     mintlify-proj: elationhealth

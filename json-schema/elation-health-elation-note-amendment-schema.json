@@ -1,0 +1,3392 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-elation-note-amendment-schema.json",
+  "title": "ElationNoteAmendment",
+  "description": "Full representation of an EN2.1 sections-based note amendment.\n\nAnalogous to NoteAmendment for legacy DocumentNode notes. `previous_content`\nis populated after the amendment is signed and captures the parent note\nstate at signing time.",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-notes-api-openapi.yml#/components/schemas/ElationNoteAmendment",
+  "properties": {
+    "bill": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Bill"
+    },
+    "category": {
+      "title": "Category",
+      "type": "integer"
+    },
+    "content": {
+      "$ref": "#/$defs/SectionsContent"
+    },
+    "exam_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Exam Reason"
+    },
+    "id": {
+      "title": "Id",
+      "type": "integer"
+    },
+    "is_draft": {
+      "title": "Is Draft",
+      "type": "boolean"
+    },
+    "is_outdated": {
+      "default": false,
+      "title": "Is Outdated",
+      "type": "boolean"
+    },
+    "metadata": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Metadata"
+    },
+    "note_id": {
+      "title": "Note Id",
+      "type": "integer"
+    },
+    "patient": {
+      "title": "Patient",
+      "type": "integer"
+    },
+    "practice": {
+      "title": "Practice",
+      "type": "integer"
+    },
+    "previous_content": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SectionsContent"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "provider": {
+      "title": "Provider",
+      "type": "integer"
+    },
+    "serviced_at": {
+      "format": "date-time",
+      "title": "Serviced At",
+      "type": "string"
+    },
+    "signatures": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DocumentSignature"
+      },
+      "title": "Signatures",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "note_id",
+    "provider",
+    "practice",
+    "patient",
+    "category",
+    "content",
+    "serviced_at",
+    "is_draft"
+  ],
+  "type": "object",
+  "$defs": {
+    "AttrsWithRefId": {
+      "description": "Base attrs for any node that carries a stable change-tracking ref_id.",
+      "properties": {
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "title": "AttrsWithRefId",
+      "type": "object"
+    },
+    "CardiacOrderBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/CardiacOrderBlockAttrs-Output"
+        },
+        "type": {
+          "const": "cardiacOrder",
+          "default": "cardiacOrder",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "CardiacOrderBlock",
+      "type": "object"
+    },
+    "CardiacOrderBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "order": {
+          "$ref": "#/$defs/CardiacOrderSummary"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "order"
+      ],
+      "title": "CardiacOrderBlockAttrs",
+      "type": "object"
+    },
+    "CardiacOrderSummary": {
+      "properties": {
+        "clinical_reason": {
+          "title": "Clinical Reason",
+          "type": "string"
+        },
+        "confidential": {
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "date_for_test": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date For Test"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "medications": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Medications"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "tests": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CardiacOrderTest"
+          },
+          "title": "Tests",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "clinical_reason",
+        "confidential"
+      ],
+      "title": "CardiacOrderSummary",
+      "type": "object"
+    },
+    "CardiacOrderTest": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "CardiacOrderTest",
+      "type": "object"
+    },
+    "ContentMap-Output": {
+      "description": "Typed map from section type to its content. All sections are optional.\n\nKeys match section ``type`` wire values (``NodeType``): lowercase single words\n(e.g. ``narrative``, ``vitals``) or camelCase for multi-word nodes (e.g. ``followUp``).",
+      "properties": {
+        "followUp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FollowupSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "instructions": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InstructionsSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "narrative": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NarrativeSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "orders": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OrdersSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "procedures": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProcedureSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "referencedDocuments": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReferencedDocumentsSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "vitals": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VitalsSection-Output"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "title": "ContentMap",
+      "type": "object"
+    },
+    "CptCode": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "description"
+      ],
+      "title": "CptCode",
+      "type": "object"
+    },
+    "DocumentSignature": {
+      "description": "A signature on a document.",
+      "properties": {
+        "amendment_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "ID of the note amendment this signature applies to, if any; null for signatures on the base note or legacy records.",
+          "title": "Amendment Id"
+        },
+        "on_behalf_of_user_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "On Behalf Of User Id"
+        },
+        "on_behalf_of_user_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "On Behalf Of User Name"
+        },
+        "signature_comments": {
+          "title": "Signature Comments",
+          "type": "string"
+        },
+        "signature_role": {
+          "$ref": "#/$defs/DocumentSignatureRole"
+        },
+        "signed_at": {
+          "description": "When the associated document was signed with this signature.",
+          "format": "date-time",
+          "title": "Signed At",
+          "type": "string"
+        },
+        "user_id": {
+          "description": "The ID of the user who authored the signature.",
+          "title": "User Id",
+          "type": "integer"
+        },
+        "user_name": {
+          "description": "The name of the user who authored the signature.",
+          "title": "User Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_id",
+        "user_name",
+        "signed_at",
+        "signature_role",
+        "signature_comments"
+      ],
+      "title": "DocumentSignature",
+      "type": "object"
+    },
+    "DocumentSignatureRole": {
+      "description": "The role the user is performing when adding a signature to a visit note",
+      "enum": [
+        "amender",
+        "cosigner",
+        "rendering_provider",
+        "staff_autofiler"
+      ],
+      "title": "DocumentSignatureRole",
+      "type": "string"
+    },
+    "FollowupListItem-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "description": "List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/FollowupParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/FollowupUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/FollowupOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "followUpListItem",
+          "default": "followUpListItem",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "FollowupListItem",
+      "type": "object"
+    },
+    "FollowupOrderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/FollowupListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "followUpOrderedList",
+          "default": "followUpOrderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "FollowupOrderedList",
+      "type": "object"
+    },
+    "FollowupParagraph-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/FollowupParagraphAttrs"
+        },
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextInline-Output"
+              },
+              {
+                "$ref": "#/$defs/LineBreakInline"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "followUpParagraph",
+          "default": "followUpParagraph",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "FollowupParagraph",
+      "type": "object"
+    },
+    "FollowupParagraphAttrs": {
+      "properties": {
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "title": "FollowupParagraphAttrs",
+      "type": "object"
+    },
+    "FollowupSection-Output": {
+      "properties": {
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/FollowupParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/FollowupUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/FollowupOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "followUp",
+          "default": "followUp",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "FollowupSection",
+      "type": "object"
+    },
+    "FollowupUnorderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/FollowupListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "followUpUnorderedList",
+          "default": "followUpUnorderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "FollowupUnorderedList",
+      "type": "object"
+    },
+    "Handout": {
+      "properties": {
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Type"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "original_filename": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Original Filename"
+        },
+        "type_name": {
+          "$ref": "#/$defs/HandoutTypeName"
+        },
+        "vis_barcode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vis Barcode"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type_name"
+      ],
+      "title": "Handout",
+      "type": "object"
+    },
+    "HandoutBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/HandoutBlockAttrs-Output"
+        },
+        "type": {
+          "const": "handout",
+          "default": "handout",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "HandoutBlock",
+      "type": "object"
+    },
+    "HandoutBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "handout": {
+          "$ref": "#/$defs/Handout"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "handout"
+      ],
+      "title": "HandoutBlockAttrs",
+      "type": "object"
+    },
+    "HandoutTypeName": {
+      "description": "Handout kind. Hippo reconciles this into its integer ``type`` if needed.",
+      "enum": [
+        "Patient Resource",
+        "VIS"
+      ],
+      "title": "HandoutTypeName",
+      "type": "string"
+    },
+    "ImagingOrderBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/ImagingOrderBlockAttrs-Output"
+        },
+        "type": {
+          "const": "imagingOrder",
+          "default": "imagingOrder",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "ImagingOrderBlock",
+      "type": "object"
+    },
+    "ImagingOrderBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "order": {
+          "$ref": "#/$defs/ImagingOrderSummary"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "order"
+      ],
+      "title": "ImagingOrderBlockAttrs",
+      "type": "object"
+    },
+    "ImagingOrderSummary": {
+      "properties": {
+        "clinical_reason": {
+          "title": "Clinical Reason",
+          "type": "string"
+        },
+        "confidential": {
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "date_for_test": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date For Test"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "tests": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ImagingOrderTest"
+          },
+          "title": "Tests",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "clinical_reason",
+        "confidential"
+      ],
+      "title": "ImagingOrderSummary",
+      "type": "object"
+    },
+    "ImagingOrderTest": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "ImagingOrderTest",
+      "type": "object"
+    },
+    "Immunization": {
+      "properties": {
+        "administered_date": {
+          "title": "Administered Date",
+          "type": "string"
+        },
+        "administering_physician": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Administering Physician"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Description"
+        },
+        "dose_in_series": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dose In Series"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "lot_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lot Number"
+        },
+        "method": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Method"
+        },
+        "ordering_physician": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ordering Physician"
+        },
+        "patient_id": {
+          "title": "Patient Id",
+          "type": "integer"
+        },
+        "qty": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Qty"
+        },
+        "qty_units": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Qty Units"
+        },
+        "site": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Site"
+        },
+        "vaccine": {
+          "$ref": "#/$defs/ImmunizationVaccine"
+        }
+      },
+      "required": [
+        "administered_date",
+        "id",
+        "patient_id"
+      ],
+      "title": "Immunization",
+      "type": "object"
+    },
+    "ImmunizationVaccine": {
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name"
+        }
+      },
+      "title": "ImmunizationVaccine",
+      "type": "object"
+    },
+    "Injection": {
+      "properties": {
+        "deleted_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "dose": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dose"
+        },
+        "dose_unit": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InjectionDoseUnit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "given_by_user_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Given By User Id"
+        },
+        "given_date": {
+          "title": "Given Date",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "is_confidential": {
+          "default": false,
+          "title": "Is Confidential",
+          "type": "boolean"
+        },
+        "is_new": {
+          "default": false,
+          "title": "Is New",
+          "type": "boolean"
+        },
+        "method": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InjectionMethod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "patient_id": {
+          "title": "Patient Id",
+          "type": "integer"
+        },
+        "practice_id": {
+          "title": "Practice Id",
+          "type": "integer"
+        },
+        "reference_medication_id": {
+          "title": "Reference Medication Id",
+          "type": "integer"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        }
+      },
+      "required": [
+        "given_date",
+        "id",
+        "patient_id",
+        "practice_id",
+        "reference_medication_id"
+      ],
+      "title": "Injection",
+      "type": "object"
+    },
+    "InjectionBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/InjectionBlockAttrs-Output"
+        },
+        "type": {
+          "const": "injection",
+          "default": "injection",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "InjectionBlock",
+      "type": "object"
+    },
+    "InjectionBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "injection": {
+          "$ref": "#/$defs/Injection"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "injection"
+      ],
+      "title": "InjectionBlockAttrs",
+      "type": "object"
+    },
+    "InjectionDoseUnit": {
+      "enum": [
+        "dL",
+        "g",
+        "kg",
+        "kL",
+        "L",
+        "mCi",
+        "mg",
+        "mL",
+        "ug",
+        "uL",
+        "tab"
+      ],
+      "title": "InjectionDoseUnit",
+      "type": "string"
+    },
+    "InjectionMethod": {
+      "enum": [
+        "Intravenous",
+        "Intramuscular",
+        "Subcutaneous",
+        "Intradermal",
+        "Other"
+      ],
+      "title": "InjectionMethod",
+      "type": "string"
+    },
+    "InstructionParagraphAttrs": {
+      "properties": {
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "title": "InstructionParagraphAttrs",
+      "type": "object"
+    },
+    "InstructionsListItem-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "description": "List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/InstructionsParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/InstructionsUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/InstructionsOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "instructionsListItem",
+          "default": "instructionsListItem",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "InstructionsListItem",
+      "type": "object"
+    },
+    "InstructionsOrderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/InstructionsListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "instructionsOrderedList",
+          "default": "instructionsOrderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "InstructionsOrderedList",
+      "type": "object"
+    },
+    "InstructionsParagraph-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/InstructionParagraphAttrs"
+        },
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextInline-Output"
+              },
+              {
+                "$ref": "#/$defs/LineBreakInline"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "instructionsParagraph",
+          "default": "instructionsParagraph",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "InstructionsParagraph",
+      "type": "object"
+    },
+    "InstructionsSection-Output": {
+      "properties": {
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/InstructionsParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/InstructionsUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/InstructionsOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "instructions",
+          "default": "instructions",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "InstructionsSection",
+      "type": "object"
+    },
+    "InstructionsUnorderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/InstructionsListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "instructionsUnorderedList",
+          "default": "instructionsUnorderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "InstructionsUnorderedList",
+      "type": "object"
+    },
+    "LabOrderBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/LabOrderBlockAttrs-Output"
+        },
+        "type": {
+          "const": "labOrder",
+          "default": "labOrder",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "LabOrderBlock",
+      "type": "object"
+    },
+    "LabOrderBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "order": {
+          "$ref": "#/$defs/LabOrderSummary"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "order"
+      ],
+      "title": "LabOrderBlockAttrs",
+      "type": "object"
+    },
+    "LabOrderFastingMethod": {
+      "enum": [
+        "fasting_12_hour",
+        "fasting_8_hours",
+        "fasting_2_hours",
+        "fasting_none",
+        "fasting_random"
+      ],
+      "title": "LabOrderFastingMethod",
+      "type": "string"
+    },
+    "LabOrderSummary": {
+      "properties": {
+        "confidential": {
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "created_date": {
+          "format": "date-time",
+          "title": "Created Date",
+          "type": "string"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "fasting_method": {
+          "$ref": "#/$defs/LabOrderFastingMethod"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "tests": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LabOrderTest"
+          },
+          "title": "Tests",
+          "type": "array"
+        },
+        "vendor_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vendor Id"
+        }
+      },
+      "required": [
+        "id",
+        "confidential",
+        "fasting_method",
+        "created_date"
+      ],
+      "title": "LabOrderSummary",
+      "type": "object"
+    },
+    "LabOrderTest": {
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Code"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "LabOrderTest",
+      "type": "object"
+    },
+    "Layout": {
+      "description": "Structural description of a note.\n\n`name` identifies the template (e.g. \"simple_note\", \"soap\").\n`content` lists columns (1 for single-column, 2 for two-column).\nEach column's `content` list defines both which section blocks are\npermitted and their display order. Headers are decorative dividers.",
+      "properties": {
+        "content": {
+          "items": {
+            "$ref": "#/$defs/NoteLayoutColumn"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Layout",
+      "type": "object"
+    },
+    "LineBreakInline": {
+      "description": "Hard line break. No attrs, no content.",
+      "properties": {
+        "type": {
+          "const": "lineBreak",
+          "default": "lineBreak",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "LineBreakInline",
+      "type": "object"
+    },
+    "NarrativeListItem-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "description": "List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/NarrativeParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/NarrativeUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/NarrativeOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "narrativeListItem",
+          "default": "narrativeListItem",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NarrativeListItem",
+      "type": "object"
+    },
+    "NarrativeOrderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/NarrativeListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "narrativeOrderedList",
+          "default": "narrativeOrderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NarrativeOrderedList",
+      "type": "object"
+    },
+    "NarrativeParagraph-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/NarrativeParagraphAttrs"
+        },
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextInline-Output"
+              },
+              {
+                "$ref": "#/$defs/LineBreakInline"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "narrativeParagraph",
+          "default": "narrativeParagraph",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NarrativeParagraph",
+      "type": "object"
+    },
+    "NarrativeParagraphAttrs": {
+      "properties": {
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "title": "NarrativeParagraphAttrs",
+      "type": "object"
+    },
+    "NarrativeSection-Output": {
+      "properties": {
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/NarrativeParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/NarrativeUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/NarrativeOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "narrative",
+          "default": "narrative",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NarrativeSection",
+      "type": "object"
+    },
+    "NarrativeUnorderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/NarrativeListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "narrativeUnorderedList",
+          "default": "narrativeUnorderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NarrativeUnorderedList",
+      "type": "object"
+    },
+    "NoteLayoutBlock": {
+      "description": "A section slot in the layout. `type` is the section identifier.",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "NoteLayoutBlock",
+      "type": "object"
+    },
+    "NoteLayoutColumn": {
+      "properties": {
+        "content": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/NoteLayoutHeader"
+              },
+              {
+                "$ref": "#/$defs/NoteLayoutBlock"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "column",
+          "default": "column",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NoteLayoutColumn",
+      "type": "object"
+    },
+    "NoteLayoutHeader": {
+      "description": "Decorative section divider — display text only, no clinical meaning.",
+      "properties": {
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "type": {
+          "const": "header",
+          "default": "header",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "NoteLayoutHeader",
+      "type": "object"
+    },
+    "OrdersSection-Output": {
+      "properties": {
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/PrescriptionBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/LabOrderBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/ImagingOrderBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/ReferralBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/CardiacOrderBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/PulmonaryOrderBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/SleepOrderBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/PatientImmunizationBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/InjectionBlock-Output"
+              },
+              {
+                "$ref": "#/$defs/HandoutBlock-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "orders",
+          "default": "orders",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "OrdersSection",
+      "type": "object"
+    },
+    "PatientImmunizationAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "immunization": {
+          "$ref": "#/$defs/Immunization"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "immunization"
+      ],
+      "title": "PatientImmunizationAttrs",
+      "type": "object"
+    },
+    "PatientImmunizationBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/PatientImmunizationAttrs-Output"
+        },
+        "type": {
+          "const": "patientImmunization",
+          "default": "patientImmunization",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "PatientImmunizationBlock",
+      "type": "object"
+    },
+    "PrescriptionBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/PrescriptionBlockAttrs"
+        },
+        "type": {
+          "const": "prescription",
+          "default": "prescription",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "PrescriptionBlock",
+      "type": "object"
+    },
+    "PrescriptionBlockAttrs": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "prescription": {
+          "$ref": "#/$defs/PrescriptionSummary"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "prescription"
+      ],
+      "title": "PrescriptionBlockAttrs",
+      "type": "object"
+    },
+    "PrescriptionSummary": {
+      "properties": {
+        "created_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "days_supply": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Days Supply"
+        },
+        "directions": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Directions"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "instructions_to_pharmacy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Instructions To Pharmacy"
+        },
+        "is_document_med": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": false,
+          "title": "Is Document Med"
+        },
+        "medication_display_name": {
+          "title": "Medication Display Name",
+          "type": "string"
+        },
+        "medication_id": {
+          "title": "Medication Id",
+          "type": "integer"
+        },
+        "medication_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Medication Type"
+        },
+        "num_samples": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Num Samples"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "quantity_units": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Quantity Units"
+        },
+        "refills": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Refills"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Type"
+        }
+      },
+      "required": [
+        "id",
+        "medication_display_name",
+        "medication_id"
+      ],
+      "title": "PrescriptionSummary",
+      "type": "object"
+    },
+    "Procedure-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/ProcedureAttrs"
+        },
+        "type": {
+          "const": "procedure",
+          "default": "procedure",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "Procedure",
+      "type": "object"
+    },
+    "ProcedureAttrs": {
+      "properties": {
+        "cpt_code": {
+          "$ref": "#/$defs/CptCode"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cpt_code"
+      ],
+      "title": "ProcedureAttrs",
+      "type": "object"
+    },
+    "ProcedureListItem-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "description": "List-item children, capped at two: a single child must be a paragraph, and a second child (if present) must be a nested ordered or unordered list. Shape is [paragraph] or [paragraph, nested list].",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ProcedureParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/ProcedureUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/ProcedureOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "proceduresListItem",
+          "default": "proceduresListItem",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ProcedureListItem",
+      "type": "object"
+    },
+    "ProcedureOrderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/ProcedureListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "proceduresOrderedList",
+          "default": "proceduresOrderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ProcedureOrderedList",
+      "type": "object"
+    },
+    "ProcedureParagraph-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/ProcedureParagraphAttrs"
+        },
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextInline-Output"
+              },
+              {
+                "$ref": "#/$defs/LineBreakInline"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "proceduresParagraph",
+          "default": "proceduresParagraph",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ProcedureParagraph",
+      "type": "object"
+    },
+    "ProcedureParagraphAttrs": {
+      "properties": {
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "title": "ProcedureParagraphAttrs",
+      "type": "object"
+    },
+    "ProcedureSection-Output": {
+      "properties": {
+        "content": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Procedure-Output"
+              },
+              {
+                "$ref": "#/$defs/ProcedureParagraph-Output"
+              },
+              {
+                "$ref": "#/$defs/ProcedureUnorderedList-Output"
+              },
+              {
+                "$ref": "#/$defs/ProcedureOrderedList-Output"
+              }
+            ]
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "procedures",
+          "default": "procedures",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ProcedureSection",
+      "type": "object"
+    },
+    "ProcedureUnorderedList-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/AttrsWithRefId"
+        },
+        "content": {
+          "items": {
+            "$ref": "#/$defs/ProcedureListItem-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "proceduresUnorderedList",
+          "default": "proceduresUnorderedList",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ProcedureUnorderedList",
+      "type": "object"
+    },
+    "PulmonaryOrderBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/PulmonaryOrderBlockAttrs-Output"
+        },
+        "type": {
+          "const": "pulmonaryOrder",
+          "default": "pulmonaryOrder",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "PulmonaryOrderBlock",
+      "type": "object"
+    },
+    "PulmonaryOrderBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "order": {
+          "$ref": "#/$defs/PulmonaryOrderSummary"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "order"
+      ],
+      "title": "PulmonaryOrderBlockAttrs",
+      "type": "object"
+    },
+    "PulmonaryOrderSummary": {
+      "properties": {
+        "allergies": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Allergies"
+        },
+        "clinical_reason": {
+          "title": "Clinical Reason",
+          "type": "string"
+        },
+        "confidential": {
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "date_for_test": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date For Test"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "tests": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PulmonaryOrderTest"
+          },
+          "title": "Tests",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "clinical_reason",
+        "confidential"
+      ],
+      "title": "PulmonaryOrderSummary",
+      "type": "object"
+    },
+    "PulmonaryOrderTest": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "PulmonaryOrderTest",
+      "type": "object"
+    },
+    "ReferencedDocument-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/ReferencedDocumentAttrs"
+        },
+        "type": {
+          "const": "referencedDocument",
+          "default": "referencedDocument",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "ReferencedDocument",
+      "type": "object"
+    },
+    "ReferencedDocumentAttrs": {
+      "properties": {
+        "document": {
+          "$ref": "#/$defs/ReferencedDocumentData"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document"
+      ],
+      "title": "ReferencedDocumentAttrs",
+      "type": "object"
+    },
+    "ReferencedDocumentData": {
+      "description": "Structured reference to a hippo document (e.g. a lab/imaging report).\n\nMirrors the VN1 reference-bullet payload: ``id`` is the report/document id,\n``lab_result_id`` identifies an individual lab result within a lab report,\n``summary`` is the link text shown in the UI, and ``summary_formatting``\ncarries optional VN1-style decoration offsets (kept for backport parity).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "lab_result_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lab Result Id"
+        },
+        "summary": {
+          "default": "",
+          "title": "Summary",
+          "type": "string"
+        },
+        "summary_formatting": {
+          "items": {},
+          "title": "Summary Formatting",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "ReferencedDocumentData",
+      "type": "object"
+    },
+    "ReferencedDocumentsSection-Output": {
+      "properties": {
+        "content": {
+          "items": {
+            "$ref": "#/$defs/ReferencedDocument-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "type": {
+          "const": "referencedDocuments",
+          "default": "referencedDocuments",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "ReferencedDocumentsSection",
+      "type": "object"
+    },
+    "ReferralBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/ReferralBlockAttrs"
+        },
+        "type": {
+          "const": "referral",
+          "default": "referral",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "ReferralBlock",
+      "type": "object"
+    },
+    "ReferralBlockAttrs": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        },
+        "referral": {
+          "$ref": "#/$defs/el8_note_models__note__sections__shared__ReferralSummary"
+        }
+      },
+      "required": [
+        "entity_id",
+        "referral"
+      ],
+      "title": "ReferralBlockAttrs",
+      "type": "object"
+    },
+    "SectionsContent": {
+      "description": "The sections-based note content: layout description + typed section content.",
+      "properties": {
+        "content_map": {
+          "$ref": "#/$defs/ContentMap-Output"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        }
+      },
+      "required": [
+        "layout",
+        "content_map"
+      ],
+      "title": "SectionsContent",
+      "type": "object"
+    },
+    "SleepOrderBlock-Output": {
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/SleepOrderBlockAttrs-Output"
+        },
+        "type": {
+          "const": "sleepOrder",
+          "default": "sleepOrder",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "SleepOrderBlock",
+      "type": "object"
+    },
+    "SleepOrderBlockAttrs-Output": {
+      "properties": {
+        "entity_id": {
+          "title": "Entity Id",
+          "type": "integer"
+        },
+        "order": {
+          "$ref": "#/$defs/SleepOrderSummary"
+        },
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "order"
+      ],
+      "title": "SleepOrderBlockAttrs",
+      "type": "object"
+    },
+    "SleepOrderSummary": {
+      "properties": {
+        "clinical_reason": {
+          "title": "Clinical Reason",
+          "type": "string"
+        },
+        "confidential": {
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "date_for_test": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date For Test"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "signed_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "tests": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SleepOrderTest"
+          },
+          "title": "Tests",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "clinical_reason",
+        "confidential"
+      ],
+      "title": "SleepOrderSummary",
+      "type": "object"
+    },
+    "SleepOrderTest": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "SleepOrderTest",
+      "type": "object"
+    },
+    "TextInline-Output": {
+      "description": "Plain text run.\n\nThis node has NO ``attrs``: both ``text`` and ``marks`` are top-level keys.\nThis is the one deliberate exception to the type/attrs/content rule\ndocumented at the top of this module — it mirrors the VN2 TextNode wire\nshape verbatim (and ProseMirror's text node, where ``text`` and ``marks``\nsit beside ``type`` with no ``attrs``), keeping the two schema-compatible.",
+      "properties": {
+        "marks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TextInlineMark"
+          },
+          "title": "Marks",
+          "type": "array"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "type": {
+          "const": "text",
+          "default": "text",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "TextInline",
+      "type": "object"
+    },
+    "TextInlineMark": {
+      "description": "A single formatting mark applied to a TextInline run.",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/el8_note_models__note__sections__shared__TextBlockMarkTypes"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "TextInlineMark",
+      "type": "object"
+    },
+    "VitalBMI": {
+      "properties": {
+        "bmi": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bmi"
+        },
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        }
+      },
+      "title": "VitalBMI",
+      "type": "object"
+    },
+    "VitalBP": {
+      "properties": {
+        "bp_d": {
+          "default": "",
+          "title": "Bp D",
+          "type": "string"
+        },
+        "bp_s": {
+          "default": "",
+          "title": "Bp S",
+          "type": "string"
+        },
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        }
+      },
+      "title": "VitalBP",
+      "type": "object"
+    },
+    "VitalFiO2": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "percent": {
+          "default": "",
+          "title": "Percent",
+          "type": "string"
+        }
+      },
+      "title": "VitalFiO2",
+      "type": "object"
+    },
+    "VitalHC": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "hc": {
+          "default": "",
+          "title": "Hc",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        }
+      },
+      "title": "VitalHC",
+      "type": "object"
+    },
+    "VitalHR": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "hr": {
+          "default": "",
+          "title": "Hr",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        }
+      },
+      "title": "VitalHR",
+      "type": "object"
+    },
+    "VitalHeight": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "height": {
+          "default": "",
+          "title": "Height",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        }
+      },
+      "title": "VitalHeight",
+      "type": "object"
+    },
+    "VitalOxygen": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "percent": {
+          "default": "",
+          "title": "Percent",
+          "type": "string"
+        }
+      },
+      "title": "VitalOxygen",
+      "type": "object"
+    },
+    "VitalPain": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "pain": {
+          "default": "",
+          "title": "Pain",
+          "type": "string"
+        }
+      },
+      "title": "VitalPain",
+      "type": "object"
+    },
+    "VitalRR": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "rr": {
+          "default": "",
+          "title": "Rr",
+          "type": "string"
+        }
+      },
+      "title": "VitalRR",
+      "type": "object"
+    },
+    "VitalTemperature": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "temperature": {
+          "default": "",
+          "title": "Temperature",
+          "type": "string"
+        }
+      },
+      "title": "VitalTemperature",
+      "type": "object"
+    },
+    "VitalWeight": {
+      "properties": {
+        "edited_by_scribe": {
+          "default": false,
+          "title": "Edited By Scribe",
+          "type": "boolean"
+        },
+        "extra_note": {
+          "default": "",
+          "title": "Extra Note",
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "weight": {
+          "default": "",
+          "title": "Weight",
+          "type": "string"
+        }
+      },
+      "title": "VitalWeight",
+      "type": "object"
+    },
+    "VitalsSection-Output": {
+      "description": "Tier-1 vitals section; attrs mirror VN2 ``VitalsNode``.",
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/VitalsSectionAttrs-Output"
+        },
+        "type": {
+          "const": "vitals",
+          "default": "vitals",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "VitalsSection",
+      "type": "object"
+    },
+    "VitalsSectionAttrs-Output": {
+      "properties": {
+        "ref_id": {
+          "title": "Ref Id",
+          "type": "string"
+        },
+        "vitals": {
+          "$ref": "#/$defs/el8_note_models__note__sections__vitals_section__Vitals"
+        },
+        "vitals_collection_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vitals Collection Id"
+        }
+      },
+      "title": "VitalsSectionAttrs",
+      "type": "object"
+    },
+    "el8_note_models__note__sections__shared__ReferralSummary": {
+      "properties": {
+        "authorization_for": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Authorization For"
+        },
+        "clinical_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Clinical Reason"
+        },
+        "confidential": {
+          "default": false,
+          "title": "Confidential",
+          "type": "boolean"
+        },
+        "consultant_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Consultant Name"
+        },
+        "created_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Created Date"
+        },
+        "deleted_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deleted Date"
+        },
+        "icd10_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Icd10 Codes",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "signed_by_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed By Id"
+        },
+        "signed_date": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Signed Date"
+        },
+        "specialty_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Specialty Name"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "ReferralSummary",
+      "type": "object"
+    },
+    "el8_note_models__note__sections__shared__TextBlockMarkTypes": {
+      "description": "Formatting marks a text run can carry.\n\nSupports ``bold``, ``italic``, ``strike`` (strikethrough), and ``underline``.",
+      "enum": [
+        "bold",
+        "italic",
+        "strike",
+        "underline"
+      ],
+      "title": "TextBlockMarkTypes",
+      "type": "string"
+    },
+    "el8_note_models__note__sections__vitals_section__Vitals": {
+      "properties": {
+        "bmi": {
+          "items": {
+            "$ref": "#/$defs/VitalBMI"
+          },
+          "title": "Bmi",
+          "type": "array"
+        },
+        "bp": {
+          "items": {
+            "$ref": "#/$defs/VitalBP"
+          },
+          "title": "Bp",
+          "type": "array"
+        },
+        "fio2": {
+          "items": {
+            "$ref": "#/$defs/VitalFiO2"
+          },
+          "title": "Fio2",
+          "type": "array"
+        },
+        "hc": {
+          "items": {
+            "$ref": "#/$defs/VitalHC"
+          },
+          "title": "Hc",
+          "type": "array"
+        },
+        "height": {
+          "items": {
+            "$ref": "#/$defs/VitalHeight"
+          },
+          "title": "Height",
+          "type": "array"
+        },
+        "hr": {
+          "items": {
+            "$ref": "#/$defs/VitalHR"
+          },
+          "title": "Hr",
+          "type": "array"
+        },
+        "oxygen": {
+          "items": {
+            "$ref": "#/$defs/VitalOxygen"
+          },
+          "title": "Oxygen",
+          "type": "array"
+        },
+        "pain": {
+          "items": {
+            "$ref": "#/$defs/VitalPain"
+          },
+          "title": "Pain",
+          "type": "array"
+        },
+        "rr": {
+          "items": {
+            "$ref": "#/$defs/VitalRR"
+          },
+          "title": "Rr",
+          "type": "array"
+        },
+        "temperature": {
+          "items": {
+            "$ref": "#/$defs/VitalTemperature"
+          },
+          "title": "Temperature",
+          "type": "array"
+        },
+        "weight": {
+          "items": {
+            "$ref": "#/$defs/VitalWeight"
+          },
+          "title": "Weight",
+          "type": "array"
+        }
+      },
+      "title": "Vitals",
+      "type": "object"
+    }
+  }
+}

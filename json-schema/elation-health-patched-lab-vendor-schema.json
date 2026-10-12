@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patched-lab-vendor-schema.json",
+  "title": "PatchedLabVendor",
+  "description": "The serializer for LabVendor",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-vendors-api-openapi.yml#/components/schemas/PatchedLabVendor",
+  "properties": {
+    "bidi_connections": {
+      "items": {
+        "$ref": "#/$defs/BiDiLabConnection"
+      },
+      "readOnly": true,
+      "type": "array"
+    },
+    "compendiums": {
+      "items": {
+        "$ref": "#/$defs/LabOrderTestCompendium"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "default_compendium": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/LabOrderTestCompendium"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "display_name": {
+      "maxLength": 100,
+      "type": "string"
+    },
+    "has_order_compendium": {
+      "type": "boolean"
+    },
+    "has_test_compendium": {
+      "type": "boolean"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "is_bidi": {
+      "type": "boolean"
+    },
+    "is_in_house": {
+      "type": "boolean"
+    },
+    "name": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "orders_integration_available": {
+      "type": "boolean"
+    },
+    "practice_created": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "results_integration_available": {
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "BiDiLabConnection": {
+      "properties": {
+        "alias": {
+          "description": "Get the alias of the connection.",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enabled": {
+          "description": "Get the enabled status of the connection.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "priority": {
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "protocol": {
+          "description": "Get the protocol of the connection.",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "LabOrderTestCompendium": {
+      "description": "The serializer for LabOrderTestCompendium",
+      "properties": {
+        "code": {
+          "maxLength": 200,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "lab_vendor": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "last_updated": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "type": "string"
+        }
+      },
+      "required": [
+        "lab_vendor",
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-caregap-apipaginated-response-schema.json",
+  "title": "CaregapAPIPaginatedResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-caregaps-api-openapi.yml#/components/schemas/CaregapAPIPaginatedResponse",
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "properties": {
+    "results": {
+      "title": "Results",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CaregapAPI"
+      },
+      "description": "Page of results requested"
+    },
+    "cursor": {
+      "title": "Cursor",
+      "type": "string",
+      "description": "Cursor to query for the next page"
+    },
+    "next_page_url": {
+      "title": "Next Page Url",
+      "type": "string",
+      "description": "Full URL to query for the next page"
+    }
+  },
+  "$defs": {
+    "CaregapAPI": {
+      "title": "CaregapAPI",
+      "required": [
+        "definition_id",
+        "patient_id",
+        "practice_id",
+        "created_date",
+        "status",
+        "id",
+        "quality_program"
+      ],
+      "type": "object",
+      "properties": {
+        "definition_id": {
+          "title": "Definition Id",
+          "type": "string",
+          "description": "Definition id this caregap is associated with."
+        },
+        "patient_id": {
+          "title": "Patient Id",
+          "type": "string",
+          "description": "Patient id this caregap is associated with."
+        },
+        "practice_id": {
+          "title": "Practice Id",
+          "type": "string",
+          "description": "Practice id this caregap is associated with."
+        },
+        "created_date": {
+          "title": "Created Date",
+          "type": "string",
+          "description": "ISO timestamp for when this caregap was created.",
+          "format": "date"
+        },
+        "status": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/StatusEnum"
+            }
+          ],
+          "description": "Current status of the caregap"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string",
+          "description": "Extra detail about the caregap."
+        },
+        "closed_date": {
+          "title": "Closed Date",
+          "type": "string",
+          "description": "ISO timestamp for when the caregap was closed.",
+          "format": "date"
+        },
+        "closed_by": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/ClosedByEnum"
+            }
+          ],
+          "description": "Who or what action closed the caregap."
+        },
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "description": "UUID to identify the caregap"
+        },
+        "quality_program": {
+          "title": "Quality Program",
+          "type": "string",
+          "description": "Quality program this caregap is associated with."
+        }
+      }
+    },
+    "ClosedByEnum": {
+      "title": "ClosedByEnum",
+      "enum": [
+        "API",
+        "condition-saved",
+        "feedback"
+      ],
+      "type": "string",
+      "description": "An enumeration."
+    },
+    "StatusEnum": {
+      "title": "StatusEnum",
+      "enum": [
+        "open",
+        "closed"
+      ],
+      "type": "string",
+      "description": "An enumeration."
+    }
+  }
+}

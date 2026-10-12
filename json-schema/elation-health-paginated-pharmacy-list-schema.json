@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-pharmacy-list-schema.json",
+  "title": "PaginatedPharmacyList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-pharmacies-api-openapi.yml#/components/schemas/PaginatedPharmacyList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/Pharmacy"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "Pharmacy": {
+      "properties": {
+        "active_end_time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "active_start_time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "address_line1": {
+          "maxLength": 105,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "address_line2": {
+          "maxLength": 105,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "maxLength": 105,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fax": {
+          "maxLength": 75,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "ncpdpid": {
+          "maxLength": 21,
+          "type": "string"
+        },
+        "npi": {
+          "maxLength": 30,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone_primary": {
+          "maxLength": 75,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "specialty_types": {
+          "maxLength": 150,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "maxLength": 6,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "store_name": {
+          "maxLength": 105,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zip": {
+          "maxLength": 33,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "active_end_time",
+        "active_start_time",
+        "id",
+        "ncpdpid"
+      ],
+      "type": "object"
+    }
+  }
+}

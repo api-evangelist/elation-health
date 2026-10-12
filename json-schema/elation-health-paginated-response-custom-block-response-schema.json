@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-response-custom-block-response-schema.json",
+  "title": "PaginatedResponse[CustomBlockResponse]",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-custom-blocks-api-openapi.yml#/components/schemas/PaginatedResponse_CustomBlockResponse_",
+  "properties": {
+    "count": {
+      "title": "Count",
+      "type": "integer"
+    },
+    "limit": {
+      "title": "Limit",
+      "type": "integer"
+    },
+    "next": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next"
+    },
+    "offset": {
+      "title": "Offset",
+      "type": "integer"
+    },
+    "previous": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Previous"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/CustomBlockResponse"
+      },
+      "title": "Results",
+      "type": "array"
+    }
+  },
+  "required": [
+    "results",
+    "count",
+    "offset",
+    "limit"
+  ],
+  "type": "object",
+  "$defs": {
+    "AiGenerationInfo": {
+      "properties": {
+        "is_finalized": {
+          "default": true,
+          "title": "Is Finalized",
+          "type": "boolean"
+        },
+        "transcript_source_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "",
+          "title": "Transcript Source Text"
+        }
+      },
+      "title": "AiGenerationInfo",
+      "type": "object"
+    },
+    "CustomBlockResponse": {
+      "properties": {
+        "aliases": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": [],
+          "description": "Shortcuts for accessing the custom block in a note 2 editor",
+          "title": "Aliases"
+        },
+        "content": {
+          "default": [],
+          "description": "The content of the custom block.",
+          "items": {
+            "$ref": "#/$defs/DynamicFormNode-Output"
+          },
+          "title": "Content",
+          "type": "array"
+        },
+        "created_by": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The ID of the user who created the custom block.",
+          "title": "Created By"
+        },
+        "id": {
+          "description": "The ID of the custom block.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "is_system_template": {
+          "description": "Whether the custom block is a system template.",
+          "title": "Is System Template",
+          "type": "boolean"
+        },
+        "label": {
+          "description": "The name of the custom block.",
+          "title": "Label",
+          "type": "string"
+        },
+        "practice_id": {
+          "description": "The ID of the practice to which the custom block belongs.",
+          "title": "Practice Id",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "label",
+        "id",
+        "practice_id",
+        "is_system_template"
+      ],
+      "title": "CustomBlockResponse",
+      "type": "object"
+    },
+    "DynamicFormAttrs": {
+      "properties": {
+        "ai_generation_info": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AiGenerationInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "creation_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ai",
+                "template"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Creation Type"
+        },
+        "data": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Data",
+          "type": "object"
+        },
+        "dataSchema": {
+          "title": "Dataschema"
+        },
+        "is_new": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Is New"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "lastEditedBy": {
+          "additionalProperties": {
+            "enum": [
+              "user",
+              "api",
+              "note-prediction",
+              "template"
+            ],
+            "type": "string"
+          },
+          "title": "Lasteditedby",
+          "type": "object"
+        },
+        "ref_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ref Id"
+        },
+        "uiSchema": {
+          "title": "Uischema"
+        }
+      },
+      "required": [
+        "dataSchema",
+        "uiSchema",
+        "label"
+      ],
+      "title": "DynamicFormAttrs",
+      "type": "object"
+    },
+    "DynamicFormNode-Output": {
+      "additionalProperties": true,
+      "properties": {
+        "attrs": {
+          "$ref": "#/$defs/DynamicFormAttrs"
+        },
+        "type": {
+          "const": "dynamicForm",
+          "default": "dynamicForm",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attrs"
+      ],
+      "title": "DynamicFormNode",
+      "type": "object"
+    }
+  }
+}

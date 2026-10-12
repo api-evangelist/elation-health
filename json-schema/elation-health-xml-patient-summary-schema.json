@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-xml-patient-summary-schema.json",
+  "title": "XmlPatientSummary",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-clinical-documents-api-openapi.yml#/components/schemas/XmlPatientSummary",
+  "properties": {
+    "allergies_imported": {
+      "type": "boolean"
+    },
+    "author_name": {
+      "maxLength": 255,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authoring_practice": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data_format": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/DataFormatEnum"
+        }
+      ],
+      "description": "The format of the clinical document data."
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "demographics_imported": {
+      "type": "boolean"
+    },
+    "encounters_imported": {
+      "type": "boolean"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "immunizations_imported": {
+      "type": "boolean"
+    },
+    "labs_imported": {
+      "type": "boolean"
+    },
+    "medications_imported": {
+      "type": "boolean"
+    },
+    "patient": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "problems_imported": {
+      "type": "boolean"
+    },
+    "procedures_imported": {
+      "type": "boolean"
+    },
+    "vitals_imported": {
+      "type": "boolean"
+    },
+    "xml_file": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/XmlFile"
+        }
+      ],
+      "description": "The xml file to be used as clinical document."
+    }
+  },
+  "required": [
+    "authoring_practice",
+    "patient",
+    "xml_file"
+  ],
+  "type": "object",
+  "$defs": {
+    "DataFormatEnum": {
+      "enum": [
+        "ccda",
+        "ccr",
+        "qrda_1"
+      ],
+      "type": "string"
+    },
+    "XmlFile": {
+      "description": "Alias for S3RetrievingDocumentFileSerializer with proper OpenAPI schema name.",
+      "properties": {
+        "base64_content": {
+          "type": "string"
+        },
+        "content_type": {
+          "type": "string"
+        },
+        "document": {
+          "description": "URL to retrieve the document",
+          "format": "uri",
+          "type": "string"
+        },
+        "external_content": {},
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "original_filename": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

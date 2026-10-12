@@ -1,0 +1,157 @@
+generated: '2026-10-12'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 11
+  own: 3
+  other_domain: 4
+  platform: 4
+  roles:
+  - api
+  - other
+  - portal
+  - source
+  - status
+  - website
+hosts:
+- host: api.app.elationemr.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: elationemr.com
+  role: api
+  relation: other-domain
+- host: app.elationemr.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: elationemr.com
+  role: other
+  relation: other-domain
+- host: docs.elationhealth.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - Authentication
+  - Webhooks
+  - ModelContextProtocol
+  serves:
+  - docs
+  registrable_domain: elationhealth.com
+  role: portal
+  relation: own
+- host: elationhealth.statuspage.io
+  found_by:
+  - pointer
+  - vendor-detect
+  types:
+  - StatusPage
+  serves:
+  - status-page
+  vendor: statuspage
+  registrable_domain: statuspage.io
+  role: status
+  relation: other-domain
+- host: fhir.elationemr.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: elationemr.com
+  role: other
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  - GitHubOrg
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: help.elationhealth.com
+  found_by:
+  - pointer
+  - apis[]
+  - vendor-detect
+  types:
+  - Deprecation
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - Authentication
+  - OAuthScopes
+  - Webhooks
+  - ModelContextProtocol
+  - ChangeLog
+  - HelpCenter
+  - Support
+  - Compliance
+  serves:
+  - docs
+  - hosting
+  vendor: vercel
+  registrable_domain: elationhealth.com
+  role: portal
+  relation: own
+- host: www.elationhealth.com
+  found_by:
+  - pointer
+  - vendor-detect
+  types:
+  - Leadership
+  - Compliance
+  - Website
+  - Pricing
+  - SignUp
+  - Support
+  - TermsOfService
+  - PrivacyPolicy
+  - Blog
+  serves:
+  - cdn
+  - hosting
+  vendor: cloudflare
+  registrable_domain: elationhealth.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - PostmanWorkspace
+  serves: []
+  registrable_domain: postman.com
+  role: other
+  relation: platform
+- host: x.com
+  found_by:
+  - pointer
+  types:
+  - X
+  serves: []
+  registrable_domain: x.com
+  role: other
+  relation: platform

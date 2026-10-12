@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-packaged-medication-schema.json",
+  "title": "PackagedMedication",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-packaged-medication-beta-api-openapi.yml#/components/schemas/PackagedMedication",
+  "properties": {
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "din": {
+      "description": "Drug Identification Number.",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gpi": {
+      "description": "Generic Product Identifier.",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "has_outer_packaged_drug": {
+      "readOnly": true,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "hri": {
+      "description": "Health Related Item.",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "is_active": {
+      "readOnly": true,
+      "type": "boolean"
+    },
+    "is_clinic_pack": {
+      "description": "`true` if the packaged medication is a clinic pack.",
+      "readOnly": true,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "is_repackaged": {
+      "description": "`true` if the packaged medication is a repackaged medication.",
+      "readOnly": true,
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "labeler_id": {
+      "format": "int64",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "market_end_date": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "medispanppid": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "multi_source": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "name": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "ndc": {
+      "description": "National Drug Code.",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "obsolete_date": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "packaging_name": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reference_medication_id": {
+      "format": "int64",
+      "readOnly": true,
+      "type": "integer"
+    },
+    "size_description": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "upc": {
+      "description": "Universal Product Code.",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "type": "object"
+}

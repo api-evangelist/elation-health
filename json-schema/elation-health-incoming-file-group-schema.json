@@ -1,0 +1,366 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-incoming-file-group-schema.json",
+  "title": "IncomingFileGroup",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-incoming-files-api-openapi.yml#/components/schemas/IncomingFileGroup",
+  "properties": {
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "external_fax_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "file_size": {
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "from_number": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "group_name": {
+      "maxLength": 200,
+      "type": "string"
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/Image"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "page_count": {
+      "readOnly": true,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "practice_fax": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "process_complete_time": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "process_result": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "process_start_time": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "process_state": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ProcessStateEnum"
+        }
+      ],
+      "readOnly": true
+    },
+    "received_time": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/SourceEnum"
+        }
+      ],
+      "readOnly": true
+    },
+    "subject": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "to_company": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "to_name": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "to_number": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transmit_time": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "group_name",
+    "practice"
+  ],
+  "type": "object",
+  "$defs": {
+    "File": {
+      "properties": {
+        "base64_content": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "content_type": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "file_size": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "file_url": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "incoming_file": {
+          "type": "integer"
+        },
+        "practice": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "base64_content",
+        "content_type",
+        "filename"
+      ],
+      "type": "object"
+    },
+    "Image": {
+      "properties": {
+        "base64_content": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "content_type": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "file_size": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "image_url": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "incoming_file": {
+          "type": "integer"
+        },
+        "original_extension": {
+          "maxLength": 10,
+          "type": "string"
+        },
+        "original_height": {
+          "type": "integer"
+        },
+        "original_padded": {
+          "type": "integer"
+        },
+        "original_rotation": {
+          "type": "integer"
+        },
+        "original_width": {
+          "type": "integer"
+        },
+        "practice": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "quality_score": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "quality_score_by": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "received_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "rotation": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "sequence": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "width": {
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "base64_content",
+        "content_type"
+      ],
+      "type": "object"
+    },
+    "ProcessStateEnum": {
+      "enum": [
+        "complete",
+        "error",
+        "pending",
+        "processing"
+      ],
+      "type": "string"
+    },
+    "SourceEnum": {
+      "enum": [
+        "metrofax",
+        "plr",
+        "refile",
+        "softlinx",
+        "user"
+      ],
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-token-response-schema.json",
+  "title": "TokenResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-authentication-api-openapi.yml#/components/schemas/TokenResponse",
+  "type": "object",
+  "properties": {
+    "access_token": {
+      "type": "string",
+      "description": "Bearer token for API requests"
+    },
+    "token_type": {
+      "type": "string"
+    },
+    "expires_in": {
+      "type": "integer",
+      "description": "Token validity in seconds"
+    },
+    "refresh_token": {
+      "type": "string",
+      "description": "Token for obtaining new access tokens"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Granted permission scopes"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-patient-form-submission-schema.json",
+  "title": "PatientFormSubmission",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-patient-form-submissions-api-openapi.yml#/components/schemas/PatientFormSubmission",
+  "properties": {
+    "appointment": {
+      "description": "ID of the appointment this submission is linked to.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "document_date": {
+      "description": "Date of the clinical document. For past appointments, set this to the appointment date so the record appears at the correct position in the chart feed.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "form_name": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "form_response_json": {
+      "description": "Form response data in the patient form submission JSON format."
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "patient": {
+      "description": "ID of the patient.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "patient_form": {
+      "description": "ID of the PatientForm to create a response for.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "reported_date_time": {
+      "description": "Date and time the form was reported.",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "topics": {
+      "readOnly": true
+    }
+  },
+  "required": [
+    "form_response_json",
+    "patient",
+    "patient_form"
+  ],
+  "type": "object"
+}

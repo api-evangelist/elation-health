@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-cardiac-center-schema.json",
+  "title": "CardiacCenter",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-cardiac-centers-api-openapi.yml#/components/schemas/CardiacCenter",
+  "properties": {
+    "address_line1": {
+      "type": "string"
+    },
+    "address_line2": {
+      "type": "string"
+    },
+    "city": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "company": {
+      "description": "Maps to the Ancillary Company object ID attribute.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "company_name": {
+      "description": "Maps to the Ancillary Company object name attribute.",
+      "type": "string"
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fax": {
+      "maxLength": 20,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "location_name": {
+      "type": "string"
+    },
+    "phone": {
+      "maxLength": 20,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "state": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "zip": {
+      "maxLength": 10,
+      "type": "string"
+    }
+  },
+  "required": [
+    "address_line1",
+    "address_line2",
+    "company",
+    "company_name",
+    "location_name",
+    "practice"
+  ],
+  "type": "object"
+}

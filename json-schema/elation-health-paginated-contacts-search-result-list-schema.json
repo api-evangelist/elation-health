@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-contacts-search-result-list-schema.json",
+  "title": "PaginatedContactsSearchResultList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-contacts-api-openapi.yml#/components/schemas/PaginatedContactsSearchResultList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/ContactsSearchResult"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "ContactsSearchResult": {
+      "description": "Serializer used to work with contacts found via elasticsearch",
+      "properties": {
+        "accepting_insurance": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "accepting_new_patients": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "address_line": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "city": {
+          "maxLength": 30,
+          "type": "string"
+        },
+        "contact_type": {
+          "maxLength": 15,
+          "type": "string"
+        },
+        "direct_address": {
+          "maxLength": 500,
+          "type": "string"
+        },
+        "fax": {
+          "maxLength": 15,
+          "type": "string"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "is_elation_confirmed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "is_verified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "npi": {
+          "type": "string"
+        },
+        "phone": {
+          "maxLength": 25,
+          "type": "string"
+        },
+        "specialties": {
+          "items": {},
+          "type": "array"
+        },
+        "specialty_categories": {
+          "items": {},
+          "type": "array"
+        },
+        "state": {
+          "maxLength": 20,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

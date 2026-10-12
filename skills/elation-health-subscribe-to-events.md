@@ -1,5 +1,5 @@
 ---
-name: Subscribe to webhook events
+name: elation-health-subscribe-to-events
 description: Create a webhook subscription to resource updates, verify Ed25519-signed callbacks, and process published events.
 api: openapi/elation-event-subscription-api.json
 operations: [subscriptions_create, subscriptions_list, subscriptions_retrieve, subscriptions_destroy, published_events_list]

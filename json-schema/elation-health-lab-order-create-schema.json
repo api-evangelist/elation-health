@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-lab-order-create-schema.json",
+  "title": "LabOrderCreate",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-lab-orders-api-openapi.yml#/components/schemas/LabOrderCreate",
+  "type": "object",
+  "required": [
+    "patient",
+    "physician",
+    "practice"
+  ],
+  "properties": {
+    "patient": {
+      "type": "integer",
+      "description": "Patient ID"
+    },
+    "physician": {
+      "type": "integer",
+      "description": "Ordering physician ID"
+    },
+    "practice": {
+      "type": "integer",
+      "description": "Practice ID"
+    },
+    "lab_vendor": {
+      "type": "integer",
+      "description": "Lab vendor ID"
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "test_id": {
+            "type": "integer"
+          },
+          "test_name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "clinical_notes": {
+      "type": "string",
+      "description": "Clinical notes for the lab"
+    },
+    "document_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Order date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Ordered",
+        "Collected",
+        "Sent",
+        "Resulted"
+      ]
+    }
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-discontinue-med-order-list-schema.json",
+  "title": "PaginatedDiscontinueMedOrderList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-discontinued-medications-api-openapi.yml#/components/schemas/PaginatedDiscontinueMedOrderList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/DiscontinueMedOrder"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "DiscontinueMedOrder": {
+      "properties": {
+        "chart_date": {
+          "description": "The timestamp at which this discontinue was available in the patient's chart",
+          "format": "date-time",
+          "type": "string"
+        },
+        "created_date": {
+          "description": "The timestamp at which this discontinue was created in our database.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "description": "The timestamp at which the discontinue was marked as deleted, usually occurs when a user wants to 'undiscontinue' the medication.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "discontinue_date": {
+          "description": "The date when the medication was discontinued.",
+          "format": "date",
+          "type": "string"
+        },
+        "document_date": {
+          "description": "The timestamp at which we've documented this discontinue occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "documenting_personnel": {
+          "description": "The user who documented this discontinue.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "id": {
+          "description": "The id of the discontinue medication.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "is_documented": {
+          "type": "boolean"
+        },
+        "last_medication_order": {
+          "description": "The id of the last medication ordered before we discontinued this thread of med orders.",
+          "readOnly": true,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "med_order": {
+          "description": "The id of the medication which we discontinued.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "medication": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Medication"
+            }
+          ],
+          "description": "The medication that was discontinued."
+        },
+        "patient": {
+          "description": "The id of the patient chart.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "practice": {
+          "description": "The id of the practice.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "prescribing_physician": {
+          "description": "The id of the physician who prescribed the medication.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The discontinue reason.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_by": {
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "signed_date": {
+          "description": "The timestamp at which a user signed off on the discontinue.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supervising_physician": {
+          "description": "If the prescribing physician requires supervision, this will reference the physician who is in that role.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "thread": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "med_order"
+      ],
+      "type": "object"
+    },
+    "Medication": {
+      "properties": {
+        "active_ndcs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "brand_name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "creation_type": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/MedicationDrugType"
+            }
+          ],
+          "default": "user",
+          "readOnly": true
+        },
+        "form": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "generic_name": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the medication.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "is_controlled": {
+          "default": false,
+          "description": "Whether the drug is a controlled substance or not.",
+          "type": "boolean"
+        },
+        "market_end_date": {
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "The name that will display for the medication in the search and when referenced by the prescription or documented med.",
+          "type": "string"
+        },
+        "ndcs": {
+          "description": "The NDCs of the medication (must contain only one ndc code when creating).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "obsolete_date": {
+          "description": "The date at which this practice medication became obsolete.",
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "practice": {
+          "description": "The practice that created the medication. `null` for medications from the standard formulary.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "route": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "rxnorm_cuis": {
+          "description": "The Rxnorm.cui code of the medication (must contain only one cui code when creating).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "strength": {
+          "description": "The strength of the drug, e.g. 40mg.",
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/MedicationType"
+            }
+          ],
+          "default": "prescription",
+          "description": "Whether the practice medication is an OTC or Prescription drug.\n\n* `otc` - otc\n* `prescription` - prescription\n* `discontinued` - discontinued"
+        }
+      },
+      "type": "object"
+    },
+    "MedicationDrugType": {
+      "description": "* `user` - user\n* `medispan` - medispan\n* `ss` - surescripts\n* `disp` - dispensary",
+      "enum": [
+        "user",
+        "medispan",
+        "ss",
+        "disp"
+      ],
+      "type": "string"
+    },
+    "MedicationType": {
+      "description": "* `otc` - otc\n* `prescription` - prescription\n* `discontinued` - discontinued",
+      "enum": [
+        "otc",
+        "prescription",
+        "discontinued"
+      ],
+      "type": "string"
+    }
+  }
+}

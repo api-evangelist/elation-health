@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-insurance-company-create-schema.json",
+  "title": "InsuranceCompanyCreate",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-insurance-api-openapi.yml#/components/schemas/InsuranceCompanyCreate",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Insurance company name"
+    },
+    "address": {
+      "$ref": "#/$defs/Address"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "fax": {
+      "type": "string"
+    },
+    "payer_id": {
+      "type": "string",
+      "description": "Electronic payer identifier"
+    }
+  },
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "address_line1": {
+          "type": "string",
+          "description": "Primary street address"
+        },
+        "address_line2": {
+          "type": "string",
+          "description": "Secondary address line"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "description": "Two-letter state code"
+        },
+        "zip": {
+          "type": "string",
+          "description": "ZIP or postal code"
+        }
+      }
+    }
+  }
+}

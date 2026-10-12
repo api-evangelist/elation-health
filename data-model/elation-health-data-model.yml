@@ -1,21 +1,8 @@
 generated: '2026-07-24'
 method: derived
 source: openapi/*.json (schema id-reference fields)
-note: Entity relationships derived from id-reference property names across the 17 OpenAPI specs. belongs_to
-  = the entity carries a foreign-key field pointing at the target.
-core_entities:
-- patient
-- physician
-- practice
-- service_location
-- appointment
-- visit_note
-- document
-- insurance_company
-- insurance_plan
-- user
-- message_thread
-- lab_vendor
+note: Entity relationships derived from id-reference property names across the 17 OpenAPI specs. belongs_to = the
+  entity carries a foreign-key field pointing at the target.
 relationships:
 - from: Actor
   to: user
@@ -497,3 +484,16 @@ relationships:
   to: lab_vendor
   via: lab_vendor
   kind: belongs_to
+entities:
+- name: patient
+- name: physician
+- name: practice
+- name: service_location
+- name: appointment
+- name: visit_note
+- name: document
+- name: insurance_company
+- name: insurance_plan
+- name: user
+- name: message_thread
+- name: lab_vendor

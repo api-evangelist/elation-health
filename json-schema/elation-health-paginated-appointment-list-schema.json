@@ -1,0 +1,519 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-appointment-list-schema.json",
+  "title": "PaginatedAppointmentList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-appointments-api-openapi.yml#/components/schemas/PaginatedAppointmentList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/Appointment"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "Appointment": {
+      "properties": {
+        "appointment_type_id": {
+          "description": "The ID of an existing appointment type to assign to the appointment. Provide this instead of 'reason' to reference a specific appointment type rather than matching or creating one by name. If both 'reason' and 'appointment_type_id' are supplied, 'reason' takes precedence.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "billing_details": {
+          "description": "The billing details for the appointment.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AppointmentBillingDetails"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "duration": {
+          "description": "The duration of the appointment in minutes. If duration is not provided, the default duration will be used given a reason.",
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": "integer"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "instructions": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "is_blocking": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "last_modified_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "metadata": {
+          "properties": {
+            "data": {
+              "type": "object"
+            },
+            "object_id": {
+              "type": "string"
+            },
+            "object_web_link": {
+              "type": "string"
+            }
+          },
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "mode": {
+          "$ref": "#/$defs/ModeEnum"
+        },
+        "patient": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "payment": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Payment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "physician": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "practice": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "reason": {
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "recurring_event_schedule": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "scheduled_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "service_location": {
+          "description": "The ID of the service location where the appointment will occur.",
+          "properties": {
+            "address_line1": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "address_line2": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "city": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "created_date": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "deleted_date": {
+              "format": "date-time",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "id": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "is_primary": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "place_of_service": {
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                31,
+                32,
+                33,
+                34,
+                41,
+                42,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                60,
+                61,
+                62,
+                65,
+                66,
+                71,
+                72,
+                81,
+                99
+              ],
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "state": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "zip": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": [
+            "object",
+            "integer",
+            "null"
+          ]
+        },
+        "status": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AppointmentStatus"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "telehealth_details": {
+          "deprecated": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "time_slot_status": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/TimeSlotStatusEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "time_slot_type": {
+          "$ref": "#/$defs/TimeSlotTypeEnum"
+        },
+        "transportation_details": {
+          "description": "The transportation details for the appointment.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/TransportationDetails"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "patient",
+        "physician",
+        "practice",
+        "scheduled_date"
+      ],
+      "type": "object"
+    },
+    "AppointmentBillingDetails": {
+      "properties": {
+        "billing_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prior_authorization": {
+          "maxLength": 50,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "referring_provider": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "referring_provider_state": {
+          "maxLength": 2,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "AppointmentStatus": {
+      "properties": {
+        "room": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/AppointmentStatusStatusEnum"
+        },
+        "status_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status_detail": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "AppointmentStatusStatusEnum": {
+      "enum": [
+        "Billed",
+        "Cancelled",
+        "Checked In",
+        "Checked Out",
+        "Confirmed",
+        "In Room",
+        "In Room - Vitals Taken",
+        "Not Seen",
+        "Scheduled",
+        "With Doctor"
+      ],
+      "type": "string"
+    },
+    "ModeEnum": {
+      "enum": [
+        "IN_PERSON",
+        "VIDEO"
+      ],
+      "type": "string"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "Payment": {
+      "properties": {
+        "amount": {
+          "format": "decimal",
+          "pattern": "^-?\\d{0,10}(?:\\.\\d{0,2})?$",
+          "type": "string"
+        },
+        "appointment": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "bill": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "create_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "delete_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "when_collected": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "when_collected"
+      ],
+      "type": "object"
+    },
+    "TimeSlotStatusEnum": {
+      "enum": [
+        "not_avail_for_self_schedule"
+      ],
+      "type": "string"
+    },
+    "TimeSlotTypeEnum": {
+      "enum": [
+        "appointment",
+        "appointment_slot",
+        "event"
+      ],
+      "type": "string"
+    },
+    "TransportationDetails": {
+      "description": "Typed API shape for the ``transportation`` attribute, backed by the generic\n``AppointmentAttribute`` store. Fields mirror ``TransportationAttr``; that Pydantic\nschema is the authoritative validator on write (length/format constraints live there,\nnot here, to avoid drift).",
+      "properties": {
+        "is_required": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  }
+}

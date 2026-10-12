@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-insurance-company-list-schema.json",
+  "title": "PaginatedInsuranceCompanyList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-insurance-api-openapi.yml#/components/schemas/PaginatedInsuranceCompanyList",
+  "allOf": [
+    {
+      "$ref": "#/$defs/PaginationMeta"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InsuranceCompany"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "address_line1": {
+          "type": "string",
+          "description": "Primary street address"
+        },
+        "address_line2": {
+          "type": "string",
+          "description": "Secondary address line"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "description": "Two-letter state code"
+        },
+        "zip": {
+          "type": "string",
+          "description": "ZIP or postal code"
+        }
+      }
+    },
+    "InsuranceCompany": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InsuranceCompanyCreate"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "created_date": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "deleted_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "readOnly": true
+            }
+          }
+        }
+      ]
+    },
+    "InsuranceCompanyCreate": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Insurance company name"
+        },
+        "address": {
+          "$ref": "#/$defs/Address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "payer_id": {
+          "type": "string",
+          "description": "Electronic payer identifier"
+        }
+      }
+    },
+    "PaginationMeta": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Total number of results"
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "URL for next page"
+        },
+        "previous": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "URL for previous page"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-rx-refill-request-schema.json",
+  "title": "RxRefillRequest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-refills-api-openapi.yml#/components/schemas/RxRefillRequest",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "original_medication_order": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "patient": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "patient_matched": {
+      "type": "boolean"
+    },
+    "patient_matching_result": {
+      "$ref": "#/$defs/PatientMatchingResultEnum"
+    },
+    "practice": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "prescriber": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "received_date": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "requested_pharmacy_ncpdpid": {
+      "type": "integer"
+    },
+    "supervisor": {
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "original_medication_order",
+    "patient_matching_result",
+    "practice",
+    "prescriber",
+    "received_date",
+    "requested_pharmacy_ncpdpid"
+  ],
+  "type": "object",
+  "$defs": {
+    "PatientMatchingResultEnum": {
+      "enum": [
+        "COMPLETE_MATCH",
+        "MULTIPLE_MATCHES",
+        "NO_MATCH"
+      ],
+      "type": "string"
+    }
+  }
+}

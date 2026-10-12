@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-coded-document-tag-schema.json",
+  "title": "CodedDocumentTag",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-document-tags-api-openapi.yml#/components/schemas/CodedDocumentTag",
+  "properties": {
+    "code": {
+      "description": "The code of the tag.",
+      "maxLength": 50,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "code_type": {
+      "description": "The type of the tag's code.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CodeTypeEnum"
+        },
+        {
+          "$ref": "#/$defs/NullEnum"
+        }
+      ]
+    },
+    "concept_name": {
+      "description": "The name of the tag's concept.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ConceptNameEnum"
+        },
+        {
+          "$ref": "#/$defs/NullEnum"
+        }
+      ]
+    },
+    "context": {
+      "description": "The context of the tag. Choices = rejected, ordered or reviewed.",
+      "maxLength": 15,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deleted_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "maxLength": 500,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "readOnly": true,
+      "type": "integer"
+    },
+    "practice_created": {
+      "description": "The id of the tag's practice.",
+      "format": "int64",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "snomed_result_code": {
+      "readOnly": true,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {
+      "maxLength": 100,
+      "type": "string"
+    }
+  },
+  "required": [
+    "value"
+  ],
+  "type": "object",
+  "$defs": {
+    "CodeTypeEnum": {
+      "enum": [
+        "CPT",
+        "CPTII",
+        "CVX",
+        "EL8",
+        "HCPCS",
+        "HL7",
+        "ICD10",
+        "ICD9",
+        "LOINC",
+        "RXNORM",
+        "SNOMED"
+      ],
+      "type": "string"
+    },
+    "ConceptNameEnum": {
+      "enum": [
+        "cognitive-assessment",
+        "depression-screening-adolescent-declined",
+        "depression-screening-adult-declined",
+        "diet-counsel",
+        "dietic-service-referral",
+        "dietician-referral",
+        "exercise-counsel",
+        "falls-assessment",
+        "flu-vaccine-contraindicated",
+        "flu-vaccine-declined",
+        "flu-vaccine-elsewhere",
+        "flu-vaccine-referred",
+        "hospice-care",
+        "hpv-test",
+        "nutrition-counsel",
+        "pap-smear",
+        "phys-activity-counsel",
+        "procedure-contraindicated",
+        "tobacco-counsel-long",
+        "tobacco-counsel-short",
+        "unable-to-walk",
+        "wt-mgmt-referral"
+      ],
+      "type": "string"
+    },
+    "NullEnum": {
+      "type": "null"
+    }
+  }
+}

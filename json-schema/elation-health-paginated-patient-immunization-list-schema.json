@@ -1,0 +1,372 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/elation-health/main/json-schema/elation-health-paginated-patient-immunization-list-schema.json",
+  "title": "PaginatedPatientImmunizationList",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/elation-health-immunizations-api-openapi.yml#/components/schemas/PaginatedPatientImmunizationList",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous": {
+      "format": "uri",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/PatientImmunization"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "type": "object",
+  "$defs": {
+    "FundingSourceEnum": {
+      "enum": [
+        "Privately funded vaccine stock",
+        "Publicly funded vaccine stock",
+        "Publicly funded vaccine stock - Non-VFC",
+        "Publicly funded vaccine stock - VFC"
+      ],
+      "type": "string"
+    },
+    "ImmunizationVaccine": {
+      "properties": {
+        "cdc_name": {
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cdc_type": {
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cvx": {
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InfoSourceEnum": {
+      "enum": [
+        "Historical information - from birth certificate",
+        "Historical information - from other provider",
+        "Historical information - from other registry",
+        "Historical information - from parent's recall",
+        "Historical information - from parent's written record",
+        "Historical information - from public agency",
+        "Historical information - from school record",
+        "Historical information - source unspecified",
+        "New immunization record"
+      ],
+      "type": "string"
+    },
+    "NullEnum": {
+      "type": "null"
+    },
+    "PatientImmunization": {
+      "properties": {
+        "administered_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "administering_physician": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "allowed_sharing": {
+          "description": "Whether this immunization should be sent to Immunization Registry (true/false/null)",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "created_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deleted_date": {
+          "format": "date-time",
+          "readOnly": true,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dose_in_series": {
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "expiration_date": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "funding_source": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FundingSourceEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "info_source": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/InfoSourceEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "lot_number": {
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manufacturer_code": {
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manufacturer_name": {
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ndc": {
+          "description": "Should be 10-11 digits, 2 dashes.",
+          "maxLength": 31,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ordering_physician": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "patient": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "patient_consent": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "practice": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "priority_population": {
+          "description": "For Immunization Registry Integrations (less than 9 symbols).",
+          "maxLength": 8,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publicity_code": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PublicityCodeEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "qty": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "qty_units": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "service_location_id": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "site": {
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "vaccine": {
+          "$ref": "#/$defs/ImmunizationVaccine"
+        },
+        "vfc_eligibility": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/VfcEligibilityEnum"
+            },
+            {
+              "$ref": "#/$defs/NullEnum"
+            }
+          ]
+        },
+        "vis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "vis_given_date": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "administered_date",
+        "administering_physician",
+        "ordering_physician",
+        "patient",
+        "qty",
+        "vaccine"
+      ],
+      "type": "object"
+    },
+    "PublicityCodeEnum": {
+      "enum": [
+        "No reminder/recall",
+        "Only recall to provider, no reminder",
+        "Only reminder to provider, no recall",
+        "Recall only - any method",
+        "Recall only - no calls",
+        "Recall to provider",
+        "Reminder only - any method",
+        "Reminder only - no calls",
+        "Reminder to provider",
+        "Reminder/recall - any method",
+        "Reminder/recall - no calls",
+        "Reminder/recall - to provider"
+      ],
+      "type": "string"
+    },
+    "VfcEligibilityEnum": {
+      "enum": [
+        "317",
+        "CA State General Fund Vaccines",
+        "CHIP",
+        "HI Adult Insured",
+        "HI Adult Not Insured",
+        "HI Birthing Hospital Hepatitis B",
+        "Local-specific eligibility",
+        "ME State Eligible - Insured - Under 19",
+        "Medicare",
+        "Not VFC eligible",
+        "OR Locally Owned",
+        "OR Special Projects",
+        "State program eligibility",
+        "VFC eligible - American Indian/Alaskan Native",
+        "VFC eligible - Medicaid/Medicaid Managed Care",
+        "VFC eligible - Under-insured",
+        "VFC eligible - Uninsured"
+      ],
+      "type": "string"
+    }
+  }
+}
