@@ -507,20 +507,121 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    IncomingFileGroup:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        external_fax_id:
+          type:
+          - string
+          - 'null'
+        file_size:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        files:
+          items:
+            $ref: '#/components/schemas/File'
+          type:
+          - array
+          - 'null'
+        from_number:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        group_name:
+          maxLength: 200
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type:
+          - array
+          - 'null'
+        page_count:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        practice:
+          format: int64
+          type: integer
+        practice_fax:
+          type:
+          - string
+          - 'null'
+        process_complete_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        process_result:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        process_start_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        process_state:
+          allOf:
+          - $ref: '#/components/schemas/ProcessStateEnum'
+          readOnly: true
+        received_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        source:
+          allOf:
+          - $ref: '#/components/schemas/SourceEnum'
+          readOnly: true
+        subject:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        to_company:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        to_name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        to_number:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        transmit_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - group_name
+      - practice
+      type: object
     ProcessStateEnum:
       enum:
       - complete
       - error
       - pending
       - processing
-      type: string
-    SourceEnum:
-      enum:
-      - metrofax
-      - plr
-      - refile
-      - softlinx
-      - user
       type: string
     File:
       properties:
@@ -651,6 +752,14 @@ components:
       - base64_content
       - content_type
       type: object
+    SourceEnum:
+      enum:
+      - metrofax
+      - plr
+      - refile
+      - softlinx
+      - user
+      type: string
     PaginatedIncomingFileGroupList:
       properties:
         count:
@@ -672,115 +781,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    IncomingFileGroup:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        external_fax_id:
-          type:
-          - string
-          - 'null'
-        file_size:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        files:
-          items:
-            $ref: '#/components/schemas/File'
-          type:
-          - array
-          - 'null'
-        from_number:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        group_name:
-          maxLength: 200
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        images:
-          items:
-            $ref: '#/components/schemas/Image'
-          type:
-          - array
-          - 'null'
-        page_count:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        practice:
-          format: int64
-          type: integer
-        practice_fax:
-          type:
-          - string
-          - 'null'
-        process_complete_time:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        process_result:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        process_start_time:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        process_state:
-          allOf:
-          - $ref: '#/components/schemas/ProcessStateEnum'
-          readOnly: true
-        received_time:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        source:
-          allOf:
-          - $ref: '#/components/schemas/SourceEnum'
-          readOnly: true
-        subject:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        to_company:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        to_name:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        to_number:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        transmit_time:
-          format: date-time
-          type:
-          - string
-          - 'null'
-      required:
-      - group_name
-      - practice
       type: object
   securitySchemes:
     sec0:

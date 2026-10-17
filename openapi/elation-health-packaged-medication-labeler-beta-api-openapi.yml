@@ -91,22 +91,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PackagedMedicationLabeler:
-      properties:
-        id:
-          format: int64
-          type: integer
-        medispanid:
-          maxLength: 32
-          type: string
-        name:
-          maxLength: 255
-          type: string
-      required:
-      - id
-      - medispanid
-      - name
-      type: object
     PaginatedPackagedMedicationLabelerList:
       properties:
         count:
@@ -128,6 +112,22 @@ components:
           type: array
       required:
       - results
+      type: object
+    PackagedMedicationLabeler:
+      properties:
+        id:
+          format: int64
+          type: integer
+        medispanid:
+          maxLength: 32
+          type: string
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - id
+      - medispanid
+      - name
       type: object
   securitySchemes:
     oauth2:

@@ -669,6 +669,21 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    InsuranceTypeEnum:
+      enum:
+      - Capitated
+      - Commercial
+      - Managed Medicaid
+      - Medicaid
+      - Medicare
+      - Medicare Advantage
+      - Medicare Supplement
+      - Self Pay
+      - Workers Compensation/Third Party Liability
+      - None
+      type: string
+    NullEnum:
+      type: 'null'
     PatchedInsuranceCompanySingleInstance:
       properties:
         address:
@@ -767,8 +782,6 @@ components:
           maxLength: 10
           type: string
       type: object
-    NullEnum:
-      type: 'null'
     InsuranceCompany:
       properties:
         address:
@@ -859,41 +872,6 @@ components:
       required:
       - carrier
       - practice
-      type: object
-    InsuranceTypeEnum:
-      enum:
-      - Capitated
-      - Commercial
-      - Managed Medicaid
-      - Medicaid
-      - Medicare
-      - Medicare Advantage
-      - Medicare Supplement
-      - Self Pay
-      - Workers Compensation/Third Party Liability
-      - None
-      type: string
-    PaginatedInsuranceCompanyList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/InsuranceCompany'
-          type: array
-      required:
-      - results
       type: object
     InsuranceCompanySingleInstance:
       properties:
@@ -995,6 +973,28 @@ components:
       required:
       - carrier
       - practice
+      type: object
+    PaginatedInsuranceCompanyList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/InsuranceCompany'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

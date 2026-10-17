@@ -792,29 +792,7 @@ components:
       - license_state
       - npi
       type: object
-    PaginatedPhysicianList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Physician'
-          type: array
-      required:
-      - results
-      type: object
-    ProviderAvailabilityBlockSerializerPracticeTimeZone:
+    ProviderAvailabilityBlock:
       properties:
         end_time:
           format: time
@@ -846,7 +824,7 @@ components:
       - start_time
       - weekday
       type: object
-    ProviderAvailabilityBlock:
+    ProviderAvailabilityBlockSerializerPracticeTimeZone:
       properties:
         end_time:
           format: time
@@ -935,6 +913,28 @@ components:
           - integer
           - 'null'
       type: object
+    PaginatedPhysicianList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Physician'
+          type: array
+      required:
+      - results
+      type: object
     Physician_2:
       type: object
       properties:
@@ -987,20 +987,6 @@ components:
           - 'null'
           description: URL for previous page
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -1008,6 +994,20 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

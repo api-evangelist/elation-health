@@ -276,19 +276,6 @@ paths:
         - import
 components:
   schemas:
-    PatientChartInputPost:
-      required:
-      - chart_json
-      - status
-      type: object
-      properties:
-        source_patient_id:
-          type: string
-          description: a patient key, normally (fname|lname|dob|gender)
-        chart_json:
-          $ref: '#/components/schemas/ChartBuilderJson'
-        status:
-          $ref: '#/components/schemas/JobStatus'
     JobStatus:
       type: string
       default: open
@@ -299,6 +286,16 @@ components:
       - processing
       - failed
       - completed
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
     PatientChartInputPut:
       required:
       - chart_json
@@ -313,26 +310,6 @@ components:
           $ref: '#/components/schemas/ChartBuilderJson'
         status:
           $ref: '#/components/schemas/JobStatus'
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-    PatientChartInputGetId:
-      allOf:
-      - $ref: '#/components/schemas/PatientChartInputGetList'
-      - type: object
-      properties:
-        chart_json:
-          $ref: '#/components/schemas/ChartBuilderJson'
-    ChartBuilderJson:
-      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
-      type: object
     ValidationErrorResponse:
       type: object
       additionalProperties:
@@ -341,6 +318,29 @@ components:
         items:
           type: string
           description: Validation error string
+    ChartBuilderJson:
+      description: contains JSON schema that describes the json that chart_builder.py consumes to create chart. Schemas are uploaded to a public s3 endpoint that is backing http://data-import.elationemr.com. The files are stored in the /spec/ folder.
+      type: object
+    PatientChartInputPost:
+      required:
+      - chart_json
+      - status
+      type: object
+      properties:
+        source_patient_id:
+          type: string
+          description: a patient key, normally (fname|lname|dob|gender)
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+    PatientChartInputGetId:
+      allOf:
+      - $ref: '#/components/schemas/PatientChartInputGetList'
+      - type: object
+      properties:
+        chart_json:
+          $ref: '#/components/schemas/ChartBuilderJson'
     PatientChartInputGetList:
       required:
       - chart_json

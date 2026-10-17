@@ -490,6 +490,35 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
+    PatientAllergySeverityEnum:
+      enum:
+      - mild
+      - moderate
+      - severe
+      - unknown
+      type: string
+    PaginatedPatientAllergyList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientAllergy'
+          type: array
+      required:
+      - results
+      type: object
     PatchedPatientAllergy:
       properties:
         created_date:
@@ -539,40 +568,11 @@ components:
         status:
           $ref: '#/components/schemas/AllergyStatus'
       type: object
-    PatientAllergySeverityEnum:
-      enum:
-      - mild
-      - moderate
-      - severe
-      - unknown
-      type: string
     AllergyStatus:
       enum:
       - Active
       - Inactive
       type: string
-    PaginatedPatientAllergyList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientAllergy'
-          type: array
-      required:
-      - results
-      type: object
     PatientAllergy:
       properties:
         created_date:
@@ -702,20 +702,6 @@ components:
         notes:
           type: string
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -723,6 +709,20 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

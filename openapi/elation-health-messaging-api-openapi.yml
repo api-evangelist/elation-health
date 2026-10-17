@@ -121,20 +121,6 @@ paths:
           description: Message thread deleted
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -142,7 +128,37 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
     MessageThread:
       allOf:
       - $ref: '#/components/schemas/MessageThreadCreate'
@@ -165,6 +181,15 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    PaginatedMessageThreadList:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/MessageThread'
     MessageThreadCreate:
       type: object
       required:
@@ -186,31 +211,6 @@ components:
         note:
           type: string
           description: Initial message content
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for next page
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for previous page
-    PaginatedMessageThreadList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/MessageThread'
   securitySchemes:
     oauth2:
       type: oauth2

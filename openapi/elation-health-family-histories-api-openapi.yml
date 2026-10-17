@@ -395,20 +395,6 @@ components:
       - patient
       - relationship
       type: object
-    PatientFamilyHistoryRelationshipEnum:
-      enum:
-      - Aunt
-      - Brother
-      - Daughter
-      - Father
-      - Grandfather
-      - Grandmother
-      - Mother
-      - Other
-      - Sister
-      - Son
-      - Uncle
-      type: string
     PaginatedPatientFamilyHistoryList:
       properties:
         count:
@@ -431,6 +417,20 @@ components:
       required:
       - results
       type: object
+    PatientFamilyHistoryRelationshipEnum:
+      enum:
+      - Aunt
+      - Brother
+      - Daughter
+      - Father
+      - Grandfather
+      - Grandmother
+      - Mother
+      - Other
+      - Sister
+      - Son
+      - Uncle
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

@@ -178,33 +178,27 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    UploadedPhoto:
-      description: 'Serializer for UploadedPhoto model.
-
-        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
+    PaginatedPracticePrintHeaderList:
       properties:
-        content_type:
-          readOnly: true
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
           type: string
-        file_size:
-          readOnly: true
-          type: integer
-        height:
-          readOnly: true
-          type: integer
-        id:
-          readOnly: true
-          type: integer
-        last_updated:
-          format: date-time
-          readOnly: true
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
           type: string
-        original_filename:
-          readOnly: true
-          type: string
-        width:
-          readOnly: true
-          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/PracticePrintHeader'
+          type: array
+      required:
+      - results
       type: object
     PracticePrintHeader:
       properties:
@@ -253,27 +247,33 @@ components:
       required:
       - name
       type: object
-    PaginatedPracticePrintHeaderList:
+    UploadedPhoto:
+      description: 'Serializer for UploadedPhoto model.
+
+        Used for print header images and other cases where we need to serialize an UploadedPhoto directly.'
       properties:
-        count:
-          example: 123
+        content_type:
+          readOnly: true
+          type: string
+        file_size:
+          readOnly: true
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        height:
+          readOnly: true
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        last_updated:
+          format: date-time
+          readOnly: true
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
+        original_filename:
+          readOnly: true
           type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PracticePrintHeader'
-          type: array
-      required:
-      - results
+        width:
+          readOnly: true
+          type: integer
       type: object
   securitySchemes:
     sec0:

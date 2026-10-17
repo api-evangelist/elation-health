@@ -508,128 +508,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    CodeTypeEnum:
-      enum:
-      - CPT
-      - CPTII
-      - CVX
-      - EL8
-      - HCPCS
-      - HL7
-      - ICD10
-      - ICD9
-      - LOINC
-      - RXNORM
-      - SNOMED
-      type: string
-    PaginatedCodedDocumentTagList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/CodedDocumentTag'
-          type: array
-      required:
-      - results
-      type: object
-    ConceptNameEnum:
-      enum:
-      - cognitive-assessment
-      - depression-screening-adolescent-declined
-      - depression-screening-adult-declined
-      - diet-counsel
-      - dietic-service-referral
-      - dietician-referral
-      - exercise-counsel
-      - falls-assessment
-      - flu-vaccine-contraindicated
-      - flu-vaccine-declined
-      - flu-vaccine-elsewhere
-      - flu-vaccine-referred
-      - hospice-care
-      - hpv-test
-      - nutrition-counsel
-      - pap-smear
-      - phys-activity-counsel
-      - procedure-contraindicated
-      - tobacco-counsel-long
-      - tobacco-counsel-short
-      - unable-to-walk
-      - wt-mgmt-referral
-      type: string
-    PatchedCodedDocumentTag:
-      properties:
-        code:
-          description: The code of the tag.
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        code_type:
-          description: The type of the tag's code.
-          oneOf:
-          - $ref: '#/components/schemas/CodeTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        concept_name:
-          description: The name of the tag's concept.
-          oneOf:
-          - $ref: '#/components/schemas/ConceptNameEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        context:
-          description: The context of the tag. Choices = rejected, ordered or reviewed.
-          maxLength: 15
-          type:
-          - string
-          - 'null'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        description:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        practice_created:
-          description: The id of the tag's practice.
-          format: int64
-          type:
-          - integer
-          - 'null'
-        snomed_result_code:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        value:
-          maxLength: 100
-          type: string
-      type: object
-    NullEnum:
-      type: 'null'
     CodedDocumentTag:
       properties:
         code:
@@ -691,6 +569,128 @@ components:
       required:
       - value
       type: object
+    ConceptNameEnum:
+      enum:
+      - cognitive-assessment
+      - depression-screening-adolescent-declined
+      - depression-screening-adult-declined
+      - diet-counsel
+      - dietic-service-referral
+      - dietician-referral
+      - exercise-counsel
+      - falls-assessment
+      - flu-vaccine-contraindicated
+      - flu-vaccine-declined
+      - flu-vaccine-elsewhere
+      - flu-vaccine-referred
+      - hospice-care
+      - hpv-test
+      - nutrition-counsel
+      - pap-smear
+      - phys-activity-counsel
+      - procedure-contraindicated
+      - tobacco-counsel-long
+      - tobacco-counsel-short
+      - unable-to-walk
+      - wt-mgmt-referral
+      type: string
+    NullEnum:
+      type: 'null'
+    PaginatedCodedDocumentTagList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/CodedDocumentTag'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedCodedDocumentTag:
+      properties:
+        code:
+          description: The code of the tag.
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        code_type:
+          description: The type of the tag's code.
+          oneOf:
+          - $ref: '#/components/schemas/CodeTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        concept_name:
+          description: The name of the tag's concept.
+          oneOf:
+          - $ref: '#/components/schemas/ConceptNameEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        context:
+          description: The context of the tag. Choices = rejected, ordered or reviewed.
+          maxLength: 15
+          type:
+          - string
+          - 'null'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        description:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        practice_created:
+          description: The id of the tag's practice.
+          format: int64
+          type:
+          - integer
+          - 'null'
+        snomed_result_code:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        value:
+          maxLength: 100
+          type: string
+      type: object
+    CodeTypeEnum:
+      enum:
+      - CPT
+      - CPTII
+      - CVX
+      - EL8
+      - HCPCS
+      - HL7
+      - ICD10
+      - ICD9
+      - LOINC
+      - RXNORM
+      - SNOMED
+      type: string
   securitySchemes:
     sec0:
       type: oauth2

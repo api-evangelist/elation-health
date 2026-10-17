@@ -92,20 +92,38 @@ paths:
       - '2.0'
 components:
   schemas:
-    Actor:
+    ProcedureCodes:
       properties:
-        name:
+        code:
+          maxLength: 10
           type: string
-        type:
-          readOnly: true
-          type: string
-        user_id:
-          readOnly: true
+        dxs:
+          items:
+            $ref: '#/components/schemas/DiagnosisCode'
+          type: array
+        modifier_1:
+          maxLength: 255
           type:
-          - integer
+          - string
+          - 'null'
+        modifier_2:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_3:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+        modifier_4:
+          maxLength: 255
+          type:
+          - string
           - 'null'
       required:
-      - name
+      - code
+      - dxs
       type: object
     Injection:
       properties:
@@ -229,53 +247,6 @@ components:
       - given_date
       - ndc
       type: object
-    ProcedureCodes:
-      properties:
-        code:
-          maxLength: 10
-          type: string
-        dxs:
-          items:
-            $ref: '#/components/schemas/DiagnosisCode'
-          type: array
-        modifier_1:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        modifier_2:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        modifier_3:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-        modifier_4:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      - dxs
-      type: object
-    DiagnosisCode:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        system:
-          type: string
-      required:
-      - code
-      - system
-      type: object
-    BlankEnum:
-      enum:
-      - ''
     PaginatedInjectionList:
       properties:
         count:
@@ -298,8 +269,6 @@ components:
       required:
       - results
       type: object
-    NullEnum:
-      type: 'null'
     SiteEnum:
       description: '* `Abdomen` - Abdomen
 
@@ -371,6 +340,43 @@ components:
       - L Hand
       - Other
       type: string
+    NullEnum:
+      type: 'null'
+    Actor:
+      properties:
+        name:
+          type: string
+        type:
+          readOnly: true
+          type: string
+        user_id:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+      required:
+      - name
+      type: object
+    BlankEnum:
+      enum:
+      - ''
+    MethodEnum:
+      description: '* `Intravenous` - Intravenous
+
+        * `Intramuscular` - Intramuscular
+
+        * `Subcutaneous` - Subcutaneous
+
+        * `Intradermal` - Intradermal
+
+        * `Other` - Other'
+      enum:
+      - Intravenous
+      - Intramuscular
+      - Subcutaneous
+      - Intradermal
+      - Other
+      type: string
     DoseUnitEnum:
       description: '* `dL` - Deciliter
 
@@ -406,23 +412,17 @@ components:
       - uL
       - tab
       type: string
-    MethodEnum:
-      description: '* `Intravenous` - Intravenous
-
-        * `Intramuscular` - Intramuscular
-
-        * `Subcutaneous` - Subcutaneous
-
-        * `Intradermal` - Intradermal
-
-        * `Other` - Other'
-      enum:
-      - Intravenous
-      - Intramuscular
-      - Subcutaneous
-      - Intradermal
-      - Other
-      type: string
+    DiagnosisCode:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        system:
+          type: string
+      required:
+      - code
+      - system
+      type: object
   securitySchemes:
     oauth2:
       flows:

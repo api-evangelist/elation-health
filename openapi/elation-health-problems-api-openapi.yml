@@ -607,25 +607,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientProblemStatusEnum:
-      enum:
-      - Active
-      - Controlled
-      - Resolved
-      type: string
-    ImoCodeRelation:
-      properties:
-        icd10:
-          items:
-            type: string
-          type: array
-        icd9:
-          items:
-            type: string
-          type: array
-        snomed:
-          type: string
-      type: object
     PatientProblem:
       properties:
         created_date:
@@ -685,42 +666,6 @@ components:
       - start_date
       - status
       type: object
-    BlankEnum:
-      enum:
-      - ''
-    VerificationStatusEnum:
-      enum:
-      - confirmed
-      - differential
-      - entered_in_error
-      - provisional
-      - refuted
-      - unconfirmed
-      type: string
-    NullEnum:
-      type: 'null'
-    PaginatedPatientProblemList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientProblem'
-          type: array
-      required:
-      - results
-      type: object
     PatchedPatientProblem:
       properties:
         created_date:
@@ -774,54 +719,61 @@ components:
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
       type: object
-    Diagnosis:
-      type: object
+    ImoCodeRelation:
       properties:
-        icd9:
-          type: array
-          items:
-            type: string
         icd10:
-          type: array
           items:
             type: string
+          type: array
+        icd9:
+          items:
+            type: string
+          type: array
         snomed:
           type: string
-    ProblemCreate:
       type: object
-      required:
-      - description
-      - status
-      - start_date
-      - patient
+    NullEnum:
+      type: 'null'
+    PaginatedPatientProblemList:
       properties:
-        description:
-          type: string
-          description: Description of the problem
-        status:
-          type: string
-          enum:
-          - Active
-          - Controlled
-          - Resolved
-        synopsis:
-          type: string
-          description: Brief synopsis of the problem
-        start_date:
-          type: string
-          format: date-time
-          description: Date the problem started
-        resolved_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date the problem was resolved (required when status is Resolved)
-        patient:
+        count:
+          example: 123
           type: integer
-          description: Patient ID
-        dx:
-          $ref: '#/components/schemas/Diagnosis'
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientProblem'
+          type: array
+      required:
+      - results
+      type: object
+    PatientProblemStatusEnum:
+      enum:
+      - Active
+      - Controlled
+      - Resolved
+      type: string
+    BlankEnum:
+      enum:
+      - ''
+    VerificationStatusEnum:
+      enum:
+      - confirmed
+      - differential
+      - entered_in_error
+      - provisional
+      - refuted
+      - unconfirmed
+      type: string
     PaginatedProblemList:
       allOf:
       - $ref: '#/components/schemas/PaginationMeta'
@@ -865,21 +817,55 @@ components:
           - string
           - 'null'
           description: URL for previous page
+    ProblemCreate:
+      type: object
+      required:
+      - description
+      - status
+      - start_date
+      - patient
+      properties:
+        description:
+          type: string
+          description: Description of the problem
+        status:
+          type: string
+          enum:
+          - Active
+          - Controlled
+          - Resolved
+        synopsis:
+          type: string
+          description: Brief synopsis of the problem
+        start_date:
+          type: string
+          format: date-time
+          description: Date the problem started
+        resolved_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date the problem was resolved (required when status is Resolved)
+        patient:
+          type: integer
+          description: Patient ID
+        dx:
+          $ref: '#/components/schemas/Diagnosis'
+    Diagnosis:
+      type: object
+      properties:
+        icd9:
+          type: array
+          items:
+            type: string
+        icd10:
+          type: array
+          items:
+            type: string
+        snomed:
+          type: string
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -887,6 +873,20 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

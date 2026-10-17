@@ -907,105 +907,25 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    HandoutsSerializerNoBase64Content:
-      description: Handout serializer that returns content without base64_content
-      properties:
-        content:
-          $ref: '#/components/schemas/ContentSerializerNoBase64Content'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          description: The name of the handout.
-          maxLength: 255
-          type: string
-        practice_created:
-          format: int64
-          type: integer
-        received_date:
-          format: date-time
-          readOnly: true
-          type: string
-        tags:
-          items:
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/HandoutType'
-        vis_barcode:
-          description: Should only be set if the type == VIS.
-          maxLength: 30
-          type:
-          - string
-          - 'null'
-      required:
-      - content
-      - name
-      - practice_created
-      - type
-      type: object
     HandoutType:
       enum:
       - Patient Resource
       - VIS
       type: string
-    PatchedHandout:
-      description: 'Contains only webhooks
-
-        All other fields inherited'
+    Content:
+      description: The Content serializer. It serialize file data
       properties:
-        content:
-          $ref: '#/components/schemas/Content'
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          description: The name of the handout.
-          maxLength: 255
+        base64_content:
           type: string
-        practice_created:
-          format: int64
-          type: integer
-        received_date:
-          format: date-time
+        content_type:
           readOnly: true
           type: string
-        tags:
-          items:
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/HandoutType'
-        vis_barcode:
-          description: Should only be set if the type == VIS.
-          maxLength: 30
-          type:
-          - string
-          - 'null'
+        original_filename:
+          maxLength: 200
+          type: string
+      required:
+      - base64_content
+      - original_filename
       type: object
     Handout:
       description: 'Contains only webhooks
@@ -1058,6 +978,101 @@ components:
       - practice_created
       - type
       type: object
+    HandoutsSerializerNoBase64Content:
+      description: Handout serializer that returns content without base64_content
+      properties:
+        content:
+          $ref: '#/components/schemas/ContentSerializerNoBase64Content'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the handout.
+          maxLength: 255
+          type: string
+        practice_created:
+          format: int64
+          type: integer
+        received_date:
+          format: date-time
+          readOnly: true
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/HandoutType'
+        vis_barcode:
+          description: Should only be set if the type == VIS.
+          maxLength: 30
+          type:
+          - string
+          - 'null'
+      required:
+      - content
+      - name
+      - practice_created
+      - type
+      type: object
+    PatchedHandout:
+      description: 'Contains only webhooks
+
+        All other fields inherited'
+      properties:
+        content:
+          $ref: '#/components/schemas/Content'
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the handout.
+          maxLength: 255
+          type: string
+        practice_created:
+          format: int64
+          type: integer
+        received_date:
+          format: date-time
+          readOnly: true
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/HandoutType'
+        vis_barcode:
+          description: Should only be set if the type == VIS.
+          maxLength: 30
+          type:
+          - string
+          - 'null'
+      type: object
     PaginatedHandoutsSerializerNoBase64ContentList:
       properties:
         count:
@@ -1079,21 +1094,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    Content:
-      description: The Content serializer. It serialize file data
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          readOnly: true
-          type: string
-        original_filename:
-          maxLength: 200
-          type: string
-      required:
-      - base64_content
-      - original_filename
       type: object
     ContentSerializerNoBase64Content:
       description: The Content serializer. It serialize file data without base64_content

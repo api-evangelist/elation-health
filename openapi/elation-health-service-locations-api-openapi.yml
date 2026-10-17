@@ -1629,6 +1629,93 @@ components:
       - US/Pacific
       - UTC
       type: string
+    ServiceLocationPlaceOfServiceEnum:
+      enum:
+      - Ambulance - Air or Water
+      - Ambulance - Land
+      - Ambulatory Surgical Center
+      - Assisted Living Facility
+      - Birthing Center
+      - Community Mental Health Center
+      - Comprehensive Inpatient Rehabilitation Facility
+      - Comprehensive Outpatient Rehabilitation Facility
+      - Custodial Care Facility
+      - Emergency Room - Hospital
+      - End-Stage Renal Disease Treatment Facility
+      - Federally Qualified Health Center
+      - Group Home
+      - Home
+      - Homeless Shelter
+      - Hospice
+      - Independent Clinic
+      - Independent Laboratory
+      - Indian Health ServiceFree-standing Facility
+      - Indian Health ServiceProvider-based Facility
+      - Inpatient Hospital
+      - Inpatient Psychiatric Facility
+      - Intermediate Care Facility/Individuals with Intellectual Disabilities
+      - Mass Immunization Center
+      - Military Treatment Facility
+      - Mobile Unit
+      - Non-residential Substance Abuse Treatment Facility
+      - Nursing Facility
+      - Off Campus Outpatient-Hospital
+      - Office
+      - On Campus-Outpatient Hospital
+      - Other Place of Service
+      - Outreach Site/Street
+      - Pharmacy
+      - Place of Employment-Worksite
+      - Prison/Correctional Facility
+      - Programs of All-Inclusive Care for the Elderly (PACE) Center
+      - Psychiatric Facility-Partial Hospitalization
+      - Psychiatric Residential Treatment Center
+      - Public Health Clinic
+      - Residential Substance Abuse Treatment Facility
+      - Rural Health Clinic
+      - School
+      - Skilled Nursing Facility
+      - Telehealth Provided Other than in Patient’s Home
+      - Telehealth Provided in Patient’s Home
+      - Temporary Lodging
+      - Tribal 638Free-standingFacility
+      - Tribal 638Provider-basedFacility
+      - Urgent Care Facility
+      - Walk-in Retail Health Clinic
+      type: string
+    NullEnum:
+      type: 'null'
+    ServiceLocationStatusEnum:
+      enum:
+      - active
+      - inactive
+      - suspended
+      type: string
+    PaginatedServiceLocationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ServiceLocation'
+          type: array
+      required:
+      - results
+      type: object
+    BlankEnum:
+      enum:
+      - ''
     PatchedServiceLocation:
       properties:
         address_line1:
@@ -1702,93 +1789,6 @@ components:
           maxLength: 10
           type: string
       type: object
-    PaginatedServiceLocationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/ServiceLocation'
-          type: array
-      required:
-      - results
-      type: object
-    ServiceLocationPlaceOfServiceEnum:
-      enum:
-      - Ambulance - Air or Water
-      - Ambulance - Land
-      - Ambulatory Surgical Center
-      - Assisted Living Facility
-      - Birthing Center
-      - Community Mental Health Center
-      - Comprehensive Inpatient Rehabilitation Facility
-      - Comprehensive Outpatient Rehabilitation Facility
-      - Custodial Care Facility
-      - Emergency Room - Hospital
-      - End-Stage Renal Disease Treatment Facility
-      - Federally Qualified Health Center
-      - Group Home
-      - Home
-      - Homeless Shelter
-      - Hospice
-      - Independent Clinic
-      - Independent Laboratory
-      - Indian Health ServiceFree-standing Facility
-      - Indian Health ServiceProvider-based Facility
-      - Inpatient Hospital
-      - Inpatient Psychiatric Facility
-      - Intermediate Care Facility/Individuals with Intellectual Disabilities
-      - Mass Immunization Center
-      - Military Treatment Facility
-      - Mobile Unit
-      - Non-residential Substance Abuse Treatment Facility
-      - Nursing Facility
-      - Off Campus Outpatient-Hospital
-      - Office
-      - On Campus-Outpatient Hospital
-      - Other Place of Service
-      - Outreach Site/Street
-      - Pharmacy
-      - Place of Employment-Worksite
-      - Prison/Correctional Facility
-      - Programs of All-Inclusive Care for the Elderly (PACE) Center
-      - Psychiatric Facility-Partial Hospitalization
-      - Psychiatric Residential Treatment Center
-      - Public Health Clinic
-      - Residential Substance Abuse Treatment Facility
-      - Rural Health Clinic
-      - School
-      - Skilled Nursing Facility
-      - Telehealth Provided Other than in Patient’s Home
-      - Telehealth Provided in Patient’s Home
-      - Temporary Lodging
-      - Tribal 638Free-standingFacility
-      - Tribal 638Provider-basedFacility
-      - Urgent Care Facility
-      - Walk-in Retail Health Clinic
-      type: string
-    BlankEnum:
-      enum:
-      - ''
-    NullEnum:
-      type: 'null'
-    ServiceLocationStatusEnum:
-      enum:
-      - active
-      - inactive
-      - suspended
-      type: string
   securitySchemes:
     sec0:
       type: oauth2

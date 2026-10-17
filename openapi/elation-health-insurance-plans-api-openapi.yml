@@ -578,28 +578,6 @@ components:
       - name
       - practice
       type: object
-    PaginatedInsurancePlanList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/InsurancePlan'
-          type: array
-      required:
-      - results
-      type: object
     PatchedInsurancePlanSingleInstance:
       properties:
         created_date:
@@ -632,6 +610,28 @@ components:
         practice:
           format: int64
           type: integer
+      type: object
+    PaginatedInsurancePlanList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/InsurancePlan'
+          type: array
+      required:
+      - results
       type: object
     InsurancePlanSingleInstance:
       properties:

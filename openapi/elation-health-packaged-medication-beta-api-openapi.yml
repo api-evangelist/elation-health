@@ -121,28 +121,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PaginatedPackagedMedicationList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PackagedMedication'
-          type: array
-      required:
-      - results
-      type: object
     PackagedMedication:
       properties:
         created_date:
@@ -251,6 +229,28 @@ components:
           type:
           - string
           - 'null'
+      type: object
+    PaginatedPackagedMedicationList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PackagedMedication'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     oauth2:

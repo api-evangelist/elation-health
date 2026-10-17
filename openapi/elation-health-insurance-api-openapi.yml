@@ -120,20 +120,6 @@ paths:
           description: Insurance company deleted
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -141,24 +127,21 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   schemas:
-    InsuranceCompanyCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Insurance company name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-        fax:
-          type: string
-        payer_id:
-          type: string
-          description: Electronic payer identifier
     InsuranceCompany:
       allOf:
       - $ref: '#/components/schemas/InsuranceCompanyCreate'
@@ -177,6 +160,22 @@ components:
             - 'null'
             format: date-time
             readOnly: true
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
     Address:
       type: object
       properties:
@@ -194,22 +193,6 @@ components:
         zip:
           type: string
           description: ZIP or postal code
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for next page
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for previous page
     PaginatedInsuranceCompanyList:
       allOf:
       - $ref: '#/components/schemas/PaginationMeta'
@@ -219,6 +202,23 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/InsuranceCompany'
+    InsuranceCompanyCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Insurance company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        fax:
+          type: string
+        payer_id:
+          type: string
+          description: Electronic payer identifier
   securitySchemes:
     oauth2:
       type: oauth2

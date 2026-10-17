@@ -112,16 +112,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    ImageContent:
-      properties:
-        base64_content:
-          type: string
-        original_filename:
-          type: string
-      required:
-      - base64_content
-      - original_filename
-      type: object
     InsuranceCardImage:
       properties:
         side:
@@ -149,6 +139,16 @@ components:
       required:
       - images
       - rank
+      type: object
+    ImageContent:
+      properties:
+        base64_content:
+          type: string
+        original_filename:
+          type: string
+      required:
+      - base64_content
+      - original_filename
       type: object
     CreateInsuranceCard:
       properties:

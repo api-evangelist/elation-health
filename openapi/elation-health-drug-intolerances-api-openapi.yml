@@ -352,22 +352,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatientDrugIntoleranceSeverityEnum:
-      description: '* `` - unknown
-
-        * `255604002` - mild
-
-        * `6736007` - moderate
-
-        * `24484000` - severe'
-      enum:
-      - '255604002'
-      - '6736007'
-      - '24484000'
-      type: string
-    BlankEnum:
-      enum:
-      - ''
     PatientDrugIntoleranceStatusEnum:
       description: '* `1` - Active
 
@@ -376,6 +360,28 @@ components:
       - 1
       - 2
       type: integer
+    PaginatedPatientDrugIntoleranceList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PatientDrugIntolerance'
+          type: array
+      required:
+      - results
+      type: object
     PatientDrugIntolerance:
       properties:
         created_date:
@@ -443,28 +449,22 @@ components:
       - name
       - patient
       type: object
-    PaginatedPatientDrugIntoleranceList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PatientDrugIntolerance'
-          type: array
-      required:
-      - results
-      type: object
+    BlankEnum:
+      enum:
+      - ''
+    PatientDrugIntoleranceSeverityEnum:
+      description: '* `` - unknown
+
+        * `255604002` - mild
+
+        * `6736007` - moderate
+
+        * `24484000` - severe'
+      enum:
+      - '255604002'
+      - '6736007'
+      - '24484000'
+      type: string
     PatchedPatientDrugIntolerance:
       properties:
         created_date:

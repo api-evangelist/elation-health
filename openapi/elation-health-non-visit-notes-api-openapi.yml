@@ -1179,48 +1179,74 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedNonVisitNoteList:
+    Document:
       properties:
-        count:
-          example: 123
+        authoring_practice:
+          format: int64
           type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
+        chart_date:
+          description: The creation date of the patient chart.
+          format: date-time
           type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/NonVisitNote'
-          type: array
-      required:
-      - results
-      type: object
-    NonVisitNoteBullet:
-      properties:
-        author:
-          description: The author of the bullet.
-          type: integer
-        id:
-          type: integer
-        text:
-          description: The text of the bullet.
-          type: string
-        updated_date:
+        created_date:
+          description: The creation date of the document.
           format: date-time
           readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          description: The deleted date of the document.
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        document_date:
+          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
+          format: date-time
           type: string
-        version:
-          maximum: 65535
-          minimum: 0
+        document_type:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        id:
+          format: int64
+          type: integer
+        last_modified:
+          format: date-time
+          type: string
+        patient:
+          format: int64
+          type: integer
+        sign_date:
+          description: The date of when the document was signed (if signed).
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        signed_by:
+          description: The id of whoever signed the document (if signed).
+          readOnly: true
           type: integer
       required:
-      - text
+      - authoring_practice
+      - chart_date
+      - document_date
+      - id
+      - patient
+      type: object
+    NonVisitNotePatientItem:
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        item:
+          $ref: '#/components/schemas/PatientItem'
+      required:
+      - item
       type: object
     NonVisitNote:
       properties:
@@ -1292,45 +1318,6 @@ components:
       - patient
       - type
       type: object
-    PatientItem:
-      properties:
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        is_confidential:
-          type: boolean
-        patient:
-          format: int64
-          type: integer
-        type:
-          type: string
-      required:
-      - is_confidential
-      - patient
-      - type
-      type: object
-    NonVisitNotePatientItem:
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        item:
-          $ref: '#/components/schemas/PatientItem'
-      required:
-      - item
-      type: object
     NonVisitNoteDocument:
       properties:
         document:
@@ -1344,65 +1331,6 @@ components:
           - 'null'
       required:
       - document
-      type: object
-    Document:
-      properties:
-        authoring_practice:
-          format: int64
-          type: integer
-        chart_date:
-          description: The creation date of the patient chart.
-          format: date-time
-          type: string
-        created_date:
-          description: The creation date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          description: The deleted date of the document.
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        document_date:
-          description: The date of the document. In most cases it's the same as the creation date. For some documents, like visit notes, it's the date of the visit note.
-          format: date-time
-          type: string
-        document_type:
-          readOnly: true
-          type:
-          - integer
-          - 'null'
-        id:
-          format: int64
-          type: integer
-        last_modified:
-          format: date-time
-          type: string
-        patient:
-          format: int64
-          type: integer
-        sign_date:
-          description: The date of when the document was signed (if signed).
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        signed_by:
-          description: The id of whoever signed the document (if signed).
-          readOnly: true
-          type: integer
-      required:
-      - authoring_practice
-      - chart_date
-      - document_date
-      - id
-      - patient
       type: object
     PatchedNonVisitNote:
       properties:
@@ -1468,6 +1396,78 @@ components:
         type:
           description: The type of the non visit note.
           type: string
+      type: object
+    PatientItem:
+      properties:
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        is_confidential:
+          type: boolean
+        patient:
+          format: int64
+          type: integer
+        type:
+          type: string
+      required:
+      - is_confidential
+      - patient
+      - type
+      type: object
+    NonVisitNoteBullet:
+      properties:
+        author:
+          description: The author of the bullet.
+          type: integer
+        id:
+          type: integer
+        text:
+          description: The text of the bullet.
+          type: string
+        updated_date:
+          format: date-time
+          readOnly: true
+          type: string
+        version:
+          maximum: 65535
+          minimum: 0
+          type: integer
+      required:
+      - text
+      type: object
+    PaginatedNonVisitNoteList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/NonVisitNote'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     sec0:

@@ -317,24 +317,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    XmlFile:
-      description: Alias for S3RetrievingDocumentFileSerializer with proper OpenAPI schema name.
-      properties:
-        base64_content:
-          type: string
-        content_type:
-          type: string
-        document:
-          description: URL to retrieve the document
-          format: uri
-          type: string
-        external_content: {}
-        id:
-          readOnly: true
-          type: integer
-        original_filename:
-          type: string
-      type: object
     PaginatedXmlPatientSummaryList:
       properties:
         count:
@@ -363,6 +345,24 @@ components:
       - ccr
       - qrda_1
       type: string
+    XmlFile:
+      description: Alias for S3RetrievingDocumentFileSerializer with proper OpenAPI schema name.
+      properties:
+        base64_content:
+          type: string
+        content_type:
+          type: string
+        document:
+          description: URL to retrieve the document
+          format: uri
+          type: string
+        external_content: {}
+        id:
+          readOnly: true
+          type: integer
+        original_filename:
+          type: string
+      type: object
     XmlPatientSummary:
       properties:
         allergies_imported:

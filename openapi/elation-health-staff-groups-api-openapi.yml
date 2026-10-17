@@ -473,6 +473,28 @@ components:
       - practice
       - users
       type: object
+    PaginatedStaffGroupList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/StaffGroup'
+          type: array
+      required:
+      - results
+      type: object
     PatchedStaffGroup:
       properties:
         created_date:
@@ -506,28 +528,6 @@ components:
           items:
             type: integer
           type: array
-      type: object
-    PaginatedStaffGroupList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/StaffGroup'
-          type: array
-      required:
-      - results
       type: object
   securitySchemes:
     sec0:

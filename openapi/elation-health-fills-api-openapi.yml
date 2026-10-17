@@ -252,28 +252,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    PaginatedPrescriptionFillList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/PrescriptionFill'
-          type: array
-      required:
-      - results
-      type: object
     PriorAuthQualifierEnum:
       description: '* `94` - Pharmacy or Prescriber File ID
 
@@ -357,6 +335,28 @@ components:
       - WI
       - ZZ
       type: string
+    RequestingPhysicianActionEnum:
+      description: '* `ReqAct` - Requiring Action
+
+        * `Addressed` - Addressed'
+      enum:
+      - ReqAct
+      - Addressed
+      type: string
+    FillStatusEnum:
+      description: '* `AH` - Dispensed
+
+        * `AJ` - PartiallyDispensed
+
+        * `AK` - NotDispensed
+
+        * `AL` - Transferred'
+      enum:
+      - AH
+      - AJ
+      - AK
+      - AL
+      type: string
     PaginatedMedicationHistoryDownloadFillList:
       properties:
         count:
@@ -375,6 +375,65 @@ components:
         results:
           items:
             $ref: '#/components/schemas/MedicationHistoryDownloadFill'
+          type: array
+      required:
+      - results
+      type: object
+    PrescriptionFill:
+      properties:
+        fill_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        fill_status:
+          $ref: '#/components/schemas/FillStatusEnum'
+        id:
+          readOnly: true
+          type: integer
+        medication_order:
+          format: int64
+          type: integer
+        note_from_pharmacy:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        patient:
+          format: int64
+          type: integer
+        pharmacy_ncpdpid:
+          maxLength: 21
+          title: Pharmacy this fill occurred at
+          type: string
+        practice:
+          format: int64
+          type: integer
+      required:
+      - fill_status
+      - medication_order
+      - patient
+      - pharmacy_ncpdpid
+      - practice
+      type: object
+    PaginatedPrescriptionFillList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PrescriptionFill'
           type: array
       required:
       - results
@@ -482,65 +541,6 @@ components:
       - requesting_physician_action
       - substitutions
       - written_date
-      type: object
-    FillStatusEnum:
-      description: '* `AH` - Dispensed
-
-        * `AJ` - PartiallyDispensed
-
-        * `AK` - NotDispensed
-
-        * `AL` - Transferred'
-      enum:
-      - AH
-      - AJ
-      - AK
-      - AL
-      type: string
-    RequestingPhysicianActionEnum:
-      description: '* `ReqAct` - Requiring Action
-
-        * `Addressed` - Addressed'
-      enum:
-      - ReqAct
-      - Addressed
-      type: string
-    PrescriptionFill:
-      properties:
-        fill_date:
-          format: date
-          type:
-          - string
-          - 'null'
-        fill_status:
-          $ref: '#/components/schemas/FillStatusEnum'
-        id:
-          readOnly: true
-          type: integer
-        medication_order:
-          format: int64
-          type: integer
-        note_from_pharmacy:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        patient:
-          format: int64
-          type: integer
-        pharmacy_ncpdpid:
-          maxLength: 21
-          title: Pharmacy this fill occurred at
-          type: string
-        practice:
-          format: int64
-          type: integer
-      required:
-      - fill_status
-      - medication_order
-      - patient
-      - pharmacy_ncpdpid
-      - practice
       type: object
   securitySchemes:
     oauth2:

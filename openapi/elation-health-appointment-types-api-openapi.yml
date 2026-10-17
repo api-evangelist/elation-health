@@ -432,28 +432,6 @@ components:
       - name
       - practice
       type: object
-    PaginatedAppointmentTypeList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/AppointmentType'
-          type: array
-      required:
-      - results
-      type: object
     PatchedAppointmentType:
       properties:
         abbreviation:
@@ -528,6 +506,28 @@ components:
       type: string
     NullEnum:
       type: 'null'
+    PaginatedAppointmentTypeList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/AppointmentType'
+          type: array
+      required:
+      - results
+      type: object
   securitySchemes:
     sec0:
       type: oauth2

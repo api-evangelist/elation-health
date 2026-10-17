@@ -119,29 +119,19 @@ paths:
         '204':
           description: Billing code deleted
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 25
-      description: Number of results to return
   schemas:
+    BillingCode:
+      allOf:
+      - $ref: '#/components/schemas/BillingCodeCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+            readOnly: true
+          created_date:
+            type: string
+            format: date-time
+            readOnly: true
     BillingCodeCreate:
       type: object
       required:
@@ -161,18 +151,15 @@ components:
         code_type:
           type: string
           description: Type of billing code (CPT, ICD10, etc.)
-    BillingCode:
+    PaginatedBillingCodeList:
       allOf:
-      - $ref: '#/components/schemas/BillingCodeCreate'
+      - $ref: '#/components/schemas/PaginationMeta'
       - type: object
         properties:
-          id:
-            type: integer
-            readOnly: true
-          created_date:
-            type: string
-            format: date-time
-            readOnly: true
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/BillingCode'
     PaginationMeta:
       type: object
       properties:
@@ -189,15 +176,28 @@ components:
           - string
           - 'null'
           description: URL for previous page
-    PaginatedBillingCodeList:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/BillingCode'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 25
+      description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
     oauth2:
       type: oauth2

@@ -101,101 +101,6 @@ paths:
       - '2.0'
 components:
   schemas:
-    EligibilityStatusEnum:
-      description: '* `active` - active
-
-        * `inactive` - inactive
-
-        * `error` - error'
-      enum:
-      - active
-      - inactive
-      - error
-      type: string
-    CreateInsuranceEligibility:
-      properties:
-        group_id:
-          description: ID that matches the group record in Elation system
-          type: integer
-        group_name:
-          description: Name of the group / organization. group_npi field is required if this is populated.
-          type: string
-        group_npi:
-          description: NPI of the group / organization. group_name field is required if this is populated.
-          type: string
-      type: object
-    InsuranceEligibility:
-      properties:
-        eligibility_check_timestamp:
-          description: Eligibility check timestamp in ISO format.
-          format: date-time
-          type: string
-        eligibility_details:
-          $ref: '#/components/schemas/EligibilityDetails'
-        eligibility_status:
-          allOf:
-          - $ref: '#/components/schemas/EligibilityStatusEnum'
-          description: 'Status of eligibility check.
-
-
-            * `active` - active
-
-            * `inactive` - inactive
-
-            * `error` - error'
-        patient_id:
-          description: Patient's id in Elation system.
-          type: integer
-        patient_insurance_id:
-          description: Patient's insurance id in Elation system.
-          type: integer
-        practice_id:
-          description: Practice's id in Elation system.
-          type: integer
-      type: object
-    InsuranceEligibilityFullReport:
-      properties:
-        benefits:
-          $ref: '#/components/schemas/EligibilityBenefits'
-        eligibility_check_timestamp:
-          description: Eligibility check timestamp in ISO format.
-          format: date-time
-          type: string
-        eligibility_provider:
-          $ref: '#/components/schemas/EligibilityProvider'
-        patient_id:
-          description: Patient's id in Elation system.
-          type: integer
-        patient_insurance_id:
-          description: Patient's insurance id in Elation system.
-          type: integer
-        plan_details:
-          $ref: '#/components/schemas/EligibilityPlanDetails'
-        practice_id:
-          description: Practice's id in Elation system.
-          type: integer
-        service_type_code:
-          type: string
-        subscriber:
-          $ref: '#/components/schemas/EligibilitySubscriber'
-      type: object
-    EligibilitySubscriber:
-      properties:
-        address:
-          $ref: '#/components/schemas/EligibilityAddress'
-        first_name:
-          type: string
-        last_name:
-          type: string
-        member_id:
-          type: string
-        middle_name:
-          type: string
-        name:
-          type: string
-        sex_at_birth:
-          type: string
-      type: object
     EligibilityPlanDetails:
       properties:
         carrier:
@@ -244,6 +149,129 @@ components:
         organization_name:
           type: string
       type: object
+    EligibilityStatusEnum:
+      description: '* `active` - active
+
+        * `inactive` - inactive
+
+        * `error` - error'
+      enum:
+      - active
+      - inactive
+      - error
+      type: string
+    InsuranceEligibility:
+      properties:
+        eligibility_check_timestamp:
+          description: Eligibility check timestamp in ISO format.
+          format: date-time
+          type: string
+        eligibility_details:
+          $ref: '#/components/schemas/EligibilityDetails'
+        eligibility_status:
+          allOf:
+          - $ref: '#/components/schemas/EligibilityStatusEnum'
+          description: 'Status of eligibility check.
+
+
+            * `active` - active
+
+            * `inactive` - inactive
+
+            * `error` - error'
+        patient_id:
+          description: Patient's id in Elation system.
+          type: integer
+        patient_insurance_id:
+          description: Patient's insurance id in Elation system.
+          type: integer
+        practice_id:
+          description: Practice's id in Elation system.
+          type: integer
+      type: object
+    EligibilityBenefits:
+      properties:
+        coinsurance:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        copay:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        deductible:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        limitations:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        out_of_pocket:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+      type: object
+    EligibilitySubscriber:
+      properties:
+        address:
+          $ref: '#/components/schemas/EligibilityAddress'
+        first_name:
+          type: string
+        last_name:
+          type: string
+        member_id:
+          type: string
+        middle_name:
+          type: string
+        name:
+          type: string
+        sex_at_birth:
+          type: string
+      type: object
+    InsuranceEligibilityFullReport:
+      properties:
+        benefits:
+          $ref: '#/components/schemas/EligibilityBenefits'
+        eligibility_check_timestamp:
+          description: Eligibility check timestamp in ISO format.
+          format: date-time
+          type: string
+        eligibility_provider:
+          $ref: '#/components/schemas/EligibilityProvider'
+        patient_id:
+          description: Patient's id in Elation system.
+          type: integer
+        patient_insurance_id:
+          description: Patient's insurance id in Elation system.
+          type: integer
+        plan_details:
+          $ref: '#/components/schemas/EligibilityPlanDetails'
+        practice_id:
+          description: Practice's id in Elation system.
+          type: integer
+        service_type_code:
+          type: string
+        subscriber:
+          $ref: '#/components/schemas/EligibilitySubscriber'
+      type: object
+    CreateInsuranceEligibility:
+      properties:
+        group_id:
+          description: ID that matches the group record in Elation system
+          type: integer
+        group_name:
+          description: Name of the group / organization. group_npi field is required if this is populated.
+          type: string
+        group_npi:
+          description: NPI of the group / organization. group_name field is required if this is populated.
+          type: string
+      type: object
     EligibilityDetails:
       properties:
         coinsurance:
@@ -278,34 +306,6 @@ components:
           type: boolean
         errors:
           description: Error messages showing reason for failed eligibility check.
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-      type: object
-    EligibilityBenefits:
-      properties:
-        coinsurance:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        copay:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        deductible:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        limitations:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        out_of_pocket:
           items:
             additionalProperties: {}
             type: object

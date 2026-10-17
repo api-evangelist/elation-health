@@ -688,46 +688,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PaginatedPracticeList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/Practice'
-          type: array
-      required:
-      - results
-      type: object
-    Employer:
-      properties:
-        code:
-          maxLength: 50
-          type: string
-        description:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        name:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
     ServiceLocation:
       properties:
         address_line1:
@@ -1243,6 +1203,24 @@ components:
       - US/Pacific
       - UTC
       type: string
+    Employer:
+      properties:
+        code:
+          maxLength: 50
+          type: string
+        description:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        name:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
     ServiceLocationPlaceOfServiceEnum:
       enum:
       - Ambulance - Air or Water
@@ -1366,6 +1344,14 @@ components:
       - address_line2
       - name
       type: object
+    NullEnum:
+      type: 'null'
+    ServiceLocationStatusEnum:
+      enum:
+      - active
+      - inactive
+      - suspended
+      type: string
     BlankEnum:
       enum:
       - ''
@@ -1434,23 +1420,28 @@ components:
           maxLength: 10
           type: string
       type: object
-    NullEnum:
-      type: 'null'
-    ServiceLocationStatusEnum:
-      enum:
-      - active
-      - inactive
-      - suspended
-      type: string
-    PaginatedPracticeList_2:
-      allOf:
-      - $ref: '#/components/schemas/PaginationMeta'
-      - type: object
-        properties:
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/Practice_2'
+    PaginatedPracticeList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Practice'
+          type: array
+      required:
+      - results
+      type: object
     Practice_2:
       type: object
       properties:
@@ -1471,6 +1462,22 @@ components:
         npi:
           type: string
           maxLength: 10
+    PaginationMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of results
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for next page
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for previous page
     Address:
       type: object
       properties:
@@ -1488,37 +1495,16 @@ components:
         zip:
           type: string
           description: ZIP or postal code
-    PaginationMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of results
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for next page
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for previous page
+    PaginatedPracticeList_2:
+      allOf:
+      - $ref: '#/components/schemas/PaginationMeta'
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/Practice_2'
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-      description: Unique resource identifier
     limit:
       name: limit
       in: query
@@ -1526,6 +1512,20 @@ components:
         type: integer
         default: 25
       description: Number of results to return
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Unique resource identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
   securitySchemes:
     sec0:
       type: oauth2

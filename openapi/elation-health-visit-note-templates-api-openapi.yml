@@ -393,56 +393,6 @@ paths:
       url: https://api.app.elationemr.com
 components:
   schemas:
-    PatchedVisitNoteTemplate:
-      properties:
-        content:
-          type: string
-        created_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        deleted_date:
-          format: date-time
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        id:
-          readOnly: true
-          type: integer
-        name:
-          maxLength: 50
-          type: string
-        practice_created:
-          format: int64
-          type:
-          - integer
-          - 'null'
-      type: object
-    PaginatedVisitNoteTemplateList:
-      properties:
-        count:
-          example: 123
-          type: integer
-        next:
-          example: http://api.example.org/accounts/?offset=400&limit=100
-          format: uri
-          nullable: true
-          type: string
-        previous:
-          example: http://api.example.org/accounts/?offset=200&limit=100
-          format: uri
-          nullable: true
-          type: string
-        results:
-          items:
-            $ref: '#/components/schemas/VisitNoteTemplate'
-          type: array
-      required:
-      - results
-      type: object
     VisitNoteTemplate:
       properties:
         content:
@@ -473,6 +423,56 @@ components:
       required:
       - content
       - name
+      type: object
+    PaginatedVisitNoteTemplateList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?offset=400&limit=100
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?offset=200&limit=100
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/VisitNoteTemplate'
+          type: array
+      required:
+      - results
+      type: object
+    PatchedVisitNoteTemplate:
+      properties:
+        content:
+          type: string
+        created_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        deleted_date:
+          format: date-time
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        id:
+          readOnly: true
+          type: integer
+        name:
+          maxLength: 50
+          type: string
+        practice_created:
+          format: int64
+          type:
+          - integer
+          - 'null'
       type: object
   securitySchemes:
     sec0:

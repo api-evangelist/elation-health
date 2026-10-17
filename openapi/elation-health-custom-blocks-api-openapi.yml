@@ -54,39 +54,6 @@ paths:
       - Custom Blocks
 components:
   schemas:
-    PaginatedResponse_CustomBlockResponse_:
-      properties:
-        count:
-          title: Count
-          type: integer
-        limit:
-          title: Limit
-          type: integer
-        next:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next
-        offset:
-          title: Offset
-          type: integer
-        previous:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Previous
-        results:
-          items:
-            $ref: '#/components/schemas/CustomBlockResponse'
-          title: Results
-          type: array
-      required:
-      - results
-      - count
-      - offset
-      - limit
-      title: PaginatedResponse[CustomBlockResponse]
-      type: object
     AiGenerationInfo:
       properties:
         is_finalized:
@@ -100,6 +67,58 @@ components:
           default: ''
           title: Transcript Source Text
       title: AiGenerationInfo
+      type: object
+    DynamicFormAttrs:
+      properties:
+        ai_generation_info:
+          anyOf:
+          - $ref: '#/components/schemas/AiGenerationInfo'
+          - type: 'null'
+        creation_type:
+          anyOf:
+          - enum:
+            - ai
+            - template
+            type: string
+          - type: 'null'
+          title: Creation Type
+        data:
+          additionalProperties: true
+          default: {}
+          title: Data
+          type: object
+        dataSchema:
+          title: Dataschema
+        is_new:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is New
+        label:
+          title: Label
+          type: string
+        lastEditedBy:
+          additionalProperties:
+            enum:
+            - user
+            - api
+            - note-prediction
+            - template
+            type: string
+          title: Lasteditedby
+          type: object
+        ref_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ref Id
+        uiSchema:
+          title: Uischema
+      required:
+      - dataSchema
+      - uiSchema
+      - label
+      title: DynamicFormAttrs
       type: object
     CustomBlockResponse:
       examples:
@@ -187,81 +206,6 @@ components:
       - is_system_template
       title: CustomBlockResponse
       type: object
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          title: Detail
-          type: array
-      title: HTTPValidationError
-      type: object
-    DynamicFormNode-Output:
-      additionalProperties: true
-      properties:
-        attrs:
-          $ref: '#/components/schemas/DynamicFormAttrs'
-        type:
-          const: dynamicForm
-          default: dynamicForm
-          title: Type
-          type: string
-      required:
-      - attrs
-      title: DynamicFormNode
-      type: object
-    DynamicFormAttrs:
-      properties:
-        ai_generation_info:
-          anyOf:
-          - $ref: '#/components/schemas/AiGenerationInfo'
-          - type: 'null'
-        creation_type:
-          anyOf:
-          - enum:
-            - ai
-            - template
-            type: string
-          - type: 'null'
-          title: Creation Type
-        data:
-          additionalProperties: true
-          default: {}
-          title: Data
-          type: object
-        dataSchema:
-          title: Dataschema
-        is_new:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is New
-        label:
-          title: Label
-          type: string
-        lastEditedBy:
-          additionalProperties:
-            enum:
-            - user
-            - api
-            - note-prediction
-            - template
-            type: string
-          title: Lasteditedby
-          type: object
-        ref_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Ref Id
-        uiSchema:
-          title: Uischema
-      required:
-      - dataSchema
-      - uiSchema
-      - label
-      title: DynamicFormAttrs
-      type: object
     ValidationError:
       properties:
         ctx:
@@ -287,6 +231,62 @@ components:
       - msg
       - type
       title: ValidationError
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    DynamicFormNode-Output:
+      additionalProperties: true
+      properties:
+        attrs:
+          $ref: '#/components/schemas/DynamicFormAttrs'
+        type:
+          const: dynamicForm
+          default: dynamicForm
+          title: Type
+          type: string
+      required:
+      - attrs
+      title: DynamicFormNode
+      type: object
+    PaginatedResponse_CustomBlockResponse_:
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+        offset:
+          title: Offset
+          type: integer
+        previous:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Previous
+        results:
+          items:
+            $ref: '#/components/schemas/CustomBlockResponse'
+          title: Results
+          type: array
+      required:
+      - results
+      - count
+      - offset
+      - limit
+      title: PaginatedResponse[CustomBlockResponse]
       type: object
   securitySchemes:
     RequireAuthentication:
