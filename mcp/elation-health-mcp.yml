@@ -3,15 +3,16 @@ method: searched
 status: published
 source: https://help.elationhealth.com/.well-known/mcp/server-card.json, https://help.elationhealth.com/articles/rest/overview/mcp-server,
   https://docs.elationhealth.com/docs/mcp
-probe: POST tools/list returned HTTP 200 anonymously on 2026-08-14 against https://help.elationhealth.com/mcp (3
-  tools) and against the legacy https://docs.elationhealth.com/mcp (5 tools). Both are documentation MCP servers;
-  neither is a resource server over the Elation EHR data API.
-note: Elation ships TWO hosted MCP servers, both bound to its documentation rather than to the clinical API itself.
-  The current one runs on the new developer documentation host help.elationhealth.com (Mintlify), which the Elation
-  API documentation moved to on 2026-08-07; its server card is advertised from the host's Link header at /.well-known/mcp/server-card.json
-  and saved at well-known/elation-health-mcp-server-card.json. The legacy one runs on the superseded ReadMe portal
-  docs.elationhealth.com and exposes generic OpenAPI-navigation tools plus an execute-request proxy. Live tool schemas
-  for the current server are captured verbatim in mcp/elation-health-help-mcp-tools.json.
+probe: POST tools/list returned HTTP 200 anonymously on 2026-08-14 against https://help.elationhealth.com/mcp
+  (3 tools) and against the legacy https://docs.elationhealth.com/mcp (5 tools). Both are documentation
+  MCP servers; neither is a resource server over the Elation EHR data API.
+note: Elation ships TWO hosted MCP servers, both bound to its documentation rather than to the clinical
+  API itself. The current one runs on the new developer documentation host help.elationhealth.com (Mintlify),
+  which the Elation API documentation moved to on 2026-08-07; its server card is advertised from the host's
+  Link header at /.well-known/mcp/server-card.json and saved at well-known/elation-health-mcp-server-card.json.
+  The legacy one runs on the superseded ReadMe portal docs.elationhealth.com and exposes generic OpenAPI-navigation
+  tools plus an execute-request proxy. Live tool schemas for the current server are captured verbatim
+  in mcp/elation-health-help-mcp-tools.json.
 deployment:
   mode: remote
   verified: searched
@@ -41,9 +42,9 @@ servers:
     inputs:
     - query
   - name: query_docs_filesystem_elation_help_center
-    description: Read-only shell-like query (rg/grep/find/tree/ls/cat/head/tail/jq) against a virtualized in-memory
-      filesystem containing only the Elation documentation pages and its OpenAPI specs. This is the tool that exposed
-      the 16 published OpenAPI documents, including /openapi/files/elation-api-full.yaml.
+    description: Read-only shell-like query (rg/grep/find/tree/ls/cat/head/tail/jq) against a virtualized
+      in-memory filesystem containing only the Elation documentation pages and its OpenAPI specs. This
+      is the tool that exposed the 16 published OpenAPI documents, including /openapi/files/elation-api-full.yaml.
     read_only: true
     inputs:
     - command
@@ -59,15 +60,16 @@ servers:
   transport: http
   url: https://docs.elationhealth.com/mcp
   protocol_version: '2024-11-05'
-  auth: Anonymous for spec navigation/search. The execute-request tool proxies live Elation API calls, for which
-    the caller supplies their own Elation OAuth2 bearer token via request headers.
+  auth: Anonymous for spec navigation/search. The execute-request tool proxies live Elation API calls,
+    for which the caller supplies their own Elation OAuth2 bearer token via request headers.
   note: Hosted alongside the superseded ReadMe developer portal; still answering as of 2026-08-14.
   tools:
   - name: list-endpoints
     description: Lists all API paths and their HTTP methods with summaries, organized by path.
     read_only: true
   - name: get-endpoint
-    description: Gets detailed information about a specific API endpoint, including security schemes and servers.
+    description: Gets detailed information about a specific API endpoint, including security schemes and
+      servers.
     read_only: true
   - name: search-endpoints
     description: Deep search through paths, operations, and parameters to discover relevant API endpoints.
@@ -76,5 +78,31 @@ servers:
     description: Lists all available OpenAPI specs.
     read_only: true
   - name: execute-request
-    description: Executes an API request with a given HAR request object (proxies a live call; caller supplies auth).
+    description: Executes an API request with a given HAR request object (proxies a live call; caller
+      supplies auth).
     read_only: false
+tool_quality:
+  tool_count: 3
+  tokens_total: 1644
+  tokens_per_tool_median: 240
+  heavy_tools: []
+  heavy_tool_count: 0
+  params_total: 4
+  params_undescribed: 0
+  params_described_pct: 100.0
+  tools_with_undescribed_params: 0
+  tools_annotated: 3
+  annotated_pct: 100.0
+  state_changing_unhinted: []
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 0
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/elation-health-help-mcp-tools.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.
